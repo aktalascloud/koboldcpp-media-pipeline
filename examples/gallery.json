@@ -1,0 +1,84 @@
+{
+  "source_pair_rgb_verified": true,
+  "new_generation": false,
+  "crops": [
+    {
+      "file": "normal-face.png",
+      "source": "normal-592x896-final.png",
+      "box": [
+        250,
+        27,
+        338,
+        157
+      ],
+      "source_rgb_sha256": "8735dbc9ef786c30c19ef558d47edb9d4c9a9fc2d486cca7b8521b9d2262f5ca",
+      "crop_rgb_sha256": "0dee55182f61c9c60b2ccd6d09af2f0bd319c9a82ee1b89e145bad48942c9616",
+      "resampling": false
+    },
+    {
+      "file": "normal-eyes.png",
+      "source": "normal-592x896-final.png",
+      "box": [
+        264,
+        76,
+        315,
+        95
+      ],
+      "source_rgb_sha256": "8735dbc9ef786c30c19ef558d47edb9d4c9a9fc2d486cca7b8521b9d2262f5ca",
+      "crop_rgb_sha256": "45c7d5f67acab3b0bf9ca644e9544ec4b0cd7f058280149ed5cb294d9368d988",
+      "resampling": false
+    },
+    {
+      "file": "sr-input-face.png",
+      "source": "normal-608x912-final.png",
+      "box": [
+        259,
+        29,
+        355,
+        162
+      ],
+      "source_rgb_sha256": "537372a09c4d5aea76d8e5d0d0aab560b37913d528be12899e4a3a565820ef0b",
+      "crop_rgb_sha256": "612a12288e7397df491e2af2dd2b4346ca08c8bcc081e7f3441c5cddba13dfa0",
+      "resampling": false
+    },
+    {
+      "file": "sr-input-eyes.png",
+      "source": "normal-608x912-final.png",
+      "box": [
+        274,
+        81,
+        330,
+        100
+      ],
+      "source_rgb_sha256": "537372a09c4d5aea76d8e5d0d0aab560b37913d528be12899e4a3a565820ef0b",
+      "crop_rgb_sha256": "fc4f656cb6b9bd4c5d9a6dc528b495441d28c0cfff4ae6c75898fae6b046b039",
+      "resampling": false
+    },
+    {
+      "file": "helaman-4x-face.png",
+      "source": "resident-normal-4x.png",
+      "box": [
+        1037,
+        118,
+        1422,
+        650
+      ],
+      "source_rgb_sha256": "a90c8fe96b23bf8dd478802a09abbdec56b82f5e4fb74b08a106546654005f63",
+      "crop_rgb_sha256": "1f08ccc781dc7dc4cab1dff8d27fbbb5802568c6f1d64452a2055acef18783e3",
+      "resampling": false
+    },
+    {
+      "file": "helaman-4x-eyes.png",
+      "source": "resident-normal-4x.png",
+      "box": [
+        1099,
+        324,
+        1323,
+        403
+      ],
+      "source_rgb_sha256": "a90c8fe96b23bf8dd478802a09abbdec56b82f5e4fb74b08a106546654005f63",
+      "crop_rgb_sha256": "73b1279da5bd3f3eef86674ff166ef7652353197d74b3b025fde96285d181362",
+      "resampling": false
+    }
+  ]
+}

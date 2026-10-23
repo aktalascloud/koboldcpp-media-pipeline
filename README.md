@@ -1,8 +1,38 @@
 # KoboldCpp portable media pipeline
 
+**[Русская версия](README.ru.md)**
+
 Portable Windows photo/music pipeline for **RX 580 Polaris (gfx803)** and Haswell/AVX2, using **[the optimized KoboldCpp CPU/Vulkan fork](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa)**. Kobold remains the model backend. The proxy adds automatic model switching, face refinement, image restoration and optional Helaman 4× upscaling through A1111/OpenAI-compatible routes.
 
 **[Portable release assets](https://github.com/aktalascloud/koboldcpp-media-pipeline/releases)** · [API / OpenWebUI](docs/API.md) · [Licenses and model downloads](docs/LICENSES.md) · [Existing comparisons](examples/README.md) · [Measured timings](benchmarks/results.json)
+
+## Selected results
+
+Saved outputs from our selected pipeline: PhysioShade 0.15 + FlowDPO 0.35 + MaskedDPOFull 0.25, Euler/beta, 8 steps, eta=0, Cache-DiT 0.08, YuNet/GPEN/SFace and Gater Restore. Click an image to inspect its original pixels. No new generation was performed for this gallery.
+
+### Current Normal mode: 592×896
+
+All selected refinements, without automatic upscaling. **145.34 s first request / 140.09 s repeat** on the measured Xeon E5-2696 v3 and RX 580 Polaris (gfx803).
+
+<a href="examples/normal-592x896-final.png"><img src="examples/normal-592x896-final.png" width="420" alt="Current Normal output with LoRAs, face refinement and Gater Restore"></a>
+
+| Face from Normal output | Eyes from Normal output |
+|---|---|
+|![Normal face](examples/normal-face.png)|![Normal eyes](examples/normal-eyes.png)|
+
+### Matched Helaman 4× example
+
+This saved reference uses **608×912**, a larger earlier test size. It is shown separately from the current 592×896 default. The source already includes the selected LoRAs, face refinement and Gater Restore. Helaman outputs **2432×3648**, with no second face/restoration pass.
+
+**Upscaling alone: 194.90 s** with exclusive VRAM, versus 516.15 s when photo weights remained loaded; final RGB pixels are identical between those two memory policies. Photo generation and subsequent model reload are outside that upscaling time.
+
+| Refined source: 608×912 | Helaman output: 2432×3648 |
+|---|---|
+|[![Source](examples/normal-608x912-final.png)](examples/normal-608x912-final.png)|[![Helaman 4×](examples/resident-normal-4x.png)](examples/resident-normal-4x.png)|
+|![Source face](examples/sr-input-face.png)|![Upscaled face](examples/helaman-4x-face.png)|
+|![Source eyes](examples/sr-input-eyes.png)|![Upscaled eyes](examples/helaman-4x-eyes.png)|
+
+Crops use the saved PNG pixels without resampling. The source pair is verified by RGB hash. These are synthetic adult benchmark scenes; the baseline clock-hand defect is still visible. The gallery does not claim perfect anatomy or geometry. [More comparisons and provenance](examples/README.md).
 
 ## Exact chosen chain
 
