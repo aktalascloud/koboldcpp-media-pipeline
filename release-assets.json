@@ -1,0 +1,25 @@
+{
+  "format": 1,
+  "assets": [
+    {
+      "name": "media-windows-runtime.zip",
+      "sha256": "f5fe19df431e87e255403e6a1760b25077f8a72af54962a38c1fb21df8d37f5e",
+      "url": "https://github.com/aktalascloud/koboldcpp-media-pipeline/releases/download/v2026.10.23/media-windows-runtime.zip"
+    },
+    {
+      "name": "media-apache-ccby-models.zip",
+      "sha256": "90883b5b49677e3f398e857ea610347cf4b732b457bb7b91232afdcf1a919396",
+      "url": "https://github.com/aktalascloud/koboldcpp-media-pipeline/releases/download/v2026.10.23/media-apache-ccby-models.zip"
+    },
+    {
+      "name": "media-gpen-noncommercial.zip",
+      "sha256": "20fc513cd7bc866438e8d8c1ff34a062e1a81769493ce1d0118dc1df534c9163",
+      "url": "https://github.com/aktalascloud/koboldcpp-media-pipeline/releases/download/v2026.10.23/media-gpen-noncommercial.zip"
+    },
+    {
+      "name": "koboldcpp-windows-haswell-vulkan.zip",
+      "sha256": "b4a227f6c0727c2d9b88a973f6dfeb5961a1022f1d31d440253c4cabf1444075",
+      "url": "https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/releases/download/v1.123.1-20261023-651e4a41/koboldcpp-windows-haswell-vulkan.zip"
+    }
+  ]
+}

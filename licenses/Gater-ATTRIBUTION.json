@@ -1,0 +1,11 @@
+{
+  "name": "1xgaterv3_r_restore",
+  "author": "Philip Hofmann / Phhofm",
+  "license": "CC-BY-4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "primary_source": "https://github.com/Phhofm/models/releases/tag/1xgaterv3_r_restore",
+  "model_sha256": "6653528b62fe763403e18fa33a21c28755b27006e15d6be4b2c2c56c7ca4d27b",
+  "modifications": "Original author FP32 op17 ONNX unchanged; no onnxslim re-export.",
+  "license_evidence": "Author release card states CC BY4.0. Architecture MIT is distinct from weights license.",
+  "endorsement_claimed": false
+}

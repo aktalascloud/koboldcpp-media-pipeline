@@ -1,0 +1,1 @@
+Read README.md, docs/API.md and docs/LICENSES.md. Keep model weights, private configs, secrets, caches, logs, PID/state and generated runtime files out of Git. Preserve model/LoRA settings and ownership locks. Video deferred. No inference needed just to package existing measurements.

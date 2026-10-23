@@ -1,0 +1,11 @@
+ml_dtypes==0.6.0
+numpy==2.2.6
+onnx==1.23.2
+onnxruntime-directml==1.24.4
+opencv-python-headless==4.12.0.88
+openvino==2026.4.1
+openvino-telemetry==2025.2.0
+packaging==26.3
+pillow==12.3.0
+protobuf==7.36.2
+typing_extensions==4.16.0

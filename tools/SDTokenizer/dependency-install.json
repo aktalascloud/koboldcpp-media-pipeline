@@ -1,0 +1,22 @@
+{
+  "package": "regex",
+  "version": "2026.9.29",
+  "metadata_url": "https://pypi.org/pypi/regex/json",
+  "wheel": "regex-2026.9.29-cp312-cp312-win_amd64.whl",
+  "wheel_url": "https://files.pythonhosted.org/packages/93/19/489bc8db91196381c935752df01ba3f607140daece33b78d88573f028e64/regex-2026.9.29-cp312-cp312-win_amd64.whl",
+  "wheel_sha256": "fdd88ed5e20b1bcdd234421e454962c971aa44b653bdb7f1ea9ef683e90fb649",
+  "wheel_bytes": 280334,
+  "files_sha256": {
+    "regex/__init__.py": "2b40f3a1696a161e74dfd3ee8eb926d4d67fadcdb18517a76df06d841d3a5b8f",
+    "regex/_main.py": "4c1d431b261f9d9e360023f8b597a098f6ebe0cd48e59454c1133e16fa62cbac",
+    "regex/_regex.cp312-win_amd64.pyd": "4beee916c5d638552d1a71c6fd25e45d83ae8369ac9cb38009060e8bedcdc5dc",
+    "regex/_regex_core.py": "baf7b83f394d41b4b5e93ef645b49bcf211140757928cfe283e8dff1bb8e7866",
+    "regex/tests/test_regex.py": "e9e4d35c1601d7608d5489250cbb383e9621833955ffb1f2b01802070aac6ada",
+    "regex-2026.9.29.dist-info/licenses/LICENSE.txt": "3d220c06594b826bbabf110312f60f385f99e57e529fa4b9e536f79091f8b4c7",
+    "regex-2026.9.29.dist-info/METADATA": "726c658b5d0ee420e773f9e6c843918e8a2ad7c27577d20c8f502c08eccb211e",
+    "regex-2026.9.29.dist-info/WHEEL": "547199cfb31450578b25778938b82f94e190e69e750e6c850e3b6d657fa1a30f",
+    "regex-2026.9.29.dist-info/top_level.txt": "6909a20cc84d4c5dba7022b8ffb0fea9a56f85bc42946d30c824e7121933601b",
+    "regex-2026.9.29.dist-info/RECORD": "05e5f754afbb51926e90a77a589ce80b76deca12cf97f9a079eba07dd804c7cd"
+  },
+  "scope": "Prototype target only; no Root/site-packages changes."
+}

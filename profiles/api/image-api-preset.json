@@ -1,0 +1,14 @@
+{
+  "steps": 8,
+  "cfg_scale": 1,
+  "sampler_name": "euler",
+  "scheduler": "beta",
+  "eta": 0,
+  "flow_shift": 3,
+  "clip_skip": -1,
+  "cache_mode": "cache-dit",
+  "cache_options": "threshold=0.08,warmup=4,Fn=16,Bn=2",
+  "width": 592,
+  "height": 896,
+  "enable_hr": false
+}

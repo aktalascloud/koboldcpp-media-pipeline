@@ -1,0 +1,12 @@
+{
+  "author": "F16",
+  "source": "https://huggingface.co/F16/z-image-turbo-masked-dpo",
+  "source_revision": "3504d3a5031559af29b7f18bf58b5021352005f1",
+  "license": "Apache-2.0",
+  "license_evidence": "Public Hugging Face model API cardData.license verified on2026-10-23; original access is gated:auto.",
+  "source_file": "zit_stage1_masked_dpo_11100.safetensors",
+  "source_sha256": "4395632e6ed627f7e89a102cf5a6cfbb0ce9f2605994de593ee50e301126d4f7",
+  "derivative_sha256": "6dce05bed0a25f8aafc417ce0e980b5a83bfc7b2049b5d8b095efd92467cc03d",
+  "changes": "Expanded inner LoKR W2=float32(A)@float32(B)*(alpha/rank),240 W2; W1 BF16 bytes unchanged, output alphaF32=1. No full Kronecker expansion/base merge.",
+  "endorsement_claimed": false
+}

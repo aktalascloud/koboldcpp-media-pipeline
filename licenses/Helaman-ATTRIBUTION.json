@@ -1,0 +1,14 @@
+{
+  "model": "4xNomos8k_atd_jpg / Z Image 4X UPSCALER by Helaman",
+  "author": "Philip Hofmann / Phhofm",
+  "uploader": "loonalone",
+  "weights_license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "legalcode_url": "https://creativecommons.org/licenses/by/4.0/legalcode.en",
+  "source_urls": [
+    "https://github.com/Phhofm/models/releases/tag/4xNomos8k_atd_jpg",
+    "https://civitai.com/models/2377999?modelVersionId=2674200"
+  ],
+  "source_weights_sha256": "009671cec5a384db31052b52e344e5989b0c51a5ad4d25a8c2c629f658754d13",
+  "derivative_changes": "FP32 ONNX fixed640x256, reflected context32 tiles, original Torch unstable sort. Native4x output with no downsize. Tilewise global grouping differs from whole-frame ATD."
+}

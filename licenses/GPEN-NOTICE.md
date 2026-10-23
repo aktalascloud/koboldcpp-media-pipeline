@@ -1,0 +1,3 @@
+# GPEN512
+
+Vendor: yangxy/GPEN. ONNX converter/distributor: FaceFusion. Model distribution page: https://github.com/facefusion/facefusion-assets/releases/tag/models-3.0.0 . License classification: **Non-Commercial**, https://docs.facefusion.io/introduction/licenses . A clear complete original redistribution grant was not located. Do not infer MIT or unrestricted rights from a mirror or from the wrapper's AGPL license. At the maintainer's explicit request this exact existing converted model is provided separately for non-commercial use. This notice does not create a new license or certify additional rights. Not endorsed by the original authors.

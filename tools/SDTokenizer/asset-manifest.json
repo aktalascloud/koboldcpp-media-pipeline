@@ -1,0 +1,74 @@
+{
+  "format": 1,
+  "scope": "Portable existing SD-Qwen counter assets only; no model weights.",
+  "files": {
+    "dependency-install.json": {
+      "bytes": 1603,
+      "sha256": "7539e63b25cfabffbcca800f7ca75dbd37f2c3d122f4579e356049043d87a5c2"
+    },
+    "deps/regex/__init__.py": {
+      "bytes": 78,
+      "sha256": "2b40f3a1696a161e74dfd3ee8eb926d4d67fadcdb18517a76df06d841d3a5b8f"
+    },
+    "deps/regex/_main.py": {
+      "bytes": 34169,
+      "sha256": "4c1d431b261f9d9e360023f8b597a098f6ebe0cd48e59454c1133e16fa62cbac"
+    },
+    "deps/regex/_regex.cp312-win_amd64.pyd": {
+      "bytes": 736768,
+      "sha256": "4beee916c5d638552d1a71c6fd25e45d83ae8369ac9cb38009060e8bedcdc5dc"
+    },
+    "deps/regex/_regex_core.py": {
+      "bytes": 152010,
+      "sha256": "baf7b83f394d41b4b5e93ef645b49bcf211140757928cfe283e8dff1bb8e7866"
+    },
+    "deps/regex-2026.9.29.dist-info/licenses/LICENSE.txt": {
+      "bytes": 11792,
+      "sha256": "3d220c06594b826bbabf110312f60f385f99e57e529fa4b9e536f79091f8b4c7"
+    },
+    "deps/regex-2026.9.29.dist-info/METADATA": {
+      "bytes": 41625,
+      "sha256": "726c658b5d0ee420e773f9e6c843918e8a2ad7c27577d20c8f502c08eccb211e"
+    },
+    "deps/regex-2026.9.29.dist-info/RECORD": {
+      "bytes": 809,
+      "sha256": "05e5f754afbb51926e90a77a589ce80b76deca12cf97f9a079eba07dd804c7cd"
+    },
+    "deps/regex-2026.9.29.dist-info/top_level.txt": {
+      "bytes": 6,
+      "sha256": "6909a20cc84d4c5dba7022b8ffb0fea9a56f85bc42946d30c824e7121933601b"
+    },
+    "deps/regex-2026.9.29.dist-info/WHEEL": {
+      "bytes": 101,
+      "sha256": "547199cfb31450578b25778938b82f94e190e69e750e6c850e3b6d657fa1a30f"
+    },
+    "native-qwen-spec.json": {
+      "bytes": 1280,
+      "sha256": "3113adb80b9ed125d4577ab978ced08505ab9924b9e50c04a76528abe9ceb8d6"
+    },
+    "native-resource-provenance.json": {
+      "bytes": 207,
+      "sha256": "d8e83813467bcbeb1b2213746f5647467771b6c4ca066b5c723714cab4b35b37"
+    },
+    "native_counter.py": {
+      "bytes": 8530,
+      "sha256": "202a2bf3d704624ac593be0955d0791b7012c8ef125189546abd642cad214751"
+    },
+    "qwen2-merges.native.txt": {
+      "bytes": 1823226,
+      "sha256": "0de0bc38a29ea38eef099b677fa1ff52edd181e573529af26c4cd2136e233777"
+    },
+    "README.md": {
+      "bytes": 995,
+      "sha256": "eb9066aaeb5c96305db501cf2c8c85fa377758ca2cb22450ba10d8d91ba79836"
+    },
+    "validation.json": {
+      "bytes": 1627,
+      "sha256": "406ccd7113d2b236631676be180b041e0b65e120ccbf135f64db9b935c0eb590"
+    }
+  },
+  "total_bytes": 2814826,
+  "omitted_non_runtime_files": [
+    "deps/regex/tests/test_regex.py"
+  ]
+}
