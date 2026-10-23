@@ -8,31 +8,34 @@ Portable Windows photo/music pipeline for **RX 580 Polaris (gfx803)** and Haswel
 
 ## Selected results
 
-Saved outputs from our selected pipeline: PhysioShade 0.15 + FlowDPO 0.35 + MaskedDPOFull 0.25, Euler/beta, 8 steps, eta=0, Cache-DiT 0.08, YuNet/GPEN/SFace and Gater Restore. Click an image to inspect its original pixels. No new generation was performed for this gallery.
+Existing results from several benchmark scenes, selected after inspecting faces and eyes. No new image generation or retouching was performed. Click an image for its saved resolution.
 
-### Current Normal mode: 592×896
+### Other scenes from earlier tests
 
-All selected refinements, without automatic upscaling. **145.34 s first request / 140.09 s repeat** on the measured Xeon E5-2696 v3 and RX 580 Polaris (gfx803).
+| Portrait in window light | Watchmaker at work | Tailoring studio |
+|---|---|---|
+|[![Window portrait](examples/portrait-window-helaman-2x.png)](examples/portrait-window-helaman-2x.png)|[![Watchmaker](examples/watchmaker-workbench-2x.png)](examples/watchmaker-workbench-2x.png)|[![Tailoring studio](examples/tailoring-studio-native.png)](examples/tailoring-studio-native.png)|
+|1280×1728; historical Helaman FP32 DirectML **2×** test.|1280×1728; historical **2×** LoRA test with PhysioShade 0.15 / FlowDPO 0.35 / MaskedDPOFull 0.25.|544×816; **native** resolution test, Euler/beta, 8 steps, eta=0, with the selected three LoRAs.|
+|![Portrait eyes](examples/portrait-window-helaman-2x-eyes.png)|![Hands and metal](examples/watchmaker-workbench-2x-hands.png)|![Studio portrait eyes](examples/tailoring-studio-native-eyes.png)|
 
-<a href="examples/normal-592x896-final.png"><img src="examples/normal-592x896-final.png" width="420" alt="Current Normal output with LoRAs, face refinement and Gater Restore"></a>
+These PNGs were recovered from saved tool previews of our earlier tests after the original benchmark folders had been cleaned. Their RGB pixels are preserved and metadata is stripped. They use different resolutions and processing stages: they are quality examples, not a controlled comparison of the current complete pipeline. Missing timings and unverified finishing stages are not inferred. [Per-image provenance](examples/historical-scenes.json).
 
-| Face from Normal output | Eyes from Normal output |
-|---|---|
-|![Normal face](examples/normal-face.png)|![Normal eyes](examples/normal-eyes.png)|
+### Matched full-body example: hair tied back, Helaman 4×
 
-### Matched Helaman 4× example
+This is the retained preferred full-body reference. The **608×912** source already includes PhysioShade 0.15 + FlowDPO 0.35 + MaskedDPOFull 0.25, Euler/beta, 8 steps, eta=0, Cache-DiT 0.08, YuNet/GPEN/SFace and Gater Restore. Helaman outputs **2432×3648**, without a second face/restoration pass.
 
-This saved reference uses **608×912**, a larger earlier test size. It is shown separately from the current 592×896 default. The source already includes the selected LoRAs, face refinement and Gater Restore. Helaman outputs **2432×3648**, with no second face/restoration pass.
-
-**Upscaling alone: 194.90 s** with exclusive VRAM, versus 516.15 s when photo weights remained loaded; final RGB pixels are identical between those two memory policies. Photo generation and subsequent model reload are outside that upscaling time.
+**Upscaling alone: 194.90 s** with exclusive VRAM, versus 516.15 s with photo weights still loaded. RGB pixels are identical between those two memory policies. Photo generation and the later photo-model reload are outside that upscaling time.
 
 | Refined source: 608×912 | Helaman output: 2432×3648 |
 |---|---|
-|[![Source](examples/normal-608x912-final.png)](examples/normal-608x912-final.png)|[![Helaman 4×](examples/resident-normal-4x.png)](examples/resident-normal-4x.png)|
+|[![Preferred full-body source](examples/normal-608x912-final.png)](examples/normal-608x912-final.png)|[![Preferred full-body Helaman 4×](examples/resident-normal-4x.png)](examples/resident-normal-4x.png)|
 |![Source face](examples/sr-input-face.png)|![Upscaled face](examples/helaman-4x-face.png)|
 |![Source eyes](examples/sr-input-eyes.png)|![Upscaled eyes](examples/helaman-4x-eyes.png)|
 
-Crops use the saved PNG pixels without resampling. The source pair is verified by RGB hash. These are synthetic adult benchmark scenes; the baseline clock-hand defect is still visible. The gallery does not claim perfect anatomy or geometry. [More comparisons and provenance](examples/README.md).
+The current Normal default remains **592×896**, measured at **145.34 s first request / 140.09 s repeat**, without SR. The 608×912 image above is a separately labeled saved reference. The loose-hair clock portrait is excluded from this selected gallery.
+
+All crops use saved pixels without resampling. The 4× source pair is verified by RGB hash. A baseline clock-hand defect remains in the full-body scene; perfect geometry is not claimed. [Historical controls and provenance](examples/README.md).
+
 
 ## Exact chosen chain
 

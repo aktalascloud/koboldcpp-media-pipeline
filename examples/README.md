@@ -1,5 +1,7 @@
 # Existing benchmark images
 
+The selected quality gallery is on the [main README](../README.md#selected-results), with [per-scene provenance](historical-scenes.json). The images below are historical performance controls, including known artifacts; they are not all selected quality examples.
+
 No new generation was performed for publication. These images come from the same synthetic adult fashion/hotel/night/clock test, seed424242. PNGs were re-encoded only to remove metadata; RGB pixels were preserved. The subject is a generated adult, not a user's uploaded reference photo.
 
 | Stock576×864 |New build576×864, same processing |
