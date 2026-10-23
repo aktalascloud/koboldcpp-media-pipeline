@@ -4,7 +4,7 @@
 
 Portable Windows photo/music pipeline for **RX 580 Polaris (gfx803)** and Haswell/AVX2, using **[the optimized KoboldCpp CPU/Vulkan fork](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa)**. Kobold remains the model backend. The proxy adds automatic model switching, face refinement, image restoration and optional Helaman 4× upscaling through A1111/OpenAI-compatible routes.
 
-**[Portable release assets](https://github.com/aktalascloud/koboldcpp-media-pipeline/releases)** · [API / OpenWebUI](docs/API.md) · [Licenses and model downloads](docs/LICENSES.md) · [Existing comparisons](examples/README.md) · [Measured timings](benchmarks/results.json)
+**[Portable release assets](https://github.com/aktalascloud/koboldcpp-media-pipeline/releases/latest)** · [Original KoboldCpp](https://github.com/LostRuins/koboldcpp) · [API / OpenWebUI](docs/API.md) · [Licenses and model downloads](docs/LICENSES.md) · [Existing comparisons](examples/README.md) · [Measured timings](benchmarks/results.json)
 
 ## Selected results
 
