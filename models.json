@@ -1,32 +1,43 @@
 {
-  "format": 1,
+  "format": 2,
   "models": [
     {
-      "path": "ZIMAGE/moodyProMix_collectorsEdition.safetensors",
-      "bytes": 12309876368,
-      "sha256": "b94f1c201bced7da5a4a44dda6465d0c0a49133f83c3bcb3f8f47151f2353591",
-      "url": "https://civitai.red/api/download/models/3161628",
-      "license": "Author terms; obtain from the model page",
-      "source": "https://civitai.red/models/620406?modelVersionId=3161628",
-      "in_release": false
+      "path": "MOSS/models/image-q8_0.gguf",
+      "bytes": 5401115744,
+      "sha256": "8a3ed10d3e568ce01860fd9fcecd3478b9a50df5d2a780c562a01dcd84b765c4",
+      "in_release": false,
+      "source": "https://civitai.com/models/3010191?modelVersionId=3416029",
+      "license": "Original author terms; no derived weights distributed by this project.",
+      "generated_role": "image",
+      "url": null
     },
     {
-      "path": "Qwen3-4B-Instruct-2507-heretic-uncens.i1-IQ4_XS.gguf",
-      "bytes": 2270750752,
-      "sha256": "78614724ef8ccb9d50831fb24b3be3b6a90a4b7c5d73230531fdb80e4386a98d",
-      "url": "https://huggingface.co/mradermacher/Qwen3-4B-Instruct-2507-heretic-uncens-i1-GGUF/resolve/8892eb7be59811232116c04f191503d7ec823c27/Qwen3-4B-Instruct-2507-heretic-uncens.i1-IQ4_XS.gguf",
-      "license": "Apache-2.0; see upstream model card",
-      "source": "https://huggingface.co/mradermacher/Qwen3-4B-Instruct-2507-heretic-uncens-i1-GGUF/resolve/8892eb7be59811232116c04f191503d7ec823c27/Qwen3-4B-Instruct-2507-heretic-uncens.i1-IQ4_XS.gguf",
-      "in_release": false
+      "path": "MOSS/models/text-q8_0.gguf",
+      "bytes": 10400747200,
+      "sha256": "f3083eab75745e7d3e0cfc8184747d5e53ae4a23811096345d0e2b361c571bde",
+      "in_release": false,
+      "source": "https://civitai.com/models/3010191?modelVersionId=3416029",
+      "license": "Original author terms; no derived weights distributed by this project.",
+      "generated_role": "text",
+      "url": null
     },
     {
-      "path": "ZIMAGE/ae.safetensors",
-      "bytes": 335304388,
-      "sha256": "afc8e28272cd15db3919bacdb6918ce9c1ed22e96cb12c4d5ed0fba823529e38",
-      "url": "https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/vae/ae.safetensors",
-      "license": "See original Z-Image/FLUX VAE card",
-      "source": "https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/vae/ae.safetensors",
-      "in_release": false
+      "path": "MOSS/models/vae.fp32.safetensors",
+      "bytes": 249521372,
+      "sha256": "c3bdf94dc67ec69b30ea9fe1fa8340085679cae64d019f7c7e4a9921f1a7f17a",
+      "in_release": false,
+      "source": "https://civitai.com/models/3010191?modelVersionId=3416029",
+      "license": "Original author terms; no derived weights distributed by this project.",
+      "url": "https://huggingface.co/hfmaster/artius-moss/resolve/d75d8f6bcb2423b21d42631751d39467fadfaba1/moss_image_vae.safetensors"
+    },
+    {
+      "path": "MOSS/models/tokenizer.json",
+      "bytes": 12807982,
+      "sha256": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+      "in_release": false,
+      "source": "https://civitai.com/models/3010191?modelVersionId=3416029",
+      "license": "Apache-2.0, Qwen tokenizer; see upstream.",
+      "url": "https://huggingface.co/Qwen/Qwen3.5-9B/resolve/c202236235762e1c871ad0ccb60c8ee5ba337b9a/tokenizer.json"
     },
     {
       "path": "MUSIC/acestep-5Hz-lm-4B-Q6_K.gguf",
@@ -63,33 +74,6 @@
       "license": "Original AceStep/Qwen license; see model card",
       "source": "https://huggingface.co/koboldcpp/music/resolve/5f747e22d54a81a0a99f4d675bc98836ee77bd13/ace-vae-BF16.gguf",
       "in_release": false
-    },
-    {
-      "path": "LORAS/PhysioShade.safetensors",
-      "bytes": 85094864,
-      "sha256": "20e6c60b8b32ba3c2943d6ad3e0770d7c16ceb92a32d47eb7276f5c93f9f76e5",
-      "url": null,
-      "license": "Apache-2.0",
-      "source": "https://huggingface.co/jarod2212/PhysioShade_ZIT",
-      "in_release": true
-    },
-    {
-      "path": "LORAS/FlowDPO.safetensors",
-      "bytes": 169691320,
-      "sha256": "1fd3c728ade7e1dec52f26ab5f860e7efd57abb06f740788f13b5b68bd94edc2",
-      "url": null,
-      "license": "Apache-2.0",
-      "source": "https://huggingface.co/F16/z-image-turbo-flow-dpo",
-      "in_release": true
-    },
-    {
-      "path": "LORAS/MaskedDPOFull.safetensors",
-      "bytes": 339266712,
-      "sha256": "6dce05bed0a25f8aafc417ce0e980b5a83bfc7b2049b5d8b095efd92467cc03d",
-      "url": null,
-      "license": "Apache-2.0",
-      "source": "https://huggingface.co/F16/z-image-turbo-masked-dpo",
-      "in_release": true
     },
     {
       "path": "tools/detailer_models/face_detection_yunet_2023mar.onnx",
@@ -143,7 +127,34 @@
       "url": "https://github.com/facefusion/facefusion-assets/releases/download/models-3.0.0/gpen_bfr_512.onnx",
       "license": "Non-Commercial (FaceFusion model distributor; exact original grant not located)",
       "source": "https://docs.facefusion.io/introduction/licenses",
-      "in_release": true
+      "in_release": false
+    }
+  ],
+  "moss_sources": [
+    {
+      "role": "image",
+      "path": "MOSS/source/img-artiusMoss_v10_3309287.safetensors",
+      "bytes": 7494295376,
+      "sha256": "187a5c86c6fea9497bf16d43c5d780ebd46fb52f17a4a8faa2bd553218b0344b",
+      "url": "https://huggingface.co/hfmaster/artius-moss/resolve/d75d8f6bcb2423b21d42631751d39467fadfaba1/Artius_Moss_int8_hq_v1.safetensors",
+      "aliases": [
+        "Artius_Moss_int8_hq_v1.safetensors",
+        "artiusMoss_v10_3309287.safetensors"
+      ],
+      "source": "https://civitai.com/models/3010191?modelVersionId=3416029"
+    },
+    {
+      "role": "text",
+      "path": "MOSS/source/txt-artiusMoss_v10_3313824.safetensors",
+      "bytes": 6857004728,
+      "sha256": "b0a6c1ab290b55c083fea294179c6c41b9027f645355e7eb63566dd1cb63efd1",
+      "url": "https://civitai.com/api/download/models/3416029?fileId=3313824",
+      "aliases": [
+        "artiusMoss_v10_3313824.safetensors",
+        "txt-artiusMoss_v10_3313824.safetensors"
+      ],
+      "requires_civitai_access": true,
+      "source": "https://civitai.com/models/3010191?modelVersionId=3416029"
     }
   ],
   "no_main_model_weights_in_repository_or_release": true

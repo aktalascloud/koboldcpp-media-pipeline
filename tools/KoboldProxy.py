@@ -43,6 +43,7 @@ from FaceSizePolicy import scale_face_options
 from PhotoRestoration import restore_once,matching_marker as matching_restoration_marker,attach_marker as attach_restoration_marker,prewarm_model as prewarm_restoration_model
 from ImageBudget import ImageBudgetError,apply_image_gpu_budget,prewarm_image_budget
 from NativeVideo import request_json_deadline
+from PhotoCapture import capture_stage
 
 VERSION='3.0-photo-video-portable'
 IMAGE_FIELDS=('steps','cfg_scale','sampler_name','scheduler','eta','flow_shift','clip_skip','cache_mode','cache_options')
@@ -285,14 +286,20 @@ class Pipeline:
                 LOG.exception('Pre-upscale face stage failed; retained original')
             report['detailer_before_upscale']=before
             first_marker=before.get('marker',prior)
+            capture_stage(config,base.get('genkey'),'faces',final)
         if upscale:
-            final,restoration,restoration_marker=restore_once(final,restoration_options,restoration_marker)
-            report['restoration']=restoration
             if callable(self.upscale_vram_lease):
                 with self.upscale_vram_lease(config) as placement:
+                    final,restoration,restoration_marker=restore_once(final,restoration_options,restoration_marker)
+                    report['restoration']=restoration
+                    capture_stage(config,base.get('genkey'),'processed',final)
                     final,up=self.upscale(final,config)
+                    placement['restoration_in_exclusive_gpu_lease']=True
                     up['vram_policy']=placement
             else:
+                final,restoration,restoration_marker=restore_once(final,restoration_options,restoration_marker)
+                report['restoration']=restoration
+                capture_stage(config,base.get('genkey'),'processed',final)
                 final,up=self.upscale(final,config)
             report['upscaler']=up
             scale=final.width/image.width
@@ -392,7 +399,8 @@ class Pipeline:
                         raise RuntimeError('Native clamped the requested geometry: expected '+str(expected_size)+', received '+str(image.size))
                     actual_seed=info.get('all_seeds',[info.get('seed',payload.get('seed',104729))])
                     seed=actual_seed[min(index,len(actual_seed)-1)] if actual_seed else 104729
-                    final,report=self.finish_photo(image,detail_opts,{'seed':seed},config,upscale=requested_hr)
+                    capture_stage(config,key,'raw',image)
+                    final,report=self.finish_photo(image,detail_opts,{'seed':seed,'genkey':key},config,upscale=requested_hr)
                     changed=report.get('detailer',{}).get('processed_faces',0)>0 or requested_hr or report.get('denoise',{}).get('applied',False) or report.get('restoration',{}).get('applied',False)
                     parameters=(info.get('infotexts') or [''])[0]
                     images.append(image_encode(final,parameters,report.get('detailer',{}).get('marker')) if changed else encoded)
@@ -682,7 +690,7 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                 super().server_bind()
     else:Server=ThreadingHTTPServer
     server=Server((host,initial['port']),Handler)
-    try:pipeline.image_budget_prewarm=prewarm_image_budget(root=ROOT)
+    try:pipeline.image_budget_prewarm=prewarm_image_budget(root=ROOT,config=initial)
     except ImageBudgetError as error:
         pipeline.image_budget_prewarm=dict(ok=False,error=str(error))
         LOG.exception('SD tokenizer prewarm failed; image requests remain blocked until repaired')

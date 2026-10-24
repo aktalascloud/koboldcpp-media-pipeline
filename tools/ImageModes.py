@@ -47,7 +47,7 @@ def default_image_modes():
     return copy.deepcopy(DEFAULT_MODES)
 
 
-def _integer(value, field, minimum=1, maximum=8192, status=400):
+def _integer(value, field, minimum=1, maximum=16384, status=400):
     if isinstance(value, bool) or not isinstance(value, (int, str)):
         raise ImageModeError('A positive integer is required.', field, 'invalid_dimensions', status)
     if isinstance(value, str) and not re.fullmatch(r'[0-9]+', value):
@@ -69,7 +69,7 @@ def _mode_spec(config, mode):
     if spec['native_profile'] != 'photo-' + mode:
         raise ImageModeError('Mode must map to its approved photo profile.', 'native_profile', 'invalid_mode_config', 500)
     for key in ('default_width', 'default_height', 'max_native_edge'):
-        spec[key] = _integer(spec[key], key, 256, 2048, 500)
+        spec[key] = _integer(spec[key], key, 256, 4096, 500)
     spec['native_pixel_budget'] = _integer(spec['native_pixel_budget'], 'native_pixel_budget', 1, 2048**2, 500)
     alignment = spec['native_alignment']
     if type(alignment) is not int or alignment not in (16, 32, 64):
@@ -132,6 +132,8 @@ def resolve_image_mode(payload, config, operation='generation'):
     local = copy.deepcopy(config)
     spec = _mode_spec(local, mode)
     defaults, proxy = local.setdefault('defaults', {}), local.setdefault('proxy', {})
+    # Sampling follows the reviewed Helper defaults for both photo modes.
+    # Do not silently disable cache or replace the configured step count in High.
     # Mode defaults are an explicit selected/fallback size, never silently enlarged.
     budget = min(spec['native_pixel_budget'], spec['default_width']*spec['default_height'])
     edge = min(spec['max_native_edge'], max(spec['default_width'], spec['default_height']))

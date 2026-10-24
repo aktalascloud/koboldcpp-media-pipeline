@@ -143,7 +143,7 @@
   "embeddingsgpu": false,
   "rpcmode": "disabled",
   "rpcport": 5551,
-  "rpchost": "127.0.0.1",
+  "rpchost": "0.0.0.0",
   "rpcdevice": "",
   "rpctargets": "",
   "admin": false,

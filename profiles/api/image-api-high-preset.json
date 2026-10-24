@@ -1,15 +1,15 @@
 {
+  "width": 928,
+  "height": 1392,
   "steps": 8,
   "cfg_scale": 1,
   "sampler_name": "euler",
-  "scheduler": "beta",
+  "scheduler": "simple",
   "eta": 0,
-  "flow_shift": 3,
+  "flow_shift": 5,
   "clip_skip": -1,
   "cache_mode": "cache-dit",
   "cache_options": "threshold=0.08,warmup=4,Fn=16,Bn=2",
-  "width": 1152,
-  "height": 768,
-  "enable_hr": true,
-  "kcpp_quality": "quality"
+  "kcpp_quality": "quality",
+  "enable_hr": true
 }

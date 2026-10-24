@@ -1,49 +1,50 @@
-# KoboldCpp media pipeline
-[Русский](README.ru.md) · **[Download](https://github.com/aktalascloud/koboldcpp-media-pipeline/releases/latest)** · [API / OpenWebUI](docs/API.md) · [Licenses](docs/LICENSES.md)
+# KoboldCpp MOSS media pipeline
+[Русский](README.ru.md) · **[Download Windows kit](https://github.com/aktalascloud/koboldcpp-media-pipeline/releases/latest)** · [API / OpenWebUI](docs/API.md) · [Model setup](docs/MODELS.md) · [Licenses](docs/LICENSES.md)
 
-Portable Windows photo/music integration for **[our optimized KoboldCpp fork](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa)**. Haswell/AVX2 and RX 580 Polaris/gfx803. Kobold stays the backend; the proxy adds model switching, face refinement, restoration and Helaman 4×.
+Portable Windows photo/music integration for **[our optimized KoboldCpp fork](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa)** and [original KoboldCpp](https://github.com/LostRuins/koboldcpp). Tested on Haswell AVX2 and AMD RX 580 Polaris/gfx803 8 GB. Kobold remains the backend; the proxy provides AUTOMATIC1111/OpenAI Images APIs, model switching, face refinement, restoration and Helaman 4×.
 
-## Selected results
-Saved images from earlier tests; no new generation or retouching for publication. Different scenes use different saved stages; [provenance](examples/historical-scenes.json).
+## Current MOSS results
+All images below were saved during existing tests. No new inference or AI retouching was performed for publication. [Pixel provenance](examples/gallery.json).
 
-| Window portrait, Helaman 2× | Watchmaker, 2× | Tailoring studio, native |
+| Normal, faces + Gater | Watchmaker, saved 704×1056 | Night, saved 704×1056 |
 |---|---|---|
-| [![Portrait](examples/portrait-window-helaman-2x.png)](examples/portrait-window-helaman-2x.png) | [![Watchmaker](examples/watchmaker-workbench-2x.png)](examples/watchmaker-workbench-2x.png) | [![Studio](examples/tailoring-studio-native.png)](examples/tailoring-studio-native.png) |
-| ![Eyes](examples/portrait-window-helaman-2x-eyes.png) | ![Hands](examples/watchmaker-workbench-2x-hands.png) | ![Eyes](examples/tailoring-studio-native-eyes.png) |
+| [![Normal](examples/normal-moss.png)](examples/normal-moss.png) | [![Watchmaker](examples/watchmaker-moss.png)](examples/watchmaker-moss.png) | [![Night](examples/night-moss.png)](examples/night-moss.png) |
+| ![Face](examples/normal-moss-face.png) | ![Face](examples/watchmaker-moss-face.png) | ![Face](examples/night-moss-face.png) |
 
-### Full body, face and eyes
-The saved 608×912 source already includes three LoRAs, faces and Gater. Helaman produces 2432×3648 without another face pass. Crops preserve saved pixels.
+### Exact High source and full 4× cycle
+The source RGB matches the native base of the measured High request. The right image includes faces, Gater and Helaman; this is a full-chain comparison, not an SR-only comparison. Crops contain unscaled saved pixels. The right overview is a labeled web preview; click it for the original 3712×5568 PNG.
 
-| Refined source | Helaman 4× |
+| Native 928×1392, raw | Faces + Gater + Helaman 4× |
 |---|---|
-| [![Source](examples/normal-608x912-final.png)](examples/normal-608x912-final.png) | [![4×](examples/resident-normal-4x.png)](examples/resident-normal-4x.png) |
-| ![Face](examples/sr-input-face.png) | ![Face](examples/helaman-4x-face.png) |
-| ![Eyes](examples/sr-input-eyes.png) | ![Eyes](examples/helaman-4x-eyes.png) |
+| [![Native](examples/high-native-moss.png)](examples/high-native-moss.png) | [![4× preview](examples/high-4x-preview.png)](examples/high-4x-moss.png) |
+| ![Eyes](examples/high-native-moss-eyes.png) | ![Eyes](examples/high-4x-moss-eyes.png) |
+| ![Face](examples/high-native-moss-face.png) | ![Face](examples/high-4x-moss-face.png) |
 
-## Measured time
-Same 576×864 scene, seed, three LoRAs, faces and Gater; no SR:
+## Measured settings and time
+| Mode | Native, exact 2:3 | Steps / cache | Output | Complete request |
+|---|---|---|---|---:|
+| Normal / edit budget | 736×1104 | 8 / Cache-DiT 0.08 | Faces + Gater, no autoSR | **141.47 s** |
+| High | 928×1392, 1.29 MP | 8 / Cache-DiT 0.08 | Faces + Gater + 4×, 3712×5568 | **861.79 s — 14 min 22 s** |
 
-| Original stock | Latest measured optimized result |
-|---:|---:|
-| 163.15 s | 138.35 s first / **131.83 s warm** |
-
-Warm elapsed time is **19.20% lower**. This saved 23 October test is separate from later native compiler builds. [Raw proof](benchmarks/results.json).
-
-Current Normal is larger: **592×896, about 140 s warm**, without SR. Saved Helaman 608×912 to 2432×3648: **194.90 s**, exclusive VRAM, about 7.41 GB dedicated memory. Photo generation/reload is outside SR time. Full High+4× was not timed again after the memory-policy fix. Refinement does not guarantee correct clock geometry.
+High is one complete API request, including profile switching. Native 245.676 s; faces 1.597 s; Gater 4.608 s; Helaman 588.394 s; the remainder is switching/transport. No OOM occurred. This is one saved complex scene/seed, not a guarantee for every caption. Captions/cache hits/background load affect time. [Exact scope and proof](benchmarks/results.json). These are media-profile timings, not an attribution of gains to native compiler patches; see the linked core fork for stock-versus-latest native comparisons.
 
 ## Pipeline
-1. GPU-resident Moody photo model; protected Qwen encoder on CPU, 20 threads. Music loads only on API demand, outputs MP3, then restores photo.
-2. PhysioShade **0.15**, FlowDPO **0.35**, MaskedDPOFull **0.25**. Trigger **physioshade** is inserted once. Do not load the same LoRAs again in requests.
-3. Euler/beta, **8 steps**, eta 0, CFG 1, shift 3, clip skip−1, Cache-DiT 0.08/warmup4/Fn16/Bn2; SD flash attention off.
-4. YuNet 960, score 0.82; GPEN 512/OpenVINO CPU blended 20%; SFace minimum 0.97; max 2 faces. Face-size bounds scale with resolution.
-5. Gater Restore 1× FP32 DirectML, strength 1, after faces. No sharpen.
-6. Normal/edit **592×896**, no autoSR. High **1152×768** or portrait768×1152, auto Helaman native **4×**, no downsize/repeated face pass.
+1. **Artius MOSS compatible Q8_0** image/text GGUF, official Qwen3.5 tokenizer and FLUX2 VAE. No Z-Image LoRA or `physioshade` trigger. Original custom INT8/packed W4A8 files require the included local converter; converted weights are not uploaded here.
+2. Euler/simple, **8 steps**, CFG 1, flow shift 5, clip skip −1, eta 0. Flash Attention on. Cache-DiT `threshold=0.08,warmup=4,Fn=16,Bn=2`; the control scene skipped two of eight model evaluations.
+3. Text encoder on CPU, 20 threads; diffusion/VAE on Vulkan. High has a 6500 MiB budget and can segment if required. The selected size used a monolithic GPU graph.
+4. YuNet 960, score 0.82; GPEN 512/OpenVINO CPU blended 20%; SFace minimum 0.97, at most two faces. Automatic bounds: Normal 39–155 px, High 49–196 px. Large faces may intentionally skip GPEN.
+5. Gater Restore 1× FP32 DirectML, full native frame. No sharpen. High/standalone SR releases the owned idle Native before Gater and Helaman, then restores photo after the response. No repeated face/Gater pass after 4×. Pixel-bound PNG markers prevent duplicate processing.
+6. Music loads on API demand, returns MP3, then restores the GPU-resident Normal photo model. Video remains deferred.
 
-Standalone SR applies faces/Gater before Helaman unless pixel-bound markers prove prior processing. The supervisor releases its owned idle Native for exclusive SR VRAM, then restores photo. Video is deferred and its weights/runtime are excluded.
+Sharpened eyes do not guarantee flawless anatomy or exact clock hands. The restorer/upscaler can smooth skin or fabric; native originals are provided. This Kobold adaptation does not include the author's TemporalScoreRescaling. Q8 conversion adds rounding; do not claim bit-identical ComfyUI inference.
 
-## Install
-Extract **media-pipeline-code.zip**, run **Setup.ps1 once**, then launch **Start.exe directly**. Setup downloads hash-pinned components; large Moody/Qwen/AceStep weights come from their original hosts. One runtime copy. Start.exe --check validates installation.
+## Install once, then run the EXE
+1. Extract **media-pipeline-code.zip** from the latest release. Run **Setup.ps1 once**. It downloads SHA-pinned runtime/postprocessing assets and primary-host main weights, converts MOSS locally and creates the local manifest.
+2. **Exact W4 encoder access is required.** Civitai file **3313824**, SHA256 starting `b0a6c1ab29`, requires the user's own account/access. Download it from the [author page](https://civitai.com/models/3010191?modelVersionId=3416029), then run `Setup.ps1 -MossSourceDirectory <your-download-folder>`. Alternatively use the process-only `CIVITAI_API_KEY` environment variable; the installer never saves or prints its value. Current HF v2 INT8 is a different file and is not silently substituted. [Details](docs/MODELS.md).
+3. Launch **Start.exe directly**; no PowerShell launcher is needed afterward. **Start.exe --check** checks the installation. The registered Native window is separate and visible. One runtime copy; user-supplied source files are preserved. Allow roughly 60 GB free during initial download/conversion.
 
-Windows startup is opt-in: runtime/python/python.exe -I -B tools/Launch.py --register-startup. Kobold opens in a separate visible window. Public API 5001/private Native 5003 default to loopback; network exposure is explicit.
+GPEN is downloaded from its original ONNX distributor, or supplied with `-GPENPath`; it is not mirrored in the new code release. Its terms are **Non-Commercial**, with unresolved original redistribution details. Main MOSS/Qwen/AceStep weights are never in Git or our release.
 
-Code: AGPL-3.0; third-party terms retained. GPEN is a separate **Non-Commercial** asset. No credentials, private addresses, cache or logs in the public kit. [Component licenses](docs/LICENSES.md) · [Original KoboldCpp](https://github.com/LostRuins/koboldcpp).
+Defaults are loopback public 5001/private 5003. For another OWUI machine, explicitly pass `-ListenHost 0.0.0.0` during Setup and configure access on your network. Startup is opt-in: **Start.exe --register-startup**. No driver, BIOS, TDR, clock or voltage changes. Existing large runtime/postprocessing assets are hash-pinned and reused; unused Z-Image LoRAs/token resources are not extracted.
+
+Original wrapper code: AGPL-3.0. GGUF writer subset: MIT. Model/runtime licenses are independent and retained. No credentials, private addresses, caches, logs, PID/state or benchmark counters are shipped. [Component notices](docs/LICENSES.md).

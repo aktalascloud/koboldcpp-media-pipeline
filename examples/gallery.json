@@ -1,84 +1,193 @@
 {
-  "source_pair_rgb_verified": true,
-  "new_generation": false,
-  "crops": [
+  "images": [
     {
-      "file": "normal-face.png",
-      "source": "normal-592x896-final.png",
-      "box": [
-        250,
-        27,
-        338,
-        157
+      "file": "normal-moss.png",
+      "source_artifact": "final-api-normal.png",
+      "dimensions": [
+        736,
+        1104
       ],
-      "source_rgb_sha256": "8735dbc9ef786c30c19ef558d47edb9d4c9a9fc2d486cca7b8521b9d2262f5ca",
-      "crop_rgb_sha256": "0dee55182f61c9c60b2ccd6d09af2f0bd319c9a82ee1b89e145bad48942c9616",
-      "resampling": false
+      "rgb_sha256": "132a77cffc45fd3843de21e40c4ddb653babedbd5e3edd0838886396f185e433",
+      "metadata_removed": true,
+      "scope": "Normal736x1104,faces/Gater,one API request"
     },
     {
-      "file": "normal-eyes.png",
-      "source": "normal-592x896-final.png",
-      "box": [
-        264,
-        76,
-        315,
-        95
+      "file": "watchmaker-moss.png",
+      "source_artifact": "watchmaker-simple-cache-704x1056-processed.png",
+      "dimensions": [
+        704,
+        1056
       ],
-      "source_rgb_sha256": "8735dbc9ef786c30c19ef558d47edb9d4c9a9fc2d486cca7b8521b9d2262f5ca",
-      "crop_rgb_sha256": "45c7d5f67acab3b0bf9ca644e9544ec4b0cd7f058280149ed5cb294d9368d988",
-      "resampling": false
+      "rgb_sha256": "5e4ff8b9ea3c90bf590196c97e058a60d11542698304ebf2895122b949d4a48f",
+      "metadata_removed": true,
+      "scope": "Saved704x1056 Euler/simple,faces policy/Gater"
     },
     {
-      "file": "sr-input-face.png",
-      "source": "normal-608x912-final.png",
-      "box": [
-        259,
-        29,
-        355,
-        162
+      "file": "night-moss.png",
+      "source_artifact": "night-simple-cache-704x1056-processed.png",
+      "dimensions": [
+        704,
+        1056
       ],
-      "source_rgb_sha256": "537372a09c4d5aea76d8e5d0d0aab560b37913d528be12899e4a3a565820ef0b",
-      "crop_rgb_sha256": "612a12288e7397df491e2af2dd2b4346ca08c8bcc081e7f3441c5cddba13dfa0",
-      "resampling": false
+      "rgb_sha256": "44794d39cfa58384cf21afdfa1a88f7ab7a60d69f7be0a5ab8e2c7d96d9b1fed",
+      "metadata_removed": true,
+      "scope": "Saved704x1056 Euler/simple,faces policy/Gater"
     },
     {
-      "file": "sr-input-eyes.png",
-      "source": "normal-608x912-final.png",
-      "box": [
-        274,
-        81,
-        330,
-        100
+      "file": "high-native-moss.png",
+      "source_artifact": "fullbody-simple-cache-928x1392-high15-candidate.png",
+      "dimensions": [
+        928,
+        1392
       ],
-      "source_rgb_sha256": "537372a09c4d5aea76d8e5d0d0aab560b37913d528be12899e4a3a565820ef0b",
-      "crop_rgb_sha256": "fc4f656cb6b9bd4c5d9a6dc528b495441d28c0cfff4ae6c75898fae6b046b039",
-      "resampling": false
+      "rgb_sha256": "f70f0bcebe7814f050ef6325b40ed419e08ab645badf1f277e89051101040928",
+      "metadata_removed": true,
+      "scope": "Native928x1392,raw,8steps/cache"
     },
     {
-      "file": "helaman-4x-face.png",
-      "source": "resident-normal-4x.png",
-      "box": [
-        1037,
-        118,
-        1422,
-        650
+      "file": "high-4x-moss.png",
+      "source_artifact": "high15-928x1392-full.png",
+      "dimensions": [
+        3712,
+        5568
       ],
-      "source_rgb_sha256": "a90c8fe96b23bf8dd478802a09abbdec56b82f5e4fb74b08a106546654005f63",
-      "crop_rgb_sha256": "1f08ccc781dc7dc4cab1dff8d27fbbb5802568c6f1d64452a2055acef18783e3",
-      "resampling": false
+      "rgb_sha256": "33bf1c201048f7351d25c6385ef825b1ff7c9b0be9306f9bad326cdb1647d9d0",
+      "metadata_removed": true,
+      "scope": "Full928x1392 High API cycle,faces/Gater/Helaman4x"
     },
     {
-      "file": "helaman-4x-eyes.png",
-      "source": "resident-normal-4x.png",
+      "file": "high-native-moss-eyes.png",
+      "source": "high-native-moss.png",
       "box": [
-        1099,
+        408,
+        95,
+        504,
+        136
+      ],
+      "dimensions": [
+        96,
+        41
+      ],
+      "rgb_sha256": "a357064f3de390738991836f84107b7132dba4bd711f320e4f2361f3a5f8c79d",
+      "metadata_removed": true,
+      "scope": "Exact unscaled saved-pixel crop"
+    },
+    {
+      "file": "high-native-moss-face.png",
+      "source": "high-native-moss.png",
+      "box": [
+        385,
+        46,
+        547,
+        220
+      ],
+      "dimensions": [
+        162,
+        174
+      ],
+      "rgb_sha256": "a0586cc5d73ff054d7dad3db1ab2d9bbb1557898f85faf12cf5c59e998e290b0",
+      "metadata_removed": true,
+      "scope": "Exact unscaled saved-pixel crop"
+    },
+    {
+      "file": "high-4x-moss-eyes.png",
+      "source": "high-4x-moss.png",
+      "box": [
+        1632,
+        380,
+        2016,
+        544
+      ],
+      "dimensions": [
+        384,
+        164
+      ],
+      "rgb_sha256": "533d397a0e2fde930e28c5522a2a497503e9c12c36b5a68714fb8b150ad171e6",
+      "metadata_removed": true,
+      "scope": "Exact unscaled saved-pixel crop"
+    },
+    {
+      "file": "high-4x-moss-face.png",
+      "source": "high-4x-moss.png",
+      "box": [
+        1540,
+        184,
+        2188,
+        880
+      ],
+      "dimensions": [
+        648,
+        696
+      ],
+      "rgb_sha256": "28c7367bd89638c8428e0f07cff711c1bdaa9b1b5d26ad149253860410952f42",
+      "metadata_removed": true,
+      "scope": "Exact unscaled saved-pixel crop"
+    },
+    {
+      "file": "normal-moss-face.png",
+      "source": "normal-moss.png",
+      "box": [
         324,
-        1323,
-        403
+        75,
+        427,
+        205
       ],
-      "source_rgb_sha256": "a90c8fe96b23bf8dd478802a09abbdec56b82f5e4fb74b08a106546654005f63",
-      "crop_rgb_sha256": "73b1279da5bd3f3eef86674ff166ef7652353197d74b3b025fde96285d181362",
-      "resampling": false
+      "dimensions": [
+        103,
+        130
+      ],
+      "rgb_sha256": "13469c7736cdd20427d84037e2d16a0963229e120f4e1687ae96a189ead860cd",
+      "metadata_removed": true,
+      "scope": "Exact saved-pixel face crop"
+    },
+    {
+      "file": "watchmaker-moss-face.png",
+      "source": "watchmaker-moss.png",
+      "box": [
+        360,
+        120,
+        627,
+        469
+      ],
+      "dimensions": [
+        267,
+        349
+      ],
+      "rgb_sha256": "d5a0d39ceae3643e661f833d01bd01ea83ce41f3ebd339b8fb2968974519dfd0",
+      "metadata_removed": true,
+      "scope": "Exact saved-pixel face crop"
+    },
+    {
+      "file": "night-moss-face.png",
+      "source": "night-moss.png",
+      "box": [
+        258,
+        103,
+        449,
+        355
+      ],
+      "dimensions": [
+        191,
+        252
+      ],
+      "rgb_sha256": "bd68e2401b41067cafd4db5361d2abde092f4efbb0f46fa5071f448f03e4957e",
+      "metadata_removed": true,
+      "scope": "Exact saved-pixel face crop"
+    },
+    {
+      "file": "high-4x-preview.png",
+      "source": "high-4x-moss.png",
+      "dimensions": [
+        928,
+        1392
+      ],
+      "rgb_sha256": "5a802933afe6a354258fa3107fbc275f064e8ba3b5650b27d079fc7e21120f61",
+      "scope": "Lanczos web preview only; link opens original4x PNG",
+      "metadata_removed": true
     }
-  ]
+  ],
+  "generated_for_publication": false,
+  "ai_retouching_for_publication": false,
+  "high_native_base_rgb_identical": true,
+  "statement": "All source images are already saved MOSS tests. PNG metadata stripped; exact crops preserve saved pixels. One web thumbnail is explicitly resized."
 }

@@ -1,49 +1,50 @@
-# Медиапайплайн KoboldCpp
-[English](README.md) · **[Скачать](https://github.com/aktalascloud/koboldcpp-media-pipeline/releases/latest)** · [API / OpenWebUI](docs/API.md) · [Лицензии](docs/LICENSES.md)
+# Медиапайплайн KoboldCpp MOSS
+[English](README.md) · **[Скачать комплект Windows](https://github.com/aktalascloud/koboldcpp-media-pipeline/releases/latest)** · [API / OWUI](docs/API.md) · [Установка моделей](docs/MODELS.md) · [Лицензии](docs/LICENSES.md)
 
-Портативный Windows-комплект для Haswell/AVX2 и RX 580 Polaris/gfx803. **[Оптимизированный KoboldCpp](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa)** остаётся бэкендом; прокси добавляет переключение моделей, обработку лиц, восстановление и Helaman 4×.
+Портативная генерация фото и музыки через **[наш оптимизированный KoboldCpp](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa)**, форк [оригинального KoboldCpp](https://github.com/LostRuins/koboldcpp). Проверено на Haswell AVX2 и RX 580 Polaris/gfx803 8 ГБ. Backend остаётся Kobold; прокси предоставляет AUTOMATIC1111/OpenAI Images API, переключение моделей, лица, восстановление и Helaman 4×.
 
-## Примеры качества
-Готовые изображения прежних тестов, без новой генерации или ретуши для публикации. Этапы обработки различаются; [происхождение кадров](examples/historical-scenes.json).
+## Результаты MOSS
+Использованы сохранённые тесты: для публикации ничего не генерировалось и не ретушировалось. [Происхождение пикселей](examples/gallery.json).
 
-| Портрет, Helaman 2× | Мастерская, 2× | Ателье, нативное разрешение |
+| Normal, лица + Gater | Часовщик, сохранённые 704×1056 | Ночь, сохранённые 704×1056 |
 |---|---|---|
-| [![Портрет](examples/portrait-window-helaman-2x.png)](examples/portrait-window-helaman-2x.png) | [![Мастер](examples/watchmaker-workbench-2x.png)](examples/watchmaker-workbench-2x.png) | [![Ателье](examples/tailoring-studio-native.png)](examples/tailoring-studio-native.png) |
-| ![Глаза](examples/portrait-window-helaman-2x-eyes.png) | ![Руки](examples/watchmaker-workbench-2x-hands.png) | ![Глаза](examples/tailoring-studio-native-eyes.png) |
+| [![Normal](examples/normal-moss.png)](examples/normal-moss.png) | [![Часовщик](examples/watchmaker-moss.png)](examples/watchmaker-moss.png) | [![Ночь](examples/night-moss.png)](examples/night-moss.png) |
+| ![Лицо](examples/normal-moss-face.png) | ![Лицо](examples/watchmaker-moss-face.png) | ![Лицо](examples/night-moss-face.png) |
 
-### Полный рост, лицо и глаза
-Исходник 608×912 уже обработан тремя LoRA, лицами и Gater. После Helaman — 2432×3648, без повторной обработки лица. Кропы сохраняют исходные пиксели.
+### High до обработки и после полного 4×
+RGB исходника совпадает с базовым кадром измеренного High. Справа — лица, Gater и Helaman, поэтому это сравнение всей цепочки, а не только SR. Кропы сохраняют пиксели без масштабирования. Обзор справа уменьшен для страницы; ссылка открывает оригинальный PNG 3712×5568.
 
-| Обработанный исходник | Helaman 4× |
+| Native 928×1392 | Лица + Gater + Helaman 4× |
 |---|---|
-| [![Исходник](examples/normal-608x912-final.png)](examples/normal-608x912-final.png) | [![4×](examples/resident-normal-4x.png)](examples/resident-normal-4x.png) |
-| ![Лицо](examples/sr-input-face.png) | ![Лицо](examples/helaman-4x-face.png) |
-| ![Глаза](examples/sr-input-eyes.png) | ![Глаза](examples/helaman-4x-eyes.png) |
+| [![Исходник](examples/high-native-moss.png)](examples/high-native-moss.png) | [![Превью 4×](examples/high-4x-preview.png)](examples/high-4x-moss.png) |
+| ![Глаза](examples/high-native-moss-eyes.png) | ![Глаза](examples/high-4x-moss-eyes.png) |
+| ![Лицо](examples/high-native-moss-face.png) | ![Лицо](examples/high-4x-moss-face.png) |
 
-## Измеренная скорость
-Одинаковые сцена 576×864, seed, три LoRA, лица и Gater; без SR:
+## Настройки и время
+| Режим | Native, строго 2:3 | Шаги / кэш | Результат | Полный запрос |
+|---|---|---|---|---:|
+| Normal / бюджет редактирования | 736×1104 | 8 / Cache-DiT 0,08 | Лица + Gater, без автоSR | **141,47 с** |
+| High | 928×1392, 1,29 МП | 8 / Cache-DiT 0,08 | Лица + Gater + 4×, 3712×5568 | **861,79 с — 14 минут 22 секунды** |
 
-| Исходный сток | Последний измеренный результат |
-|---:|---:|
-| 163,15 с | 138,35 с первым / **131,83 с прогретым** |
-
-Прогретый цикл короче на **19,20%**. Это сохранённый тест 23 октября, отдельно от последующих сборок native. [Числовое доказательство](benchmarks/results.json).
-
-Текущий Normal крупнее: **592×896, около 140 с прогретым**, без SR. Helaman 608×912 в 2432×3648: **194,90 с**, отдельная VRAM, около 7,41 ГБ dedicated memory. Генерация и возврат фотомодели в это время не входят. Полный High+4× после исправления памяти повторно не измерялся. Обработка не гарантирует правильную геометрию часов.
+High измерен одним запросом, включая переключение профиля. Native — 245,676 с; лица — 1,597 с; Gater — 4,608 с; Helaman — 588,394 с; остаток — переключение и передача PNG. OOM не было. Это один сохранённый сложный сюжет/seed, а не гарантированное время любого запроса. [Доказательства и границы замера](benchmarks/results.json). Эти цифры относятся к медиапрофилю; сравнение исходного и последнего native-билда находится в репозитории форка.
 
 ## Цепочка
-1. Фотомодель Moody находится в GPU; Qwen-кодировщик — CPU, 20 потоков. Музыка загружается по API, выдаёт MP3, затем возвращается фото.
-2. PhysioShade **0,15**, FlowDPO **0,35**, MaskedDPOFull **0,25**. Триггер **physioshade** добавляется один раз; повторно LoRA в запросах не подключаются.
-3. Euler/beta, **8 шагов**, eta 0, CFG 1, shift 3, clip skip−1, Cache-DiT 0,08/warmup4/Fn16/Bn2; SD flash attention выключен.
-4. YuNet 960, score 0,82; GPEN 512/OpenVINO CPU, смешивание 20%; SFace минимум 0,97, до 2 лиц. Размерные пороги зависят от разрешения.
-5. Gater Restore 1× FP32 DirectML после лиц. Strength1, без sharpen.
-6. Normal/edit **592×896**, без autoSR. High **1152×768**, портрет 768×1152, автоматический Helaman **4×**, без уменьшения и повторного лица.
+1. Artius MOSS в совместимых image/text GGUF Q8_0, официальный tokenizer Qwen3.5 и FLUX2 VAE. Старые LoRA Z-Image и `physioshade` не используются. Исходная упаковка INT8/W4A8 преобразуется локально; конвертированные веса не публикуются.
+2. Euler/simple, **8 шагов**, CFG 1, shift 5, clip skip −1, eta 0, Flash Attention. Cache-DiT: `threshold=0.08,warmup=4,Fn=16,Bn=2`. В контрольной сцене кэш пропустил два из восьми вычислений.
+3. Энкодер — CPU, 20 потоков; генератор/VAE — Vulkan. Лимит High 6500 МиБ допускает сегментацию; выбранный размер помещался целым графом.
+4. YuNet 960, порог 0,82; GPEN 512/OpenVINO CPU, смешивание 20%; SFace ≥0,97, до двух лиц. Размеры масштабируются автоматически: Normal 39–155 px, High 49–196 px. Крупное лицо может быть намеренно пропущено.
+5. Gater Restore 1× FP32 DirectML получает полный кадр; sharpen выключен. Перед Gater/Helaman в High и отдельном SR освобождается VRAM Native; после ответа возвращается фото. После 4× нет повторных лиц/Gater. PNG-маркеры предотвращают повторную обработку.
+6. Музыка загружается по API, возвращается в MP3, затем восстанавливается фото-модель в GPU. Видео отложено.
 
-Отдельный апскейл применяет лица/Gater до Helaman, если пиксельные маркеры не подтверждают готовую обработку. Супервизор выгружает только свой свободный Native, отдаёт SR всю VRAM и возвращает фото. Видео отложено; его веса/runtime не включены.
+Чёткие глаза не гарантируют правильную анатомию и стрелки часов. Обработка может сгладить кожу/ткань; исходники доступны. Авторский TemporalScoreRescaling здесь не реализован. Q8 добавляет округление; идентичное исполнение ComfyUI не заявляется.
 
 ## Установка
-Распакуйте **media-pipeline-code.zip**, один раз запустите **Setup.ps1**, далее — **Start.exe напрямую**. Компоненты скачиваются по SHA; крупные Moody/Qwen/AceStep — из исходных источников. Одна runtime-копия. Start.exe --check проверяет установку.
+Распакуйте **media-pipeline-code.zip**, один раз запустите **Setup.ps1**, затем пользуйтесь **Start.exe напрямую**. `Start.exe --check` проверяет комплект. Зависимости и модели скачиваются с закреплёнными SHA256; отдельной копии runtime нет. Во время первой установки нужно примерно 60 ГБ свободного места.
 
-Автозапуск включается отдельно: runtime/python/python.exe -I -B tools/Launch.py --register-startup. Kobold работает в отдельном видимом окне. API 5001/private Native 5003 по умолчанию loopback; сетевой доступ настраивается явно.
+**Точный W4-энкодер:** файл Civitai **3313824**, SHA256 начинается с `b0a6c1ab29`. Нужен собственный доступ пользователя. Скачайте его со [страницы автора](https://civitai.com/models/3010191?modelVersionId=3416029) и запустите `Setup.ps1 -MossSourceDirectory <папка-загрузки>`. Альтернатива — ключ только в переменной процесса `CIVITAI_API_KEY`; установщик его не сохраняет и не печатает. Текущий HF v2 INT8 отличается и автоматически не подставляется. [Подробности](docs/MODELS.md).
 
-Код — AGPL-3.0, сторонние условия сохранены. GPEN — отдельный **Non-Commercial** ассет. Ключи, личные адреса, кэши и логи не публикуются. [Лицензии](docs/LICENSES.md) · [Оригинальный KoboldCpp](https://github.com/LostRuins/koboldcpp).
+GPEN скачивается у исходного ONNX-распространителя либо передаётся через `-GPENPath`; в новом code-релизе зеркала GPEN нет. Сохранена классификация **Non-Commercial**, полноценное исходное разрешение на распространение не заявляется. Большие веса MOSS/Qwen/AceStep не входят в Git и релиз.
+
+По умолчанию public 5001/private 5003 доступны на loopback. Для другой машины OWUI явно укажите `-ListenHost 0.0.0.0` при Setup и настройте доступ своей сети. Автозапуск включается отдельно: **Start.exe --register-startup**. Native работает в отдельном видимом окне. Драйверы, BIOS, TDR и частоты не меняются. Старые LoRA/tokenizer Z-Image из общих ассетов не извлекаются.
+
+Код обёртки — AGPL-3.0, поднабор GGUF — MIT; модели и runtime имеют собственные условия. Ключей, личных адресов, кэша, логов и PID/state в комплекте нет. [Лицензии компонентов](docs/LICENSES.md).

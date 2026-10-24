@@ -83,6 +83,15 @@ def main():
                       visible_console=bool(console_window and user.IsWindowVisible(console_window)),
                       temporary_directory=str(temporary), native_environment=native_environment, python_unbuffered_requested=True,
                       native_c_stdio_unbuffered_proven=False, managed_port_mutex=port_ownership)
+        if h.get('sdquant')==0 and str(h.get('sdmodel','')).lower().endswith('.gguf'):
+            from MossImageBudget import inspect_gguf
+            try:
+                quant=inspect_gguf(root_path(root,h['sdmodel']))
+                if quant['architecture']=='moss_image':
+                    active.update(actual_image_quantization=quant['quantization'],
+                        image_quantization_source=quant['quantization_confirmation'])
+            except (OSError,ValueError):
+                pass  # The generic worker also accepts non-MOSS GGUF models.
         write_json(active_file, active)
         log_file.parent.mkdir(parents=True, exist_ok=True)
         with log_file.open('w', encoding='utf-8', buffering=1) as output:

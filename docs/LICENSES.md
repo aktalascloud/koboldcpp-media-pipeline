@@ -1,23 +1,23 @@
-# Components, licenses and downloads
+# Component licenses and attribution
 
-This repository's original wrapper code is AGPL-3.0. Models and runtime dependencies have independent licenses. License texts and attribution are retained in release assets; no license of a mirror is taken to override an original model license.
+Original wrapper code: AGPL-3.0. Every runtime/checkpoint has independent terms. Neither this repository license nor a mirror changes the model author's grant.
 
-| Component | Source / terms | Distribution |
+| Component | Source / terms | Current distribution |
 |---|---|---|
-| Optimized Kobold |[fork](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa),AGPL-3.0 + upstream notices|Exact accepted EXE in core releases; corresponding source at tag.|
-| Moody Pro Mix |[author Civitai page](https://civitai.red/models/620406?modelVersionId=3161628); exact collectorsEdition file|Not redistributed.|
-| Qwen encoder |[exact HF quant](https://huggingface.co/mradermacher/Qwen3-4B-Instruct-2507-heretic-uncens-i1-GGUF), heretic-uncens-i1 IQ4_XS|Not redistributed; check manifest/source link.|
-| Z-Image/FLUX-compatible VAE |Original model author's download; retain its terms|Download/supply locally.|
-| PhysioShade |[jarod2212](https://huggingface.co/jarod2212/PhysioShade_ZIT),Apache-2.0|Apache-2.0 weight asset; trigger physioshade.|
-| FlowDPO |[F16](https://huggingface.co/F16/z-image-turbo-flow-dpo),Apache-2.0|Apache-2.0 weight asset.|
-| MaskedDPO |[F16](https://huggingface.co/F16/z-image-turbo-masked-dpo),Apache-2.0 confirmed by public model API, original gated access|Compatible Full derivative in the Apache-2.0 weight asset, with conversion notice/source hash; no HF token or contact data.|
-| YuNet |[OpenCV Zoo](https://github.com/opencv/opencv_zoo/tree/main/models/face_detection_yunet),MIT|License retained.|
-| SFace |[OpenCV Zoo](https://github.com/opencv/opencv_zoo/tree/main/models/face_recognition_sface),Apache-2.0|License retained.|
-| GPEN512 ONNX |[GPEN author](https://github.com/yangxy/GPEN),[FaceFusion converter labels Non-Commercial](https://docs.facefusion.io/introduction/licenses)|Separate optional non-commercial asset, explicitly requested by the maintainer. Not relicensed AGPL/MIT. No unrestricted-commercial-use or settled original-license claim.|
-| Gater Restore1x |[Phhofm release](https://github.com/Phhofm/models/releases/tag/1xgaterv3_r_restore),CC-BY-4.0|Author Philip Hofmann; original FP32 ONNX.|
-| Helaman /4xNomos8k_atd_jpg |[Phhofm original](https://github.com/Phhofm/models/releases/tag/4xNomos8k_atd_jpg),CC-BY-4.0|Author Philip Hofmann; Helaman uploader loonalone. FP32 fixed-shape ONNX derivative, original unstable sort, reflected tiling; no whole-frame equivalence claim.|
-| ATD architecture /Spandrel converter |Apache-2.0 /MIT|Texts retained; converter is not required at runtime.|
-| Python /NumPy /Pillow /Torch CPU /ORT DirectML /ORT Extensions /OpenVINO /OpenCV |Their bundled original licenses and third-party notices|Runtime-only subset, no training cache/logs or installer credentials.|
-| AceStep music weights |[KoboldCpp HF organization](https://huggingface.co/koboldcpp/music),follow exact per-model terms|Downloaded separately; no music GGUF in Git.|
+| Optimized KoboldCpp |[fork](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa), [original](https://github.com/LostRuins/koboldcpp); AGPL/MIT notices|Pinned core release, exact corresponding source at its tag.|
+| Artius MOSS image/custom text/VAE |[author](https://civitai.com/models/3010191?modelVersionId=3416029), exact hashes in models.json|No main weights or converted GGUF distributed. Author metadata: derivatives=false, differentLicense=false; commercial flags Image/RentCivit. Check original terms/access for your use. Local format-conversion code does not grant additional rights.|
+| Official MOSS base/SFT |[OpenMOSS](https://huggingface.co/OpenMOSS-Team/MOSS-Image-Base), Apache-2.0|Not silently substituted for Artius; base license does not erase finetune restrictions.|
+| Qwen3.5 tokenizer |[Qwen](https://huggingface.co/Qwen/Qwen3.5-9B), Apache-2.0|Pinned original download.|
+| GGUF writer/quantizer subset |[exact native-source tree](https://github.com/LostRuins/koboldcpp/tree/329f6a5b31e9a1036ff862f8a0c694bd2fc6c98c/gguf-py), MIT|Unchanged source subset, MIT notice retained; minimal package initializer.|
+| YuNet |[OpenCV Zoo](https://github.com/opencv/opencv_zoo/tree/main/models/face_detection_yunet), MIT|Verified checkpoint in original pinned asset; notice retained.|
+| SFace |[OpenCV Zoo](https://github.com/opencv/opencv_zoo/tree/main/models/face_recognition_sface), Apache-2.0|Verified checkpoint; notice retained.|
+| GPEN512 ONNX |[GPEN](https://github.com/yangxy/GPEN), [FaceFusion terms](https://docs.facefusion.io/introduction/licenses)|Non-Commercial according to distributor; complete original redistribution grant not located. New code release does not mirror weights; users obtain/supply the original ONNX. No MIT/unrestricted-use claim.|
+| Gater Restore1× |[Philip Hofmann / Phhofm](https://github.com/Phhofm/models/releases/tag/1xgaterv3_r_restore), CC-BY-4.0|Original FP32 ONNX in pinned base asset, attribution retained.|
+| Helaman /4xNomos8k_atd_jpg |[Philip Hofmann / Phhofm](https://github.com/Phhofm/models/releases/tag/4xNomos8k_atd_jpg), CC-BY-4.0|Fixed-shape FP32 ONNX derivative; attribution/change record retained. Helaman uploader loonalone; no author endorsement. Reflected tiling is approximate, not guaranteed whole-frame equivalence.|
+| ATD architecture / Spandrel |Apache-2.0 / MIT|Original texts retained.|
+| Python, NumPy, Pillow, Torch CPU, ORT DirectML/Extensions, OpenVINO, OpenCV |Bundled licenses/third-party notices|Pinned runtime-only subset; no training state, logs or credentials.|
+| AceStep music |[KoboldCpp music](https://huggingface.co/koboldcpp/music), per-model terms|Primary-host downloads; no music GGUF in Git/releases.|
 
-CC-BY changes and source attributions are recorded in licenses/Helaman-ATTRIBUTION.json and Gater-ATTRIBUTION.json. No endorsement by model authors is claimed. Generated benchmark examples are outputs of this installation; no user's uploaded reference photos or browser screenshots are included.
+CC-BY source hashes, changes and attributions are in `licenses/Gater-ATTRIBUTION.json` and `licenses/Helaman-ATTRIBUTION.json`. Generated gallery examples are this installation's saved outputs, not uploaded user/reference photos or browser screenshots. PNG metadata was stripped without changing RGB pixels; one explicitly labeled overview thumbnail is resized. The gallery manifest records every crop/source/hash.
+
+Historic release assets remain available for pinned older versions. Their presence is not a new unrestricted-license claim. Current Setup does not install obsolete Z-Image LoRAs and does not download the historic GPEN mirror.

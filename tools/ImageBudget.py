@@ -22,7 +22,7 @@ ASSET_RELATIVE='tools/SDTokenizer'
 EXPECTED={
     'native_counter.py':'202a2bf3d704624ac593be0955d0791b7012c8ef125189546abd642cad214751',
     'qwen2-merges.native.txt':'0de0bc38a29ea38eef099b677fa1ff52edd181e573529af26c4cd2136e233777',
-    'native-qwen-spec.json':'3113adb80b9ed125d4577ab978ced08505ab9924b9e50c04a76528abe9ceb8d6',
+    'native-qwen-spec.json':'aeff5de00ac45b8ce4f9a70d88af69875fe13da8c06edffc0e12d3300d8cb614',
     'dependency-install.json':'7539e63b25cfabffbcca800f7ca75dbd37f2c3d122f4579e356049043d87a5c2',
 }
 _LOCK=threading.RLock()
@@ -102,7 +102,11 @@ def _counter(root=None,assets=None):
                                    'imageBudget','image_tokenizer_unavailable',503) from error
 
 
-def prewarm_image_budget(root=None,assets=None):
+def prewarm_image_budget(root=None,assets=None,config=None):
+    if config and config.get('proxy',{}).get('image_model_family')=='moss':
+        from MossImageBudget import validate_profile
+        started=time.perf_counter();validate_profile(config['helper'],root)
+        return dict(ok=True,seconds=time.perf_counter()-started,policy='moss_FA_measured_geometry',weights_loaded=False)
     started=time.perf_counter();_counter(root,assets)
     return dict(ok=True,seconds=time.perf_counter()-started,policy='Native_SD_Qwen_exact_counter',weights_loaded=False)
 
@@ -134,7 +138,8 @@ def apply_image_gpu_budget(payload,config,*,operation='generation',image_prepare
             raise ImageBudgetError('Nested Native parameters cannot override the resolved image geometry, prompt or fixed profile.','kcpp_extra_args','unsupported_nested_budget')
     if isinstance(local.get('cfg_scale'),bool) or local.get('cfg_scale')!=1:
         raise ImageBudgetError('The validated image profile requires CFG1.','cfg_scale','unsupported_gpu_budget_profile')
-    if cfg.get('helper',{}).get('sdflashattention') is not False:
+    moss=cfg.get('proxy',{}).get('image_model_family')=='moss'
+    if not moss and cfg.get('helper',{}).get('sdflashattention') is not False:
         raise ImageBudgetError('The GPU budget is validated for the selected NoFA image context only.','sdflashattention','unsupported_gpu_budget_profile')
     for field in ('batch_size','n_iter','frames'):
         if local.get(field,1)!=1:raise ImageBudgetError('The validated image budget supports one image at a time.',field,'unsupported_gpu_budget_profile')
@@ -147,12 +152,16 @@ def apply_image_gpu_budget(payload,config,*,operation='generation',image_prepare
     if '<lora:' in (positive+forced).lower():
         raise ImageBudgetError('Runtime LoRA prompt directives are not yet parity-validated; the prompt was not changed.','prompt','unsupported_lora_budget')
     width,height=local.get('width'),local.get('height')
-    if any(type(value)is not int or value<256 or value>2048 or value%16 for value in (width,height)):
-        raise ImageBudgetError('Resolved aligned16 dimensions256..2048 are required.','size','invalid_budget_geometry')
+    edge_limit=4096 if moss else 2048
+    if any(type(value)is not int or value<256 or value>edge_limit or value%16 for value in (width,height)):
+        raise ImageBudgetError('Resolved aligned16 dimensions256..'+str(edge_limit)+' are required.','size','invalid_budget_geometry')
     if operation=='generation' and (local.get('init_images') or local.get('mask')):
         raise ImageBudgetError('Prepared image/mask input must use the edit budget path.','init_images','prepared_image_geometry_required')
     if local.get('enable_hr'):
         raise ImageBudgetError('Automatic high-resolution passes are outside the selected no-autoSR image profile.','enable_hr','unsupported_gpu_budget_profile')
+    if moss:
+        from MossImageBudget import apply_moss_budget
+        return apply_moss_budget(local,cfg,operation=operation,image_prepared=image_prepared,root=root)
     try:count=_counter(root,assets).native_request(local)
     except ImageBudgetError:raise
     except (ValueError,TypeError,UnicodeError) as error:raise ImageBudgetError('The exact Native prompt cannot be counted: '+str(error),'prompt','unsupported_prompt_budget') from error

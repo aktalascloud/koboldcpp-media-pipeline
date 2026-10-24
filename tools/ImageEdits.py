@@ -16,7 +16,7 @@ from PIL import Image, ImageOps, UnidentifiedImageError
 from Resolution import choose_resolution
 
 EDIT_PATHS = ('/v1/images/edits', '/images/edits')
-MAX_IMAGE_PIXELS = 16_777_216
+MAX_IMAGE_PIXELS = 67_108_864
 MAX_FORM_PARTS = 24
 
 
@@ -97,7 +97,7 @@ def parse_fields(body, content_type):
             images.append(data)
             continue
         if name == 'mask':
-            fail('Masked edits are not enabled for this Z-Image pipeline.', 'mask', 'mask_unsupported', 422)
+            fail('Masked edits are not enabled for this image pipeline.', 'mask', 'mask_unsupported', 422)
         if part.get_filename() is not None:
             fail('Unexpected uploaded file field: ' + name, name)
         if name in fields:
@@ -117,7 +117,7 @@ def load_image(raw):
             if source.format not in ('PNG', 'JPEG', 'WEBP'):
                 fail('Only PNG, JPEG and WebP images are supported.', 'image', 'unsupported_image_format', 415)
             if source.width * source.height > MAX_IMAGE_PIXELS:
-                fail('Input image exceeds the 16-megapixel decoding limit.', 'image', 'image_too_large', 413)
+                fail('Input image exceeds the 64-megapixel decoding limit.', 'image', 'image_too_large', 413)
             if min(source.size) < 256:
                 fail('Both source-image dimensions must be at least 256 pixels.', 'image', 'image_too_small')
             if getattr(source, 'n_frames', 1) != 1:
@@ -207,8 +207,8 @@ def prepare_edit(body, content_type, config, mode_resolver=None):
         if not match:
             fail('size must be auto or WIDTHxHEIGHT.', 'size')
         requested = tuple(int(value) for value in match.groups())
-        if not all(256 <= value <= 8192 for value in requested):
-            fail('Requested size dimensions must be between 256 and 8192.', 'size')
+        if not all(256 <= value <= 16384 for value in requested):
+            fail('Requested size dimensions must be between 256 and 16384.', 'size')
         budget = min(budget, requested[0] * requested[1])
         max_edge = min(max_edge, max(requested))
     alignment = int(config['proxy'].get('native_alignment', 32))

@@ -40,6 +40,8 @@ def preflight(helper):
         path=Path(asset(h[name],ROOT));files[name]=dict(path=str(path),exists=path.is_file(),bytes=path.stat().st_size if path.is_file() else None)
     for index,value in enumerate(h.get('sdlora') or []):
         path=Path(asset(value,ROOT));files['sdlora_'+str(index)]=dict(path=str(path),exists=path.is_file(),bytes=path.stat().st_size if path.is_file() else None)
+    if h.get('sdclip2'):
+        path=Path(asset(h['sdclip2'],ROOT));files['sdclip2']=dict(path=str(path),exists=path.is_file(),bytes=path.stat().st_size if path.is_file() else None)
     for section,key in (('upscaler','model'),('upscaler','detail_model'),('detailer','model'),('detailer','feature_guard_model')):
         value=gd['kcpp_proxy'].get(section,{}).get(key)
         if value:

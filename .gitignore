@@ -32,3 +32,8 @@ tools/HelamanATD/deps/
 tools/SDTokenizer/deps/
 portable-manifest.json
 *.writing
+*.download
+MOSS/
+MUSIC/
+ZIMAGE/
+LORAS/

@@ -43,7 +43,7 @@ class HelamanUpscaler:
         if not temporary.is_relative_to(portable_root) or temporary == portable_root:
             raise ValueError('Helaman temporary parent must resolve inside portable ROOT')
         temporary.mkdir(parents=True, exist_ok=True)
-        budget = max(30, min(1800, int(self.options.get('timeout_seconds', 1800))))
+        budget = max(30, min(7200, int(self.options.get('timeout_seconds', 1800))))
         with tempfile.TemporaryDirectory(prefix='helaman-', dir=temporary) as folder:
             folder = Path(folder).resolve()
             if folder.parent != temporary or not folder.name.startswith('helaman-'):

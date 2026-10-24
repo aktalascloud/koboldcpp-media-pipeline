@@ -1,35 +1,48 @@
 {
-  "date": "2026-10-23",
-  "photo": {
-    "dimensions": [
-      576,
-      864
+  "model": "Artius MOSS compatible Q8_0",
+  "normal": [
+    736,
+    1104
+  ],
+  "normal_steps": 8,
+  "normal_seconds": 141.4695528000011,
+  "high": [
+    928,
+    1392
+  ],
+  "high_steps": 8,
+  "high_cache": "cache-dit",
+  "high_vram_mib": 6500,
+  "high_native_seconds": 245.676,
+  "high_face_seconds": 1.5966,
+  "high_gater_seconds": 4.608118000003742,
+  "high_sr_seconds": 588.3943,
+  "high_total_seconds": 861.7906689000083,
+  "high_no_oom": true,
+  "face_bounds": {
+    "normal": [
+      39,
+      155
     ],
-    "stock_seconds": 163.15458520001266,
-    "first_seconds": 138.34833489999437,
-    "warm_seconds": 131.83,
-    "scope": "Same scene/seed,3LoRA,YuNet/GPEN/SFace/Gater,noSR"
+    "high": [
+      49,
+      196
+    ]
   },
-  "normal": {
-    "dimensions": [
-      592,
-      896
-    ],
-    "warm_seconds": 140.09
-  },
-  "upscale": {
-    "input": [
-      608,
-      912
-    ],
-    "output": [
-      2432,
-      3648
-    ],
-    "seconds": 194.902,
-    "exclusive_vram": true,
-    "dedicated_gb": 7.41,
-    "rgb_source": "examples/gallery.json"
-  },
-  "native_performance": "https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa"
+  "date": "2026-10-24",
+  "native_executable_sha256": "d1aa7e7e1a8882e7dfda02c31bf1d54a63dfcc94fa7118e2bd43ec0b05de94b3",
+  "scope": "One complete saved High API request including profile switch; Normal is a separate saved request. One test scene/seed per timing, not a guarantee for every prompt.",
+  "high_native_base_rgb_sha256": "f70f0bcebe7814f050ef6325b40ed419e08ab645badf1f277e89051101040928",
+  "seed": 424242,
+  "high_tile_count": 16,
+  "high_output_dimensions": [
+    3712,
+    5568
+  ],
+  "minimum_available_ram_gib": 13.706737518310547,
+  "maximum_system_swap_used_gib": 0.07427597045898438,
+  "sface_similarity": [
+    0.9977741043345527
+  ],
+  "new_inference_for_publication": false
 }

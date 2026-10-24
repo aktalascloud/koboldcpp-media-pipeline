@@ -562,6 +562,18 @@ class BackendSupervisor:
 
     @staticmethod
     def _annotate_quantization(active, profile, helper):
+        if profile['name'].startswith('photo-') and helper.get('sdquant')==0 and str(helper.get('sdmodel','')).lower().endswith('.gguf'):
+            from MossImageBudget import inspect_gguf
+            model=root_path(profile['executable'].parent,helper['sdmodel'])
+            info=inspect_gguf(model)
+            if info['architecture']=='moss_image':
+                observed=active.get('actual_image_quantization')
+                active.update(expected_image_quantization='q8_0',
+                    quantization_confirmed=observed=='q8_0',
+                    quantization_confirmation=active.get('image_quantization_source','pending_GGUF_tensor_directory'))
+                if observed and observed!='q8_0':
+                    raise SupervisorError('Observed MOSS GGUF quantization differs from reviewed profile.','quantization_mismatch')
+                return
         if profile['name'].startswith('photo-') and helper.get('sdquant') in (1, 2):
             expected = 'q4_0' if helper['sdquant'] == 2 else 'q8_0'
             observed = active.get('actual_image_quantization')

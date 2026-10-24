@@ -2,13 +2,13 @@
   "steps": 8,
   "cfg_scale": 1,
   "sampler_name": "euler",
-  "scheduler": "beta",
+  "scheduler": "simple",
   "eta": 0,
-  "flow_shift": 3,
+  "flow_shift": 5,
   "clip_skip": -1,
   "cache_mode": "cache-dit",
   "cache_options": "threshold=0.08,warmup=4,Fn=16,Bn=2",
-  "width": 592,
-  "height": 896,
+  "width": 736,
+  "height": 1104,
   "enable_hr": false
 }
