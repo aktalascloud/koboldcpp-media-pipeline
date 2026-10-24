@@ -32,11 +32,11 @@ Warm elapsed time is **19.20% lower**. This saved 23 October test is separate fr
 Current Normal is larger: **592×896, about 140 s warm**, without SR. Saved Helaman 608×912 to 2432×3648: **194.90 s**, exclusive VRAM, about 7.41 GB dedicated memory. Photo generation/reload is outside SR time. Full High+4× was not timed again after the memory-policy fix. Refinement does not guarantee correct clock geometry.
 
 ## Pipeline
-1. GPU-resident Moody photo model; protected Qwen encoder on CPU20. Music loads only on API demand, outputs MP3, then restores photo.
+1. GPU-resident Moody photo model; protected Qwen encoder on CPU, 20 threads. Music loads only on API demand, outputs MP3, then restores photo.
 2. PhysioShade **0.15**, FlowDPO **0.35**, MaskedDPOFull **0.25**. Trigger **physioshade** is inserted once. Do not load the same LoRAs again in requests.
-3. Euler/beta, **8 steps**, eta0, CFG1, shift3, clip skip−1, Cache-DiT0.08/warmup4/Fn16/Bn2; SD flash attention off.
-4. YuNet960, score0.82; GPEN512/OpenVINO CPU blended20%; SFace minimum0.97; max2 faces. Face-size bounds scale with resolution.
-5. Gater Restore1× FP32 DirectML, strength1, after faces. No sharpen.
+3. Euler/beta, **8 steps**, eta 0, CFG 1, shift 3, clip skip−1, Cache-DiT 0.08/warmup4/Fn16/Bn2; SD flash attention off.
+4. YuNet 960, score 0.82; GPEN 512/OpenVINO CPU blended 20%; SFace minimum 0.97; max 2 faces. Face-size bounds scale with resolution.
+5. Gater Restore 1× FP32 DirectML, strength 1, after faces. No sharpen.
 6. Normal/edit **592×896**, no autoSR. High **1152×768** or portrait768×1152, auto Helaman native **4×**, no downsize/repeated face pass.
 
 Standalone SR applies faces/Gater before Helaman unless pixel-bound markers prove prior processing. The supervisor releases its owned idle Native for exclusive SR VRAM, then restores photo. Video is deferred and its weights/runtime are excluded.
@@ -44,6 +44,6 @@ Standalone SR applies faces/Gater before Helaman unless pixel-bound markers prov
 ## Install
 Extract **media-pipeline-code.zip**, run **Setup.ps1 once**, then launch **Start.exe directly**. Setup downloads hash-pinned components; large Moody/Qwen/AceStep weights come from their original hosts. One runtime copy. Start.exe --check validates installation.
 
-Windows startup is opt-in: runtime/python/python.exe -I -B tools/Launch.py --register-startup. Kobold opens in a separate visible window. Public API5001/private Native5003 default to loopback; network exposure is explicit.
+Windows startup is opt-in: runtime/python/python.exe -I -B tools/Launch.py --register-startup. Kobold opens in a separate visible window. Public API 5001/private Native 5003 default to loopback; network exposure is explicit.
 
 Code: AGPL-3.0; third-party terms retained. GPEN is a separate **Non-Commercial** asset. No credentials, private addresses, cache or logs in the public kit. [Component licenses](docs/LICENSES.md) · [Original KoboldCpp](https://github.com/LostRuins/koboldcpp).
