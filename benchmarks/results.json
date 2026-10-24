@@ -1,46 +1,35 @@
 {
   "date": "2026-10-23",
-  "hardware": "Xeon E5-2696v3 / RX580 2048SP 8GB / Windows",
-  "current": {
-    "width": 592,
-    "height": 896,
-    "pixels": 530432,
-    "pixel_increase_percent": 6.584362139917688,
-    "author_aspect_relative_error": 0.008928571428571428,
-    "cold_seconds": 145.34423399998923,
-    "warm_seconds": 140.09327840000333,
-    "native_warm_seconds": 135.51,
-    "faces_warm_seconds": 1.0183,
-    "gater_warm_seconds": 2.8361042000033194,
-    "scope": "ThreeLoRA+Euler/beta8/eta0/Cache-DiT.08+YuNet/GPEN/SFace+Gater,noSR",
-    "editing_same_budget": true,
-    "editing_native_inference_retested": false
-  },
-  "native_build_before_after": {
+  "photo": {
+    "dimensions": [
+      576,
+      864
+    ],
     "stock_seconds": 163.15458520001266,
-    "before_seconds": 136.01556070000152,
-    "cold_seconds": 138.34833489999437,
-    "warm_seconds": 131.82604799999535,
-    "png_identical": true,
-    "scope": "Historical Normal576x864/all3LoRA/faces/Gater,noSR;current geometry/timing in current-media-policy.json"
+    "first_seconds": 138.34833489999437,
+    "warm_seconds": 131.83,
+    "scope": "Same scene/seed,3LoRA,YuNet/GPEN/SFace/Gater,noSR"
   },
-  "helaman": {
-    "input_dimensions": [
+  "normal": {
+    "dimensions": [
+      592,
+      896
+    ],
+    "warm_seconds": 140.09
+  },
+  "upscale": {
+    "input": [
       608,
       912
     ],
-    "output_dimensions": [
+    "output": [
       2432,
       3648
     ],
-    "before_seconds": 516.1493368000083,
-    "exclusive_seconds": 194.90208470000653,
-    "speed_factor": 2.6482494407100154,
-    "pixel_identical": true,
-    "native_released_before_sr": true,
-    "whole_new_high4x_repeated": false
+    "seconds": 194.902,
+    "exclusive_vram": true,
+    "dedicated_gb": 7.41,
+    "rgb_source": "examples/gallery.json"
   },
-  "music_prepare_seconds": 23.608857,
-  "music_audio_regenerated": false,
-  "new_generations_for_publication": false
+  "native_performance": "https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa"
 }

@@ -1,61 +1,49 @@
-# Портативный медиапайплайн KoboldCpp
+# Медиапайплайн KoboldCpp
+[English](README.md) · **[Скачать](https://github.com/aktalascloud/koboldcpp-media-pipeline/releases/latest)** · [API / OpenWebUI](docs/API.md) · [Лицензии](docs/LICENSES.md)
 
-**[English version](README.md)**
+Портативный Windows-комплект для Haswell/AVX2 и RX 580 Polaris/gfx803. **[Оптимизированный KoboldCpp](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa)** остаётся бэкендом; прокси добавляет переключение моделей, обработку лиц, восстановление и Helaman 4×.
 
-Комплект для Windows, **RX 580 Polaris (gfx803)** и CPU Haswell/AVX2. Генерацию выполняет **[оптимизированный форк KoboldCpp](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa)**; прокси добавляет обработку лиц, восстановление изображения, апскейл и переключение фото/музыки по API.
+## Примеры качества
+Готовые изображения прежних тестов, без новой генерации или ретуши для публикации. Этапы обработки различаются; [происхождение кадров](examples/historical-scenes.json).
 
-**[Релиз](https://github.com/aktalascloud/koboldcpp-media-pipeline/releases/latest)** · [API и OpenWebUI](docs/API.md) · [Лицензии](docs/LICENSES.md) · [Все сравнения](examples/README.md)
-
-## Примеры выбранного качества
-
-Готовые результаты нескольких прошлых тестов. Лица и глаза проверены крупно. Новая генерация и ретушь не запускались; изображения открываются в сохранённом разрешении.
-
-### Другие сцены
-
-| Портрет при свете окна | Мастер за работой | Мужской портрет в ателье |
+| Портрет, Helaman 2× | Мастерская, 2× | Ателье, нативное разрешение |
 |---|---|---|
-|[![Портрет](examples/portrait-window-helaman-2x.png)](examples/portrait-window-helaman-2x.png)|[![Мастерская](examples/watchmaker-workbench-2x.png)](examples/watchmaker-workbench-2x.png)|[![Ателье](examples/tailoring-studio-native.png)](examples/tailoring-studio-native.png)|
-|1280×1728, сохранённый тест Helaman FP32 DirectML **2×**.|1280×1728, прежний тест **2×** с LoRA 0,15 / 0,35 / 0,25.|544×816, **нативный** тест разрешения: Euler/beta, 8 шагов, eta=0, выбранные три LoRA.|
-|![Глаза на портрете](examples/portrait-window-helaman-2x-eyes.png)|![Руки и металл](examples/watchmaker-workbench-2x-hands.png)|![Глаза мужчины](examples/tailoring-studio-native-eyes.png)|
+| [![Портрет](examples/portrait-window-helaman-2x.png)](examples/portrait-window-helaman-2x.png) | [![Мастер](examples/watchmaker-workbench-2x.png)](examples/watchmaker-workbench-2x.png) | [![Ателье](examples/tailoring-studio-native.png)](examples/tailoring-studio-native.png) |
+| ![Глаза](examples/portrait-window-helaman-2x-eyes.png) | ![Руки](examples/watchmaker-workbench-2x-hands.png) | ![Глаза](examples/tailoring-studio-native-eyes.png) |
 
-PNG восстановлены из сохранённых показов наших тестов в истории чата: исходные каталоги ранее очищались. RGB-пиксели сохранены, метаданные удалены. Это примеры качества разных этапов прежних тестов, а не сравнение одной текущей цепочки. Время и внешняя обработка указаны только там, где они подтверждены. [Происхождение каждого кадра](examples/historical-scenes.json).
+### Полный рост, лицо и глаза
+Исходник608×912 уже обработан тремя LoRA, лицами и Gater. После Helaman —2432×3648, без повторной обработки лица. Кропы сохраняют исходные пиксели.
 
-### Понравившийся вариант с собранными волосами и Helaman 4×
-
-Исходник **608×912** уже прошёл выбранные LoRA 0,15 / 0,35 / 0,25, Euler/beta, 8 шагов, eta=0, Cache-DiT 0,08, YuNet/GPEN/SFace и Gater Restore. После Helaman — **2432×3648**; повторной обработки лиц и Gater нет.
-
-| До апскейла | После Helaman 4× |
+| Обработанный исходник | Helaman 4× |
 |---|---|
-|![Исходник с собранными волосами](examples/normal-608x912-final.png)|![Результат Helaman 4×](examples/resident-normal-4x.png)|
-|![Лицо до](examples/sr-input-face.png)|![Лицо после](examples/helaman-4x-face.png)|
-|![Глаза до](examples/sr-input-eyes.png)|![Глаза после](examples/helaman-4x-eyes.png)|
+| [![Исходник](examples/normal-608x912-final.png)](examples/normal-608x912-final.png) | [![4×](examples/resident-normal-4x.png)](examples/resident-normal-4x.png) |
+| ![Лицо](examples/sr-input-face.png) | ![Лицо](examples/helaman-4x-face.png) |
+| ![Глаза](examples/sr-input-eyes.png) | ![Глаза](examples/helaman-4x-eyes.png) |
 
-Сам апскейл занял **194,90 с** при освобождённой VRAM вместо 516,15 с при удержании фотомодели. RGB-результат одинаков. Генерация исходника и последующая загрузка фотомодели в это время не входят.
+## Измеренная скорость
+Одинаковые сцена576×864, seed, три LoRA, лица и Gater; без SR:
 
-Текущий Normal остаётся **592×896**: **145,34 с первым запросом / 140,09 с повторным**, без апскейла. Пример 608×912 относится к отдельному сохранённому тесту. Девушку с распущенными волосами и неудачными глазами из основной подборки убрала.
+| Исходный сток | Последний измеренный результат |
+|---:|---:|
+| 163,15 с | 138,35 с первым / **131,83 с прогретым** |
 
-Кропы взяты без ресемплинга. В сцене полного роста остаётся дефект стрелок часов; идеальная геометрия не обещается. [Исторические контрольные сравнения](examples/README.md).
+Прогретый цикл короче на **19,20%**. Это сохранённый тест23октября, отдельно от последующих сборок native. [Числовое доказательство](benchmarks/results.json).
 
+Текущий Normal крупнее: **592×896, около140 с прогретым**, без SR. Helaman608×912 в2432×3648: **194,90 с**, отдельная VRAM, около7,41ГБ dedicated memory. Генерация и возврат фотомодели в это время не входят. Полный High+4× после исправления памяти повторно не измерялся. Обработка не гарантирует правильную геометрию часов.
 
-## Цепочка обработки
+## Цепочка
+1. Фотомодель Moody находится в GPU; Qwen-кодировщик — CPU20. Музыка загружается по API, выдаёт MP3, затем возвращается фото.
+2. PhysioShade **0,15**, FlowDPO **0,35**, MaskedDPOFull **0,25**. Триггер **physioshade** добавляется один раз; повторно LoRA в запросах не подключаются.
+3. Euler/beta, **8 шагов**, eta0, CFG1, shift3, clip skip−1, Cache-DiT0,08/warmup4/Fn16/Bn2; SD flash attention выключен.
+4. YuNet960, score0,82; GPEN512/OpenVINO CPU, смешивание20%; SFace минимум0,97, до2 лиц. Размерные пороги зависят от разрешения.
+5. Gater Restore1× FP32 DirectML после лиц. Strength1, без sharpen.
+6. Normal/edit **592×896**, без autoSR. High **1152×768**, портрет768×1152, автоматический Helaman **4×**, без уменьшения и повторного лица.
 
-1. Moody Pro Mix и исходный Qwen-кодировщик; фотомодель остаётся в GPU между запросами, кодировщик работает на CPU.
-2. PhysioShade **0,15**, FlowDPO **0,35**, MaskedDPOFull **0,25**. Прокси однократно добавляет **physioshade**; повторно подключать LoRA через запрос не нужно.
-3. **Euler / beta, 8 шагов, eta=0, CFG=1, flow shift=3, clip skip=-1, Cache-DiT 0,08**. Flash attention для SD выключен.
-4. **YuNet 960**, GPEN 512 на OpenVINO CPU с подмешиванием **20%**, SFace **не ниже 0,97**, до двух лиц. Порог размера лица масштабируется с разрешением.
-5. **Gater Restore 1×**, FP32 DirectML. Sharpen-модель не используется.
-6. Normal/edit: **592×896**, без автоапскейла. High: **1152×768**, портрет **768×1152**, с автоматическим **Helaman 4×**. После апскейла лица и Gater повторно не обрабатываются.
+Отдельный апскейл применяет лица/Gater до Helaman, если пиксельные маркеры не подтверждают готовую обработку. Супервизор выгружает только свой свободный Native, отдаёт SR всю VRAM и возвращает фото. Видео отложено; его веса/runtime не включены.
 
-Перед отдельным апскейлом применяются лица и Gater, если метаданные PNG не подтверждают уже выполненную обработку. На время Helaman супервизор освобождает только собственный простаивающий Native, затем автоматически возвращает фотомодель. При удержании фотомодели тот же апскейл занимал 516,15 с; после освобождения — 194,90 с, с одинаковыми RGB-пикселями.
+## Установка
+Распакуйте **media-pipeline-code.zip**, один раз запустите **Setup.ps1**, далее — **Start.exe напрямую**. Компоненты скачиваются по SHA; крупные Moody/Qwen/AceStep — из исходных источников. Одна runtime-копия. Start.exe --check проверяет установку.
 
-Музыка загружается по API, сохраняет исходный планировщик AceStep и стерео MP3. После запроса восстанавливается фото. Видео отложено.
+Автозапуск включается отдельно: runtime/python/python.exe -I -B tools/Launch.py --register-startup. Kobold работает в отдельном видимом окне. API5001/private Native5003 по умолчанию loopback; сетевой доступ настраивается явно.
 
-## Установка и запуск
-
-Распакуйте `media-pipeline-code.zip` в новую папку и один раз выполните `Setup.ps1`. Установщик скачает компоненты по проверенным SHA256. Крупные Moody/Qwen/AceStep загружаются из первоисточников; их веса в Git не публикуются.
-
-Для обычного запуска достаточно **Start.exe**, без PowerShell-лаунчера. Проверка комплекта: `Start.exe --check`. Автозапуск Windows включается отдельно командой `runtime/python/python.exe -I -B tools/Launch.py --register-startup`.
-
-Публичный API по умолчанию: `http://127.0.0.1:5001`; внутренний Native: порт 5003. Для OpenWebUI на другой машине явно настройте адрес прослушивания и доступ через сеть. [Параметры и маршруты API](docs/API.md).
-
-Код — AGPL-3.0, модели и библиотеки сохраняют свои лицензии. GPEN выложен отдельным ассетом с пометкой **Non-Commercial**, по классификации конвертера FaceFusion; свободные коммерческие права не заявляются. Ключи, личные настройки, кэши, логи и PID-файлы не включены. [Условия компонентов](docs/LICENSES.md).
+Код — AGPL-3.0, сторонние условия сохранены. GPEN — отдельный **Non-Commercial** ассет. Ключи, личные адреса, кэши и логи не публикуются. [Лицензии](docs/LICENSES.md) · [Оригинальный KoboldCpp](https://github.com/LostRuins/koboldcpp).

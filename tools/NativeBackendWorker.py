@@ -117,6 +117,9 @@ def main():
                 for line in native.stdout:
                     # Native's Input line may contain full image/base64 data.
                     safe_line = '[Input payload omitted]\n' if line.lstrip().startswith('Input:') else line
+                    # Bound the current diagnostic file; console output remains complete.
+                    if output.tell() > 512 * 1024:
+                        output.seek(0); output.truncate()
                     output.write(safe_line); output.flush()
                     print(safe_line, end='', flush=True)
                     quant = re.search(r'Diffusion Model quantized to ([A-Za-z0-9_]+)', line)

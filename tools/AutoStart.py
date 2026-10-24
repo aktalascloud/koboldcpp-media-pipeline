@@ -13,6 +13,7 @@ def main():
     if not (root/'Helper.kcpps').is_file() or not launch.is_file():
         return 2
     (root/'logs').mkdir(exist_ok=True)
+    (root/'runtime/tmp').mkdir(parents=True,exist_ok=True)
     with (root/'logs/autostart.log').open('w',encoding='utf-8',buffering=1) as log:
         # pythonw has no console streams at logon. Launch expects real streams.
         sys.stdout=sys.stderr=log
