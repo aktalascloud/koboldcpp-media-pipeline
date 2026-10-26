@@ -212,7 +212,7 @@ def edit_resolution(width, height, config, requested_dimensions=None):
 def fit_edit_pair(image, mask, config, requested_dimensions=None):
     """CPU pixel geometry only. Inputs must already share orientation/coordinates.
 
-    Existing OpenAI/ZIT mask rejection remains the caller's policy. For an
+    Mask rejection remains the caller's policy. For an
     allowed A1111 mask this preserves soft/binary levels with NEAREST and puts
     the same scaled mask in the image content box; padded pixels stay maskedoff.
     """

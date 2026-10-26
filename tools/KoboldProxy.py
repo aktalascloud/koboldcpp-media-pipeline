@@ -1,7 +1,7 @@
 """Single-Helper A1111/OpenAI photo pipeline: configured photo SR, local faces and MP3.
 
 Configuration lives in Helper.kcpps / gendefaults / kcpp_proxy. Native Kobold
-continues to run Z-Image and music; this process supplies optional postprocessing.
+continues to run MOSS and music; this process supplies optional postprocessing.
 """
 import argparse
 from contextlib import nullcontext,contextmanager
@@ -34,8 +34,8 @@ from FastFaceRestore import Restorer,FeatureGuard
 from FastDenoise import denoise
 from ToneGuard import preserve_tones
 from Resolution import choose_resolution
-from ImageEdits import EDIT_PATHS,ImageEditError,prepare_edit
-from ImageModes import ImageModeError,resolve_image_mode,fit_edit_pair
+from ImageEdits import EDIT_PATHS,ImageEditError,prepare_edit,prepare_a1111_edit,validate_edit_contract,validate_generation_contract,image_capabilities,model_contract
+from ImageModes import ImageModeError,resolve_image_mode
 from HelamanUpscale import HelamanUpscaler,configured_output_scale as helaman_output_scale
 from VideoService import VideoService,VideoServiceError,VIDEO_JSON_PATHS,VIDEO_MEDIA_PREFIX,is_video_request
 from BackendSupervisor import SupervisorError
@@ -335,22 +335,17 @@ class Pipeline:
         return final,report
     def generate(self,path,payload,headers,edit_context=None,request_mode=None):
         start=time.perf_counter()
+        if path=='/sdapi/v1/img2img' and edit_context is None:validate_edit_contract(payload,self.config(),default_operation='img2img')
         mode=request_mode or resolve_image_mode(payload,self.config(),'edit' if path=='/sdapi/v1/img2img' else 'generation')
         config=mode.config
         if request_mode is None:payload=mode.payload
+        selected_model=edit_context['model'] if edit_context else (validate_generation_contract(payload,config) if path=='/sdapi/v1/txt2img' else model_contract(config,payload.get('model')))
+        payload.pop('model',None);payload.pop('operation',None)
         key=payload.get('genkey','')
         if path=='/sdapi/v1/img2img' and edit_context is None:
-            initial=payload.get('init_images')
-            if not isinstance(initial,list) or len(initial)!=1 or not isinstance(initial[0],str):
-                raise ImageModeError('Provide exactly one init_images image.','init_images','single_image_required')
-            image=image_decode(initial[0]);mask=image_decode(payload['mask']) if payload.get('mask') else None
-            requested=(payload['width'],payload['height']) if 'width' in payload and 'height' in payload else None
-            if ('width' in payload)!=('height' in payload):
-                raise ImageModeError('Provide width and height together.','size','invalid_dimensions')
-            prepared,prepared_mask,geometry=fit_edit_pair(image,mask,config,requested)
-            payload.update(init_images=[image_encode(prepared)],width=prepared.width,height=prepared.height,resize_mode=0)
-            if prepared_mask is not None:payload['mask']=image_encode(prepared_mask)
-            mode.metadata['geometry']=geometry
+            payload,edit_context=prepare_a1111_edit(payload,config)
+            edit_context['model']=selected_model
+            mode.metadata['geometry']=edit_context['geometry']
         option=payload.pop('kcpp_detailer',None)
         requested_hr=config['proxy'].get('allow_generation_upscale',True) and (config['proxy'].get('always_upscale',False) or bool(payload.get('enable_hr',config['defaults'].get('enable_hr',False))))
         if edit_context:requested_hr=False
@@ -409,6 +404,8 @@ class Pipeline:
                     reports.append(report)
                 answer['images']=images;answer['kcpp_proxy']=dict(version=VERSION,base_seconds=round(base_seconds,3),postprocessing=reports,total_seconds=round(time.perf_counter()-start,3),profile={k:payload.get(k) for k in IMAGE_FIELDS})
                 answer['kcpp_proxy']['gpu_budget']=budget.report
+                answer['kcpp_proxy']['image_model']=selected_model
+                if edit_context:answer['kcpp_proxy']['image_edit']=edit_context
                 answer['kcpp_proxy']['image_mode']={**mode.metadata,'active_profile':active['native_profile'],'active_helper_sha256':active['helper_sha256'],**{key:active.get(key) for key in ('expected_image_quantization','actual_image_quantization','quantization_confirmed','quantization_confirmation')}}
                 LOG.info(json.dumps(dict(kind='image',**answer['kcpp_proxy']),ensure_ascii=False))
                 return answer
@@ -556,8 +553,10 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                 if path=='/api/extra/version' and backend_supervisor:
                     status,headers,raw=request(cfg['backend']+path)
                     if status==200:
-                        version=json.loads(raw);version.update(music=True,musicllm=True,txt2img=True,kcpp_auto_switch=True,video=bool(cfg['proxy'].get('video',{}).get('enabled',False)))
+                        version=json.loads(raw);version.update(music=True,musicllm=True,txt2img=True,img2img=True,image_instruction_edit=False,image_reference_images=False,image_capabilities_url='/v1/images/capabilities',kcpp_auto_switch=True,video=bool(cfg['proxy'].get('video',{}).get('enabled',False)))
                         self.reply(version);return
+                if path in ('/v1/images/capabilities','/api/extra/image-capabilities'):
+                    self.reply(image_capabilities(cfg));return
                 if path=='/health':
                     self.reply(dict(service='KoboldProxy',version=VERSION,pid=os.getpid(),helper=str(pipeline.helper),helper_sha256=cfg['helper_sha256'],
                       backend=cfg['backend'],port=cfg['port'],profile={k:cfg['defaults'].get(k) for k in IMAGE_FIELDS},
@@ -596,8 +595,11 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                 maximum=int(cfg['helper'].get('maxrequestsize',32))*1024*1024
                 if length<0 or length>maximum:self.reply(dict(error='Request exceeds configured size limit'),413);return
                 body=self.rfile.read(length)
+                if path.startswith(('/v1/images/','/images/')) and path not in (*OPENAI_IMAGE_PATHS,*EDIT_PATHS):
+                    raise ImageEditError('Unsupported image operation endpoint; see /v1/images/capabilities.',param='operation',code='unsupported_image_operation',status=422)
                 if path in VIDEO_JSON_PATHS or path=='/sdapi/v1/txt2img':
-                    video_payload=json.loads(body or b'{}')
+                    try:video_payload=json.loads(body or b'{}')
+                    except (ValueError,UnicodeError):raise ImageEditError('Expected valid UTF-8 JSON.',code='invalid_json')
                     if not isinstance(video_payload,dict):self.reply(dict(error='JSON object required'),400);return
                     if is_video_request(path,video_payload):
                         if videos is None:raise VideoServiceError('Video supervisor unavailable.','video_backend_unavailable',503)
@@ -631,12 +633,15 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                         if len(images)!=1:raise RuntimeError('Native image edit returned an unexpected image count')
                         decoded=image_decode(images[0]);report=answer.get('kcpp_proxy',{})
                         report['image_edit']=edit_context
-                        self.reply(dict(created=int(time.time()),data=[dict(b64_json=images[0])],background='opaque',output_format='png',size=f'{decoded.width}x{decoded.height}',kcpp_proxy=report))
+                        self.reply(dict(created=int(time.time()),data=[dict(b64_json=images[0])],model=edit_context['model']['resolved'],operation='img2img',semantics='whole_frame_redraw',processing_success=True,semantic_success_evaluated=False,background='opaque',output_format='png',size=f'{decoded.width}x{decoded.height}',kcpp_proxy=report))
                     return
                 if path not in (*IMAGE_PATHS,*OPENAI_IMAGE_PATHS,*EDIT_PATHS,*SR_PATHS,*MUSIC_PATHS,'/sdapi/v1/detail'):
                     self.forward(body,config=cfg);return
-                payload=json.loads(body or b'{}')
+                try:payload=json.loads(body or b'{}')
+                except (ValueError,UnicodeError):raise ImageEditError('Expected valid UTF-8 JSON.',code='invalid_json')
                 if not isinstance(payload,dict):self.reply(dict(error='JSON object required'),400);return
+                if path=='/sdapi/v1/img2img':validate_edit_contract(payload,cfg,default_operation='img2img')
+                if path in OPENAI_IMAGE_PATHS:validate_generation_contract(payload,cfg)
                 with pipeline.lock, (checked_gpu_lease() if backend_supervisor else nullcontext()):
                     request_mode=None
                     if path in (*IMAGE_PATHS,*OPENAI_IMAGE_PATHS):
@@ -654,7 +659,7 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                         images=answer.get('images',[]);size=''
                         if images:
                             decoded=image_decode(images[0]);size=f'{decoded.width}x{decoded.height}'
-                        self.reply(dict(created=int(time.time()),data=[dict(b64_json=value) for value in images],background='opaque',output_format='png',size=size,quality='medium',kcpp_proxy=answer.get('kcpp_proxy')));return
+                        self.reply(dict(created=int(time.time()),data=[dict(b64_json=value) for value in images],model=model_contract(cfg)['resolved'],background='opaque',output_format='png',size=size,kcpp_proxy=answer.get('kcpp_proxy')));return
                     if path in IMAGE_PATHS:
                         self.reply(pipeline.generate(path,payload,dict(self.headers),request_mode=request_mode));return
                     pipeline.begin(payload.get('genkey',''), 'music' if path in MUSIC_PATHS else 'postprocess')

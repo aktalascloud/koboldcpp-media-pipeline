@@ -1,10 +1,11 @@
-Refined Realism photo/music pipeline for Windows · Haswell AVX2 · RX580 Polaris/gfx803, 8 GB.
+MOSS image-operation contract, schema2. Existing Refined/DPM/SGM/ClearReality settings are preserved.
 
-- Selected **DPM++ 2M SDE / sgm_uniform,eta0,8 steps,Cache-DiT0.08**.
-- **Normal 736×1104 + faces/Gater + ClearReality4×: 161.96 s**, one complete public API request,2944×4416. Model resident; PNG/HTTP included. High 928×1392 profile retained, **Refined High timing unmeasured**.
-- `enable_hr:true` now works for Normal proxy4×; no native hires/img2img pass. Helaman and repeated faces after SR removed. Music MP3 and visible Native startup preserved.
-- Saved three-scene gallery and scalar timing/cache evidence. No new inference for publication; no claim DPM denoising beats Euler/simple.
+- New `GET /v1/images/capabilities`: one target, zero references, no instruction-edit or masks.
+- `/v1/images/edits` now rejects unsupported instruction edits with422 and no PNG/inference. Redraw requires explicit `operation:img2img`; a model alias cannot silently select an operation.
+- JSON/multipart/A1111 redraws share source/aspect/strength validation. Actual checkpoint is reported; unavailable models, multiple images, references and unsupported parameters are rejected instead of ignored.
+- Final faces/Gater retained; edits do not auto-upscale. Existing Normal `enable_hr:true`4x and music remain intact.
+- Real small320x256 redraws and negative HTTP regressions verified. These do not prove semantic recoloring. Saved Normal4x161.96s is the earlier pre-contract-change reference on the same native EXE/profile, not a new full-resolution measurement for this release.
 
-Extract **media-pipeline-code.zip**, run **Setup.ps1 once**, then launch **Start.exe directly**. Requires exact user-supplied Refined BF16 plus gated Artius text original, or matching derived GGUF. No main weights in Git/releases. Runtime/common components are hash-pinned reuse; ClearReality comes from its Apache2 original, GPEN from its Non-Commercial original distributor.
+Extract **media-pipeline-code.zip**, run **Setup.ps1 once** for a new installation, then **Start.exe directly**. Main weights are not included; exact user-supplied Refined source and gated text source/verified GGUF are required. Existing runtime assets are pinned and reused. No keys/private state are shipped; GPEN is downloaded from its original distributor.
 
-[Setup/models](https://github.com/aktalascloud/koboldcpp-media-pipeline/blob/main/docs/MODELS.md) · [OWUI presets](https://github.com/aktalascloud/koboldcpp-media-pipeline/blob/main/docs/API.md) · [Optimized native fork](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa)
+[Editing/capabilities and OWUI rules](https://github.com/aktalascloud/koboldcpp-media-pipeline/blob/main/docs/EDITING.md) · [Evidence](https://github.com/aktalascloud/koboldcpp-media-pipeline/blob/main/benchmarks/edit-contract.json)

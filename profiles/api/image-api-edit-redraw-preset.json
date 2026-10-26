@@ -1,0 +1,11 @@
+{
+  "operation": "img2img",
+  "model": "kobold-moss-img2img",
+  "reference_images": [],
+  "denoising_strength": 0.6,
+  "steps": 8,
+  "n": 1,
+  "response_format": "b64_json",
+  "output_format": "png",
+  "enable_hr": false
+}

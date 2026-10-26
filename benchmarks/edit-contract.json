@@ -1,0 +1,166 @@
+{
+  "date": "2026-10-26",
+  "capability_schema": 2,
+  "instruction_edit_supported": false,
+  "max_target_images": 1,
+  "max_reference_images": 0,
+  "masks_supported": false,
+  "unsupported_requests": [
+    {
+      "name": "model-alias-does-not-select-operation",
+      "status": 422,
+      "error": {
+        "message": "This checkpoint has no instruction-edit mode. Explicit img2img is whole-frame redraw from a descriptive caption, not a precise editing command.",
+        "type": "invalid_request_error",
+        "param": "operation",
+        "code": "instruction_edit_unsupported",
+        "capabilities_url": "/v1/images/capabilities",
+        "requested_operation": "instruction_edit",
+        "supported_operations": [
+          "img2img"
+        ]
+      }
+    },
+    {
+      "name": "instruction-default",
+      "status": 422,
+      "error": {
+        "message": "This checkpoint has no instruction-edit mode. Explicit img2img is whole-frame redraw from a descriptive caption, not a precise editing command.",
+        "type": "invalid_request_error",
+        "param": "operation",
+        "code": "instruction_edit_unsupported",
+        "capabilities_url": "/v1/images/capabilities",
+        "requested_operation": "instruction_edit",
+        "supported_operations": [
+          "img2img"
+        ]
+      }
+    },
+    {
+      "name": "instruction-explicit",
+      "status": 422,
+      "error": {
+        "message": "This checkpoint has no instruction-edit mode. Explicit img2img is whole-frame redraw from a descriptive caption, not a precise editing command.",
+        "type": "invalid_request_error",
+        "param": "operation",
+        "code": "instruction_edit_unsupported",
+        "capabilities_url": "/v1/images/capabilities",
+        "requested_operation": "instruction_edit",
+        "supported_operations": [
+          "img2img"
+        ]
+      }
+    },
+    {
+      "name": "reference-role",
+      "status": 422,
+      "error": {
+        "message": "Reference conditioning is unsupported by this model/backend; no references were used.",
+        "type": "invalid_request_error",
+        "param": "reference_images",
+        "code": "reference_images_unsupported",
+        "capabilities_url": "/v1/images/capabilities",
+        "max_reference_images": 0
+      }
+    },
+    {
+      "name": "multiple-targets",
+      "status": 422,
+      "error": {
+        "message": "Exactly one target is supported; multiple images are not treated as references.",
+        "type": "invalid_request_error",
+        "param": "image",
+        "code": "multiple_images_unsupported",
+        "capabilities_url": "/v1/images/capabilities",
+        "max_target_images": 1,
+        "max_reference_images": 0
+      }
+    },
+    {
+      "name": "wrong-model",
+      "status": 422,
+      "error": {
+        "message": "The image model is server-managed; the requested model is not available.",
+        "type": "invalid_request_error",
+        "param": "model",
+        "code": "unsupported_image_model",
+        "capabilities_url": "/v1/images/capabilities",
+        "supported_models": [
+          "default",
+          "koboldcpp",
+          "kobold-moss",
+          "kobold-moss-img2img",
+          "refined-realism-v10-q8_0.gguf",
+          "refined-realism-v10-q8_0"
+        ]
+      }
+    },
+    {
+      "name": "mask",
+      "status": 422,
+      "error": {
+        "message": "Masked editing is not supported by this MOSS proxy.",
+        "type": "invalid_request_error",
+        "param": "mask",
+        "code": "mask_unsupported",
+        "capabilities_url": "/v1/images/capabilities"
+      }
+    }
+  ],
+  "unsupported_requests_started_inference": false,
+  "redraw_tests": [
+    {
+      "route": "json-target",
+      "seconds": 9.610209400008898,
+      "dimensions": [
+        320,
+        256
+      ],
+      "strength": 0.25,
+      "operation": "img2img",
+      "semantics": "whole_frame_redraw",
+      "semantic_success_evaluated": false,
+      "output_rgb_sha256": "b94c2b0f5f5f961dd4f305b5f7567a4508619e1371dc3252b628a7d446712a94"
+    },
+    {
+      "route": "multipart-target",
+      "seconds": 7.769951199996285,
+      "dimensions": [
+        320,
+        256
+      ],
+      "strength": 0.25,
+      "operation": "img2img",
+      "semantics": "whole_frame_redraw",
+      "semantic_success_evaluated": false,
+      "output_rgb_sha256": "310faf602306aa68a3728345bb59a9cc021b276e66d769bc8e1097cdc3ee687e"
+    },
+    {
+      "route": "a1111",
+      "seconds": 7.756114099989645,
+      "dimensions": [
+        320,
+        256
+      ],
+      "strength": 0.25,
+      "operation": "img2img",
+      "semantics": "whole_frame_redraw",
+      "semantic_success_evaluated": false,
+      "output_rgb_sha256": "b94c2b0f5f5f961dd4f305b5f7567a4508619e1371dc3252b628a7d446712a94"
+    }
+  ],
+  "different_targets_different_outputs": true,
+  "scope": "Small functional transport/conditioning tests, not instruction-following or full-resolution performance. The blue-square source was not recolored and was not claimed as semantic success.",
+  "native_executable_sha256": "9cdacf216336f24d2585f4dab4f2602fe9f92728282094675b1b050febdd61ca",
+  "normal_photo_redraw": {
+    "seconds": 90.61898829997517,
+    "dimensions": [
+      736,
+      1104
+    ],
+    "face_count": 1,
+    "gater_applied": true,
+    "scope": "Whole-frame redraw of an existing real Normal photo, same descriptive caption, strength0.25. No local-edit/instruction-success claim; no High test.",
+    "strength": 0.25
+  }
+}

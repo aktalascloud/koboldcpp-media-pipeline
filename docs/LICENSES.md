@@ -12,7 +12,7 @@ Original wrapper code: AGPL-3.0. Every runtime/checkpoint has independent terms.
 | YuNet |[OpenCV Zoo](https://github.com/opencv/opencv_zoo/tree/main/models/face_detection_yunet), MIT|Verified checkpoint in original pinned asset; notice retained.|
 | SFace |[OpenCV Zoo](https://github.com/opencv/opencv_zoo/tree/main/models/face_recognition_sface), Apache-2.0|Verified checkpoint; notice retained.|
 | GPEN512 ONNX |[GPEN](https://github.com/yangxy/GPEN), [FaceFusion terms](https://docs.facefusion.io/introduction/licenses)|Non-Commercial according to distributor; complete original redistribution grant not located. New code release does not mirror weights; users obtain/supply the original ONNX. No MIT/unrestricted-use claim.|
-| Gater Restore1Р“вЂ” |[Philip Hofmann / Phhofm](https://github.com/Phhofm/models/releases/tag/1xgaterv3_r_restore), CC-BY-4.0|Original FP32 ONNX in pinned base asset, attribution retained.|
+| Gater Restore1Р В РІР‚СљР Р†Р вЂљРІР‚Сњ |[Philip Hofmann / Phhofm](https://github.com/Phhofm/models/releases/tag/1xgaterv3_r_restore), CC-BY-4.0|Original FP32 ONNX in pinned base asset, attribution retained.|
 | Historical Helaman /4xNomos8k_atd_jpg, not installed |[Philip Hofmann / Phhofm](https://github.com/Phhofm/models/releases/tag/4xNomos8k_atd_jpg), CC-BY-4.0|Fixed-shape FP32 ONNX derivative; attribution/change record retained. Helaman uploader loonalone; no author endorsement. Reflected tiling is approximate, not guaranteed whole-frame equivalence.|
 | ATD architecture / Spandrel |Apache-2.0 / MIT|Original texts retained.|
 | Python, NumPy, Pillow, Torch CPU, ORT DirectML/Extensions, OpenVINO, OpenCV |Bundled licenses/third-party notices|Pinned runtime-only subset; no training state, logs or credentials.|

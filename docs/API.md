@@ -44,12 +44,15 @@ Apply the selected preset after common filter parameters; remove a conflicting `
 
 ## Processing and routes
 - `POST /sdapi/v1/txt2img`: generation; `/v1/images/generations` is OpenAI Images-compatible.
-- `POST /sdapi/v1/img2img`: init_images/prompt/denoising_strength; final faces/Gater, no automatic SR on edits.
-- `POST /v1/images/edits`: PNG/JPEG/WebP or supported base64 JSON. Ordinary redraw, not an instruction-edit-trained model; default strength0.6. Source aspect is retained; OpenAI edit masks remain unsupported.
+- `GET /v1/images/capabilities`: explicit operations, target/reference limits and model aliases. [Editing contract](EDITING.md).
+- `POST /sdapi/v1/img2img`: explicit whole-frame redraw, one init_images target; final faces/Gater, no automatic SR.
+- `POST /v1/images/edits`: instruction-edit defaults to422. Redraw requires explicit operation=img2img; model=kobold-moss-img2img alone does not select the operation. One target_image (legacy image accepted), zero references; no masks. Source aspect retained, default strength0.6. Successful PNG means processing completed, not that an instruction was fulfilled.
 - `POST /sdapi/v1/extra-single-image` or `/sdapi/v1/upscale`: `{"image":"BASE64_PNG","upscaling_resize":4}`. Applies faces/Gater first, unless valid pixel-bound markers prove they already ran. Returns exact4×; no repeated face pass afterward. Preserve returned PNG bytes, not a metadata-stripped thumbnail.
 - Music `/api/extra/music/prepare` and `/api/extra/music/generate`: original schema, MP3, demand loading and photo return.
 - Progress `/sdapi/v1/progress?genkey=YOUR_JOB_KEY`. Native LLM abort is not an image-cancel API.
 
 YuNet960, GPEN512/OpenVINOCPU at20%, SFace≥0.97, max2; face bounds39–155 px Normal/49–196 px High. Larger faces can skip GPEN. Gater1× and ClearReality4× use FP32 DirectML with owned VRAM handoff, then photo returns to GPU. No driver or TDR changes.
+
+Model selection is server-managed: use kobold-moss for generation; unknown provider models return422 instead of being ignored. Only n=1, response_format=b64_json, PNG and opaque background are supported; quality=auto is accepted, other OpenAI quality presets return422 (use kcpp_quality for the real profile). Unsupported references/masks/multiple inputs never silently fall back to generation. [OWUI/filter rules](EDITING.md).
 
 Use a client/proxy timeout covering the full job, e.g.3600 s. Prompt rewriting: one pass, cache the result, normally120–180 coherent English words. Describe subject/action/framing/light/materials/colors; no Z-Image LoRA/physioshade tags. Exact anatomy, clocks and small writing are not guaranteed. [Official MOSS prompt skill](https://github.com/OpenMOSS/MOSS-Image/blob/main/skills/moss-image-prompt-enhancer/SKILL.md).
