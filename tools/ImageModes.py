@@ -137,9 +137,11 @@ def resolve_image_mode(payload, config, operation='generation'):
     # Mode defaults are an explicit selected/fallback size, never silently enlarged.
     budget = min(spec['native_pixel_budget'], spec['default_width']*spec['default_height'])
     edge = min(spec['max_native_edge'], max(spec['default_width'], spec['default_height']))
-    # High owns its SR policy. Native still receives enable_hr=False in generate;
-    # the proxy performs the configured Helaman pass after faces and restoration.
-    auto_upscale = operation == 'generation' and spec['auto_upscale']
+    # High defaults to SR; Normal may explicitly request it. Native receives
+    # enable_hr=False: the proxy runs the configured SR after faces/restoration.
+    if 'enable_hr' in clean and type(clean['enable_hr']) is not bool:
+        raise ImageModeError('enable_hr must be boolean.', 'enable_hr', 'invalid_upscale_flag')
+    auto_upscale = operation == 'generation' and (spec['auto_upscale'] or clean.get('enable_hr') is True)
     proxy.update(native_pixel_budget=budget, max_native_edge=edge,
                  native_alignment=spec['native_alignment'], fixed_native_resolution=True,
                  always_upscale=auto_upscale, allow_generation_upscale=auto_upscale,

@@ -1,4 +1,4 @@
-"""Single-Helper A1111/OpenAI photo pipeline: configured Helaman2x/4x SR, local faces and MP3.
+"""Single-Helper A1111/OpenAI photo pipeline: configured photo SR, local faces and MP3.
 
 Configuration lives in Helper.kcpps / gendefaults / kcpp_proxy. Native Kobold
 continues to run Z-Image and music; this process supplies optional postprocessing.
@@ -55,14 +55,14 @@ LOG=logging.getLogger('KoboldProxy')
 
 def upscale_api_scale(config):
     opts=config['proxy']['upscaler']
-    return helaman_output_scale(opts) if opts.get('runtime')=='helaman_atd' else 2
+    return helaman_output_scale(opts) if opts.get('runtime')=='helaman_atd' else int(opts.get('output_scale',2))
 
 def sr_api_response(final,report,config,requested_scale=None):
     opts=config['proxy']['upscaler'];scale=upscale_api_scale(config)
     name=opts.get('name',str(scale)+'x upscaler')
     answer=dict(image=image_encode(final,marker=report.get('detailer',{}).get('marker')),
                 html_info=f'<p>Postprocess upscale by: {float(scale):.1f}, Postprocess upscaler: {name}</p>',kcpp_proxy=report)
-    if opts.get('runtime')=='helaman_atd':
+    if opts.get('runtime')=='helaman_atd' or opts.get('output_scale')==4:
         report['upscaling_resize']=scale
         report['requested_upscaling_resize']=requested_scale
         answer['upscaling_resize']=scale
@@ -251,11 +251,13 @@ class Pipeline:
             provider=opts.get('provider','directml');scale=int(opts.get('native_scale',2));padding=int(opts.get('padding',32));blend=opts.get('runtime')=='photo_blend';photo=opts.get('runtime')=='photo' or scale!=2 or blend;key=(str(opts['model']),provider,tile,scale,padding,photo,opts.get('detail_model'),float(opts.get('blend_amount',.5)),bool(opts.get('release_between_models',True)))
             def engine_for(selected_provider,selected_tile):
                 if blend:return PhotoBlendUpscaler(opts['model'],opts['detail_model'],opts.get('blend_amount',.5),selected_provider,selected_tile,padding,opts.get('release_between_models',True))
-                return PhotoUpscaler(opts['model'],scale,selected_provider,selected_tile,padding) if photo else Upscaler(opts['model'],selected_provider,selected_tile)
+                return PhotoUpscaler(opts['model'],scale,selected_provider,selected_tile,padding,output_scale=int(opts.get('output_scale',2))) if photo else Upscaler(opts['model'],selected_provider,selected_tile)
             try:
                 if self.upscaler_key!=key:
                     self.release_upscaler()
                     self.upscaler=engine_for(provider,tile)
+                    if opts.get('model_sha256') and self.upscaler.metadata['model_sha256']!=opts['model_sha256']:
+                        raise RuntimeError('Photo upscaler SHA256 mismatch')
                     self.upscaler_key=key
                 final,info=self.upscaler.upscale(image)
             except Exception:
@@ -271,7 +273,7 @@ class Pipeline:
         options=dict(options or {})
         report=dict(base_rgb_sha256=hashlib.sha256(image.convert('RGB').tobytes()).hexdigest(),input_dimensions=list(image.size),native_dimensions=list(image.size))
         # A matching marker prevents repeating the same restoration before SR.
-        # The selected profile skips restoration after the Helaman pass.
+        # The selected profile skips repeated restoration after SR.
         prior=matching_face_marker(image,options) if options.get('enabled',True) else None
         before_upscale=bool(upscale and config['proxy'].get('faces_before_upscale',False))
         repeat_after_upscale=bool(upscale and config['proxy'].get('repeat_faces_after_upscale',False))
@@ -308,7 +310,7 @@ class Pipeline:
             self.release_upscaler()
             detail=dict(processed_faces=0,attempted_faces=0,seconds=0,already_processed=True,
                         source_faces=int((first_marker or {}).get('faces',0)),outside_masks_exact=True,marker=first_marker,
-                        skipped='Selected Helaman profile applies faces only before SR; no repeated GPEN after SR')
+                        skipped='Selected profile applies faces only before SR; no repeated GPEN after SR')
         else:
             try:final,detail=self.process_faces(final,local,base,config)
             except Exception as error:
@@ -459,7 +461,7 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
             resident=cfg['proxy'].get('resident_photo',{}).get('enabled',False)
             result=backend_supervisor.stop_idle() if resident else dict(stopped=False)
             placement=dict(native_released=result.get('stopped',False),
-                reason='Helaman owns VRAM exclusively; photo returns after the response')
+                reason='Photo SR owns VRAM exclusively; photo returns after the response')
             try:
                 yield placement
             finally:
@@ -667,7 +669,7 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                             final,detail=pipeline.process_faces(image,opts,payload,cfg)
                             self.reply(dict(image=image_encode(final,marker=detail.get('marker')),detailer=detail));return
                         requested_scale=payload.get('upscaling_resize')
-                        if cfg['proxy']['upscaler'].get('runtime')=='helaman_atd':payload['upscaling_resize']=upscale_api_scale(cfg)
+                        if cfg['proxy']['upscaler'].get('runtime')=='helaman_atd' or cfg['proxy']['upscaler'].get('output_scale')==4:payload['upscaling_resize']=upscale_api_scale(cfg)
                         opts=dict(cfg['proxy'].get('detailer',{}));option=payload.get('kcpp_detailer')
                         if option is False:opts['enabled']=False
                         elif isinstance(option,dict):opts.update(option)

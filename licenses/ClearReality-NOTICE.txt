@@ -1,0 +1,4 @@
+ClearRealityV1 Normal by Kim2091. Architecture: SPAN. License: Apache-2.0.
+Source: https://huggingface.co/Kim2091/ClearRealityV1
+ONNX FP32 opset17; unmodified weights.
+SHA256: bbce9d5a653281cfae07788d620bd4ec45712709bdf6349a06a893159efd97ce

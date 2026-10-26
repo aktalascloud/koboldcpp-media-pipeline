@@ -1,193 +1,222 @@
 {
   "images": [
     {
-      "file": "normal-moss.png",
-      "source_artifact": "final-api-normal.png",
+      "file": "fullbody-native.png",
       "dimensions": [
         736,
         1104
       ],
-      "rgb_sha256": "132a77cffc45fd3843de21e40c4ddb653babedbd5e3edd0838886396f185e433",
+      "rgb_sha256": "4691a1430d788a42d9b60bd92660ba2134e10f6c764b4535f6c222ad09a52cbf",
       "metadata_removed": true,
-      "scope": "Normal736x1104,faces/Gater,one API request"
+      "source_artifact": "fullbody-dpm-sde-sgm-cache-736x1104-quick-beta-20261026.png",
+      "scope": "Saved measured output; metadata removed, RGB unchanged"
     },
     {
-      "file": "watchmaker-moss.png",
-      "source_artifact": "watchmaker-simple-cache-704x1056-processed.png",
+      "file": "fullbody-processed.png",
       "dimensions": [
-        704,
-        1056
+        736,
+        1104
       ],
-      "rgb_sha256": "5e4ff8b9ea3c90bf590196c97e058a60d11542698304ebf2895122b949d4a48f",
+      "rgb_sha256": "f5233767a60cb6b37e11933636c8987f0af74fff68ba61255755d6ebe0bf916e",
       "metadata_removed": true,
-      "scope": "Saved704x1056 Euler/simple,faces policy/Gater"
+      "source_artifact": "fullbody-dpm-sde-sgm-cache-736x1104-quick-beta-20261026-processed.png",
+      "scope": "Saved measured output; metadata removed, RGB unchanged"
     },
     {
-      "file": "night-moss.png",
-      "source_artifact": "night-simple-cache-704x1056-processed.png",
+      "file": "fullbody-4x.png",
       "dimensions": [
-        704,
-        1056
+        2944,
+        4416
       ],
-      "rgb_sha256": "44794d39cfa58384cf21afdfa1a88f7ab7a60d69f7be0a5ab8e2c7d96d9b1fed",
+      "rgb_sha256": "5f435b31068960fc2706ce8da5e4f28f08bfc14ac99e02c93d7331403f4ac9d0",
       "metadata_removed": true,
-      "scope": "Saved704x1056 Euler/simple,faces policy/Gater"
+      "source_artifact": "refined-samplers-2026-10-26/normal4x-public.png",
+      "scope": "Actual single public API Normal4x result; source RGB verified"
     },
     {
-      "file": "high-native-moss.png",
-      "source_artifact": "fullbody-simple-cache-928x1392-high15-candidate.png",
+      "file": "fullbody-4x-preview.png",
       "dimensions": [
-        928,
-        1392
+        736,
+        1104
       ],
-      "rgb_sha256": "f70f0bcebe7814f050ef6325b40ed419e08ab645badf1f277e89051101040928",
+      "rgb_sha256": "b9884c7bab73632a7a4161ac10133a34df3ff4ed560b51a9abea46bde63a954f",
       "metadata_removed": true,
-      "scope": "Native928x1392,raw,8steps/cache"
+      "source_artifact": "refined-samplers-2026-10-26/normal4x-public.png",
+      "resized_preview": true,
+      "scope": "Labeled Lanczos web preview, not new inference"
     },
     {
-      "file": "high-4x-moss.png",
-      "source_artifact": "high15-928x1392-full.png",
+      "file": "fullbody-face.png",
       "dimensions": [
-        3712,
-        5568
+        375,
+        485
       ],
-      "rgb_sha256": "33bf1c201048f7351d25c6385ef825b1ff7c9b0be9306f9bad326cdb1647d9d0",
+      "rgb_sha256": "7f6e9fb0657e350d68b974c133b2fa4e77c247c8c4f9850336a01d131fe31560",
       "metadata_removed": true,
-      "scope": "Full928x1392 High API cycle,faces/Gater/Helaman4x"
+      "source_artifact": "refined-samplers-2026-10-26/normal4x-public.png",
+      "artifact_box": [
+        1200,
+        349,
+        1575,
+        834
+      ],
+      "scope": "Exact unscaled crop of saved4x pixels"
     },
     {
-      "file": "high-native-moss-eyes.png",
-      "source": "high-native-moss.png",
-      "box": [
-        408,
-        95,
-        504,
-        136
-      ],
+      "file": "fullbody-eyes.png",
       "dimensions": [
-        96,
-        41
-      ],
-      "rgb_sha256": "a357064f3de390738991836f84107b7132dba4bd711f320e4f2361f3a5f8c79d",
-      "metadata_removed": true,
-      "scope": "Exact unscaled saved-pixel crop"
-    },
-    {
-      "file": "high-native-moss-face.png",
-      "source": "high-native-moss.png",
-      "box": [
-        385,
-        46,
-        547,
-        220
-      ],
-      "dimensions": [
-        162,
-        174
-      ],
-      "rgb_sha256": "a0586cc5d73ff054d7dad3db1ab2d9bbb1557898f85faf12cf5c59e998e290b0",
-      "metadata_removed": true,
-      "scope": "Exact unscaled saved-pixel crop"
-    },
-    {
-      "file": "high-4x-moss-eyes.png",
-      "source": "high-4x-moss.png",
-      "box": [
-        1632,
-        380,
-        2016,
-        544
-      ],
-      "dimensions": [
-        384,
-        164
-      ],
-      "rgb_sha256": "533d397a0e2fde930e28c5522a2a497503e9c12c36b5a68714fb8b150ad171e6",
-      "metadata_removed": true,
-      "scope": "Exact unscaled saved-pixel crop"
-    },
-    {
-      "file": "high-4x-moss-face.png",
-      "source": "high-4x-moss.png",
-      "box": [
-        1540,
-        184,
-        2188,
-        880
-      ],
-      "dimensions": [
-        648,
-        696
-      ],
-      "rgb_sha256": "28c7367bd89638c8428e0f07cff711c1bdaa9b1b5d26ad149253860410952f42",
-      "metadata_removed": true,
-      "scope": "Exact unscaled saved-pixel crop"
-    },
-    {
-      "file": "normal-moss-face.png",
-      "source": "normal-moss.png",
-      "box": [
-        324,
-        75,
-        427,
+        266,
         205
       ],
-      "dimensions": [
-        103,
-        130
-      ],
-      "rgb_sha256": "13469c7736cdd20427d84037e2d16a0963229e120f4e1687ae96a189ead860cd",
+      "rgb_sha256": "552926e675a74535ca77239e85263ab6c9e97f07c1d87c4204bb87c2ed94e9ad",
       "metadata_removed": true,
-      "scope": "Exact saved-pixel face crop"
+      "source_artifact": "refined-samplers-2026-10-26/normal4x-public.png",
+      "artifact_box": [
+        1218,
+        438,
+        1484,
+        643
+      ],
+      "scope": "Exact unscaled crop of saved4x pixels"
     },
     {
-      "file": "watchmaker-moss-face.png",
-      "source": "watchmaker-moss.png",
-      "box": [
-        360,
-        120,
-        627,
-        469
-      ],
+      "file": "night-native.png",
       "dimensions": [
-        267,
-        349
+        736,
+        1104
       ],
-      "rgb_sha256": "d5a0d39ceae3643e661f833d01bd01ea83ce41f3ebd339b8fb2968974519dfd0",
+      "rgb_sha256": "aced12258bd1b748711bbf07f20d9071ea62c1bced28dec844860e27a5ab4c56",
       "metadata_removed": true,
-      "scope": "Exact saved-pixel face crop"
+      "source_artifact": "night-dpm-sde-sgm-cache-736x1104-quick-beta-20261026.png",
+      "scope": "Saved measured output; metadata removed, RGB unchanged"
     },
     {
-      "file": "night-moss-face.png",
-      "source": "night-moss.png",
-      "box": [
-        258,
-        103,
-        449,
-        355
-      ],
+      "file": "night-processed.png",
       "dimensions": [
-        191,
-        252
+        736,
+        1104
       ],
-      "rgb_sha256": "bd68e2401b41067cafd4db5361d2abde092f4efbb0f46fa5071f448f03e4957e",
+      "rgb_sha256": "c6e3869c61f7f02c13fdb3ccf9938549da750df1ce5d106d4b2973c57e39631b",
       "metadata_removed": true,
-      "scope": "Exact saved-pixel face crop"
+      "source_artifact": "night-dpm-sde-sgm-cache-736x1104-quick-beta-20261026-processed.png",
+      "scope": "Saved measured output; metadata removed, RGB unchanged"
     },
     {
-      "file": "high-4x-preview.png",
-      "source": "high-4x-moss.png",
+      "file": "night-4x-preview.png",
       "dimensions": [
-        928,
-        1392
+        736,
+        1104
       ],
-      "rgb_sha256": "5a802933afe6a354258fa3107fbc275f064e8ba3b5650b27d079fc7e21120f61",
-      "scope": "Lanczos web preview only; link opens original4x PNG",
-      "metadata_removed": true
+      "rgb_sha256": "d3e67242a1ad704140cbcef4403e13ec37eb9b97f5cd03c88e451cf1d88e90ce",
+      "metadata_removed": true,
+      "source_artifact": "night-dpm-sde-sgm-cache-736x1104-quick-beta-20261026-4x.png",
+      "resized_preview": true,
+      "scope": "Labeled Lanczos web preview, not new inference"
+    },
+    {
+      "file": "night-face.png",
+      "dimensions": [
+        715,
+        960
+      ],
+      "rgb_sha256": "08035bd79af02e0dd0c6cd6c0a3d4abd4a53e4d5397094676b16fb523c5da8d8",
+      "metadata_removed": true,
+      "source_artifact": "night-dpm-sde-sgm-cache-736x1104-quick-beta-20261026-4x.png",
+      "artifact_box": [
+        1065,
+        510,
+        1780,
+        1470
+      ],
+      "scope": "Exact unscaled crop of saved4x pixels"
+    },
+    {
+      "file": "night-eyes.png",
+      "dimensions": [
+        510,
+        410
+      ],
+      "rgb_sha256": "805ad4216410a6add4b0e2e78adfaf2cd3041d8be126beaf541bc281f465cccb",
+      "metadata_removed": true,
+      "source_artifact": "night-dpm-sde-sgm-cache-736x1104-quick-beta-20261026-4x.png",
+      "artifact_box": [
+        1188,
+        721,
+        1698,
+        1131
+      ],
+      "scope": "Exact unscaled crop of saved4x pixels"
+    },
+    {
+      "file": "watchmaker-native.png",
+      "dimensions": [
+        736,
+        1104
+      ],
+      "rgb_sha256": "91de6c96fedf3a43ba793974b779733a18429d75278ad0580ec365f85e869deb",
+      "metadata_removed": true,
+      "source_artifact": "watchmaker-dpm-sde-sgm-cache-736x1104-quick-beta-20261026.png",
+      "scope": "Saved measured output; metadata removed, RGB unchanged"
+    },
+    {
+      "file": "watchmaker-processed.png",
+      "dimensions": [
+        736,
+        1104
+      ],
+      "rgb_sha256": "43075eb66dc0690787bfd9bdef364e7c7d067c24b129ac8f4e086e0b28f177f3",
+      "metadata_removed": true,
+      "source_artifact": "watchmaker-dpm-sde-sgm-cache-736x1104-quick-beta-20261026-processed.png",
+      "scope": "Saved measured output; metadata removed, RGB unchanged"
+    },
+    {
+      "file": "watchmaker-4x-preview.png",
+      "dimensions": [
+        736,
+        1104
+      ],
+      "rgb_sha256": "32f93d52afe2245a4293aad37e4d7eb7e39463d04fa9292aa0ca8e3f81cbcc8a",
+      "metadata_removed": true,
+      "source_artifact": "watchmaker-dpm-sde-sgm-cache-736x1104-quick-beta-20261026-4x.png",
+      "resized_preview": true,
+      "scope": "Labeled Lanczos web preview, not new inference"
+    },
+    {
+      "file": "watchmaker-face.png",
+      "dimensions": [
+        1016,
+        1459
+      ],
+      "rgb_sha256": "7bb6703c2ab56250784e7f810fa1450ee6791d83068ef34e62ef5e815afca38d",
+      "metadata_removed": true,
+      "source_artifact": "watchmaker-dpm-sde-sgm-cache-736x1104-quick-beta-20261026-4x.png",
+      "artifact_box": [
+        712,
+        497,
+        1728,
+        1956
+      ],
+      "scope": "Exact unscaled crop of saved4x pixels"
+    },
+    {
+      "file": "watchmaker-eyes.png",
+      "dimensions": [
+        726,
+        614
+      ],
+      "rgb_sha256": "ed9fe29c5eab53ac57cefa00f2057ada8afd5633799d89761102269f12efa10b",
+      "metadata_removed": true,
+      "source_artifact": "watchmaker-dpm-sde-sgm-cache-736x1104-quick-beta-20261026-4x.png",
+      "artifact_box": [
+        916,
+        779,
+        1642,
+        1393
+      ],
+      "scope": "Exact unscaled crop of saved4x pixels"
     }
   ],
   "generated_for_publication": false,
   "ai_retouching_for_publication": false,
-  "high_native_base_rgb_identical": true,
-  "statement": "All source images are already saved MOSS tests. PNG metadata stripped; exact crops preserve saved pixels. One web thumbnail is explicitly resized."
+  "live_normal_native_base_rgb_identical": true
 }

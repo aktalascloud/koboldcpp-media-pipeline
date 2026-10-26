@@ -1,48 +1,170 @@
 {
-  "model": "Artius MOSS compatible Q8_0",
+  "date": "2026-10-26",
+  "model": "MOSS Refined Realism Q8_0",
+  "image_sha256": "061903b58b6dfc6e317ba6fe5064c4a2cee94172f77d4d4cf9c1fff423c3c623",
+  "native_executable_sha256": "9cdacf216336f24d2585f4dab4f2602fe9f92728282094675b1b050febdd61ca",
+  "profile": {
+    "steps": 8,
+    "cfg_scale": 1,
+    "sampler_name": "dpm++2m_sde",
+    "scheduler": "sgm_uniform",
+    "eta": 0,
+    "flow_shift": 5,
+    "clip_skip": -1,
+    "cache_mode": "cache-dit",
+    "cache_options": "threshold=0.08,warmup=4,Fn=16,Bn=2"
+  },
   "normal": [
     736,
     1104
   ],
-  "normal_steps": 8,
-  "normal_seconds": 141.4695528000011,
   "high": [
     928,
     1392
   ],
-  "high_steps": 8,
-  "high_cache": "cache-dit",
-  "high_vram_mib": 6500,
-  "high_native_seconds": 245.676,
-  "high_face_seconds": 1.5966,
-  "high_gater_seconds": 4.608118000003742,
-  "high_sr_seconds": 588.3943,
-  "high_total_seconds": 861.7906689000083,
-  "high_no_oom": true,
-  "face_bounds": {
-    "normal": [
-      39,
-      155
-    ],
-    "high": [
-      49,
-      196
-    ]
-  },
-  "date": "2026-10-24",
-  "native_executable_sha256": "d1aa7e7e1a8882e7dfda02c31bf1d54a63dfcc94fa7118e2bd43ec0b05de94b3",
-  "scope": "One complete saved High API request including profile switch; Normal is a separate saved request. One test scene/seed per timing, not a guarantee for every prompt.",
-  "high_native_base_rgb_sha256": "f70f0bcebe7814f050ef6325b40ed419e08ab645badf1f277e89051101040928",
-  "seed": 424242,
-  "high_tile_count": 16,
-  "high_output_dimensions": [
-    3712,
-    5568
+  "high_current_generation_measured": false,
+  "normal4x_seconds": 161.9578760000295,
+  "normal4x_output": [
+    2944,
+    4416
   ],
-  "minimum_available_ram_gib": 13.706737518310547,
-  "maximum_system_swap_used_gib": 0.07427597045898438,
-  "sface_similarity": [
-    0.9977741043345527
+  "native_seconds": 150.259,
+  "face_seconds": 1.1833,
+  "gater_seconds": 3.6942263999953866,
+  "sr_seconds": 0.9619,
+  "native_restored": true,
+  "scope": "One complete public Normal request with explicit enable_hr=true, resident model, faces/Gater/ClearReality4x; PNG/HTTP included. High Refined was not generated. No new inference for publication.",
+  "sampler_sweep": [
+    {
+      "scene": "fullbody",
+      "label": "Euler / simple",
+      "generation_seconds": 150.94220799999312,
+      "cache_skipped": 1,
+      "native_timing_seconds": {
+        "get_learned_condition": 8.05,
+        "sampling": 135.02,
+        "decode_first_stage": 7.3
+      },
+      "checkpoint_sha256": "061903b58b6dfc6e317ba6fe5064c4a2cee94172f77d4d4cf9c1fff423c3c623",
+      "executable_sha256": "9cdacf216336f24d2585f4dab4f2602fe9f92728282094675b1b050febdd61ca"
+    },
+    {
+      "scene": "fullbody",
+      "label": "Euler A / beta",
+      "generation_seconds": 152.0460255999933,
+      "cache_skipped": 1,
+      "native_timing_seconds": {
+        "get_learned_condition": 7.43,
+        "sampling": 136.55,
+        "decode_first_stage": 7.29
+      },
+      "checkpoint_sha256": "061903b58b6dfc6e317ba6fe5064c4a2cee94172f77d4d4cf9c1fff423c3c623",
+      "executable_sha256": "9cdacf216336f24d2585f4dab4f2602fe9f92728282094675b1b050febdd61ca"
+    },
+    {
+      "scene": "fullbody",
+      "label": "DPM++2M SDE / sgm_uniform",
+      "generation_seconds": 150.19571679999353,
+      "cache_skipped": 1,
+      "native_timing_seconds": {
+        "get_learned_condition": 6.97,
+        "sampling": 135.33,
+        "decode_first_stage": 7.32
+      },
+      "checkpoint_sha256": "061903b58b6dfc6e317ba6fe5064c4a2cee94172f77d4d4cf9c1fff423c3c623",
+      "executable_sha256": "9cdacf216336f24d2585f4dab4f2602fe9f92728282094675b1b050febdd61ca"
+    },
+    {
+      "scene": "night",
+      "label": "Euler / simple",
+      "generation_seconds": 148.85322079999605,
+      "cache_skipped": 1,
+      "native_timing_seconds": {
+        "get_learned_condition": 6.55,
+        "sampling": 134.84,
+        "decode_first_stage": 7.27
+      },
+      "checkpoint_sha256": "061903b58b6dfc6e317ba6fe5064c4a2cee94172f77d4d4cf9c1fff423c3c623",
+      "executable_sha256": "9cdacf216336f24d2585f4dab4f2602fe9f92728282094675b1b050febdd61ca"
+    },
+    {
+      "scene": "night",
+      "label": "Euler A / beta",
+      "generation_seconds": 150.01404229999753,
+      "cache_skipped": 1,
+      "native_timing_seconds": {
+        "get_learned_condition": 6.58,
+        "sampling": 135.62,
+        "decode_first_stage": 7.27
+      },
+      "checkpoint_sha256": "061903b58b6dfc6e317ba6fe5064c4a2cee94172f77d4d4cf9c1fff423c3c623",
+      "executable_sha256": "9cdacf216336f24d2585f4dab4f2602fe9f92728282094675b1b050febdd61ca"
+    },
+    {
+      "scene": "night",
+      "label": "DPM++2M SDE / sgm_uniform",
+      "generation_seconds": 142.83469679998234,
+      "cache_skipped": 1,
+      "native_timing_seconds": {
+        "get_learned_condition": 0.0,
+        "sampling": 135.34,
+        "decode_first_stage": 7.29
+      },
+      "checkpoint_sha256": "061903b58b6dfc6e317ba6fe5064c4a2cee94172f77d4d4cf9c1fff423c3c623",
+      "executable_sha256": "9cdacf216336f24d2585f4dab4f2602fe9f92728282094675b1b050febdd61ca"
+    },
+    {
+      "scene": "watchmaker",
+      "label": "Euler / simple",
+      "generation_seconds": 147.36234499997227,
+      "cache_skipped": 1,
+      "native_timing_seconds": {
+        "get_learned_condition": 6.51,
+        "sampling": 133.4,
+        "decode_first_stage": 7.27
+      },
+      "checkpoint_sha256": "061903b58b6dfc6e317ba6fe5064c4a2cee94172f77d4d4cf9c1fff423c3c623",
+      "executable_sha256": "9cdacf216336f24d2585f4dab4f2602fe9f92728282094675b1b050febdd61ca"
+    },
+    {
+      "scene": "watchmaker",
+      "label": "Euler A / beta",
+      "generation_seconds": 147.85189579997677,
+      "cache_skipped": 1,
+      "native_timing_seconds": {
+        "get_learned_condition": 6.66,
+        "sampling": 133.75,
+        "decode_first_stage": 7.26
+      },
+      "checkpoint_sha256": "061903b58b6dfc6e317ba6fe5064c4a2cee94172f77d4d4cf9c1fff423c3c623",
+      "executable_sha256": "9cdacf216336f24d2585f4dab4f2602fe9f92728282094675b1b050febdd61ca"
+    },
+    {
+      "scene": "watchmaker",
+      "label": "DPM++2M SDE / sgm_uniform",
+      "generation_seconds": 141.21505399997113,
+      "cache_skipped": 1,
+      "native_timing_seconds": {
+        "get_learned_condition": 0.0,
+        "sampling": 133.63,
+        "decode_first_stage": 7.37
+      },
+      "checkpoint_sha256": "061903b58b6dfc6e317ba6fe5064c4a2cee94172f77d4d4cf9c1fff423c3c623",
+      "executable_sha256": "9cdacf216336f24d2585f4dab4f2602fe9f92728282094675b1b050febdd61ca"
+    }
   ],
-  "new_inference_for_publication": false
+  "rejected": [
+    {
+      "label": "er_sde / beta, eta0",
+      "seconds": 161.987144899962,
+      "cache": [
+        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
+        "CacheDIT completed without skipping steps"
+      ],
+      "reason": "Essentially uniform grey frame, visually unusable. Other two scenes intentionally not repeated under user exclusion rule.",
+      "tested_scenes": [
+        "fullbody"
+      ]
+    }
+  ]
 }

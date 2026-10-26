@@ -2,12 +2,12 @@
   "format": 2,
   "models": [
     {
-      "path": "MOSS/models/image-q8_0.gguf",
-      "bytes": 5401115744,
-      "sha256": "8a3ed10d3e568ce01860fd9fcecd3478b9a50df5d2a780c562a01dcd84b765c4",
+      "path": "MOSS/models/refined-realism-v10-q8_0.gguf",
+      "bytes": 5401122784,
+      "sha256": "061903b58b6dfc6e317ba6fe5064c4a2cee94172f77d4d4cf9c1fff423c3c623",
       "in_release": false,
-      "source": "https://civitai.com/models/3010191?modelVersionId=3416029",
-      "license": "Original author terms; no derived weights distributed by this project.",
+      "source": "User-supplied Refined Realism BF16; authoritative author download URL not verified.",
+      "license": "Original checkpoint terms apply. No source or converted main weights redistributed.",
       "generated_role": "image",
       "url": null
     },
@@ -38,6 +38,15 @@
       "source": "https://civitai.com/models/3010191?modelVersionId=3416029",
       "license": "Apache-2.0, Qwen tokenizer; see upstream.",
       "url": "https://huggingface.co/Qwen/Qwen3.5-9B/resolve/c202236235762e1c871ad0ccb60c8ee5ba337b9a/tokenizer.json"
+    },
+    {
+      "path": "tools/upscaler_models/ClearRealityV1-fp32.onnx",
+      "bytes": 1718947,
+      "sha256": "bbce9d5a653281cfae07788d620bd4ec45712709bdf6349a06a893159efd97ce",
+      "url": "https://huggingface.co/Kim2091/ClearRealityV1/resolve/6bfd32e08342ad5d8ae5ac2fd6629a72d525c76e/ONNX/fp32/4x-ClearRealityV1-fp32-opset17.onnx",
+      "in_release": false,
+      "source": "https://huggingface.co/Kim2091/ClearRealityV1",
+      "license": "Apache-2.0; Kim2091; unmodified FP32 ONNX."
     },
     {
       "path": "MUSIC/acestep-5Hz-lm-4B-Q6_K.gguf",
@@ -103,24 +112,6 @@
       "in_release": true
     },
     {
-      "path": "tools/HelamanATD/gpu-ort/models/atd-legacy-stripe256-640x256-prepared.onnx",
-      "bytes": 2055086,
-      "sha256": "c6ecba3961089f1c2cdbc8bc5868c5680a5b51775ccdbc7217d95e0ea074c992",
-      "url": null,
-      "license": "CC-BY-4.0",
-      "source": "https://github.com/Phhofm/models/releases/tag/4xNomos8k_atd_jpg",
-      "in_release": true
-    },
-    {
-      "path": "tools/HelamanATD/gpu-ort/models/atd-legacy-stripe256-640x256-prepared.onnx.data",
-      "bytes": 445391112,
-      "sha256": "d4dee3b28b8a7f61e94a75b404f7e41756436f23451eca965676e25467b00862",
-      "url": null,
-      "license": "CC-BY-4.0",
-      "source": "https://github.com/Phhofm/models/releases/tag/4xNomos8k_atd_jpg",
-      "in_release": true
-    },
-    {
       "path": "tools/detailer_models/gpen_bfr_512.onnx",
       "bytes": 284340240,
       "sha256": "d5f066b9068a8b74217f9712e28e875a6144629b108a6f7355acbdb3a2832c54",
@@ -133,15 +124,17 @@
   "moss_sources": [
     {
       "role": "image",
-      "path": "MOSS/source/img-artiusMoss_v10_3309287.safetensors",
-      "bytes": 7494295376,
-      "sha256": "187a5c86c6fea9497bf16d43c5d780ebd46fb52f17a4a8faa2bd553218b0344b",
-      "url": "https://huggingface.co/hfmaster/artius-moss/resolve/d75d8f6bcb2423b21d42631751d39467fadfaba1/Artius_Moss_int8_hq_v1.safetensors",
+      "path": "MOSS/source/mossRefinedRealism_v108steps_bf16.safetensors",
+      "bytes": 10164691056,
+      "sha256": "292f41c04bfb4be1eacfcd42eb6a0ee500757d25b6643cb7f6aa28bd4cf90fb3",
+      "url": null,
       "aliases": [
-        "Artius_Moss_int8_hq_v1.safetensors",
-        "artiusMoss_v10_3309287.safetensors"
+        "mossRefinedRealism_v108steps_bf16.safetensors"
       ],
-      "source": "https://civitai.com/models/3010191?modelVersionId=3416029"
+      "required_user_file": true,
+      "source": "User-supplied Refined Realism BF16; authoritative author download URL not verified.",
+      "model_name": "MOSS Refined Realism v1.0 8steps Q8_0",
+      "description": "Standard Q8_0 matrices; source formats and transformations recorded in conversion evidence."
     },
     {
       "role": "text",

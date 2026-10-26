@@ -61,6 +61,8 @@ def source_file(row,directory,temporary):
                     except OSError:shutil.copyfile(path,destination)
                 if not verified(destination,row):raise RuntimeError('Imported source differs; preserved for inspection.')
                 return destination
+    if row.get('required_user_file') and not row.get('url'):
+        raise RuntimeError('Required original model not found in --moss-source-directory: '+Path(row['path']).name)
     return download(row,destination)
 def prepare_moss(catalog,directory):
     pending=[]
@@ -74,9 +76,14 @@ def prepare_moss(catalog,directory):
     # Fail gated encoder access before downloading/converting the public image.
     pending.sort(key=lambda row:row['generated_role']!='text')
     temporary=inside('runtime/tmp/moss-source');temporary.mkdir(parents=True,exist_ok=True);sources={r['role']:r for r in catalog['moss_sources']}
+    # Require explicitly supplied checkpoints before any large gated download.
+    imported={r['role']:source_file(sources[r['role']],directory,temporary) for r in pending if sources[r['role']].get('required_user_file')}
     for row in pending:
-        role=row['generated_role'];source=source_file(sources[role],directory,temporary)
-        subprocess.run([sys.executable,'-I','-B',str(ROOT/'tools/MossConvert.py'),'--source-dir',str(temporary),'--output-dir',str(ROOT/'MOSS/models'),'--role',role],cwd=ROOT,check=True)
+        role=row['generated_role'];source=imported.get(role) or source_file(sources[role],directory,temporary)
+        command=[sys.executable,'-I','-B',str(ROOT/'tools/MossConvert.py'),'--source-dir',str(temporary),'--source-file',str(source),'--output-dir',str(ROOT/'MOSS/models'),'--output-name',Path(row['path']).name,'--role',role]
+        for field in ['model_name','description']:
+            if sources[role].get(field):command.extend(['--'+field.replace('_','-'),sources[role][field]])
+        subprocess.run(command,cwd=ROOT,check=True)
         if not verified(inside(row['path']),row):raise RuntimeError('Derived model differs from measured Q8 output; no unverified model accepted.')
         source.unlink() # Only Setup's verified temporary download/link, never the user's source.
     for folder in [ROOT/'MOSS/models/.tmp',temporary]:

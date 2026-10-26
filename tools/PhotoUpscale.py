@@ -1,4 +1,4 @@
-"""FP32 photo SR with native2x or4x models, always returning exact2x."""
+"""FP32 photo SR with explicit output scale; legacy callers retain exact2x."""
 import gc
 import hashlib
 from pathlib import Path
@@ -12,9 +12,11 @@ from PIL import Image
 import onnxruntime as ort
 
 class PhotoUpscaler:
-    def __init__(self,model,scale=4,provider='directml',tile=256,padding=32,threads=10):
+    def __init__(self,model,scale=4,provider='directml',tile=256,padding=32,threads=10,output_scale=2):
         self.model=Path(model);self.scale=int(scale);self.provider=provider;self.tile=int(tile);self.padding=int(padding);self.session=None;self.compiled=None
         assert self.scale in (2,4) and self.tile>=0
+        self.output_scale=int(output_scale)
+        if self.output_scale not in (2,4):raise ValueError('Photo output scale must be2 or4')
         start=time.perf_counter()
         if provider.startswith('openvino'):
             import openvino as ov
@@ -29,13 +31,15 @@ class PhotoUpscaler:
             self.input_name=self.compiled.input(0).any_name
         else:
             options=ort.SessionOptions();options.enable_mem_pattern=False;options.execution_mode=ort.ExecutionMode.ORT_SEQUENTIAL;options.intra_op_num_threads=int(threads) if provider=='cpu' else 2;options.inter_op_num_threads=1
+            options.graph_optimization_level=ort.GraphOptimizationLevel.ORT_ENABLE_BASIC
             self.adapter=select_dml_adapter() if provider=='directml' else None
             providers=[('DmlExecutionProvider',{'device_id':self.adapter['index']}),'CPUExecutionProvider'] if self.adapter else ['CPUExecutionProvider']
             self.session=ort.InferenceSession(str(self.model),sess_options=options,providers=providers)
+            self.session.disable_fallback()
             self.input_name=self.session.get_inputs()[0].name
             if provider=='directml':assert self.session.get_providers()[0]=='DmlExecutionProvider'
         self.load_seconds=round(time.perf_counter()-start,4)
-        self.metadata=dict(model=str(self.model),model_sha256=hashlib.sha256(self.model.read_bytes()).hexdigest(),native_scale=self.scale,provider=provider,tile=self.tile,padding=self.padding,load_seconds=self.load_seconds)
+        self.metadata=dict(model=str(self.model),model_sha256=hashlib.sha256(self.model.read_bytes()).hexdigest(),native_scale=self.scale,output_scale=self.output_scale,provider=provider,tile=self.tile,padding=self.padding,load_seconds=self.load_seconds)
         self.metadata['adapter']=getattr(self,'adapter',None)
         self.metadata['openvino_device']=getattr(self,'ov_device',None)
     def run_tensor(self,arr):
@@ -56,9 +60,9 @@ class PhotoUpscaler:
                     right=min(w,left+self.tile);bottom=min(h,top+self.tile);a=max(0,left-self.padding);b=max(0,top-self.padding);c=min(w,right+self.padding);d=min(h,bottom+self.padding)
                     piece=self.run_tensor(arr[b:d,a:c]);result[top*s:bottom*s,left*s:right*s]=piece[(top-b)*s:(bottom-b)*s,(left-a)*s:(right-a)*s];tiles+=1
         final=Image.fromarray(result[:height*s,:width*s]);native_size=final.size
-        if s!=2:final=final.resize((width*2,height*2),Image.Resampling.LANCZOS)
+        if s!=self.output_scale:final=final.resize((width*self.output_scale,height*self.output_scale),Image.Resampling.LANCZOS)
         if 'A' in image.getbands():final=final.convert('RGBA');final.putalpha(image.getchannel('A').resize(final.size,Image.Resampling.LANCZOS))
-        return final,dict(inference_seconds=round(time.perf_counter()-start,4),input_dimensions=[width,height],native_dimensions=list(native_size),output_dimensions=list(final.size),tiles=tiles,provider=self.provider,native_scale=s,postresize='Lanczos4to2' if s==4 else 'none')
+        return final,dict(inference_seconds=round(time.perf_counter()-start,4),input_dimensions=[width,height],native_dimensions=list(native_size),output_dimensions=list(final.size),tiles=tiles,provider=self.provider,native_scale=s,output_scale=self.output_scale,postresize='none' if s==self.output_scale else f'Lanczos{s}to{self.output_scale}')
     def close(self):self.session=None;self.compiled=None;gc.collect()
 
 class PhotoBlendUpscaler:
