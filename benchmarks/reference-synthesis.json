@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-27",
+  "operation": "reference_synthesis",
+  "requires_client_visual_analysis": true,
+  "analysis_provider_bound": false,
+  "conditioning": "text_descriptions_only",
+  "native_reference_conditioning": false,
+  "exact_identity_guaranteed": false,
+  "real_moss_handoff_seconds": 23.916264900006354,
+  "dimensions": [
+    320,
+    480
+  ],
+  "negative": [
+    "generation_prompt_required",
+    "unsupported_synthesis_parameter",
+    "unsupported_synthesis_parameter"
+  ],
+  "scope": "Real MOSS synthesis from a composed caption with manually verified synthetic-source descriptions. No external vision model was called; no native reference conditioning/identity-transfer claim."
+}

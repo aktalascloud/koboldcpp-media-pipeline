@@ -1,11 +1,11 @@
-MOSS image-operation contract, schema2. Existing Refined/DPM/SGM/ClearReality settings are preserved.
+Model-agnostic reference synthesis on the existing MOSS generator. No new model weights.
 
-- New `GET /v1/images/capabilities`: one target, zero references, no instruction-edit or masks.
-- `/v1/images/edits` now rejects unsupported instruction edits with422 and no PNG/inference. Redraw requires explicit `operation:img2img`; a model alias cannot silently select an operation.
-- JSON/multipart/A1111 redraws share source/aspect/strength validation. Actual checkpoint is reported; unavailable models, multiple images, references and unsupported parameters are rejected instead of ignored.
-- Final faces/Gater retained; edits do not auto-upscale. Existing Normal `enable_hr:true`4x and music remain intact.
-- Real small320x256 redraws and negative HTTP regressions verified. These do not prove semantic recoloring. Saved Normal4x161.96s is the earlier pre-contract-change reference on the same native EXE/profile, not a new full-resolution measurement for this release.
+- `GET /v1/images/synthesis-schema` returns a universal vision-analysis/caption template.
+- `POST /v1/images/synthesize` accepts2–4 client source analyses with explicit base/reference roles, hashes, user request and final caption. Any caller-selected vision provider can prepare them; no provider/model is fixed.
+- Included stdlib client helper takes a sync/async vision callback, makes one analysis call and preserves trusted IDs/roles/hashes.
+- Conditioning is explicitly TEXT ONLY: MOSS does not see raw references, exact face identity and pixel preservation are not guaranteed. Unsupported instruction-edit still returns422; no automatic fallback.
+- Actual small MOSS caption-handoff test passed at320x480 in23.92s, using truthful manual source descriptions. This does not claim an external vision model was tested.
 
-Extract **media-pipeline-code.zip**, run **Setup.ps1 once** for a new installation, then **Start.exe directly**. Main weights are not included; exact user-supplied Refined source and gated text source/verified GGUF are required. Existing runtime assets are pinned and reused. No keys/private state are shipped; GPEN is downloaded from its original distributor.
+Existing Refined/DPM/SGM/Cache-DiT/face/Gater/ClearReality4x and music settings are preserved. Runtime/postprocessor assets are pinned downloads. Main weights and credentials are not distributed. Existing Normal4x timings are historical references, not fresh full-resolution measurements for this API release.
 
-[Editing/capabilities and OWUI rules](https://github.com/aktalascloud/koboldcpp-media-pipeline/blob/main/docs/EDITING.md) · [Evidence](https://github.com/aktalascloud/koboldcpp-media-pipeline/blob/main/benchmarks/edit-contract.json)
+[API and OWUI callback](https://github.com/aktalascloud/koboldcpp-media-pipeline/blob/main/docs/REFERENCE-SYNTHESIS.md)

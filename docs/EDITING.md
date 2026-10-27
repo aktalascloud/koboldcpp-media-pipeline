@@ -66,3 +66,5 @@ Reference inputs return `reference_images_unsupported`; multiple targets return 
 6. Prompt-rewrite caching must include operation, target/reference roles and hashes, selected model/profile and strength. Generation prompts and edit instructions must not share a cache key.
 
 Regression validation: unsupported recoloring/default edit, references, multiple targets, masks and wrong model produced422 without increasing the image-processing counter. JSON, multipart and A1111 real redraws at320×256/strength0.25 took approximately7.8–9.6s and produced source-dependent images. The blue square remained blue: this was deliberately not reported as successful recoloring. These are functional small-image tests, not full-resolution quality/timing measurements.
+
+For a NEW image based on descriptions of several photos, see [reference_synthesis](REFERENCE-SYNTHESIS.md). This separate explicit workflow does not change the unsupported native instruction-edit/reference-conditioning contract above.

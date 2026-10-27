@@ -35,6 +35,7 @@ from FastDenoise import denoise
 from ToneGuard import preserve_tones
 from Resolution import choose_resolution
 from ImageEdits import EDIT_PATHS,ImageEditError,prepare_edit,prepare_a1111_edit,validate_edit_contract,validate_generation_contract,image_capabilities,model_contract
+from ReferenceSynthesis import SYNTHESIS_PATHS,synthesis_schema,prepare_synthesis
 from ImageModes import ImageModeError,resolve_image_mode
 from HelamanUpscale import HelamanUpscaler,configured_output_scale as helaman_output_scale
 from VideoService import VideoService,VideoServiceError,VIDEO_JSON_PATHS,VIDEO_MEDIA_PREFIX,is_video_request
@@ -556,7 +557,9 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                         version=json.loads(raw);version.update(music=True,musicllm=True,txt2img=True,img2img=True,image_instruction_edit=False,image_reference_images=False,image_capabilities_url='/v1/images/capabilities',kcpp_auto_switch=True,video=bool(cfg['proxy'].get('video',{}).get('enabled',False)))
                         self.reply(version);return
                 if path in ('/v1/images/capabilities','/api/extra/image-capabilities'):
-                    self.reply(image_capabilities(cfg));return
+                    cap=image_capabilities(cfg);cap['operations']['reference_synthesis']=dict(supported=True,endpoints=list(SYNTHESIS_PATHS),conditioning='text_descriptions_only',requires_client_visual_analysis=True,min_sources=2,max_sources=4,raw_images_accepted=False,native_reference_conditioning=False,exact_identity_guaranteed=False,schema_url='/v1/images/synthesis-schema');self.reply(cap);return
+                if path in ('/v1/images/synthesis-schema','/images/synthesis-schema'):
+                    self.reply(synthesis_schema());return
                 if path=='/health':
                     self.reply(dict(service='KoboldProxy',version=VERSION,pid=os.getpid(),helper=str(pipeline.helper),helper_sha256=cfg['helper_sha256'],
                       backend=cfg['backend'],port=cfg['port'],profile={k:cfg['defaults'].get(k) for k in IMAGE_FIELDS},
@@ -595,7 +598,7 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                 maximum=int(cfg['helper'].get('maxrequestsize',32))*1024*1024
                 if length<0 or length>maximum:self.reply(dict(error='Request exceeds configured size limit'),413);return
                 body=self.rfile.read(length)
-                if path.startswith(('/v1/images/','/images/')) and path not in (*OPENAI_IMAGE_PATHS,*EDIT_PATHS):
+                if path.startswith(('/v1/images/','/images/')) and path not in (*OPENAI_IMAGE_PATHS,*EDIT_PATHS,*SYNTHESIS_PATHS):
                     raise ImageEditError('Unsupported image operation endpoint; see /v1/images/capabilities.',param='operation',code='unsupported_image_operation',status=422)
                 if path in VIDEO_JSON_PATHS or path=='/sdapi/v1/txt2img':
                     try:video_payload=json.loads(body or b'{}')
@@ -624,6 +627,16 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                                 LOG.info('Video deadline expired; response socket closed after cleanup')
                             else:self.reply(error.body,error.status,headers=getattr(error,'headers',None))
                         return
+                if path in SYNTHESIS_PATHS:
+                    try:synthesis_fields=json.loads(body)
+                    except (ValueError,UnicodeError):raise ImageEditError('Valid JSON is required.',code='invalid_json')
+                    image_payload,receipt=prepare_synthesis(synthesis_fields,cfg)
+                    with pipeline.lock:
+                        answer=pipeline.generate('/sdapi/v1/txt2img',image_payload,dict(self.headers))
+                        images=answer.get('images',[]);assert len(images)==1
+                        final=image_decode(images[0]);report=answer.get('kcpp_proxy',{});report['reference_synthesis']=receipt
+                        self.reply(dict(created=int(time.time()),data=[dict(b64_json=images[0])],model=receipt['model']['resolved'],operation='reference_synthesis',conditioning='text_descriptions_only',processing_success=True,semantic_success_evaluated=False,native_reference_conditioning=False,exact_identity_guaranteed=False,size=f'{final.width}x{final.height}',kcpp_proxy=report))
+                    return
                 if path in EDIT_PATHS:
                     with pipeline.lock:
                         image_payload,edit_context=prepare_edit(body,self.headers.get('Content-Type',''),cfg,mode_resolver=resolve_image_mode)

@@ -33,3 +33,5 @@ Refined Q8 → YuNet960 → GPEN20%/SFace≥0.97 → Gater Restore1× → option
 Normal defaults to no SR; **`enable_hr:true` now requests proxy4× in Normal**. High defaults to4×; it has no new full-cycle timing yet. [Ready OWUI presets](docs/API.md). Original wrapper AGPL-3.0; third-party licenses remain separate. No keys, private addresses, logs, cache or state shipped.
 
 **Editing contract:** [capabilities and OWUI/filter rules](docs/EDITING.md). Instruction-edit, references and masks return422; only explicit whole-frame img2img redraw is supported. A model alias alone does not opt into redraw.
+
+**New image from several photos:** [reference synthesis](docs/REFERENCE-SYNTHESIS.md) uses analyses/final captions from any caller-selected vision model. MOSS receives text only; exact face identity is not promised. No new weights installed.

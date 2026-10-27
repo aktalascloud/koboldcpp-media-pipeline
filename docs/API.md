@@ -56,3 +56,6 @@ YuNet960, GPEN512/OpenVINOCPU at20%, SFace≥0.97, max2; face bounds39–155 px 
 Model selection is server-managed: use kobold-moss for generation; unknown provider models return422 instead of being ignored. Only n=1, response_format=b64_json, PNG and opaque background are supported; quality=auto is accepted, other OpenAI quality presets return422 (use kcpp_quality for the real profile). Unsupported references/masks/multiple inputs never silently fall back to generation. [OWUI/filter rules](EDITING.md).
 
 Use a client/proxy timeout covering the full job, e.g.3600 s. Prompt rewriting: one pass, cache the result, normally120–180 coherent English words. Describe subject/action/framing/light/materials/colors; no Z-Image LoRA/physioshade tags. Exact anatomy, clocks and small writing are not guaranteed. [Official MOSS prompt skill](https://github.com/OpenMOSS/MOSS-Image/blob/main/skills/moss-image-prompt-enhancer/SKILL.md).
+
+## Reference synthesis
+GET /v1/images/synthesis-schema provides the provider-agnostic analysis prompt. POST /v1/images/synthesize accepts2–4 role-bound client visual analyses plus user_request/generation_prompt. It creates a NEW image from text; it is not native reference-conditioned editing. Raw images/exact-identity constraints are rejected. [Workflow and OWUI callback](REFERENCE-SYNTHESIS.md).
