@@ -1,19 +1,8 @@
 {
-  "date": "2026-10-26",
-  "model": "MOSS Refined Realism Q8_0",
-  "image_sha256": "061903b58b6dfc6e317ba6fe5064c4a2cee94172f77d4d4cf9c1fff423c3c623",
-  "native_executable_sha256": "9cdacf216336f24d2585f4dab4f2602fe9f92728282094675b1b050febdd61ca",
-  "profile": {
-    "steps": 8,
-    "cfg_scale": 1,
-    "sampler_name": "dpm++2m_sde",
-    "scheduler": "sgm_uniform",
-    "eta": 0,
-    "flow_shift": 5,
-    "clip_skip": -1,
-    "cache_mode": "cache-dit",
-    "cache_options": "threshold=0.08,warmup=4,Fn=16,Bn=2"
-  },
+  "date": "2026-10-27",
+  "model": "Dirty MOSS Q8_0 + DMD2 dynamic69 1 / Afterlight0.25 / Textslider0.25",
+  "image_sha256": "8276dcb69a1550924b44b35ff7d0264357196349ae0d7d74edba88ca91f0653b",
+  "native_executable_sha256": "6b815fe4ace25231f789639b2595458f2b467d752c77370864520d3a15e2354d",
   "normal": [
     736,
     1104
@@ -22,149 +11,168 @@
     928,
     1392
   ],
-  "high_current_generation_measured": false,
-  "normal4x_seconds": 161.9578760000295,
-  "normal4x_output": [
-    2944,
-    4416
-  ],
-  "native_seconds": 150.259,
-  "face_seconds": 1.1833,
-  "gater_seconds": 3.6942263999953866,
-  "sr_seconds": 0.9619,
-  "native_restored": true,
-  "scope": "One complete public Normal request with explicit enable_hr=true, resident model, faces/Gater/ClearReality4x; PNG/HTTP included. High Refined was not generated. No new inference for publication.",
-  "sampler_sweep": [
+  "profile": {
+    "sampler_name": "euler",
+    "scheduler": "simple",
+    "turbo": 1,
+    "afterlight": 0.25,
+    "textslider": 0.25,
+    "steps": 8,
+    "width": 736,
+    "height": 1104,
+    "cfg_scale": 1,
+    "eta": 0,
+    "flow_shift": 5,
+    "cache_mode": "cache-dit",
+    "cache_options": "threshold=0.08,warmup=4,Fn=16,Bn=2"
+  },
+  "native_seconds": 155.6020529999514,
+  "normal4x_seconds": null,
+  "high_current_measured": false,
+  "scope": "Single fixed fullbody/seed424242 per condition; raw Native time only, no checkpoint load, faces/Gater/SR. No new generation for publication. Cache skips vary; adapter/sampler changes are not compiler gains.",
+  "trials": [
     {
-      "scene": "fullbody",
-      "label": "Euler / simple",
-      "generation_seconds": 150.94220799999312,
-      "cache_skipped": 1,
-      "native_timing_seconds": {
-        "get_learned_condition": 8.05,
-        "sampling": 135.02,
-        "decode_first_stage": 7.3
-      },
-      "checkpoint_sha256": "061903b58b6dfc6e317ba6fe5064c4a2cee94172f77d4d4cf9c1fff423c3c623",
-      "executable_sha256": "9cdacf216336f24d2585f4dab4f2602fe9f92728282094675b1b050febdd61ca"
-    },
-    {
-      "scene": "fullbody",
-      "label": "Euler A / beta",
-      "generation_seconds": 152.0460255999933,
-      "cache_skipped": 1,
-      "native_timing_seconds": {
-        "get_learned_condition": 7.43,
-        "sampling": 136.55,
-        "decode_first_stage": 7.29
-      },
-      "checkpoint_sha256": "061903b58b6dfc6e317ba6fe5064c4a2cee94172f77d4d4cf9c1fff423c3c623",
-      "executable_sha256": "9cdacf216336f24d2585f4dab4f2602fe9f92728282094675b1b050febdd61ca"
-    },
-    {
-      "scene": "fullbody",
-      "label": "DPM++2M SDE / sgm_uniform",
-      "generation_seconds": 150.19571679999353,
-      "cache_skipped": 1,
-      "native_timing_seconds": {
-        "get_learned_condition": 6.97,
-        "sampling": 135.33,
-        "decode_first_stage": 7.32
-      },
-      "checkpoint_sha256": "061903b58b6dfc6e317ba6fe5064c4a2cee94172f77d4d4cf9c1fff423c3c623",
-      "executable_sha256": "9cdacf216336f24d2585f4dab4f2602fe9f92728282094675b1b050febdd61ca"
-    },
-    {
-      "scene": "night",
-      "label": "Euler / simple",
-      "generation_seconds": 148.85322079999605,
-      "cache_skipped": 1,
-      "native_timing_seconds": {
-        "get_learned_condition": 6.55,
-        "sampling": 134.84,
-        "decode_first_stage": 7.27
-      },
-      "checkpoint_sha256": "061903b58b6dfc6e317ba6fe5064c4a2cee94172f77d4d4cf9c1fff423c3c623",
-      "executable_sha256": "9cdacf216336f24d2585f4dab4f2602fe9f92728282094675b1b050febdd61ca"
-    },
-    {
-      "scene": "night",
-      "label": "Euler A / beta",
-      "generation_seconds": 150.01404229999753,
-      "cache_skipped": 1,
-      "native_timing_seconds": {
-        "get_learned_condition": 6.58,
-        "sampling": 135.62,
-        "decode_first_stage": 7.27
-      },
-      "checkpoint_sha256": "061903b58b6dfc6e317ba6fe5064c4a2cee94172f77d4d4cf9c1fff423c3c623",
-      "executable_sha256": "9cdacf216336f24d2585f4dab4f2602fe9f92728282094675b1b050febdd61ca"
-    },
-    {
-      "scene": "night",
-      "label": "DPM++2M SDE / sgm_uniform",
-      "generation_seconds": 142.83469679998234,
-      "cache_skipped": 1,
-      "native_timing_seconds": {
-        "get_learned_condition": 0.0,
-        "sampling": 135.34,
-        "decode_first_stage": 7.29
-      },
-      "checkpoint_sha256": "061903b58b6dfc6e317ba6fe5064c4a2cee94172f77d4d4cf9c1fff423c3c623",
-      "executable_sha256": "9cdacf216336f24d2585f4dab4f2602fe9f92728282094675b1b050febdd61ca"
-    },
-    {
-      "scene": "watchmaker",
-      "label": "Euler / simple",
-      "generation_seconds": 147.36234499997227,
-      "cache_skipped": 1,
-      "native_timing_seconds": {
-        "get_learned_condition": 6.51,
-        "sampling": 133.4,
-        "decode_first_stage": 7.27
-      },
-      "checkpoint_sha256": "061903b58b6dfc6e317ba6fe5064c4a2cee94172f77d4d4cf9c1fff423c3c623",
-      "executable_sha256": "9cdacf216336f24d2585f4dab4f2602fe9f92728282094675b1b050febdd61ca"
-    },
-    {
-      "scene": "watchmaker",
-      "label": "Euler A / beta",
-      "generation_seconds": 147.85189579997677,
-      "cache_skipped": 1,
-      "native_timing_seconds": {
-        "get_learned_condition": 6.66,
-        "sampling": 133.75,
-        "decode_first_stage": 7.26
-      },
-      "checkpoint_sha256": "061903b58b6dfc6e317ba6fe5064c4a2cee94172f77d4d4cf9c1fff423c3c623",
-      "executable_sha256": "9cdacf216336f24d2585f4dab4f2602fe9f92728282094675b1b050febdd61ca"
-    },
-    {
-      "scene": "watchmaker",
-      "label": "DPM++2M SDE / sgm_uniform",
-      "generation_seconds": 141.21505399997113,
-      "cache_skipped": 1,
-      "native_timing_seconds": {
-        "get_learned_condition": 0.0,
-        "sampling": 133.63,
-        "decode_first_stage": 7.37
-      },
-      "checkpoint_sha256": "061903b58b6dfc6e317ba6fe5064c4a2cee94172f77d4d4cf9c1fff423c3c623",
-      "executable_sha256": "9cdacf216336f24d2585f4dab4f2602fe9f92728282094675b1b050febdd61ca"
-    }
-  ],
-  "rejected": [
-    {
-      "label": "er_sde / beta, eta0",
-      "seconds": 161.987144899962,
+      "key": "fullbody-dpm-sde-sgm-cache-736x1104-quality-refined-control",
+      "seconds": 150.49310459999833,
       "cache": [
         "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
-        "CacheDIT completed without skipping steps"
+        "CacheDIT skipped 1/8 steps (1.14x estimated speedup)"
       ],
-      "reason": "Essentially uniform grey frame, visually unusable. Other two scenes intentionally not repeated under user exclusion rule.",
-      "tested_scenes": [
-        "fullbody"
-      ]
+      "adapters": [],
+      "checkpoint_sha256": "061903b58b6dfc6e317ba6fe5064c4a2cee94172f77d4d4cf9c1fff423c3c623",
+      "executable_sha256": "6b815fe4ace25231f789639b2595458f2b467d752c77370864520d3a15e2354d"
+    },
+    {
+      "key": "fullbody-dpm-sde-sgm-cache-736x1104-quality-dirty-turbo",
+      "seconds": 163.0644921999774,
+      "cache": [
+        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
+        "CacheDIT skipped 1/8 steps (1.14x estimated speedup)"
+      ],
+      "adapters": [
+        {
+          "file": "turbo-dmd2-dynamic69.safetensors",
+          "weight": 1.0,
+          "sha256": "d869785c75a20a409f1b590d4ad3a825b542a1fbb9f21589e5ad5e46e62c6910"
+        }
+      ],
+      "checkpoint_sha256": "8276dcb69a1550924b44b35ff7d0264357196349ae0d7d74edba88ca91f0653b",
+      "executable_sha256": "6b815fe4ace25231f789639b2595458f2b467d752c77370864520d3a15e2354d"
+    },
+    {
+      "key": "fullbody-simple-cache-736x1104-quality-dirty-turbo",
+      "seconds": 163.5198580000433,
+      "cache": [
+        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
+        "CacheDIT skipped 1/8 steps (1.14x estimated speedup)"
+      ],
+      "adapters": [
+        {
+          "file": "turbo-dmd2-dynamic69.safetensors",
+          "weight": 1.0,
+          "sha256": "d869785c75a20a409f1b590d4ad3a825b542a1fbb9f21589e5ad5e46e62c6910"
+        }
+      ],
+      "checkpoint_sha256": "8276dcb69a1550924b44b35ff7d0264357196349ae0d7d74edba88ca91f0653b",
+      "executable_sha256": "6b815fe4ace25231f789639b2595458f2b467d752c77370864520d3a15e2354d"
+    },
+    {
+      "key": "fullbody-simple-cache-736x1104-quality-dirty-afterlight025",
+      "seconds": 150.83298300002934,
+      "cache": [
+        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
+        "CacheDIT skipped 2/8 steps (1.33x estimated speedup)"
+      ],
+      "adapters": [
+        {
+          "file": "turbo-dmd2-dynamic69.safetensors",
+          "weight": 1.0,
+          "sha256": "d869785c75a20a409f1b590d4ad3a825b542a1fbb9f21589e5ad5e46e62c6910"
+        },
+        {
+          "file": "afterlight-v1.safetensors",
+          "weight": 0.25,
+          "sha256": "57d2a400af32a0afd9cd065c43ebeb6a0e44b153abaef0171ce6891b6b057d13"
+        }
+      ],
+      "checkpoint_sha256": "8276dcb69a1550924b44b35ff7d0264357196349ae0d7d74edba88ca91f0653b",
+      "executable_sha256": "6b815fe4ace25231f789639b2595458f2b467d752c77370864520d3a15e2354d"
+    },
+    {
+      "key": "fullbody-simple-cache-736x1104-quality-dirty-slider025",
+      "seconds": 168.43363840004895,
+      "cache": [
+        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
+        "CacheDIT skipped 1/8 steps (1.14x estimated speedup)"
+      ],
+      "adapters": [
+        {
+          "file": "turbo-dmd2-dynamic69.safetensors",
+          "weight": 1.0,
+          "sha256": "d869785c75a20a409f1b590d4ad3a825b542a1fbb9f21589e5ad5e46e62c6910"
+        },
+        {
+          "file": "quality-textslider-r16.safetensors",
+          "weight": 0.25,
+          "sha256": "29d7b624a374104a79cbe5d3d07127caf6f175e5a530baa095a7bdf6a887ccc8"
+        }
+      ],
+      "checkpoint_sha256": "8276dcb69a1550924b44b35ff7d0264357196349ae0d7d74edba88ca91f0653b",
+      "executable_sha256": "6b815fe4ace25231f789639b2595458f2b467d752c77370864520d3a15e2354d"
+    },
+    {
+      "key": "fullbody-dpm-sde-sgm-cache-736x1104-quality-dirty-mix025",
+      "seconds": 178.86568270000862,
+      "cache": [
+        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
+        "CacheDIT skipped 1/8 steps (1.14x estimated speedup)"
+      ],
+      "adapters": [
+        {
+          "file": "turbo-dmd2-dynamic69.safetensors",
+          "weight": 1.0,
+          "sha256": "d869785c75a20a409f1b590d4ad3a825b542a1fbb9f21589e5ad5e46e62c6910"
+        },
+        {
+          "file": "afterlight-v1.safetensors",
+          "weight": 0.25,
+          "sha256": "57d2a400af32a0afd9cd065c43ebeb6a0e44b153abaef0171ce6891b6b057d13"
+        },
+        {
+          "file": "quality-textslider-r16.safetensors",
+          "weight": 0.25,
+          "sha256": "29d7b624a374104a79cbe5d3d07127caf6f175e5a530baa095a7bdf6a887ccc8"
+        }
+      ],
+      "checkpoint_sha256": "8276dcb69a1550924b44b35ff7d0264357196349ae0d7d74edba88ca91f0653b",
+      "executable_sha256": "6b815fe4ace25231f789639b2595458f2b467d752c77370864520d3a15e2354d"
+    },
+    {
+      "key": "fullbody-simple-cache-736x1104-quality-dirty-mix025",
+      "seconds": 155.6020529999514,
+      "cache": [
+        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
+        "CacheDIT skipped 2/8 steps (1.33x estimated speedup)"
+      ],
+      "adapters": [
+        {
+          "file": "turbo-dmd2-dynamic69.safetensors",
+          "weight": 1.0,
+          "sha256": "d869785c75a20a409f1b590d4ad3a825b542a1fbb9f21589e5ad5e46e62c6910"
+        },
+        {
+          "file": "afterlight-v1.safetensors",
+          "weight": 0.25,
+          "sha256": "57d2a400af32a0afd9cd065c43ebeb6a0e44b153abaef0171ce6891b6b057d13"
+        },
+        {
+          "file": "quality-textslider-r16.safetensors",
+          "weight": 0.25,
+          "sha256": "29d7b624a374104a79cbe5d3d07127caf6f175e5a530baa095a7bdf6a887ccc8"
+        }
+      ],
+      "checkpoint_sha256": "8276dcb69a1550924b44b35ff7d0264357196349ae0d7d74edba88ca91f0653b",
+      "executable_sha256": "6b815fe4ace25231f789639b2595458f2b467d752c77370864520d3a15e2354d"
     }
   ]
 }

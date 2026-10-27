@@ -1,24 +1,25 @@
-# Exact model setup
-No main image/text/music weights are distributed in this repository or release. `models.json` pins exact sizes/SHA256. Existing mismatched files are preserved and rejected; user originals are never deleted.
+# Exact models and adapters
+No main weights or LoRA binaries are distributed. Original author terms apply; `models.json` pins size/SHA256. User originals and existing mismatched assets are preserved.
 
-## Required originals
-Supply both files in `Setup.ps1 -MossSourceDirectory <folder>`:
+## Setup originals
+Use `Setup.ps1 -MossSourceDirectory <folder>`. Supply the exact user-resized turbo and the gated Artius text original. Dirty INT8 and quality LoRA can also be imported from that folder, otherwise Setup downloads from the original author endpoint. A different turbo rank/file is not silently substituted.
 
-| Role | Original | SHA256 |
+|Asset|Source / import|SHA256|
 |---|---|---|
-| Refined image BF16 |`mossRefinedRealism_v108 steps_bf16.safetensors`,10164691056 bytes|`292f41c04bfb4be1eacfcd42eb6a0ee500757d25b6643cb7f6aa28bd4cf90fb3`|
-| Artius W4A8 text |file3313824 from [author version3416029](https://civitai.com/models/3010191?modelVersionId=3416029),6857004728 bytes|`b0a6c1ab290b55c083fea294179c6c41b9027f645355e7eb63566dd1cb63efd1`|
+|`dirtyMoss_int8.safetensors`|[image](https://civitai.com/models/3015644?modelVersionId=3423156) · aliases `dirtyMoss_3317587.safetensors, dirtyMoss_int8.safetensors`|`dd17ac4099151719ffd233d83d3f6ab376080fa93d91326ab033242a2fa1e43e`|
+|`txt-artiusMoss_v10_3313824.safetensors`|[text](https://civitai.com/models/3010191?modelVersionId=3416029) · aliases `artiusMoss_v10_3313824.safetensors, txt-artiusMoss_v10_3313824.safetensors`|`b0a6c1ab290b55c083fea294179c6c41b9027f645355e7eb63566dd1cb63efd1`|
+|`turbo-dmd2-dynamic69.safetensors`|[adapter](https://civitai.com/models/3006599?modelVersionId=3420002) · aliases `lodestones-8-steps-dmd2-lora_resized_from_128_to_dynamic_69.safetensors`|`d869785c75a20a409f1b590d4ad3a825b542a1fbb9f21589e5ad5e46e62c6910`|
+|`afterlight-v1.safetensors`|[adapter](https://civitai.com/models/3016917?modelVersionId=3424873) · aliases `Moss-Afterlight-V1.safetensors`|`57d2a400af32a0afd9cd065c43ebeb6a0e44b153abaef0171ce6891b6b057d13`|
+|`quality-textslider-r16.safetensors`|[adapter](https://civitai.com/models/3008688?modelVersionId=3414043) · aliases `moss_anima_pure_text_slider_rank16.safetensors`|`29d7b624a374104a79cbe5d3d07127caf6f175e5a530baa095a7bdf6a887ccc8`|
 
-**Refined source author URL/license metadata were not independently verified.** Obtain the original under its author's terms; Setup requires your exact local file instead of guessing a mirror or redistributing it. Its filename/hash identify the tested artifact. Main BF16 and converted Q8 are never uploaded here.
+The turbo is the tested dynamic69 derivative (ranks58–112), not the full rank128 author download. Place the exact existing file in the originals folder; its hash is mandatory. This project does not redistribute or claim a license for that derivative. Quality-adapter cards declare no mandatory trigger.
 
-The exact gated text file requires your own Civitai access; Setup accepts it locally or uses process-only `CIVITAI_API_KEY` for the original endpoint. The key is never saved/printed and is stripped on cross-host redirects. Another HF text checkpoint is not silently substituted.
+Dirty INT8 ConvRot is decoded with inverse rotation/per-row scales, then requantized to standard Q8. Exact GGUF name/description are pinned for byte-identical installation. This is not bit-identical to author Comfy INT8 inference. The author25-step CFG2/SLG/hires workflow is not reproduced by the selected8-step turbo adaptation.
 
-## Derived working outputs
-- `MOSS/models/refined-realism-v10-q8_0.gguf`:5401122784 bytes, SHA256 `061903b58b6dfc6e317ba6fe5064c4a2cee94172f77d4d4cf9c1fff423c3c623`.
-- `MOSS/models/text-q8_0.gguf`:10400747200 bytes, SHA256 `f3083eab75745e7d3e0cfc8184747d5e53ae4a23811096345d0e2b361c571bde`.
+## Working outputs
+- `MOSS/models/dirty-moss-q8_0.gguf`: 5401126112bytes, SHA256 `8276dcb69a1550924b44b35ff7d0264357196349ae0d7d74edba88ca91f0653b`.
+- `MOSS/models/text-q8_0.gguf`: 10400747200bytes, SHA256 `f3083eab75745e7d3e0cfc8184747d5e53ae4a23811096345d0e2b361c571bde`.
+- `MOSS/models/vae.fp32.safetensors`: 249521372bytes, SHA256 `c3bdf94dc67ec69b30ea9fe1fa8340085679cae64d019f7c7e4a9921f1a7f17a`.
+- `MOSS/models/tokenizer.json`: 12807982bytes, SHA256 `5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42`.
 
-You may copy these exact verified files from your existing installation before Setup instead of reconverting. Otherwise the included streaming converter handles BF16 image tensors and the exact packed W4/ConvRot text source. GGUF headers/name/description are pinned too: hashes cover the entire file, not only weights. Q8 adds rounding; starting from another INT8 file does not promise faster inference in the same Q8 runtime.
-
-Qwen3.5 official tokenizer, FLUX2 VAE, ClearReality FP32, GPEN and AceStep downloads are pinned in `models.json`. GPEN comes directly from its original FaceFusion distributor or `-GPENPath`, under Non-Commercial terms; not mirrored. ClearReality is an unmodified Apache2 FP32 ONNX download. Runtime/common asset URLs and hashes are in `release-assets.json`; unused Helaman/Torch/Z-Image paths from historic archives are not extracted. Keep enough space for originals, temporary conversion and output; roughly60 GB during a fresh setup.
-
-Fresh-machine generation was not repeated for this release. The existing installation's real Normal 4× request and separate cold-start/API checks are recorded; installer traversal/resume/source-preservation and tiny BF16/INT8 conversions are checked offline.
+Existing exact GGUF files may be copied before Setup. The text original needs your Civitai access; no alternative encoder is substituted. GPEN comes directly from its original distributor under Non-Commercial terms, not this release. ClearReality FP32 remains Apache2. See [licenses](LICENSES.md). Setup/converter guards are checked offline; fresh-machine generation and selected Dirty High/full4x are not claimed tested.

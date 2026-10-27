@@ -11,7 +11,7 @@ Discover capabilities with `GET /v1/images/capabilities` (alias `/api/extra/imag
 | Masks / inpainting | **No: HTTP422** |
 | Upscale | Separate4× API; image edits do not auto-upscale |
 
-The installed Refined checkpoint is not an instruction-edit-trained model. A successful img2img PNG does not prove a requested color/object/identity change. The server reports `semantic_success_evaluated:false`; clients must not present it as successful instruction-following.
+The installed Dirty MOSS checkpoint is not an instruction-edit-trained model. A successful img2img PNG does not prove a requested color/object/identity change. The server reports `semantic_success_evaluated:false`; clients must not present it as successful instruction-following.
 
 ## Explicit redraw
 

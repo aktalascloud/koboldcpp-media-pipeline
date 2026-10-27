@@ -1,0 +1,27 @@
+{
+  "format": 1,
+  "base_model_path": "MOSS/models/dirty-moss-q8_0.gguf",
+  "adapters": [
+    {
+      "path": "LORAS/moss/turbo-dmd2-dynamic69.safetensors",
+      "weight": 1.0,
+      "sha256": "d869785c75a20a409f1b590d4ad3a825b542a1fbb9f21589e5ad5e46e62c6910",
+      "role": "turbo",
+      "approved": true
+    },
+    {
+      "path": "LORAS/moss/afterlight-v1.safetensors",
+      "weight": 0.25,
+      "sha256": "57d2a400af32a0afd9cd065c43ebeb6a0e44b153abaef0171ce6891b6b057d13",
+      "role": "quality",
+      "approved": true
+    },
+    {
+      "path": "LORAS/moss/quality-textslider-r16.safetensors",
+      "weight": 0.25,
+      "sha256": "29d7b624a374104a79cbe5d3d07127caf6f175e5a530baa095a7bdf6a887ccc8",
+      "role": "quality",
+      "approved": true
+    }
+  ]
+}

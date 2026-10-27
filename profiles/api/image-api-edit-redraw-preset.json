@@ -7,5 +7,8 @@
   "n": 1,
   "response_format": "b64_json",
   "output_format": "png",
-  "enable_hr": false
+  "enable_hr": false,
+  "sampler_name": "euler",
+  "scheduler": "simple",
+  "eta": 0
 }

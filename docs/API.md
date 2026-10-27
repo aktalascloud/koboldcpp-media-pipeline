@@ -7,8 +7,8 @@ Works without a mode field.736×1104 generates2944×4416, landscape swaps dimens
 {
   "steps": 8,
   "cfg_scale": 1,
-  "sampler_name": "dpm++2m_sde",
-  "scheduler": "sgm_uniform",
+  "sampler_name": "euler",
+  "scheduler": "simple",
   "eta": 0,
   "flow_shift": 5,
   "clip_skip": -1,
@@ -22,15 +22,15 @@ Works without a mode field.736×1104 generates2944×4416, landscape swaps dimens
 Set `enable_hr:false` or omit it for ordinary Normal without SR. Faces/Gater still apply. The selected model is controlled by the backend profile; no LoRA trigger or client checkpoint override is needed.
 
 ## High
-Use `kcpp_quality:"quality"`.928×1392 produces3712×5568. The selected Refined High profile is not yet measured end-to-end; do not apply old Artius/Helaman timing to it.
+Use `kcpp_quality:"quality"`.928×1392 produces3712×5568. The selected Dirty High profile is not yet measured end-to-end; do not apply old Artius/Helaman timing to it.
 ```json
 {
   "width": 928,
   "height": 1392,
   "steps": 8,
   "cfg_scale": 1,
-  "sampler_name": "dpm++2m_sde",
-  "scheduler": "sgm_uniform",
+  "sampler_name": "euler",
+  "scheduler": "simple",
   "eta": 0,
   "flow_shift": 5,
   "clip_skip": -1,
@@ -59,3 +59,6 @@ Use a client/proxy timeout covering the full job, e.g.3600 s. Prompt rewriting: 
 
 ## Reference synthesis
 GET /v1/images/synthesis-schema provides the provider-agnostic analysis prompt. POST /v1/images/synthesize accepts2–4 role-bound client visual analyses plus user_request/generation_prompt. It creates a NEW image from text; it is not native reference-conditioned editing. Raw images/exact-identity constraints are rejected. [Workflow and OWUI callback](REFERENCE-SYNTHESIS.md).
+
+## Selected Dirty profile
+Server-side static LoRA: DMD2 dynamic69=1, Afterlight=.25, Textslider=.25. No trigger words or client tags. Both Normal/edit and High select them. Remove old explicit DPM/sgm_uniform OWUI overrides, or change them to Euler/simple; explicit client sampler fields override defaults. Model aliases do not switch arbitrary checkpoints. Normal Native 155.60s is measured on the source EXE; current High/full4x is unmeasured.

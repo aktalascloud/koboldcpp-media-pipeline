@@ -1,20 +1,14 @@
-# Медиапайплайн KoboldCpp · Refined Realism
-[English](README.md) · [Windows-комплект](https://github.com/aktalascloud/koboldcpp-media-pipeline/releases/latest) · [API/OWUI](docs/API.md) · [Модели](docs/MODELS.md) · [Лицензии](docs/LICENSES.md)
+# KoboldCpp media pipeline · Dirty MOSS
+[English](README.md) · [Windows-комплект](https://github.com/aktalascloud/koboldcpp-media-pipeline/releases/latest) · [API/OWUI](docs/API.md)
 
-Бэкенд — [наш оптимизированный KoboldCpp](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa), форк [оригинала](https://github.com/LostRuins/koboldcpp). Проверено: Haswell AVX2, RX580 Polaris/gfx803, 8 ГБ.
+Переносимый фото/музыкальный API поверх [оптимизированного KoboldCpp](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa) и [оригинального KoboldCpp](https://github.com/LostRuins/koboldcpp). Haswell AVX2, RX580 Polaris/gfx8038GB.
 
-**Refined Realism Q8 · DPM++ 2M SDE/sgm_uniform ·8шагов ·eta0.** Normal 736×1104, High 928×1392. Без LoRA. YuNet960/GPEN20%/SFace0,97, Gater1×, затем необязательный ClearReality Normal 4×. Helaman и повторные лица после SR отключены. Кэш0,08/warmup4/Fn16/Bn2; CFG1,shift5,FA; энкодерCPU20.
+**Dirty Q8 · Euler/simple ·8шагов ·CFG1 ·eta0 ·shift5.** Turbo dynamic69=1, Afterlight=0,25, Textslider=0,25. LoRA подключает сервер; trigger-слова не нужны. Normal/edit736×1104, High928×1392. Cache-DiT0,08/warmup4/Fn16/Bn2, FA. YuNet/GPEN/SFace/Gater и ClearReality4× сохранены. Normal без автоапскейла; `enable_hr:true` включает4×. High по умолчанию с4×. МузыкаMP3 по API с возвратом фото.
 
-Один настоящий Normal-запрос сразу с4×: **161.96с**,2944×4416, включая PNG/API. Native 150.259с, лица1.183с, Gater3.694с, SR0.962с. Фото-модель уже была в GPU; после ответа снова загружена. Полный High Refined не измерялся. [Точные замеры и scope](benchmarks/results.json).
+**155,60с — только генерация Normal**, одиночный прогон27октября на EXE `6b815fe4ace2`. Не включает загрузку, лица/Gater и SR. Кэш пропустил2/8, у DPM с теми же весами1/8 и178,87с. Полный цикл Dirty/High не замерялся; старые161,96с Refined к нему не относятся. [Все скалярные измерения](benchmarks/results.json).
 
-Выбран DPM по предпочтению пользователя. Не заявляем выигрыш над Euler/simple по самому самплингу: часть разницы запросов связана с отдельным кэшем Qwen. Сравнение ускорений native со стоком — в репозитории core.
+![Полный рост, выбранная связка](examples/fullbody-native.png)
 
-Галерея трёх сцен, крупные глаза и точная пара Native/4× — в [основном README](README.md#current-moss-results). Это сохранённые тестовые результаты; заново для публикации ничего не генерировалось. Ошибки стрелок, пальцев и мелких деталей возможны.
+Галерея и сравнения — в [English README](README.md): полный рост выбранной связки; ночь/часовщик — отдельный контроль Dirty DPM/turbo без LoRA качества. Глаза, часы и анатомия могут содержать ошибки.
 
-Установка: распаковать код, предоставить точные исходники Refined BF16 и Artius W4-энкодера, один раз выполнить `Setup.ps1 -MossSourceDirectory <папка>`, затем запускать **Start.exe** напрямую. Для Refined проверенный URL загрузки не установлен: требуется пользовательский файл. Либо заранее положить проверенные GGUF по `models.json`. GPEN скачивается у исходного распространителя; Non-Commercial, не зеркалируется.
-
-Normal без параметров работает без SR; `enable_hr:true` включает4×. High через `kcpp_quality:"quality"` автоматически включает4×. МузыкаMP3 загружается по API, затем возвращается фото. Видео отложено. Один runtime; отдельное видимое окно, автозапуск по желанию. Ключи, личные пути, кэши и логи не публикуются. Основные веса не загружаются в GitHub.
-
-**Редактирование:** [контракт и правила фильтра OWUI](docs/EDITING.md). Instruction-edit, референсы и маски возвращают422. Поддерживается только явная перерисовка img2img; одного alias модели для выбора операции недостаточно.
-
-**Новый кадр по нескольким фото:** [reference_synthesis](docs/REFERENCE-SYNTHESIS.md). Любая выбранная vision-модель клиента анализирует фото и составляет caption; MOSS получает только текст. Точная идентичность лица не гарантируется, новых весов нет.
+Разово `Setup.ps1 -MossSourceDirectory <папка-оригиналов>`, затем **Start.exe**. Нужны точный уменьшенный turbo и исходный текстовый энкодер; SHA/ссылки в [MODELS](docs/MODELS.md). Основные веса и LoRA не зеркалируются. Один runtime, отдельное видимое окно, автозапуск по желанию. Ограничения [редактирования](docs/EDITING.md) и [синтеза по описаниям референсов](docs/REFERENCE-SYNTHESIS.md) сохранены.

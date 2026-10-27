@@ -94,6 +94,13 @@ def convert(path,role,output_name=None,model_name='Artius MOSS local compatible 
                     if cfg.get('convrot'):x=unrotate(x,int(cfg.get('convrot_groupsize',256)))
                     scale=f.array(base+'.weight_scale')
                     x*=scale.reshape(-1,1)[sl] if scale.size>1 else float(scale.reshape(-1)[0])
+                elif t['dtype']=='F8_E4M3':
+                    x=f.array(name,sl).astype(np.float32)
+                    scale_key=base+'.weight_scale'
+                    if scale_key in f.header:
+                        scale=f.array(scale_key)
+                        x*=scale.reshape(-1,1)[sl] if scale.size>1 else float(scale.reshape(-1)[0])
+                    if cfg.get('convrot'):x=unrotate(x,int(cfg.get('convrot_groupsize',256)))
                 else:x=f.array(name,sl).astype(np.float32)
                 assert np.isfinite(x).all(),name
                 encoded=quantize(x,QT.Q8_0);q[a:b]=encoded

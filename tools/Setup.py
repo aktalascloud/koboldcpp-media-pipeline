@@ -89,6 +89,22 @@ def prepare_moss(catalog,directory):
     for folder in [ROOT/'MOSS/models/.tmp',temporary]:
         if folder.is_dir() and not any(folder.iterdir()):folder.rmdir()
 def inventory(catalog):return [dict(path=row['path'],ok=verified(inside(row['path']),row)) for row in catalog['models']]
+
+def install_original(row,directory):
+    """Import a pinned adapter without modifying its user-owned original."""
+    target=inside(row['path'])
+    if target.exists():
+        if not verified(target,row):raise RuntimeError('Existing adapter differs; preserved: '+row['path'])
+        return target
+    temporary=inside('runtime/tmp/moss-adapters');temporary.mkdir(parents=True,exist_ok=True)
+    source=source_file(row,directory,temporary);target.parent.mkdir(parents=True,exist_ok=True)
+    if target.exists():raise RuntimeError('Adapter appeared concurrently; both files preserved.')
+    # Do not leave an installed adapter hard-linked to a user-owned original.
+    with source.open('rb') as incoming,target.open('xb') as output:shutil.copyfileobj(incoming,output,4*1024*1024)
+    source.unlink()
+    if not verified(target,row):raise RuntimeError('Installed adapter fingerprint differs.')
+    if not any(temporary.iterdir()):temporary.rmdir()
+    return target
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--skip-model-downloads',action='store_true');parser.add_argument('--check-only',action='store_true')
     parser.add_argument('--moss-source-directory',type=Path);parser.add_argument('--gpen-path',type=Path);parser.add_argument('--listen-host',default='127.0.0.1');args=parser.parse_args();ipaddress.ip_address(args.listen_host)
@@ -106,9 +122,15 @@ def main():
         target=inside(row['path']);target.parent.mkdir(parents=True,exist_ok=True)
         if not target.exists():shutil.copyfile(source,target)
     if not args.skip_model_downloads:
+        directory=args.moss_source_directory.resolve() if args.moss_source_directory else None
+        # Fail missing exact user-resized turbo before large model downloads.
+        for row in catalog['models']:
+            if row.get('required_user_file') and not row.get('generated_role'):install_original(row,directory)
         prepare_moss(catalog,args.moss_source_directory.resolve() if args.moss_source_directory else None)
         for row in catalog['models']:
-            if not row.get('generated_role'):download(row)
+            if not row.get('generated_role'):
+                if row.get('aliases') or row.get('required_user_file'):install_original(row,directory)
+                else:download(row)
     exe=ROOT/'koboldcpp-nocuda.exe'
     if not exe.is_file():raise RuntimeError('Pinned core Windows asset missing.')
     defaults['kcpp_proxy'].update(host=args.listen_host,autostart_enabled=False);exe_sha=sha(exe)

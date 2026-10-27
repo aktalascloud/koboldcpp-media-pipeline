@@ -1,4 +1,5 @@
 {
+  "format": 2,
   "images": [
     {
       "file": "fullbody-native.png",
@@ -6,24 +7,137 @@
         736,
         1104
       ],
-      "rgb_sha256": "4691a1430d788a42d9b60bd92660ba2134e10f6c764b4535f6c222ad09a52cbf",
+      "rgb_sha256": "27e4f047ada7e534b6780c9638c07788dcc9e28d3f05d87a4da06cd38f3be079",
       "metadata_removed": true,
-      "source_artifact": "fullbody-dpm-sde-sgm-cache-736x1104-quick-beta-20261026.png",
-      "scope": "Saved measured output; metadata removed, RGB unchanged"
+      "source_artifact": "fullbody-simple-cache-736x1104-quality-dirty-mix025.png",
+      "scope": "Selected Euler/mixed0.25 profile"
     },
     {
-      "file": "fullbody-processed.png",
+      "file": "fullbody-face.png",
+      "dimensions": [
+        114,
+        134
+      ],
+      "rgb_sha256": "2b092bb349b4c870f067cc8574a529b94eb23580638b481015b603f80a1f0bdf",
+      "metadata_removed": true,
+      "source": "fullbody-native.png",
+      "box": [
+        281,
+        85,
+        395,
+        219
+      ],
+      "scope": "Unscaled native-pixel crop"
+    },
+    {
+      "file": "fullbody-eyes.png",
+      "dimensions": [
+        64,
+        42
+      ],
+      "rgb_sha256": "827a8b21ac71ac33f87a974a3c38bddb3c300b577339c9c124527b108c5e92d6",
+      "metadata_removed": true,
+      "source": "fullbody-native.png",
+      "box": [
+        299,
+        115,
+        363,
+        157
+      ],
+      "scope": "Unscaled native-pixel crop"
+    },
+    {
+      "file": "night-native.png",
       "dimensions": [
         736,
         1104
       ],
-      "rgb_sha256": "f5233767a60cb6b37e11933636c8987f0af74fff68ba61255755d6ebe0bf916e",
+      "rgb_sha256": "d4f177d5a3c8b2803bad7988c97fd1aaedbce49b7c6f02e3acf49eee9c2465de",
       "metadata_removed": true,
-      "source_artifact": "fullbody-dpm-sde-sgm-cache-736x1104-quick-beta-20261026-processed.png",
-      "scope": "Saved measured output; metadata removed, RGB unchanged"
+      "source_artifact": "night-dpm-sde-sgm-cache-736x1104-quality-dirty-turbo.png",
+      "scope": "Alternate Dirty DPM/turbo-only control; NOT the selected quality-adapter profile"
     },
     {
-      "file": "fullbody-4x.png",
+      "file": "night-face.png",
+      "dimensions": [
+        208,
+        278
+      ],
+      "rgb_sha256": "a73b83755dc22d3dd245484f8eecb186af8beafd78732e4b754da4ccf7275e34",
+      "metadata_removed": true,
+      "source": "night-native.png",
+      "box": [
+        241,
+        83,
+        449,
+        361
+      ],
+      "scope": "Unscaled native-pixel crop"
+    },
+    {
+      "file": "night-eyes.png",
+      "dimensions": [
+        134,
+        89
+      ],
+      "rgb_sha256": "0ea38c80d49cec90e1b95b32fd255cd10b908a83fd636e69fa735b6af8773765",
+      "metadata_removed": true,
+      "source": "night-native.png",
+      "box": [
+        276,
+        157,
+        410,
+        246
+      ],
+      "scope": "Unscaled native-pixel crop"
+    },
+    {
+      "file": "watchmaker-native.png",
+      "dimensions": [
+        736,
+        1104
+      ],
+      "rgb_sha256": "78495ef43088d70a290e31a91cd56644e6709ed8f3102324585b851f9b67c33c",
+      "metadata_removed": true,
+      "source_artifact": "watchmaker-dpm-sde-sgm-cache-736x1104-quality-dirty-turbo.png",
+      "scope": "Alternate Dirty DPM/turbo-only control; NOT the selected quality-adapter profile"
+    },
+    {
+      "file": "watchmaker-face.png",
+      "dimensions": [
+        255,
+        354
+      ],
+      "rgb_sha256": "8354771c0e3c499f8f140fe3b83f9883352545803b0e86c4267a8d426bea888f",
+      "metadata_removed": true,
+      "source": "watchmaker-native.png",
+      "box": [
+        204,
+        127,
+        459,
+        481
+      ],
+      "scope": "Unscaled native-pixel crop"
+    },
+    {
+      "file": "watchmaker-eyes.png",
+      "dimensions": [
+        172,
+        127
+      ],
+      "rgb_sha256": "ad269632c286aa3405da798886f828fc409cbc36f794a018dd44a1f7fbd8291f",
+      "metadata_removed": true,
+      "source": "watchmaker-native.png",
+      "box": [
+        238,
+        218,
+        410,
+        345
+      ],
+      "scope": "Unscaled native-pixel crop"
+    },
+    {
+      "file": "historical-refined-4x.png",
       "dimensions": [
         2944,
         4416
@@ -31,10 +145,10 @@
       "rgb_sha256": "5f435b31068960fc2706ce8da5e4f28f08bfc14ac99e02c93d7331403f4ac9d0",
       "metadata_removed": true,
       "source_artifact": "refined-samplers-2026-10-26/normal4x-public.png",
-      "scope": "Actual single public API Normal4x result; source RGB verified"
+      "scope": "Historical Refined publicAPI4x; NOT Dirty or current timing"
     },
     {
-      "file": "fullbody-4x-preview.png",
+      "file": "historical-refined-4x-preview.png",
       "dimensions": [
         736,
         1104
@@ -43,180 +157,8 @@
       "metadata_removed": true,
       "source_artifact": "refined-samplers-2026-10-26/normal4x-public.png",
       "resized_preview": true,
-      "scope": "Labeled Lanczos web preview, not new inference"
-    },
-    {
-      "file": "fullbody-face.png",
-      "dimensions": [
-        375,
-        485
-      ],
-      "rgb_sha256": "7f6e9fb0657e350d68b974c133b2fa4e77c247c8c4f9850336a01d131fe31560",
-      "metadata_removed": true,
-      "source_artifact": "refined-samplers-2026-10-26/normal4x-public.png",
-      "artifact_box": [
-        1200,
-        349,
-        1575,
-        834
-      ],
-      "scope": "Exact unscaled crop of saved4x pixels"
-    },
-    {
-      "file": "fullbody-eyes.png",
-      "dimensions": [
-        266,
-        205
-      ],
-      "rgb_sha256": "552926e675a74535ca77239e85263ab6c9e97f07c1d87c4204bb87c2ed94e9ad",
-      "metadata_removed": true,
-      "source_artifact": "refined-samplers-2026-10-26/normal4x-public.png",
-      "artifact_box": [
-        1218,
-        438,
-        1484,
-        643
-      ],
-      "scope": "Exact unscaled crop of saved4x pixels"
-    },
-    {
-      "file": "night-native.png",
-      "dimensions": [
-        736,
-        1104
-      ],
-      "rgb_sha256": "aced12258bd1b748711bbf07f20d9071ea62c1bced28dec844860e27a5ab4c56",
-      "metadata_removed": true,
-      "source_artifact": "night-dpm-sde-sgm-cache-736x1104-quick-beta-20261026.png",
-      "scope": "Saved measured output; metadata removed, RGB unchanged"
-    },
-    {
-      "file": "night-processed.png",
-      "dimensions": [
-        736,
-        1104
-      ],
-      "rgb_sha256": "c6e3869c61f7f02c13fdb3ccf9938549da750df1ce5d106d4b2973c57e39631b",
-      "metadata_removed": true,
-      "source_artifact": "night-dpm-sde-sgm-cache-736x1104-quick-beta-20261026-processed.png",
-      "scope": "Saved measured output; metadata removed, RGB unchanged"
-    },
-    {
-      "file": "night-4x-preview.png",
-      "dimensions": [
-        736,
-        1104
-      ],
-      "rgb_sha256": "d3e67242a1ad704140cbcef4403e13ec37eb9b97f5cd03c88e451cf1d88e90ce",
-      "metadata_removed": true,
-      "source_artifact": "night-dpm-sde-sgm-cache-736x1104-quick-beta-20261026-4x.png",
-      "resized_preview": true,
-      "scope": "Labeled Lanczos web preview, not new inference"
-    },
-    {
-      "file": "night-face.png",
-      "dimensions": [
-        715,
-        960
-      ],
-      "rgb_sha256": "08035bd79af02e0dd0c6cd6c0a3d4abd4a53e4d5397094676b16fb523c5da8d8",
-      "metadata_removed": true,
-      "source_artifact": "night-dpm-sde-sgm-cache-736x1104-quick-beta-20261026-4x.png",
-      "artifact_box": [
-        1065,
-        510,
-        1780,
-        1470
-      ],
-      "scope": "Exact unscaled crop of saved4x pixels"
-    },
-    {
-      "file": "night-eyes.png",
-      "dimensions": [
-        510,
-        410
-      ],
-      "rgb_sha256": "805ad4216410a6add4b0e2e78adfaf2cd3041d8be126beaf541bc281f465cccb",
-      "metadata_removed": true,
-      "source_artifact": "night-dpm-sde-sgm-cache-736x1104-quick-beta-20261026-4x.png",
-      "artifact_box": [
-        1188,
-        721,
-        1698,
-        1131
-      ],
-      "scope": "Exact unscaled crop of saved4x pixels"
-    },
-    {
-      "file": "watchmaker-native.png",
-      "dimensions": [
-        736,
-        1104
-      ],
-      "rgb_sha256": "91de6c96fedf3a43ba793974b779733a18429d75278ad0580ec365f85e869deb",
-      "metadata_removed": true,
-      "source_artifact": "watchmaker-dpm-sde-sgm-cache-736x1104-quick-beta-20261026.png",
-      "scope": "Saved measured output; metadata removed, RGB unchanged"
-    },
-    {
-      "file": "watchmaker-processed.png",
-      "dimensions": [
-        736,
-        1104
-      ],
-      "rgb_sha256": "43075eb66dc0690787bfd9bdef364e7c7d067c24b129ac8f4e086e0b28f177f3",
-      "metadata_removed": true,
-      "source_artifact": "watchmaker-dpm-sde-sgm-cache-736x1104-quick-beta-20261026-processed.png",
-      "scope": "Saved measured output; metadata removed, RGB unchanged"
-    },
-    {
-      "file": "watchmaker-4x-preview.png",
-      "dimensions": [
-        736,
-        1104
-      ],
-      "rgb_sha256": "32f93d52afe2245a4293aad37e4d7eb7e39463d04fa9292aa0ca8e3f81cbcc8a",
-      "metadata_removed": true,
-      "source_artifact": "watchmaker-dpm-sde-sgm-cache-736x1104-quick-beta-20261026-4x.png",
-      "resized_preview": true,
-      "scope": "Labeled Lanczos web preview, not new inference"
-    },
-    {
-      "file": "watchmaker-face.png",
-      "dimensions": [
-        1016,
-        1459
-      ],
-      "rgb_sha256": "7bb6703c2ab56250784e7f810fa1450ee6791d83068ef34e62ef5e815afca38d",
-      "metadata_removed": true,
-      "source_artifact": "watchmaker-dpm-sde-sgm-cache-736x1104-quick-beta-20261026-4x.png",
-      "artifact_box": [
-        712,
-        497,
-        1728,
-        1956
-      ],
-      "scope": "Exact unscaled crop of saved4x pixels"
-    },
-    {
-      "file": "watchmaker-eyes.png",
-      "dimensions": [
-        726,
-        614
-      ],
-      "rgb_sha256": "ed9fe29c5eab53ac57cefa00f2057ada8afd5633799d89761102269f12efa10b",
-      "metadata_removed": true,
-      "source_artifact": "watchmaker-dpm-sde-sgm-cache-736x1104-quick-beta-20261026-4x.png",
-      "artifact_box": [
-        916,
-        779,
-        1642,
-        1393
-      ],
-      "scope": "Exact unscaled crop of saved4x pixels"
+      "scope": "Historical Refined labeled web preview"
     }
   ],
-  "generated_for_publication": false,
-  "ai_retouching_for_publication": false,
-  "live_normal_native_base_rgb_identical": true
+  "scope": "Saved pixels only; no new inference; selected and alternate/historical conditions explicitly separated."
 }

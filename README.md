@@ -1,37 +1,33 @@
-# KoboldCpp media pipeline · Refined Realism
-[Русский](README.ru.md) · **[Windows kit](https://github.com/aktalascloud/koboldcpp-media-pipeline/releases/latest)** · [API / OpenWebUI](docs/API.md) · [Models](docs/MODELS.md) · [Licenses](docs/LICENSES.md)
+# KoboldCpp media pipeline · Dirty MOSS
+[Русский](README.ru.md) · **[Windows kit](https://github.com/aktalascloud/koboldcpp-media-pipeline/releases/latest)** · [API / OWUI](docs/API.md) · [Models](docs/MODELS.md) · [Licenses](docs/LICENSES.md)
 
-Portable photo/music wrapper for **[our optimized KoboldCpp fork](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa)** and [original KoboldCpp](https://github.com/LostRuins/koboldcpp). Tested on Haswell AVX2, AMD RX580 Polaris/gfx803, 8 GB. Kobold remains the backend; AUTOMATIC1111/OpenAI Images APIs connect through the proxy.
+Portable photo/music wrapper for [our Haswell AVX2 / RX580 Polaris Vulkan KoboldCpp fork](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa) and [original KoboldCpp](https://github.com/LostRuins/koboldcpp). DirectML handles restoration/upscaling; Kobold remains the generator. AUTOMATIC1111 and OpenAI Images-compatible proxy APIs are preserved.
 
-## Current MOSS results
-**Refined Realism Q8_0 · DPM++ 2M SDE / sgm_uniform ·8 steps ·eta0.** Normal 736×1104; High 928×1392. LoRA off. Saved images only; publication did not generate or retouch them. [RGB/crop provenance](examples/gallery.json).
+**Dirty MOSS Q8_0 · Euler/simple ·8 steps ·CFG1 ·eta0 ·shift5.** Static adapters: **DMD2 dynamic69 1.0 + Afterlight0.25 + Textslider0.25**; no trigger words or client LoRA tags. Normal/edit 736×1104; High 928×1392. Cache-DiT0.08/warmup4/Fn16/Bn2, FA on. Normal has no automatic SR; `enable_hr:true` requests ClearReality4x; High defaults to4x. YuNet960/GPEN20%/SFace0.97/Gater1x remain enabled. MusicMP3 is API-only; the photo model returns afterward.
 
-| Normal: faces/Gater | Night | Watchmaker |
+## Saved examples
+| Selected Euler + both0.25 | Night: alternate DPM/turbo-only | Watchmaker: alternate DPM/turbo-only |
 |---|---|---|
-| ![Normal](examples/fullbody-processed.png) | ![Night](examples/night-processed.png) | ![Watchmaker](examples/watchmaker-processed.png) |
-| ![Eyes](examples/fullbody-eyes.png) | ![Eyes](examples/night-eyes.png) | ![Eyes](examples/watchmaker-eyes.png) |
+|![Fullbody](examples/fullbody-native.png)|![Night](examples/night-native.png)|![Watchmaker](examples/watchmaker-native.png)|
+|![Eyes](examples/fullbody-eyes.png)|![Eyes](examples/night-eyes.png)|![Eyes](examples/watchmaker-eyes.png)|
 
-| Exact Native source | Actual Normal 4× API result, labeled web preview |
-|---|---|
-| [![Native](examples/fullbody-native.png)](examples/fullbody-native.png) | [![4×](examples/fullbody-4x-preview.png)](examples/fullbody-4x.png) |
-
-The source RGB matches the actual request base. The full4× PNG includes faces, Gater and ClearReality; it is a full-chain comparison, not SR alone. Eye crops are unscaled saved pixels. Clock markings, fingers and skin texture can still contain generative artifacts.
+Raw Native outputs, not face-restored/upscaled results. Eye crops contain original pixels, without enlargement. [RGB provenance](examples/gallery.json). Clock markings, anatomy and tiny features can still contain artifacts.
 
 ## Measured speed
-**Normal with automatic4×: 161.96 s**, one complete public API request,2944×4416. Native 150.259 s; faces 1.183 s; Gater 3.694 s; SR 0.962 s. Remaining time includes VRAM handoff and PNG/HTTP. Model was resident before the request; photo was restored afterward. **High Refined generation is not measured.**
+27 October 2026, XeonE5-2696v3/RX5802048SP8 GB; same 736×1104,8 steps,seed424242. EXE `6b815fe4ace2`, image `8276dcb69a15`. One pass per condition; **155.60s is Native only**, excluding load/faces/Gater/SR. Different cache skip counts explain much of the timing difference; this is not a compiler/patch speed claim.
 
-Measured26Oct2026, EXE SHA256 `9cdacf216336f24d2585f4dab4f2602fe9f92728282094675b1b050febdd61ca`. [Evidence and all three-scene sampler measurements](benchmarks/results.json). DPM was selected by the user for appearance; it is not claimed faster than Euler/simple denoising. Repeat-prompt Qwen caching saves6–7 s in some trials and is separate from Cache-DiT. Native compiler stock/latest comparisons are in the linked core fork.
+| Condition | Native seconds | Cache skipped |
+|---|---:|---:|
+|turbo / DPM/sgm_uniform|163.06|1/8|
+|turbo / Euler/simple|163.52|1/8|
+|afterlight025 / Euler/simple|150.83|2/8|
+|slider025 / Euler/simple|168.43|1/8|
+|mix025 / DPM/sgm_uniform|178.87|1/8|
+|mix025 / Euler/simple|155.60|2/8|
 
-## Pipeline
-Refined Q8 → YuNet960 → GPEN20%/SFace≥0.97 → Gater Restore1× → optional **ClearRealityV1 Normal FP32 DirectML4×**. No Helaman, skin/sharpen extra pass or repeated faces after SR. CFG1,shift5,FA,Cache-DiT `threshold=0.08,warmup=4,Fn=16,Bn=2`; CPU text encoder20 threads. Face bounds scale automatically; at most2 faces, larger faces may skip GPEN. High/SR releases only owned idle Native, then restores resident Normal. Music MP3 loads on API demand. Video deferred.
+Dirty High and its complete4× API cycle were **not measured**. The [historical Refined4× image](examples/historical-refined-4x.png) and [161.96s public-cycle evidence](benchmarks/historical-refined.json) belong to the old model/settings; they are not Dirty results.
 
-## Install and run
-1. Extract `media-pipeline-code.zip`. Obtain the exact **Refined BF16 image source and gated Artius W4 text encoder**, or supply the verified derived GGUF files. Main weights are not in Git/releases. [Exact filenames, hashes and access](docs/MODELS.md).
-2. Run `Setup.ps1 -MossSourceDirectory <folder-with-originals>` once. It verifies local originals, fetches pinned dependencies/postprocessors and converts locally. **Refined has no verified automatic-download URL; its source must be supplied.** GPEN comes from its original distributor, under Non-Commercial terms.
-3. Launch **Start.exe directly**. `Start.exe --check` checks installation; `Start.exe --register-startup` opts into startup. One runtime, a separate visible Native window; no driver/BIOS/TDR changes. Default loopback; `-ListenHost 0.0.0.0` explicitly exposes the API.
+## Run
+Extract the code kit, run `Setup.ps1 -MossSourceDirectory <your-originals>` once, then launch **Start.exe**. Setup requires the exact user-resized turbo file and gated text original; other pinned assets come from original distributors. Existing models are hash-checked and preserved. No main weights, LoRA binaries, keys, caches or logs are mirrored here. Optional startup uses one runtime and a separate visible Native window.
 
-Normal defaults to no SR; **`enable_hr:true` now requests proxy4× in Normal**. High defaults to4×; it has no new full-cycle timing yet. [Ready OWUI presets](docs/API.md). Original wrapper AGPL-3.0; third-party licenses remain separate. No keys, private addresses, logs, cache or state shipped.
-
-**Editing contract:** [capabilities and OWUI/filter rules](docs/EDITING.md). Instruction-edit, references and masks return422; only explicit whole-frame img2img redraw is supported. A model alias alone does not opt into redraw.
-
-**New image from several photos:** [reference synthesis](docs/REFERENCE-SYNTHESIS.md) uses analyses/final captions from any caller-selected vision model. MOSS receives text only; exact face identity is not promised. No new weights installed.
+Normal/edit and High use the same selected adapters. High geometry is retained, not newly validated for this model. [Editing limitations](docs/EDITING.md) and [model-agnostic text-only reference synthesis](docs/REFERENCE-SYNTHESIS.md) remain explicit.

@@ -2,11 +2,11 @@
   "format": 2,
   "models": [
     {
-      "path": "MOSS/models/refined-realism-v10-q8_0.gguf",
-      "bytes": 5401122784,
-      "sha256": "061903b58b6dfc6e317ba6fe5064c4a2cee94172f77d4d4cf9c1fff423c3c623",
+      "path": "MOSS/models/dirty-moss-q8_0.gguf",
+      "bytes": 5401126112,
+      "sha256": "8276dcb69a1550924b44b35ff7d0264357196349ae0d7d74edba88ca91f0653b",
       "in_release": false,
-      "source": "User-supplied Refined Realism BF16; authoritative author download URL not verified.",
+      "source": "https://civitai.com/models/3015644?modelVersionId=3423156",
       "license": "Original checkpoint terms apply. No source or converted main weights redistributed.",
       "generated_role": "image",
       "url": null
@@ -119,22 +119,59 @@
       "license": "Non-Commercial (FaceFusion model distributor; exact original grant not located)",
       "source": "https://docs.facefusion.io/introduction/licenses",
       "in_release": false
+    },
+    {
+      "path": "LORAS/moss/turbo-dmd2-dynamic69.safetensors",
+      "bytes": 628397016,
+      "sha256": "d869785c75a20a409f1b590d4ad3a825b542a1fbb9f21589e5ad5e46e62c6910",
+      "in_release": false,
+      "url": null,
+      "required_user_file": true,
+      "aliases": [
+        "lodestones-8-steps-dmd2-lora_resized_from_128_to_dynamic_69.safetensors"
+      ],
+      "source": "https://civitai.com/models/3006599?modelVersionId=3420002",
+      "license": "Original turbo author terms; exact user-supplied dynamic-rank derivative, not redistributed."
+    },
+    {
+      "path": "LORAS/moss/afterlight-v1.safetensors",
+      "bytes": 72608488,
+      "sha256": "57d2a400af32a0afd9cd065c43ebeb6a0e44b153abaef0171ce6891b6b057d13",
+      "in_release": false,
+      "url": "https://civitai.com/api/download/models/3424873",
+      "aliases": [
+        "Moss-Afterlight-V1.safetensors"
+      ],
+      "source": "https://civitai.com/models/3016917?modelVersionId=3424873",
+      "license": "Original Afterlight author terms; downloaded from original distributor, not mirrored."
+    },
+    {
+      "path": "LORAS/moss/quality-textslider-r16.safetensors",
+      "bytes": 74401176,
+      "sha256": "29d7b624a374104a79cbe5d3d07127caf6f175e5a530baa095a7bdf6a887ccc8",
+      "in_release": false,
+      "url": "https://civitai.com/api/download/models/3414043",
+      "aliases": [
+        "moss_anima_pure_text_slider_rank16.safetensors"
+      ],
+      "source": "https://civitai.com/models/3008688?modelVersionId=3414043",
+      "license": "Original Textslider author terms; downloaded from original distributor, not mirrored."
     }
   ],
   "moss_sources": [
     {
       "role": "image",
-      "path": "MOSS/source/mossRefinedRealism_v108steps_bf16.safetensors",
-      "bytes": 10164691056,
-      "sha256": "292f41c04bfb4be1eacfcd42eb6a0ee500757d25b6643cb7f6aa28bd4cf90fb3",
-      "url": null,
+      "path": "MOSS/source/dirtyMoss_int8.safetensors",
+      "bytes": 5413715446,
+      "sha256": "dd17ac4099151719ffd233d83d3f6ab376080fa93d91326ab033242a2fa1e43e",
+      "url": "https://civitai.com/api/download/models/3423156?fileId=3317587",
       "aliases": [
-        "mossRefinedRealism_v108steps_bf16.safetensors"
+        "dirtyMoss_3317587.safetensors",
+        "dirtyMoss_int8.safetensors"
       ],
-      "required_user_file": true,
-      "source": "User-supplied Refined Realism BF16; authoritative author download URL not verified.",
-      "model_name": "MOSS Refined Realism v1.0 8steps Q8_0",
-      "description": "Standard Q8_0 matrices; source formats and transformations recorded in conversion evidence."
+      "source": "https://civitai.com/models/3015644?modelVersionId=3423156",
+      "model_name": "Dirty MOSS compatible Q8_0",
+      "description": "Verified author INT8 ConvRot decoded with per-row scales and inverse rotation; standard Q8_0 matrices, turbo adapter separate."
     },
     {
       "role": "text",
