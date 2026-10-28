@@ -120,7 +120,7 @@
   "sdquant": 0,
   "sdt5xxl": "",
   "sdthreads": 20,
-  "sdtiledvae": 576,
+  "sdtiledvae": 1024,
   "sdupscaler": "",
   "sdvae": "MODELS/vae/wan22-vae.safetensors",
   "sdvaeauto": false,
@@ -161,5 +161,9 @@
   "sdllm": "",
   "kcpp_native_environment": {
     "GGML_VK_GCN_CONV_WG": "256"
+  },
+  "kcpp_video_tae_decoder": {
+    "path": "MODELS/vae/taew2_2_super.safetensors",
+    "sha256": "cf6d8bdadb77d9f9741ae28b5b4659bb74cf9b0be6d08fc4afed3cb50c39364c"
   }
 }

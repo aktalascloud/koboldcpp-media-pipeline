@@ -621,7 +621,7 @@
       "test": "post/split-super-quality-f49/paragon2x-faces-temporal-directml"
     }
   ],
-  "selected_codec": "Full Wan VAE quality default;Super-Tiny optional,not lossless",
+  "selected_codec": "full Wan encoder + Super-Tiny decoder",
   "selected_post": "ClearReality FP32 DirectML; optional YuNet960/GPEN20%/SFace.97 DirectML,guarded motion-compensated face residual smoothing",
   "constraints": [
     "17frames is0.7083s;49frames is2.0417s;no30second continuity proof.",
@@ -640,7 +640,7 @@
     "scope": "README,workflow,attention helper text,archive listing/relevant text and issue7 comments;not every file audited.",
     "rejected": "rocBLAS/Tensile affects ROCm/ZLUDA,not this Vulkan backend;experimentalFP16 accumulation warns of incoherence;coopmat2 PRs need newer hardware."
   },
-  "public_api": {
+  "public_api_full_vae": {
     "ok": true,
     "request_seconds": 261.17460320005193,
     "photo_ready_after_seconds": 281.95418230001815,
@@ -659,6 +659,28 @@
       "native_call_seconds": 213.8425,
       "encoder_seconds": 0.41707920003682375,
       "enhancement_seconds": 22.611584500060417,
+      "processed_faces": 17
+    }
+  },
+  "public_api": {
+    "ok": true,
+    "request_seconds": 98.01341459993273,
+    "photo_ready_after_seconds": 118.26815010001883,
+    "range_read": true,
+    "photo_resident_restored": true,
+    "executable_sha256": "6b05639f2ec9ce393edb5ece1aff1117818678ccffa9cd9cdae9970f0194ae49",
+    "scope": "One actual public17frame I2V/ClearReality720/GPEN-SFace request,not30second continuity.",
+    "stages": {
+      "frames": 17,
+      "fps": 24,
+      "width": 720,
+      "height": 1248,
+      "duration_seconds": 0.7083333333333334,
+      "vae_decoder": "full Wan encoder + Super-Tiny decoder",
+      "profile_ready_seconds": 21.682,
+      "native_call_seconds": 51.7452,
+      "encoder_seconds": 0.42847609997261316,
+      "enhancement_seconds": 21.580149700050242,
       "processed_faces": 17
     }
   },
