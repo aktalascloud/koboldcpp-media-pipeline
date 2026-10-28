@@ -1,0 +1,178 @@
+{
+  "date": "2026-10-27",
+  "model": "Dirty MOSS Q8_0 + DMD2 dynamic69 1 / Afterlight0.25 / Textslider0.25",
+  "image_sha256": "8276dcb69a1550924b44b35ff7d0264357196349ae0d7d74edba88ca91f0653b",
+  "native_executable_sha256": "6b815fe4ace25231f789639b2595458f2b467d752c77370864520d3a15e2354d",
+  "normal": [
+    736,
+    1104
+  ],
+  "high": [
+    928,
+    1392
+  ],
+  "profile": {
+    "sampler_name": "euler",
+    "scheduler": "simple",
+    "turbo": 1,
+    "afterlight": 0.25,
+    "textslider": 0.25,
+    "steps": 8,
+    "width": 736,
+    "height": 1104,
+    "cfg_scale": 1,
+    "eta": 0,
+    "flow_shift": 5,
+    "cache_mode": "cache-dit",
+    "cache_options": "threshold=0.08,warmup=4,Fn=16,Bn=2"
+  },
+  "native_seconds": 155.6020529999514,
+  "normal4x_seconds": null,
+  "high_current_measured": false,
+  "scope": "Single fixed fullbody/seed424242 per condition; raw Native time only, no checkpoint load, faces/Gater/SR. No new generation for publication. Cache skips vary; adapter/sampler changes are not compiler gains.",
+  "trials": [
+    {
+      "key": "fullbody-dpm-sde-sgm-cache-736x1104-quality-refined-control",
+      "seconds": 150.49310459999833,
+      "cache": [
+        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
+        "CacheDIT skipped 1/8 steps (1.14x estimated speedup)"
+      ],
+      "adapters": [],
+      "checkpoint_sha256": "061903b58b6dfc6e317ba6fe5064c4a2cee94172f77d4d4cf9c1fff423c3c623",
+      "executable_sha256": "6b815fe4ace25231f789639b2595458f2b467d752c77370864520d3a15e2354d"
+    },
+    {
+      "key": "fullbody-dpm-sde-sgm-cache-736x1104-quality-dirty-turbo",
+      "seconds": 163.0644921999774,
+      "cache": [
+        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
+        "CacheDIT skipped 1/8 steps (1.14x estimated speedup)"
+      ],
+      "adapters": [
+        {
+          "file": "turbo-dmd2-dynamic69.safetensors",
+          "weight": 1.0,
+          "sha256": "d869785c75a20a409f1b590d4ad3a825b542a1fbb9f21589e5ad5e46e62c6910"
+        }
+      ],
+      "checkpoint_sha256": "8276dcb69a1550924b44b35ff7d0264357196349ae0d7d74edba88ca91f0653b",
+      "executable_sha256": "6b815fe4ace25231f789639b2595458f2b467d752c77370864520d3a15e2354d"
+    },
+    {
+      "key": "fullbody-simple-cache-736x1104-quality-dirty-turbo",
+      "seconds": 163.5198580000433,
+      "cache": [
+        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
+        "CacheDIT skipped 1/8 steps (1.14x estimated speedup)"
+      ],
+      "adapters": [
+        {
+          "file": "turbo-dmd2-dynamic69.safetensors",
+          "weight": 1.0,
+          "sha256": "d869785c75a20a409f1b590d4ad3a825b542a1fbb9f21589e5ad5e46e62c6910"
+        }
+      ],
+      "checkpoint_sha256": "8276dcb69a1550924b44b35ff7d0264357196349ae0d7d74edba88ca91f0653b",
+      "executable_sha256": "6b815fe4ace25231f789639b2595458f2b467d752c77370864520d3a15e2354d"
+    },
+    {
+      "key": "fullbody-simple-cache-736x1104-quality-dirty-afterlight025",
+      "seconds": 150.83298300002934,
+      "cache": [
+        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
+        "CacheDIT skipped 2/8 steps (1.33x estimated speedup)"
+      ],
+      "adapters": [
+        {
+          "file": "turbo-dmd2-dynamic69.safetensors",
+          "weight": 1.0,
+          "sha256": "d869785c75a20a409f1b590d4ad3a825b542a1fbb9f21589e5ad5e46e62c6910"
+        },
+        {
+          "file": "afterlight-v1.safetensors",
+          "weight": 0.25,
+          "sha256": "57d2a400af32a0afd9cd065c43ebeb6a0e44b153abaef0171ce6891b6b057d13"
+        }
+      ],
+      "checkpoint_sha256": "8276dcb69a1550924b44b35ff7d0264357196349ae0d7d74edba88ca91f0653b",
+      "executable_sha256": "6b815fe4ace25231f789639b2595458f2b467d752c77370864520d3a15e2354d"
+    },
+    {
+      "key": "fullbody-simple-cache-736x1104-quality-dirty-slider025",
+      "seconds": 168.43363840004895,
+      "cache": [
+        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
+        "CacheDIT skipped 1/8 steps (1.14x estimated speedup)"
+      ],
+      "adapters": [
+        {
+          "file": "turbo-dmd2-dynamic69.safetensors",
+          "weight": 1.0,
+          "sha256": "d869785c75a20a409f1b590d4ad3a825b542a1fbb9f21589e5ad5e46e62c6910"
+        },
+        {
+          "file": "quality-textslider-r16.safetensors",
+          "weight": 0.25,
+          "sha256": "29d7b624a374104a79cbe5d3d07127caf6f175e5a530baa095a7bdf6a887ccc8"
+        }
+      ],
+      "checkpoint_sha256": "8276dcb69a1550924b44b35ff7d0264357196349ae0d7d74edba88ca91f0653b",
+      "executable_sha256": "6b815fe4ace25231f789639b2595458f2b467d752c77370864520d3a15e2354d"
+    },
+    {
+      "key": "fullbody-dpm-sde-sgm-cache-736x1104-quality-dirty-mix025",
+      "seconds": 178.86568270000862,
+      "cache": [
+        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
+        "CacheDIT skipped 1/8 steps (1.14x estimated speedup)"
+      ],
+      "adapters": [
+        {
+          "file": "turbo-dmd2-dynamic69.safetensors",
+          "weight": 1.0,
+          "sha256": "d869785c75a20a409f1b590d4ad3a825b542a1fbb9f21589e5ad5e46e62c6910"
+        },
+        {
+          "file": "afterlight-v1.safetensors",
+          "weight": 0.25,
+          "sha256": "57d2a400af32a0afd9cd065c43ebeb6a0e44b153abaef0171ce6891b6b057d13"
+        },
+        {
+          "file": "quality-textslider-r16.safetensors",
+          "weight": 0.25,
+          "sha256": "29d7b624a374104a79cbe5d3d07127caf6f175e5a530baa095a7bdf6a887ccc8"
+        }
+      ],
+      "checkpoint_sha256": "8276dcb69a1550924b44b35ff7d0264357196349ae0d7d74edba88ca91f0653b",
+      "executable_sha256": "6b815fe4ace25231f789639b2595458f2b467d752c77370864520d3a15e2354d"
+    },
+    {
+      "key": "fullbody-simple-cache-736x1104-quality-dirty-mix025",
+      "seconds": 155.6020529999514,
+      "cache": [
+        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
+        "CacheDIT skipped 2/8 steps (1.33x estimated speedup)"
+      ],
+      "adapters": [
+        {
+          "file": "turbo-dmd2-dynamic69.safetensors",
+          "weight": 1.0,
+          "sha256": "d869785c75a20a409f1b590d4ad3a825b542a1fbb9f21589e5ad5e46e62c6910"
+        },
+        {
+          "file": "afterlight-v1.safetensors",
+          "weight": 0.25,
+          "sha256": "57d2a400af32a0afd9cd065c43ebeb6a0e44b153abaef0171ce6891b6b057d13"
+        },
+        {
+          "file": "quality-textslider-r16.safetensors",
+          "weight": 0.25,
+          "sha256": "29d7b624a374104a79cbe5d3d07127caf6f175e5a530baa095a7bdf6a887ccc8"
+        }
+      ],
+      "checkpoint_sha256": "8276dcb69a1550924b44b35ff7d0264357196349ae0d7d74edba88ca91f0653b",
+      "executable_sha256": "6b815fe4ace25231f789639b2595458f2b467d752c77370864520d3a15e2354d"
+    }
+  ]
+}

@@ -59,8 +59,16 @@ def validate_static_adapters(helper,root):
     paths=helper.get('sdlora') or [];weights=helper.get('sdloramult') or []
     if not paths:return []
     if not isinstance(paths,list) or not isinstance(weights,list) or len(paths)!=len(weights) or len(paths)>4:raise ValueError('Explicit static MOSS adapter paths/weights required.')
-    manifest=json.loads((root/'profiles/moss-adapters.json').read_text(encoding='utf-8-sig'));allowed={row['path']:row for row in manifest['adapters']};out=[];turbo=0
-    if manifest.get('base_model_path') and (root/helper.get('sdmodel','')).resolve()!=(root/manifest['base_model_path']).resolve():raise ValueError('Static adapters were not reviewed for this model path.')
+    manifest=json.loads((root/'profiles/moss-adapters.json').read_text(encoding='utf-8-sig'))
+    if manifest.get('format')==2:
+        model=(root/helper.get('sdmodel','')).resolve().relative_to(root.resolve()).as_posix()
+        selected=manifest.get('models',{}).get(model)
+        if not isinstance(selected,dict):raise ValueError('Unreviewed MOSS model for static adapters.')
+        rows=selected.get('adapters',[])
+    else:
+        if manifest.get('base_model_path') and (root/helper.get('sdmodel','')).resolve()!=(root/manifest['base_model_path']).resolve():raise ValueError('Static adapters were not reviewed for this model path.')
+        rows=manifest.get('adapters',[])
+    allowed={row['path']:row for row in rows};out=[];turbo=0
     for value,weight in zip(paths,weights):
         path=(root/value).resolve()
         if not path.is_relative_to(root) or path.suffix!='.safetensors' or not path.is_file():raise ValueError('Static adapter missing/outside portable Root.')

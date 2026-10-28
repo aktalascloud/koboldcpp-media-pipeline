@@ -8,7 +8,7 @@
   "response_format": "b64_json",
   "output_format": "png",
   "enable_hr": false,
-  "sampler_name": "euler",
-  "scheduler": "simple",
+  "sampler_name": "dpm++2m_sde",
+  "scheduler": "sgm_uniform",
   "eta": 0
 }

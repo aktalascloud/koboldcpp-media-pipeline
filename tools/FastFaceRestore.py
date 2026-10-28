@@ -8,7 +8,7 @@ import hashlib
 from pathlib import Path
 import sys
 import time
-from RuntimePaths import dependencies
+from RuntimePaths import dependencies, ROOT, asset
 
 HERE=Path(__file__).resolve().parent
 dependencies()
@@ -23,7 +23,7 @@ from OvSession import OvSession
 FFHQ=np.array([[.37691676,.46864664],[.62285697,.46912813],[.50123859,.61331904],[.39308822,.72541100],[.61150205,.72490465]],np.float32)*512
 class FeatureGuard:
     def __init__(self,path=None):
-        self.path=Path(path or HERE/'detailer_models'/'face_recognition_sface_2021dec.onnx')
+        self.path=Path(asset(path or ROOT/'DETAILERS'/'faces'/'face_recognition_sface_2021dec.onnx'))
         self.model=cv2.FaceRecognizerSF.create(str(self.path),'')
     def feature(self,image,face):
         bgr=np.asarray(image.convert('RGB'))[:,:,::-1].copy()

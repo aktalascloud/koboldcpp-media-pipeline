@@ -1,0 +1,153 @@
+{
+  "date": "2026-10-28",
+  "selected": {
+    "selected_afterlight": 0.25,
+    "sampler_name": "dpm++2m_sde",
+    "scheduler": "sgm_uniform",
+    "native_seconds": 160.092079700029,
+    "native_executable_sha256": "6c03b583f7a266facdfd045561013e164e88202b583a4bbe6d801938ae189c08",
+    "checkpoint_sha256": "dd02927547bc7b7d60ffb4a2ba566d384e37387eb91aaeaa0404666a72c7e7cb",
+    "selected_scene_key": "fullbody-dpm-sde-sgm-cache-736x1104-quality-ray28-after025",
+    "steps": 8,
+    "normal": [
+      736,
+      1104
+    ],
+    "high": [
+      928,
+      1392
+    ],
+    "high_current_measured": false,
+    "user_selected_primary": "Ray MOSS Artshoot",
+    "user_retained_backup": "Dirty MOSS"
+  },
+  "author_adaptation": "Exact8-point linear_quadratic sigma curve; Heun substitute for missingHeun++2, not author12steps/SLG.",
+  "trials": [
+    {
+      "key": "fullbody-beta-cache-736x1104-quality-ray28-base",
+      "seconds": 143.01632130000507,
+      "stages": {
+        "get_learned_condition": 0.0,
+        "sampling": 135.5,
+        "decode_first_stage": 7.31
+      },
+      "cache": [
+        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
+        "CacheDIT skipped 1/8 steps (1.14x estimated speedup)"
+      ],
+      "adapters": [],
+      "executable_sha256": "6c03b583f7a266facdfd045561013e164e88202b583a4bbe6d801938ae189c08"
+    },
+    {
+      "key": "fullbody-dpm-sde-sgm-cache-736x1104-quality-ray28-base",
+      "seconds": 142.92068039998412,
+      "stages": {
+        "get_learned_condition": 0.0,
+        "sampling": 135.37,
+        "decode_first_stage": 7.33
+      },
+      "cache": [
+        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
+        "CacheDIT skipped 1/8 steps (1.14x estimated speedup)"
+      ],
+      "adapters": [],
+      "executable_sha256": "6c03b583f7a266facdfd045561013e164e88202b583a4bbe6d801938ae189c08"
+    },
+    {
+      "key": "fullbody-heun-linear-quad-cache-736x1104-quality-ray28-base",
+      "seconds": 241.72350389999337,
+      "stages": {
+        "get_learned_condition": 0.0,
+        "sampling": 234.13,
+        "decode_first_stage": 7.32
+      },
+      "cache": [
+        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
+        "CacheDIT skipped 3/8 steps (1.60x estimated speedup)"
+      ],
+      "adapters": [],
+      "executable_sha256": "6c03b583f7a266facdfd045561013e164e88202b583a4bbe6d801938ae189c08"
+    },
+    {
+      "key": "fullbody-simple-cache-736x1104-quality-ray28-base",
+      "seconds": 132.7527116999845,
+      "stages": {
+        "get_learned_condition": 7.24,
+        "sampling": 116.85,
+        "decode_first_stage": 7.3
+      },
+      "cache": [
+        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
+        "CacheDIT skipped 2/8 steps (1.33x estimated speedup)"
+      ],
+      "adapters": [],
+      "executable_sha256": "6c03b583f7a266facdfd045561013e164e88202b583a4bbe6d801938ae189c08"
+    },
+    {
+      "key": "fullbody-dpm-sde-sgm-cache-736x1104-quality-ray28-after010",
+      "seconds": 160.11140739999246,
+      "stages": {
+        "get_learned_condition": 6.92,
+        "sampling": 145.22,
+        "decode_first_stage": 7.28
+      },
+      "cache": [
+        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
+        "CacheDIT skipped 1/8 steps (1.14x estimated speedup)"
+      ],
+      "adapters": [
+        {
+          "file": "afterlight-v1.safetensors",
+          "weight": 0.1,
+          "sha256": "57d2a400af32a0afd9cd065c43ebeb6a0e44b153abaef0171ce6891b6b057d13"
+        }
+      ],
+      "executable_sha256": "6c03b583f7a266facdfd045561013e164e88202b583a4bbe6d801938ae189c08"
+    },
+    {
+      "key": "fullbody-dpm-sde-sgm-cache-736x1104-quality-ray28-after025",
+      "seconds": 160.092079700029,
+      "stages": {
+        "get_learned_condition": 6.84,
+        "sampling": 145.22,
+        "decode_first_stage": 7.28
+      },
+      "cache": [
+        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
+        "CacheDIT skipped 1/8 steps (1.14x estimated speedup)"
+      ],
+      "adapters": [
+        {
+          "file": "afterlight-v1.safetensors",
+          "weight": 0.25,
+          "sha256": "57d2a400af32a0afd9cd065c43ebeb6a0e44b153abaef0171ce6891b6b057d13"
+        }
+      ],
+      "executable_sha256": "6c03b583f7a266facdfd045561013e164e88202b583a4bbe6d801938ae189c08"
+    },
+    {
+      "key": "fullbody-dpm-sde-sgm-cache-736x1104-quality-ray28-after050",
+      "seconds": 163.62776409997605,
+      "stages": {
+        "get_learned_condition": 10.49,
+        "sampling": 145.16,
+        "decode_first_stage": 7.28
+      },
+      "cache": [
+        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
+        "CacheDIT skipped 1/8 steps (1.14x estimated speedup)"
+      ],
+      "adapters": [
+        {
+          "file": "afterlight-v1.safetensors",
+          "weight": 0.5,
+          "sha256": "57d2a400af32a0afd9cd065c43ebeb6a0e44b153abaef0171ce6891b6b057d13"
+        }
+      ],
+      "executable_sha256": "6c03b583f7a266facdfd045561013e164e88202b583a4bbe6d801938ae189c08"
+    }
+  ],
+  "normal4x_public_seconds": 175.13998730003368,
+  "normal4x_public_base_rgb_matches": true,
+  "high_current_measured": false
+}

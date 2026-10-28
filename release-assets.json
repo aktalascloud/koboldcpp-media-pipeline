@@ -18,12 +18,16 @@
         "tools/detailer_models/",
         "tools/restoration_models/",
         "licenses/"
-      ]
+      ],
+      "extract_mappings": {
+        "tools/detailer_models/": "DETAILERS/faces/",
+        "tools/restoration_models/": "DETAILERS/restoration/"
+      }
     },
     {
       "name": "koboldcpp-windows-haswell-vulkan.zip",
-      "sha256": "083465e7a7f4c346545d33954302d6accd655176b0adc3960275edc9a4957355",
-      "url": "https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/releases/download/v1.123.1-20261027-6b815fe4/koboldcpp-windows-haswell-vulkan.zip",
+      "sha256": "8fa0a397de636614d0425e5eaaa6d499e4fff196c5af1567b75604fa5cd76614",
+      "url": "https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/releases/download/v1.123.1-20261028-6c03b583/koboldcpp-windows-haswell-vulkan.zip",
       "extract_prefixes": [
         "koboldcpp-nocuda.exe",
         "LICENSE.md",

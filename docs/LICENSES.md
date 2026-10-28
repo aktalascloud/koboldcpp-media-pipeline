@@ -28,3 +28,6 @@ Historic release assets remain available for pinned older versions. Their presen
 
 ## Current Dirty adapters
 Dirty MOSS [author version3423156](https://civitai.com/models/3015644?modelVersionId=3423156), turbo [author version3420002](https://civitai.com/models/3006599?modelVersionId=3420002), [Afterlight3424873](https://civitai.com/models/3016917?modelVersionId=3424873), [Textslider3414043](https://civitai.com/models/3008688?modelVersionId=3414043): links and fingerprints only; no weight redistribution or inferred permissive license. The exact resized turbo is user-supplied. Author access/usage terms remain the installer user's responsibility; no author card or private training metadata is embedded. Existing AGPL/MIT/runtime/GPEN notices are retained.
+
+## Current Ray assets
+Ray Artshoot [version3426693](https://civitai.com/models/3018302?modelVersionId=3426693) and [Afterlight3424873](https://civitai.com/models/3016917?modelVersionId=3424873): original author terms, links/hashes only, no weights mirrored or inferred permissive license. Optional Dirty/turbo follow original terms; exact resized turbo is user-imported. Existing AGPL/MIT/Apache/CC-BY/GPEN Non-Commercial notices and aria2/GMP source hashes retained.

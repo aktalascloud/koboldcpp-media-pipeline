@@ -1,8 +1,8 @@
 {
-  "date": "2026-10-27",
-  "model": "Dirty MOSS Q8_0 + DMD2 dynamic69 1 / Afterlight0.25 / Textslider0.25",
-  "image_sha256": "8276dcb69a1550924b44b35ff7d0264357196349ae0d7d74edba88ca91f0653b",
-  "native_executable_sha256": "6b815fe4ace25231f789639b2595458f2b467d752c77370864520d3a15e2354d",
+  "date": "2026-10-28",
+  "model": "Ray MOSS Artshoot Q8_0 + Afterlight0.25",
+  "image_sha256": "dd02927547bc7b7d60ffb4a2ba566d384e37387eb91aaeaa0404666a72c7e7cb",
+  "native_executable_sha256": "6c03b583f7a266facdfd045561013e164e88202b583a4bbe6d801938ae189c08",
   "normal": [
     736,
     1104
@@ -12,167 +12,67 @@
     1392
   ],
   "profile": {
-    "sampler_name": "euler",
-    "scheduler": "simple",
-    "turbo": 1,
-    "afterlight": 0.25,
-    "textslider": 0.25,
     "steps": 8,
-    "width": 736,
-    "height": 1104,
     "cfg_scale": 1,
+    "sampler_name": "dpm++2m_sde",
+    "scheduler": "sgm_uniform",
     "eta": 0,
     "flow_shift": 5,
     "cache_mode": "cache-dit",
-    "cache_options": "threshold=0.08,warmup=4,Fn=16,Bn=2"
+    "cache_options": "threshold=0.08,warmup=4,Fn=16,Bn=2",
+    "afterlight": 0.25
   },
-  "native_seconds": 155.6020529999514,
-  "normal4x_seconds": null,
+  "normal4x_seconds": 175.13998730003368,
+  "native_api_seconds": 163.081,
+  "face_seconds": 1.3591,
+  "gater_seconds": 3.8665662999846973,
+  "sr_seconds": 1.0172,
+  "output_dimensions": [
+    2944,
+    4416
+  ],
+  "base_rgb_matches_saved_candidate": true,
   "high_current_measured": false,
-  "scope": "Single fixed fullbody/seed424242 per condition; raw Native time only, no checkpoint load, faces/Gater/SR. No new generation for publication. Cache skips vary; adapter/sampler changes are not compiler gains.",
-  "trials": [
+  "scene_measurements": [
     {
-      "key": "fullbody-dpm-sde-sgm-cache-736x1104-quality-refined-control",
-      "seconds": 150.49310459999833,
+      "scene": "fullbody",
+      "native_seconds": 160.092079700029,
+      "faces_gater_seconds": 5.879439699987415,
+      "sr_seconds": 0.9372,
       "cache": [
         "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
         "CacheDIT skipped 1/8 steps (1.14x estimated speedup)"
       ],
-      "adapters": [],
-      "checkpoint_sha256": "061903b58b6dfc6e317ba6fe5064c4a2cee94172f77d4d4cf9c1fff423c3c623",
-      "executable_sha256": "6b815fe4ace25231f789639b2595458f2b467d752c77370864520d3a15e2354d"
+      "native_executable_sha256": "6c03b583f7a266facdfd045561013e164e88202b583a4bbe6d801938ae189c08",
+      "image_sha256": "c4fc52d6beb8065e8d5a4bb87718ae48212655b800d3b5e8139419bc647e3880",
+      "scope": "Separate saved-image stages, not one public API request."
     },
     {
-      "key": "fullbody-dpm-sde-sgm-cache-736x1104-quality-dirty-turbo",
-      "seconds": 163.0644921999774,
+      "scene": "night",
+      "native_seconds": 162.89507209998555,
+      "faces_gater_seconds": 5.580585399991833,
+      "sr_seconds": 0.9681,
       "cache": [
         "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
         "CacheDIT skipped 1/8 steps (1.14x estimated speedup)"
       ],
-      "adapters": [
-        {
-          "file": "turbo-dmd2-dynamic69.safetensors",
-          "weight": 1.0,
-          "sha256": "d869785c75a20a409f1b590d4ad3a825b542a1fbb9f21589e5ad5e46e62c6910"
-        }
-      ],
-      "checkpoint_sha256": "8276dcb69a1550924b44b35ff7d0264357196349ae0d7d74edba88ca91f0653b",
-      "executable_sha256": "6b815fe4ace25231f789639b2595458f2b467d752c77370864520d3a15e2354d"
+      "native_executable_sha256": "6c03b583f7a266facdfd045561013e164e88202b583a4bbe6d801938ae189c08",
+      "image_sha256": "1c85ef1b97b0271e2acb119e284008d30783e150afd3b1588dd6f6796d163023",
+      "scope": "Separate saved-image stages, not one public API request."
     },
     {
-      "key": "fullbody-simple-cache-736x1104-quality-dirty-turbo",
-      "seconds": 163.5198580000433,
+      "scene": "watchmaker",
+      "native_seconds": 157.4895405000425,
+      "faces_gater_seconds": 3.5726239000214264,
+      "sr_seconds": 0.9343,
       "cache": [
         "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
         "CacheDIT skipped 1/8 steps (1.14x estimated speedup)"
       ],
-      "adapters": [
-        {
-          "file": "turbo-dmd2-dynamic69.safetensors",
-          "weight": 1.0,
-          "sha256": "d869785c75a20a409f1b590d4ad3a825b542a1fbb9f21589e5ad5e46e62c6910"
-        }
-      ],
-      "checkpoint_sha256": "8276dcb69a1550924b44b35ff7d0264357196349ae0d7d74edba88ca91f0653b",
-      "executable_sha256": "6b815fe4ace25231f789639b2595458f2b467d752c77370864520d3a15e2354d"
-    },
-    {
-      "key": "fullbody-simple-cache-736x1104-quality-dirty-afterlight025",
-      "seconds": 150.83298300002934,
-      "cache": [
-        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
-        "CacheDIT skipped 2/8 steps (1.33x estimated speedup)"
-      ],
-      "adapters": [
-        {
-          "file": "turbo-dmd2-dynamic69.safetensors",
-          "weight": 1.0,
-          "sha256": "d869785c75a20a409f1b590d4ad3a825b542a1fbb9f21589e5ad5e46e62c6910"
-        },
-        {
-          "file": "afterlight-v1.safetensors",
-          "weight": 0.25,
-          "sha256": "57d2a400af32a0afd9cd065c43ebeb6a0e44b153abaef0171ce6891b6b057d13"
-        }
-      ],
-      "checkpoint_sha256": "8276dcb69a1550924b44b35ff7d0264357196349ae0d7d74edba88ca91f0653b",
-      "executable_sha256": "6b815fe4ace25231f789639b2595458f2b467d752c77370864520d3a15e2354d"
-    },
-    {
-      "key": "fullbody-simple-cache-736x1104-quality-dirty-slider025",
-      "seconds": 168.43363840004895,
-      "cache": [
-        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
-        "CacheDIT skipped 1/8 steps (1.14x estimated speedup)"
-      ],
-      "adapters": [
-        {
-          "file": "turbo-dmd2-dynamic69.safetensors",
-          "weight": 1.0,
-          "sha256": "d869785c75a20a409f1b590d4ad3a825b542a1fbb9f21589e5ad5e46e62c6910"
-        },
-        {
-          "file": "quality-textslider-r16.safetensors",
-          "weight": 0.25,
-          "sha256": "29d7b624a374104a79cbe5d3d07127caf6f175e5a530baa095a7bdf6a887ccc8"
-        }
-      ],
-      "checkpoint_sha256": "8276dcb69a1550924b44b35ff7d0264357196349ae0d7d74edba88ca91f0653b",
-      "executable_sha256": "6b815fe4ace25231f789639b2595458f2b467d752c77370864520d3a15e2354d"
-    },
-    {
-      "key": "fullbody-dpm-sde-sgm-cache-736x1104-quality-dirty-mix025",
-      "seconds": 178.86568270000862,
-      "cache": [
-        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
-        "CacheDIT skipped 1/8 steps (1.14x estimated speedup)"
-      ],
-      "adapters": [
-        {
-          "file": "turbo-dmd2-dynamic69.safetensors",
-          "weight": 1.0,
-          "sha256": "d869785c75a20a409f1b590d4ad3a825b542a1fbb9f21589e5ad5e46e62c6910"
-        },
-        {
-          "file": "afterlight-v1.safetensors",
-          "weight": 0.25,
-          "sha256": "57d2a400af32a0afd9cd065c43ebeb6a0e44b153abaef0171ce6891b6b057d13"
-        },
-        {
-          "file": "quality-textslider-r16.safetensors",
-          "weight": 0.25,
-          "sha256": "29d7b624a374104a79cbe5d3d07127caf6f175e5a530baa095a7bdf6a887ccc8"
-        }
-      ],
-      "checkpoint_sha256": "8276dcb69a1550924b44b35ff7d0264357196349ae0d7d74edba88ca91f0653b",
-      "executable_sha256": "6b815fe4ace25231f789639b2595458f2b467d752c77370864520d3a15e2354d"
-    },
-    {
-      "key": "fullbody-simple-cache-736x1104-quality-dirty-mix025",
-      "seconds": 155.6020529999514,
-      "cache": [
-        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
-        "CacheDIT skipped 2/8 steps (1.33x estimated speedup)"
-      ],
-      "adapters": [
-        {
-          "file": "turbo-dmd2-dynamic69.safetensors",
-          "weight": 1.0,
-          "sha256": "d869785c75a20a409f1b590d4ad3a825b542a1fbb9f21589e5ad5e46e62c6910"
-        },
-        {
-          "file": "afterlight-v1.safetensors",
-          "weight": 0.25,
-          "sha256": "57d2a400af32a0afd9cd065c43ebeb6a0e44b153abaef0171ce6891b6b057d13"
-        },
-        {
-          "file": "quality-textslider-r16.safetensors",
-          "weight": 0.25,
-          "sha256": "29d7b624a374104a79cbe5d3d07127caf6f175e5a530baa095a7bdf6a887ccc8"
-        }
-      ],
-      "checkpoint_sha256": "8276dcb69a1550924b44b35ff7d0264357196349ae0d7d74edba88ca91f0653b",
-      "executable_sha256": "6b815fe4ace25231f789639b2595458f2b467d752c77370864520d3a15e2354d"
+      "native_executable_sha256": "6c03b583f7a266facdfd045561013e164e88202b583a4bbe6d801938ae189c08",
+      "image_sha256": "b034a033e724d37882ee8bbbb5060d1898e56abb12521d423c9ef6b6827b3d69",
+      "scope": "Separate saved-image stages, not one public API request."
     }
-  ]
+  ],
+  "scope": "Actual resident-model public Normal request without explicit mode/size; faces/Gater/ClearReality4x included. Normal restore checked; not a compiler A/B."
 }

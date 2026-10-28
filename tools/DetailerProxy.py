@@ -15,7 +15,7 @@ import threading
 import time
 import urllib.error
 import urllib.request
-from RuntimePaths import dependencies
+from RuntimePaths import dependencies, ROOT
 
 HERE=Path(__file__).resolve().parent
 dependencies()
@@ -37,7 +37,7 @@ class FaceDetailer:
         self.backend=backend.rstrip('/')
         self.detector_resolution=int(detector_resolution)
         if not 320<=self.detector_resolution<=2048 or not 0<float(score_threshold)<1 or not 0<float(nms_threshold)<1 or not 1<=int(top_k)<=10000:raise ValueError('Invalid YuNet settings')
-        self.detector=cv2.FaceDetectorYN.create(str(HERE/'detailer_models'/'face_detection_yunet_2023mar.onnx'),'',(self.detector_resolution,self.detector_resolution),float(score_threshold),float(nms_threshold),int(top_k))
+        self.detector=cv2.FaceDetectorYN.create(str(ROOT/'DETAILERS'/'faces'/'face_detection_yunet_2023mar.onnx'),'',(self.detector_resolution,self.detector_resolution),float(score_threshold),float(nms_threshold),int(top_k))
         cv2.setNumThreads(2)
         self.lock=threading.Lock()
     def detect(self,im,minimum=32,maximum=160):

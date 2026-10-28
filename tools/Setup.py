@@ -80,7 +80,8 @@ def prepare_moss(catalog,directory):
     imported={r['role']:source_file(sources[r['role']],directory,temporary) for r in pending if sources[r['role']].get('required_user_file')}
     for row in pending:
         role=row['generated_role'];source=imported.get(role) or source_file(sources[role],directory,temporary)
-        command=[sys.executable,'-I','-B',str(ROOT/'tools/MossConvert.py'),'--source-dir',str(temporary),'--source-file',str(source),'--output-dir',str(ROOT/'MOSS/models'),'--output-name',Path(row['path']).name,'--role',role]
+        output=inside(row['path']);output.parent.mkdir(parents=True,exist_ok=True)
+        command=[sys.executable,'-I','-B',str(ROOT/'tools/MossConvert.py'),'--source-dir',str(temporary),'--source-file',str(source),'--output-dir',str(output.parent),'--output-name',output.name,'--role','image' if role=='backup_image' else role]
         for field in ['model_name','description']:
             if sources[role].get(field):command.extend(['--'+field.replace('_','-'),sources[role][field]])
         subprocess.run(command,cwd=ROOT,check=True)
@@ -89,6 +90,21 @@ def prepare_moss(catalog,directory):
     for folder in [ROOT/'MOSS/models/.tmp',temporary]:
         if folder.is_dir() and not any(folder.iterdir()):folder.rmdir()
 def inventory(catalog):return [dict(path=row['path'],ok=verified(inside(row['path']),row)) for row in catalog['models']]
+
+def migrate_verified_assets(catalog):
+    """Relocate only exact known assets; preserve unknown or mismatched files."""
+    for row in catalog['models']:
+        target=inside(row['path'])
+        if target.exists():
+            if not verified(target,row):raise RuntimeError('Existing structured asset differs; preserved: '+row['path'])
+            continue
+        for relative in row.get('legacy_paths',[]):
+            source=inside(relative)
+            if not source.is_file():continue
+            if not verified(source,row):raise RuntimeError('Legacy asset fingerprint differs; preserved: '+relative)
+            target.parent.mkdir(parents=True,exist_ok=True)
+            if target.exists():raise RuntimeError('Relocation target appeared concurrently')
+            os.rename(source,target);break
 
 def install_original(row,directory):
     """Import a pinned adapter without modifying its user-owned original."""
@@ -107,8 +123,12 @@ def install_original(row,directory):
     return target
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--skip-model-downloads',action='store_true');parser.add_argument('--check-only',action='store_true')
-    parser.add_argument('--moss-source-directory',type=Path);parser.add_argument('--gpen-path',type=Path);parser.add_argument('--listen-host',default='127.0.0.1');args=parser.parse_args();ipaddress.ip_address(args.listen_host)
+    parser.add_argument('--moss-source-directory',type=Path);parser.add_argument('--gpen-path',type=Path);parser.add_argument('--include-dirty-backup',action='store_true');parser.add_argument('--listen-host',default='127.0.0.1');args=parser.parse_args();ipaddress.ip_address(args.listen_host)
     catalog=json.loads((ROOT/'models.json').read_text(encoding='utf-8'))
+    if args.include_dirty_backup:
+        optional=catalog['optional_dirty_backup'];known={r['path'] for r in catalog['models']}
+        catalog['models'] += [r for r in optional['models'] if r['path'] not in known]
+        catalog['moss_sources'].append(optional['source'])
     if args.check_only:
         rows=inventory(catalog);ready=all(r['ok'] for r in rows);print(json.dumps(dict(ready=ready,assets=rows,inference_started=False,registry_changed=False),indent=2));return 0 if ready else 2
     helper_path=ROOT/'Helper.kcpps';helper=json.loads(helper_path.read_text(encoding='utf-8-sig'));defaults=json.loads(helper['gendefaults'])
@@ -116,6 +136,7 @@ def main():
         with socket.socket() as probe:
             probe.settimeout(.3)
             if probe.connect_ex(('127.0.0.1',port))==0:raise RuntimeError('Configured port is busy. Close the service before initial Setup; a running installation is never modified.')
+    migrate_verified_assets(catalog)
     if args.gpen_path:
         row=next(r for r in catalog['models'] if r['path'].endswith('gpen_bfr_512.onnx'));source=args.gpen_path.resolve()
         if not verified(source,row):raise RuntimeError('Supplied GPEN fingerprint differs.')

@@ -2,139 +2,165 @@
   "format": 2,
   "models": [
     {
-      "path": "MOSS/models/dirty-moss-q8_0.gguf",
-      "bytes": 5401126112,
-      "sha256": "8276dcb69a1550924b44b35ff7d0264357196349ae0d7d74edba88ca91f0653b",
+      "path": "MODELS/images/ray-artshoot-v1-q8_0.gguf",
+      "bytes": 5400345792,
+      "sha256": "dd02927547bc7b7d60ffb4a2ba566d384e37387eb91aaeaa0404666a72c7e7cb",
       "in_release": false,
-      "source": "https://civitai.com/models/3015644?modelVersionId=3423156",
+      "source": "https://civitai.com/models/3018302?modelVersionId=3426693",
       "license": "Original checkpoint terms apply. No source or converted main weights redistributed.",
       "generated_role": "image",
-      "url": null
+      "url": null,
+      "legacy_paths": [
+        "MOSS/models/ray-artshoot-v1-q8_0.gguf"
+      ]
     },
     {
-      "path": "MOSS/models/text-q8_0.gguf",
+      "path": "MODELS/text/moss-qwen35-text-q8_0.gguf",
       "bytes": 10400747200,
       "sha256": "f3083eab75745e7d3e0cfc8184747d5e53ae4a23811096345d0e2b361c571bde",
       "in_release": false,
       "source": "https://civitai.com/models/3010191?modelVersionId=3416029",
       "license": "Original author terms; no derived weights distributed by this project.",
       "generated_role": "text",
-      "url": null
+      "url": null,
+      "legacy_paths": [
+        "MOSS/models/text-q8_0.gguf"
+      ]
     },
     {
-      "path": "MOSS/models/vae.fp32.safetensors",
+      "path": "MODELS/vae/flux2-vae.fp32.safetensors",
       "bytes": 249521372,
       "sha256": "c3bdf94dc67ec69b30ea9fe1fa8340085679cae64d019f7c7e4a9921f1a7f17a",
       "in_release": false,
       "source": "https://civitai.com/models/3010191?modelVersionId=3416029",
       "license": "Original author terms; no derived weights distributed by this project.",
-      "url": "https://huggingface.co/hfmaster/artius-moss/resolve/d75d8f6bcb2423b21d42631751d39467fadfaba1/moss_image_vae.safetensors"
+      "url": "https://huggingface.co/hfmaster/artius-moss/resolve/d75d8f6bcb2423b21d42631751d39467fadfaba1/moss_image_vae.safetensors",
+      "legacy_paths": [
+        "MOSS/models/vae.fp32.safetensors"
+      ]
     },
     {
-      "path": "MOSS/models/tokenizer.json",
+      "path": "MODELS/text/tokenizer.json",
       "bytes": 12807982,
       "sha256": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
       "in_release": false,
       "source": "https://civitai.com/models/3010191?modelVersionId=3416029",
       "license": "Apache-2.0, Qwen tokenizer; see upstream.",
-      "url": "https://huggingface.co/Qwen/Qwen3.5-9B/resolve/c202236235762e1c871ad0ccb60c8ee5ba337b9a/tokenizer.json"
+      "url": "https://huggingface.co/Qwen/Qwen3.5-9B/resolve/c202236235762e1c871ad0ccb60c8ee5ba337b9a/tokenizer.json",
+      "legacy_paths": [
+        "MOSS/models/tokenizer.json"
+      ]
     },
     {
-      "path": "tools/upscaler_models/ClearRealityV1-fp32.onnx",
+      "path": "UPSCALERS/ClearRealityV1-fp32.onnx",
       "bytes": 1718947,
       "sha256": "bbce9d5a653281cfae07788d620bd4ec45712709bdf6349a06a893159efd97ce",
       "url": "https://huggingface.co/Kim2091/ClearRealityV1/resolve/6bfd32e08342ad5d8ae5ac2fd6629a72d525c76e/ONNX/fp32/4x-ClearRealityV1-fp32-opset17.onnx",
       "in_release": false,
       "source": "https://huggingface.co/Kim2091/ClearRealityV1",
-      "license": "Apache-2.0; Kim2091; unmodified FP32 ONNX."
+      "license": "Apache-2.0; Kim2091; unmodified FP32 ONNX.",
+      "legacy_paths": [
+        "tools/upscaler_models/ClearRealityV1-fp32.onnx"
+      ]
     },
     {
-      "path": "MUSIC/acestep-5Hz-lm-4B-Q6_K.gguf",
+      "path": "MODELS/music/acestep-5Hz-lm-4B-Q6_K.gguf",
       "bytes": 3442713504,
       "sha256": "d39b8b5070fa617a0f57dcc26e710f8096a293c21721c5f714318bab7b40cfdb",
       "url": "https://huggingface.co/koboldcpp/music/resolve/5f747e22d54a81a0a99f4d675bc98836ee77bd13/acestep-5Hz-lm-4B-Q6_K.gguf",
       "license": "Original AceStep/Qwen license; see model card",
       "source": "https://huggingface.co/koboldcpp/music/resolve/5f747e22d54a81a0a99f4d675bc98836ee77bd13/acestep-5Hz-lm-4B-Q6_K.gguf",
-      "in_release": false
+      "in_release": false,
+      "legacy_paths": [
+        "MUSIC/acestep-5Hz-lm-4B-Q6_K.gguf"
+      ]
     },
     {
-      "path": "MUSIC/Ace-Qwen3-Embedding-0.6B-BF16.gguf",
+      "path": "MODELS/music/Ace-Qwen3-Embedding-0.6B-BF16.gguf",
       "bytes": 1196890592,
       "sha256": "6f57900773fbd447b2943bc8126e2dc68ed009151ba89a47c14d1be05d4c73df",
       "url": "https://huggingface.co/koboldcpp/music/resolve/5f747e22d54a81a0a99f4d675bc98836ee77bd13/Ace-Qwen3-Embedding-0.6B-BF16.gguf",
       "license": "Original AceStep/Qwen license; see model card",
       "source": "https://huggingface.co/koboldcpp/music/resolve/5f747e22d54a81a0a99f4d675bc98836ee77bd13/Ace-Qwen3-Embedding-0.6B-BF16.gguf",
-      "in_release": false
+      "in_release": false,
+      "legacy_paths": [
+        "MUSIC/Ace-Qwen3-Embedding-0.6B-BF16.gguf"
+      ]
     },
     {
-      "path": "MUSIC/acestep-v15-xl-sftturbo50-Q4_K_M.gguf",
+      "path": "MODELS/music/acestep-v15-xl-sftturbo50-Q4_K_M.gguf",
       "bytes": 2989922720,
       "sha256": "7f7619d78037f9cfbe7b7816f758dc99f2841f48010da12eed732a8faef2eb0d",
       "url": "https://huggingface.co/koboldcpp/music/resolve/5f747e22d54a81a0a99f4d675bc98836ee77bd13/acestep-v15-xl-sftturbo50-Q4_K_M.gguf",
       "license": "Original AceStep/Qwen license; see model card",
       "source": "https://huggingface.co/koboldcpp/music/resolve/5f747e22d54a81a0a99f4d675bc98836ee77bd13/acestep-v15-xl-sftturbo50-Q4_K_M.gguf",
-      "in_release": false
+      "in_release": false,
+      "legacy_paths": [
+        "MUSIC/acestep-v15-xl-sftturbo50-Q4_K_M.gguf"
+      ]
     },
     {
-      "path": "MUSIC/ace-vae-BF16.gguf",
+      "path": "MODELS/music/ace-vae-BF16.gguf",
       "bytes": 337420928,
       "sha256": "0599862ac5d15cd308e1d2e368373aea6c02e25ebd1737ad4a4562a0901b0ef8",
       "url": "https://huggingface.co/koboldcpp/music/resolve/5f747e22d54a81a0a99f4d675bc98836ee77bd13/ace-vae-BF16.gguf",
       "license": "Original AceStep/Qwen license; see model card",
       "source": "https://huggingface.co/koboldcpp/music/resolve/5f747e22d54a81a0a99f4d675bc98836ee77bd13/ace-vae-BF16.gguf",
-      "in_release": false
+      "in_release": false,
+      "legacy_paths": [
+        "MUSIC/ace-vae-BF16.gguf"
+      ]
     },
     {
-      "path": "tools/detailer_models/face_detection_yunet_2023mar.onnx",
+      "path": "DETAILERS/faces/face_detection_yunet_2023mar.onnx",
       "bytes": 232589,
       "sha256": "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4",
       "url": null,
       "license": "MIT",
       "source": "https://github.com/opencv/opencv_zoo/tree/main/models/face_detection_yunet",
-      "in_release": true
+      "in_release": true,
+      "legacy_paths": [
+        "tools/detailer_models/face_detection_yunet_2023mar.onnx"
+      ]
     },
     {
-      "path": "tools/detailer_models/face_recognition_sface_2021dec.onnx",
+      "path": "DETAILERS/faces/face_recognition_sface_2021dec.onnx",
       "bytes": 38696353,
       "sha256": "0ba9fbfa01b5270c96627c4ef784da859931e02f04419c829e83484087c34e79",
       "url": null,
       "license": "Apache-2.0",
       "source": "https://github.com/opencv/opencv_zoo/tree/main/models/face_recognition_sface",
-      "in_release": true
+      "in_release": true,
+      "legacy_paths": [
+        "tools/detailer_models/face_recognition_sface_2021dec.onnx"
+      ]
     },
     {
-      "path": "tools/restoration_models/1xGaterV3Restore_fp32.onnx",
+      "path": "DETAILERS/restoration/1xGaterV3Restore_fp32.onnx",
       "bytes": 86388840,
       "sha256": "6653528b62fe763403e18fa33a21c28755b27006e15d6be4b2c2c56c7ca4d27b",
       "url": null,
       "license": "CC-BY-4.0",
       "source": "https://github.com/Phhofm/models/releases/tag/1xgaterv3_r_restore",
-      "in_release": true
+      "in_release": true,
+      "legacy_paths": [
+        "tools/restoration_models/1xGaterV3Restore_fp32.onnx"
+      ]
     },
     {
-      "path": "tools/detailer_models/gpen_bfr_512.onnx",
+      "path": "DETAILERS/faces/gpen_bfr_512.onnx",
       "bytes": 284340240,
       "sha256": "d5f066b9068a8b74217f9712e28e875a6144629b108a6f7355acbdb3a2832c54",
       "url": "https://github.com/facefusion/facefusion-assets/releases/download/models-3.0.0/gpen_bfr_512.onnx",
       "license": "Non-Commercial (FaceFusion model distributor; exact original grant not located)",
       "source": "https://docs.facefusion.io/introduction/licenses",
-      "in_release": false
-    },
-    {
-      "path": "LORAS/moss/turbo-dmd2-dynamic69.safetensors",
-      "bytes": 628397016,
-      "sha256": "d869785c75a20a409f1b590d4ad3a825b542a1fbb9f21589e5ad5e46e62c6910",
       "in_release": false,
-      "url": null,
-      "required_user_file": true,
-      "aliases": [
-        "lodestones-8-steps-dmd2-lora_resized_from_128_to_dynamic_69.safetensors"
-      ],
-      "source": "https://civitai.com/models/3006599?modelVersionId=3420002",
-      "license": "Original turbo author terms; exact user-supplied dynamic-rank derivative, not redistributed."
+      "legacy_paths": [
+        "tools/detailer_models/gpen_bfr_512.onnx"
+      ]
     },
     {
-      "path": "LORAS/moss/afterlight-v1.safetensors",
+      "path": "MODELS/loras/afterlight-v1.safetensors",
       "bytes": 72608488,
       "sha256": "57d2a400af32a0afd9cd065c43ebeb6a0e44b153abaef0171ce6891b6b057d13",
       "in_release": false,
@@ -143,39 +169,29 @@
         "Moss-Afterlight-V1.safetensors"
       ],
       "source": "https://civitai.com/models/3016917?modelVersionId=3424873",
-      "license": "Original Afterlight author terms; downloaded from original distributor, not mirrored."
-    },
-    {
-      "path": "LORAS/moss/quality-textslider-r16.safetensors",
-      "bytes": 74401176,
-      "sha256": "29d7b624a374104a79cbe5d3d07127caf6f175e5a530baa095a7bdf6a887ccc8",
-      "in_release": false,
-      "url": "https://civitai.com/api/download/models/3414043",
-      "aliases": [
-        "moss_anima_pure_text_slider_rank16.safetensors"
-      ],
-      "source": "https://civitai.com/models/3008688?modelVersionId=3414043",
-      "license": "Original Textslider author terms; downloaded from original distributor, not mirrored."
+      "license": "Original Afterlight author terms; downloaded from original distributor, not mirrored.",
+      "legacy_paths": [
+        "LORAS/moss/afterlight-v1.safetensors"
+      ]
     }
   ],
   "moss_sources": [
     {
       "role": "image",
-      "path": "MOSS/source/dirtyMoss_int8.safetensors",
-      "bytes": 5413715446,
-      "sha256": "dd17ac4099151719ffd233d83d3f6ab376080fa93d91326ab033242a2fa1e43e",
-      "url": "https://civitai.com/api/download/models/3423156?fileId=3317587",
+      "path": "MODELS/source/rayMossArtshoot_sftTurboV1.safetensors",
+      "bytes": 5088554880,
+      "sha256": "411f33aadfa3b6e8fd3e99ef6cd076b28a86fca4e92cc168b32f0d41b524904a",
+      "url": "https://civitai.com/api/download/models/3426693?fileId=3321739",
       "aliases": [
-        "dirtyMoss_3317587.safetensors",
-        "dirtyMoss_int8.safetensors"
+        "rayMossArtshoot_sftTurboV1.safetensors"
       ],
-      "source": "https://civitai.com/models/3015644?modelVersionId=3423156",
-      "model_name": "Dirty MOSS compatible Q8_0",
-      "description": "Verified author INT8 ConvRot decoded with per-row scales and inverse rotation; standard Q8_0 matrices, turbo adapter separate."
+      "source": "https://civitai.com/models/3018302?modelVersionId=3426693",
+      "model_name": "Ray MOSS Artshoot SFT Turbo v1 Q8_0",
+      "description": "Verified author INT8 ConvRot decoded with source scales and inverse rotation; standard Q8_0 matrices. Original recommends12steps;8-step and additional turbo tests are experimental."
     },
     {
       "role": "text",
-      "path": "MOSS/source/txt-artiusMoss_v10_3313824.safetensors",
+      "path": "MODELS/source/txt-artiusMoss_v10_3313824.safetensors",
       "bytes": 6857004728,
       "sha256": "b0a6c1ab290b55c083fea294179c6c41b9027f645355e7eb63566dd1cb63efd1",
       "url": "https://civitai.com/api/download/models/3416029?fileId=3313824",
@@ -187,5 +203,57 @@
       "source": "https://civitai.com/models/3010191?modelVersionId=3416029"
     }
   ],
-  "no_main_model_weights_in_repository_or_release": true
+  "no_main_model_weights_in_repository_or_release": true,
+  "optional_dirty_backup": {
+    "models": [
+      {
+        "path": "MODELS/images/dirty-moss-q8_0.gguf",
+        "bytes": 5401126112,
+        "sha256": "8276dcb69a1550924b44b35ff7d0264357196349ae0d7d74edba88ca91f0653b",
+        "generated_role": "backup_image",
+        "in_release": false,
+        "source": "https://civitai.com/models/3015644?modelVersionId=3423156",
+        "license": "Original author terms; no weights redistributed."
+      },
+      {
+        "path": "MODELS/loras/turbo-dmd2-dynamic69.safetensors",
+        "bytes": 628397016,
+        "sha256": "d869785c75a20a409f1b590d4ad3a825b542a1fbb9f21589e5ad5e46e62c6910",
+        "in_release": false,
+        "url": null,
+        "required_user_file": true,
+        "aliases": [
+          "lodestones-8-steps-dmd2-lora_resized_from_128_to_dynamic_69.safetensors"
+        ],
+        "source": "https://civitai.com/models/3006599?modelVersionId=3420002",
+        "license": "Original turbo author terms; exact user-supplied dynamic-rank derivative, not redistributed."
+      },
+      {
+        "path": "MODELS/loras/afterlight-v1.safetensors",
+        "bytes": 72608488,
+        "sha256": "57d2a400af32a0afd9cd065c43ebeb6a0e44b153abaef0171ce6891b6b057d13",
+        "in_release": false,
+        "url": "https://civitai.com/api/download/models/3424873",
+        "aliases": [
+          "Moss-Afterlight-V1.safetensors"
+        ],
+        "source": "https://civitai.com/models/3016917?modelVersionId=3424873",
+        "license": "Original Afterlight author terms; downloaded from original distributor, not mirrored."
+      }
+    ],
+    "source": {
+      "role": "backup_image",
+      "path": "MODELS/source/dirtyMoss_int8.safetensors",
+      "bytes": 5413715446,
+      "sha256": "dd17ac4099151719ffd233d83d3f6ab376080fa93d91326ab033242a2fa1e43e",
+      "url": "https://civitai.com/api/download/models/3423156?fileId=3317587",
+      "aliases": [
+        "dirtyMoss_3317587.safetensors",
+        "dirtyMoss_int8.safetensors"
+      ],
+      "source": "https://civitai.com/models/3015644?modelVersionId=3423156",
+      "model_name": "Dirty MOSS compatible Q8_0",
+      "description": "Verified author INT8 ConvRot decoded with per-row scales and inverse rotation; standard Q8_0 matrices, turbo adapter separate."
+    }
+  }
 }

@@ -1,14 +1,14 @@
-# API and OpenWebUI
-Public AUTOMATIC1111 URL: `http://YOUR_KOBOLD_HOST:5001`; OpenAI Images uses `/v1`. Private Native 5003 is not an OWUI endpoint. Default bind is loopback; expose it explicitly during Setup if needed.
+# API / OpenWebUI
+AUTOMATIC1111 base: `http://YOUR_KOBOLD_HOST:5001`; OpenAI Images uses `/v1`. Private Native5003 is not OWUI's endpoint. Setup binds loopback by default; use `-ListenHost 0.0.0.0` to expose your LAN service explicitly.
 
-## Normal with immediate4×
-Works without a mode field.736×1104 generates2944×4416, landscape swaps dimensions. `enable_hr:true` selects the proxy SR pass, not native hires/img2img.
+## Normal
+No explicit mode needed. Extra JSON:
 ```json
 {
   "steps": 8,
   "cfg_scale": 1,
-  "sampler_name": "euler",
-  "scheduler": "simple",
+  "sampler_name": "dpm++2m_sde",
+  "scheduler": "sgm_uniform",
   "eta": 0,
   "flow_shift": 5,
   "clip_skip": -1,
@@ -16,21 +16,21 @@ Works without a mode field.736×1104 generates2944×4416, landscape swaps dimens
   "cache_options": "threshold=0.08,warmup=4,Fn=16,Bn=2",
   "width": 736,
   "height": 1104,
-  "enable_hr": true
+  "enable_hr": false
 }
 ```
-Set `enable_hr:false` or omit it for ordinary Normal without SR. Faces/Gater still apply. The selected model is controlled by the backend profile; no LoRA trigger or client checkpoint override is needed.
+The server owns the selected image model, static Afterlight0.25 and sampling profile. No LoRA tags/triggers. `enable_hr:true` requests proxy4×, not Native hires/img2img. Default Normal returns736×1104 with faces/Gater;4× returns2944×4416.
 
-## High
-Use `kcpp_quality:"quality"`.928×1392 produces3712×5568. The selected Dirty High profile is not yet measured end-to-end; do not apply old Artius/Helaman timing to it.
+## High through a filter
+Apply after common filter parameters; remove conflicting `size` overrides:
 ```json
 {
   "width": 928,
   "height": 1392,
   "steps": 8,
   "cfg_scale": 1,
-  "sampler_name": "euler",
-  "scheduler": "simple",
+  "sampler_name": "dpm++2m_sde",
+  "scheduler": "sgm_uniform",
   "eta": 0,
   "flow_shift": 5,
   "clip_skip": -1,
@@ -40,25 +40,15 @@ Use `kcpp_quality:"quality"`.928×1392 produces3712×5568. The selected Dirty Hi
   "enable_hr": true
 }
 ```
-Apply the selected preset after common filter parameters; remove a conflicting `size`. High owns its orientation/size and defaults to SR. Sampling follows Helper defaults. Max2MP guard remains; sdclampedsoft=2048 prevents silent1MP clamping.
+High selects928×1392 and defaults to4× (3712×5568). Selected Ray High generation/full-cycle is not measured; historical times do not apply.
 
-## Processing and routes
-- `POST /sdapi/v1/txt2img`: generation; `/v1/images/generations` is OpenAI Images-compatible.
-- `GET /v1/images/capabilities`: explicit operations, target/reference limits and model aliases. [Editing contract](EDITING.md).
-- `POST /sdapi/v1/img2img`: explicit whole-frame redraw, one init_images target; final faces/Gater, no automatic SR.
-- `POST /v1/images/edits`: instruction-edit defaults to422. Redraw requires explicit operation=img2img; model=kobold-moss-img2img alone does not select the operation. One target_image (legacy image accepted), zero references; no masks. Source aspect retained, default strength0.6. Successful PNG means processing completed, not that an instruction was fulfilled.
-- `POST /sdapi/v1/extra-single-image` or `/sdapi/v1/upscale`: `{"image":"BASE64_PNG","upscaling_resize":4}`. Applies faces/Gater first, unless valid pixel-bound markers prove they already ran. Returns exact4×; no repeated face pass afterward. Preserve returned PNG bytes, not a metadata-stripped thumbnail.
-- Music `/api/extra/music/prepare` and `/api/extra/music/generate`: original schema, MP3, demand loading and photo return.
-- Progress `/sdapi/v1/progress?genkey=YOUR_JOB_KEY`. Native LLM abort is not an image-cancel API.
+## Processing / routes
+- Generation: `/sdapi/v1/txt2img`, `/v1/images/generations`.
+- Redraw: `/sdapi/v1/img2img`; `/v1/images/edits` requires explicit `operation=img2img`. Final faces/Gater; no autoSR. [Limitations](EDITING.md).
+- Upscale: `/sdapi/v1/extra-single-image` or `/sdapi/v1/upscale`, `{"image":"BASE64_PNG","upscaling_resize":4}`. Faces/Gater before SR unless valid pixel-bound markers prove they ran already. No repeated pass after SR; preserve returned PNG/metadata.
+- YuNet960 detects; GPEN512 blends20%; SFace>=0.97 guards features, max2faces. Bounds scale by image area; large faces may be skipped. Gater Restore1× then optional ClearReality FP32 DirectML4×. Separate denoise/Gater Sharpen/Helaman disabled.
+- `/v1/images/capabilities`: instruction-edit/masks/raw references/multi-image are explicitly unsupported, not replaced by successful PNG generation.
+- [Reference synthesis](REFERENCE-SYNTHESIS.md): client-selected vision analysis/caption, text-only conditioning, no exact identity guarantee.
+- MusicMP3/API-only; returns to GPU-resident Normal. Video deferred.
 
-YuNet960, GPEN512/OpenVINOCPU at20%, SFace≥0.97, max2; face bounds39–155 px Normal/49–196 px High. Larger faces can skip GPEN. Gater1× and ClearReality4× use FP32 DirectML with owned VRAM handoff, then photo returns to GPU. No driver or TDR changes.
-
-Model selection is server-managed: use kobold-moss for generation; unknown provider models return422 instead of being ignored. Only n=1, response_format=b64_json, PNG and opaque background are supported; quality=auto is accepted, other OpenAI quality presets return422 (use kcpp_quality for the real profile). Unsupported references/masks/multiple inputs never silently fall back to generation. [OWUI/filter rules](EDITING.md).
-
-Use a client/proxy timeout covering the full job, e.g.3600 s. Prompt rewriting: one pass, cache the result, normally120–180 coherent English words. Describe subject/action/framing/light/materials/colors; no Z-Image LoRA/physioshade tags. Exact anatomy, clocks and small writing are not guaranteed. [Official MOSS prompt skill](https://github.com/OpenMOSS/MOSS-Image/blob/main/skills/moss-image-prompt-enhancer/SKILL.md).
-
-## Reference synthesis
-GET /v1/images/synthesis-schema provides the provider-agnostic analysis prompt. POST /v1/images/synthesize accepts2–4 role-bound client visual analyses plus user_request/generation_prompt. It creates a NEW image from text; it is not native reference-conditioned editing. Raw images/exact-identity constraints are rejected. [Workflow and OWUI callback](REFERENCE-SYNTHESIS.md).
-
-## Selected Dirty profile
-Server-side static LoRA: DMD2 dynamic69=1, Afterlight=.25, Textslider=.25. No trigger words or client tags. Both Normal/edit and High select them. Remove old explicit DPM/sgm_uniform OWUI overrides, or change them to Euler/simple; explicit client sampler fields override defaults. Model aliases do not switch arbitrary checkpoints. Normal Native 155.60s is measured on the source EXE; current High/full4x is unmeasured.
+Use a timeout covering the full job, e.g.3600s. Rewrite captions once and cache them; normally120–180 coherent English words. Numeric timing scope: benchmarks/results.json.

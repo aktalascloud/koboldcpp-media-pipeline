@@ -1,7 +1,10 @@
-param([switch]$SkipModelDownloads,[string]$MossSourceDirectory,[string]$GPENPath,[string]$ListenHost='127.0.0.1')
+param([switch]$SkipModelDownloads,[switch]$IncludeDirtyBackup,[string]$MossSourceDirectory,[string]$GPENPath,[string]$ListenHost='127.0.0.1')
 $ErrorActionPreference='Stop'
 $taskRoot=[IO.Path]::GetFullPath($PSScriptRoot)
 $taskManifest=Get-Content -LiteralPath (Join-Path $taskRoot 'release-assets.json') -Raw|ConvertFrom-Json
+$taskModelManifest=Get-Content -LiteralPath (Join-Path $taskRoot 'models.json') -Raw|ConvertFrom-Json
+$taskModelPaths=@($taskModelManifest.models|ForEach-Object {$_.path})
+if($IncludeDirtyBackup){$taskModelPaths+=@($taskModelManifest.optional_dirty_backup.models|ForEach-Object {$_.path})}
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 function Assert-TaskNoReparse([string]$Path){
     $taskParent=[IO.Path]::GetDirectoryName($Path)
@@ -26,8 +29,14 @@ foreach($taskAsset in $taskManifest.assets){
             if(-not $taskAllowed -or $taskName.EndsWith('/')){continue}
             if($taskName.Split('/') -contains '__pycache__' -or $taskName.EndsWith('.pyc')){continue}
             $taskOutputName=$taskName
+            if($taskAsset.PSObject.Properties.Name -contains 'extract_mappings'){
+                foreach($taskMapping in $taskAsset.extract_mappings.PSObject.Properties){
+                    if($taskName.StartsWith($taskMapping.Name,[StringComparison]::Ordinal)){$taskOutputName=$taskMapping.Value+$taskName.Substring($taskMapping.Name.Length);break}
+                }
+            }
             if($taskAsset.name -eq 'koboldcpp-windows-haswell-vulkan.zip' -and $taskName -ne 'koboldcpp-nocuda.exe'){$taskOutputName='licenses/native-release/'+$taskName}
             elseif($taskName.StartsWith('licenses/')){$taskOutputName='licenses/base-assets/'+$taskAsset.name.Replace('.zip','')+'/'+$taskName.Substring(9)}
+            if(($taskOutputName -match '\.(gguf|safetensors|pth|onnx|onnx\.data)$') -and ($taskModelPaths -notcontains $taskOutputName)){continue}
             $taskDestination=[IO.Path]::GetFullPath((Join-Path $taskRoot $taskOutputName.Replace('/','\')))
             if(-not $taskDestination.StartsWith($taskRoot+'\',[StringComparison]::OrdinalIgnoreCase)){throw 'Archive escaped installation root'}
             Assert-TaskNoReparse $taskDestination
@@ -45,6 +54,7 @@ foreach($taskAsset in $taskManifest.assets){
 }
 $taskArguments=@('-I','-B',(Join-Path $taskRoot 'tools\Setup.py'),'--listen-host',$ListenHost)
 if($SkipModelDownloads){$taskArguments+='--skip-model-downloads'}
+if($IncludeDirtyBackup){$taskArguments+='--include-dirty-backup'}
 if($MossSourceDirectory){$taskArguments+=@('--moss-source-directory',(Resolve-Path -LiteralPath $MossSourceDirectory).Path)}
 if($GPENPath){$taskArguments+=@('--gpen-path',(Resolve-Path -LiteralPath $GPENPath).Path)}
 & (Join-Path $taskRoot 'runtime\python\python.exe') @taskArguments

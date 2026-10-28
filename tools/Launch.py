@@ -46,7 +46,7 @@ def preflight(helper):
         value=gd['kcpp_proxy'].get(section,{}).get(key)
         if value:
             path=Path(asset(value,ROOT));files[section+'_'+key]=dict(path=str(path),exists=path.is_file(),bytes=path.stat().st_size if path.is_file() else None)
-    for name,relative in (('native_executable','koboldcpp-nocuda.exe'),('face_detector','tools/detailer_models/face_detection_yunet_2023mar.onnx')):
+    for name,relative in (('native_executable','koboldcpp-nocuda.exe'),('face_detector','DETAILERS/faces/face_detection_yunet_2023mar.onnx')):
         path=ROOT/relative;files[name]=dict(path=str(path),exists=path.is_file(),bytes=path.stat().st_size if path.is_file() else None)
     import numpy,PIL,cv2,onnxruntime
     packages={name:dict(version=module.__version__,path=str(Path(module.__file__).resolve())) for name,module in [('numpy',numpy),('PIL',PIL),('cv2',cv2),('onnxruntime',onnxruntime)]}

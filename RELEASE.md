@@ -1,9 +1,8 @@
-Dirty MOSS · Euler/simple · balanced quality adapters
+Ray MOSS · DPM/SGM · Afterlight0.25 · structured portable kit
 
-- Accepted static setup: DMD2 dynamic69=1, Afterlight=.25, Textslider=.25;8 steps,eta0,CFG1,shift5,Cache-DiT.08. Normal/edit 736×1104; High 928×1392 retained.
-- Measured single fullbody Native 155.60s on6b815fe4, cache 2/8. Same adapters on DPM/sgm_uniform 178.87s,cache 1/8; skip counts explain much of the difference. No new inference for publication. Dirty High/full4x are unmeasured.
-- Normal optional/High default ClearReality4×; YuNet/GPEN/SFace/Gater, musicMP3 and explicit API editing/reference-synthesis contracts preserved.
-- Pinned adapter registry and installer original-file imports; no main models/LoRA binaries/credentials in assets. Exact resized turbo must be user-supplied; original author terms and all third-party notices retained.
-- Code-only update; runtime/core/model components remain hash-pinned downloads. Existing installations: replace old explicit OWUI DPM/sgm_uniform overrides with Euler/simple.
+- Ray Q8 primary, alreadySFTTurbo:8steps,DPM++2M SDE/sgm_uniform,eta0,CFG1,shift5,Cache-DiT.08. Static Afterlight0.25; no added turbo/triggers. Normal736×1104,High928×1392 (High unmeasured).
+- Actual Normal4× API: **175.14s**,2944×4416,EXE6c03b583,28October2026. One request, faces/Gater/ClearReality included, baseRGB matches the selected control. No new inference for publication.
+- MODELS/DETAILERS/UPSCALERS, exact SHA preserved; optional Dirty backup. Verified legacy assets migrate, unknown files preserved. MP3 and image editing/reference-synthesis contracts retained.
+- Code-only update; no model/LoRA binaries, keys, caches or logs. Original-source downloads/imports and third-party notices/pinned aria2/GMP sources retained.
 
-[Saved examples and timings](https://github.com/aktalascloud/koboldcpp-media-pipeline#measured-speed) · [Model/adapter sources](https://github.com/aktalascloud/koboldcpp-media-pipeline/blob/main/docs/MODELS.md) · [Optimized KoboldCpp](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa)
+[Examples/timing scope](https://github.com/aktalascloud/koboldcpp-media-pipeline#measured-time) · [Model sources](https://github.com/aktalascloud/koboldcpp-media-pipeline/blob/main/docs/MODELS.md) · [Optimized KoboldCpp](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa)

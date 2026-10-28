@@ -1,5 +1,5 @@
 {
-  "format": 2,
+  "format": 3,
   "images": [
     {
       "file": "fullbody-native.png",
@@ -7,44 +7,78 @@
         736,
         1104
       ],
-      "rgb_sha256": "27e4f047ada7e534b6780c9638c07788dcc9e28d3f05d87a4da06cd38f3be079",
+      "rgb_sha256": "30ed43ad94bca703e4d3a1cf69ec3df892bf26086c261ba9521aac2e8bdc3cca",
       "metadata_removed": true,
-      "source_artifact": "fullbody-simple-cache-736x1104-quality-dirty-mix025.png",
-      "scope": "Selected Euler/mixed0.25 profile"
+      "source_artifact": "fullbody-dpm-sde-sgm-cache-736x1104-quality-ray28-after025.png",
+      "scope": "Exact selected-profile Native output"
+    },
+    {
+      "file": "fullbody-processed.png",
+      "dimensions": [
+        736,
+        1104
+      ],
+      "rgb_sha256": "bca36ef16815a0d602e8735839ebd49075ccdca39f13945f99e20fa5d7608a15",
+      "metadata_removed": true,
+      "source_artifact": "fullbody-dpm-sde-sgm-cache-736x1104-quality-ray28-after025-processed.png",
+      "scope": "Same faces/Gater settings on saved pixels"
+    },
+    {
+      "file": "fullbody-4x.png",
+      "dimensions": [
+        2944,
+        4416
+      ],
+      "rgb_sha256": "0119b63b773f5a0a92ae0421d0ba4200e01218be725f5ce6ee28f854c3b8e572",
+      "metadata_removed": true,
+      "source_artifact": "ray-author-2026-10-28/normal4x-public.png",
+      "scope": "Actual public API4x; sourceRGB verified"
+    },
+    {
+      "file": "fullbody-4x-preview.png",
+      "dimensions": [
+        736,
+        1104
+      ],
+      "rgb_sha256": "25f18f4b35f95f1eac9d002af9202d3539dac5f16d76c6b47c707aad944434a8",
+      "metadata_removed": true,
+      "source_artifact": "ray-author-2026-10-28/normal4x-public.png",
+      "resized_preview": true,
+      "scope": "Labeled web preview only"
     },
     {
       "file": "fullbody-face.png",
       "dimensions": [
-        114,
-        134
+        400,
+        553
       ],
-      "rgb_sha256": "2b092bb349b4c870f067cc8574a529b94eb23580638b481015b603f80a1f0bdf",
+      "rgb_sha256": "ccb0350b9cf903186ce2c6ef380c50901b75ff2db8dba740c3ae8424270deac7",
       "metadata_removed": true,
-      "source": "fullbody-native.png",
+      "source": "fullbody-4x.png",
       "box": [
-        281,
-        85,
-        395,
-        219
+        1288,
+        393,
+        1688,
+        946
       ],
-      "scope": "Unscaled native-pixel crop"
+      "scope": "Exact unscaled4x pixels"
     },
     {
       "file": "fullbody-eyes.png",
       "dimensions": [
-        64,
-        42
+        250,
+        156
       ],
-      "rgb_sha256": "827a8b21ac71ac33f87a974a3c38bddb3c300b577339c9c124527b108c5e92d6",
+      "rgb_sha256": "9ae4f0ac4e5a1571105f6a3ac0d7ddb9ba7cf2b29534a1ad916ec4fa156f18de",
       "metadata_removed": true,
-      "source": "fullbody-native.png",
+      "source": "fullbody-4x.png",
       "box": [
-        299,
-        115,
-        363,
-        157
+        1355,
+        545,
+        1605,
+        701
       ],
-      "scope": "Unscaled native-pixel crop"
+      "scope": "Exact unscaled4x pixels"
     },
     {
       "file": "night-native.png",
@@ -52,44 +86,78 @@
         736,
         1104
       ],
-      "rgb_sha256": "d4f177d5a3c8b2803bad7988c97fd1aaedbce49b7c6f02e3acf49eee9c2465de",
+      "rgb_sha256": "709c78929cd113a99e6dcb713202304f1d9221dda663505ae11bd25971ce42d4",
       "metadata_removed": true,
-      "source_artifact": "night-dpm-sde-sgm-cache-736x1104-quality-dirty-turbo.png",
-      "scope": "Alternate Dirty DPM/turbo-only control; NOT the selected quality-adapter profile"
+      "source_artifact": "night-dpm-sde-sgm-cache-736x1104-quality-ray28-after025.png",
+      "scope": "Exact selected-profile Native output"
+    },
+    {
+      "file": "night-processed.png",
+      "dimensions": [
+        736,
+        1104
+      ],
+      "rgb_sha256": "bc99b181482d78df2c164c998986b648933e8b1e15fcf76558a6eb627d7abf64",
+      "metadata_removed": true,
+      "source_artifact": "night-dpm-sde-sgm-cache-736x1104-quality-ray28-after025-processed.png",
+      "scope": "Same faces/Gater settings on saved pixels"
+    },
+    {
+      "file": "night-4x.png",
+      "dimensions": [
+        2944,
+        4416
+      ],
+      "rgb_sha256": "15a9361b850afedd92606173583fdec2be25264206eafa9eca014edf72ff4b43",
+      "metadata_removed": true,
+      "source_artifact": "night-dpm-sde-sgm-cache-736x1104-quality-ray28-after025-4x.png",
+      "scope": "Selected candidate, separate identical post-chain"
+    },
+    {
+      "file": "night-4x-preview.png",
+      "dimensions": [
+        736,
+        1104
+      ],
+      "rgb_sha256": "ed5dae4ca866d780858dbe922cdc57cc34c7d00f3f76c52c2a27a4f1f764db62",
+      "metadata_removed": true,
+      "source_artifact": "night-dpm-sde-sgm-cache-736x1104-quality-ray28-after025-4x.png",
+      "resized_preview": true,
+      "scope": "Labeled web preview only"
     },
     {
       "file": "night-face.png",
       "dimensions": [
-        208,
-        278
+        771,
+        1030
       ],
-      "rgb_sha256": "a73b83755dc22d3dd245484f8eecb186af8beafd78732e4b754da4ccf7275e34",
+      "rgb_sha256": "77a4744717fabdca7afcc76059f424e27d152ea744aa4a421e92128b449703f9",
       "metadata_removed": true,
-      "source": "night-native.png",
+      "source": "night-4x.png",
       "box": [
-        241,
-        83,
-        449,
-        361
+        970,
+        640,
+        1741,
+        1670
       ],
-      "scope": "Unscaled native-pixel crop"
+      "scope": "Exact unscaled4x pixels"
     },
     {
       "file": "night-eyes.png",
       "dimensions": [
-        134,
-        89
+        478,
+        321
       ],
-      "rgb_sha256": "0ea38c80d49cec90e1b95b32fd255cd10b908a83fd636e69fa735b6af8773765",
+      "rgb_sha256": "25248ff0c1b17bda1d6ae032a0b9506e4d7379f8f97fa400904ceb93d6eb55aa",
       "metadata_removed": true,
-      "source": "night-native.png",
+      "source": "night-4x.png",
       "box": [
-        276,
-        157,
-        410,
-        246
+        1093,
+        926,
+        1571,
+        1247
       ],
-      "scope": "Unscaled native-pixel crop"
+      "scope": "Exact unscaled4x pixels"
     },
     {
       "file": "watchmaker-native.png",
@@ -97,68 +165,79 @@
         736,
         1104
       ],
-      "rgb_sha256": "78495ef43088d70a290e31a91cd56644e6709ed8f3102324585b851f9b67c33c",
+      "rgb_sha256": "bb79a5932bcc716204e9189d0f11c9f5a7c94fb2a8208dcc3d946d192dfa8807",
       "metadata_removed": true,
-      "source_artifact": "watchmaker-dpm-sde-sgm-cache-736x1104-quality-dirty-turbo.png",
-      "scope": "Alternate Dirty DPM/turbo-only control; NOT the selected quality-adapter profile"
+      "source_artifact": "watchmaker-dpm-sde-sgm-cache-736x1104-quality-ray28-after025.png",
+      "scope": "Exact selected-profile Native output"
     },
     {
-      "file": "watchmaker-face.png",
-      "dimensions": [
-        255,
-        354
-      ],
-      "rgb_sha256": "8354771c0e3c499f8f140fe3b83f9883352545803b0e86c4267a8d426bea888f",
-      "metadata_removed": true,
-      "source": "watchmaker-native.png",
-      "box": [
-        204,
-        127,
-        459,
-        481
-      ],
-      "scope": "Unscaled native-pixel crop"
-    },
-    {
-      "file": "watchmaker-eyes.png",
-      "dimensions": [
-        172,
-        127
-      ],
-      "rgb_sha256": "ad269632c286aa3405da798886f828fc409cbc36f794a018dd44a1f7fbd8291f",
-      "metadata_removed": true,
-      "source": "watchmaker-native.png",
-      "box": [
-        238,
-        218,
-        410,
-        345
-      ],
-      "scope": "Unscaled native-pixel crop"
-    },
-    {
-      "file": "historical-refined-4x.png",
-      "dimensions": [
-        2944,
-        4416
-      ],
-      "rgb_sha256": "5f435b31068960fc2706ce8da5e4f28f08bfc14ac99e02c93d7331403f4ac9d0",
-      "metadata_removed": true,
-      "source_artifact": "refined-samplers-2026-10-26/normal4x-public.png",
-      "scope": "Historical Refined publicAPI4x; NOT Dirty or current timing"
-    },
-    {
-      "file": "historical-refined-4x-preview.png",
+      "file": "watchmaker-processed.png",
       "dimensions": [
         736,
         1104
       ],
-      "rgb_sha256": "b9884c7bab73632a7a4161ac10133a34df3ff4ed560b51a9abea46bde63a954f",
+      "rgb_sha256": "d1656802116bfce7134e073d32738d16d85e7cbc74c8e0a2a5a54c784fd40474",
       "metadata_removed": true,
-      "source_artifact": "refined-samplers-2026-10-26/normal4x-public.png",
+      "source_artifact": "watchmaker-dpm-sde-sgm-cache-736x1104-quality-ray28-after025-processed.png",
+      "scope": "Same faces/Gater settings on saved pixels"
+    },
+    {
+      "file": "watchmaker-4x.png",
+      "dimensions": [
+        2944,
+        4416
+      ],
+      "rgb_sha256": "ba6d7d42c12a58e9a14cec2191af11aeee346fd447a8b081239cb1838d06c93d",
+      "metadata_removed": true,
+      "source_artifact": "watchmaker-dpm-sde-sgm-cache-736x1104-quality-ray28-after025-4x.png",
+      "scope": "Selected candidate, separate identical post-chain"
+    },
+    {
+      "file": "watchmaker-4x-preview.png",
+      "dimensions": [
+        736,
+        1104
+      ],
+      "rgb_sha256": "951f6a0e187d6de9030560d7944ddca07cbf807213f6a3f42c799a81100ed9b0",
+      "metadata_removed": true,
+      "source_artifact": "watchmaker-dpm-sde-sgm-cache-736x1104-quality-ray28-after025-4x.png",
       "resized_preview": true,
-      "scope": "Historical Refined labeled web preview"
+      "scope": "Labeled web preview only"
+    },
+    {
+      "file": "watchmaker-face.png",
+      "dimensions": [
+        1122,
+        1493
+      ],
+      "rgb_sha256": "a95b445c44e5ddceb5f07a282f8f8f2ae7f9cecf8636c0e69a8f567817dd2e01",
+      "metadata_removed": true,
+      "source": "watchmaker-4x.png",
+      "box": [
+        603,
+        542,
+        1725,
+        2035
+      ],
+      "scope": "Exact unscaled4x pixels"
+    },
+    {
+      "file": "watchmaker-eyes.png",
+      "dimensions": [
+        645,
+        454
+      ],
+      "rgb_sha256": "292e18ee1f197641212d81d9fc634c025e4e4d2689e5d56c7fd553d7b16b6c7c",
+      "metadata_removed": true,
+      "source": "watchmaker-4x.png",
+      "box": [
+        945,
+        942,
+        1590,
+        1396
+      ],
+      "scope": "Exact unscaled4x pixels"
     }
   ],
-  "scope": "Saved pixels only; no new inference; selected and alternate/historical conditions explicitly separated."
+  "scope": "Selected Ray/Afterlight.25/DPM-SGM only; no new generation for publication."
 }
