@@ -1,15 +1,15 @@
-"""Staged Native-only video routing; no process launcher and no standalone SD CLI.
+"""Shared Native video routing; no process launcher and no standalone SD CLI.
 
 The shared supervisor owns Native identity/startup/unload. Its global lease is
 held through the Native request and CPU finishing. Public media reads do not
-load/switch models. Root wiring is supplied separately as a reviewable patch.
+load/switch models.
 """
 from __future__ import annotations
 
 import copy
 from contextlib import contextmanager
 from dataclasses import dataclass
-import importlib.util
+import shutil
 import json
 import math
 from pathlib import Path
@@ -20,18 +20,10 @@ import time
 import urllib.parse
 import uuid
 
-try:
-    from NativeVideo import prepare_request, finish_native_video
-except ImportError:
-    source=Path(__file__).resolve().parent.parent/'staged-video/native_video.py'
-    if not source.is_file():raise
-    spec=importlib.util.spec_from_file_location('NativeVideoStaged',source)
-    module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
-    prepare_request,finish_native_video=module.prepare_request,module.finish_native_video
+from NativeVideo import prepare_request, finish_native_video
 
 VIDEO_JSON_PATHS=('/api/extra/video/generate','/v1/videos/generations')
 VIDEO_MEDIA_PREFIX='/api/extra/video/media/'
-VIDEO_NATIVE_SHA256='9b41b9d2fc1117048674063611c52898d723eeed583fca0335f005143dccf161'
 MAX_VIDEO_SECONDS=900
 SIZES={(640,352):('360p','landscape'),(352,640):('360p','portrait'),
        (832,480):('480p','landscape'),(480,832):('480p','portrait')}
@@ -92,7 +84,7 @@ class VideoService:
         self.clock=clock or time.perf_counter
         VideoBudget(deadline_seconds,self.clock)
         self.deadline_seconds=float(deadline_seconds)
-        self.outputs=(self.root/'VIDEO/outputs').resolve()
+        self.outputs=(self.root/'OUTPUTS/video').resolve()
         self.blocker=(self.root/'logs/video-owned-unload-blocker.json').resolve()
         if not self.outputs.is_relative_to(self.root) or not self.blocker.is_relative_to(self.root):
             raise ValueError('Video managed paths must remain inside portable root')
@@ -162,7 +154,7 @@ class VideoService:
         active=state.get('active');identity=self._identity(active)
         profile=self._profile()
         if not identity:return None
-        if identity.get('native_profile')!='video' or identity.get('helper_sha256')!=profile['helper_sha256'] or identity.get('executable_sha256')!=VIDEO_NATIVE_SHA256 or identity.get('port')!=profile.get('port',5003):
+        if identity.get('native_profile')!='video' or identity.get('helper_sha256')!=profile['helper_sha256'] or identity.get('executable_sha256')!=profile['executable_sha256'] or identity.get('port')!=profile.get('port',5003):
             raise RuntimeError('Current context is not this verified video profile; preserved')
         return identity
 
@@ -230,13 +222,21 @@ class VideoService:
         if not self.supervisor or not callable(getattr(self.supervisor,'lease',None)) or not hasattr(self.supervisor,'lock'):
             raise VideoServiceError('Общий менеджер Native не подключён.','video_backend_unavailable',503)
         profile=getattr(self.supervisor,'profiles',{}).get('video',{})
-        expected=(self.root/'VIDEO/runtime/koboldcpp-video.exe').resolve()
-        if Path(profile.get('executable','')).resolve()!=expected or profile.get('executable_sha256')!=VIDEO_NATIVE_SHA256 or not re.fullmatch(r'[0-9a-f]{64}',str(profile.get('helper_sha256',''))):
-            raise VideoServiceError('Менеджер не закрепил проверенный Native JPEG90 EXE/Helper.','video_backend_unavailable',503)
+        expected=(self.root/'koboldcpp-nocuda.exe').resolve()
+        photo=self.supervisor.profiles.get('photo-normal',{})
+        if Path(profile.get('executable','')).resolve()!=expected or profile.get('executable_sha256')!=photo.get('executable_sha256') or not re.fullmatch(r'[0-9a-f]{64}',str(profile.get('helper_sha256',''))) or profile.get('native_jpeg_quality')!=95:
+            raise VideoServiceError('Менеджер не закрепил текущий общий Native с проверенным JPEG95 и видеопрофилем.','video_backend_unavailable',503)
         return profile
 
     def _job(self,payload):
         if not isinstance(payload,dict):raise VideoServiceError('Требуется объект JSON.')
+        allowed={'prompt','frames','fps','seed','resolution','orientation','width','height','n','batch_size','n_iter','steps','cfg_scale','model','genkey','start_frame','video_start_frame','image','init_images','continue_from','sampler_name','scheduler','flow_shift','eta','negative_prompt','upscale_to','enhance_faces'}
+        unknown=set(payload)-allowed
+        if unknown:raise VideoServiceError('Неподдерживаемые поля видео: '+', '.join(sorted(unknown)),status=422)
+        for key,expected in [('steps',4),('cfg_scale',1),('sampler_name','euler'),('scheduler','simple'),('flow_shift',5),('eta',0)]:
+            if key in payload and payload[key]!=expected:raise VideoServiceError('Для выбранной Turbo-модели требуется '+key+'='+str(expected),status=422)
+        if payload.get('model','kobold-video') not in ('kobold-video','kobold-wan22-turbo'):raise VideoServiceError('Неизвестная видео-модель; веса управляются сервером.',status=422)
+        if payload.get('negative_prompt',''):raise VideoServiceError('CFG1 Turbo не использует negative_prompt; задайте позитивное описание.',status=422)
         if any(key in payload for key in ('seconds','duration','duration_seconds')):
             raise VideoServiceError('Пока задайте явное frames: 4n+1, от 5 до 121. Длинное видео ещё не измерено.')
         if payload.get('n',1)!=1 or payload.get('batch_size',1)!=1 or payload.get('n_iter',1)!=1:
@@ -254,13 +254,16 @@ class VideoService:
         images=payload.get('init_images')
         if images is not None and (not isinstance(images,list) or len(images)>1):
             raise VideoServiceError('Для I2V допускается одно начальное PNG.')
-        inline=payload.get('video_start_frame') or payload.get('image') or (images[0] if images else None)
+        image_inputs=[value for value in (payload.get('video_start_frame'),payload.get('image'),images[0] if images else None) if value is not None and value!='']
+        if len(image_inputs)>1:raise VideoServiceError('Укажите только один источник PNG: image, video_start_frame или init_images.',status=422)
+        inline=image_inputs[0] if image_inputs else None
         continuation=payload.get('continue_from')
         if inline and continuation:raise VideoServiceError('Укажите одно начальное изображение.')
         if continuation:
             if not isinstance(continuation,str) or not re.fullmatch(r'[0-9a-f]{32}',continuation):
                 raise VideoServiceError('Некорректный идентификатор предыдущего видео.')
-            previous=(self.outputs/continuation/'last-frame.png').resolve()
+            folder=self.outputs/continuation
+            previous=(folder/('native-last-frame.png' if (folder/'native-last-frame.png').is_file() else 'last-frame.png')).resolve()
             if not previous.is_relative_to(self.outputs) or not previous.is_file():
                 raise VideoServiceError('Последний кадр предыдущего видео отсутствует.','video_not_found',404)
             job['start_frame']=str(previous)
@@ -274,7 +277,7 @@ class VideoService:
         if not is_video_request(path,payload):raise VideoServiceError('Запрос не относится к видеогенерации.')
         self.require_unblocked();profile=self._profile();job=self._job(copy.deepcopy(payload))
         # Validate before acquiring a cold model. No photo defaults/triggers leak in.
-        try:prepare_request(job,self.root,'http://127.0.0.1:'+str(profile.get('port',5003)),native_jpeg_quality=90)
+        try:prepare_request(job,self.root,'http://127.0.0.1:'+str(profile.get('port',5003)),native_jpeg_quality=95)
         except ValueError as error:raise VideoServiceError(str(error)) from error
         created=int(time.time());job_id=uuid.uuid4().hex;destination=self.outputs/job_id
         acquired=False;lease_attempted=False;expected=None;native_sent=False;before_lease=None
@@ -296,7 +299,7 @@ class VideoService:
                 if not expected or expected['run_id']!=active.get('run_id'):
                     raise VideoServiceError('Не подтверждена identity собственного видео-запроса.','video_backend_unavailable',503)
                 ready_seconds=budget.elapsed();budget.remaining()
-                try:plan=prepare_request(job,self.root,active['backend'],native_jpeg_quality=90)
+                try:plan=prepare_request(job,self.root,active['backend'],native_jpeg_quality=95)
                 except ValueError as error:raise VideoServiceError(str(error)) from error
                 native_started=self.clock();native_sent=True
                 # Callback must implement an absolute socket watchdog, not an
@@ -315,7 +318,7 @@ class VideoService:
                 except (ValueError,TypeError):info={}
                 media_path=VIDEO_MEDIA_PREFIX+job_id+'/video.mp4'
                 metadata=dict(id=job_id,model=plan['contract']['model'],backend='KoboldCpp Native',
-                              native_profile='video',native_jpeg_quality=90,output_format='mp4',mime_type='video/mp4',
+                              native_profile='video',native_jpeg_quality=95,vae_decoder=(cfg or {}).get('proxy',{}).get('video',{}).get('codec'),output_format='mp4',mime_type='video/mp4',
                               width=plan['contract']['dimensions'][0],height=plan['contract']['dimensions'][1],
                               frames=finished.get('encoded_frames'),fps=plan['contract']['fps'],
                               duration_seconds=plan['contract']['seconds'],steps=4,cfg_scale=1,
@@ -358,9 +361,54 @@ class VideoService:
             if acquired and prior_readiness is not None:self.supervisor.readiness_seconds=prior_readiness
             if acquired:self.supervisor.lock.release()
 
+    def enhance(self,result,cfg,budget,upscale_to=None,faces=False):
+        """Only saved generated media. Caller holds the global pipeline/GPU locks."""
+        from VideoPost import process_video
+        metadata=dict(result.get('metadata') or result.get('kcpp_video') or {})
+        identity=metadata.get('id')
+        if not isinstance(identity,str) or not re.fullmatch(r'[0-9a-f]{32}',identity):raise VideoServiceError('Некорректный video_id.',status=422)
+        if upscale_to not in (None,'720p') or type(faces) is not bool:raise VideoServiceError('upscale_to:720p или null; enhance_faces:boolean.',status=422)
+        if not(upscale_to or faces):return result
+        folder=(self.outputs/identity).resolve();source=folder/'native.avi'
+        if not folder.is_relative_to(self.outputs) or not source.is_file():raise VideoServiceError('Исходный Native AVI не найден.','video_not_found',404)
+        options=cfg.get('proxy',{}).get('video',{})
+        model=options.get('upscaler','clearreality') if upscale_to else 'lanczos'
+        if model not in ('clearreality','paragon2x','lanczos'):raise VideoServiceError('Неизвестный проверенный видео-апскейлер.',status=422)
+        report=process_video(source,folder/'enhanced',self.root,model=model,faces=faces,target_short_edge=720 if upscale_to else 480,
+            face_provider=options.get('face_provider','directml'),face_visibility=.2,temporal_faces=.25,timeout=budget.remaining())
+        (folder/'video.mp4').rename(folder/'video-native480.mp4')
+        shutil.copy2(folder/'last-frame.png',folder/'native-last-frame.png')
+        Path(report['output']).rename(folder/'video.mp4');shutil.copy2(folder/'enhanced/output-last.png',folder/'last-frame.png')
+        metadata.update(width=report['dimensions'][0],height=report['dimensions'][1],native_dimensions=report['source_dimensions'],
+            upscale=bool(upscale_to),face_processing=bool(report['processed_faces']),processed_faces=report['processed_faces'],
+            output_sha256=report['output_sha256'],output_bytes=report['output_bytes'],enhancement_seconds=report['total_seconds'],
+            total_seconds=round(budget.elapsed(),4),postprocessing={k:v for k,v in report.items() if k!='output'},source_native_preserved=True)
+        metadata.update(native_video_url=self.public_base_url+VIDEO_MEDIA_PREFIX+identity+'/video-native480.mp4',native_last_frame_url=self.public_base_url+VIDEO_MEDIA_PREFIX+identity+'/native-last-frame.png')
+        (folder/'enhancement.json').write_text(json.dumps(metadata,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+        result=dict(result);result['metadata']=metadata;result['url']=metadata['url'];result['data']=[dict(url=metadata['url'],mime_type='video/mp4')]
+        return result
+
+    def upscale_saved(self,payload,cfg,budget):
+        if not isinstance(payload,dict) or set(payload)-{'video_id','enhance_faces'}:raise VideoServiceError('Ожидаются video_id и необязательный enhance_faces.',status=422)
+        identity=payload.get('video_id');faces=payload.get('enhance_faces',False)
+        if not isinstance(identity,str) or not re.fullmatch(r'[0-9a-f]{32}',identity) or type(faces) is not bool:raise VideoServiceError('Некорректный video_id/enhance_faces.',status=422)
+        original=(self.outputs/identity).resolve();service=original/'service.json'
+        if not original.is_relative_to(self.outputs) or not service.is_file() or not (original/'native.avi').is_file():raise VideoServiceError('Исходное видео не найдено.','video_not_found',404)
+        saved=json.loads(service.read_text(encoding='utf-8'));metadata=dict(saved['metadata']);new_id=uuid.uuid4().hex;target=self.outputs/new_id;target.mkdir()
+        for name in ['native.avi','video.mp4']:
+            source=original/('video-native480.mp4' if name=='video.mp4' and (original/'video-native480.mp4').is_file() else name)
+            shutil.copy2(source,target/name)
+        shutil.copy2(original/('native-last-frame.png' if (original/'native-last-frame.png').is_file() else 'last-frame.png'),target/'last-frame.png')
+        metadata.update(id=new_id,url=self.public_base_url+VIDEO_MEDIA_PREFIX+new_id+'/video.mp4',relative_url=VIDEO_MEDIA_PREFIX+new_id+'/video.mp4',
+            last_frame_url=self.public_base_url+VIDEO_MEDIA_PREFIX+new_id+'/last-frame.png',source_video_id=identity)
+        result=dict(id=new_id,object='video',created=int(time.time()),metadata=metadata,url=metadata['url'])
+        result=self.enhance(result,cfg,budget,upscale_to='720p',faces=faces)
+        (target/'service.json').write_text(json.dumps(dict(created=result['created'],metadata=result['metadata']),indent=2)+'\n')
+        return result
+
     def open_media(self,path,headers=None):
         decoded=urllib.parse.unquote(urllib.parse.urlsplit(path).path)
-        match=re.fullmatch(re.escape(VIDEO_MEDIA_PREFIX)+r'([0-9a-f]{32})/(video\.mp4|last-frame\.png)',decoded)
+        match=re.fullmatch(re.escape(VIDEO_MEDIA_PREFIX)+r'([0-9a-f]{32})/(video\.mp4|video-native480\.mp4|last-frame\.png|native-last-frame\.png)',decoded)
         if not match:raise VideoServiceError('Видео не найдено.','video_not_found',404)
         file=(self.outputs/match[1]/match[2]).resolve()
         if not file.is_relative_to(self.outputs) or not file.is_file():
@@ -381,7 +429,7 @@ class VideoService:
                 start=max(0,total-suffix)
             if start>=total or start>end:raise VideoServiceError('Range вне файла.','invalid_range',416,error_headers)
             status=206
-        returned={'Content-Type':'video/mp4' if match[2]=='video.mp4' else 'image/png',
+        returned={'Content-Type':'video/mp4' if match[2].endswith('.mp4') else 'image/png',
                   'Content-Length':str(end-start+1),'Accept-Ranges':'bytes',
                   'X-Content-Type-Options':'nosniff','Cache-Control':'no-store'}
         if status==206:returned['Content-Range']=f'bytes {start}-{end}/{total}'

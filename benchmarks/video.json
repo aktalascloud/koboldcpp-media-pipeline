@@ -1,0 +1,699 @@
+{
+  "date": "2026-10-28",
+  "hardware": "Xeon E5-2696v3 / AMD RX5802048SP8GB Polaris/gfx803; Windows Vulkan",
+  "scene": "Same neutral adult fashion I2V source,seed424242,480x832,24FPS,4Euler/simple steps,CFG1,shift5,no cache",
+  "native_runs": [
+    {
+      "executable_sha256": "6b05639f2ec9ce393edb5ece1aff1117818678ccffa9cd9cdae9970f0194ae49",
+      "model_sha256": "8aa3a98c254bd02a9cc7e4f1db37720fe291cef8b0c32fb78e7a2391125d6b28",
+      "vae": "full",
+      "full_encoder": false,
+      "conv_wg": null,
+      "tiling_threshold": 576,
+      "conv_direct": "full",
+      "offload": false,
+      "load_seconds": 11.07007130002603,
+      "native_seconds": 831.1072240999201,
+      "framecount": 49,
+      "fps": 24,
+      "dimensions": [
+        480,
+        832
+      ],
+      "cache": "disabled",
+      "test": "full-quality-control-f49",
+      "source_avi_sha256": "d1094aaf4378b539fb8560f06c488faba84d9edb1b3d51f8b3e278bb91a7563c",
+      "encoder_seconds": 0.38260969996917993,
+      "gpu_peak_dedicated_mib": 5177.796875,
+      "gpu_peak_shared_mib": 358.765625
+    },
+    {
+      "executable_sha256": "f519a1e865d222e37cffa1e9a2ba8fa64bcea96d3d2fbdab22f7f8bdf6b994d1",
+      "model_sha256": "8aa3a98c254bd02a9cc7e4f1db37720fe291cef8b0c32fb78e7a2391125d6b28",
+      "vae": "full",
+      "full_encoder": null,
+      "conv_wg": null,
+      "tiling_threshold": 576,
+      "conv_direct": "off",
+      "offload": true,
+      "load_seconds": 10.041686499956995,
+      "native_seconds": 297.8101897999877,
+      "framecount": 17,
+      "fps": 24,
+      "dimensions": [
+        480,
+        832
+      ],
+      "cache": "disabled",
+      "test": "full-quality-offload-convoff-f17",
+      "source_avi_sha256": "d3559a858c7e2ace46048079630987cd8f210ae9c993f7ddf147c437af0c340a",
+      "encoder_seconds": 0.3322967999847606,
+      "gpu_peak_dedicated_mib": 5476.98046875,
+      "gpu_peak_shared_mib": 335.7265625
+    },
+    {
+      "executable_sha256": "ba5ca7a56566046a45972a3c7a40eae658d3c4e74bfd30ad35dee7c498f011e8",
+      "model_sha256": "8aa3a98c254bd02a9cc7e4f1db37720fe291cef8b0c32fb78e7a2391125d6b28",
+      "vae": "full",
+      "full_encoder": false,
+      "conv_wg": null,
+      "tiling_threshold": 576,
+      "conv_direct": "full",
+      "offload": false,
+      "load_seconds": 11.037245300016366,
+      "native_seconds": 240.82527139992453,
+      "framecount": 17,
+      "fps": 24,
+      "dimensions": [
+        480,
+        832
+      ],
+      "cache": "disabled",
+      "test": "gcn64-full-control-f17",
+      "source_avi_sha256": "412b00c1f2a076035554eb55981cd6f9bf677fb352f7e225427137c8b233a725",
+      "encoder_seconds": 0.34054389991797507,
+      "gpu_peak_dedicated_mib": 5856.23046875,
+      "gpu_peak_shared_mib": 348.765625
+    },
+    {
+      "executable_sha256": "f519a1e865d222e37cffa1e9a2ba8fa64bcea96d3d2fbdab22f7f8bdf6b994d1",
+      "model_sha256": "8aa3a98c254bd02a9cc7e4f1db37720fe291cef8b0c32fb78e7a2391125d6b28",
+      "vae": "full",
+      "full_encoder": null,
+      "conv_wg": null,
+      "tiling_threshold": 1024,
+      "conv_direct": null,
+      "offload": false,
+      "load_seconds": 18.067151999974158,
+      "native_seconds": 233.34045919997152,
+      "framecount": 17,
+      "fps": 24,
+      "dimensions": [
+        480,
+        832
+      ],
+      "cache": "disabled",
+      "test": "i2v-full-tile1024-f17",
+      "source_avi_sha256": "6c77bd0eeb202180d00e261dd67ebdd50087f0bd9a75afe2f604ac67210a2fd9",
+      "encoder_seconds": 0.15390659996774048,
+      "gpu_peak_dedicated_mib": 5132.47265625,
+      "gpu_peak_shared_mib": 348.765625
+    },
+    {
+      "executable_sha256": "f519a1e865d222e37cffa1e9a2ba8fa64bcea96d3d2fbdab22f7f8bdf6b994d1",
+      "model_sha256": "8aa3a98c254bd02a9cc7e4f1db37720fe291cef8b0c32fb78e7a2391125d6b28",
+      "vae": "full",
+      "full_encoder": null,
+      "conv_wg": null,
+      "tiling_threshold": 576,
+      "conv_direct": "full",
+      "offload": false,
+      "load_seconds": 11.041339099989273,
+      "native_seconds": 210.23275500000454,
+      "framecount": 17,
+      "fps": 24,
+      "dimensions": [
+        480,
+        832
+      ],
+      "cache": "disabled",
+      "test": "i2v-full-tile576-f17",
+      "source_avi_sha256": "412b00c1f2a076035554eb55981cd6f9bf677fb352f7e225427137c8b233a725",
+      "encoder_seconds": 7.978648099990096,
+      "gpu_peak_dedicated_mib": 6282.30859375,
+      "gpu_peak_shared_mib": 348.890625
+    },
+    {
+      "executable_sha256": "f519a1e865d222e37cffa1e9a2ba8fa64bcea96d3d2fbdab22f7f8bdf6b994d1",
+      "model_sha256": "8aa3a98c254bd02a9cc7e4f1db37720fe291cef8b0c32fb78e7a2391125d6b28",
+      "vae": "tiny",
+      "full_encoder": null,
+      "conv_wg": null,
+      "tiling_threshold": 1024,
+      "conv_direct": "off",
+      "offload": false,
+      "load_seconds": 11.051220499968622,
+      "native_seconds": 111.99382840003818,
+      "framecount": 17,
+      "fps": 24,
+      "dimensions": [
+        480,
+        832
+      ],
+      "cache": "disabled",
+      "test": "i2v-tiny-tile1024-conv-off-f17",
+      "source_avi_sha256": "741abc89b17ab01a15f7b7b2d69732ffb0e46a94fd9855a659f6040566f3d42c",
+      "encoder_seconds": 0.34137860004557297,
+      "gpu_peak_dedicated_mib": 4380.34375,
+      "gpu_peak_shared_mib": 2825.875
+    },
+    {
+      "executable_sha256": "f519a1e865d222e37cffa1e9a2ba8fa64bcea96d3d2fbdab22f7f8bdf6b994d1",
+      "model_sha256": "8aa3a98c254bd02a9cc7e4f1db37720fe291cef8b0c32fb78e7a2391125d6b28",
+      "vae": "tiny",
+      "full_encoder": null,
+      "conv_wg": null,
+      "tiling_threshold": 1024,
+      "conv_direct": null,
+      "offload": false,
+      "load_seconds": 10.542244000011124,
+      "native_seconds": 96.01138439995702,
+      "framecount": 17,
+      "fps": 24,
+      "dimensions": [
+        480,
+        832
+      ],
+      "cache": "disabled",
+      "test": "i2v-tiny-tile1024-f17",
+      "source_avi_sha256": "1d748e8a9b0966e5d2477c9655d1430c3cafbeec069cfa391e7fb078ad1d0664",
+      "encoder_seconds": 0.29645599995274097,
+      "gpu_peak_dedicated_mib": 3026.16015625,
+      "gpu_peak_shared_mib": 352.578125
+    },
+    {
+      "executable_sha256": "6b05639f2ec9ce393edb5ece1aff1117818678ccffa9cd9cdae9970f0194ae49",
+      "model_sha256": "8aa3a98c254bd02a9cc7e4f1db37720fe291cef8b0c32fb78e7a2391125d6b28",
+      "vae": "super",
+      "full_encoder": true,
+      "conv_wg": null,
+      "tiling_threshold": 1024,
+      "conv_direct": "full",
+      "offload": false,
+      "load_seconds": 12.045620799995959,
+      "native_seconds": 51.37626300007105,
+      "framecount": 17,
+      "fps": 24,
+      "dimensions": [
+        480,
+        832
+      ],
+      "cache": "disabled",
+      "test": "split-full-super-control-f17",
+      "source_avi_sha256": "a1c2955a2d188784a895b811364ae2326486e9ccbd8e19f53e0fba1164533e71",
+      "encoder_seconds": 0.8072401999961585,
+      "gpu_peak_dedicated_mib": 4359.09765625,
+      "gpu_peak_shared_mib": 385.015625
+    },
+    {
+      "executable_sha256": "6b05639f2ec9ce393edb5ece1aff1117818678ccffa9cd9cdae9970f0194ae49",
+      "model_sha256": "8aa3a98c254bd02a9cc7e4f1db37720fe291cef8b0c32fb78e7a2391125d6b28",
+      "vae": "super",
+      "full_encoder": true,
+      "conv_wg": null,
+      "tiling_threshold": 1024,
+      "conv_direct": "full",
+      "offload": false,
+      "load_seconds": 12.030543300090358,
+      "native_seconds": 140.0570690999739,
+      "framecount": 49,
+      "fps": 24,
+      "dimensions": [
+        480,
+        832
+      ],
+      "cache": "disabled",
+      "test": "split-super-quality-f49",
+      "source_avi_sha256": "38b11820c4a000fb84e80298b1ea06e155eba487c32fb9492e44dc62284a422c",
+      "encoder_seconds": 0.20031119999475777,
+      "gpu_peak_dedicated_mib": 5617.99609375,
+      "gpu_peak_shared_mib": 510.9609375
+    },
+    {
+      "executable_sha256": "6b05639f2ec9ce393edb5ece1aff1117818678ccffa9cd9cdae9970f0194ae49",
+      "model_sha256": "8aa3a98c254bd02a9cc7e4f1db37720fe291cef8b0c32fb78e7a2391125d6b28",
+      "vae": "super",
+      "full_encoder": true,
+      "conv_wg": null,
+      "tiling_threshold": 1024,
+      "conv_direct": "full",
+      "offload": false,
+      "load_seconds": 11.037443900015205,
+      "native_seconds": 49.83255709998775,
+      "framecount": 17,
+      "fps": 24,
+      "dimensions": [
+        480,
+        832
+      ],
+      "cache": "disabled",
+      "test": "split-super-text-f17",
+      "source_avi_sha256": "7b5e2cdf61ca23bbe6fd29ae4e66c46d756a021b644367638a21808a5c32e3b3",
+      "encoder_seconds": 0.1305772999767214,
+      "gpu_peak_dedicated_mib": 4355.0859375,
+      "gpu_peak_shared_mib": 385.015625
+    },
+    {
+      "executable_sha256": "6b05639f2ec9ce393edb5ece1aff1117818678ccffa9cd9cdae9970f0194ae49",
+      "model_sha256": "8aa3a98c254bd02a9cc7e4f1db37720fe291cef8b0c32fb78e7a2391125d6b28",
+      "vae": "super",
+      "full_encoder": true,
+      "conv_wg": "512",
+      "tiling_threshold": 1024,
+      "conv_direct": "full",
+      "offload": false,
+      "load_seconds": 12.047262999927625,
+      "native_seconds": 50.9601365000708,
+      "framecount": 17,
+      "fps": 24,
+      "dimensions": [
+        480,
+        832
+      ],
+      "cache": "disabled",
+      "test": "split-super-wg512-f17-f17",
+      "source_avi_sha256": "a1c2955a2d188784a895b811364ae2326486e9ccbd8e19f53e0fba1164533e71",
+      "encoder_seconds": 0.3284894999815151,
+      "gpu_peak_dedicated_mib": 4146.90234375,
+      "gpu_peak_shared_mib": 376.890625
+    },
+    {
+      "executable_sha256": "6b05639f2ec9ce393edb5ece1aff1117818678ccffa9cd9cdae9970f0194ae49",
+      "model_sha256": "8aa3a98c254bd02a9cc7e4f1db37720fe291cef8b0c32fb78e7a2391125d6b28",
+      "vae": "super",
+      "full_encoder": true,
+      "conv_wg": "512",
+      "tiling_threshold": 1024,
+      "conv_direct": "full",
+      "offload": false,
+      "load_seconds": 12.04619439993985,
+      "native_seconds": 140.0827306000283,
+      "framecount": 49,
+      "fps": 24,
+      "dimensions": [
+        480,
+        832
+      ],
+      "cache": "disabled",
+      "test": "split-super-wg512-f49",
+      "source_avi_sha256": "38b11820c4a000fb84e80298b1ea06e155eba487c32fb9492e44dc62284a422c",
+      "encoder_seconds": 0.37491959996987134,
+      "gpu_peak_dedicated_mib": 5617.99609375,
+      "gpu_peak_shared_mib": 510.9609375
+    },
+    {
+      "executable_sha256": "ba5ca7a56566046a45972a3c7a40eae658d3c4e74bfd30ad35dee7c498f011e8",
+      "model_sha256": "8aa3a98c254bd02a9cc7e4f1db37720fe291cef8b0c32fb78e7a2391125d6b28",
+      "vae": "super",
+      "full_encoder": null,
+      "conv_wg": null,
+      "tiling_threshold": 1024,
+      "conv_direct": "full",
+      "offload": false,
+      "load_seconds": 10.539449400035664,
+      "native_seconds": 95.17999569990207,
+      "framecount": 17,
+      "fps": 24,
+      "dimensions": [
+        480,
+        832
+      ],
+      "cache": "disabled",
+      "test": "super-native-port-f17",
+      "source_avi_sha256": "a48c83d676f99be96a92c405afba88af2eb9a1d15e82ed728bb9c7e1a066d5e5",
+      "encoder_seconds": 0.3348261999199167,
+      "gpu_peak_dedicated_mib": 4399.9921875,
+      "gpu_peak_shared_mib": 352.578125
+    }
+  ],
+  "post_runs": [
+    {
+      "model": "clearreality",
+      "faces": false,
+      "face_provider": null,
+      "frames": 17,
+      "dimensions": [
+        720,
+        1248
+      ],
+      "total_seconds": 8.793429300014395,
+      "sr_seconds": 7.654495600028895,
+      "face_seconds": 0,
+      "processed_faces": 0,
+      "gpu_profile": {
+        "dml_nodes": 74,
+        "cpu_core_nodes": []
+      },
+      "face_gpu_profile": null,
+      "source_dimensions": [
+        480,
+        832
+      ],
+      "test": "post/i2v-tiny-tile1024-f17/clearreality"
+    },
+    {
+      "model": "clearreality",
+      "faces": true,
+      "face_provider": null,
+      "frames": 17,
+      "dimensions": [
+        720,
+        1248
+      ],
+      "total_seconds": 31.463441200030502,
+      "sr_seconds": 7.408959699911065,
+      "face_seconds": 21.913294600206427,
+      "processed_faces": 17,
+      "gpu_profile": {
+        "dml_nodes": 74,
+        "cpu_core_nodes": []
+      },
+      "face_gpu_profile": null,
+      "source_dimensions": [
+        480,
+        832
+      ],
+      "test": "post/i2v-tiny-tile1024-f17/clearreality-faces-temporal"
+    },
+    {
+      "model": "clearreality",
+      "faces": true,
+      "face_provider": "directml",
+      "frames": 17,
+      "dimensions": [
+        720,
+        1248
+      ],
+      "total_seconds": 21.837778599990997,
+      "sr_seconds": 7.3976948000490665,
+      "face_seconds": 11.292306999792345,
+      "processed_faces": 17,
+      "gpu_profile": {
+        "dml_nodes": 74,
+        "cpu_core_nodes": []
+      },
+      "face_gpu_profile": {
+        "dml_nodes": 1,
+        "cpu_core_nodes": []
+      },
+      "source_dimensions": [
+        480,
+        832
+      ],
+      "test": "post/i2v-tiny-tile1024-f17/clearreality-faces-temporal-directml"
+    },
+    {
+      "model": "clearreality",
+      "faces": true,
+      "face_provider": "directml",
+      "frames": 17,
+      "dimensions": [
+        720,
+        1248
+      ],
+      "total_seconds": 21.98635160003323,
+      "sr_seconds": 7.354604900174309,
+      "face_seconds": 11.152405000058934,
+      "processed_faces": 17,
+      "gpu_profile": {
+        "dml_nodes": 74,
+        "cpu_core_nodes": []
+      },
+      "face_gpu_profile": {
+        "dml_nodes": 1,
+        "cpu_core_nodes": []
+      },
+      "source_dimensions": [
+        480,
+        832
+      ],
+      "test": "post/i2v-tiny-tile1024-f17/clearreality-faces-temporal-directml-constfold"
+    },
+    {
+      "model": "lanczos",
+      "faces": false,
+      "face_provider": null,
+      "frames": 17,
+      "dimensions": [
+        720,
+        1248
+      ],
+      "total_seconds": 4.069044700008817,
+      "sr_seconds": 0.3127097000833601,
+      "face_seconds": 0,
+      "processed_faces": 0,
+      "gpu_profile": null,
+      "face_gpu_profile": null,
+      "source_dimensions": [
+        480,
+        832
+      ],
+      "test": "post/i2v-tiny-tile1024-f17/lanczos"
+    },
+    {
+      "model": "paragon2x",
+      "faces": false,
+      "face_provider": null,
+      "frames": 17,
+      "dimensions": [
+        720,
+        1248
+      ],
+      "total_seconds": 5.737660100043286,
+      "sr_seconds": 4.30193220009096,
+      "face_seconds": 0,
+      "processed_faces": 0,
+      "gpu_profile": {
+        "dml_nodes": 177,
+        "cpu_core_nodes": []
+      },
+      "face_gpu_profile": null,
+      "source_dimensions": [
+        480,
+        832
+      ],
+      "test": "post/i2v-tiny-tile1024-f17/paragon2x"
+    },
+    {
+      "model": "paragon2x",
+      "faces": true,
+      "face_provider": null,
+      "frames": 17,
+      "dimensions": [
+        720,
+        1248
+      ],
+      "total_seconds": 28.798036799998954,
+      "sr_seconds": 3.9138550999341533,
+      "face_seconds": 22.241277499939315,
+      "processed_faces": 17,
+      "gpu_profile": {
+        "dml_nodes": 177,
+        "cpu_core_nodes": []
+      },
+      "face_gpu_profile": null,
+      "source_dimensions": [
+        480,
+        832
+      ],
+      "test": "post/i2v-tiny-tile1024-f17/paragon2x-faces-temporal"
+    },
+    {
+      "model": "paragon2x",
+      "faces": true,
+      "face_provider": "directml",
+      "frames": 17,
+      "dimensions": [
+        720,
+        1248
+      ],
+      "total_seconds": 17.713151599979028,
+      "sr_seconds": 3.9343847000272945,
+      "face_seconds": 11.217069999896921,
+      "processed_faces": 17,
+      "gpu_profile": {
+        "dml_nodes": 177,
+        "cpu_core_nodes": []
+      },
+      "face_gpu_profile": {
+        "dml_nodes": 1,
+        "cpu_core_nodes": []
+      },
+      "source_dimensions": [
+        480,
+        832
+      ],
+      "test": "post/i2v-tiny-tile1024-f17/paragon2x-faces-temporal-directml"
+    },
+    {
+      "model": "paragon2x",
+      "faces": true,
+      "face_provider": "directml",
+      "frames": 17,
+      "dimensions": [
+        720,
+        1248
+      ],
+      "total_seconds": 17.88761750003323,
+      "sr_seconds": 3.8868363000801764,
+      "face_seconds": 11.124017600086518,
+      "processed_faces": 17,
+      "gpu_profile": {
+        "dml_nodes": 177,
+        "cpu_core_nodes": []
+      },
+      "face_gpu_profile": {
+        "dml_nodes": 1,
+        "cpu_core_nodes": []
+      },
+      "source_dimensions": [
+        480,
+        832
+      ],
+      "test": "post/i2v-tiny-tile1024-f17/paragon2x-faces-temporal-directml-constfold"
+    },
+    {
+      "model": "realesr-general",
+      "faces": false,
+      "face_provider": null,
+      "frames": 17,
+      "dimensions": [
+        720,
+        1248
+      ],
+      "total_seconds": 9.661876300000586,
+      "sr_seconds": 8.6531806999119,
+      "face_seconds": 0,
+      "processed_faces": 0,
+      "gpu_profile": {
+        "dml_nodes": 70,
+        "cpu_core_nodes": []
+      },
+      "face_gpu_profile": null,
+      "source_dimensions": [
+        480,
+        832
+      ],
+      "test": "post/i2v-tiny-tile1024-f17/realesr-general"
+    },
+    {
+      "model": "clearreality",
+      "faces": true,
+      "face_provider": "directml",
+      "frames": 49,
+      "dimensions": [
+        720,
+        1248
+      ],
+      "total_seconds": 56.080469199921936,
+      "sr_seconds": 21.02542929991614,
+      "face_seconds": 32.28760449914262,
+      "processed_faces": 49,
+      "gpu_profile": {
+        "dml_nodes": 74,
+        "cpu_core_nodes": []
+      },
+      "face_gpu_profile": {
+        "dml_nodes": 1,
+        "cpu_core_nodes": []
+      },
+      "source_dimensions": [
+        480,
+        832
+      ],
+      "test": "post/split-super-quality-f49/clearreality-faces-temporal-directml"
+    },
+    {
+      "model": "paragon2x",
+      "faces": true,
+      "face_provider": "directml",
+      "frames": 49,
+      "dimensions": [
+        720,
+        1248
+      ],
+      "total_seconds": 47.355797399999574,
+      "sr_seconds": 11.07925190019887,
+      "face_seconds": 32.98311729985289,
+      "processed_faces": 50,
+      "gpu_profile": {
+        "dml_nodes": 177,
+        "cpu_core_nodes": []
+      },
+      "face_gpu_profile": {
+        "dml_nodes": 1,
+        "cpu_core_nodes": []
+      },
+      "source_dimensions": [
+        480,
+        832
+      ],
+      "test": "post/split-super-quality-f49/paragon2x-faces-temporal-directml"
+    }
+  ],
+  "selected_codec": "Full Wan VAE quality default;Super-Tiny optional,not lossless",
+  "selected_post": "ClearReality FP32 DirectML; optional YuNet960/GPEN20%/SFace.97 DirectML,guarded motion-compensated face residual smoothing",
+  "constraints": [
+    "17frames is0.7083s;49frames is2.0417s;no30second continuity proof.",
+    "Native and post times are isolated,not automatically full API latency.",
+    "Full49 uses tiling576;split49 uses1024: this compares pipeline configurations,not an isolated decoder-only change.17frame full1024 control is also retained.",
+    "Super-Tiny may soften/change fine details;not lossless full VAE.",
+    "GPU shared allocation alone is not Windows pagefile proof.",
+    "Per-frame SR can flicker;face guards do not guarantee exact identity or anatomy.",
+    "DR34ML4Y adapter only technically loaded,not used for generated comparisons."
+  ],
+  "source_review": {
+    "repository": "https://github.com/advanced-lvl-up/Rx470-Vega10-Rx580-gfx803-gfx900-fix-AMD-GPU",
+    "commit": "6547664db8732305530b969b54c9b7d3806c02e1",
+    "role_split_workflow": "New-Wan5B-image2vid-workflow-VAE-FIX.json",
+    "archive_files": 126,
+    "scope": "README,workflow,attention helper text,archive listing/relevant text and issue7 comments;not every file audited.",
+    "rejected": "rocBLAS/Tensile affects ROCm/ZLUDA,not this Vulkan backend;experimentalFP16 accumulation warns of incoherence;coopmat2 PRs need newer hardware."
+  },
+  "public_api": {
+    "ok": true,
+    "request_seconds": 261.17460320005193,
+    "photo_ready_after_seconds": 281.95418230001815,
+    "range_read": true,
+    "photo_resident_restored": true,
+    "executable_sha256": "6b05639f2ec9ce393edb5ece1aff1117818678ccffa9cd9cdae9970f0194ae49",
+    "scope": "One actual public17frame I2V/ClearReality720/GPEN-SFace request,not30second continuity.",
+    "stages": {
+      "frames": 17,
+      "fps": 24,
+      "width": 720,
+      "height": 1248,
+      "duration_seconds": 0.7083333333333334,
+      "vae_decoder": "full Wan VAE",
+      "profile_ready_seconds": 21.7172,
+      "native_call_seconds": 213.8425,
+      "encoder_seconds": 0.41707920003682375,
+      "enhancement_seconds": 22.611584500060417,
+      "processed_faces": 17
+    }
+  },
+  "gater_frame_trials": {
+    "runs": [
+      {
+        "frame": 0,
+        "inference_seconds": 0.8858395999995992,
+        "total_seconds": 3.3314048000611365
+      },
+      {
+        "frame": 24,
+        "inference_seconds": 0.8245952000143006,
+        "total_seconds": 2.5756268999539316
+      },
+      {
+        "frame": 48,
+        "inference_seconds": 0.8267358000157401,
+        "total_seconds": 2.5926305999746546
+      }
+    ],
+    "activated": false,
+    "verdict": "Smoother frame texture,but lost eye detail is not restored;not added to video default."
+  },
+  "guarded_face_strength_trials": {
+    "weights": [
+      0.2,
+      0.35,
+      0.5
+    ],
+    "frames": [
+      "first",
+      "last"
+    ],
+    "evidence": "face-strength/comparison.png",
+    "verdict": "Higher strength did not recover Super-Tiny eye detail;20percent retained."
+  }
+}

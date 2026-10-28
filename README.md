@@ -37,3 +37,7 @@ Dirty is an **optional backup**, not installed by default: `-IncludeDirtyBackup`
 ## Music
 
 **YuE2 Q8 + F16 VAE**, client-side NeoHorse helper, MP3 stereo. One measured32s request: **57.01s** including model handoff; photo resident again by61.07s. Russian short trial accepted by the user; long songs untested. [OWUI filter](docs/MUSIC.md), [Russian specification](docs/MUSIC.ru.md), [MP3 example](examples/yue2-russian-32s.mp3), [proof](benchmarks/music.json). Weights CC-BY-NC-4.0, original downloads only; ACE-Step removed.
+
+## Video
+
+[480p Native generation,720p enhancement and API](docs/VIDEO.md) · [Русская инструкция OWUI](docs/VIDEO.ru.md) · [Measured timings](benchmarks/video.json). Models download from their original distributors.

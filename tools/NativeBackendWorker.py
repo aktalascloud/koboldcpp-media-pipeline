@@ -40,6 +40,13 @@ def main():
     temporary = root / 'runtime/tmp'
     temporary.mkdir(parents=True, exist_ok=True)
     environment = os.environ.copy()
+    environment.pop('KCPP_WAN_TAE_DECODER',None)
+    decoder=h.get('kcpp_video_tae_decoder')
+    if decoder is not None:
+        if args.profile!='video' or not isinstance(decoder,dict) or set(decoder)!={'path','sha256'}:raise SupervisorError('Independent Tiny decoder is video-only and must be pinned.','invalid_profile_config')
+        decoder_path=root_path(root,decoder['path'])
+        if not decoder_path.is_file() or not 0<decoder_path.stat().st_size<64*1024**2 or sha256(decoder_path)!=decoder['sha256']:raise SupervisorError('Independent Tiny decoder identity mismatch.','profile_file_changed')
+        environment['KCPP_WAN_TAE_DECODER']=str(decoder_path)
     environment['TMP'] = environment['TEMP'] = str(temporary)
     environment['PYTHONUNBUFFERED'] = '1'
     environment['PYTHONIOENCODING'] = 'utf-8'
@@ -49,11 +56,14 @@ def main():
     allowed_environment = {'GGML_VK_ALLOW_GRAPHICS_QUEUE', 'GGML_VK_POLARIS_SAFE',
         'GGML_VK_MAX_NODES_PER_SUBMIT', 'GGML_VK_BATCHED_SUBMITS', 'GGML_VK_FORCE_MMVQ',
         'GGML_VK_DISABLE_MMVQ', 'GGML_VK_DISABLE_ASYNC', 'GGML_VK_GCN_TILE64',
-        'GGML_VK_GCN_TILE_VARIANT', 'GGML_VK_IQ4_XS_ROWS', 'GGML_VK_IQ4_XS_WG'}
+        'GGML_VK_GCN_TILE_VARIANT', 'GGML_VK_IQ4_XS_ROWS', 'GGML_VK_IQ4_XS_WG', 'GGML_VK_GCN_CONV_WG'}
+    profile_environment=h.get('kcpp_native_environment',{})
+    if not isinstance(native_environment,dict) or not isinstance(profile_environment,dict):raise SupervisorError('Native environments must be objects.','invalid_profile_config')
+    native_environment={**native_environment,**profile_environment}
     if not isinstance(native_environment, dict) or set(native_environment) - allowed_environment:
         raise SupervisorError('Unknown portable Vulkan environment option.', 'invalid_profile_config')
     for key, value in native_environment.items():
-        valid = isinstance(value, str) and (value in {'k16','m32','n32'} if key == 'GGML_VK_GCN_TILE_VARIANT' else bool(re.fullmatch(r'[0-9]{1,4}', value)))
+        valid = isinstance(value, str) and (value in {'k16','m32','n32'} if key == 'GGML_VK_GCN_TILE_VARIANT' else value in {'256','512'} if key=='GGML_VK_GCN_CONV_WG' else bool(re.fullmatch(r'[0-9]{1,4}', value)))
         if not valid:
             raise SupervisorError('Invalid portable Vulkan option value.', 'invalid_profile_config')
     if environment_file.is_file():

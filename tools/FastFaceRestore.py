@@ -34,7 +34,7 @@ class FeatureGuard:
     def similarity(self,a,b,face):return float(np.dot(self.feature(a,face),self.feature(b,face)))
 
 class Restorer:
-    def __init__(self,model,provider='directml',detector=None,guard=None,profile_prefix=None):
+    def __init__(self,model,provider='directml',detector=None,guard=None,profile_prefix=None,freeze_initializers=False):
         self.path=Path(model);self.provider=provider;self.detector=detector or FaceDetailer();self.guard=guard
         options=ort.SessionOptions();options.enable_mem_pattern=False;options.execution_mode=ort.ExecutionMode.ORT_SEQUENTIAL
         options.intra_op_num_threads=2;options.inter_op_num_threads=1
@@ -42,13 +42,23 @@ class Restorer:
         adapter=select_dml_adapter() if provider=='directml' else None
         providers=[('DmlExecutionProvider',{'device_id':adapter['index']}),'CPUExecutionProvider'] if adapter else ['CPUExecutionProvider']
         start=time.perf_counter()
+        frozen=0
         if provider=='openvino':
             self.session=OvSession(self.path,threads=10)
-        else:self.session=ort.InferenceSession(str(self.path),sess_options=options,providers=providers)
+        else:
+            source=str(self.path)
+            if freeze_initializers:
+                import onnx
+                graph=onnx.load(str(self.path));constants={v.name for v in graph.graph.initializer}
+                inputs=[v for v in graph.graph.input if v.name not in constants or v.name in ('input','weight')];frozen=len(graph.graph.input)-len(inputs)
+                del graph.graph.input[:];graph.graph.input.extend(inputs)
+                source=graph.SerializeToString();del graph
+            self.session=ort.InferenceSession(source,sess_options=options,providers=providers)
         if provider=='directml' and self.session.get_providers()[0]!='DmlExecutionProvider':raise RuntimeError('DirectML not active')
         self.inputs=self.session.get_inputs();self.output_name=self.session.get_outputs()[0].name;self.load_seconds=round(time.perf_counter()-start,4)
         self.metadata=dict(model=str(self.path),model_sha256=hashlib.sha256(self.path.read_bytes()).hexdigest(),provider=provider,ort_version=ort.__version__,load_seconds=self.load_seconds,inputs=[dict(name=i.name,type=i.type,shape=i.shape) for i in self.inputs])
         self.metadata['adapter']=adapter
+        self.metadata['in_memory_frozen_initializers']=frozen
     def restore_crop(self,crop,fidelity):
         tensor=np.ascontiguousarray((crop.astype(np.float32)/127.5-1).transpose(2,0,1)[None])
         feed={}

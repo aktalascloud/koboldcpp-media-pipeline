@@ -1,6 +1,7 @@
-YuE2 music · NeoHorse/OWUI · photo settings unchanged
+Wan5B video API · full VAE quality default · optional 720p
 
-- Replaces ACE-Step with YuE2 Q8 + F16 VAE; no Gemma. Existing client helper composes lyrics/style once. [OWUI rules](https://github.com/aktalascloud/koboldcpp-media-pipeline/blob/main/docs/MUSIC.ru.md).
-- One32s MP3 request: **57.01s** including model handoff; resident photo restored by61.07s. Isolated32s diagnostic:40.13s; peak4419.60MiB dedicated VRAM, no OOM. User accepted Russian short-trial vocals; long songs untested.28Oct2026,EXE6c03b583. [Proof](https://github.com/aktalascloud/koboldcpp-media-pipeline/blob/main/benchmarks/music.json) / [MP3](https://github.com/aktalascloud/koboldcpp-media-pipeline/blob/main/examples/yue2-russian-32s.mp3).
-- Family-aware startup/model guards, duration-to-token mapping, old ACE fields422 and empty Native audio502. Ray photo profiles/face restoration/SR unchanged; no native rebuild.
-- Code-only kit, pinned original weight downloads; YuE2 CC-BY-NC-4.0. No model weights, secrets, caches or logs mirrored. Existing third-party attribution/licenses retained.
+- Adds `/v1/videos/generations` and `/v1/videos/upscale`: one start PNG or text, MP4/Range output, exclusive GPU handoff and automatic resident-photo recovery. [API instructions](docs/VIDEO.md).
+- Actual public 17-frame cycle: **261.17s** for **0.71s** of video, including ClearReality720p and guarded GPEN/SFace. Photo returned by **281.95s**. Native EXE `6b05639f`, 28 October 2026. [Scoped proof](benchmarks/video.json).
+- Full VAE preserved eyes better. A faster Super-Tiny configuration took 140.06s versus 831.11s for 49 frames, but lost detail; it is not the default. These compare complete VAE/tiling configurations. Continuous 30-second quality/speed is unvalidated.
+- Ray photo and YuE2 music settings remain unchanged; their dated results were not remeasured. [Optimized Native build](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa).
+- Minimal code-only kit; weights and FFmpeg download from pinned original sources. MIT/AGPL/GPL/model notices retained. No model mirrors, keys, caches or logs.

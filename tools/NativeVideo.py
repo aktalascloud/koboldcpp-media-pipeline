@@ -1,4 +1,4 @@
-"""Staged Native Kobold request builder and CPU-only AVI-to-MP4 finishing.
+"""Native Kobold request builder and CPU-only AVI-to-MP4 finishing.
 
 One bounded loopback HTTP request is available for the video service. No model
 loader, SD CLI, profile switch or GPU call; Supervisor owns startup/unload.
@@ -22,7 +22,7 @@ from urllib.parse import urlparse
 import zlib
 
 SIZES = {'360p': (640, 352), '480p': (832, 480)}
-FPS = 16
+FPS = 24
 MAX_FRAMES = 121
 MAX_RESPONSE_BYTES = 256 * 1024**2
 MAX_START_BYTES = 16 * 1024**2
@@ -80,8 +80,8 @@ def project_root(value: str | Path | None = None) -> Path:
         root = Path(ROOT).resolve()
     else:
         root = Path(value).resolve()
-    if not (root / 'VIDEO').is_dir():
-        raise ValueError('Portable root must contain VIDEO')
+    if not (root / 'Helper.kcpps').is_file():
+        raise ValueError('Portable root must contain Helper.kcpps')
     return root
 
 
@@ -128,18 +128,20 @@ def png_dimensions(data: bytes) -> tuple[int, int]:
 
 def prepare_request(job: dict, root: str | Path | None = None,
                     backend: str = 'http://127.0.0.1:5013',
-                    native_jpeg_quality: int = 40) -> dict:
+                    native_jpeg_quality: int = 95) -> dict:
     """Build only. Do not send this request through the ordinary photo pipeline."""
     root = project_root(root)
-    if native_jpeg_quality not in (40, 90):
-        raise ValueError('Manager must identify a verified NativeJPEG40/90 binary; this is metadata, not an APIoverride')
+    if native_jpeg_quality not in (40, 90, 95):
+        raise ValueError('Manager must identify the actual verified Native JPEG quality; this is metadata, not an API override')
     address = urlparse(backend)
     if address.scheme != 'http' or address.hostname not in ('127.0.0.1', 'localhost') or address.port not in (5003, 5013) or address.path not in ('', '/') or address.query or address.fragment or address.username:
         raise ValueError('Expected local Native manager backend on5003/5013')
-    resolution = job.get('resolution', '360p')
+    resolution = job.get('resolution', '480p')
     if resolution not in SIZES:
         raise ValueError('Resolution must be360p or480p')
     width, height = SIZES[resolution]
+    if job.get('orientation', 'landscape') not in ('portrait','landscape'):
+        raise ValueError('Orientation must be portrait or landscape')
     if job.get('orientation', 'landscape') == 'portrait':
         width, height = height, width
     elif job.get('orientation', 'landscape') != 'landscape':
@@ -148,7 +150,7 @@ def prepare_request(job: dict, root: str | Path | None = None,
     if isinstance(frames, bool) or not isinstance(frames, int) or not 5 <= frames <= MAX_FRAMES or frames % 4 != 1:
         raise ValueError('Frames must be4n+1, from5 through121')
     if job.get('fps', FPS) != FPS or job.get('steps', 4) != 4 or job.get('cfg_scale', 1) != 1:
-        raise ValueError('Staged video fixesFPS16,4steps,CFG1')
+        raise ValueError('Video usesFPS24,4steps,CFG1')
     prompt = str(job.get('prompt', '')).strip()
     if not prompt or len(prompt.encode('utf-8')) > 2400:
         raise ValueError('Prompt must contain1..2400UTF8bytes')
@@ -159,7 +161,7 @@ def prepare_request(job: dict, root: str | Path | None = None,
         raise ValueError('Seed must fit signed32-bit integer or-1')
     payload = dict(prompt=prompt, negative_prompt='', width=width, height=height,
                    frames=frames, fps=FPS, steps=4, cfg_scale=1, sampler_name='euler',
-                   scheduler='simple', flow_shift=3, eta=0, clip_skip=-1,
+                   scheduler='simple', flow_shift=5, eta=0, clip_skip=-1,
                    cache_mode='disabled', cache_options='', enable_hr=False,
                    video_output_type=1, seed=seed, lora=[])
     payload['kcpp_extra_args']=dict(keep_image_gen_on_disconnect=False)
@@ -190,7 +192,7 @@ def prepare_request(job: dict, root: str | Path | None = None,
     return dict(endpoint=backend.rstrip('/') + '/sdapi/v1/txt2img', payload=payload,
                 contract=dict(backend='Native KoboldCpp1.123.1', dimensions=[width, height],
                               frames=frames, fps=FPS, seconds=frames/FPS,
-                              model='Wan2.2-TI2V-5B-Turbo-Q4_K_S', start_frame=start_metadata,
+                              model='Wan2.2-TI2V-5B-Turbo-Q4_0', start_frame=start_metadata,
                               automatic_photo_details=False, automatic_upscale=False,
                               source_container='MJPEG AVI', source_jpeg_quality=native_jpeg_quality,
                               lossless_native_frames_available=False,
@@ -249,7 +251,7 @@ def finish_native_video(answer: dict, plan: dict, output_dir: str | Path,
     destination = Path(output_dir)
     if not destination.is_absolute():destination=root/destination
     destination=destination.resolve()
-    allowed = [root/'VIDEO/outputs', root/'benchmarks/portable-photo-video-2026-10-20/artifacts']
+    allowed = [root/'OUTPUTS/video', root/'RESULTS/Video']
     if not any(destination.is_relative_to(path.resolve()) for path in allowed):
         raise ValueError('Output must stay within managed VIDEO outputs or benchmark artifacts')
     if not answer.get('animated'):
@@ -272,7 +274,7 @@ def finish_native_video(answer: dict, plan: dict, output_dir: str | Path,
     final = decode_base64(answer.get('final_frame', ''), MAX_START_BYTES)
     if list(png_dimensions(final)) != contract['dimensions']:
         raise ValueError('Native finalPNG dimensions differ from AVI')
-    ffmpeg = root/'VIDEO/runtime/ffmpeg.exe'
+    ffmpeg = root/'runtime/ffmpeg/ffmpeg.exe'
     if not ffmpeg.is_file():
         raise ValueError('Bundled FFmpeg missing')
     native_file, last_frame = destination/'native.avi', destination/'last-frame.png'

@@ -12,7 +12,7 @@ from PIL import Image
 import onnxruntime as ort
 
 class PhotoUpscaler:
-    def __init__(self,model,scale=4,provider='directml',tile=256,padding=32,threads=10,output_scale=2):
+    def __init__(self,model,scale=4,provider='directml',tile=256,padding=32,threads=10,output_scale=2,profile_prefix=None):
         self.model=Path(model);self.scale=int(scale);self.provider=provider;self.tile=int(tile);self.padding=int(padding);self.session=None;self.compiled=None
         assert self.scale in (2,4) and self.tile>=0
         self.output_scale=int(output_scale)
@@ -31,6 +31,7 @@ class PhotoUpscaler:
             self.input_name=self.compiled.input(0).any_name
         else:
             options=ort.SessionOptions();options.enable_mem_pattern=False;options.execution_mode=ort.ExecutionMode.ORT_SEQUENTIAL;options.intra_op_num_threads=int(threads) if provider=='cpu' else 2;options.inter_op_num_threads=1
+            if profile_prefix:options.enable_profiling=True;options.profile_file_prefix=str(profile_prefix)
             options.graph_optimization_level=ort.GraphOptimizationLevel.ORT_ENABLE_BASIC
             self.adapter=select_dml_adapter() if provider=='directml' else None
             providers=[('DmlExecutionProvider',{'device_id':self.adapter['index']}),'CPUExecutionProvider'] if self.adapter else ['CPUExecutionProvider']

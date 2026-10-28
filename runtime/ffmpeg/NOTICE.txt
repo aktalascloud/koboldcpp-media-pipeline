@@ -1,0 +1,1 @@
+FFmpeg GPL build downloaded unchanged from BtbN/FFmpeg-Builds. See LICENSE.txt and provenance.json for the exact original release, archive/binary SHA and build/source repository. This binary is not mirrored by our GitHub code-only release.

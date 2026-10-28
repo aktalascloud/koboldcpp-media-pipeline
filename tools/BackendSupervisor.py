@@ -328,8 +328,8 @@ class BackendSupervisor:
         if self.music_on_demand and not same_path(self.profiles['music']['executable'], self.root / 'koboldcpp-nocuda.exe'):
             raise SupervisorError('Music must use the same Root Kobold executable.', 'invalid_profile_config')
         if 'video' in self.profiles:
-            if same_path(self.profiles['video']['executable'], self.profiles['photo-normal']['executable']) or not same_path(self.profiles['video']['executable'], self.root / 'VIDEO/runtime/koboldcpp-video.exe'):
-                raise SupervisorError('Video requires its isolated VIDEO/runtime/koboldcpp-video.exe copy.', 'invalid_profile_config')
+            if not same_path(self.profiles['video']['executable'], self.root / 'koboldcpp-nocuda.exe') or self.profiles['video']['executable_sha256']!=self.profiles['photo-normal']['executable_sha256']:
+                raise SupervisorError('Video must use the same pinned Root Kobold executable as photo/music.', 'invalid_profile_config')
         self.default_profile = config.get('default_profile', 'photo-normal')
         if self.default_profile != 'photo-normal':
             raise SupervisorError('Startup must restore the full photo-normal/music profile.', 'invalid_profile_config')

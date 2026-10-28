@@ -14,3 +14,7 @@ Normal/edit736×1104: YuNet960/GPEN20%/SFace0,97/Gater1×, без автоSR. `e
 ## Музыка
 
 **YuE2 Q8 + F16 VAE**, helper NeoHorse на стороне OWUI, MP3 stereo. 32с музыки через API: **57,01с** с переключением; фото снова в GPU к61,07с. Русская короткая проба одобрена пользователем; длинные песни не измерены. [Правила фильтра](docs/MUSIC.ru.md), [MP3](examples/yue2-russian-32s.mp3), [замеры](benchmarks/music.json). ACE-Step удалён. Веса CC-BY-NC-4.0 скачиваются у оригинального распространителя.
+
+## Video
+
+[480p Native generation,720p enhancement and API](docs/VIDEO.md) · [Русская инструкция OWUI](docs/VIDEO.ru.md) · [Measured timings](benchmarks/video.json). Models download from their original distributors.

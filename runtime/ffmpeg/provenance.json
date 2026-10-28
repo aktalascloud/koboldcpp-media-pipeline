@@ -1,0 +1,22 @@
+{
+  "repository": "BtbN/FFmpeg-Builds",
+  "tag": "autobuild-2026-10-27-18-38",
+  "name": "ffmpeg-N-128121-g86444dd368-win64-gpl.zip",
+  "bytes": 201621920,
+  "sha256": "1eb70a550388567bc2abbb2d164814f722f36a034fd927dcdfb217bc7e94930c",
+  "url": "https://github.com/BtbN/FFmpeg-Builds/releases/download/autobuild-2026-10-27-18-38/ffmpeg-N-128121-g86444dd368-win64-gpl.zip",
+  "license": "GPL build; original distributor download, no binary mirroring",
+  "build_sources": "https://github.com/BtbN/FFmpeg-Builds",
+  "installed_files": [
+    {
+      "path": "runtime\\ffmpeg\\LICENSE.txt",
+      "bytes": 35147,
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+    },
+    {
+      "path": "runtime\\ffmpeg\\ffmpeg.exe",
+      "bytes": 169886208,
+      "sha256": "5db27a218bd47831a0f44f6201fd54eb62ba7c082687e797316ae088d0ecf3d3"
+    }
+  ]
+}

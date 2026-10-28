@@ -53,6 +53,7 @@ SR_PATHS=('/sdapi/v1/upscale','/sdapi/v1/extra-single-image')
 IMAGE_PATHS=('/sdapi/v1/txt2img','/sdapi/v1/img2img')
 OPENAI_IMAGE_PATHS=('/v1/images/generations','/images/generations')
 MUSIC_PATHS=('/api/extra/music/generate','/api/extra/music/prepare')
+VIDEO_UPSCALE_PATHS=('/api/extra/video/upscale','/v1/videos/upscale')
 LOG=logging.getLogger('KoboldProxy')
 
 def upscale_api_scale(config):
@@ -439,6 +440,9 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
             with checked_native_lease('photo-normal',cfg): pass
         except Exception:
             LOG.exception('Photo reload after music failed; next photo lease will retry')
+    def restore_photo_after_video(cfg):
+        with pipeline.lock:
+            if not stop.is_set():restore_photo(cfg)
     def restore_photo_after_prepare(cfg, serial):
         # A prepare request is normally followed by generate. Give that pair
         # a shared music context, then restore photo if the caller stays idle.
@@ -561,6 +565,12 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                         self.reply(version);return
                 if path in ('/v1/music/capabilities','/api/extra/music/capabilities'):
                     self.reply(music_capabilities(cfg));return
+                if path in ('/v1/videos/capabilities','/api/extra/video/capabilities'):
+                    self.reply(dict(enabled=bool(cfg['proxy'].get('video',{}).get('enabled',False)),backend='KoboldCpp Native',model='kobold-wan22-turbo',
+                        generation_endpoints=list(VIDEO_JSON_PATHS),upscale_endpoints=list(VIDEO_UPSCALE_PATHS),fps=24,frames=dict(min=5,max=121,grid='4n+1'),
+                        resolutions={'480p':[832,480],'360p':[640,352]},inputs=['text','one PNG start frame','continue_from generated video_id'],
+                        output='MP4 URL',upscale_to='720p short edge, original aspect ratio',optional_guarded_faces=True,
+                        native_jpeg_quality=95,validated_frames=49,vae=cfg['proxy'].get('video',{}).get('codec'),continuous_long_video_validated=False));return
                 if path in ('/v1/images/capabilities','/api/extra/image-capabilities'):
                     cap=image_capabilities(cfg);cap['operations']['reference_synthesis']=dict(supported=True,endpoints=list(SYNTHESIS_PATHS),conditioning='text_descriptions_only',requires_client_visual_analysis=True,min_sources=2,max_sources=4,raw_images_accepted=False,native_reference_conditioning=False,exact_identity_guaranteed=False,schema_url='/v1/images/synthesis-schema');self.reply(cap);return
                 if path in ('/v1/images/synthesis-schema','/images/synthesis-schema'):
@@ -603,6 +613,20 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                 maximum=int(cfg['helper'].get('maxrequestsize',32))*1024*1024
                 if length<0 or length>maximum:self.reply(dict(error='Request exceeds configured size limit'),413);return
                 body=self.rfile.read(length)
+                if path in VIDEO_UPSCALE_PATHS:
+                    if videos is None or not cfg['proxy'].get('video',{}).get('enabled',False):raise VideoServiceError('Видео пока не включено.','video_deferred',503)
+                    try:video_payload=json.loads(body)
+                    except (ValueError,UnicodeError):raise VideoServiceError('Ожидается JSON.',status=422)
+                    with videos.client_deadline(self.connection) as video_budget:
+                        with pipeline.lock,backend_supervisor.lock:
+                            pipeline.begin('','video_postprocess')
+                            try:
+                                videos.require_unblocked();backend_supervisor.stop_idle()
+                                with backend_supervisor.gpu_lease():result=videos.upscale_saved(video_payload,cfg,video_budget)
+                                self.reply(result)
+                            finally:
+                                pipeline.finish();threading.Thread(target=restore_photo_after_video,args=(cfg,),daemon=True).start()
+                    return
                 if path.startswith(('/v1/images/','/images/')) and path not in (*OPENAI_IMAGE_PATHS,*EDIT_PATHS,*SYNTHESIS_PATHS):
                     raise ImageEditError('Unsupported image operation endpoint; see /v1/images/capabilities.',param='operation',code='unsupported_image_operation',status=422)
                 if path in VIDEO_JSON_PATHS or path=='/sdapi/v1/txt2img':
@@ -617,8 +641,19 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                             with videos.client_deadline(self.connection) as video_budget:
                                 with pipeline.lock:
                                     pipeline.begin(video_payload.get('genkey',''),'video')
-                                    try:self.reply(videos.generate(path,video_payload,dict(self.headers),cfg,budget=video_budget))
-                                    finally:pipeline.finish()
+                                    try:
+                                        upscale_to=video_payload.get('upscale_to');faces=video_payload.get('enhance_faces',False)
+                                        if upscale_to not in (None,'720p') or type(faces) is not bool:raise VideoServiceError('Некорректные upscale_to/enhance_faces.',status=422)
+                                        if path not in VIDEO_JSON_PATHS and (upscale_to or faces):raise VideoServiceError('Для MP4720p/детейлера используйте /v1/videos/generations, не raw A1111.',status=422)
+                                        result=videos.generate(path,video_payload,dict(self.headers),cfg,budget=video_budget)
+                                        if upscale_to or faces:
+                                            with backend_supervisor.lock:
+                                                videos.require_unblocked();backend_supervisor.stop_idle()
+                                                with backend_supervisor.gpu_lease():result=videos.enhance(result,cfg,video_budget,upscale_to,faces)
+                                        self.reply(result)
+                                    finally:
+                                        pipeline.finish()
+                                        threading.Thread(target=restore_photo_after_video,args=(cfg,),daemon=True).start()
                         except (BrokenPipeError,ConnectionResetError,OSError):
                             self.close_connection=True
                             LOG.info('Video client disconnected or reached its deadline')
