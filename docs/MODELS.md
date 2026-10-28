@@ -14,3 +14,6 @@ Conversion reverses INT8 ConvRot/scales and writes Q8. Names/descriptions/writer
 Dirty is optional: `Setup.ps1 -IncludeDirtyBackup -MossSourceDirectory <folder>`. See optional_dirty_backup in models.json. Its dynamic69 turbo is user-supplied, not the original full-rank author download; no replacement is silently accepted. The local workspace retains Dirty; fresh kits install only Ray by default.
 
 MODELS contains weights; DETAILERS faces/Gater; UPSCALERS ClearReality. Verified legacy assets migrate; unknown/mismatched files are preserved. GPEN downloads directly from its original FaceFusion distributor, Non-Commercial; ClearReality is Apache2 FP32. [Licenses](LICENSES.md). One runtime; runtime/native downloads remain SHA-pinned.
+
+
+YuE2 music supersedes previous ACE-Step references: Q8_0 main + F16 VAE, no Gemma, client-side helper, MP3. See [music contract](MUSIC.md). Original pinned weights download only; CC-BY-NC-4.0 and upstream attribution apply. No song-generation claims beyond the saved short trials.

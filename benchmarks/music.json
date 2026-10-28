@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-28",
+  "executable_sha256": "6c03b583f7a266facdfd045561013e164e88202b583a4bbe6d801938ae189c08",
+  "family": "yue2",
+  "weights": {
+    "repository": "audio-cpp/Yue2-3B-GGUF",
+    "revision": "cca74d8980c00f30ab8d52248a367c01ad633ec2",
+    "license": "CC-BY-NC-4.0",
+    "files": [
+      {
+        "file": "yue2-3b-q8_0.gguf",
+        "bytes": 4264195616,
+        "sha256": "52be345b5155bf9ef0b2411e7df8d1d2b8e13b6d977a2f70c35612ec69b1f591"
+      },
+      {
+        "file": "yue2-vae-f16.gguf",
+        "bytes": 265218656,
+        "sha256": "d4f4a05d8f291ae820cd1e43609da3fa91b56465810091a2b08c3350b751719d"
+      },
+      {
+        "file": "sidecars/yue2-model-config.json",
+        "bytes": 959,
+        "sha256": "ad3477bbef890bf98ae196c1e4b44779494a6231c4ab66f32708eabadf265329"
+      },
+      {
+        "file": "sidecars/yue2-generation-config.json",
+        "bytes": 466,
+        "sha256": "203830cebde6e3644eb291925362990d198e66c3b6006cd11f1aaa21904bcc61"
+      },
+      {
+        "file": "sidecars/yue2-vae-config.json",
+        "bytes": 1378,
+        "sha256": "f0191bb9694009956de44e0c361a6f1334760be4c8f848e599bde242a54a0970"
+      },
+      {
+        "file": "sidecars/yue2-qwen.tiktoken",
+        "bytes": 2561218,
+        "sha256": "b2b1b8dfb5cc5f024bafc373121c6aba3f66f9a5a0269e243470a1de16a33186"
+      }
+    ]
+  },
+  "short_mp3_seconds": [
+    26.836154599965084,
+    25.340543700032867
+  ],
+  "short_mp3_bitidentical": true,
+  "diagnostic_wav": {
+    "generation_seconds": 40.132335799979046,
+    "duration_seconds": 31.998666666666665,
+    "sample_rate": 48000,
+    "channels": 2,
+    "peak_dedicated_mib": 4419.6015625,
+    "peak_shared_mib": 844.9609375,
+    "oom": false
+  },
+  "local_qwen_helper_seconds": 5.43499919999158,
+  "remote_neohorse_helper_seconds": 5.886100300005637,
+  "public_api": {
+    "seconds": 57.01072500000009,
+    "restored_seconds": 61.065655899990816,
+    "mp3_bytes": 768384,
+    "resident_photo_restored": true
+  },
+  "russian_quality_user_accepted": true,
+  "long_song_not_tested": true,
+  "ace_removed": true
+}

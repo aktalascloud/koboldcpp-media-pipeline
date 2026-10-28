@@ -36,7 +36,8 @@ def preflight(helper):
     assert h.get('sdquant',0) in (0,1,2),'Kobold sdquant supports0=off,1=Q8,2=Q4'
     assert 1<=int(gd.get('steps',8))<=9,'This profile is limited to9steps'
     files={}
-    for name in ('sdmodel','sdclip1','sdvae','musicdiffusion','musicllm','musicembeddings','musicvae'):
+    from BackendSupervisor import music_asset_fields
+    for name in ('sdmodel','sdclip1','sdvae',*music_asset_fields(h)):
         path=Path(asset(h[name],ROOT));files[name]=dict(path=str(path),exists=path.is_file(),bytes=path.stat().st_size if path.is_file() else None)
     for index,value in enumerate(h.get('sdlora') or []):
         path=Path(asset(value,ROOT));files['sdlora_'+str(index)]=dict(path=str(path),exists=path.is_file(),bytes=path.stat().st_size if path.is_file() else None)

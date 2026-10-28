@@ -34,6 +34,13 @@ class SupervisorError(RuntimeError):
         self.body = {'error': {'message': message, 'type': 'backend_error', 'code': code}}
 
 
+def music_asset_fields(helper):
+    present={field for field in MUSIC_FIELDS if helper.get(field)}
+    if present=={'musicllm','musicvae'}:return ('musicllm','musicvae')
+    if present==set(MUSIC_FIELDS):return MUSIC_FIELDS
+    raise SupervisorError('Music requires either YuE2 LLM+VAE or the complete ACE-Step asset set.', 'music_profile_changed')
+
+
 def read_json(path):
     return json.loads(Path(path).read_text(encoding='utf-8-sig'))
 
@@ -381,7 +388,10 @@ class BackendSupervisor:
                 raise SupervisorError('Static LoRA asset missing or outside Root.', 'profile_file_changed')
         if profile['name'] == 'music' or (profile['name'] == 'photo-normal' and not self.music_on_demand):
             master = read_json(self.root / 'Helper.kcpps')
-            for field in MUSIC_FIELDS:
+            fields=music_asset_fields(helper)
+            if set(fields)!=set(music_asset_fields(master)):
+                raise SupervisorError('Music model family differs from the master Helper.', 'music_profile_changed')
+            for field in fields:
                 if not helper.get(field) or not master.get(field) or not same_path(root_path(self.root, helper[field]), root_path(self.root, master[field])):
                     raise SupervisorError('Original production music assets are not preserved.', 'music_profile_changed')
                 if not root_path(self.root, helper[field]).is_file():

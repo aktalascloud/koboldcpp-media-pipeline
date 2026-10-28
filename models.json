@@ -64,54 +64,6 @@
       ]
     },
     {
-      "path": "MODELS/music/acestep-5Hz-lm-4B-Q6_K.gguf",
-      "bytes": 3442713504,
-      "sha256": "d39b8b5070fa617a0f57dcc26e710f8096a293c21721c5f714318bab7b40cfdb",
-      "url": "https://huggingface.co/koboldcpp/music/resolve/5f747e22d54a81a0a99f4d675bc98836ee77bd13/acestep-5Hz-lm-4B-Q6_K.gguf",
-      "license": "Original AceStep/Qwen license; see model card",
-      "source": "https://huggingface.co/koboldcpp/music/resolve/5f747e22d54a81a0a99f4d675bc98836ee77bd13/acestep-5Hz-lm-4B-Q6_K.gguf",
-      "in_release": false,
-      "legacy_paths": [
-        "MUSIC/acestep-5Hz-lm-4B-Q6_K.gguf"
-      ]
-    },
-    {
-      "path": "MODELS/music/Ace-Qwen3-Embedding-0.6B-BF16.gguf",
-      "bytes": 1196890592,
-      "sha256": "6f57900773fbd447b2943bc8126e2dc68ed009151ba89a47c14d1be05d4c73df",
-      "url": "https://huggingface.co/koboldcpp/music/resolve/5f747e22d54a81a0a99f4d675bc98836ee77bd13/Ace-Qwen3-Embedding-0.6B-BF16.gguf",
-      "license": "Original AceStep/Qwen license; see model card",
-      "source": "https://huggingface.co/koboldcpp/music/resolve/5f747e22d54a81a0a99f4d675bc98836ee77bd13/Ace-Qwen3-Embedding-0.6B-BF16.gguf",
-      "in_release": false,
-      "legacy_paths": [
-        "MUSIC/Ace-Qwen3-Embedding-0.6B-BF16.gguf"
-      ]
-    },
-    {
-      "path": "MODELS/music/acestep-v15-xl-sftturbo50-Q4_K_M.gguf",
-      "bytes": 2989922720,
-      "sha256": "7f7619d78037f9cfbe7b7816f758dc99f2841f48010da12eed732a8faef2eb0d",
-      "url": "https://huggingface.co/koboldcpp/music/resolve/5f747e22d54a81a0a99f4d675bc98836ee77bd13/acestep-v15-xl-sftturbo50-Q4_K_M.gguf",
-      "license": "Original AceStep/Qwen license; see model card",
-      "source": "https://huggingface.co/koboldcpp/music/resolve/5f747e22d54a81a0a99f4d675bc98836ee77bd13/acestep-v15-xl-sftturbo50-Q4_K_M.gguf",
-      "in_release": false,
-      "legacy_paths": [
-        "MUSIC/acestep-v15-xl-sftturbo50-Q4_K_M.gguf"
-      ]
-    },
-    {
-      "path": "MODELS/music/ace-vae-BF16.gguf",
-      "bytes": 337420928,
-      "sha256": "0599862ac5d15cd308e1d2e368373aea6c02e25ebd1737ad4a4562a0901b0ef8",
-      "url": "https://huggingface.co/koboldcpp/music/resolve/5f747e22d54a81a0a99f4d675bc98836ee77bd13/ace-vae-BF16.gguf",
-      "license": "Original AceStep/Qwen license; see model card",
-      "source": "https://huggingface.co/koboldcpp/music/resolve/5f747e22d54a81a0a99f4d675bc98836ee77bd13/ace-vae-BF16.gguf",
-      "in_release": false,
-      "legacy_paths": [
-        "MUSIC/ace-vae-BF16.gguf"
-      ]
-    },
-    {
       "path": "DETAILERS/faces/face_detection_yunet_2023mar.onnx",
       "bytes": 232589,
       "sha256": "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4",
@@ -158,6 +110,60 @@
       "legacy_paths": [
         "tools/detailer_models/gpen_bfr_512.onnx"
       ]
+    },
+    {
+      "path": "MODELS/music/yue2/yue2-3b-q8_0.gguf",
+      "bytes": 4264195616,
+      "sha256": "52be345b5155bf9ef0b2411e7df8d1d2b8e13b6d977a2f70c35612ec69b1f591",
+      "in_release": false,
+      "url": "https://huggingface.co/audio-cpp/Yue2-3B-GGUF/resolve/cca74d8980c00f30ab8d52248a367c01ad633ec2/yue2-3b-q8_0.gguf",
+      "source": "https://huggingface.co/audio-cpp/Yue2-3B-GGUF",
+      "license": "CC-BY-NC-4.0; attribution and Non-Commercial restrictions apply. Downloaded from original distributor, not mirrored."
+    },
+    {
+      "path": "MODELS/music/yue2/yue2-vae-f16.gguf",
+      "bytes": 265218656,
+      "sha256": "d4f4a05d8f291ae820cd1e43609da3fa91b56465810091a2b08c3350b751719d",
+      "in_release": false,
+      "url": "https://huggingface.co/audio-cpp/Yue2-3B-GGUF/resolve/cca74d8980c00f30ab8d52248a367c01ad633ec2/yue2-vae-f16.gguf",
+      "source": "https://huggingface.co/audio-cpp/Yue2-3B-GGUF",
+      "license": "CC-BY-NC-4.0; attribution and Non-Commercial restrictions apply. Downloaded from original distributor, not mirrored."
+    },
+    {
+      "path": "MODELS/music/yue2/sidecars/yue2-model-config.json",
+      "bytes": 959,
+      "sha256": "ad3477bbef890bf98ae196c1e4b44779494a6231c4ab66f32708eabadf265329",
+      "in_release": false,
+      "url": "https://huggingface.co/audio-cpp/Yue2-3B-GGUF/resolve/cca74d8980c00f30ab8d52248a367c01ad633ec2/sidecars/yue2-model-config.json",
+      "source": "https://huggingface.co/audio-cpp/Yue2-3B-GGUF",
+      "license": "CC-BY-NC-4.0; attribution and Non-Commercial restrictions apply. Downloaded from original distributor, not mirrored."
+    },
+    {
+      "path": "MODELS/music/yue2/sidecars/yue2-generation-config.json",
+      "bytes": 466,
+      "sha256": "203830cebde6e3644eb291925362990d198e66c3b6006cd11f1aaa21904bcc61",
+      "in_release": false,
+      "url": "https://huggingface.co/audio-cpp/Yue2-3B-GGUF/resolve/cca74d8980c00f30ab8d52248a367c01ad633ec2/sidecars/yue2-generation-config.json",
+      "source": "https://huggingface.co/audio-cpp/Yue2-3B-GGUF",
+      "license": "CC-BY-NC-4.0; attribution and Non-Commercial restrictions apply. Downloaded from original distributor, not mirrored."
+    },
+    {
+      "path": "MODELS/music/yue2/sidecars/yue2-vae-config.json",
+      "bytes": 1378,
+      "sha256": "f0191bb9694009956de44e0c361a6f1334760be4c8f848e599bde242a54a0970",
+      "in_release": false,
+      "url": "https://huggingface.co/audio-cpp/Yue2-3B-GGUF/resolve/cca74d8980c00f30ab8d52248a367c01ad633ec2/sidecars/yue2-vae-config.json",
+      "source": "https://huggingface.co/audio-cpp/Yue2-3B-GGUF",
+      "license": "CC-BY-NC-4.0; attribution and Non-Commercial restrictions apply. Downloaded from original distributor, not mirrored."
+    },
+    {
+      "path": "MODELS/music/yue2/sidecars/yue2-qwen.tiktoken",
+      "bytes": 2561218,
+      "sha256": "b2b1b8dfb5cc5f024bafc373121c6aba3f66f9a5a0269e243470a1de16a33186",
+      "in_release": false,
+      "url": "https://huggingface.co/audio-cpp/Yue2-3B-GGUF/resolve/cca74d8980c00f30ab8d52248a367c01ad633ec2/sidecars/yue2-qwen.tiktoken",
+      "source": "https://huggingface.co/audio-cpp/Yue2-3B-GGUF",
+      "license": "CC-BY-NC-4.0; attribution and Non-Commercial restrictions apply. Downloaded from original distributor, not mirrored."
     },
     {
       "path": "MODELS/loras/afterlight-v1.safetensors",

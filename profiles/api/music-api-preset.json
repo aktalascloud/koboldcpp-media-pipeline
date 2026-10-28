@@ -1,8 +1,11 @@
 {
-  "inference_steps": 8,
-  "guidance_scale": 1,
-  "shift": 3,
-  "vocal_language": "ru",
-  "stereo": true,
-  "use_mp3": true
+  "style": "Russian female vocals, acoustic pop, gentle guitar and drums, 80 BPM.",
+  "lyrics": "[Verse]\nРанний свет после дождя.\nТёплый свет в окне.\nНадежда в сердце.\nСветит мир вновь.",
+  "cot": "off",
+  "num_inference_steps": 8,
+  "guidance_scale": 1.01,
+  "duration": 30,
+  "seed": 424242,
+  "use_mp3": true,
+  "stereo": true
 }

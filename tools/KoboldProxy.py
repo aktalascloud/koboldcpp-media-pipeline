@@ -26,6 +26,7 @@ import urllib.parse
 import urllib.request
 
 from PIL import Image,PngImagePlugin
+from MusicContract import MusicRequestError,prepare_music,music_family,capabilities as music_capabilities
 from RuntimePaths import ROOT,asset
 from DetailerProxy import FaceDetailer
 from OnnxUpscale import Upscaler
@@ -496,6 +497,8 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
             try:response=urllib.request.urlopen(upstream,timeout=600)
             except urllib.error.HTTPError as error:response=error
             with response:
+                if urllib.parse.urlsplit(self.path).path=='/api/extra/music/generate' and response.status==200 and response.headers.get('Content-Length')=='0':
+                    self.reply(dict(error=dict(code='empty_music_output',message='Native returned no audio; generation failed.')),502);return
                 self.send_response(response.status)
                 self.send_header('Content-Type',response.headers.get('Content-Type','application/json'))
                 length=response.headers.get('Content-Length')
@@ -554,8 +557,10 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                 if path=='/api/extra/version' and backend_supervisor:
                     status,headers,raw=request(cfg['backend']+path)
                     if status==200:
-                        version=json.loads(raw);version.update(music=True,musicllm=True,txt2img=True,img2img=True,image_instruction_edit=False,image_reference_images=False,image_capabilities_url='/v1/images/capabilities',kcpp_auto_switch=True,video=bool(cfg['proxy'].get('video',{}).get('enabled',False)))
+                        version=json.loads(raw);version.update(music=True,musicllm=True,musicfamily=music_family(cfg),music_capabilities_url='/v1/music/capabilities',txt2img=True,img2img=True,image_instruction_edit=False,image_reference_images=False,image_capabilities_url='/v1/images/capabilities',kcpp_auto_switch=True,video=bool(cfg['proxy'].get('video',{}).get('enabled',False)))
                         self.reply(version);return
+                if path in ('/v1/music/capabilities','/api/extra/music/capabilities'):
+                    self.reply(music_capabilities(cfg));return
                 if path in ('/v1/images/capabilities','/api/extra/image-capabilities'):
                     cap=image_capabilities(cfg);cap['operations']['reference_synthesis']=dict(supported=True,endpoints=list(SYNTHESIS_PATHS),conditioning='text_descriptions_only',requires_client_visual_analysis=True,min_sources=2,max_sources=4,raw_images_accepted=False,native_reference_conditioning=False,exact_identity_guaranteed=False,schema_url='/v1/images/synthesis-schema');self.reply(cap);return
                 if path in ('/v1/images/synthesis-schema','/images/synthesis-schema'):
@@ -653,6 +658,7 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                 try:payload=json.loads(body or b'{}')
                 except (ValueError,UnicodeError):raise ImageEditError('Expected valid UTF-8 JSON.',code='invalid_json')
                 if not isinstance(payload,dict):self.reply(dict(error='JSON object required'),400);return
+                if path in MUSIC_PATHS:payload=prepare_music(payload,cfg)
                 if path=='/sdapi/v1/img2img':validate_edit_contract(payload,cfg,default_operation='img2img')
                 if path in OPENAI_IMAGE_PATHS:validate_generation_contract(payload,cfg)
                 with pipeline.lock, (checked_gpu_lease() if backend_supervisor else nullcontext()):
@@ -698,7 +704,7 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                         LOG.info(json.dumps(dict(kind='upscale',**report),ensure_ascii=False))
                     finally:pipeline.finish()
             except (BrokenPipeError,ConnectionResetError):pass
-            except (ImageEditError,ImageModeError,ImageBudgetError,SupervisorError,VideoServiceError) as error:self.reply(error.body,error.status,headers=getattr(error,'headers',None))
+            except (ImageEditError,ImageModeError,ImageBudgetError,SupervisorError,VideoServiceError,MusicRequestError) as error:self.reply(error.body,error.status,headers=getattr(error,'headers',None))
             except Exception as error:LOG.exception('POST failed');self.reply(dict(error=type(error).__name__,detail=str(error)),502)
         def log_message(self,format,*args):LOG.info(format,*args)
     host=initial['proxy'].get('host','127.0.0.1')

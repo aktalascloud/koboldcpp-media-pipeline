@@ -33,3 +33,7 @@ Run `Setup.ps1 -MossSourceDirectory <originals>` once, then **Start.exe**. Sourc
 - `profiles/`, `tools/`, `runtime/`: current configuration/code and one Python runtime.
 
 Dirty is an **optional backup**, not installed by default: `-IncludeDirtyBackup` requires its exact user-resized turbo original. No main weights, LoRA binaries, keys, caches or logs are mirrored. GPEN comes directly from its original distributor, Non-Commercial. [Editing contract](docs/EDITING.md) and [text-only reference synthesis](docs/REFERENCE-SYNTHESIS.md) are preserved.
+
+## Music
+
+**YuE2 Q8 + F16 VAE**, client-side NeoHorse helper, MP3 stereo. One measured32s request: **57.01s** including model handoff; photo resident again by61.07s. Russian short trial accepted by the user; long songs untested. [OWUI filter](docs/MUSIC.md), [Russian specification](docs/MUSIC.ru.md), [MP3 example](examples/yue2-russian-32s.mp3), [proof](benchmarks/music.json). Weights CC-BY-NC-4.0, original downloads only; ACE-Step removed.

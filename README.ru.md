@@ -10,3 +10,7 @@ Normal/edit736×1104: YuNet960/GPEN20%/SFace0,97/Gater1×, без автоSR. `e
 ![Обычный режим с улучшалками](examples/fullbody-processed.png)
 
 **MODELS** — модели/LoRA/музыка; **DETAILERS** — лица/Gater; **UPSCALERS** — ClearReality. Dirty — необязательный запасной комплект (`-IncludeDirtyBackup`). Разово `Setup.ps1 -MossSourceDirectory <оригиналы>`, затем **Start.exe**. Проверенные старые пути переносятся поSHA; незнакомые файлы не удаляются. Основные веса/LoRA/ключи/кэши/логи не выкладываются. [Источники](docs/MODELS.md), [лицензии](docs/LICENSES.md), [оптимизированный KoboldCpp](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa), [оригинал](https://github.com/LostRuins/koboldcpp).
+
+## Музыка
+
+**YuE2 Q8 + F16 VAE**, helper NeoHorse на стороне OWUI, MP3 stereo. 32с музыки через API: **57,01с** с переключением; фото снова в GPU к61,07с. Русская короткая проба одобрена пользователем; длинные песни не измерены. [Правила фильтра](docs/MUSIC.ru.md), [MP3](examples/yue2-russian-32s.mp3), [замеры](benchmarks/music.json). ACE-Step удалён. Веса CC-BY-NC-4.0 скачиваются у оригинального распространителя.

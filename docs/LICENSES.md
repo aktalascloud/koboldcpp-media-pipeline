@@ -31,3 +31,6 @@ Dirty MOSS [author version3423156](https://civitai.com/models/3015644?modelVersi
 
 ## Current Ray assets
 Ray Artshoot [version3426693](https://civitai.com/models/3018302?modelVersionId=3426693) and [Afterlight3424873](https://civitai.com/models/3016917?modelVersionId=3424873): original author terms, links/hashes only, no weights mirrored or inferred permissive license. Optional Dirty/turbo follow original terms; exact resized turbo is user-imported. Existing AGPL/MIT/Apache/CC-BY/GPEN Non-Commercial notices and aria2/GMP source hashes retained.
+
+
+YuE2 music supersedes previous ACE-Step references: Q8_0 main + F16 VAE, no Gemma, client-side helper, MP3. See [music contract](MUSIC.md). Original pinned weights download only; CC-BY-NC-4.0 and upstream attribution apply. No song-generation claims beyond the saved short trials.

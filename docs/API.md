@@ -52,3 +52,6 @@ High selects928×1392 and defaults to4× (3712×5568). Selected Ray High generat
 - MusicMP3/API-only; returns to GPU-resident Normal. Video deferred.
 
 Use a timeout covering the full job, e.g.3600s. Rewrite captions once and cache them; normally120–180 coherent English words. Numeric timing scope: benchmarks/results.json.
+
+
+YuE2 music supersedes previous ACE-Step references: Q8_0 main + F16 VAE, no Gemma, client-side helper, MP3. See [music contract](MUSIC.md). Original pinned weights download only; CC-BY-NC-4.0 and upstream attribution apply. No song-generation claims beyond the saved short trials.
