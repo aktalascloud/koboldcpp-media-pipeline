@@ -1,0 +1,144 @@
+{
+  "date": "2026-10-28",
+  "native_snapshot_executable_sha256": "5b71334f6a515e3e7a6ba0b87b8e64142398321639e5b1e9f2ffed8d558806ce",
+  "scene": "Same captured Native raw posterior mean;17frames480x832/24FPS",
+  "face_trials": [
+    {
+      "name": "gpen20",
+      "three_frame_seconds": 1.284353099996224,
+      "model_load_seconds": 12.61887070001103,
+      "attempted": 3,
+      "accepted": 3,
+      "minimum_sface": 0.9978415543552389,
+      "dml_nodes": 1,
+      "cpu_core_nodes": []
+    },
+    {
+      "name": "gfpgan35",
+      "three_frame_seconds": 0.9280976998852566,
+      "model_load_seconds": 2.0669866000534967,
+      "attempted": 3,
+      "accepted": 3,
+      "minimum_sface": 0.9934493088996916,
+      "dml_nodes": 1,
+      "cpu_core_nodes": []
+    },
+    {
+      "name": "gfpgan60eyes",
+      "three_frame_seconds": 0.9830817000474781,
+      "model_load_seconds": 1.6868615000275895,
+      "attempted": 3,
+      "accepted": 3,
+      "minimum_sface": 0.9953904036891507,
+      "dml_nodes": 1,
+      "cpu_core_nodes": []
+    },
+    {
+      "name": "codeformer35f07",
+      "three_frame_seconds": 1.4298156999284402,
+      "model_load_seconds": 2.4817460000049323,
+      "attempted": 3,
+      "accepted": 3,
+      "minimum_sface": 0.9855942513716441,
+      "dml_nodes": 1,
+      "cpu_core_nodes": []
+    },
+    {
+      "name": "codeformer60f05",
+      "three_frame_seconds": 1.429010899970308,
+      "model_load_seconds": 2.304557199939154,
+      "attempted": 3,
+      "accepted": 1,
+      "minimum_sface": 0.9418214630440986,
+      "dml_nodes": 1,
+      "cpu_core_nodes": []
+    },
+    {
+      "name": "codeformer60eyes",
+      "three_frame_seconds": 1.4720264999195933,
+      "model_load_seconds": 2.311392799951136,
+      "attempted": 3,
+      "accepted": 3,
+      "minimum_sface": 0.9858560291360002,
+      "dml_nodes": 1,
+      "cpu_core_nodes": []
+    }
+  ],
+  "same_saved49_post": {
+    "gpen20_seconds": 56.0804692,
+    "gfpgan35_seconds": 52.7570382,
+    "scope": "ClearReality720 plus faces on the identical saved49frame video;not full API latency."
+  },
+  "vae": {
+    "lite": {
+      "decode_seconds": [
+        11.498124500038102,
+        10.709538999944925,
+        10.675053699989803
+      ],
+      "model_load_seconds": 5.062337200040929,
+      "cpu_core_nodes": [],
+      "applied": false
+    },
+    "pro": {
+      "decode_seconds": [
+        45.907983000040986,
+        39.13807750004344,
+        46.92845100001432
+      ],
+      "model_load_seconds": 15.426071400055662,
+      "cpu_core_nodes": [],
+      "observed_dedicated_mib": 7457.6,
+      "observed_shared_mib": 2823.3,
+      "applied": false
+    },
+    "super_native_decode_seconds": 0.85,
+    "scope": "Decoder-only timings,not complete generation;full Native VAE prior17frame tiled control158.76s uses a different tiling setup."
+  },
+  "super_reference": {
+    "reference_commit": "011dfc2112197741c540e0bdd5b7b67bcc930771",
+    "frames": 17,
+    "cpu_reference_seconds": 3.8112982999300584,
+    "max_rgb_error": 1,
+    "mean_rgb_error": 5.425347222222222e-05,
+    "p99_rgb_error": 0.0,
+    "scope": "Reference CPU FP32 vs Native Vulkan PNG;inverse normalization and RGB8 rounding may contribute small differences."
+  },
+  "conclusions": [
+    "Super remains the user-selected fast default.",
+    "Pro preserves eyes better,but tested full-resolution GPU variants exceeded the memory policy;not deployed.",
+    "Lite is a tested decoder candidate,not a newly installed public API mode.",
+    "GFPGAN is slightly faster,without a convincing eye-quality win;GPEN20percent retained.",
+    "Strong CodeFormer60percent was rejected by SFace on2of3frames.",
+    "No new general Vulkan-kernel speedup is claimed."
+  ],
+  "video_face_bounds": {
+    "native480": [
+      32,
+      192
+    ],
+    "upscaled720": [
+      48,
+      288
+    ],
+    "night_before": [
+      14,
+      13
+    ],
+    "night_after": [
+      17,
+      17
+    ],
+    "frames": 17,
+    "large_watchmaker_face": "Intentionally skipped;already-large face is outside the restoration policy."
+  },
+  "sources": [
+    "https://github.com/ModelTC/LightVAE",
+    "https://huggingface.co/lightx2v/LightVAE",
+    "https://github.com/madebyollin/taehv",
+    "https://github.com/hustvl/Turbo-VAED"
+  ],
+  "turbo_vaed": "Reviewed,not executed: referenced configs/Turbo-VAED-Wan.json absent from the inspected source snapshot.",
+  "candidates_redistributed": false,
+  "raw_latents_published": false
+}

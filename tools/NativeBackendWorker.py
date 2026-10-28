@@ -41,6 +41,15 @@ def main():
     temporary.mkdir(parents=True, exist_ok=True)
     environment = os.environ.copy()
     environment.pop('KCPP_WAN_TAE_DECODER',None)
+    environment.pop('KCPP_WAN_LATENT_SNAPSHOT',None)
+    capture=h.get('kcpp_video_capture_latents',False)
+    if type(capture) is not bool or (capture and args.profile!='video'):
+        raise SupervisorError('Latent capture is a video-only boolean.','invalid_profile_config')
+    if capture:
+        if not re.fullmatch(r'[0-9a-f]{32}',args.run_id):raise SupervisorError('Invalid capture run identity.','invalid_profile_config')
+        capture_path=root_path(root,'runtime/tmp/wan-latents-'+args.run_id+'.bin')
+        if capture_path.exists() or capture_path.with_suffix('.bin.partial').exists():raise SupervisorError('Capture target already exists.','profile_file_changed')
+        environment['KCPP_WAN_LATENT_SNAPSHOT']=str(capture_path)
     decoder=h.get('kcpp_video_tae_decoder')
     if decoder is not None:
         if args.profile!='video' or not isinstance(decoder,dict) or set(decoder)!={'path','sha256'}:raise SupervisorError('Independent Tiny decoder is video-only and must be pinned.','invalid_profile_config')

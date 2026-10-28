@@ -570,7 +570,7 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                         generation_endpoints=list(VIDEO_JSON_PATHS),upscale_endpoints=list(VIDEO_UPSCALE_PATHS),fps=24,frames=dict(min=5,max=121,grid='4n+1'),
                         resolutions={'480p':[832,480],'360p':[640,352]},inputs=['text','one PNG start frame','continue_from generated video_id'],
                         output='MP4 URL',upscale_to='720p short edge, original aspect ratio',optional_guarded_faces=True,
-                        native_jpeg_quality=95,validated_frames=49,vae=cfg['proxy'].get('video',{}).get('codec'),continuous_long_video_validated=False));return
+                        native_jpeg_quality=95,validated_frames=49,vae=cfg['proxy'].get('video',{}).get('codec'),sampling=dict(sampler_name='euler',scheduler='simple',steps=4,cfg_scale=1,flow_shift=5,eta=0,cache_mode='none'),continuous_long_video_validated=False));return
                 if path in ('/v1/images/capabilities','/api/extra/image-capabilities'):
                     cap=image_capabilities(cfg);cap['operations']['reference_synthesis']=dict(supported=True,endpoints=list(SYNTHESIS_PATHS),conditioning='text_descriptions_only',requires_client_visual_analysis=True,min_sources=2,max_sources=4,raw_images_accepted=False,native_reference_conditioning=False,exact_identity_guaranteed=False,schema_url='/v1/images/synthesis-schema');self.reply(cap);return
                 if path in ('/v1/images/synthesis-schema','/images/synthesis-schema'):

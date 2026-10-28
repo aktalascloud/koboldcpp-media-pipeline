@@ -64,7 +64,10 @@ def process_video(source,destination,root,model='clearreality',faces=False,tempo
                 profile.unlink()
             before=enhanced;face_report={};face_seconds=0;temporal_reverted=False
             if restorer:
-                begin=time.perf_counter();enhanced,face_report=restorer.refine(before,dict(visibility=face_visibility,fidelity=1.,minimum_face=32,maximum_face=240,max_faces=2,minimum_feature_similarity=.97,mask_mode='face'))
+                # Keep the same native-face size policy before/after720p SR.
+                # A fixed240px cap caused medium faces to toggle on/off after SR.
+                face_min=round(32*target_short_edge/480);face_max=round(192*target_short_edge/480)
+                begin=time.perf_counter();enhanced,face_report=restorer.refine(before,dict(visibility=face_visibility,fidelity=1.,minimum_face=face_min,maximum_face=face_max,max_faces=2,minimum_feature_similarity=.97,mask_mode='face'))
                 if profile_gpu and face_provider=='directml' and index==0:
                     profile=Path(restorer.session.end_profiling());events=json.loads(profile.read_text());profile.unlink()
                     core={'Conv','ConvTranspose','Gemm','MatMul'}
@@ -98,7 +101,7 @@ def process_video(source,destination,root,model='clearreality',faces=False,tempo
         check=cv2.VideoCapture(str(output),cv2.CAP_FFMPEG)
         actual=(round(check.get(cv2.CAP_PROP_FRAME_COUNT)),check.get(cv2.CAP_PROP_FPS),round(check.get(cv2.CAP_PROP_FRAME_WIDTH)),round(check.get(cv2.CAP_PROP_FRAME_HEIGHT)));check.release()
         if actual[0]!=count or abs(actual[1]-fps)>.001 or actual[2:]!=size:raise RuntimeError('Video SR changed frame count/FPS/size unexpectedly')
-        receipt=dict(ok=True,model=model,faces=faces,face_provider=face_provider,face_visibility=face_visibility,face_gpu_profile=face_gpu_report,frozen_face_initializers=restorer.metadata.get('in_memory_frozen_initializers') if restorer else None,temporal_face_strength=temporal_faces,source_dimensions=[width,height],dimensions=list(size),frames=count,fps=fps,
+        receipt=dict(ok=True,model=model,faces=faces,face_provider=face_provider,face_visibility=face_visibility,face_size_policy=dict(minimum=round(32*target_short_edge/480),maximum=round(192*target_short_edge/480),reference_short_edge=480),face_gpu_profile=face_gpu_report,frozen_face_initializers=restorer.metadata.get('in_memory_frozen_initializers') if restorer else None,temporal_face_strength=temporal_faces,source_dimensions=[width,height],dimensions=list(size),frames=count,fps=fps,
             total_seconds=time.perf_counter()-started,load_seconds=load_seconds,sr_seconds=sum(r['sr_seconds'] for r in rows),face_seconds=sum(r['faces_seconds'] for r in rows),
             processed_faces=sum(r['processed_faces'] for r in rows),gpu_profile=gpu_report,frames_details=rows,output=str(output),output_sha256=sha(output),output_bytes=output.stat().st_size,
             geometry=f'Aspect ratio preserved; short edge{target_short_edge}, even dimensions; no stretching, interpolation, frame duplication or drop.',quality='Per-frame SR; no guarantee of recovering missing detail. Optional guarded face residual smoothing is motion-compensated.')

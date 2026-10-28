@@ -41,3 +41,7 @@ Dirty is an **optional backup**, not installed by default: `-IncludeDirtyBackup`
 ## Video
 
 [480p Native generation,720p enhancement and API](docs/VIDEO.md) · [Русская инструкция OWUI](docs/VIDEO.ru.md) · [Measured timings](benchmarks/video.json). Models download from their original distributors.
+
+<!-- video-research -->
+
+[Restorers, alternative VAEs and factory sampler comparisons](docs/VIDEO_RESEARCH.md). No candidate VAE is silently enabled; the selected fast Super-Tiny pipeline remains the default.

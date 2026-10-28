@@ -322,6 +322,7 @@ class VideoService:
                               width=plan['contract']['dimensions'][0],height=plan['contract']['dimensions'][1],
                               frames=finished.get('encoded_frames'),fps=plan['contract']['fps'],
                               duration_seconds=plan['contract']['seconds'],steps=4,cfg_scale=1,
+                              sampler_name=plan['payload']['sampler_name'],scheduler=plan['payload']['scheduler'],flow_shift=plan['payload']['flow_shift'],eta=plan['payload']['eta'],cache_mode=plan['payload'].get('cache_mode','none'),
                               requested_seed=plan['payload']['seed'],actual_seed=info.get('seed') if isinstance(info,dict) else None,
                               url=self.public_base_url+media_path,relative_url=media_path,
                               last_frame_url=self.public_base_url+VIDEO_MEDIA_PREFIX+job_id+'/last-frame.png',

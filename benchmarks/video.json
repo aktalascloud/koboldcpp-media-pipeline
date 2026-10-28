@@ -4,6 +4,174 @@
   "scene": "Same neutral adult fashion I2V source,seed424242,480x832,24FPS,4Euler/simple steps,CFG1,shift5,no cache",
   "native_runs": [
     {
+      "executable_sha256": "5b71334f6a515e3e7a6ba0b87b8e64142398321639e5b1e9f2ffed8d558806ce",
+      "model_sha256": "8aa3a98c254bd02a9cc7e4f1db37720fe291cef8b0c32fb78e7a2391125d6b28",
+      "vae": "super",
+      "full_encoder": true,
+      "conv_wg": null,
+      "tiling_threshold": 1024,
+      "conv_direct": "full",
+      "offload": false,
+      "load_seconds": 12.066465099924244,
+      "native_seconds": 41.671665900037624,
+      "framecount": 17,
+      "fps": 24,
+      "dimensions": [
+        480,
+        832
+      ],
+      "cache": "disabled",
+      "test": "author-near-dpm-sde3-f17",
+      "source_avi_sha256": "ea939dacbebef634d8ef26ba03a22b87d5fb0588eafe5b00ad4112b096cc4a5f",
+      "encoder_seconds": 0.32721060002222657,
+      "gpu_peak_dedicated_mib": 5506.19140625,
+      "gpu_peak_shared_mib": 385.015625
+    },
+    {
+      "executable_sha256": "5b71334f6a515e3e7a6ba0b87b8e64142398321639e5b1e9f2ffed8d558806ce",
+      "model_sha256": "8aa3a98c254bd02a9cc7e4f1db37720fe291cef8b0c32fb78e7a2391125d6b28",
+      "vae": "super",
+      "full_encoder": true,
+      "conv_wg": null,
+      "tiling_threshold": 1024,
+      "conv_direct": "full",
+      "offload": false,
+      "load_seconds": 12.05360159999691,
+      "native_seconds": 50.06687580002472,
+      "framecount": 17,
+      "fps": 24,
+      "dimensions": [
+        480,
+        832
+      ],
+      "cache": "disabled",
+      "test": "factory-euler-beta-f17",
+      "source_avi_sha256": "74856a40054529a55a0b2fafce11d6f4947c312735125af06bcb9163f3f8dde1",
+      "encoder_seconds": 0.8192879999987781,
+      "gpu_peak_dedicated_mib": 820.4140625,
+      "gpu_peak_shared_mib": 8.1328125
+    },
+    {
+      "executable_sha256": "5b71334f6a515e3e7a6ba0b87b8e64142398321639e5b1e9f2ffed8d558806ce",
+      "model_sha256": "8aa3a98c254bd02a9cc7e4f1db37720fe291cef8b0c32fb78e7a2391125d6b28",
+      "vae": "super",
+      "full_encoder": true,
+      "conv_wg": null,
+      "tiling_threshold": 1024,
+      "conv_direct": "full",
+      "offload": false,
+      "load_seconds": 12.037792399991304,
+      "native_seconds": 50.149512400035746,
+      "framecount": 17,
+      "fps": 24,
+      "dimensions": [
+        480,
+        832
+      ],
+      "cache": "disabled",
+      "test": "factory-euler-normal-f17",
+      "source_avi_sha256": "6efb85051b6abc004e3c046f0052b7a7195e6d24ac1631753d7b6b9df468bb5f",
+      "encoder_seconds": 0.2987804999575019,
+      "gpu_peak_dedicated_mib": 4359.09765625,
+      "gpu_peak_shared_mib": 385.015625
+    },
+    {
+      "executable_sha256": "5b71334f6a515e3e7a6ba0b87b8e64142398321639e5b1e9f2ffed8d558806ce",
+      "model_sha256": "8aa3a98c254bd02a9cc7e4f1db37720fe291cef8b0c32fb78e7a2391125d6b28",
+      "vae": "super",
+      "full_encoder": true,
+      "conv_wg": null,
+      "tiling_threshold": 1024,
+      "conv_direct": "full",
+      "offload": false,
+      "load_seconds": 12.039576699957252,
+      "native_seconds": 50.10966439999174,
+      "framecount": 17,
+      "fps": 24,
+      "dimensions": [
+        480,
+        832
+      ],
+      "cache": "disabled",
+      "test": "factory-night-discrete-f17",
+      "source_avi_sha256": "da51dec904e8b9da142444d438cacc3e5dc780d51c29353bcdd7c0c7c14fb23a",
+      "encoder_seconds": 4.724585399962962,
+      "gpu_peak_dedicated_mib": 4359.09765625,
+      "gpu_peak_shared_mib": 385.015625
+    },
+    {
+      "executable_sha256": "5b71334f6a515e3e7a6ba0b87b8e64142398321639e5b1e9f2ffed8d558806ce",
+      "model_sha256": "8aa3a98c254bd02a9cc7e4f1db37720fe291cef8b0c32fb78e7a2391125d6b28",
+      "vae": "super",
+      "full_encoder": true,
+      "conv_wg": null,
+      "tiling_threshold": 1024,
+      "conv_direct": "full",
+      "offload": false,
+      "load_seconds": 12.035781499929726,
+      "native_seconds": 50.13660860003438,
+      "framecount": 17,
+      "fps": 24,
+      "dimensions": [
+        480,
+        832
+      ],
+      "cache": "disabled",
+      "test": "factory-night-simple-f17",
+      "source_avi_sha256": "c38c54e4e5a962317d74d8bc8121866cfed05c4574da1902850cee0df299cc16",
+      "encoder_seconds": 0.3031080999644473,
+      "gpu_peak_dedicated_mib": 4495.01171875,
+      "gpu_peak_shared_mib": 385.015625
+    },
+    {
+      "executable_sha256": "5b71334f6a515e3e7a6ba0b87b8e64142398321639e5b1e9f2ffed8d558806ce",
+      "model_sha256": "8aa3a98c254bd02a9cc7e4f1db37720fe291cef8b0c32fb78e7a2391125d6b28",
+      "vae": "super",
+      "full_encoder": true,
+      "conv_wg": null,
+      "tiling_threshold": 1024,
+      "conv_direct": "full",
+      "offload": false,
+      "load_seconds": 12.051174900028855,
+      "native_seconds": 50.13732060010079,
+      "framecount": 17,
+      "fps": 24,
+      "dimensions": [
+        480,
+        832
+      ],
+      "cache": "disabled",
+      "test": "factory-watchmaker-discrete-f17",
+      "source_avi_sha256": "e93c420a3eb9de1cbffdfefc2724e0d8c1058d943569c3b791369108c52de6b7",
+      "encoder_seconds": 0.32523429999127984,
+      "gpu_peak_dedicated_mib": 4359.09375,
+      "gpu_peak_shared_mib": 385.015625
+    },
+    {
+      "executable_sha256": "5b71334f6a515e3e7a6ba0b87b8e64142398321639e5b1e9f2ffed8d558806ce",
+      "model_sha256": "8aa3a98c254bd02a9cc7e4f1db37720fe291cef8b0c32fb78e7a2391125d6b28",
+      "vae": "super",
+      "full_encoder": true,
+      "conv_wg": null,
+      "tiling_threshold": 1024,
+      "conv_direct": "full",
+      "offload": false,
+      "load_seconds": 11.031893500010483,
+      "native_seconds": 50.34086350002326,
+      "framecount": 17,
+      "fps": 24,
+      "dimensions": [
+        480,
+        832
+      ],
+      "cache": "disabled",
+      "test": "factory-watchmaker-simple-f17",
+      "source_avi_sha256": "e55bab651911c8569623a657d40b3d2f44ba901f23e3147337b5497cac4080b9",
+      "encoder_seconds": 0.30055539996828884,
+      "gpu_peak_dedicated_mib": 5506.1953125,
+      "gpu_peak_shared_mib": 385.015625
+    },
+    {
       "executable_sha256": "6b05639f2ec9ce393edb5ece1aff1117818678ccffa9cd9cdae9970f0194ae49",
       "model_sha256": "8aa3a98c254bd02a9cc7e4f1db37720fe291cef8b0c32fb78e7a2391125d6b28",
       "vae": "full",
@@ -170,6 +338,78 @@
       "encoder_seconds": 0.29645599995274097,
       "gpu_peak_dedicated_mib": 3026.16015625,
       "gpu_peak_shared_mib": 352.578125
+    },
+    {
+      "executable_sha256": "5b71334f6a515e3e7a6ba0b87b8e64142398321639e5b1e9f2ffed8d558806ce",
+      "model_sha256": "8aa3a98c254bd02a9cc7e4f1db37720fe291cef8b0c32fb78e7a2391125d6b28",
+      "vae": "super",
+      "full_encoder": true,
+      "conv_wg": null,
+      "tiling_threshold": 1024,
+      "conv_direct": "full",
+      "offload": false,
+      "load_seconds": 12.044709700043313,
+      "native_seconds": 50.22415810008533,
+      "framecount": 17,
+      "fps": 24,
+      "dimensions": [
+        480,
+        832
+      ],
+      "cache": "disabled",
+      "test": "latent-capture-super-f17",
+      "source_avi_sha256": "a1c2955a2d188784a895b811364ae2326486e9ccbd8e19f53e0fba1164533e71",
+      "encoder_seconds": 0.3511788999894634,
+      "gpu_peak_dedicated_mib": 4495.015625,
+      "gpu_peak_shared_mib": 385.015625
+    },
+    {
+      "executable_sha256": "5b71334f6a515e3e7a6ba0b87b8e64142398321639e5b1e9f2ffed8d558806ce",
+      "model_sha256": "8aa3a98c254bd02a9cc7e4f1db37720fe291cef8b0c32fb78e7a2391125d6b28",
+      "vae": "super",
+      "full_encoder": true,
+      "conv_wg": null,
+      "tiling_threshold": 1024,
+      "conv_direct": "full",
+      "offload": false,
+      "load_seconds": 12.086930299992673,
+      "native_seconds": 51.374821099918336,
+      "framecount": 17,
+      "fps": 24,
+      "dimensions": [
+        480,
+        832
+      ],
+      "cache": "disabled",
+      "test": "original-euler-shift8-f17",
+      "source_avi_sha256": "d7d6b31a9b66dde9f6998b48c05af55cd8adc62eccc43c96c7c747cccb08f8ba",
+      "encoder_seconds": 0.32824239996261895,
+      "gpu_peak_dedicated_mib": 5506.19140625,
+      "gpu_peak_shared_mib": 385.015625
+    },
+    {
+      "executable_sha256": "5b71334f6a515e3e7a6ba0b87b8e64142398321639e5b1e9f2ffed8d558806ce",
+      "model_sha256": "8aa3a98c254bd02a9cc7e4f1db37720fe291cef8b0c32fb78e7a2391125d6b28",
+      "vae": "super",
+      "full_encoder": true,
+      "conv_wg": null,
+      "tiling_threshold": 1024,
+      "conv_direct": "full",
+      "offload": false,
+      "load_seconds": 12.032570899929851,
+      "native_seconds": 50.25108399998862,
+      "framecount": 17,
+      "fps": 24,
+      "dimensions": [
+        480,
+        832
+      ],
+      "cache": "disabled",
+      "test": "original-renoise-lcm-shift8-f17",
+      "source_avi_sha256": "e5b57c99fec452ac29ff763ed090f40fbce525a2159de490d48c5b000f34132f",
+      "encoder_seconds": 0.2998140000272542,
+      "gpu_peak_dedicated_mib": 4359.09765625,
+      "gpu_peak_shared_mib": 385.015625
     },
     {
       "executable_sha256": "6b05639f2ec9ce393edb5ece1aff1117818678ccffa9cd9cdae9970f0194ae49",
@@ -594,6 +834,33 @@
       "test": "post/split-super-quality-f49/clearreality-faces-temporal-directml"
     },
     {
+      "model": "clearreality",
+      "faces": true,
+      "face_provider": "directml",
+      "frames": 49,
+      "dimensions": [
+        720,
+        1248
+      ],
+      "total_seconds": 52.75703820004128,
+      "sr_seconds": 21.39022879989352,
+      "face_seconds": 27.4735453997273,
+      "processed_faces": 49,
+      "gpu_profile": {
+        "dml_nodes": 74,
+        "cpu_core_nodes": []
+      },
+      "face_gpu_profile": {
+        "dml_nodes": 1,
+        "cpu_core_nodes": []
+      },
+      "source_dimensions": [
+        480,
+        832
+      ],
+      "test": "post/split-super-quality-f49/clearreality-faces-temporal-directml-v0.35-gfpgan14"
+    },
+    {
       "model": "paragon2x",
       "faces": true,
       "face_provider": "directml",
@@ -662,7 +929,7 @@
       "processed_faces": 17
     }
   },
-  "public_api": {
+  "public_api_super_previous": {
     "ok": true,
     "request_seconds": 98.01341459993273,
     "photo_ready_after_seconds": 118.26815010001883,
@@ -681,6 +948,28 @@
       "native_call_seconds": 51.7452,
       "encoder_seconds": 0.42847609997261316,
       "enhancement_seconds": 21.580149700050242,
+      "processed_faces": 17
+    }
+  },
+  "public_api": {
+    "ok": true,
+    "request_seconds": 97.75507519999519,
+    "photo_ready_after_seconds": 119.05106700002216,
+    "range_read": true,
+    "photo_resident_restored": true,
+    "executable_sha256": "5b71334f6a515e3e7a6ba0b87b8e64142398321639e5b1e9f2ffed8d558806ce",
+    "scope": "One actual public17frame I2V/ClearReality720/GPEN-SFace request,not30second continuity.",
+    "stages": {
+      "frames": 17,
+      "fps": 24,
+      "width": 720,
+      "height": 1248,
+      "duration_seconds": 0.7083333333333334,
+      "vae_decoder": "full Wan encoder + Super-Tiny decoder",
+      "profile_ready_seconds": 22.3791,
+      "native_call_seconds": 50.7002,
+      "encoder_seconds": 0.44915530004072934,
+      "enhancement_seconds": 21.64648200001102,
       "processed_faces": 17
     }
   },
