@@ -87,9 +87,9 @@ def prepare_moss(catalog,directory):
         subprocess.run(command,cwd=ROOT,check=True)
         if not verified(inside(row['path']),row):raise RuntimeError('Derived model differs from measured Q8 output; no unverified model accepted.')
         source.unlink() # Only Setup's verified temporary download/link, never the user's source.
-    for folder in [ROOT/'MOSS/models/.tmp',temporary]:
+    for folder in [ROOT/'MODELS/converted/.tmp',temporary]:
         if folder.is_dir() and not any(folder.iterdir()):folder.rmdir()
-def inventory(catalog):return [dict(path=row['path'],ok=verified(inside(row['path']),row)) for row in catalog['models']]
+def inventory(catalog):return [dict(path=row['path'],ok=verified(inside(row['path']),row)) for row in catalog['models']+catalog.get('video_pro_models',[])]
 
 def migrate_verified_assets(catalog):
     """Relocate only exact known assets; preserve unknown or mismatched files."""
@@ -123,7 +123,7 @@ def install_original(row,directory):
     return target
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--skip-model-downloads',action='store_true');parser.add_argument('--check-only',action='store_true')
-    parser.add_argument('--moss-source-directory',type=Path);parser.add_argument('--gpen-path',type=Path);parser.add_argument('--include-dirty-backup',action='store_true');parser.add_argument('--listen-host',default='127.0.0.1');args=parser.parse_args();ipaddress.ip_address(args.listen_host)
+    parser.add_argument('--moss-source-directory',type=Path);parser.add_argument('--gpen-path',type=Path);parser.add_argument('--include-dirty-backup',action='store_true');parser.add_argument('--include-rife',action='store_true');parser.add_argument('--listen-host',default='127.0.0.1');args=parser.parse_args();ipaddress.ip_address(args.listen_host)
     catalog=json.loads((ROOT/'models.json').read_text(encoding='utf-8'))
     if args.include_dirty_backup:
         optional=catalog['optional_dirty_backup'];known={r['path'] for r in catalog['models']}
@@ -152,6 +152,12 @@ def main():
             if not row.get('generated_role'):
                 if row.get('aliases') or row.get('required_user_file'):install_original(row,directory)
                 else:download(row)
+        if catalog.get('video_pro_models'):
+            from SetupPro import prepare
+            prepare()
+        if args.include_rife:
+            from SetupRife import prepare
+            prepare()
     exe=ROOT/'koboldcpp-nocuda.exe'
     if not exe.is_file():raise RuntimeError('Pinned core Windows asset missing.')
     defaults['kcpp_proxy'].update(host=args.listen_host,autostart_enabled=False);exe_sha=sha(exe)

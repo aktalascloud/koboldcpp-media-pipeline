@@ -1,0 +1,103 @@
+{
+  "format": 1,
+  "source_files": [
+    {
+      "path": "lightvae/__init__.py",
+      "url": "https://raw.githubusercontent.com/ModelTC/LightVAE/38b0587d47df9188e3e05973265352962b20ada4/lightvae/__init__.py",
+      "bytes": 52,
+      "sha256": "45ad17394942d9f1966c4fbaba3e7ca7b7e45c3b0870734c3030a113f093d9b1"
+    },
+    {
+      "path": "lightvae/base_vae/__init__.py",
+      "url": "https://raw.githubusercontent.com/ModelTC/LightVAE/38b0587d47df9188e3e05973265352962b20ada4/lightvae/base_vae/__init__.py",
+      "bytes": 78,
+      "sha256": "9b3bfe51e9c06a00dac0b5dd681fa0b407803358ba3afb45c2d0d68be86436e6"
+    },
+    {
+      "path": "lightvae/base_vae/wan21_vae_decoder.py",
+      "url": "https://raw.githubusercontent.com/ModelTC/LightVAE/38b0587d47df9188e3e05973265352962b20ada4/lightvae/base_vae/wan21_vae_decoder.py",
+      "bytes": 4992,
+      "sha256": "a4fbabf810051c0aa91942e37a7fc3f88577b7948f2a2e941301be3142ff1b7c"
+    },
+    {
+      "path": "lightvae/base_vae/wan21_vae_layers.py",
+      "url": "https://raw.githubusercontent.com/ModelTC/LightVAE/38b0587d47df9188e3e05973265352962b20ada4/lightvae/base_vae/wan21_vae_layers.py",
+      "bytes": 7603,
+      "sha256": "fc87378260e5f2f5c17a4a000c489feb997080e382111389e798d91abfca639a"
+    },
+    {
+      "path": "lightvae/base_vae/wan22_vae_decoder.py",
+      "url": "https://raw.githubusercontent.com/ModelTC/LightVAE/38b0587d47df9188e3e05973265352962b20ada4/lightvae/base_vae/wan22_vae_decoder.py",
+      "bytes": 5022,
+      "sha256": "84e05b98742e645b924a70a88c503ed492baf576490594180d0aba04119b0736"
+    },
+    {
+      "path": "lightvae/base_vae/wan22_vae_encoder.py",
+      "url": "https://raw.githubusercontent.com/ModelTC/LightVAE/38b0587d47df9188e3e05973265352962b20ada4/lightvae/base_vae/wan22_vae_encoder.py",
+      "bytes": 5224,
+      "sha256": "7020ea40e4365768268962c5c00c9135ff97a16819b2f8c789827c0b6ddf63aa"
+    },
+    {
+      "path": "lightvae/base_vae/wan22_vae_layers.py",
+      "url": "https://raw.githubusercontent.com/ModelTC/LightVAE/38b0587d47df9188e3e05973265352962b20ada4/lightvae/base_vae/wan22_vae_layers.py",
+      "bytes": 13486,
+      "sha256": "91c3d5d4b674628f07a0bd3d51e46194246a01ecf3f845ee061f00096b95826d"
+    },
+    {
+      "path": "lightvae/config/lightvae-pro-wan22.json",
+      "url": "https://raw.githubusercontent.com/ModelTC/LightVAE/38b0587d47df9188e3e05973265352962b20ada4/lightvae/config/lightvae-pro-wan22.json",
+      "bytes": 6683,
+      "sha256": "209b778cf6cef8174285ba1ea9f472bc8a12c720708ffdb051f481c41c6e7a26"
+    },
+    {
+      "path": "lightvae/kernels.py",
+      "url": "https://raw.githubusercontent.com/ModelTC/LightVAE/38b0587d47df9188e3e05973265352962b20ada4/lightvae/kernels.py",
+      "bytes": 1734,
+      "sha256": "81ba5265896464ceef4b1def27e84a6fd2489806b6efc25a72674fa6f34994a2"
+    },
+    {
+      "path": "lightvae/modules.py",
+      "url": "https://raw.githubusercontent.com/ModelTC/LightVAE/38b0587d47df9188e3e05973265352962b20ada4/lightvae/modules.py",
+      "bytes": 9146,
+      "sha256": "469cd1089a8e14632b08582ac1f36680df3ce8ca129d612a891d2b48b44378f8"
+    },
+    {
+      "path": "lightvae/tlr.py",
+      "url": "https://raw.githubusercontent.com/ModelTC/LightVAE/38b0587d47df9188e3e05973265352962b20ada4/lightvae/tlr.py",
+      "bytes": 2823,
+      "sha256": "3e9356591e2a31aaf80c17cc453744017b4dacd189ee0e2c57d47f3eed5082f6"
+    },
+    {
+      "path": "lightvae/utils.py",
+      "url": "https://raw.githubusercontent.com/ModelTC/LightVAE/38b0587d47df9188e3e05973265352962b20ada4/lightvae/utils.py",
+      "bytes": 9284,
+      "sha256": "315ebcb2292ec91b22ca3f21fd3e54d69f1d19da210d59135a935222116a9076"
+    },
+    {
+      "path": "lightvae/wan22_lightvae_decoder.py",
+      "url": "https://raw.githubusercontent.com/ModelTC/LightVAE/38b0587d47df9188e3e05973265352962b20ada4/lightvae/wan22_lightvae_decoder.py",
+      "bytes": 426,
+      "sha256": "4426a75b4cb418ca4de6fd0c566b67c1e35f241f2c8a730e5eb2dac262b65d4a"
+    }
+  ],
+  "checkpoint": {
+    "url": "https://huggingface.co/lightx2v/LightVAE/resolve/4925ea978147b9de492d7a5fd4f9c6d1854ca1cc/lightvae-pro-wan22-decoder.safetensors",
+    "bytes": 1384550888,
+    "sha256": "9985d3b90321f48109c3fed25b526f38d137a1a7a8f34e1afbe41ddfc27d2782"
+  },
+  "pip": {
+    "url": "https://files.pythonhosted.org/packages/3f/06/3e4420302363fbb71be3c7f35ce042f54bfca330e3e66b3a2e3c4cca579f/pip-26.2.2-py3-none-any.whl",
+    "bytes": 1819850,
+    "sha256": "fd7f4dfa8190e014013b9f08f3e973f4e4c26ffd179a204895533a7254813a70",
+    "name": "pip-26.2.2-py3-none-any.whl"
+  },
+  "packages": [
+    "torch==2.7.1+cpu",
+    "onnx==1.23.2",
+    "numpy==2.2.6",
+    "safetensors==0.8.0",
+    "einops==0.8.2",
+    "tqdm==4.67.1"
+  ],
+  "expected_manifest_sha256": "be6bacb5e4e067fde9ab73bd2579df31a94f04bdb127c9e731ae3b79b589db70"
+}

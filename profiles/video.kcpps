@@ -32,7 +32,7 @@
   "enableguidance": false,
   "failsafe": false,
   "foreground": false,
-  "gendefaults": "{}",
+  "gendefaults": "{\"sampler_name\":\"euler\",\"scheduler\":\"beta\",\"steps\":4,\"cfg_scale\":1,\"flow_shift\":5,\"eta\":0,\"cache_mode\":\"disabled\",\"cache_options\":\"\"}",
   "gendefaultsoverwrite": false,
   "genlimit": 0,
   "highpriority": false,
@@ -120,7 +120,7 @@
   "sdquant": 0,
   "sdt5xxl": "",
   "sdthreads": 20,
-  "sdtiledvae": 1024,
+  "sdtiledvae": 576,
   "sdupscaler": "",
   "sdvae": "MODELS/vae/wan22-vae.safetensors",
   "sdvaeauto": false,
@@ -160,10 +160,8 @@
   "ubatchsize": 1024,
   "sdllm": "",
   "kcpp_native_environment": {
-    "GGML_VK_GCN_CONV_WG": "256"
+    "GGML_VK_GCN_CONV_WG": "512"
   },
-  "kcpp_video_tae_decoder": {
-    "path": "MODELS/vae/taew2_2_super.safetensors",
-    "sha256": "cf6d8bdadb77d9f9741ae28b5b4659bb74cf9b0be6d08fc4afed3cb50c39364c"
-  }
+  "kcpp_video_capture_latents": true,
+  "kcpp_video_latent_only": true
 }

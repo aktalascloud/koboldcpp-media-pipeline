@@ -9,6 +9,13 @@
           "role": "quality",
           "sha256": "57d2a400af32a0afd9cd065c43ebeb6a0e44b153abaef0171ce6891b6b057d13",
           "approved": true
+        },
+        {
+          "path": "MODELS/loras/moss-realism-enhancer-v1.safetensors",
+          "weight": 1.0,
+          "role": "quality",
+          "sha256": "4a187913365a862503a4297d26248d95b440636b68e60239e68ffc952b737e70",
+          "approved": true
         }
       ]
     },

@@ -8,7 +8,12 @@
   "response_format": "b64_json",
   "output_format": "png",
   "enable_hr": false,
-  "sampler_name": "dpm++2m_sde",
-  "scheduler": "sgm_uniform",
-  "eta": 0
+  "sampler_name": "euler",
+  "scheduler": "simple",
+  "eta": 0,
+  "cfg_scale": 1,
+  "flow_shift": 5,
+  "clip_skip": -1,
+  "cache_mode": "disabled",
+  "cache_options": ""
 }

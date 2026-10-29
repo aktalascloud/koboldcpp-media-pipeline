@@ -181,14 +181,26 @@
       ]
     },
     {
+      "path": "MODELS/loras/moss-realism-enhancer-v1.safetensors",
+      "bytes": 72608464,
+      "sha256": "4a187913365a862503a4297d26248d95b440636b68e60239e68ffc952b737e70",
+      "in_release": false,
+      "url": "https://civitai.red/api/download/models/3433342?fileId=3329740",
+      "aliases": [
+        "Moss-RealismEnhancer-V1.safetensors"
+      ],
+      "source": "https://civitai.red/models/3023438?modelVersionId=3433342",
+      "license": "Original Realism Enhancer author terms; original download only, not mirrored."
+    },
+    {
       "path": "MODELS/video/wan22-ti2v-5b-turbo-q4_0.gguf",
       "bytes": 3033897696,
       "sha256": "8aa3a98c254bd02a9cc7e4f1db37720fe291cef8b0c32fb78e7a2391125d6b28",
       "url": "https://huggingface.co/hum-ma/Wan2.2-TI2V-5B-Turbo-GGUF/resolve/9873ba175b4b204a81f4a43c9644e6c385ee4459/Wan2_2-TI2V-5B-Turbo-Q4_0.gguf",
       "in_release": false,
       "video_component": true,
-      "license": "Original Wan/encoder quantizer terms; original distributor download only.",
-      "source": "https://huggingface.co/hum-ma/Wan2.2-TI2V-5B-Turbo-GGUF"
+      "source": "https://huggingface.co/hum-ma/Wan2.2-TI2V-5B-Turbo-GGUF",
+      "license": "Original Wan/encoder distributor terms; downloaded from original provider, not mirrored."
     },
     {
       "path": "MODELS/text/umt5-xxl-encoder-q4_k_m.gguf",
@@ -197,8 +209,8 @@
       "url": "https://huggingface.co/city96/umt5-xxl-encoder-gguf/resolve/b535255bee98c2b0a59ea7c0ae2dcd0c6657b3b7/umt5-xxl-encoder-Q4_K_M.gguf",
       "in_release": false,
       "video_component": true,
-      "license": "Original Wan/encoder quantizer terms; original distributor download only.",
-      "source": "https://huggingface.co/city96/umt5-xxl-encoder-gguf"
+      "source": "https://huggingface.co/city96/umt5-xxl-encoder-gguf",
+      "license": "Original Wan/encoder distributor terms; downloaded from original provider, not mirrored."
     },
     {
       "path": "MODELS/vae/wan22-vae.safetensors",
@@ -207,18 +219,8 @@
       "url": "https://huggingface.co/Comfy-Org/Wan-2.2/resolve/ee6f4a40737a995bf5818954cfce6d59443b0f04/split_files/vae/wan2.2_vae.safetensors",
       "in_release": false,
       "video_component": true,
-      "license": "Original Wan/encoder quantizer terms; original distributor download only.",
-      "source": "https://huggingface.co/Comfy-Org/Wan-2.2"
-    },
-    {
-      "path": "MODELS/vae/taew2_2_super.safetensors",
-      "bytes": 40986488,
-      "sha256": "cf6d8bdadb77d9f9741ae28b5b4659bb74cf9b0be6d08fc4afed3cb50c39364c",
-      "url": "https://raw.githubusercontent.com/madebyollin/taehv/011dfc2112197741c540e0bdd5b7b67bcc930771/safetensors/taew2_2_super.safetensors",
-      "in_release": false,
-      "video_component": true,
-      "license": "MIT; madebyollin/taehv",
-      "source": "https://raw.githubusercontent.com/madebyollin/taehv/011dfc2112197741c540e0bdd5b7b67bcc930771/safetensors/taew2_2_super.safetensors"
+      "source": "https://huggingface.co/Comfy-Org/Wan-2.2",
+      "license": "Original Wan/encoder distributor terms; downloaded from original provider, not mirrored."
     }
   ],
   "moss_sources": [
@@ -301,5 +303,36 @@
       "model_name": "Dirty MOSS compatible Q8_0",
       "description": "Verified author INT8 ConvRot decoded with per-row scales and inverse rotation; standard Q8_0 matrices, turbo adapter separate."
     }
+  },
+  "video_pro_models": [
+    {
+      "role": "start",
+      "path": "MODELS/vae/lightvae-pro-stream/start.onnx",
+      "bytes": 502752,
+      "sha256": "edaea90b63938dd646c0a48a060d8c0c7acb89457a74fa112d016d9d502fa5c1",
+      "in_release": false,
+      "generated_by": "tools/SetupPro.py"
+    },
+    {
+      "role": "step",
+      "path": "MODELS/vae/lightvae-pro-stream/step.onnx",
+      "bytes": 518044,
+      "sha256": "197ed840b56df46e51c634ff3af1f7d1491af6c6f9edd9a590286d39c2caa73f",
+      "in_release": false,
+      "generated_by": "tools/SetupPro.py"
+    },
+    {
+      "role": "weights",
+      "path": "MODELS/vae/lightvae-pro-stream/weights.bin",
+      "bytes": 1384604064,
+      "sha256": "ee8e03e793b56f3559299dc430bd9af549782fd140d8fafa0eba97ff676f8be9",
+      "in_release": false,
+      "generated_by": "tools/SetupPro.py"
+    }
+  ],
+  "video_pro": {
+    "checkpoint_source": "https://huggingface.co/lightx2v/LightVAE/tree/4925ea978147b9de492d7a5fd4f9c6d1854ca1cc",
+    "license_weights": "Apache-2.0",
+    "installation": "Pinned original safetensors and upstream source are downloaded locally; one-time CPU export. No upstream Python or model weights redistributed."
   }
 }

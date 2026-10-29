@@ -1,24 +1,19 @@
-# KoboldCpp media pipeline · Ray MOSS
-[English](README.md) · [Windows-комплект](https://github.com/aktalascloud/koboldcpp-media-pipeline/releases/latest) · [API/OWUI](docs/API.md)
+# Медиасервер KoboldCpp · MOSS / YuE2 / Wan
 
-**Ray Q8 + Afterlight0,25 · DPM++2M SDE/sgm_uniform · 8 шагов · CFG1 · eta0 · shift5.** Дополнительной turbo нет: модель уже SFT Turbo. Слова-активаторы не нужны. Cache-DiT0,08/warmup4/Fn16/Bn2, FA, энкодерCPU20.
+[English](README.md) · [Комплект Windows](https://github.com/aktalascloud/koboldcpp-media-pipeline/releases/latest) · [ТЗ для фильтра OWUI](docs/MEDIA.ru.md) · [Лицензии](docs/LICENSES.md)
 
-Normal/edit736×1104: YuNet960/GPEN20%/SFace0,97/Gater1×, без автоSR. `enable_hr:true` добавляет ClearReality4×. High928×1392 по умолчанию с4×, новый полный High не измерялся. МузыкаAceStep/MP3 и возврат фото сохранены.
+Один переносимый сервер на базе [оптимизированного KoboldCpp для Haswell/AVX2 и RX580 Polaris/gfx803](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa). Изображения, музыка и видео используют общий Native-слот. По умолчанию фото-модель находится в GPU; переключение и возврат автоматические. Запуск: **Start.exe**, Setup.ps1 только для установки/обновления.
 
-**Полный реальный Normal4×: 175.14с**,2944×4416. Один запрос на EXE `6c03b583f7a2`,28октября2026. БазаAPI163,08с, лица1,36с, Gater3,87с, SR1,02с; остальное — кодирование, передача и переключение. Не переносить старые Dirty/Refined цифры или эти значения на другойSHA. [Доказательства](benchmarks/results.json).
+- Фото: Ray Q8 + Afterlight0.25 + RealismEnhancer1.0, Euler/simple8, CFG1, eta0, shift5, Cache-DiT0.08. Normal/edit736×1104 без авто-SR; явный enable_hr включает ClearReality4×. High928×1392 с4× настроен, новый набор High заново не измерен.
+- Музыка: YuE2-3B Q8/F16 VAE, MP3 stereo; текст и стиль готовит клиентская helper-LLM.
+- Видео: Wan5B Turbo Q4, полный энкодер и Pro FP32/DirectML, Euler/beta4, WG512, порогVAE576/тайл320. Генерация480p, ClearReality720p, лица; Tiny/Super-Tiny не используются. YuE2 добавляет музыкальную дорожку в тот же MP4-запрос. Это не синхронный Foley/речь/губы. RIFE48FPS опционален и не удлиняет ролик.
 
-![Обычный режим с улучшалками](examples/fullbody-processed.png)
+[Готовый API](docs/VIDEO.ru.md) · [Все фото-замеры](benchmarks/image-current.json) · [Все видео-замеры](benchmarks/video.json)
 
-**MODELS** — модели/LoRA/музыка; **DETAILERS** — лица/Gater; **UPSCALERS** — ClearReality. Dirty — необязательный запасной комплект (`-IncludeDirtyBackup`). Разово `Setup.ps1 -MossSourceDirectory <оригиналы>`, затем **Start.exe**. Проверенные старые пути переносятся поSHA; незнакомые файлы не удаляются. Основные веса/LoRA/ключи/кэши/логи не выкладываются. [Источники](docs/MODELS.md), [лицензии](docs/LICENSES.md), [оптимизированный KoboldCpp](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa), [оригинал](https://github.com/LostRuins/koboldcpp).
+Реальные публичные запросы29октября2026 на EXE ff7d4d0b: Normal163.85с и отдельный4×6.04с. Видео с Pro, локальным пользовательским адаптером,720p,лицами,RIFE и музыкой —190.76с и258.05с для17исходных кадров (0.71с видео). Последняя цифра включает очередь/готовность профиля82.55с. Публичный комплект не распространяет и не включает приватный видеоадаптер. Лёгкий кэш0.04/0.08 совпал с контрольными латентами; устойчивого выигрыша0.08 нет.
 
-## Музыка
+![Обычная генерация](examples/ray-realism-normal.png)
 
-**YuE2 Q8 + F16 VAE**, helper NeoHorse на стороне OWUI, MP3 stereo. 32с музыки через API: **57,01с** с переключением; фото снова в GPU к61,07с. Русская короткая проба одобрена пользователем; длинные песни не измерены. [Правила фильтра](docs/MUSIC.ru.md), [MP3](examples/yue2-russian-32s.mp3), [замеры](benchmarks/music.json). ACE-Step удалён. Веса CC-BY-NC-4.0 скачиваются у оригинального распространителя.
+[Полный4× без потерь](examples/ray-realism-4x.webp) · [Глаза4×](examples/ray-realism-eyes.png) · [Прежняя ночная сцена](examples/night-processed.png) · [Прежний часовщик](examples/watchmaker-processed.png)
 
-## Video
-
-[480p Native generation,720p enhancement and API](docs/VIDEO.md) · [Русская инструкция OWUI](docs/VIDEO.ru.md) · [Measured timings](benchmarks/video.json). Models download from their original distributors.
-
-<!-- video-research -->
-
-[Restorers, alternative VAEs and factory sampler comparisons](docs/VIDEO_RESEARCH.md). No candidate VAE is silently enabled; the selected fast Super-Tiny pipeline remains the default.
+Крупные модели и LoRA не зеркалируются: оригинальные загрузки/импорт пользователя, SHA и лицензии сохранены. Pro один раз конвертируется на CPU тем же комплектным Python; при работе PyTorch не нужен. Нет второй runtime-копии, ключей, кешей, логов и PID-файлов в Git/релизе. [Оригинальный KoboldCpp](https://github.com/LostRuins/koboldcpp).

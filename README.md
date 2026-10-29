@@ -1,47 +1,39 @@
-# KoboldCpp media pipeline · Ray MOSS
-[Русский](README.ru.md) · **[Windows kit](https://github.com/aktalascloud/koboldcpp-media-pipeline/releases/latest)** · [API/OWUI](docs/API.md) · [Models](docs/MODELS.md) · [Licenses](docs/LICENSES.md)
+# KoboldCpp media server · MOSS / YuE2 / Wan
 
-Portable photo/music wrapper for [our Haswell AVX2 / RX580 Polaris KoboldCpp fork](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa) and [original KoboldCpp](https://github.com/LostRuins/koboldcpp). Kobold remains the generator; faces use CPU OpenVINO, restoration/SR use DirectML.
+[Русский](README.ru.md) · [Windows kit](https://github.com/aktalascloud/koboldcpp-media-pipeline/releases/latest) · [API](docs/API.md) · [OWUI filter instructions](docs/MEDIA.ru.md) · [Models/licenses](docs/LICENSES.md)
 
-**Ray Artshoot Q8_0 + Afterlight0.25 · DPM++2M SDE/sgm_uniform · 8 steps · CFG1 · eta0 · shift5.** Ray is already SFT Turbo: no extra turbo adapter or trigger words. Cache-DiT0.08/warmup4/Fn16/Bn2; FA enabled; CPU text encoder20 threads.
+One portable Windows media server built around [our Haswell AVX2 / RX580 Polaris/gfx803 KoboldCpp fork](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa) and [original KoboldCpp](https://github.com/LostRuins/koboldcpp). One shared Native slot; the image model stays GPU-resident when idle. Models unload/load automatically. Run **Start.exe**; **Setup.ps1** is initial setup/update only.
 
-Normal/edit **736×1104**, faces/Gater, no automatic SR. `enable_hr:true` adds ClearReality4×. High **928×1392**, same sampling, defaults to4×; selected Ray High generation is not measured. MP3 music loads on demand, then photo returns to GPU.
-
-## Selected saved examples
-| Fullbody | Night | Watchmaker |
+| Task | Selected configuration | Public API |
 |---|---|---|
-|![Normal](examples/fullbody-processed.png)|![Night](examples/night-processed.png)|![Watchmaker](examples/watchmaker-processed.png)|
-|![Eyes4x](examples/fullbody-eyes.png)|![Eyes4x](examples/night-eyes.png)|![Eyes4x](examples/watchmaker-eyes.png)|
+| Images | Ray Artshoot Q8, Afterlight0.25 + RealismEnhancer1.0, Euler/simple8, CFG1, eta0, shift5, Cache-DiT0.08 | `/sdapi/v1/txt2img`, `/v1/images/generations` |
+| Music | YuE2-3B Q8 + F16 VAE, caller-provided lyrics/style, MP3 stereo | `/api/extra/music/generate` |
+| Video + soundtrack | Wan5B Turbo Q4, full encoder + Pro FP32 DirectML, Euler/beta4, CFG1, eta0, shift5 | `/v1/videos/generations` |
 
-| Exact Native source | Actual Normal4× API output, web preview |
+Normal/edit: **736×1104**, YuNet/GPEN20%/SFace0.97/Gater, no automatic SR. Explicit `enable_hr:true` adds ClearReality4×. High: **928×1392**, defaults to4×; the new High adapter combination has not been generated/measured. Native hires is off.
+
+Video: native **480p**, Pro threshold576/actual320px tiles, WG512; ClearReality720p and guarded faces. Tiny/Super-Tiny are not used. YuE2 creates a separate musical track, muxed into MP4 without re-encoding video. This is not video-conditioned Foley or lip-sync. Optional RIFE48FPS preserves duration. The public kit has no private user video adapter enabled; local video measurements explicitly include one.
+
+## Current saved example
+
+| Actual Normal | Actual4× output (lossless full image linked) |
 |---|---|
-|[![Native](examples/fullbody-native.png)](examples/fullbody-native.png)|[![4x](examples/fullbody-4x-preview.png)](examples/fullbody-4x.png)|
+|![Normal](examples/ray-realism-normal.png)|[![4x preview](examples/ray-realism-4x-preview.webp)](examples/ray-realism-4x.webp)|
 
-Fullbody4× is the actual public request; other scenes use the same post-chain on saved frames. Preview resizing is labeled; full PNGs/eye crops preserve original pixels. [RGB provenance](examples/gallery.json). Anatomy, irises, clocks and small writing can still contain artifacts.
+![Exact4× eye pixels](examples/ray-realism-eyes.png)
 
-## Measured time
-**Actual Normal + faces/Gater/ClearReality4×: 175.14s**,2944×4416, one request without explicit mode/size. BaseAPI 163.081s; faces 1.359s; Gater 3.867s; SR 1.017s. Remaining time includes encoding/handoff/API overhead. Model resident before request; Normal restored afterward.
+Other scenes from the earlier28October recipe: [night](examples/night-processed.png), [watchmaker](examples/watchmaker-processed.png). They are historical examples, not measurements of the new adapters. [RGB provenance](examples/gallery.json).
 
-28 October2026, XeonE5-2696v3/RX5802048SP8GB, EXE `6c03b583f7a2`, image `dd02927547bc`. One public measurement; [exact scope and separate scene timings](benchmarks/results.json). Historical Dirty/Refined numbers are not new results. Enabled native compute ports have no isolated speed measurement; no compiler gain is claimed from these model changes.
+## Measured scope
 
-## Run / layout
-Run `Setup.ps1 -MossSourceDirectory <originals>` once, then **Start.exe**. Sources and SHA are pinned; the gated text original needs your access. Existing verified assets migrate instead of redownloading.
+29October2026, Xeon E5-2696v3 / RX5802048SP8GB, EXE `ff7d4d0b`:
 
-- `MODELS/`: image, text/tokenizer, VAE, LoRA and music weights.
-- `DETAILERS/`: YuNet/GPEN/SFace and Gater.
-- `UPSCALERS/`: ClearReality4×.
-- `profiles/`, `tools/`, `runtime/`: current configuration/code and one Python runtime.
+- Real public Normal, without explicit mode/size: **163.85s**. Ordinary4× API on that saved PNG: **6.04s**. These are two requests. [Image battle, all arms and cold/warm caveats](benchmarks/image-current.json).
+- Real Pro + local user adapter +720p + faces + RIFE + YuE2 API examples: **190.76s** and **258.05s** for **17 native frames**, about **0.71s of footage**, not17seconds. The latter includes82.55s queue/profile readiness. [All video measurements](benchmarks/video.json).
+- Light cache0.04/0.08 matched control latents in the tested scene;0.08 did not establish a consistent speed benefit. Default video cache stays disabled. No universal speedup/long-clip claim.
 
-Dirty is an **optional backup**, not installed by default: `-IncludeDirtyBackup` requires its exact user-resized turbo original. No main weights, LoRA binaries, keys, caches or logs are mirrored. GPEN comes directly from its original distributor, Non-Commercial. [Editing contract](docs/EDITING.md) and [text-only reference synthesis](docs/REFERENCE-SYNTHESIS.md) are preserved.
+## Setup
 
-## Music
+Download the code kit and run `Setup.ps1 -ListenHost 0.0.0.0` once for LAN use, then launch **Start.exe**. Main MOSS/Qwen weights and adapters come from original distributors/user imports; no main weights, keys, logs or caches are in this repository.
 
-**YuE2 Q8 + F16 VAE**, client-side NeoHorse helper, MP3 stereo. One measured32s request: **57.01s** including model handoff; photo resident again by61.07s. Russian short trial accepted by the user; long songs untested. [OWUI filter](docs/MUSIC.md), [Russian specification](docs/MUSIC.ru.md), [MP3 example](examples/yue2-russian-32s.mp3), [proof](benchmarks/music.json). Weights CC-BY-NC-4.0, original downloads only; ACE-Step removed.
-
-## Video
-
-[480p Native generation,720p enhancement and API](docs/VIDEO.md) · [Русская инструкция OWUI](docs/VIDEO.ru.md) · [Measured timings](benchmarks/video.json). Models download from their original distributors.
-
-<!-- video-research -->
-
-[Restorers, alternative VAEs and factory sampler comparisons](docs/VIDEO_RESEARCH.md). No candidate VAE is silently enabled; the selected fast Super-Tiny pipeline remains the default.
+Pro is built once on CPU by `tools/SetupPro.py`: pinned original safetensors/source and temporary CPU PyTorch, using the same bundled Python. Serving afterwards needs only the three Pro graph/weight files and existing DirectML runtime. Optional RIFE is an original-download component; no Microsoft DLL is mirrored. [Video API/limits](docs/VIDEO.md) · [Original-download models](docs/MODELS.md).

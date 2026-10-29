@@ -29,7 +29,7 @@ MAX_START_BYTES = 16 * 1024**2
 MAX_VIDEO_SECONDS = 900
 
 
-def request_json_deadline(url, payload=None, headers=None, timeout=MAX_VIDEO_SECONDS):
+def request_json_deadline(url, payload=None, headers=None, timeout=MAX_VIDEO_SECONDS, _binary_audio=False):
     """Absolute watchdog closes only this request's loopback socket.
 
     Based on the separately tested pilot watchdog. A socket read timeout alone
@@ -65,13 +65,21 @@ def request_json_deadline(url, payload=None, headers=None, timeout=MAX_VIDEO_SEC
         if expired.is_set() or time.perf_counter()-started>=timeout:raise TimeoutError('Absolute video Native HTTP deadline exceeded')
         if len(body)>MAX_RESPONSE_BYTES:raise ValueError('Native video JSON exceeds bounded response limit')
         if not 200<=response.status<300:raise RuntimeError('Native HTTP'+str(response.status)+': '+body[:1000].decode('utf-8','replace'))
-        answer=json.loads(body)
+        if _binary_audio:
+            if len(body)<128 or not (body.startswith(b'ID3') or (body[0]==255 and body[1]&224==224)):
+                raise ValueError('Native returned no valid MP3 audio')
+            answer=body
+        else:answer=json.loads(body)
         if expired.is_set() or time.perf_counter()-started>=timeout:raise TimeoutError('Absolute video Native HTTP deadline exceeded')
         return answer
     except (OSError,http.client.HTTPException) as error:
         if expired.is_set() or time.perf_counter()-started>=timeout:raise TimeoutError('Absolute video Native HTTP deadline exceeded') from error
         raise
     finally:timer.cancel();connection.close()
+
+
+def request_audio_deadline(url,payload,headers=None,timeout=MAX_VIDEO_SECONDS):
+    return request_json_deadline(url,payload,headers,timeout,_binary_audio=True)
 
 
 def project_root(value: str | Path | None = None) -> Path:
@@ -126,6 +134,36 @@ def png_dimensions(data: bytes) -> tuple[int, int]:
     return dimensions
 
 
+def video_cache_settings(job):
+    mode=job.get('cache_mode','disabled')
+    if mode not in ('disabled','cache-dit','easycache'):
+        raise ValueError('Video cache_mode must be disabled, cache-dit or easycache')
+    defaults={'disabled':'','cache-dit':'threshold=0.08,warmup=2,Fn=16,Bn=2','easycache':'threshold=0.2,start=0.15,end=0.85'}
+    options=job.get('cache_options',defaults[mode])
+    if mode!='disabled' and options=='':options=defaults[mode]
+    if not isinstance(options,str) or len(options)>160:raise ValueError('Bounded video cache_options string required')
+    if mode=='disabled':
+        if options:raise ValueError('Disabled video cache must have empty options')
+        return mode,''
+    allowed={'threshold','warmup','Fn','Bn'} if mode=='cache-dit' else {'threshold','start','end'}
+    values={}
+    for field in options.split(','):
+        key,sep,value=field.partition('=');key=key.strip();value=value.strip()
+        if not sep or key not in allowed or key in values:raise ValueError('Unknown or duplicate video cache option')
+        try:number=float(value)
+        except ValueError:raise ValueError('Video cache options must be numeric') from None
+        if not math.isfinite(number):raise ValueError('Video cache options must be finite')
+        if key in ('warmup','Fn','Bn'):
+            if not value.isdecimal() or not 0<=number<=40:raise ValueError('Invalid video cache block/warmup count')
+            if key=='warmup' and not 1<=number<=3:raise ValueError('Four-step video cache warmup must be1..3')
+        elif key=='threshold':
+            if not 0<=number<=.3:raise ValueError('Video cache threshold must be0..0.3')
+        elif not 0<=number<=1:raise ValueError('Video cache fractions must be0..1')
+        values[key]=number
+    if mode=='easycache' and not values.get('start',.15)<values.get('end',.85):raise ValueError('Video cache start must precede end')
+    return mode,options
+
+
 def prepare_request(job: dict, root: str | Path | None = None,
                     backend: str = 'http://127.0.0.1:5013',
                     native_jpeg_quality: int = 95) -> dict:
@@ -146,7 +184,7 @@ def prepare_request(job: dict, root: str | Path | None = None,
         width, height = height, width
     elif job.get('orientation', 'landscape') != 'landscape':
         raise ValueError('Orientation must be landscape or portrait')
-    frames = job.get('frames', 49)
+    frames = job.get('frames', 17)
     if isinstance(frames, bool) or not isinstance(frames, int) or not 5 <= frames <= MAX_FRAMES or frames % 4 != 1:
         raise ValueError('Frames must be4n+1, from5 through121')
     if job.get('fps', FPS) != FPS or job.get('steps', 4) != 4 or job.get('cfg_scale', 1) != 1:
@@ -165,6 +203,10 @@ def prepare_request(job: dict, root: str | Path | None = None,
                    cache_mode='disabled', cache_options='', enable_hr=False,
                    video_output_type=1, seed=seed, lora=[])
     payload['kcpp_extra_args']=dict(keep_image_gen_on_disconnect=False)
+    requested_scheduler=job.get('scheduler','simple')
+    if requested_scheduler not in ('simple','normal','discrete','beta','sgm_uniform'):raise ValueError('Unsupported video Euler scheduler')
+    payload['scheduler']='discrete' if requested_scheduler=='normal' else requested_scheduler
+    payload['cache_mode'],payload['cache_options']=video_cache_settings(job)
     start = job.get('start_frame')
     start_encoded = job.get('start_png_base64')
     if start and start_encoded:

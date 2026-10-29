@@ -1,0 +1,24 @@
+{
+  "model": "kobold-wan22-turbo",
+  "prompt": "A cinematic adult portrait, natural blinking and subtle motion, steady camera",
+  "resolution": "480p",
+  "orientation": "portrait",
+  "frames": 17,
+  "seed": 424242,
+  "steps": 4,
+  "cfg_scale": 1,
+  "sampler_name": "euler",
+  "scheduler": "beta",
+  "flow_shift": 5,
+  "eta": 0,
+  "cache_mode": "disabled",
+  "upscale_to": "720p",
+  "enhance_faces": true,
+  "interpolate_fps": 48,
+  "audio": {
+    "enabled": true,
+    "style": "Gentle cinematic instrumental background, no vocals",
+    "lyrics": "",
+    "volume": 0.7
+  }
+}

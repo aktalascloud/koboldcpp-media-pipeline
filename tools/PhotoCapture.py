@@ -10,7 +10,7 @@ def capture_stage(config,key,stage,image):
     options=config.get('proxy',{}).get('comparison_capture',{})
     if options.get('enabled') is not True or not key or key!=options.get('genkey'):return
     if stage not in {'raw','faces','processed'}:raise ValueError('Invalid capture stage.')
-    parent=(ROOT/'MOSS/results').resolve();folder=(ROOT/str(options.get('directory',''))).resolve()
+    parent=(ROOT/'RESULTS/Images').resolve();folder=(ROOT/str(options.get('directory',''))).resolve()
     if not folder.is_relative_to(parent) or folder==parent:raise ValueError('Benchmark capture escaped its private folder.')
     folder.mkdir(parents=True,exist_ok=True);target=folder/(stage+'.png')
     if target.exists():raise ValueError('Existing benchmark stage is preserved.')

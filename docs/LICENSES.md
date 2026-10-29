@@ -12,7 +12,7 @@ Original wrapper code: AGPL-3.0. Every runtime/checkpoint has independent terms.
 | YuNet |[OpenCV Zoo](https://github.com/opencv/opencv_zoo/tree/main/models/face_detection_yunet), MIT|Verified checkpoint in original pinned asset; notice retained.|
 | SFace |[OpenCV Zoo](https://github.com/opencv/opencv_zoo/tree/main/models/face_recognition_sface), Apache-2.0|Verified checkpoint; notice retained.|
 | GPEN512 ONNX |[GPEN](https://github.com/yangxy/GPEN), [FaceFusion terms](https://docs.facefusion.io/introduction/licenses)|Non-Commercial according to distributor; complete original redistribution grant not located. New code release does not mirror weights; users obtain/supply the original ONNX. No MIT/unrestricted-use claim.|
-| Gater Restore1Р В РІР‚СљР Р†Р вЂљРІР‚Сњ |[Philip Hofmann / Phhofm](https://github.com/Phhofm/models/releases/tag/1xgaterv3_r_restore), CC-BY-4.0|Original FP32 ONNX in pinned base asset, attribution retained.|
+| Gater Restore1Р В Р’В Р Р†Р вЂљРЎС™Р В Р вЂ Р В РІР‚С™Р Р†Р вЂљРЎСљ |[Philip Hofmann / Phhofm](https://github.com/Phhofm/models/releases/tag/1xgaterv3_r_restore), CC-BY-4.0|Original FP32 ONNX in pinned base asset, attribution retained.|
 | Historical Helaman /4xNomos8k_atd_jpg, not installed |[Philip Hofmann / Phhofm](https://github.com/Phhofm/models/releases/tag/4xNomos8k_atd_jpg), CC-BY-4.0|Fixed-shape FP32 ONNX derivative; attribution/change record retained. Helaman uploader loonalone; no author endorsement. Reflected tiling is approximate, not guaranteed whole-frame equivalence.|
 | ATD architecture / Spandrel |Apache-2.0 / MIT|Original texts retained.|
 | Python, NumPy, Pillow, Torch CPU, ORT DirectML/Extensions, OpenVINO, OpenCV |Bundled licenses/third-party notices|Pinned runtime-only subset; no training state, logs or credentials.|
@@ -34,3 +34,9 @@ Ray Artshoot [version3426693](https://civitai.com/models/3018302?modelVersionId=
 
 
 YuE2 music supersedes previous ACE-Step references: Q8_0 main + F16 VAE, no Gemma, client-side helper, MP3. See [music contract](MUSIC.md). Original pinned weights download only; CC-BY-NC-4.0 and upstream attribution apply. No song-generation claims beyond the saved short trials.
+
+## Pro, interpolation and current quality adapter
+- RealismEnhancerV1 [author version3433342](https://civitai.com/models/3023438?modelVersionId=3433342): original author terms; links/hashes only, no weight mirror or inferred permissive grant.
+- Pro decoder: [LightVAE original model card](https://huggingface.co/lightx2v/LightVAE), Apache-2.0 declaration. Setup obtains exact original checkpoint and pinned ModelTC source directly; upstream ModelTC Python is not mirrored because a separate repository license was not located. Our export wrappers and source fingerprints are included; model terms remain applicable.
+- Optional RIFE ncnn [original release](https://github.com/nihui/rife-ncnn-vulkan): original downloads and their LICENSE. No Microsoft vcomp DLL redistributed. Optional private local runtime discovery does not establish redistribution rights.
+- FFmpeg/codec binaries retain their original distributor licenses and corresponding-source links in existing notices. The code kit does not include new codec binaries or model weights.

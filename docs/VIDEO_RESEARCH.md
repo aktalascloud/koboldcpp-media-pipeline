@@ -1,3 +1,5 @@
+> Historical research snapshot. Current active decoder is Pro, not Tiny; see [current video API](VIDEO.md).
+
 # Video research: 28 October 2026
 
 All comparisons use saved/generated neutral adult scenes. Raw latents, candidate weights, runtime logs and process IDs are excluded. [Exact timings and scope](../benchmarks/video-research.json).
@@ -9,7 +11,7 @@ All comparisons use saved/generated neutral adult scenes. Raw latents, candidate
 | CodeFormer35%, fidelity0.7 |1.430|3/3|
 | CodeFormer60%, fidelity0.5 |1.429|1/3|
 
-On the same49-frame video, ClearReality720 plus GFPGAN35% took52.76s versus56.08s with GPEN20%. There was no convincing eye-quality improvement, so GPEN remains selected. SFace stays≥0.97. Models were downloaded from the original FaceFusion assets release, not mirrored here.
+On the same49-frame video, ClearReality720 plus GFPGAN35% took52.76s versus56.08s with GPEN20%. There was no convincing eye-quality improvement, so GPEN remains selected. SFace staysв‰Ґ0.97. Models were downloaded from the original FaceFusion assets release, not mirrored here.
 
 ![Restorer comparison](../examples/video-detailer-comparison.png)
 

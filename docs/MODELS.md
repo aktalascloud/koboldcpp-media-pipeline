@@ -7,7 +7,7 @@ No main/LoRA weights are redistributed. `models.json` pins sizes/SHA256 and orig
 |`text`|[txt-artiusMoss_v10_3313824.safetensors](https://civitai.com/models/3010191?modelVersionId=3416029)|`b0a6c1ab290b55c083fea294179c6c41b9027f645355e7eb63566dd1cb63efd1`|
 |`Afterlight`|[afterlight-v1.safetensors](https://civitai.com/models/3016917?modelVersionId=3424873)|`57d2a400af32a0afd9cd065c43ebeb6a0e44b153abaef0171ce6891b6b057d13`|
 
-Ray is already SFT Turbo. The selected8-step DPM/sgm_uniform + Afterlight0.25 is a Kobold adaptation; author12-step Heun++2/linear_quadratic/SLG is not claimed reproduced. The tested Heun/custom8-point curve was slower and not selected.
+Ray is already SFT Turbo. The selected8-step Euler/simple + Afterlight0.25 + RealismEnhancer1.0 is a Kobold adaptation; author12-step Heun++2/linear_quadratic/SLG is not claimed reproduced. The tested Heun/custom8-point curve was slower and not selected.
 
 Conversion reverses INT8 ConvRot/scales and writes Q8. Names/descriptions/writer headers are pinned; full GGUF hashes are verified. Exact compatible image/text GGUF files may be copied before Setup instead of reconversion. Q8 adds rounding; this is not bit-identical to original Comfy INT8 inference.
 
@@ -17,3 +17,5 @@ MODELS contains weights; DETAILERS faces/Gater; UPSCALERS ClearReality. Verified
 
 
 YuE2 music supersedes previous ACE-Step references: Q8_0 main + F16 VAE, no Gemma, client-side helper, MP3. See [music contract](MUSIC.md). Original pinned weights download only; CC-BY-NC-4.0 and upstream attribution apply. No song-generation claims beyond the saved short trials.
+
+RealismEnhancerV1: [original version3433342](https://civitai.com/models/3023438?modelVersionId=3433342), SHA256 `4a187913365a862503a4297d26248d95b440636b68e60239e68ffc952b737e70`. Strength1.0; no official trigger. Pro original sources/pins are in tools/pro-setup-sources.json; generated graphs are not mirrored.

@@ -417,7 +417,7 @@ class Pipeline:
 def serve(helper,photo_backend_lease=None,backend_supervisor=None):
     pipeline=Pipeline(helper,photo_backend_lease);initial=pipeline.config();stop=threading.Event()
     videos=VideoService(backend_supervisor,ROOT,request_json_deadline,before_native=pipeline.release_gpu,
-        public_base_url=initial['proxy'].get('video_public_base_url',''),deadline_seconds=900) if backend_supervisor else None
+        public_base_url=initial['proxy'].get('video_public_base_url',''),deadline_seconds=initial['proxy'].get('video',{}).get('deadline_seconds',450)) if backend_supervisor else None
     original_photo_lease=pipeline.photo_backend_lease
     music_request_serial = [0]
     @contextmanager
@@ -438,8 +438,10 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
     def restore_photo(cfg):
         try:
             with checked_native_lease('photo-normal',cfg): pass
+            return True
         except Exception:
             LOG.exception('Photo reload after music failed; next photo lease will retry')
+            return False
     def restore_photo_after_video(cfg):
         with pipeline.lock:
             if not stop.is_set():restore_photo(cfg)
@@ -566,11 +568,21 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                 if path in ('/v1/music/capabilities','/api/extra/music/capabilities'):
                     self.reply(music_capabilities(cfg));return
                 if path in ('/v1/videos/capabilities','/api/extra/video/capabilities'):
+                    from VideoRife import available as rife_available
+                    interpolation=[24,48] if rife_available(ROOT) else [24]
                     self.reply(dict(enabled=bool(cfg['proxy'].get('video',{}).get('enabled',False)),backend='KoboldCpp Native',model='kobold-wan22-turbo',
                         generation_endpoints=list(VIDEO_JSON_PATHS),upscale_endpoints=list(VIDEO_UPSCALE_PATHS),fps=24,frames=dict(min=5,max=121,grid='4n+1'),
-                        resolutions={'480p':[832,480],'360p':[640,352]},inputs=['text','one PNG start frame','continue_from generated video_id'],
+                        resolutions={'480p':[832,480]},inputs=['text','one PNG start frame','continue_from generated video_id'],
                         output='MP4 URL',upscale_to='720p short edge, original aspect ratio',optional_guarded_faces=True,
-                        native_jpeg_quality=95,validated_frames=49,vae=cfg['proxy'].get('video',{}).get('codec'),sampling=dict(sampler_name='euler',scheduler='simple',steps=4,cfg_scale=1,flow_shift=5,eta=0,cache_mode='none'),continuous_long_video_validated=False));return
+                        native_jpeg_quality=None,validated_frames=17,vae=cfg['proxy'].get('video',{}).get('codec'),sampling=dict(sampler_name='euler',scheduler=cfg['proxy'].get('video',{}).get('scheduler','simple'),steps=4,cfg_scale=1,flow_shift=5,eta=0,cache_mode='disabled'),
+                        optional_cache=dict(supported=cfg['proxy'].get('video',{}).get('native_cache_forwarding_verified',False),modes=['disabled','cache-dit','easycache'],default='disabled',threshold_max=0.3,cache_dit_warmup='1..3; video4-step contract'),
+                        vae_tiling_threshold=cfg['proxy'].get('video',{}).get('vae_tiling_threshold'),conv_workgroup=cfg['proxy'].get('video',{}).get('conv_workgroup'),
+                        schedulers=['simple','normal','discrete','beta','sgm_uniform'],interpolate_fps=interpolation,audio=dict(generator='YuE2',default_enabled=cfg['proxy'].get('video',{}).get('default_audio',True),mode='separate text-to-music soundtrack',lip_sync=False,scene_sound_conditioning=False),deadline_seconds=videos.deadline_seconds,continuous_long_video_validated=False));return
+                if path=='/v1/media/capabilities':
+                    self.reply(dict(backend='KoboldCpp',idle_model='photo-normal',automatic_exclusive_model_switching=True,
+                        images={'generate':'/v1/images/generations','automatic1111':'/sdapi/v1/txt2img','edit':'/v1/images/edits','capabilities':'/v1/images/capabilities'},
+                        audio={'generate':'/api/extra/music/generate','format':'MP3','capabilities':'/v1/music/capabilities'},
+                        video={'generate':'/v1/videos/generations','media':VIDEO_MEDIA_PREFIX,'capabilities':'/v1/videos/capabilities','format':'MP4','default_soundtrack':True}));return
                 if path in ('/v1/images/capabilities','/api/extra/image-capabilities'):
                     cap=image_capabilities(cfg);cap['operations']['reference_synthesis']=dict(supported=True,endpoints=list(SYNTHESIS_PATHS),conditioning='text_descriptions_only',requires_client_visual_analysis=True,min_sources=2,max_sources=4,raw_images_accepted=False,native_reference_conditioning=False,exact_identity_guaranteed=False,schema_url='/v1/images/synthesis-schema');self.reply(cap);return
                 if path in ('/v1/images/synthesis-schema','/images/synthesis-schema'):
@@ -642,14 +654,30 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                                 with pipeline.lock:
                                     pipeline.begin(video_payload.get('genkey',''),'video')
                                     try:
-                                        upscale_to=video_payload.get('upscale_to');faces=video_payload.get('enhance_faces',False)
+                                        video_options=cfg['proxy'].get('video',{})
+                                        upscale_to=video_payload.get('upscale_to',video_options.get('default_upscale_to','720p'));faces=video_payload.get('enhance_faces',video_options.get('default_enhance_faces',True))
+                                        interpolate_fps=video_payload.get('interpolate_fps',video_options.get('default_interpolate_fps',24))
+                                        if interpolate_fps==48:
+                                            from VideoRife import available
+                                            if not available(ROOT):raise VideoServiceError('RIFE48FPS не установлен; доступен24FPS.','video_interpolation_unavailable',422)
+                                        from VideoAudio import audio_options
+                                        try:audio=audio_options(video_payload.get('audio'),video_options.get('default_audio',True))
+                                        except ValueError as error:raise VideoServiceError(str(error),status=422) from error
                                         if upscale_to not in (None,'720p') or type(faces) is not bool:raise VideoServiceError('Некорректные upscale_to/enhance_faces.',status=422)
-                                        if path not in VIDEO_JSON_PATHS and (upscale_to or faces):raise VideoServiceError('Для MP4720p/детейлера используйте /v1/videos/generations, не raw A1111.',status=422)
+                                        if path not in VIDEO_JSON_PATHS:raise VideoServiceError('Для Pro MP4 используйте /v1/videos/generations, не raw A1111.',status=422)
                                         result=videos.generate(path,video_payload,dict(self.headers),cfg,budget=video_budget)
-                                        if upscale_to or faces:
-                                            with backend_supervisor.lock:
-                                                videos.require_unblocked();backend_supervisor.stop_idle()
-                                                with backend_supervisor.gpu_lease():result=videos.enhance(result,cfg,video_budget,upscale_to,faces)
+                                        with backend_supervisor.lock:
+                                            videos.require_unblocked();backend_supervisor.stop_idle()
+                                            with backend_supervisor.gpu_lease():result=videos.enhance(result,cfg,video_budget,upscale_to,faces,interpolate_fps)
+                                        result=videos.soundtrack(result,cfg,video_budget,audio)
+                                        # Reply only after actual Pro/RIFE/audio, never latent metadata.
+                                        video_budget.remaining()
+                                        prior_ready=backend_supervisor.readiness_seconds
+                                        try:
+                                            backend_supervisor.readiness_seconds=min(float(prior_ready),video_budget.remaining())
+                                            ready=restore_photo(cfg)
+                                        finally:backend_supervisor.readiness_seconds=prior_ready
+                                        result=videos.finalize_result(result,video_budget,photo_ready=ready)
                                         self.reply(result)
                                     finally:
                                         pipeline.finish()

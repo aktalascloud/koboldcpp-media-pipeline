@@ -19,6 +19,7 @@ import threading
 import time
 import urllib.parse
 import uuid
+import hashlib
 
 from NativeVideo import prepare_request, finish_native_video
 
@@ -230,18 +231,21 @@ class VideoService:
 
     def _job(self,payload):
         if not isinstance(payload,dict):raise VideoServiceError('Требуется объект JSON.')
-        allowed={'prompt','frames','fps','seed','resolution','orientation','width','height','n','batch_size','n_iter','steps','cfg_scale','model','genkey','start_frame','video_start_frame','image','init_images','continue_from','sampler_name','scheduler','flow_shift','eta','negative_prompt','upscale_to','enhance_faces'}
+        allowed={'prompt','frames','fps','seed','resolution','orientation','width','height','n','batch_size','n_iter','steps','cfg_scale','model','genkey','start_frame','video_start_frame','image','init_images','continue_from','sampler_name','scheduler','flow_shift','eta','negative_prompt','upscale_to','enhance_faces','cache_mode','cache_options','audio','interpolate_fps'}
         unknown=set(payload)-allowed
         if unknown:raise VideoServiceError('Неподдерживаемые поля видео: '+', '.join(sorted(unknown)),status=422)
-        for key,expected in [('steps',4),('cfg_scale',1),('sampler_name','euler'),('scheduler','simple'),('flow_shift',5),('eta',0)]:
+        for key,expected in [('steps',4),('cfg_scale',1),('sampler_name','euler'),('flow_shift',5),('eta',0)]:
             if key in payload and payload[key]!=expected:raise VideoServiceError('Для выбранной Turbo-модели требуется '+key+'='+str(expected),status=422)
+        if payload.get('scheduler','simple') not in ('simple','normal','discrete','beta','sgm_uniform'):
+            raise VideoServiceError('Непроверенный Euler scheduler.',status=422)
+        if payload.get('interpolate_fps') not in (None,24,48):raise VideoServiceError('interpolate_fps:24 или48.',status=422)
         if payload.get('model','kobold-video') not in ('kobold-video','kobold-wan22-turbo'):raise VideoServiceError('Неизвестная видео-модель; веса управляются сервером.',status=422)
         if payload.get('negative_prompt',''):raise VideoServiceError('CFG1 Turbo не использует negative_prompt; задайте позитивное описание.',status=422)
         if any(key in payload for key in ('seconds','duration','duration_seconds')):
             raise VideoServiceError('Пока задайте явное frames: 4n+1, от 5 до 121. Длинное видео ещё не измерено.')
         if payload.get('n',1)!=1 or payload.get('batch_size',1)!=1 or payload.get('n_iter',1)!=1:
             raise VideoServiceError('Один видеоклип на запрос.')
-        job={key:payload[key] for key in ('prompt','frames','fps','seed','resolution','orientation') if key in payload}
+        job={key:payload[key] for key in ('prompt','frames','fps','seed','resolution','orientation','cache_mode','cache_options','scheduler') if key in payload}
         # Author4-step/CFG1 contract is explicit; legacy photo steps must not leak in.
         job.update(steps=4,cfg_scale=1)
         if 'width' in payload or 'height' in payload:
@@ -276,6 +280,20 @@ class VideoService:
             raise ValueError('Use this VideoService client_deadline budget')
         if not is_video_request(path,payload):raise VideoServiceError('Запрос не относится к видеогенерации.')
         self.require_unblocked();profile=self._profile();job=self._job(copy.deepcopy(payload))
+        options=(cfg or {}).get('proxy',{}).get('video',{})
+        pro_mode=options.get('decoder')=='pro'
+        if not pro_mode:raise VideoServiceError('Видеопрофиль переводится на Pro VAE. Фото и музыка доступны.','video_pro_not_ready',503)
+        if urllib.parse.urlsplit(path).path not in VIDEO_JSON_PATHS:raise VideoServiceError('Pro-видео использует /v1/videos/generations, не raw A1111.',status=422)
+        if job.get('resolution','480p')!='480p':raise VideoServiceError('Pro-профиль проверен только для480p.',status=422)
+        job.setdefault('scheduler',options.get('scheduler','simple'))
+        video_helper=json.loads((self.root/profile['helper']).read_text(encoding='utf-8-sig'))
+        if video_helper.get('kcpp_video_latent_only') is not True or video_helper.get('kcpp_video_capture_latents') is not True or video_helper.get('kcpp_video_tae_decoder') is not None:
+            raise VideoServiceError('Требуется профиль полного энкодера и Pro без Tiny.','video_pro_not_ready',503)
+        from VideoPro import verify_assets
+        try:verify_assets(self.root,options['pro_manifest_sha256'])
+        except (ValueError,OSError,KeyError) as error:raise VideoServiceError('Pro VAE недоступен или изменён.','video_pro_asset_changed',503) from error
+        if job.get('cache_mode','disabled')!='disabled' and (cfg or {}).get('proxy',{}).get('video',{}).get('native_cache_forwarding_verified') is not True:
+            raise VideoServiceError('В установленном Native ещё не подтверждена передача видеокэша.','video_cache_not_verified',422)
         # Validate before acquiring a cold model. No photo defaults/triggers leak in.
         try:prepare_request(job,self.root,'http://127.0.0.1:'+str(profile.get('port',5003)),native_jpeg_quality=95)
         except ValueError as error:raise VideoServiceError(str(error)) from error
@@ -309,8 +327,16 @@ class VideoService:
                 # A tiny remainder is still a valid bound. Native AVI/finalPNG are
                 # preserved by the finisher even if its encoder budget expires.
                 allowance=max(0.000001,budget.until-self.clock())
-                finished=self.finisher(answer,plan,destination,self.root,timeout=allowance,
-                                       deadline=budget.until,clock=self.clock,run_encoder=True)
+                info=json.loads(answer.get('info','{}')) if isinstance(answer.get('info'),str) else answer.get('info',{})
+                if not isinstance(info,dict) or info.get('kcpp_wan_latents_ready') is not True or answer.get('operation')!='wan_latents' or answer.get('images')!=[]:
+                    raise VideoServiceError('Native не подтвердил экспорт латентов без RGB-декодирования.','video_latent_export_failed',502)
+                from VideoLatents import read_wan_latents
+                capture=self.root/'runtime/tmp'/('wan-latents-'+active['run_id']+'.bin')
+                latent,capture_meta=read_wan_latents(capture,self.root)
+                if capture_meta['frames']!=plan['contract']['frames'] or [capture_meta['width'],capture_meta['height']]!=plan['contract']['dimensions']:
+                    raise VideoServiceError('Геометрия латентов не совпала с запросом.','video_latent_export_failed',502)
+                destination.mkdir(parents=True);shutil.move(str(capture),str(destination/'latents.bin'));del latent
+                finished={'status':'completed','encoded_frames':capture_meta['frames'],'encoder_seconds':0,'output_sha256':None,'output_bytes':0}
                 budget.remaining()
                 if finished.get('status')!='completed':
                     raise VideoServiceError('Обработка MP4 не завершена.','video_postprocess_failed',502)
@@ -318,7 +344,7 @@ class VideoService:
                 except (ValueError,TypeError):info={}
                 media_path=VIDEO_MEDIA_PREFIX+job_id+'/video.mp4'
                 metadata=dict(id=job_id,model=plan['contract']['model'],backend='KoboldCpp Native',
-                              native_profile='video',native_jpeg_quality=95,vae_decoder=(cfg or {}).get('proxy',{}).get('video',{}).get('codec'),output_format='mp4',mime_type='video/mp4',
+                              native_profile='video',native_jpeg_quality=None,vae_decoder='Pro pending',native_output='latents',adapters=options.get('adapters',[]),output_format='mp4',mime_type='video/mp4',
                               width=plan['contract']['dimensions'][0],height=plan['contract']['dimensions'][1],
                               frames=finished.get('encoded_frames'),fps=plan['contract']['fps'],
                               duration_seconds=plan['contract']['seconds'],steps=4,cfg_scale=1,
@@ -362,17 +388,24 @@ class VideoService:
             if acquired and prior_readiness is not None:self.supervisor.readiness_seconds=prior_readiness
             if acquired:self.supervisor.lock.release()
 
-    def enhance(self,result,cfg,budget,upscale_to=None,faces=False):
+    def enhance(self,result,cfg,budget,upscale_to=None,faces=False,interpolate_fps=None):
         """Only saved generated media. Caller holds the global pipeline/GPU locks."""
         from VideoPost import process_video
         metadata=dict(result.get('metadata') or result.get('kcpp_video') or {})
         identity=metadata.get('id')
         if not isinstance(identity,str) or not re.fullmatch(r'[0-9a-f]{32}',identity):raise VideoServiceError('Некорректный video_id.',status=422)
         if upscale_to not in (None,'720p') or type(faces) is not bool:raise VideoServiceError('upscale_to:720p или null; enhance_faces:boolean.',status=422)
-        if not(upscale_to or faces):return result
         folder=(self.outputs/identity).resolve();source=folder/'native.avi'
-        if not folder.is_relative_to(self.outputs) or not source.is_file():raise VideoServiceError('Исходный Native AVI не найден.','video_not_found',404)
         options=cfg.get('proxy',{}).get('video',{})
+        if metadata.get('native_output')=='latents':
+            from VideoPro import decode_pro
+            pro=decode_pro(folder/'latents.bin',folder/'pro',self.root,options['pro_manifest_sha256'],timeout=budget.remaining())
+            shutil.copy2(folder/'pro/decoded.avi',source);shutil.copy2(folder/'pro/video.mp4',folder/'video.mp4');shutil.copy2(folder/'pro/last-frame.png',folder/'last-frame.png')
+            metadata.update(vae_decoder=pro['decoder'],native_output='Pro RGB',pro_vae={k:v for k,v in pro.items() if k not in ('capture','output')},output_bytes=(folder/'video.mp4').stat().st_size)
+            result=dict(result);result['metadata']=metadata
+        if not(upscale_to or faces):
+            return self.interpolate(result,cfg,budget,interpolate_fps)
+        if not folder.is_relative_to(self.outputs) or not source.is_file():raise VideoServiceError('Исходный Native AVI не найден.','video_not_found',404)
         model=options.get('upscaler','clearreality') if upscale_to else 'lanczos'
         if model not in ('clearreality','paragon2x','lanczos'):raise VideoServiceError('Неизвестный проверенный видео-апскейлер.',status=422)
         report=process_video(source,folder/'enhanced',self.root,model=model,faces=faces,target_short_edge=720 if upscale_to else 480,
@@ -383,11 +416,41 @@ class VideoService:
         metadata.update(width=report['dimensions'][0],height=report['dimensions'][1],native_dimensions=report['source_dimensions'],
             upscale=bool(upscale_to),face_processing=bool(report['processed_faces']),processed_faces=report['processed_faces'],
             output_sha256=report['output_sha256'],output_bytes=report['output_bytes'],enhancement_seconds=report['total_seconds'],
-            total_seconds=round(budget.elapsed(),4),postprocessing={k:v for k,v in report.items() if k!='output'},source_native_preserved=True)
+            total_seconds=round(budget.elapsed(),4),postprocessing={k:v for k,v in report.items() if k!='output'},source_native_preserved=True,frames=report['frames'],fps=report['fps'])
         metadata.update(native_video_url=self.public_base_url+VIDEO_MEDIA_PREFIX+identity+'/video-native480.mp4',native_last_frame_url=self.public_base_url+VIDEO_MEDIA_PREFIX+identity+'/native-last-frame.png')
         (folder/'enhancement.json').write_text(json.dumps(metadata,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
         result=dict(result);result['metadata']=metadata;result['url']=metadata['url'];result['data']=[dict(url=metadata['url'],mime_type='video/mp4')]
-        return result
+        return self.interpolate(result,cfg,budget,interpolate_fps)
+
+    def interpolate(self,result,cfg,budget,fps):
+        if fps in (None,24):return result
+        if fps!=48:raise VideoServiceError('Только интерполяция48FPS.',status=422)
+        from VideoRife import interpolate_video
+        metadata=dict(result['metadata']);folder=self.outputs/metadata['id']
+        report=interpolate_video(folder/'video.mp4',folder/'rife',self.root,timeout=budget.remaining())
+        (folder/'video.mp4').rename(folder/'video-24fps.mp4');shutil.copy2(report['output'],folder/'video.mp4')
+        metadata.update(native_frames=metadata['frames'],frames=report['output_frames'],fps=48,frame_interpolation=report,total_seconds=round(budget.elapsed(),4),output_bytes=(folder/'video.mp4').stat().st_size)
+        result=dict(result);result['metadata']=metadata;return result
+
+    def soundtrack(self,result,cfg,budget,options):
+        from VideoAudio import generate_soundtrack
+        metadata=dict(result['metadata']);folder=self.outputs/metadata['id']
+        try:audio=generate_soundtrack(self.supervisor,self.root,folder,cfg,options,budget,metadata)
+        except Exception as error:raise VideoServiceError('Не удалось создать или присоединить звук; видео сохранено без выдачи ложного успешного результата.','video_audio_failed',502) from error
+        metadata['audio']=audio
+        if audio['enabled']:metadata['audio_source_url']=self.public_base_url+VIDEO_MEDIA_PREFIX+metadata['id']+'/audio.mp3'
+        result=dict(result);result['metadata']=metadata;return result
+
+    def finalize_result(self,result,budget,photo_ready=None):
+        budget.remaining()
+        metadata=dict(result['metadata']);folder=self.outputs/metadata['id'];file=folder/'video.mp4'
+        if not file.is_file() or file.stat().st_size==0:raise VideoServiceError('Финальный MP4 отсутствует.','video_postprocess_failed',502)
+        with file.open('rb') as stream:digest=hashlib.file_digest(stream,'sha256').hexdigest()
+        metadata.update(status='completed',total_seconds=round(budget.elapsed(),4),output_bytes=file.stat().st_size,output_sha256=digest)
+        if photo_ready is not None:metadata['resident_photo_ready']=bool(photo_ready)
+        previous=json.loads((folder/'service.json').read_text()) if (folder/'service.json').exists() else {'created':result['created']}
+        previous['metadata']=metadata;(folder/'service.json').write_text(json.dumps(previous,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+        budget.remaining();result=dict(result);result['metadata']=metadata;return result
 
     def upscale_saved(self,payload,cfg,budget):
         if not isinstance(payload,dict) or set(payload)-{'video_id','enhance_faces'}:raise VideoServiceError('Ожидаются video_id и необязательный enhance_faces.',status=422)
@@ -409,7 +472,7 @@ class VideoService:
 
     def open_media(self,path,headers=None):
         decoded=urllib.parse.unquote(urllib.parse.urlsplit(path).path)
-        match=re.fullmatch(re.escape(VIDEO_MEDIA_PREFIX)+r'([0-9a-f]{32})/(video\.mp4|video-native480\.mp4|last-frame\.png|native-last-frame\.png)',decoded)
+        match=re.fullmatch(re.escape(VIDEO_MEDIA_PREFIX)+r'([0-9a-f]{32})/(video\.mp4|video-native480\.mp4|video-24fps\.mp4|audio\.mp3|last-frame\.png|native-last-frame\.png)',decoded)
         if not match:raise VideoServiceError('Видео не найдено.','video_not_found',404)
         file=(self.outputs/match[1]/match[2]).resolve()
         if not file.is_relative_to(self.outputs) or not file.is_file():
@@ -430,7 +493,7 @@ class VideoService:
                 start=max(0,total-suffix)
             if start>=total or start>end:raise VideoServiceError('Range вне файла.','invalid_range',416,error_headers)
             status=206
-        returned={'Content-Type':'video/mp4' if match[2].endswith('.mp4') else 'image/png',
+        returned={'Content-Type':'video/mp4' if match[2].endswith('.mp4') else ('audio/mpeg' if match[2].endswith('.mp3') else 'image/png'),
                   'Content-Length':str(end-start+1),'Accept-Ranges':'bytes',
                   'X-Content-Type-Options':'nosniff','Cache-Control':'no-store'}
         if status==206:returned['Content-Range']=f'bytes {start}-{end}/{total}'

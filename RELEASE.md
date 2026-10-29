@@ -1,10 +1,7 @@
-Wan5B video API · user-selected Super-Tiny default · optional 720p
+Unified KoboldCpp media API · Pro video and YuE2 soundtrack
 
-- Adds `/v1/videos/generations` and `/v1/videos/upscale`: one start PNG or text, MP4/Range output, exclusive GPU handoff and automatic resident-photo recovery. [API instructions](docs/VIDEO.md).
-- Actual public 17-frame Super-Tiny cycle: **97.76s** for **0.71s** of video, including ClearReality720p and guarded GPEN/SFace. Photo returned by **119.05s**. [Scoped proof](benchmarks/video.json).
-- User chose speed over the visible loss of face/eye detail: the full Wan encoder now feeds the Super-Tiny decoder by default. The 49-frame Native comparison was 140.06s versus 831.11s for full VAE. These compare complete VAE/tiling configurations. Continuous 30-second quality/speed is unvalidated.
-- Ray photo and YuE2 music settings remain unchanged; their dated results were not remeasured. [Optimized Native build](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa).
-- Minimal code-only kit; weights and FFmpeg download from pinned original sources. MIT/AGPL/GPL/model notices retained. No model mirrors, keys, caches or logs.
-
-
-Research: GPEN/GFPGAN/CodeFormer and same-latent Lite/Pro tested;Super remains selected. Factory samplers screened on3scenes;Euler/simple4/shift5 retained. Video face bounds now scale with resolution,fixing night-frame restoration skips. Native adds bounded opt-in latent capture;no C ABI change or new Vulkan-kernel speed claim. [Research and limitations](docs/VIDEO_RESEARCH.md).
+- Adds true Wan latent-only export followed by Pro FP32 DirectML. Tiny/Super-Tiny are removed from the active media chain. Native unloads before GPU postprocessing; image residency returns automatically.
+- One `/v1/videos/generations` call produces MP4 with optional ClearReality720p, guarded faces, optional RIFE and a separate YuE2 musical track. No joint audio-video/Foley/lip-sync claim. [API](docs/VIDEO.md).
+- Local17-frame video API probes with a user adapter completed in190.76s and258.05s;0.71s of footage, not17seconds. Queue/load scope and every matrix arm are preserved. Public kit does not enable the private adapter. [Measurements](benchmarks/video.json).
+- Selected photo recipe: RayQ8 + Afterlight0.25 + RealismEnhancer1.0 / Euler-simple8. Real Normal163.85s, separate ordinary4×6.04s. MoodyV3.3/Turbo and quality-adapter alternatives are documented. [All arms](benchmarks/image-current.json).
+- Original model downloads and one-time Pro CPU conversion; no large model mirrors, private Microsoft runtime, keys, caches or logs. Source/license notices and pinned base assets retained. [Optimized Native build](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa).

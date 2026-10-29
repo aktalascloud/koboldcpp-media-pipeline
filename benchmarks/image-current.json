@@ -1,0 +1,273 @@
+{
+  "date": "2026-10-29",
+  "scope": "One full-length neutral scene/seed,736x1104,8steps,CFG1,eta0,shift5,Cache-DiT0.08; same faces/Gater/Clear4x. Native+post sums exclude initial model load; do not present them as one HTTP call. First group request is cold text conditioning,second may be warm.",
+  "selected_recipe": "RayQ8+Afterlight0.25+RealismEnhancer1/Euler-simple8",
+  "models_tested": [
+    "RayArtshootQ8",
+    "MoodyMossMixV3.3 authorFP8 convertedQ8,extraTurbo1"
+  ],
+  "model_note": "Moody author25steps/CFG3 recipe was adapted to requested8steps/CFG1 with additionalTurbo. Not exact author25step quality.",
+  "rows": [
+    {
+      "group": "afterlight",
+      "sampler": "euler",
+      "native_seconds": 156.1029476999538,
+      "post_seconds": 10.354797799955122,
+      "sum_seconds": 166.45774549990892,
+      "prompt_cache_scope": "first request in fresh model context",
+      "sampling_log": [
+        "sampling completed, taking 138.35s"
+      ],
+      "cache_log": [
+        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
+        "CacheDIT skipped 2/8 steps (1.33x estimated speedup)"
+      ],
+      "checkpoint_sha256": "0900c0c7e5e8598dffeddb9444aac41cdecbbbb8277d3b99df68155a708fab09",
+      "executable_sha256": "ff7d4d0bbc332613baef04ca524d7e0ecf0788076cf95e3a816045bcf07a64fd",
+      "adapters": [
+        {
+          "path": "MODELS/loras/turbo-dmd2-dynamic69.safetensors",
+          "weight": 1.0,
+          "sha256": "d869785c75a20a409f1b590d4ad3a825b542a1fbb9f21589e5ad5e46e62c6910"
+        },
+        {
+          "path": "MODELS/loras/afterlight-v1.safetensors",
+          "weight": 0.25,
+          "sha256": "57d2a400af32a0afd9cd065c43ebeb6a0e44b153abaef0171ce6891b6b057d13"
+        }
+      ]
+    },
+    {
+      "group": "both",
+      "sampler": "euler",
+      "native_seconds": 182.33302080002613,
+      "post_seconds": 10.597006399999373,
+      "sum_seconds": 192.9300272000255,
+      "prompt_cache_scope": "first request in fresh model context",
+      "sampling_log": [
+        "sampling completed, taking 167.39s"
+      ],
+      "cache_log": [
+        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
+        "CacheDIT skipped 1/8 steps (1.14x estimated speedup)"
+      ],
+      "checkpoint_sha256": "0900c0c7e5e8598dffeddb9444aac41cdecbbbb8277d3b99df68155a708fab09",
+      "executable_sha256": "ff7d4d0bbc332613baef04ca524d7e0ecf0788076cf95e3a816045bcf07a64fd",
+      "adapters": [
+        {
+          "path": "MODELS/loras/turbo-dmd2-dynamic69.safetensors",
+          "weight": 1.0,
+          "sha256": "d869785c75a20a409f1b590d4ad3a825b542a1fbb9f21589e5ad5e46e62c6910"
+        },
+        {
+          "path": "MODELS/loras/afterlight-v1.safetensors",
+          "weight": 0.25,
+          "sha256": "57d2a400af32a0afd9cd065c43ebeb6a0e44b153abaef0171ce6891b6b057d13"
+        },
+        {
+          "path": "MODELS/loras/moss-realism-enhancer-v1.safetensors",
+          "weight": 1.0,
+          "sha256": "4a187913365a862503a4297d26248d95b440636b68e60239e68ffc952b737e70"
+        }
+      ]
+    },
+    {
+      "group": "enhancer",
+      "sampler": "euler",
+      "native_seconds": 149.096643100027,
+      "post_seconds": 10.976350100012496,
+      "sum_seconds": 160.0729932000395,
+      "prompt_cache_scope": "first request in fresh model context",
+      "sampling_log": [
+        "sampling completed, taking 134.56s"
+      ],
+      "cache_log": [
+        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
+        "CacheDIT skipped 2/8 steps (1.33x estimated speedup)"
+      ],
+      "checkpoint_sha256": "0900c0c7e5e8598dffeddb9444aac41cdecbbbb8277d3b99df68155a708fab09",
+      "executable_sha256": "ff7d4d0bbc332613baef04ca524d7e0ecf0788076cf95e3a816045bcf07a64fd",
+      "adapters": [
+        {
+          "path": "MODELS/loras/turbo-dmd2-dynamic69.safetensors",
+          "weight": 1.0,
+          "sha256": "d869785c75a20a409f1b590d4ad3a825b542a1fbb9f21589e5ad5e46e62c6910"
+        },
+        {
+          "path": "MODELS/loras/moss-realism-enhancer-v1.safetensors",
+          "weight": 1.0,
+          "sha256": "4a187913365a862503a4297d26248d95b440636b68e60239e68ffc952b737e70"
+        }
+      ]
+    },
+    {
+      "group": "ray",
+      "sampler": "dpm",
+      "native_seconds": 158.22123190003913,
+      "post_seconds": 10.164118400076404,
+      "sum_seconds": 168.38535030011553,
+      "prompt_cache_scope": "first request in fresh model context",
+      "sampling_log": [
+        "sampling completed, taking 143.19s"
+      ],
+      "cache_log": [
+        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
+        "CacheDIT skipped 1/8 steps (1.14x estimated speedup)"
+      ],
+      "checkpoint_sha256": "dd02927547bc7b7d60ffb4a2ba566d384e37387eb91aaeaa0404666a72c7e7cb",
+      "executable_sha256": "ff7d4d0bbc332613baef04ca524d7e0ecf0788076cf95e3a816045bcf07a64fd",
+      "adapters": [
+        {
+          "path": "MODELS/loras/afterlight-v1.safetensors",
+          "weight": 0.25,
+          "sha256": "57d2a400af32a0afd9cd065c43ebeb6a0e44b153abaef0171ce6891b6b057d13"
+        }
+      ]
+    },
+    {
+      "group": "ray-both",
+      "sampler": "dpm",
+      "native_seconds": 171.28556109999772,
+      "post_seconds": 9.947320500039496,
+      "sum_seconds": 181.23288160003722,
+      "prompt_cache_scope": "first request in fresh model context",
+      "sampling_log": [
+        "sampling completed, taking 153.61s"
+      ],
+      "cache_log": [
+        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
+        "CacheDIT skipped 1/8 steps (1.14x estimated speedup)"
+      ],
+      "checkpoint_sha256": "dd02927547bc7b7d60ffb4a2ba566d384e37387eb91aaeaa0404666a72c7e7cb",
+      "executable_sha256": "ff7d4d0bbc332613baef04ca524d7e0ecf0788076cf95e3a816045bcf07a64fd",
+      "adapters": [
+        {
+          "path": "MODELS/loras/afterlight-v1.safetensors",
+          "weight": 0.25,
+          "sha256": "57d2a400af32a0afd9cd065c43ebeb6a0e44b153abaef0171ce6891b6b057d13"
+        },
+        {
+          "path": "MODELS/loras/moss-realism-enhancer-v1.safetensors",
+          "weight": 1.0,
+          "sha256": "4a187913365a862503a4297d26248d95b440636b68e60239e68ffc952b737e70"
+        }
+      ]
+    },
+    {
+      "group": "ray-both",
+      "sampler": "euler",
+      "native_seconds": 150.3037503999658,
+      "post_seconds": 9.92746359994635,
+      "sum_seconds": 160.23121399991214,
+      "prompt_cache_scope": "first request in fresh model context",
+      "sampling_log": [
+        "sampling completed, taking 131.78s"
+      ],
+      "cache_log": [
+        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
+        "CacheDIT skipped 2/8 steps (1.33x estimated speedup)"
+      ],
+      "checkpoint_sha256": "dd02927547bc7b7d60ffb4a2ba566d384e37387eb91aaeaa0404666a72c7e7cb",
+      "executable_sha256": "ff7d4d0bbc332613baef04ca524d7e0ecf0788076cf95e3a816045bcf07a64fd",
+      "adapters": [
+        {
+          "path": "MODELS/loras/afterlight-v1.safetensors",
+          "weight": 0.25,
+          "sha256": "57d2a400af32a0afd9cd065c43ebeb6a0e44b153abaef0171ce6891b6b057d13"
+        },
+        {
+          "path": "MODELS/loras/moss-realism-enhancer-v1.safetensors",
+          "weight": 1.0,
+          "sha256": "4a187913365a862503a4297d26248d95b440636b68e60239e68ffc952b737e70"
+        }
+      ]
+    },
+    {
+      "group": "ray-enhancer",
+      "sampler": "euler",
+      "native_seconds": 137.28907219995745,
+      "post_seconds": 9.84023980004713,
+      "sum_seconds": 147.12931200000457,
+      "prompt_cache_scope": "first request in fresh model context",
+      "sampling_log": [
+        "sampling completed, taking 122.91s"
+      ],
+      "cache_log": [
+        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
+        "CacheDIT skipped 2/8 steps (1.33x estimated speedup)"
+      ],
+      "checkpoint_sha256": "dd02927547bc7b7d60ffb4a2ba566d384e37387eb91aaeaa0404666a72c7e7cb",
+      "executable_sha256": "ff7d4d0bbc332613baef04ca524d7e0ecf0788076cf95e3a816045bcf07a64fd",
+      "adapters": [
+        {
+          "path": "MODELS/loras/moss-realism-enhancer-v1.safetensors",
+          "weight": 1.0,
+          "sha256": "4a187913365a862503a4297d26248d95b440636b68e60239e68ffc952b737e70"
+        }
+      ]
+    },
+    {
+      "group": "turbo",
+      "sampler": "dpm",
+      "native_seconds": 153.41837139998097,
+      "post_seconds": 7.722466100007296,
+      "sum_seconds": 161.14083749998827,
+      "prompt_cache_scope": "same prompt in retained context; text conditioning may be warm",
+      "sampling_log": [
+        "sampling completed, taking 145.88s"
+      ],
+      "cache_log": [
+        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
+        "CacheDIT skipped 1/8 steps (1.14x estimated speedup)"
+      ],
+      "checkpoint_sha256": "0900c0c7e5e8598dffeddb9444aac41cdecbbbb8277d3b99df68155a708fab09",
+      "executable_sha256": "ff7d4d0bbc332613baef04ca524d7e0ecf0788076cf95e3a816045bcf07a64fd",
+      "adapters": [
+        {
+          "path": "MODELS/loras/turbo-dmd2-dynamic69.safetensors",
+          "weight": 1.0,
+          "sha256": "d869785c75a20a409f1b590d4ad3a825b542a1fbb9f21589e5ad5e46e62c6910"
+        }
+      ]
+    },
+    {
+      "group": "turbo",
+      "sampler": "euler",
+      "native_seconds": 140.09681859996635,
+      "post_seconds": 10.089264199952595,
+      "sum_seconds": 150.18608279991895,
+      "prompt_cache_scope": "first request in fresh model context",
+      "sampling_log": [
+        "sampling completed, taking 125.65s"
+      ],
+      "cache_log": [
+        "CacheDIT enabled - mode: DBCache+TaylorSeer, Fn: 16, Bn: 2, threshold: 0.080, warmup: 4",
+        "CacheDIT skipped 2/8 steps (1.33x estimated speedup)"
+      ],
+      "checkpoint_sha256": "0900c0c7e5e8598dffeddb9444aac41cdecbbbb8277d3b99df68155a708fab09",
+      "executable_sha256": "ff7d4d0bbc332613baef04ca524d7e0ecf0788076cf95e3a816045bcf07a64fd",
+      "adapters": [
+        {
+          "path": "MODELS/loras/turbo-dmd2-dynamic69.safetensors",
+          "weight": 1.0,
+          "sha256": "d869785c75a20a409f1b590d4ad3a825b542a1fbb9f21589e5ad5e46e62c6910"
+        }
+      ]
+    }
+  ],
+  "public_final": {
+    "normal_http_seconds": 163.85335280001163,
+    "ordinary4x_http_seconds": 6.037676699925214,
+    "normal_dimensions": [
+      736,
+      1104
+    ],
+    "upscale_dimensions": [
+      2944,
+      4416
+    ],
+    "explicit_normal_mode_sent": false,
+    "automatic_normal_upscale": false,
+    "high_with_new_adapters_measured": false
+  }
+}

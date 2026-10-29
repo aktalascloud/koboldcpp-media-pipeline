@@ -1,4 +1,4 @@
-param([switch]$SkipModelDownloads,[switch]$IncludeDirtyBackup,[string]$MossSourceDirectory,[string]$GPENPath,[string]$ListenHost='127.0.0.1')
+param([switch]$SkipModelDownloads,[switch]$IncludeDirtyBackup,[switch]$IncludeRife,[string]$MossSourceDirectory,[string]$GPENPath,[string]$ListenHost='127.0.0.1')
 $ErrorActionPreference='Stop'
 $taskRoot=[IO.Path]::GetFullPath($PSScriptRoot)
 $taskManifest=Get-Content -LiteralPath (Join-Path $taskRoot 'release-assets.json') -Raw|ConvertFrom-Json
@@ -55,6 +55,7 @@ foreach($taskAsset in $taskManifest.assets){
 $taskArguments=@('-I','-B',(Join-Path $taskRoot 'tools\Setup.py'),'--listen-host',$ListenHost)
 if($SkipModelDownloads){$taskArguments+='--skip-model-downloads'}
 if($IncludeDirtyBackup){$taskArguments+='--include-dirty-backup'}
+if($IncludeRife){$taskArguments+='--include-rife'}
 if($MossSourceDirectory){$taskArguments+=@('--moss-source-directory',(Resolve-Path -LiteralPath $MossSourceDirectory).Path)}
 if($GPENPath){$taskArguments+=@('--gpen-path',(Resolve-Path -LiteralPath $GPENPath).Path)}
 & (Join-Path $taskRoot 'runtime\python\python.exe') @taskArguments

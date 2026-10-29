@@ -7,7 +7,7 @@ from pathlib import Path
 import argparse,collections,gc,hashlib,json,math,os,struct,sys,tempfile,time,types
 os.environ.setdefault('OPENBLAS_NUM_THREADS','2')
 import numpy as np
-ROOT=Path(__file__).resolve().parent.parent;BASE=ROOT/'MOSS';OUT=BASE/'models'
+ROOT=Path(__file__).resolve().parent.parent;BASE=ROOT/'MODELS';OUT=BASE/'converted'
 package=types.ModuleType('gguf');package.__path__=[str(ROOT/'tools/vendor/gguf')];sys.modules['gguf']=package
 from gguf.gguf_writer import GGUFWriter
 from gguf.constants import GGMLQuantizationType as QT

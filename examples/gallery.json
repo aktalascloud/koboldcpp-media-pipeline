@@ -237,7 +237,71 @@
         1396
       ],
       "scope": "Exact unscaled4x pixels"
+    },
+    {
+      "file": "ray-realism-normal.png",
+      "dimensions": [
+        736,
+        1104
+      ],
+      "rgb_sha256": "45e5e5f0914d26a175954a4ef3baefd3fe4db4b9dab0c5c4dfb3d667b7bb15bd",
+      "metadata_removed": true,
+      "scope": "29Oct2026 selected Ray/Afterlight0.25/RealismEnhancer1/Euler-simple8; saved actual public API output"
+    },
+    {
+      "file": "ray-realism-4x.webp",
+      "dimensions": [
+        2944,
+        4416
+      ],
+      "rgb_sha256": "05099036641fa08b869aea3a3102c57cf2aa7bbba6b54566bd0c151155584b84",
+      "metadata_removed": true,
+      "scope": "29Oct2026 selected Ray/Afterlight0.25/RealismEnhancer1/Euler-simple8; saved actual public API output"
+    },
+    {
+      "file": "ray-realism-4x-preview.webp",
+      "dimensions": [
+        1472,
+        2208
+      ],
+      "rgb_sha256": "8521063aba36f2da977bc6a0eed616e631f8b74e117fff2d380bf5be92803dfb",
+      "metadata_removed": true,
+      "scope": "Explicit resized web preview; full lossless4x source linked"
+    },
+    {
+      "file": "ray-realism-face.png",
+      "dimensions": [
+        370,
+        480
+      ],
+      "rgb_sha256": "d85a23bf210888c70df3d390baeabfc906375ec28fa6e75f4f28b8bcf9f3cdad",
+      "metadata_removed": true,
+      "scope": "Exact unscaled4x pixels",
+      "source": "ray-realism-4x.webp",
+      "box": [
+        1320,
+        500,
+        1690,
+        980
+      ]
+    },
+    {
+      "file": "ray-realism-eyes.png",
+      "dimensions": [
+        200,
+        115
+      ],
+      "rgb_sha256": "a5416b77916bf4df74edf9e40768180e5bbfa483df7b6c8d45a885222c56f957",
+      "metadata_removed": true,
+      "scope": "Exact unscaled4x pixels",
+      "source": "ray-realism-4x.webp",
+      "box": [
+        1390,
+        620,
+        1590,
+        735
+      ]
     }
   ],
-  "scope": "Selected Ray/Afterlight.25/DPM-SGM only; no new generation for publication."
+  "scope": "Current29Oct selected recipe plus explicitly historical28Oct other-scene examples. No new generation for publication."
 }
