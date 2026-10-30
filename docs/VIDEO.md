@@ -1,17 +1,13 @@
-# Video API
+# Video and soundtrack API
 
-Public API: port5001 or5003. Native5005 is private. `/media#video` is the shared workbench; `/api` and `/openapi.json` list every operation.
+Wan2.2 TI2V5B Turbo Q4 uses the native Kobold backend. The full Wan encoder exports real48-channel posterior latents; the bounded Pro FP32 DirectML decoder produces RGB. Tiny/Super-Tiny are not used.480p generation, optional ClearReality720p and guardedYuNet/GPEN20%/SFace0.97 follow. A separateYuE2 music track can be muxed into the sameMP4 request. This is not joint audio-video generation,video-conditionedFoley orlip-sync.
 
-POST `/v1/videos/generations` (JSON), or POST `/v1/media/generations` with `{"type":"video","parameters":{...}}`.
+`POST /v1/videos/generations`: `{"prompt":"A cinematic landscape with subtle cloud motion","frames":17,"resolution":"480p","orientation":"landscape","upscale_to":"720p","enhance_faces":true,"audio":{"enabled":true,"style":"Gentle cinematic instrumental,no vocals"}}`. Add`image` with PNG base64 forI2V. GET`/v1/videos/capabilities` and`/v1/media/capabilities` before sending optional features. The response contains anMP4 URL and measured stage metadata. Resolve relativeURLs against the configured server,not theOWUI host.
 
-```json
-{"prompt":"A cinematic scene with subtle natural motion","frames":17,"resolution":"480p","orientation":"portrait","steps":4,"sampler_name":"euler","scheduler":"beta","cfg_scale":1,"eta":0,"flow_shift":5,"cache_mode":"cache-dit","cache_options":"threshold=0.04,warmup=1,Fn=16,Bn=2","upscale_to":"720p","enhance_faces":true,"interpolate_fps":48,"audio":{"enabled":true,"style":"Cinematic instrumental, no vocals"}}
-```
+Use4n+1 native frames at24FPS; the demonstrated probe has17frames,about0.71seconds,not17seconds. The total request budget is450seconds. Longer clips and continuous30second motion remain unvalidated. OptionalRIFE48FPS adds interpolated frames without extending duration; it requires the optional originalRIFE runtime. The public kit does not enable the private local-test adapter. No video-model/adapter weights are mirrored.
 
-Wan5B full encoder/diffusion, causal Pro FP32 DirectML, threshold576/actual320px tiles, WG512; no Tiny. ClearReality720p, guarded GPEN/SFace, optional RIFE48 and separate YuE2 track.17 native frames are about0.71s, not17seconds; interpolation preserves duration. No Foley/lip-sync claim. Check `/v1/videos/capabilities` before requesting48FPS. Source PNG base64 uses `image`, not a local start_frame path.
+Initial`Setup.ps1` downloads original weights and runs`tools/SetupPro.py` once onCPU using the same bundledPython. Source/weights/dependencies are pinned; after conversion,serving needs noPyTorch. Main MOSS/Qwen assets remain original downloads/user imports. Native unloads beforePro/SR andYuE2,then the image model is restored before a successful response.
 
-Models switch automatically; Native unloads before GPU postprocessing and photo residency returns. Relative result URLs resolve against this server. GET returned MP4 URL; support Range playback. Limit450s; only17-frame full Pro jobs validated. Long continuous video unverified.
+[All local measurements and limits](../benchmarks/video.json) · [Full media API](MEDIA.ru.md) · [Russian video instructions](VIDEO.ru.md).
 
-Cache0.04/warmup1 is the user's30October selection. Historical29October cache probes did not establish a consistent speed gain; their original EXE SHA and all negatives remain in benchmarks/video.json. No new generation/speed benchmark for this GUI/API update. Public kit does not enable the private user video adapter.
-
-One Helper.kcpps holds exact derived profiles. Settings writes are local/same-origin/revision-guarded and idle-only. Owner-local KoboldCpp.exe bundles code/runtime; models stay external. Public code kit uses original downloads and does not mirror the large local runtime EXE.
+Current extension: [timed music/SFX/speech](AUDIO-TIMELINE.md), request deadline up to900seconds; native frame limit121. The450second default remains. Native tabs and arbitrary config Save/Load replace the old separate Media tab.

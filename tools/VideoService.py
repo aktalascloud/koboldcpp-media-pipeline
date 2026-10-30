@@ -96,14 +96,14 @@ class VideoService:
         self.public_base_url=public_base_url.rstrip('/')
 
     @contextmanager
-    def client_deadline(self,connection):
+    def client_deadline(self,connection,seconds=None):
         """Root wraps the video route/reply, BEFORE waiting for pipeline.lock.
 
         This caps the client's own API connection even while existing bounded
         Supervisor startup/shutdown operations are returning. Cleanup may finish
         later under the lease; no successful result is returned after expiry.
         """
-        budget=VideoBudget(self.deadline_seconds,self.clock)
+        budget=VideoBudget(self.deadline_seconds if seconds is None else seconds,self.clock)
         def cancel():
             budget.cancelled.set()
             try:connection.shutdown(socket.SHUT_RDWR)
@@ -231,7 +231,7 @@ class VideoService:
 
     def _job(self,payload):
         if not isinstance(payload,dict):raise VideoServiceError('Требуется объект JSON.')
-        allowed={'prompt','frames','fps','seed','resolution','orientation','width','height','n','batch_size','n_iter','steps','cfg_scale','model','genkey','start_frame','video_start_frame','image','init_images','continue_from','sampler_name','scheduler','flow_shift','eta','negative_prompt','upscale_to','enhance_faces','cache_mode','cache_options','audio','interpolate_fps'}
+        allowed={'prompt','frames','fps','seed','resolution','orientation','width','height','n','batch_size','n_iter','steps','cfg_scale','model','genkey','start_frame','video_start_frame','image','init_images','continue_from','sampler_name','scheduler','flow_shift','eta','negative_prompt','upscale_to','enhance_faces','cache_mode','cache_options','audio','interpolate_fps','deadline_seconds'}
         unknown=set(payload)-allowed
         if unknown:raise VideoServiceError('Неподдерживаемые поля видео: '+', '.join(sorted(unknown)),status=422)
         for key,expected in [('steps',4),('cfg_scale',1),('sampler_name','euler'),('flow_shift',5),('eta',0)]:
@@ -276,7 +276,7 @@ class VideoService:
 
     def generate(self,path,payload,headers=None,cfg=None,budget=None):
         if budget is None:budget=VideoBudget(self.deadline_seconds,self.clock)
-        elif not isinstance(budget,VideoBudget) or budget.clock is not self.clock or budget.seconds>self.deadline_seconds:
+        elif not isinstance(budget,VideoBudget) or budget.clock is not self.clock or budget.seconds>MAX_VIDEO_SECONDS:
             raise ValueError('Use this VideoService client_deadline budget')
         if not is_video_request(path,payload):raise VideoServiceError('Запрос не относится к видеогенерации.')
         self.require_unblocked();profile=self._profile();job=self._job(copy.deepcopy(payload))
@@ -286,6 +286,7 @@ class VideoService:
         if urllib.parse.urlsplit(path).path not in VIDEO_JSON_PATHS:raise VideoServiceError('Pro-видео использует /v1/videos/generations, не raw A1111.',status=422)
         if job.get('resolution','480p')!='480p':raise VideoServiceError('Pro-профиль проверен только для480p.',status=422)
         job.setdefault('scheduler',options.get('scheduler','simple'))
+        job.setdefault('frames',int(options.get('default_frames',17)))
         job.setdefault('cache_mode',options.get('default_cache_mode','disabled'))
         if 'cache_options' not in job and job['cache_mode']==options.get('default_cache_mode'):
             job['cache_options']=options.get('default_cache_options','')
@@ -358,7 +359,7 @@ class VideoService:
                               output_sha256=finished.get('output_sha256'),output_bytes=finished.get('output_bytes'),
                               native_call_seconds=round(native_seconds,4),encoder_seconds=finished.get('encoder_seconds'),
                               profile_ready_seconds=round(ready_seconds,4),total_seconds=round(budget.elapsed(),4),
-                              deadline_seconds=self.deadline_seconds,deadline_includes='queue,coldload,Native,MP4',
+                              deadline_seconds=budget.seconds,deadline_includes='queue,coldload,Native,postprocessing,audio,photo_restore',
                               photo_processing=False,upscale=False,
                               temporal_processing='No stretching, duplication or interpolation; I2V continuation is not yet a validated seamless extension.')
                 if not destination.is_dir():
@@ -382,7 +383,7 @@ class VideoService:
                 timed_out=isinstance(error,TimeoutError) or self.clock()>=budget.until
                 failure=VideoServiceError('Видео не завершено: '+str(error),
                     'video_deadline_exceeded' if timed_out else 'video_generation_failed',504 if timed_out else 502)
-            failure.body['error'].update(video_id=job_id,deadline_seconds=self.deadline_seconds,
+            failure.body['error'].update(video_id=job_id,deadline_seconds=budget.seconds,
                 request_seconds=round(budget.elapsed(),4),native_avi_preserved=(destination/'native.avi').is_file(),
                 partial_encoder_output_preserved=(destination/'video.work.mp4').is_file(),**cleanup)
             if failure is error:raise
@@ -415,6 +416,8 @@ class VideoService:
         faces=faces and face_options.get('enabled',True) and float(face_options.get('visibility',.2))>0
         report=process_video(source,folder/'enhanced',self.root,model=model,faces=faces,target_short_edge=720 if upscale_to else 480,
             face_provider=options.get('face_provider','directml'),face_visibility=max(.001,float(face_options.get('visibility',.2))),
+            upscaler_path=options.get('upscaler_model',cfg.get('proxy',{}).get('upscaler',{}).get('model')),upscaler_sha256=options.get('upscaler_model_sha256',cfg.get('proxy',{}).get('upscaler',{}).get('model_sha256')),
+            face_model=face_options.get('model'),guard_model=face_options.get('feature_guard_model'),detector_model=face_options.get('detector_model'),
             face_similarity=float(face_options.get('minimum_feature_similarity',.97)),detector_resolution=int(face_options.get('detector_resolution',960)),max_faces=int(face_options.get('max_faces',2)),temporal_faces=.25,timeout=budget.remaining())
         (folder/'video.mp4').rename(folder/'video-native480.mp4')
         shutil.copy2(folder/'last-frame.png',folder/'native-last-frame.png')
@@ -433,7 +436,7 @@ class VideoService:
         if fps!=48:raise VideoServiceError('Только интерполяция48FPS.',status=422)
         from VideoRife import interpolate_video
         metadata=dict(result['metadata']);folder=self.outputs/metadata['id']
-        report=interpolate_video(folder/'video.mp4',folder/'rife',self.root,timeout=budget.remaining())
+        report=interpolate_video(folder/'video.mp4',folder/'rife',self.root,timeout=budget.remaining(),model_dir=cfg.get('proxy',{}).get('video',{}).get('rife_models'))
         (folder/'video.mp4').rename(folder/'video-24fps.mp4');shutil.copy2(report['output'],folder/'video.mp4')
         metadata.update(native_frames=metadata['frames'],frames=report['output_frames'],fps=48,frame_interpolation=report,total_seconds=round(budget.elapsed(),4),output_bytes=(folder/'video.mp4').stat().st_size)
         result=dict(result);result['metadata']=metadata;return result
@@ -475,6 +478,31 @@ class VideoService:
         result=self.enhance(result,cfg,budget,upscale_to='720p',faces=faces)
         (target/'service.json').write_text(json.dumps(dict(created=result['created'],metadata=result['metadata']),indent=2)+'\n')
         return result
+
+    def soundtrack_saved(self,payload,cfg,budget):
+        """Replace audio on a new copy; never rerun Wan or mutate the source clip."""
+        if not isinstance(payload,dict) or set(payload)-{'video_id','audio'}:raise VideoServiceError('Ожидаются video_id и audio.',status=422)
+        identity=payload.get('video_id')
+        if not isinstance(identity,str) or not re.fullmatch(r'[0-9a-f]{32}',identity):raise VideoServiceError('Некорректный video_id.',status=422)
+        original=(self.outputs/identity).resolve();service=original/'service.json';source=original/'video.mp4'
+        if not original.is_relative_to(self.outputs) or not service.is_file() or not source.is_file():raise VideoServiceError('Исходное видео не найдено.','video_not_found',404)
+        saved=json.loads(service.read_text(encoding='utf-8'));old=saved['metadata']
+        if old.get('status')!='completed':raise VideoServiceError('Исходное видео ещё не завершено.',status=409)
+        from VideoAudio import audio_options
+        from AudioTimeline import validate
+        try:
+            options=audio_options(payload.get('audio'),True)
+            if not options['enabled']:raise ValueError('Для озвучивания включите audio.enabled')
+            if options.get('tracks') is not None or options.get('auto_plan'):options['_validated_timeline']=validate(options,old['frames']/old['fps'],cfg)
+        except (ValueError,TypeError) as error:raise VideoServiceError(str(error),status=422) from error
+        with source.open('rb') as stream:digest=hashlib.file_digest(stream,'sha256').hexdigest()
+        if digest!=old['output_sha256']:raise VideoServiceError('Исходный MP4 изменён; озвучивание отклонено.',status=409)
+        new_id=uuid.uuid4().hex;target=self.outputs/new_id;target.mkdir();shutil.copy2(source,target/'video.mp4')
+        if (original/'last-frame.png').is_file():shutil.copy2(original/'last-frame.png',target/'last-frame.png')
+        metadata={k:old[k] for k in ('model','width','height','frames','fps','duration_seconds')}
+        metadata.update(id=new_id,source_video_id=identity,source_output_sha256=digest,source_generation_seconds=old.get('total_seconds'),rendered_this_request=['audio_mix','photo_restore'],url=self.public_base_url+VIDEO_MEDIA_PREFIX+new_id+'/video.mp4',relative_url=VIDEO_MEDIA_PREFIX+new_id+'/video.mp4',last_frame_url=self.public_base_url+VIDEO_MEDIA_PREFIX+new_id+'/last-frame.png',deadline_seconds=budget.seconds)
+        result=dict(id=new_id,object='video',created=int(time.time()),metadata=metadata,url=metadata['url'])
+        return self.soundtrack(result,cfg,budget,options)
 
     def open_media(self,path,headers=None):
         decoded=urllib.parse.unquote(urllib.parse.urlsplit(path).path)

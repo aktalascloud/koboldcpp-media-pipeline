@@ -1,0 +1,84 @@
+{
+  "date": "2026-10-30",
+  "native_sha256": "0986410a243b78d2b92c6d147a200372acadf0e552df7970ee178da0e4258fbb",
+  "selected": {
+    "mode": "I2V from existing saved Ray photo, no new image generation",
+    "frames": 73,
+    "fps": 24,
+    "duration_seconds": 3.0416666666666665,
+    "native_resolution": [
+      480,
+      832
+    ],
+    "output_resolution": [
+      720,
+      1248
+    ],
+    "cache": "disabled in this manual quality check; global light default unchanged",
+    "http_seconds": 552.5706565999426,
+    "native_seconds": 271.9127,
+    "profile_ready_seconds": 22.2609,
+    "pro_seconds": 110.21640639996622,
+    "post_seconds": 84.41303050005808,
+    "audio_seconds": 39.463579699979164,
+    "resident_photo_ready": true
+  },
+  "audio_revision": {
+    "http_seconds": 57.955270900041796,
+    "tracks": [
+      {
+        "kind": "music",
+        "start": 0.0,
+        "end": 3.0416666666666665,
+        "volume": 0.16,
+        "speaker_id": null,
+        "voice": null,
+        "source_seconds": 6.0,
+        "render_seconds": 31.04123550001532,
+        "sha256": "c56ba238e5ad7cac03c0c455f2e742cc68850818f1c65a001f818a5278cac173"
+      },
+      {
+        "kind": "sfx",
+        "start": 0.15,
+        "end": 3.0416666666666665,
+        "volume": 0.32,
+        "speaker_id": null,
+        "voice": null,
+        "source_seconds": 2.89,
+        "render_seconds": 9.438589700032026,
+        "sha256": "15eab4fcd3e1e4cabc95b6869fbe1cfa0c3d9d57544a10ee41ce6820d833a6a7"
+      },
+      {
+        "kind": "speech",
+        "start": 0.4,
+        "end": 2.9,
+        "volume": 0.9,
+        "speaker_id": "narrator",
+        "voice": "shimmer",
+        "source_seconds": 2.25,
+        "render_seconds": 0.1892103001009673,
+        "sha256": "9e8424d76689b41badf02a6d5bef2aa603130fd24f1dc969a7f69a00bbeafd29"
+      }
+    ],
+    "voice_map": {
+      "narrator:ru": "shimmer"
+    },
+    "copied_rgb_frames_identical": 73,
+    "generated_video_again": false,
+    "source_video_preserved": true,
+    "audio_rms": 0.0957702100276947,
+    "audio_peak": 0.5036249756813049,
+    "resident_photo_ready": true
+  },
+  "rejected": {
+    "mode": "121-frame T2V with light cache, different scene; NOT a matched cache comparison",
+    "duration_seconds": 5.041666666666667,
+    "http_seconds": 854.7822273999918,
+    "reason": "Curtain obscures the face and noisy texture; not selected for quality"
+  },
+  "limits": [
+    "Separate music/SFX/TTS generators; no joint audio-video model or lip-sync.",
+    "Footstep activity window reviewed from actual frames; individual generated impacts are not guaranteed frame-accurate.",
+    "One run per clip, not a universal speed claim. Existing photo generation time is excluded."
+  ]
+}

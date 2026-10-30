@@ -16,7 +16,7 @@ def job_object():
     if not job or not k.SetInformationJobObject(job,9,ctypes.byref(info),ctypes.sizeof(info)):raise ctypes.WinError(ctypes.get_last_error())
     return k,job
 
-def run_owned(command,root,destination,timeout,memory_guard=False):
+def run_owned(command,root,destination,timeout,memory_guard=False,environment=None):
     root=Path(root).resolve();destination=Path(destination).resolve()
     if not any(destination.is_relative_to(root/f) for f in ('OUTPUTS/video','RESULTS/Video')):raise ValueError('Unexpected owned media destination')
     destination.mkdir(parents=True,exist_ok=True);k,job=job_object();began=time.perf_counter();monitor=None
@@ -24,7 +24,7 @@ def run_owned(command,root,destination,timeout,memory_guard=False):
     child=None
     try:
         with (destination/'worker.log').open('wb') as log:
-            child=subprocess.Popen(command,cwd=root,stdout=log,stderr=subprocess.STDOUT,creationflags=subprocess.CREATE_NO_WINDOW)
+            child=subprocess.Popen(command,cwd=root,env=environment,stdout=log,stderr=subprocess.STDOUT,creationflags=subprocess.CREATE_NO_WINDOW)
             if not k.AssignProcessToJobObject(job,int(child._handle)):raise RuntimeError('Owned media job assignment failed')
             if memory_guard:
                 monitor_log=(destination/'gpu-monitor.log').open('wb')

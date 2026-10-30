@@ -1,46 +1,29 @@
-# Видео для фильтра OWUI
+# Видео со звуком: API для OWUI
 
-Базовый URL: http://<AI_HOST>:5001. Порты5001 и5003 — общий постоянный API. Native работает внутри на5005. Возможности: GET /v1/videos/capabilities. Вызов: POST /v1/videos/generations, JSON; готовый файл video-api-preset.json.
+Один сервер: `/v1/videos/generations` (JSON); общий вход5001/5003. `frames` — число кадров при24FPS, не секунды.17кадров≈0,71с. RIFE48FPS не удлиняет ролик. Все параметры отдельной генерации задаются запросом, не формой запуска.
+
+`audio.tracks`:1–8дорожек. `kind`: `sfx` (SA3 Small-SFX, английский prompt), `speech` (внешний TTS, text), `music` (YuE2, prompt). Каждая: `start`, `end` в секундах, `volume`0–1. Интервал строго внутри фактического видео.
 
 ```json
-{
-  "model": "kobold-wan22-turbo",
-  "prompt": "An adult woman naturally blinks and turns her head, subtle fabric movement, realistic eyes, steady camera",
-  "frames": 17,
-  "resolution": "480p",
-  "orientation": "portrait",
-  "seed": 424242,
-  "sampler_name": "euler",
-  "scheduler": "beta",
-  "steps": 4,
-  "cfg_scale": 1,
-  "eta": 0,
-  "flow_shift": 5,
-  "cache_mode": "cache-dit",
-  "cache_options": "threshold=0.04,warmup=1,Fn=16,Bn=2",
-  "upscale_to": "720p",
-  "enhance_faces": true,
-  "interpolate_fps": 48,
-  "audio": {"enabled":true,"style":"Gentle cinematic instrumental background, quiet warm piano and soft strings, no vocals","lyrics":"","volume":0.7}
-}
+{"audio":{"enabled":true,"speakers":[{"id":"woman1","voice_profile":"female","language":"ru"}],"tracks":[{"kind":"sfx","prompt":"Soft natural wind, no music","start":0,"end":0.708333,"volume":0.4},{"kind":"speech","speaker_id":"woman1","text":"Да.","start":0.1,"end":0.65,"fit":"stretch","volume":0.8}]}}
 ```
 
-Для I2V добавить image с PNGbase64. Для продолжения — continue_from с ID клипа; длинная непрерывность не подтверждена. Локальные пути и произвольные URL запрещены. Модель и статические адаптеры выбирает сервер. Локально используется пользовательская Wan5BLoRA1.0; публичный комплект её не распространяет и автоматически не включает.
+RU по умолчанию: female→Маша(shimmer), male→Дима(echo). EN: female→Heart(shimmer), male→Michael(Ryan). Язык речи `language` не связан с языком GUI. Один `speaker_id` сохраняет профиль; точный одинаковый тембр междуRU/EN не обещается. Нет угадывания пола по лицу.
 
-Полный Wan-энкодер и диффузия работают в Kobold;48-канальные латенты декодирует ProFP32/DirectML. Tiny/Super-Tiny не используются. Порог VAE576 соответствует тайлу320, перекрытие64. Native VRAM6500MiB, у Pro дополнительно контролируется фактическая память. Native выгружается перед Pro/SR.
+Речь не режется молча: если длиннее интервала, расширьте таймкод; явное `fit:stretch` допускает ускорение до2× без изменения высоты тона. Это не lip-sync. Точность событий определяется таймкодами клиента/хелпера, не автоматическим анализом движений.
 
-Генерация:832×480 или480×832. После ClearReality:1248×720 или720×1248, без растягивания. YuNet960/GPEN20%/SFace0.97 применяются после масштабирования. Gater и повторное сильное восстановление видео выключены.
+`audio.auto_plan:true`, `audio.prompt` и `audio.speakers` включают один кэшируемый проход выбранного хелпера. Отдельный план: `POST /v1/media/audio-plan`, поля `prompt`, `duration_seconds`, `speakers`. Без описанных персонажей хелпер не должен сочинять реплики/пол.
 
-frames — исходные кадры24FPS,4n+1. Проверенные17кадров — около0,71с, не17секунд.49кадров —2,04с. Длинные клипы экспериментальны. RIFE48FPS удваивает кадры, сохраняя длительность; один конечный кадр повторяется. Если capabilities не содержит48, использовать24.
+Старый `audio:{style,lyrics,...}` сохранён для музыкального фона YuE2. ВидеогенераторWan остаётся немым; сервер отдельно рендерит дорожки и сводит их вMP4, копируя видеопоток. SA3 сейчасCPU: Vulkan на RX580 инициализирует устройство, затем падает; скоростьGPU не заявляется.
 
-Звук — отдельная музыка YuE2 и сборка дорожки в MP4. Это не совместная аудиовидеомодель, не синхронный Foley и не липсинк. audio:false отключает звук. Исходная музыка сохраняется MP3; MP4 содержит AAC, видео копируется без дополнительного перекодирования. Клиент может передать style/lyrics; сервер не привязан к конкретной helper-LLM.
+TTS: `POST /v1/audio/speech`; STT: `POST /v1/audio/transcriptions`; голоса: `GET /v1/audio/voices`; возможности: `GET /v1/audio/capabilities`. URL хелпера/TTS/STT и ID модели задаются в Audio GUI. Сетевые адреса не передаются в генерационных запросах.
 
-Кэш необязателен: cache-dit с threshold=0.04,warmup=1,Fn=16,Bn=2 или threshold=0.08,warmup=2,Fn=16,Bn=2. На проверенной сцене латенты совпали с контролем; устойчивого ускорения0,08 нет. Основной пресет без кэша. Фото-параметры автоматически в видео не переносить.
+GUI: Image Gen — фото/детали/img2img; Audio — модели/подключения; Video —Wan/VAE/LoRA/SR/RIFE; Extra — язык/автозапуск. Save/Load работают с любым пользовательским.kcpps. Launch применяет файл, модели выгружаются/загружаются автоматически, фото возвращается вGPU. `/api` и `/openapi.json` — документация. Имена JSON-полей английские для совместимости; описанияRU, `?lang=en` —EN.
 
-Ответ: id,url,data[0].url,metadata с фактическими размерами, кадрами,FPS,звуком и временами. Относительный URL объединить с адресом Kobold, не OWUI. Фильтр скачивает MP4, загружает в файлы OWUI и возвращает видео в чат. MediaURL поддерживает Range; MP3 доступен через metadata.audio_source_url.
+### Длиннее и с несколькими дорожками
 
-Таймаут клиента не менее500с; общий серверный бюджет450с включает очередь, загрузки, Native,Pro,пост и звук. Латенты или незавершённый результат не выдаются за успешный MP4. При ошибке показать JSONошибку. После успешного запроса metadata.resident_photo_ready подтверждает возврат фото-модели в GPU.
+rames:121 даёт5,04с при24FPS. deadline_seconds:900 явно расширяет бюджет одного запроса; по умолчанию450с. Это не17секунд видео. Для общего микса передавайте одновременно дорожки music/sfx/speech: сервер суммирует их по start/end, сохраняет MP3 и MP4 со звуком. Длина дорожек ограничена фактическим видео. Для событий используйте указанные клиентом таймкоды; план хелпера основан на описании и не анализирует пиксели. Закадровая речь не требует совпадения движения губ.
 
-Интерфейс: `/media` (вкладки фото/видео/музыка/апскейл). Документация: `/api`, `/openapi.json`. Унифицированный запрос: `POST /v1/media/generations`, JSON `{"type":"video","parameters":{...}}`; type также image/music. Автозапуск: `KoboldCpp.exe --background`; веса в отдельных папках, один пользовательский Helper.kcpps. Служебные Native-профили содержатся внутри Helper и восстанавливаются из него.
+### Совпадение звуков с реальными событиями
 
-Current30October: public5001/5003, private5005; `/media` GUI, `/api` documentation, `/openapi.json`, `/v1/media/generations` and `/v1/media/upscale`. Default video cache0.04/warmup1. Existing29October measurements are historical; no new generation performed.
+Для точной расстановки эффектов: сначала видео с audio.enabled=false; затем фильтр OWUI анализирует выбранной vision-моделью кадры с их таймкодами. Передайте наблюдения хелперу через /v1/media/audio-plan, проверьте события. POST /v1/videos/soundtrack принимает video_id готового ролика и audio с tracks/speakers. Создаётся новая копия с новым миксом, исходник сохранён, Wan/Pro/апскейл повторно не запускаются. Прежний звук заменяется целиком: если нужна музыка, включите её отдельной дорожкой в новом миксе. Автоматический план только по исходному тексту не гарантирует совпадения шагов/ударов с фактическими кадрами.

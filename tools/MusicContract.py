@@ -14,7 +14,7 @@ def capabilities(config):
     family=music_family(config)
     return dict(family=family,backend='KoboldCpp Native',composer='client-selected LLM',
         generate_endpoint='/api/extra/music/generate',prepare_endpoint='/api/extra/music/prepare',
-        output_format='mp3',stereo=True,default_steps=8,
+        output_format='mp3',stereo=True,default_steps=config.get('proxy',{}).get('music_defaults',{}).get('num_inference_steps',8),
         duration_control='semantic_max_tokens / 25 is an approximate upper bound' if family=='yue2' else 'duration',
         locally_tested_seconds=32 if family=='yue2' else None,
         russian_vocals='user-confirmed on the saved short trial' if family=='yue2' else 'previous configuration',
@@ -22,7 +22,10 @@ def capabilities(config):
 
 def prepare_music(payload,config):
     if music_family(config)!='yue2':return dict(payload)
-    result=dict(payload)
+    result=dict(config.get('proxy',{}).get('music_defaults',{}));result.update(payload)
+    if 'semantic_max_tokens' in payload and 'duration' not in payload:result.pop('duration',None)
+    if 'cfg_scale' in payload and 'guidance_scale' not in payload:result.pop('guidance_scale',None)
+    if 'caption' in payload and 'style' not in payload:result.pop('style',None)
     obsolete={'inference_steps','shift','vocal_language','gen_codes','rewrite_caption','music_reference_audio_data'}
     found=obsolete.intersection(result)
     if found:raise MusicRequestError('YuE2 does not accept ACE-Step fields: '+', '.join(sorted(found))+'. Use lyrics/style, num_inference_steps and semantic_max_tokens.')

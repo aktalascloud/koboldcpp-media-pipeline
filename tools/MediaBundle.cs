@@ -64,7 +64,8 @@ class KoboldMediaBundle {
    var defaults=helper["gendefaults"] is string?parser.Deserialize<Dictionary<string,object>>((string)helper["gendefaults"]):(Dictionary<string,object>)helper["gendefaults"];
    var proxy=(Dictionary<string,object>)defaults["kcpp_proxy"];Port=Convert.ToInt32(proxy["port"]);UiPort=Port;
    if(proxy.ContainsKey("api_alias_ports")){foreach(object alias in (System.Collections.IEnumerable)proxy["api_alias_ports"]){UiPort=Convert.ToInt32(alias);break;}}
-   if(native){Process.Start(new ProcessStartInfo(Path.Combine(Root,"koboldcpp-nocuda.exe")){WorkingDirectory=Root,UseShellExecute=false});return 0;}
+   if(native){Process.Start(new ProcessStartInfo(Path.Combine(Root,"koboldcpp-nocuda.exe"),"--media-settings"){WorkingDirectory=Root,UseShellExecute=false});return 0;}
+   if(!background)Process.Start(new ProcessStartInfo(Path.Combine(Root,"koboldcpp-nocuda.exe"),"--media-settings"){WorkingDirectory=Root,UseShellExecute=false});
    var js=new JavaScriptSerializer();js.MaxJsonLength=4*1024*1024;
    bool running=false;
    try{var health=js.Deserialize<Dictionary<string,object>>(Get("/health"));
@@ -75,7 +76,6 @@ class KoboldMediaBundle {
    var deadline=DateTime.UtcNow.AddSeconds(180);bool ready=false;
    while(DateTime.UtcNow<deadline){try{var c=js.Deserialize<Dictionary<string,object>>(Get("/v1/media/capabilities"));if((string)c["backend"]=="KoboldCpp"){ready=true;break;}}catch(WebException){}Thread.Sleep(500);}
    if(!ready)throw new IOException("Media startup timed out. Check logs/autostart.log; main models must be present in MODELS, DETAILERS and UPSCALERS.");
-   if(!background)Process.Start(new ProcessStartInfo("http://127.0.0.1:"+UiPort+"/media"){UseShellExecute=true});
    return 0;
   }catch(Exception error){
    try{Directory.CreateDirectory(Path.Combine(Root,"logs"));File.WriteAllText(Path.Combine(Root,"logs/bundle-startup-error.log"),DateTime.Now.ToString("o")+"\n"+error.ToString());}catch{}

@@ -50,7 +50,7 @@ def model_contract(config,requested=None):
 
 def image_capabilities(config):
     return dict(schema_version=2,model_family=config['proxy'].get('image_model_family','moss'),model=model_contract(config),
-        operations=dict(txt2img=dict(supported=True,model_alias='kobold-moss',endpoints=['/sdapi/v1/txt2img','/v1/images/generations']),img2img=dict(supported=True,model_alias='kobold-moss-img2img',endpoints=['/sdapi/v1/img2img','/v1/images/edits'],semantics='whole_frame_redraw',prompt_semantics='complete_descriptive_caption',target_images=dict(min=1,max=1),reference_images=dict(max=0),multiple_images=False,masks=False,instruction_edit=False,semantic_success_evaluated=False,default_strength=config['proxy'].get('image_edit_denoising_strength',.6),strength_range=[.05,1.0],steps_range=[1,9],cache_mode='disabled',automatic_upscale=False),instruction_edit=dict(supported=False),reference_guided_edit=dict(supported=False),inpaint=dict(supported=False),upscale=dict(supported=True,scale=config['proxy']['upscaler'].get('output_scale',4))),
+        operations=dict(txt2img=dict(supported=True,model_alias='kobold-moss',endpoints=['/sdapi/v1/txt2img','/v1/images/generations']),img2img=dict(supported=config['proxy'].get('image_edit_enabled',True),model_alias='kobold-moss-img2img',endpoints=['/sdapi/v1/img2img','/v1/images/edits'],semantics='whole_frame_redraw',prompt_semantics='complete_descriptive_caption',target_images=dict(min=1,max=1),reference_images=dict(max=0),multiple_images=False,masks=False,instruction_edit=False,semantic_success_evaluated=False,default_strength=config['proxy'].get('image_edit_denoising_strength',.6),strength_range=[.05,1.0],steps_range=[1,9],cache_mode='disabled',automatic_upscale=False),instruction_edit=dict(supported=False),reference_guided_edit=dict(supported=False),inpaint=dict(supported=False),upscale=dict(supported=True,scale=config['proxy']['upscaler'].get('output_scale',4))),
         inputs=dict(target_fields=list(TARGET_FIELDS),reference_fields=list(REFERENCE_FIELDS),formats=['png','jpeg','webp'],remote_urls=False,min_dimension=256,max_decoded_pixels=MAX_IMAGE_PIXELS,alpha_masks=False,animated_images=False,max_multipart_parts=MAX_FORM_PARTS,max_upload_bytes=int(config['helper'].get('maxrequestsize',32))*1024*1024),
         openai_edits_default_operation='instruction_edit',requires_explicit_redraw_operation=True,redraw_model_alias='kobold-moss-img2img',capabilities_url=CAPABILITIES_PATH)
 
@@ -61,6 +61,8 @@ def reject_references(fields):
 
 
 def validate_edit_contract(fields,config,*,default_operation='instruction_edit'):
+    if not config.get('proxy',{}).get('image_edit_enabled',True):
+        unsupported('Редактирование img2img выключено в настройках приложения.','operation','image_edit_disabled')
     reject_references(fields)
     operation=fields.get('operation')
     if operation is None:operation=default_operation

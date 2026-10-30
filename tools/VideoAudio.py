@@ -7,7 +7,7 @@ from MusicContract import prepare_music
 def audio_options(value,default_enabled=True):
     if value is None:return {'enabled':bool(default_enabled),'style':'Gentle cinematic instrumental background, atmospheric, natural acoustic texture, no vocals','lyrics':'','volume':.7}
     if type(value) is bool:return {'enabled':value,'style':'Gentle cinematic instrumental background, no vocals','lyrics':'','volume':.7}
-    if not isinstance(value,dict) or set(value)-{'enabled','style','lyrics','volume','seed'}:raise ValueError('audio accepts enabled/style/lyrics/volume/seed')
+    if not isinstance(value,dict) or set(value)-{'enabled','style','lyrics','volume','seed','tracks','speakers','auto_plan','prompt','language'}:raise ValueError('audio: enabled/style/lyrics/volume/seed или tracks/speakers/auto_plan/prompt/language')
     result={'enabled':True,'style':'Gentle cinematic instrumental background, no vocals','lyrics':'','volume':.7,**value}
     if type(result['enabled']) is not bool or not isinstance(result['style'],str) or not result['style'].strip() or len(result['style'])>2000 or not isinstance(result['lyrics'],str) or len(result['lyrics'])>8000:raise ValueError('Invalid video audio text/enable flag')
     if isinstance(result['volume'],bool) or not isinstance(result['volume'],(int,float)) or not math.isfinite(result['volume']) or not 0<=result['volume']<=1:raise ValueError('Audio volume must be0..1')
@@ -28,6 +28,9 @@ def mux_audio(folder,root,metadata,volume,timeout):
     return {'mux_seconds':time.perf_counter()-began,'video_stream':'copied without re-encoding','mp4_audio_codec':'AAC192k','source_audio_format':'MP3 stereo','duration_seconds':duration,'video_frames_preserved':True}
 
 def generate_soundtrack(supervisor,root,folder,cfg,options,budget,metadata):
+    if options.get('enabled') and (options.get('tracks') is not None or options.get('auto_plan')):
+        from AudioTimeline import render
+        return render(supervisor,root,folder,cfg,options,budget,metadata)
     if not options['enabled']:return {'enabled':False}
     root=Path(root).resolve();folder=Path(folder).resolve();cap=max(6,math.ceil(metadata['frames']/metadata['fps']))
     payload=prepare_music({k:v for k,v in options.items() if k in ('style','lyrics','seed')}|{'duration':cap},cfg)

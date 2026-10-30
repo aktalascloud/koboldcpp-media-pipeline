@@ -1,7 +1,8 @@
-Unified KoboldCpp media workbench
+Native media controls and timed audio
 
-- Adds image/redraw, music, video, upscale, settings and API tabs; offline UI/OpenAPI, no external web assets.
-- Stable APIs5001/5003, private Native5005; one Helper contains exact generated profiles. Models load exclusively on demand; photo returns GPU-resident.
-- Default video Cache-DiT0.04/warmup1, Pro576/WG512, Clear720/faces, optionalRIFE/YuE2. Settings save locally while idle; no new generation/speed benchmark.
-- Optional Native Media launcher; owner-local one-file runtime bundle source. Large local bundle and model weights are not mirrored. Existing source/runtime license notices retained.
-- Historical29October figures keep original EXE SHA. [API](docs/API.md) · [OWUI](docs/MEDIA.ru.md) · [Video](docs/VIDEO.md).
+- Original Image Gen/Audio pages, new Video page, RU/EN and logon startup in Extra; original file pickers/icon, arbitrary user `.kcpps` Save/Load. Request parameters remain in API.
+- One MP4 request can mix music, effects and RU/EN speech with explicit timestamps and speaker profiles. [Contract and optional CPU SFX setup](docs/AUDIO-TIMELINE.md). No joint AV or lip-sync claim.
+- Exclusive model switching, resident image model, Pro576/WG512/light cache, Clear720 and guarded faces retained. New SFX runtime/weights are not mirrored in this minimal code ZIP; unavailable effects fail before expensive generation.
+- Historical image/token measurements retain their original SHA/date. Manual audio/video proofs are separate; daily benchmarks stay disabled. Existing model/runtime license restrictions apply.
+
+Manual30October on Native0986410a:3.04s I2V with Pro/Clear720/faces and all3audio kinds552.57s; audio-only revision57.96s,73/73RGB frames unchanged. The5.04s/854.78s T2V probe was visually rejected. [Stages/limits](benchmarks/audio-video-20261030.json).

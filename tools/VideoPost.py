@@ -14,7 +14,7 @@ PARAGON_DATA_SHA='c8ddb04cc7415390194206f38c9de9108a21d07724908f49c89127d887b791
 def sha(p):
     with p.open('rb') as f:return hashlib.file_digest(f,'sha256').hexdigest()
 
-def process_video(source,destination,root,model='clearreality',faces=False,temporal_faces=.25,timeout=600,profile_gpu=False,target_short_edge=720,face_provider='openvino',face_visibility=.2,freeze_face_initializers=False,face_similarity=.97,detector_resolution=960,max_faces=2):
+def process_video(source,destination,root,model='clearreality',faces=False,temporal_faces=.25,timeout=600,profile_gpu=False,target_short_edge=720,face_provider='openvino',face_visibility=.2,freeze_face_initializers=False,face_similarity=.97,detector_resolution=960,max_faces=2,upscaler_path=None,upscaler_sha256=None,face_model=None,guard_model=None,detector_model=None):
     root=Path(root).resolve();source=Path(source).resolve();destination=Path(destination).resolve()
     if not source.is_relative_to(root) or not source.is_file():raise ValueError('Video source must be inside Root')
     if not any(destination.is_relative_to(root/folder) for folder in ['OUTPUTS/video','RESULTS/Video']):raise ValueError('Unexpected video postprocess destination')
@@ -29,16 +29,19 @@ def process_video(source,destination,root,model='clearreality',faces=False,tempo
     upscaler=None;restorer=None;guard=None;encoder=None;stderr=None;rows=[];gpu_report=None;face_gpu_report=None;previous_gray=None;previous_delta=None
     try:
         if model!='lanczos':
-            name,native_scale,digest=MODELS[model];path=root/'UPSCALERS'/name
+            name,native_scale,digest=MODELS[model];path=Path(upscaler_path) if upscaler_path else root/'UPSCALERS'/name
+            if upscaler_path:
+                if not path.resolve().is_relative_to(root) or not upscaler_sha256:raise ValueError('Portable SR path and SHA required')
+                digest=upscaler_sha256
             if sha(path)!=digest:raise ValueError('Video SR model SHA mismatch')
             if model=='paragon2x' and sha(path.with_name('net_g_75000_fused_op18_fp32.onnx.data'))!=PARAGON_DATA_SHA:raise ValueError('Video SR external data SHA mismatch')
             upscaler=PhotoUpscaler(path,scale=native_scale,provider='directml',tile=0,output_scale=native_scale,
                 profile_prefix=str(destination/'ort-first-frame') if profile_gpu else None)
         if faces:
-            guard=FeatureGuard(root/'DETAILERS/faces/face_recognition_sface_2021dec.onnx')
+            guard=FeatureGuard(guard_model or root/'DETAILERS/faces/face_recognition_sface_2021dec.onnx')
             if not .97<=face_similarity<=1 or type(detector_resolution) is not int or not 640<=detector_resolution<=1280 or type(max_faces) is not int or not 1<=max_faces<=4:raise ValueError('Invalid bounded face settings')
-            detector=FaceDetailer(detector_resolution=detector_resolution)
-            restorer=Restorer(root/'DETAILERS/faces/gpen_bfr_512.onnx',provider=face_provider,detector=detector,guard=guard,profile_prefix=str(destination/'ort-gpen') if profile_gpu and face_provider=='directml' else None,freeze_initializers=freeze_face_initializers)
+            detector=FaceDetailer(detector_resolution=detector_resolution,detector_model=detector_model)
+            restorer=Restorer(face_model or root/'DETAILERS/faces/gpen_bfr_512.onnx',provider=face_provider,detector=detector,guard=guard,profile_prefix=str(destination/'ort-gpen') if profile_gpu and face_provider=='directml' else None,freeze_initializers=freeze_face_initializers)
         load_seconds=time.perf_counter()-started
         output=destination/'video.mp4';temporary=destination/'video.work.mp4'
         command=[str(root/'runtime/ffmpeg/ffmpeg.exe'),'-hide_banner','-nostdin','-n','-f','rawvideo','-pixel_format','rgb24','-video_size',f'{size[0]}x{size[1]}','-framerate',str(fps),'-i','pipe:0','-an','-c:v','libx264','-preset','veryfast','-crf','18','-pix_fmt','yuv420p','-threads','8','-fps_mode','passthrough','-movflags','+faststart',str(temporary)]

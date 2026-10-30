@@ -77,7 +77,7 @@ def settings(path):
     defaults=helper.get('gendefaults',{});defaults=json.loads(defaults) if isinstance(defaults,str) else defaults
     proxy=defaults.get('kcpp_proxy')
     if not isinstance(proxy,dict) or not proxy.get('enabled'):raise ValueError('Helper does not enable kcpp_proxy')
-    for section,key in (('upscaler','model'),('upscaler','detail_model'),('detailer','model'),('detailer','feature_guard_model'),('photo_restoration','model')):
+    for section,key in (('upscaler','model'),('upscaler','detail_model'),('detailer','model'),('detailer','feature_guard_model'),('detailer','detector_model'),('photo_restoration','model')):
         if proxy.get(section,{}).get(key):proxy[section][key]=asset(proxy[section][key],path.resolve().parent)
     front=int(proxy.get('port',5001));back=int(helper.get('port',helper.get('port_param',5003)))
     if not 1<=front<=65535 or not 1<=back<=65535 or front==back:raise ValueError('Proxy and native backend need different valid ports')
@@ -103,6 +103,8 @@ def image_encode(image,parameters=None,marker=None):
     return base64.b64encode(out.getvalue()).decode()
 def face_signature(options,legacy=False,include_policy=False):
     canonical=dict(options)
+    detector=canonical.get('detector_model')
+    if detector and Path(detector).resolve()==(ROOT/'DETAILERS/faces/face_detection_yunet_2023mar.onnx').resolve():canonical.pop('detector_model',None)
     reference={key:canonical.pop('_reference_'+key,None) for key in ('minimum_face','maximum_face')}
     for key in ('auto_size','reference_dimensions'):canonical.pop(key,None)
     if not include_policy:canonical.pop('after_upscale',None)
@@ -111,7 +113,7 @@ def face_signature(options,legacy=False,include_policy=False):
     for key,default in (('minimum_face',32),('maximum_face',160)):
         canonical[key]=round(float(reference[key] if reference[key] is not None else float(canonical.get(key,default))/scale),6)
     if not legacy:
-        for key in ('model','feature_guard_model'):
+        for key in ('model','feature_guard_model','detector_model'):
             if canonical.get(key):
                 path=Path(canonical[key]).resolve()
                 canonical[key]=path.relative_to(ROOT).as_posix() if path.is_relative_to(ROOT) else path.name
@@ -165,7 +167,7 @@ class Pipeline:
         self.upscaler=None;self.upscaler_key=None
     def face_engine(self,backend,options=None):
         options=options if options is not None else self.config()['proxy'].get('detailer',{})
-        key=(int(options.get('detector_resolution',640)),float(options.get('detector_score_threshold',.82)),float(options.get('detector_nms_threshold',.3)),int(options.get('detector_top_k',5000)))
+        key=(int(options.get('detector_resolution',640)),float(options.get('detector_score_threshold',.82)),float(options.get('detector_nms_threshold',.3)),int(options.get('detector_top_k',5000)),options.get('detector_model'))
         if self.detailer is None or self.detailer_key!=key:
             self.detailer=FaceDetailer(backend,*key);self.detailer_key=key
         self.detailer.backend=backend;return self.detailer
@@ -488,7 +490,10 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
     class Handler(BaseHTTPRequestHandler):
         protocol_version='HTTP/1.1'
         def reply(self,data,status=200,content_type='application/json',headers=None):
-            if not isinstance(data,bytes):data=json.dumps(data,ensure_ascii=False).encode('utf-8')
+            if not isinstance(data,bytes):
+                from GuiLocale import translate_api
+                language='en' if 'lang=en' in self.path else initial['proxy'].get('ui_language','ru')
+                data=json.dumps(translate_api(data,language),ensure_ascii=False).encode('utf-8')
             self.send_response(status);self.send_header('Content-Type',content_type)
             self.send_header('Content-Length',str(len(data)));self.send_header('Connection','close')
             self.send_header('Access-Control-Allow-Origin','*')
@@ -566,6 +571,12 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                     self.reply(media_schema());return
                 if path=='/v1/media/settings':
                     self.reply(dict(**media_settings(cfg),revision=cfg['helper_sha256']));return
+                if path=='/v1/audio/capabilities':
+                    from AudioServices import capabilities
+                    self.reply(capabilities(cfg));return
+                if path=='/v1/audio/voices':
+                    from AudioServices import remote
+                    status,headers,raw=remote(cfg,'/api/extra/speakers_list',timeout=10);self.reply(raw,status,headers.get('Content-Type','application/json'));return
                 if path=='/api/native':
                     status,headers,raw=request(cfg['backend']+'/api')
                     self.reply(raw,status,headers.get('Content-Type','text/html'),headers);return
@@ -573,13 +584,13 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                 if path=='/api/extra/version' and backend_supervisor:
                     status,headers,raw=request(cfg['backend']+path)
                     if status==200:
-                        version=json.loads(raw);version.update(music=True,musicllm=True,musicfamily=music_family(cfg),music_capabilities_url='/v1/music/capabilities',txt2img=True,img2img=True,image_instruction_edit=False,image_reference_images=False,image_capabilities_url='/v1/images/capabilities',kcpp_auto_switch=True,video=bool(cfg['proxy'].get('video',{}).get('enabled',False)))
+                        version=json.loads(raw);version.update(music=True,musicllm=True,musicfamily=music_family(cfg),music_capabilities_url='/v1/music/capabilities',txt2img=True,img2img=cfg['proxy'].get('image_edit_enabled',True),image_instruction_edit=False,image_reference_images=False,image_capabilities_url='/v1/images/capabilities',kcpp_auto_switch=True,video=bool(cfg['proxy'].get('video',{}).get('enabled',False)))
                         self.reply(version);return
                 if path in ('/v1/music/capabilities','/api/extra/music/capabilities'):
                     self.reply(music_capabilities(cfg));return
                 if path in ('/v1/videos/capabilities','/api/extra/video/capabilities'):
                     from VideoRife import available as rife_available
-                    interpolation=[24,48] if rife_available(ROOT) else [24]
+                    interpolation=[24,48] if rife_available(ROOT,cfg['proxy'].get('video',{}).get('rife_models')) else [24]
                     self.reply(dict(enabled=bool(cfg['proxy'].get('video',{}).get('enabled',False)),backend='KoboldCpp Native',model='kobold-wan22-turbo',
                         generation_endpoints=list(VIDEO_JSON_PATHS),upscale_endpoints=list(VIDEO_UPSCALE_PATHS),fps=24,frames=dict(min=5,max=121,grid='4n+1'),
                         resolutions={'480p':[832,480]},inputs=['text','one PNG start frame','continue_from generated video_id'],
@@ -587,7 +598,7 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                         native_jpeg_quality=None,validated_frames=17,vae=cfg['proxy'].get('video',{}).get('codec'),sampling=dict(sampler_name='euler',scheduler=cfg['proxy'].get('video',{}).get('scheduler','simple'),steps=4,cfg_scale=1,flow_shift=5,eta=0,cache_mode=cfg['proxy'].get('video',{}).get('default_cache_mode','disabled'),cache_options=cfg['proxy'].get('video',{}).get('default_cache_options','')),
                         optional_cache=dict(supported=cfg['proxy'].get('video',{}).get('native_cache_forwarding_verified',False),modes=['disabled','cache-dit','easycache'],default=cfg['proxy'].get('video',{}).get('default_cache_mode','disabled'),threshold_max=0.3,cache_dit_warmup='1..3; video4-step contract'),
                         vae_tiling_threshold=cfg['proxy'].get('video',{}).get('vae_tiling_threshold'),conv_workgroup=cfg['proxy'].get('video',{}).get('conv_workgroup'),
-                        schedulers=['simple','normal','discrete','beta','sgm_uniform'],interpolate_fps=interpolation,audio=dict(generator='YuE2',default_enabled=cfg['proxy'].get('video',{}).get('default_audio',True),mode='separate text-to-music soundtrack',lip_sync=False,scene_sound_conditioning=False),deadline_seconds=videos.deadline_seconds,continuous_long_video_validated=False));return
+                        schedulers=['simple','normal','discrete','beta','sgm_uniform'],interpolate_fps=interpolation,audio=dict(generators=['YuE2 music','SA3 SFX CPU','configured TTS'],default_enabled=cfg['proxy'].get('video',{}).get('default_audio',True),mode='timed-multitrack',track_kinds=['music','sfx','speech'],max_tracks=8,timestamps='seconds within native clip duration',languages=['ru','en'],lip_sync=False,scene_sound_conditioning=False),deadline_seconds=videos.deadline_seconds,max_deadline_seconds=900,continuous_long_video_validated=False));return
                 if path=='/v1/media/capabilities':
                     self.reply(dict(backend='KoboldCpp',idle_model='photo-normal',automatic_exclusive_model_switching=True,gui='/media',openapi='/openapi.json',unified_generate='/v1/media/generations',unified_upscale='/v1/media/upscale',
                         images={'generate':'/v1/images/generations','automatic1111':'/sdapi/v1/txt2img','edit':'/v1/images/edits','capabilities':'/v1/images/capabilities'},
@@ -635,6 +646,23 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                 maximum=int(cfg['helper'].get('maxrequestsize',32))*1024*1024
                 if length<0 or length>maximum:self.reply(dict(error='Request exceeds configured size limit'),413);return
                 body=self.rfile.read(length)
+                if path in ('/v1/audio/speech','/api/extra/tts','/v1/audio/transcriptions','/api/extra/transcribe'):
+                    from AudioServices import remote,services
+                    opts=services(cfg);key='stt_enabled' if path.endswith(('transcriptions','transcribe')) else 'tts_enabled'
+                    if not opts[key]:self.reply(dict(error='Внешний TTS/STT не подключён в настройках Audio'),503);return
+                    status,headers,raw=remote(cfg,path,body,self.headers.get('Content-Type','application/json'),timeout=180)
+                    if status==200 and not raw:self.reply(dict(error='Аудиосервер вернул пустой ответ'),502);return
+                    self.reply(raw,status,headers.get('Content-Type','application/octet-stream'));return
+                if path=='/v1/media/audio-plan':
+                    from AudioServices import plan
+                    try:
+                        data=json.loads(body)
+                        if not isinstance(data,dict) or set(data)-{'prompt','duration_seconds','speakers'}:raise ValueError('Поля плана: prompt, duration_seconds, speakers')
+                        result=plan(cfg,data.get('prompt',''),data.get('duration_seconds'),data.get('speakers',[]))
+                        from AudioTimeline import validate
+                        validate({'tracks':result.get('tracks'),'speakers':data.get('speakers',[])},data.get('duration_seconds'),cfg)
+                    except (ValueError,TypeError) as error:self.reply(dict(error=str(error)),422);return
+                    self.reply(result);return
                 if path=='/v1/media/settings':
                     origin=self.headers.get('Origin');expected_origin=urllib.parse.urlsplit(origin).netloc if origin else None
                     from MediaConfig import loopback_peer
@@ -656,6 +684,21 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                     # The task handler owns the same exclusive queue and bounded video deadline.
                     status,headers,raw=request('http://127.0.0.1:'+str(cfg['port'])+route,json.dumps(parameters).encode('utf-8'),{'Content-Type':'application/json'},'POST')
                     self.reply(raw,status,headers.get('Content-Type','application/json'),headers);return
+                if path=='/v1/videos/soundtrack':
+                    if videos is None or backend_supervisor is None:raise VideoServiceError('Видео недоступно.',status=503)
+                    try:video_payload=json.loads(body)
+                    except (ValueError,UnicodeError):raise VideoServiceError('Ожидается JSON.',status=422)
+                    with videos.client_deadline(self.connection) as video_budget:
+                        with pipeline.lock:
+                            pipeline.begin('','video_soundtrack')
+                            try:
+                                videos.require_unblocked()
+                                result=videos.soundtrack_saved(video_payload,cfg,video_budget)
+                                ready=restore_photo(cfg)
+                                self.reply(videos.finalize_result(result,video_budget,photo_ready=ready))
+                            finally:
+                                pipeline.finish();threading.Thread(target=restore_photo_after_video,args=(cfg,),daemon=True).start()
+                    return
                 if path in VIDEO_UPSCALE_PATHS:
                     if videos is None or not cfg['proxy'].get('video',{}).get('enabled',False):raise VideoServiceError('Видео пока не включено.','video_deferred',503)
                     try:video_payload=json.loads(body)
@@ -681,7 +724,7 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                         if cfg['proxy'].get('video',{}).get('enabled',True) is False:
                             raise VideoServiceError('Видеогенерация отложена до завершения проверки качества. Фото и музыка доступны.','video_deferred',503)
                         try:
-                            with videos.client_deadline(self.connection) as video_budget:
+                            with videos.client_deadline(self.connection,video_payload.get('deadline_seconds')) as video_budget:
                                 with pipeline.lock:
                                     pipeline.begin(video_payload.get('genkey',''),'video')
                                     try:
@@ -690,9 +733,18 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                                         interpolate_fps=video_payload.get('interpolate_fps',video_options.get('default_interpolate_fps',24))
                                         if interpolate_fps==48:
                                             from VideoRife import available
-                                            if not available(ROOT):raise VideoServiceError('RIFE48FPS не установлен; доступен24FPS.','video_interpolation_unavailable',422)
+                                            if not available(ROOT,video_options.get('rife_models')):raise VideoServiceError('RIFE48FPS не установлен; доступен24FPS.','video_interpolation_unavailable',422)
                                         from VideoAudio import audio_options
-                                        try:audio=audio_options(video_payload.get('audio'),video_options.get('default_audio',True))
+                                        try:
+                                            requested_audio=video_payload.get('audio')
+                                            if requested_audio is None and cfg['proxy'].get('audio_services',{}).get('helper_enabled'):
+                                                requested_audio={'enabled':video_options.get('default_audio',True),'auto_plan':True,'prompt':video_payload.get('prompt',''),'speakers':[]}
+                                            audio=audio_options(requested_audio,video_options.get('default_audio',True))
+                                            if audio['enabled'] and (audio.get('tracks') is not None or audio.get('auto_plan')):
+                                                from AudioTimeline import validate
+                                                frame_count=video_payload.get('frames',video_options.get('default_frames',17))
+                                                if type(frame_count) is not int or frame_count%4!=1 or not 5<=frame_count<=121:raise ValueError('frames:4n+1,5..121')
+                                                audio['_validated_timeline']=validate(audio,frame_count/24,cfg)
                                         except ValueError as error:raise VideoServiceError(str(error),status=422) from error
                                         if upscale_to not in (None,'720p') or type(faces) is not bool:raise VideoServiceError('Некорректные upscale_to/enhance_faces.',status=422)
                                         if path not in VIDEO_JSON_PATHS:raise VideoServiceError('Для Pro MP4 используйте /v1/videos/generations, не raw A1111.',status=422)

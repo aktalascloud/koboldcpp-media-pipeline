@@ -21,6 +21,12 @@ def schema():
         '/v1/media/generations':('post','Unified image, music or video generation. type selects the task; parameters follow its specific contract.'),
         '/v1/media/upscale':('post','Unified image/video postprocessing. Video requires video_id and optional enhance_faces only.'),
         '/v1/media/capabilities':('get','Discover all media operations and automatic model switching.'),
+        '/v1/media/audio-plan':('post','Создать план аудиодорожек с таймкодами выбранным хелпером.'),
+        '/v1/audio/speech':('post','Речь через настроенный TTS. Язык и голос задаются в API.'),
+        '/v1/audio/transcriptions':('post','Распознавание аудио через настроенный STT.'),
+        '/v1/audio/voices':('get','Список голосов подключённого сервера.'),
+        '/v1/audio/capabilities':('get','Подключения хелпера/TTS/STT и проверка голосов.'),
+
         '/v1/media/settings':('get','Effective public settings; no credentials or private paths.'),
         '/sdapi/v1/txt2img':('post','Generate an image; faces/Gater, optional ClearReality4x.'),
         '/sdapi/v1/img2img':('post','Whole-frame redraw of one target. Not instruction editing or multiple references.'),
@@ -31,8 +37,9 @@ def schema():
         '/v1/images/capabilities':('get','Image operation contract.'),
         '/api/extra/music/generate':('post','YuE2 MP3, caller-provided lyrics/style.'),
         '/v1/music/capabilities':('get','YuE2 music contract.'),
-        '/v1/videos/generations':('post','Wan480p/full encoder/Pro decoder, optional720p faces/RIFE/YuE2 soundtrack.'),
+        '/v1/videos/generations':('post','Wan480p/Pro, optional720p faces/RIFE; timed music, SFX and speech mixed into MP4. No lip-sync.'),
         '/v1/videos/upscale':('post','Postprocess a stored generated video.'),
+        '/v1/videos/soundtrack':('post','Replace audio on a new copy of a completed video using reviewed event timestamps, without regenerating its frames.'),
         '/v1/videos/capabilities':('get','Frames, cache, optional RIFE and audio limits.'),
         '/health':('get','Live service and queue state.'),
     }
@@ -41,7 +48,11 @@ def schema():
         if method=='post':op['requestBody']={'required':True,'content':{'application/json':{'schema':{'type':'object'}}}}
         paths[route]={method:op}
     paths['/v1/media/settings']['post']={'summary':'Save bounded settings from the local machine while idle; requires current revision and X-Kobold-Config:1.','parameters':[{'name':'X-Kobold-Config','in':'header','required':True,'schema':{'type':'string','enum':['1']}}],'requestBody':{'required':True,'content':{'application/json':{'schema':{'type':'object','required':['revision']}}}},'responses':{'200':{'description':'Saved without restarting the resident model'},'403':{'description':'Not local/same-origin'},'409':{'description':'Generation active'},'422':{'description':'Invalid setting or stale revision'}}}
-    return {'openapi':'3.0.3','info':{'title':'KoboldCpp unified media API','version':'1.0'},'servers':[{'url':'/'}],'paths':paths}
+    track={'type':'object','required':['kind','start','end'],'additionalProperties':False,'properties':{'kind':{'type':'string','enum':['music','sfx','speech']},'start':{'type':'number','minimum':0},'end':{'type':'number','minimum':0},'volume':{'type':'number','minimum':0,'maximum':1},'prompt':{'type':'string'},'text':{'type':'string'},'speaker_id':{'type':'string'},'language':{'type':'string','enum':['ru','en']},'fit':{'type':'string','enum':['natural','stretch']},'seed':{'type':'integer','minimum':0,'maximum':2147483647}}}
+    audio={'type':'object','properties':{'enabled':{'type':'boolean'},'auto_plan':{'type':'boolean'},'prompt':{'type':'string'},'language':{'type':'string','enum':['ru','en']},'speakers':{'type':'array','maxItems':8,'items':{'type':'object','required':['id','voice_profile'],'properties':{'id':{'type':'string'},'voice_profile':{'type':'string','enum':['female','male']},'language':{'type':'string','enum':['ru','en']}}}},'tracks':{'type':'array','minItems':1,'maxItems':8,'items':track}}}
+    paths['/v1/videos/generations']['post']['requestBody']['content']['application/json']['schema']={'type':'object','required':['prompt'],'properties':{'prompt':{'type':'string'},'frames':{'type':'integer','minimum':5,'maximum':121,'description':'4n+1 frames at24FPS'},'resolution':{'type':'string','enum':['360p','480p']},'orientation':{'type':'string','enum':['portrait','landscape']},'deadline_seconds':{'type':'number','exclusiveMinimum':True,'minimum':0,'maximum':900},'audio':audio}}
+    paths['/v1/videos/soundtrack']['post']['requestBody']['content']['application/json']['schema']={'type':'object','required':['video_id','audio'],'additionalProperties':False,'properties':{'video_id':{'type':'string','pattern':'^[0-9a-f]{32}$'},'audio':audio}}
+    return {'openapi':'3.0.3','info':{'title':'KoboldCpp unified media API','version':'1.1'},'servers':[{'url':'/'}],'paths':paths}
 
 def public_settings(cfg):
     proxy=cfg['proxy'];defaults=cfg['defaults'];video=proxy.get('video',{})

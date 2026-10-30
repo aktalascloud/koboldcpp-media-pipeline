@@ -12,7 +12,7 @@ One portable Windows media server built around [our Haswell AVX2 / RX580 Polaris
 
 Normal/edit: **736×1104**, YuNet/GPEN20%/SFace0.97/Gater, no automatic SR. Explicit `enable_hr:true` adds ClearReality4×. High: **928×1392**, defaults to4×; the new High adapter combination has not been generated/measured. Native hires is off.
 
-Video: native **480p**, Pro threshold576/actual320px tiles, WG512; ClearReality720p and guarded faces. Tiny/Super-Tiny are not used. YuE2 creates a separate musical track, muxed into MP4 without re-encoding video. This is not video-conditioned Foley or lip-sync. Optional RIFE48FPS preserves duration. The public kit has no private user video adapter enabled; local video measurements explicitly include one.
+Video: native **480p**, Pro threshold576/actual320px tiles, WG512; ClearReality720p and guarded faces. Tiny/Super-Tiny are not used. Timed YuE2 music, SA3 effects and external TTS speech can be mixed into one MP4 without re-encoding video. Event timing is supplied by the client/helper; this is not joint AV inference or lip-sync. [Audio timeline and optional SFX installation](docs/AUDIO-TIMELINE.md). Optional RIFE48FPS preserves duration. The public kit has no private user video adapter enabled; local video measurements explicitly include one.
 
 ## Current saved example
 
@@ -28,8 +28,8 @@ Other scenes from the earlier28October recipe: [night](examples/night-processed.
 
 29October2026, Xeon E5-2696v3 / RX5802048SP8GB, EXE `ff7d4d0b`:
 
-- Real public Normal, without explicit mode/size: **163.85s**. Ordinary4× API on that saved PNG: **6.04s**. These are two requests. [Image battle, all arms and cold/warm caveats](benchmarks/image-current.json).
-- Real Pro + local user adapter +720p + faces + RIFE + YuE2 API examples: **190.76s** and **258.05s** for **17 native frames**, about **0.71s of footage**, not17seconds. The latter includes82.55s queue/profile readiness. [All video measurements](benchmarks/video.json).
+- Images29October2026, Nativeff7d4d0b: real public Normal, without explicit mode/size: **163.85s**. Ordinary4× API on that saved PNG: **6.04s**. These are two requests. [Image battle, all arms and cold/warm caveats](benchmarks/image-current.json).
+- Video30October2026, Native0986410a: **3.04s/73frames**, I2V→Pro/Clear720/faces + music/SFX/RU speech: **552.57s**. Reviewed audio revision without regenerating frames: **57.96s**. A5.04s T2V clip passed854.78s but failed visual selection. [Exact stages and limits](benchmarks/audio-video-20261030.json).
 - Light cache0.04/0.08 matched control latents in the tested scene;0.08 did not establish a consistent speed benefit. The current default is Cache-DiT0.04/warmup1 by user choice30October; no new gain is claimed. No universal speedup/long-clip claim.
 
 ## Setup
@@ -38,8 +38,10 @@ Download the code kit and run `Setup.ps1 -ListenHost 0.0.0.0` once for LAN use, 
 
 Pro is built once on CPU by `tools/SetupPro.py`: pinned original safetensors/source and temporary CPU PyTorch, using the same bundled Python. Serving afterwards needs only the three Pro graph/weight files and existing DirectML runtime. Optional RIFE is an original-download component; no Microsoft DLL is mirrored. [Video API/limits](docs/VIDEO.md) · [Original-download models](docs/MODELS.md).
 
-## Unified workbench
+## Desktop and API
 
-`/media` and `/api`: image generation/redraw, music, video, ClearReality upscale, faces, Pro VAE, RIFE and soundtrack controls. Stable public API ports5001/5003 share one queue; private Native5005 switches automatically. `POST /v1/media/generations` accepts `{"type":"video","parameters":{...}}`; image/music also supported. `/openapi.json` lists routes. One user Helper.kcpps contains exact derived profiles; local idle GUI settings preserve the resident context. Default video cache is now Cache-DiT0.04/warmup1 by user choice; no new performance/quality benchmark.
+Native **Image Gen** contains image models, faces/restoration/upscaling and img2img; **Audio** contains audio models and helper/TTS/STT connections; **Video** contains Wan/VAE/LoRA/upscaler/RIFE/cache settings. **Extra** has RU/EN and logon startup. Original file selectors are reused. Save/Load supports any user-selected `.kcpps`; duration, speech, frames and other request parameters belong in API calls.
 
-Local Windows `KoboldCpp.exe` (~356MiB) embeds code/runtime, not model weights. `--background` supports logon, `--native-gui` opens the Native launcher. Optional `tools/BuildBundle.py` creates this owner-local artifact; it is not mirrored in this code-only release pending separate runtime redistribution review. Public kit still starts with Start.exe. No fresh-machine end-to-end generation claim.
+Stable APIs5001/5003 share one queue, private Native5005 switches models. `/api` and `/openapi.json` document the routes; optional browser workbench `/media`. `POST /v1/media/generations` accepts `{"type":"video","parameters":{...}}`, also image/music. Photo returns GPU-resident after processing.
+
+Owner-local `KoboldCpp.exe` (~371MiB) embeds code/runtime, not weights. Normal launch opens the native GUI; `--background` supports logon. The source builder is `tools/BuildBundle.py`. This complete local artifact is not publicly mirrored pending runtime redistribution review; the minimal public code kit uses **Start.exe** and separately installed dependencies. Fresh-machine end-to-end generation has not been tested.

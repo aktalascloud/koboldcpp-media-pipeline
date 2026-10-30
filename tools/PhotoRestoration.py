@@ -8,6 +8,7 @@ import hashlib
 import json
 import time
 import threading
+import re
 
 from RuntimePaths import ROOT, asset
 
@@ -18,27 +19,32 @@ _VERIFIED={}
 _LOCK=threading.RLock()
 
 
+def expected_sha(options):
+    value=options.get('model_sha256',MODEL_SHA)
+    if not isinstance(value,str) or not re.fullmatch(r'[0-9a-f]{64}',value):raise ValueError('Pinned restoration model SHA256 required')
+    return value
+
 def verified_model(options):
     model=Path(asset(options.get('model',''),ROOT)).resolve()
-    if not model.is_relative_to(ROOT.resolve()) or not model.is_file() or options.get('model_sha256')!=MODEL_SHA:
+    if not model.is_relative_to(ROOT.resolve()) or not model.is_file() or not expected_sha(options):
         raise ValueError('Validated portable Gater model is missing or mismatched')
     with _LOCK:
         stat=model.stat();identity=(stat.st_size,stat.st_mtime_ns,stat.st_ino,stat.st_dev)
-        if _VERIFIED.get(str(model))!=identity:
+        if _VERIFIED.get((str(model),expected_sha(options)))!=identity:
             digest=hashlib.sha256()
             with model.open('rb') as stream:
                 for block in iter(lambda:stream.read(1024*1024),b''):digest.update(block)
             after=model.stat()
-            if (after.st_size,after.st_mtime_ns,after.st_ino,after.st_dev)!=identity or digest.hexdigest()!=MODEL_SHA:
+            if (after.st_size,after.st_mtime_ns,after.st_ino,after.st_dev)!=identity or digest.hexdigest()!=expected_sha(options):
                 raise ValueError('Gater model changed or fingerprint mismatch')
-            _VERIFIED[str(model)]=identity
+            _VERIFIED[(str(model),expected_sha(options))]=identity
     return model
 
 
 def prewarm_model(options):
     if not options.get('enabled',False):return dict(enabled=False,ok=True)
     started=time.perf_counter();model=verified_model(options)
-    return dict(enabled=True,ok=True,model_sha256=MODEL_SHA,model_bytes=model.stat().st_size,
+    return dict(enabled=True,ok=True,model_sha256=expected_sha(options),model_bytes=model.stat().st_size,
                 seconds=time.perf_counter()-started,GPU_session_created=False)
 
 
@@ -51,7 +57,7 @@ def matching_marker(image, options):
         return None
     try:
         marker = json.loads(image.info.get(MARKER_KEY, ''))
-        if (marker.get('kind') == KIND and marker.get('model_sha256') == MODEL_SHA
+        if (marker.get('kind') == KIND and marker.get('model_sha256') == expected_sha(options)
                 and marker.get('passes') == 1 and marker.get('strength') == 1
                 and marker.get('output_dimensions') == list(image.size)
                 and marker.get('rgb_sha256') == rgb_sha(image)):
@@ -74,12 +80,11 @@ def restore_once(image, options, prior=None):
         return image, dict(enabled=False, applied=False, seconds=0), None
     if options.get('provider', 'directml') != 'directml' or float(options.get('strength', 1)) != 1:
         raise ValueError('The validated Gater profile requires DirectML FP32 at strength1')
-    if options.get('model_sha256') != MODEL_SHA:
-        raise ValueError('The validated Gater model fingerprint is required')
+    expected_sha(options)
     prior = prior or matching_marker(image, options)
     if prior:
         return image, dict(enabled=True, applied=False, already_processed=True,
-                           model_sha256=MODEL_SHA, seconds=0), prior
+                           model_sha256=expected_sha(options), seconds=0), prior
     started = time.perf_counter()
     model = verified_model(options)
 
@@ -117,11 +122,11 @@ def restore_once(image, options, prior=None):
         pixels = np.rint(np.clip(raw[0].transpose(1, 2, 0), 0, 1) * 255).astype(np.uint8)
         result = Image.fromarray(pixels)
         result.info.update(image.info)
-        marker = dict(kind=KIND, model_sha256=MODEL_SHA, strength=1, passes=1,
+        marker = dict(kind=KIND, model_sha256=expected_sha(options), strength=1, passes=1,
                       restored_dimensions=list(image.size), input_rgb_sha256=rgb_sha(image))
         result = attach_marker(result, marker)
         marker = json.loads(result.info[MARKER_KEY])
-        return result, dict(enabled=True, applied=True, already_processed=False, model_sha256=MODEL_SHA,
+        return result, dict(enabled=True, applied=True, already_processed=False, model_sha256=expected_sha(options),
                             provider='DirectML FP32', scale=1, whole_frame=True, adapter=adapter,
                             model_ready_seconds=ready_seconds, inference_seconds=inference_seconds,
                             seconds=time.perf_counter() - started), marker

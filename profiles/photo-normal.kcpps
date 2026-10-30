@@ -163,5 +163,6 @@
   "sdvaecpu": false,
   "sdclipgpu": false,
   "istemplate": false,
-  "ubatchsize": 1024
+  "ubatchsize": 1024,
+  "sdllm": ""
 }

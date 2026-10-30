@@ -17,9 +17,16 @@
   "interpolate_fps": 48,
   "audio": {
     "enabled": true,
-    "style": "Gentle cinematic instrumental background, no vocals",
-    "lyrics": "",
-    "volume": 0.7
+    "speakers": [],
+    "tracks": [
+      {
+        "kind": "sfx",
+        "prompt": "Soft natural wind, quiet realistic outdoor ambience, no music, no speech",
+        "start": 0,
+        "end": 0.7083333333333334,
+        "volume": 0.6
+      }
+    ]
   },
   "cache_options": "threshold=0.04,warmup=1,Fn=16,Bn=2"
 }

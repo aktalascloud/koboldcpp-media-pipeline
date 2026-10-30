@@ -38,7 +38,7 @@ def request_json_deadline(url, payload=None, headers=None, timeout=MAX_VIDEO_SEC
     if isinstance(timeout,bool) or not isinstance(timeout,(int,float)) or not math.isfinite(timeout) or not 0<timeout<=MAX_VIDEO_SECONDS:
         raise ValueError('Video HTTP timeout must be finite and in(0,900]seconds')
     address=urlparse(url)
-    if (address.scheme!='http' or address.hostname not in ('127.0.0.1','localhost') or address.port not in (5003,5013)
+    if (address.scheme!='http' or address.hostname not in ('127.0.0.1','localhost') or address.port not in (5003,5005,5013)
             or address.username or address.password or address.query or address.fragment):
         raise ValueError('Video HTTP targets only the owned loopback Native slot')
     data=json.dumps(payload).encode('utf-8') if payload is not None else None

@@ -14,13 +14,15 @@ def main():
     manifest=BUILD/'results/media-bundle-manifest.json';archive=BUILD/'candidate/media-payload.zip'
     forbidden={'__pycache__','cache','logs','tmp','backups','.git','tests','test'}
     files={}
-    for folder in ['runtime/python','runtime/ffmpeg','runtime/rife']:
+    for folder in ['runtime/python','runtime/ffmpeg','runtime/rife','runtime/sa3']:
         for p in (ROOT/folder).rglob('*'):
             if p.is_file() and not forbidden.intersection(p.relative_to(ROOT).parts):files[p.relative_to(ROOT).as_posix()]=p
+    for p in (ROOT/'tools/vendor').rglob('*'):
+        if p.is_file() and '__pycache__' not in p.parts:files[p.relative_to(ROOT).as_posix()]=p
     for p in (ROOT/'profiles/api').rglob('*'):
         if p.is_file():files[p.relative_to(ROOT).as_posix()]=p
     for p in (ROOT/'tools').glob('*'):
-        if p.suffix in ('.py','.ps1','.json','.cs'):files[p.relative_to(ROOT).as_posix()]=p
+        if p.suffix in ('.py','.ps1','.json','.cs','.ico'):files[p.relative_to(ROOT).as_posix()]=p
     for relative in ['Helper.kcpps','koboldcpp-nocuda.exe','runtime/native-environment.json','runtime/requirements.lock.txt','runtime/versions.json','profiles/moss-adapters.json','MODELS/manifest.json']:
         p=ROOT/relative
         if p.is_file():files[relative]=p
@@ -43,7 +45,7 @@ def main():
     proof={'format':1,'files':rows,'main_models_embedded':False,'generated_profiles_in_master':True,'local_owner_bundle':True,'redistribution_review_required':True}
     manifest.write_text(json.dumps(proof,separators=(',',':')),encoding='utf-8')
     csc=Path('C:/Windows/Microsoft.NET/Framework64/v4.0.30319/csc.exe');output=ROOT/'KoboldCpp.exe'
-    args=[str(csc),'/nologo','/target:winexe','/platform:x64','/optimize+', '/out:'+str(output),'/r:System.Windows.Forms.dll','/r:System.Web.Extensions.dll','/r:System.IO.Compression.dll','/r:System.IO.Compression.FileSystem.dll','/resource:'+str(manifest)+',media-manifest.json','/resource:'+str(archive)+',media-payload.zip',str(ROOT/'tools/MediaBundle.cs')]
+    args=[str(csc),'/nologo','/target:winexe','/platform:x64','/optimize+','/win32icon:'+str(ROOT/'tools/kobold.ico'), '/out:'+str(output),'/r:System.Windows.Forms.dll','/r:System.Web.Extensions.dll','/r:System.IO.Compression.dll','/r:System.IO.Compression.FileSystem.dll','/resource:'+str(manifest)+',media-manifest.json','/resource:'+str(archive)+',media-payload.zip',str(ROOT/'tools/MediaBundle.cs')]
     subprocess.run(args,cwd=ROOT,check=True)
     result={'ok':True,'file':'KoboldCpp.exe','bytes':output.stat().st_size,'sha256':digest(output),'payload_files':len(rows),'payload_bytes':archive.stat().st_size,'native_sha256':digest(ROOT/'koboldcpp-nocuda.exe'),'main_models_embedded':False,'private_local_runtime':True,'public_release_uploaded':False}
     (BUILD/'results/media-bundle.json').write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8');print(json.dumps(result))

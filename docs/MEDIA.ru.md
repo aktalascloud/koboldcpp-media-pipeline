@@ -39,5 +39,3 @@ OpenAIсовместимая генерация: `/v1/images/generations`. MOSS�
 Модели переключает сервер, один GPUконтекст за раз. По умолчанию в GPU фото-модель. Во время видео Native освобождает GPU для Pro/ClearReality/лиц, затем при необходимости загружается YuE2 и возвращается фото-модель. Фильтру не нужны команды запуска/убийства процессов или доступ к файлам сервера.
 
 Интерфейс: `/media` (вкладки фото/видео/музыка/апскейл). Документация: `/api`, `/openapi.json`. Унифицированный запрос: `POST /v1/media/generations`, JSON `{"type":"video","parameters":{...}}`; type также image/music. Автозапуск: `KoboldCpp.exe --background`; веса в отдельных папках, один пользовательский Helper.kcpps. Служебные Native-профили содержатся внутри Helper и восстанавливаются из него.
-
-Current30October: public5001/5003, private5005; `/media` GUI, `/api` documentation, `/openapi.json`, `/v1/media/generations` and `/v1/media/upscale`. Default video cache0.04/warmup1. Existing29October measurements are historical; no new generation performed.

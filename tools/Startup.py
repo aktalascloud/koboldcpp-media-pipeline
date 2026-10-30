@@ -21,3 +21,10 @@ def register():
     row=dict(enabled=True,name=NAME,key='HKCU\\'+KEY,command=actual,previous=previous,root=str(ROOT),verified_readback=True,updated=time.time(),scope='Full visible native Kobold and public API proxy;no installed Python/Codex dependency')
     (ROOT/'logs').mkdir(exist_ok=True);(ROOT/'logs'/'startup-registration.json').write_text(json.dumps(row,ensure_ascii=False,indent=2),encoding='utf-8')
     return row
+
+def unregister():
+    with winreg.OpenKey(winreg.HKEY_CURRENT_USER,KEY,0,winreg.KEY_READ|winreg.KEY_SET_VALUE) as key:
+        try:current,_=winreg.QueryValueEx(key,NAME)
+        except FileNotFoundError:return
+        if current!=expected_command():raise RuntimeError('Unexpected startup command preserved')
+        winreg.DeleteValue(key,NAME)

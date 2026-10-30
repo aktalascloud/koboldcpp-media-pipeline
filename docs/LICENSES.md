@@ -40,3 +40,6 @@ YuE2 music supersedes previous ACE-Step references: Q8_0 main + F16 VAE, no Gemm
 - Pro decoder: [LightVAE original model card](https://huggingface.co/lightx2v/LightVAE), Apache-2.0 declaration. Setup obtains exact original checkpoint and pinned ModelTC source directly; upstream ModelTC Python is not mirrored because a separate repository license was not located. Our export wrappers and source fingerprints are included; model terms remain applicable.
 - Optional RIFE ncnn [original release](https://github.com/nihui/rife-ncnn-vulkan): original downloads and their LICENSE. No Microsoft vcomp DLL redistributed. Optional private local runtime discovery does not establish redistribution rights.
 - FFmpeg/codec binaries retain their original distributor licenses and corresponding-source links in existing notices. The code kit does not include new codec binaries or model weights.
+
+## Optional SFX
+[sa3.cpp](https://github.com/betweentwomidnights/sa3.cpp) and ggml: MIT, source commit recorded in the audio guide. SA3 Small SFX and T5Gemma weights retain original Stable Audio community/Gemma terms, not MIT; original downloads only. The new native CPU runtime and its GCC dependencies are not mirrored by this code-only release.
