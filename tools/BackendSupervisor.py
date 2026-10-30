@@ -751,4 +751,6 @@ def from_helper(helper, root=None, operations=None):
     config = helper_defaults(data).get('kcpp_proxy', {}).get('backend_supervisor', {})
     if config.get('enabled') is not True:
         raise SupervisorError('Backend supervisor is disabled.', 'supervisor_disabled')
+    from UnifiedConfig import materialize
+    materialize(config,root,operations or WindowsOperations())
     return BackendSupervisor(config, root=root, operations=operations)

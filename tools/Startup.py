@@ -3,12 +3,17 @@ import json,time,winreg
 from RuntimePaths import ROOT
 NAME='KoboldCppPortable'
 KEY=r'Software\Microsoft\Windows\CurrentVersion\Run'
+def expected_command():
+    if (ROOT/'KoboldCpp.exe').is_file():return '"'+str(ROOT/'KoboldCpp.exe')+'" --background'
+    return '"'+str(ROOT/'runtime/python/pythonw.exe')+'" -I -B "'+str(ROOT/'tools/AutoStart.py')+'"'
+
 def register():
-    command='"'+str(ROOT/'runtime/python/pythonw.exe')+'" -I -B "'+str(ROOT/'tools/AutoStart.py')+'"'
+    command=expected_command()
     with winreg.CreateKeyEx(winreg.HKEY_CURRENT_USER,KEY,0,winreg.KEY_READ|winreg.KEY_SET_VALUE) as key:
         try:previous,kind=winreg.QueryValueEx(key,NAME)
         except FileNotFoundError:previous=None
-        if previous and not str(previous).lower().endswith(('\\start.exe"','\\tools\\autostart.py"')):
+        known={command.lower(),('"'+str(ROOT/'runtime/python/pythonw.exe')+'" -I -B "'+str(ROOT/'tools/AutoStart.py')+'"').lower(),('"'+str(ROOT/'Start.exe')+'"').lower()}
+        if previous and str(previous).lower() not in known:
             raise RuntimeError('Startup name belongs to an unexpected command;preserved')
         if previous!=command:winreg.SetValueEx(key,NAME,0,winreg.REG_SZ,command)
         actual,kind=winreg.QueryValueEx(key,NAME)

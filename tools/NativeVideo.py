@@ -172,8 +172,8 @@ def prepare_request(job: dict, root: str | Path | None = None,
     if native_jpeg_quality not in (40, 90, 95):
         raise ValueError('Manager must identify the actual verified Native JPEG quality; this is metadata, not an API override')
     address = urlparse(backend)
-    if address.scheme != 'http' or address.hostname not in ('127.0.0.1', 'localhost') or address.port not in (5003, 5013) or address.path not in ('', '/') or address.query or address.fragment or address.username:
-        raise ValueError('Expected local Native manager backend on5003/5013')
+    if address.scheme != 'http' or address.hostname not in ('127.0.0.1', 'localhost') or address.port not in (5003,5005,5013) or address.path not in ('', '/') or address.query or address.fragment or address.username:
+        raise ValueError('Expected local Native manager backend on5005 (legacy5003, manual5013)')
     resolution = job.get('resolution', '480p')
     if resolution not in SIZES:
         raise ValueError('Resolution must be360p or480p')

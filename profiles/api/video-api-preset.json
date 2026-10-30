@@ -11,7 +11,7 @@
   "scheduler": "beta",
   "flow_shift": 5,
   "eta": 0,
-  "cache_mode": "disabled",
+  "cache_mode": "cache-dit",
   "upscale_to": "720p",
   "enhance_faces": true,
   "interpolate_fps": 48,
@@ -20,5 +20,6 @@
     "style": "Gentle cinematic instrumental background, no vocals",
     "lyrics": "",
     "volume": 0.7
-  }
+  },
+  "cache_options": "threshold=0.04,warmup=1,Fn=16,Bn=2"
 }

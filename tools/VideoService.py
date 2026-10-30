@@ -286,6 +286,9 @@ class VideoService:
         if urllib.parse.urlsplit(path).path not in VIDEO_JSON_PATHS:raise VideoServiceError('Pro-видео использует /v1/videos/generations, не raw A1111.',status=422)
         if job.get('resolution','480p')!='480p':raise VideoServiceError('Pro-профиль проверен только для480p.',status=422)
         job.setdefault('scheduler',options.get('scheduler','simple'))
+        job.setdefault('cache_mode',options.get('default_cache_mode','disabled'))
+        if 'cache_options' not in job and job['cache_mode']==options.get('default_cache_mode'):
+            job['cache_options']=options.get('default_cache_options','')
         video_helper=json.loads((self.root/profile['helper']).read_text(encoding='utf-8-sig'))
         if video_helper.get('kcpp_video_latent_only') is not True or video_helper.get('kcpp_video_capture_latents') is not True or video_helper.get('kcpp_video_tae_decoder') is not None:
             raise VideoServiceError('Требуется профиль полного энкодера и Pro без Tiny.','video_pro_not_ready',503)
@@ -408,8 +411,11 @@ class VideoService:
         if not folder.is_relative_to(self.outputs) or not source.is_file():raise VideoServiceError('Исходный Native AVI не найден.','video_not_found',404)
         model=options.get('upscaler','clearreality') if upscale_to else 'lanczos'
         if model not in ('clearreality','paragon2x','lanczos'):raise VideoServiceError('Неизвестный проверенный видео-апскейлер.',status=422)
+        face_options=cfg.get('proxy',{}).get('detailer',{})
+        faces=faces and face_options.get('enabled',True) and float(face_options.get('visibility',.2))>0
         report=process_video(source,folder/'enhanced',self.root,model=model,faces=faces,target_short_edge=720 if upscale_to else 480,
-            face_provider=options.get('face_provider','directml'),face_visibility=.2,temporal_faces=.25,timeout=budget.remaining())
+            face_provider=options.get('face_provider','directml'),face_visibility=max(.001,float(face_options.get('visibility',.2))),
+            face_similarity=float(face_options.get('minimum_feature_similarity',.97)),detector_resolution=int(face_options.get('detector_resolution',960)),max_faces=int(face_options.get('max_faces',2)),temporal_faces=.25,timeout=budget.remaining())
         (folder/'video.mp4').rename(folder/'video-native480.mp4')
         shutil.copy2(folder/'last-frame.png',folder/'native-last-frame.png')
         Path(report['output']).rename(folder/'video.mp4');shutil.copy2(folder/'enhanced/output-last.png',folder/'last-frame.png')

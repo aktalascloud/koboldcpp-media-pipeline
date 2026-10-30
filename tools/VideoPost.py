@@ -14,7 +14,7 @@ PARAGON_DATA_SHA='c8ddb04cc7415390194206f38c9de9108a21d07724908f49c89127d887b791
 def sha(p):
     with p.open('rb') as f:return hashlib.file_digest(f,'sha256').hexdigest()
 
-def process_video(source,destination,root,model='clearreality',faces=False,temporal_faces=.25,timeout=600,profile_gpu=False,target_short_edge=720,face_provider='openvino',face_visibility=.2,freeze_face_initializers=False):
+def process_video(source,destination,root,model='clearreality',faces=False,temporal_faces=.25,timeout=600,profile_gpu=False,target_short_edge=720,face_provider='openvino',face_visibility=.2,freeze_face_initializers=False,face_similarity=.97,detector_resolution=960,max_faces=2):
     root=Path(root).resolve();source=Path(source).resolve();destination=Path(destination).resolve()
     if not source.is_relative_to(root) or not source.is_file():raise ValueError('Video source must be inside Root')
     if not any(destination.is_relative_to(root/folder) for folder in ['OUTPUTS/video','RESULTS/Video']):raise ValueError('Unexpected video postprocess destination')
@@ -36,7 +36,8 @@ def process_video(source,destination,root,model='clearreality',faces=False,tempo
                 profile_prefix=str(destination/'ort-first-frame') if profile_gpu else None)
         if faces:
             guard=FeatureGuard(root/'DETAILERS/faces/face_recognition_sface_2021dec.onnx')
-            detector=FaceDetailer(detector_resolution=960)
+            if not .97<=face_similarity<=1 or type(detector_resolution) is not int or not 640<=detector_resolution<=1280 or type(max_faces) is not int or not 1<=max_faces<=4:raise ValueError('Invalid bounded face settings')
+            detector=FaceDetailer(detector_resolution=detector_resolution)
             restorer=Restorer(root/'DETAILERS/faces/gpen_bfr_512.onnx',provider=face_provider,detector=detector,guard=guard,profile_prefix=str(destination/'ort-gpen') if profile_gpu and face_provider=='directml' else None,freeze_initializers=freeze_face_initializers)
         load_seconds=time.perf_counter()-started
         output=destination/'video.mp4';temporary=destination/'video.work.mp4'
@@ -67,7 +68,7 @@ def process_video(source,destination,root,model='clearreality',faces=False,tempo
                 # Keep the same native-face size policy before/after720p SR.
                 # A fixed240px cap caused medium faces to toggle on/off after SR.
                 face_min=round(32*target_short_edge/480);face_max=round(192*target_short_edge/480)
-                begin=time.perf_counter();enhanced,face_report=restorer.refine(before,dict(visibility=face_visibility,fidelity=1.,minimum_face=face_min,maximum_face=face_max,max_faces=2,minimum_feature_similarity=.97,mask_mode='face'))
+                begin=time.perf_counter();enhanced,face_report=restorer.refine(before,dict(visibility=face_visibility,fidelity=1.,minimum_face=face_min,maximum_face=face_max,max_faces=max_faces,minimum_feature_similarity=face_similarity,mask_mode='face'))
                 if profile_gpu and face_provider=='directml' and index==0:
                     profile=Path(restorer.session.end_profiling());events=json.loads(profile.read_text());profile.unlink()
                     core={'Conv','ConvTranspose','Gemm','MatMul'}
@@ -84,7 +85,7 @@ def process_video(source,destination,root,model='clearreality',faces=False,tempo
                         mask=np.max(np.abs(delta),axis=2)>0
                         smooth=delta.copy();smooth[mask]=(1-temporal_faces)*delta[mask]+temporal_faces*warped[mask]
                         proposed=Image.fromarray(np.rint(np.clip(base+smooth,0,255)).astype(np.uint8))
-                        if all(guard.similarity(before,proposed,f)>=.97 for f in face_report['faces'] if f['applied']):enhanced=proposed
+                        if all(guard.similarity(before,proposed,f)>=face_similarity for f in face_report['faces'] if f['applied']):enhanced=proposed
                         else:temporal_reverted=True
                 previous_delta=np.asarray(enhanced).astype(np.float32)-base;previous_gray=small
                 face_seconds=time.perf_counter()-begin

@@ -37,3 +37,9 @@ Other scenes from the earlier28October recipe: [night](examples/night-processed.
 Download the code kit and run `Setup.ps1 -ListenHost 0.0.0.0` once for LAN use, then launch **Start.exe**. Main MOSS/Qwen weights and adapters come from original distributors/user imports; no main weights, keys, logs or caches are in this repository.
 
 Pro is built once on CPU by `tools/SetupPro.py`: pinned original safetensors/source and temporary CPU PyTorch, using the same bundled Python. Serving afterwards needs only the three Pro graph/weight files and existing DirectML runtime. Optional RIFE is an original-download component; no Microsoft DLL is mirrored. [Video API/limits](docs/VIDEO.md) · [Original-download models](docs/MODELS.md).
+
+## Unified workbench
+
+`/media` and `/api`: image generation/redraw, music, video, ClearReality upscale, faces, Pro VAE, RIFE and soundtrack controls. Stable public API ports5001/5003 share one queue; private Native5005 switches automatically. `POST /v1/media/generations` accepts `{"type":"video","parameters":{...}}`; image/music also supported. `/openapi.json` lists routes. One user Helper.kcpps contains exact derived profiles; local idle GUI settings preserve the resident context. Default video cache is now Cache-DiT0.04/warmup1 by user choice; no new performance/quality benchmark.
+
+Local Windows `KoboldCpp.exe` (~356MiB) embeds code/runtime, not model weights. `--background` supports logon, `--native-gui` opens the Native launcher. Optional `tools/BuildBundle.py` creates this owner-local artifact; it is not mirrored in this code-only release pending separate runtime redistribution review. Public kit still starts with Start.exe. No fresh-machine end-to-end generation claim.

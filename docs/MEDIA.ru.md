@@ -1,6 +1,6 @@
 # Единый медиасервер: контракт для фильтра OWUI
 
-Один настраиваемый `KOBOLD_BASE_URL`: `http://<AI_HOST>:5001`. Порт5003 является внутренним Native. Ключ и helper-модель хранить в настройках OWUI, не в коде. Сервер не привязан к NeoHorse или другому провайдеру LLM.
+Один настраиваемый `KOBOLD_BASE_URL`: `http://<AI_HOST>:5001`. Порты5001 и5003 — единый постоянный API; внутренний Native использует5005. Ключ и helper-модель хранить в настройках OWUI, не в коде. Сервер не привязан к NeoHorse или другому провайдеру LLM.
 
 `GET /v1/media/capabilities` возвращает маршруты; подробности: `/v1/images/capabilities`, `/v1/music/capabilities`, `/v1/videos/capabilities`.
 
@@ -28,7 +28,7 @@ OpenAIсовместимая генерация: `/v1/images/generations`. MOSS�
 
 ## Видео и звук
 
-Отдельный `POST /v1/videos/generations`; [JSON](video-api-preset.json) и [подробности](video-owui-instructions.ru.md). Не отправлять видео через фото-редактор или порт5003. Prompt описывает движения и камеру; `audio.style` — отдельный музыкальный фон.
+Отдельный `POST /v1/videos/generations`; [JSON](video-api-preset.json) и [подробности](video-owui-instructions.ru.md). Не отправлять видео через фото-редактор или внутренний порт5005. Prompt описывает движения и камеру; `audio.style` — отдельный музыкальный фон.
 
 `frames:17` означает0,71с при24FPS. RIFE48FPS не увеличивает длительность. Звук YuE2 — музыкальная дорожка, не синхронные шумы/речь/губы. Перед48FPS проверить capabilities; без установленного RIFE использовать24.
 
@@ -37,3 +37,7 @@ OpenAIсовместимая генерация: `/v1/images/generations`. MOSS�
 Относительные URL объединять с `KOBOLD_BASE_URL`, не с адресом OWUI. Скачивать PNG/MP3/MP4 только с настроенного сервера, загружать в файлы OWUI и возвращать настоящие mediaссылки. Не подменять ошибки или пустое аудио успешной картинкой. Не логировать ключи и полные base64.
 
 Модели переключает сервер, один GPUконтекст за раз. По умолчанию в GPU фото-модель. Во время видео Native освобождает GPU для Pro/ClearReality/лиц, затем при необходимости загружается YuE2 и возвращается фото-модель. Фильтру не нужны команды запуска/убийства процессов или доступ к файлам сервера.
+
+Интерфейс: `/media` (вкладки фото/видео/музыка/апскейл). Документация: `/api`, `/openapi.json`. Унифицированный запрос: `POST /v1/media/generations`, JSON `{"type":"video","parameters":{...}}`; type также image/music. Автозапуск: `KoboldCpp.exe --background`; веса в отдельных папках, один пользовательский Helper.kcpps. Служебные Native-профили содержатся внутри Helper и восстанавливаются из него.
+
+Current30October: public5001/5003, private5005; `/media` GUI, `/api` documentation, `/openapi.json`, `/v1/media/generations` and `/v1/media/upscale`. Default video cache0.04/warmup1. Existing29October measurements are historical; no new generation performed.

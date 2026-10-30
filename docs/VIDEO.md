@@ -9,3 +9,5 @@ Use4n+1 native frames at24FPS; the demonstrated probe has17frames,about0.71secon
 Initial`Setup.ps1` downloads original weights and runs`tools/SetupPro.py` once onCPU using the same bundledPython. Source/weights/dependencies are pinned; after conversion,serving needs noPyTorch. Main MOSS/Qwen assets remain original downloads/user imports. Native unloads beforePro/SR andYuE2,then the image model is restored before a successful response.
 
 [All local measurements and limits](../benchmarks/video.json) · [Full media API](MEDIA.ru.md) · [Russian video instructions](VIDEO.ru.md).
+
+Current30October: public5001/5003, private5005; `/media` GUI, `/api` documentation, `/openapi.json`, `/v1/media/generations` and `/v1/media/upscale`. Default video cache0.04/warmup1. Existing29October measurements are historical; no new generation performed.

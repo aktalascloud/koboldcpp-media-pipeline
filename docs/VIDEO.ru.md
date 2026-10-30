@@ -1,6 +1,6 @@
 # Видео для фильтра OWUI
 
-Базовый URL: http://<AI_HOST>:5001. Порт5003 внутренний. Возможности: GET /v1/videos/capabilities. Вызов: POST /v1/videos/generations, JSON; готовый файл video-api-preset.json.
+Базовый URL: http://<AI_HOST>:5001. Порты5001 и5003 — общий постоянный API. Native работает внутри на5005. Возможности: GET /v1/videos/capabilities. Вызов: POST /v1/videos/generations, JSON; готовый файл video-api-preset.json.
 
 ```json
 {
@@ -16,7 +16,8 @@
   "cfg_scale": 1,
   "eta": 0,
   "flow_shift": 5,
-  "cache_mode": "disabled",
+  "cache_mode": "cache-dit",
+  "cache_options": "threshold=0.04,warmup=1,Fn=16,Bn=2",
   "upscale_to": "720p",
   "enhance_faces": true,
   "interpolate_fps": 48,
@@ -39,3 +40,7 @@ frames — исходные кадры24FPS,4n+1. Проверенные17кад
 Ответ: id,url,data[0].url,metadata с фактическими размерами, кадрами,FPS,звуком и временами. Относительный URL объединить с адресом Kobold, не OWUI. Фильтр скачивает MP4, загружает в файлы OWUI и возвращает видео в чат. MediaURL поддерживает Range; MP3 доступен через metadata.audio_source_url.
 
 Таймаут клиента не менее500с; общий серверный бюджет450с включает очередь, загрузки, Native,Pro,пост и звук. Латенты или незавершённый результат не выдаются за успешный MP4. При ошибке показать JSONошибку. После успешного запроса metadata.resident_photo_ready подтверждает возврат фото-модели в GPU.
+
+Интерфейс: `/media` (вкладки фото/видео/музыка/апскейл). Документация: `/api`, `/openapi.json`. Унифицированный запрос: `POST /v1/media/generations`, JSON `{"type":"video","parameters":{...}}`; type также image/music. Автозапуск: `KoboldCpp.exe --background`; веса в отдельных папках, один пользовательский Helper.kcpps. Служебные Native-профили содержатся внутри Helper и восстанавливаются из него.
+
+Current30October: public5001/5003, private5005; `/media` GUI, `/api` documentation, `/openapi.json`, `/v1/media/generations` and `/v1/media/upscale`. Default video cache0.04/warmup1. Existing29October measurements are historical; no new generation performed.

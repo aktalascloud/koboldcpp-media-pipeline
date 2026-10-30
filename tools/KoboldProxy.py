@@ -46,6 +46,7 @@ from PhotoRestoration import restore_once,matching_marker as matching_restoratio
 from ImageBudget import ImageBudgetError,apply_image_gpu_budget,prewarm_image_budget
 from NativeVideo import request_json_deadline
 from PhotoCapture import capture_stage
+from MediaUI import page as media_page, schema as media_schema, public_settings as media_settings, dispatch as media_dispatch
 
 VERSION='3.0-photo-video-portable'
 IMAGE_FIELDS=('steps','cfg_scale','sampler_name','scheduler','eta','flow_shift','clip_skip','cache_mode','cache_options')
@@ -559,6 +560,15 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
         def do_GET(self):
             try:
                 cfg=pipeline.config();path=urllib.parse.urlsplit(self.path).path
+                if path in ('/api','/docs','/media','/videoui'):
+                    self.reply(media_page(),content_type='text/html; charset=utf-8');return
+                if path in ('/openapi.json','/v1/media/openapi.json'):
+                    self.reply(media_schema());return
+                if path=='/v1/media/settings':
+                    self.reply(dict(**media_settings(cfg),revision=cfg['helper_sha256']));return
+                if path=='/api/native':
+                    status,headers,raw=request(cfg['backend']+'/api')
+                    self.reply(raw,status,headers.get('Content-Type','text/html'),headers);return
                 if path.startswith(VIDEO_MEDIA_PREFIX):self.media(path);return
                 if path=='/api/extra/version' and backend_supervisor:
                     status,headers,raw=request(cfg['backend']+path)
@@ -574,12 +584,12 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                         generation_endpoints=list(VIDEO_JSON_PATHS),upscale_endpoints=list(VIDEO_UPSCALE_PATHS),fps=24,frames=dict(min=5,max=121,grid='4n+1'),
                         resolutions={'480p':[832,480]},inputs=['text','one PNG start frame','continue_from generated video_id'],
                         output='MP4 URL',upscale_to='720p short edge, original aspect ratio',optional_guarded_faces=True,
-                        native_jpeg_quality=None,validated_frames=17,vae=cfg['proxy'].get('video',{}).get('codec'),sampling=dict(sampler_name='euler',scheduler=cfg['proxy'].get('video',{}).get('scheduler','simple'),steps=4,cfg_scale=1,flow_shift=5,eta=0,cache_mode='disabled'),
-                        optional_cache=dict(supported=cfg['proxy'].get('video',{}).get('native_cache_forwarding_verified',False),modes=['disabled','cache-dit','easycache'],default='disabled',threshold_max=0.3,cache_dit_warmup='1..3; video4-step contract'),
+                        native_jpeg_quality=None,validated_frames=17,vae=cfg['proxy'].get('video',{}).get('codec'),sampling=dict(sampler_name='euler',scheduler=cfg['proxy'].get('video',{}).get('scheduler','simple'),steps=4,cfg_scale=1,flow_shift=5,eta=0,cache_mode=cfg['proxy'].get('video',{}).get('default_cache_mode','disabled'),cache_options=cfg['proxy'].get('video',{}).get('default_cache_options','')),
+                        optional_cache=dict(supported=cfg['proxy'].get('video',{}).get('native_cache_forwarding_verified',False),modes=['disabled','cache-dit','easycache'],default=cfg['proxy'].get('video',{}).get('default_cache_mode','disabled'),threshold_max=0.3,cache_dit_warmup='1..3; video4-step contract'),
                         vae_tiling_threshold=cfg['proxy'].get('video',{}).get('vae_tiling_threshold'),conv_workgroup=cfg['proxy'].get('video',{}).get('conv_workgroup'),
                         schedulers=['simple','normal','discrete','beta','sgm_uniform'],interpolate_fps=interpolation,audio=dict(generator='YuE2',default_enabled=cfg['proxy'].get('video',{}).get('default_audio',True),mode='separate text-to-music soundtrack',lip_sync=False,scene_sound_conditioning=False),deadline_seconds=videos.deadline_seconds,continuous_long_video_validated=False));return
                 if path=='/v1/media/capabilities':
-                    self.reply(dict(backend='KoboldCpp',idle_model='photo-normal',automatic_exclusive_model_switching=True,
+                    self.reply(dict(backend='KoboldCpp',idle_model='photo-normal',automatic_exclusive_model_switching=True,gui='/media',openapi='/openapi.json',unified_generate='/v1/media/generations',unified_upscale='/v1/media/upscale',
                         images={'generate':'/v1/images/generations','automatic1111':'/sdapi/v1/txt2img','edit':'/v1/images/edits','capabilities':'/v1/images/capabilities'},
                         audio={'generate':'/api/extra/music/generate','format':'MP3','capabilities':'/v1/music/capabilities'},
                         video={'generate':'/v1/videos/generations','media':VIDEO_MEDIA_PREFIX,'capabilities':'/v1/videos/capabilities','format':'MP4','default_soundtrack':True}));return
@@ -625,6 +635,27 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                 maximum=int(cfg['helper'].get('maxrequestsize',32))*1024*1024
                 if length<0 or length>maximum:self.reply(dict(error='Request exceeds configured size limit'),413);return
                 body=self.rfile.read(length)
+                if path=='/v1/media/settings':
+                    origin=self.headers.get('Origin');expected_origin=urllib.parse.urlsplit(origin).netloc if origin else None
+                    from MediaConfig import loopback_peer
+                    if not loopback_peer(self.client_address[0]) or self.headers.get('X-Kobold-Config')!='1' or self.headers.get('Sec-Fetch-Site')=='cross-site' or (origin and expected_origin!=self.headers.get('Host')):
+                        self.reply(dict(error='Same-origin configuration header required'),403);return
+                    if not pipeline.lock.acquire(blocking=False):self.reply(dict(error='Generation active; settings preserved'),409);return
+                    try:
+                        if pipeline.state():self.reply(dict(error='Generation active; settings preserved'),409);return
+                        from MediaConfig import update
+                        try:answer=update(ROOT,pipeline.helper,json.loads(body),os.getpid())
+                        except (ValueError,TypeError,KeyError) as error:self.reply(dict(error=str(error)),422);return
+                        self.reply(answer)
+                    finally:pipeline.lock.release()
+                    return
+                if path in ('/v1/media/generations','/v1/media/upscale'):
+                    try:route,parameters=media_dispatch(json.loads(body),upscale=path.endswith('/upscale'))
+                    except (ValueError,TypeError) as error:self.reply(dict(error=str(error)),422);return
+                    # Stable frontend to stable frontend; no pipeline/GPU lease is held here.
+                    # The task handler owns the same exclusive queue and bounded video deadline.
+                    status,headers,raw=request('http://127.0.0.1:'+str(cfg['port'])+route,json.dumps(parameters).encode('utf-8'),{'Content-Type':'application/json'},'POST')
+                    self.reply(raw,status,headers.get('Content-Type','application/json'),headers);return
                 if path in VIDEO_UPSCALE_PATHS:
                     if videos is None or not cfg['proxy'].get('video',{}).get('enabled',False):raise VideoServiceError('Видео пока не включено.','video_deferred',503)
                     try:video_payload=json.loads(body)
@@ -779,6 +810,15 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                 super().server_bind()
     else:Server=ThreadingHTTPServer
     server=Server((host,initial['port']),Handler)
+    aliases=[]
+    try:
+        ports=initial['proxy'].get('api_alias_ports',[])
+        if not isinstance(ports,list) or len(ports)>2 or any(type(p) is not int or not 1024<=p<=65535 or p in (initial['port'],int(initial['helper']['port'])) for p in ports) or len(set(ports))!=len(ports):
+            raise ValueError('Invalid stable media API aliases')
+        for port in ports:aliases.append(Server((host,port),Handler))
+    except BaseException:
+        for alias in aliases:alias.server_close()
+        server.server_close();raise
     try:pipeline.image_budget_prewarm=prewarm_image_budget(root=ROOT,config=initial)
     except ImageBudgetError as error:
         pipeline.image_budget_prewarm=dict(ok=False,error=str(error))
@@ -804,9 +844,11 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                 server.shutdown();return
     if backend_supervisor is None:threading.Thread(target=watchdog,daemon=True).start()
     LOG.info('Started proxy on %s:%s, native backend %s',host,initial['port'],initial['backend'])
+    for alias in aliases:threading.Thread(target=alias.serve_forever,kwargs={'poll_interval':.5},daemon=True).start()
     try:server.serve_forever(poll_interval=.5)
     finally:
         stop.set();server.server_close()
+        for alias in aliases:alias.shutdown();alias.server_close()
         with pipeline.lock:pipeline.release_gpu()
         LOG.info('Proxy stopped')
 

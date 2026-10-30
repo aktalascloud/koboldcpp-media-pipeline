@@ -1,5 +1,5 @@
 # API / OpenWebUI
-AUTOMATIC1111 base: `http://YOUR_KOBOLD_HOST:5001`; OpenAI Images uses `/v1`. Private Native5003 is not OWUI's endpoint. Setup binds loopback by default; use `-ListenHost 0.0.0.0` to expose your LAN service explicitly.
+AUTOMATIC1111 base: `http://YOUR_KOBOLD_HOST:5001`; OpenAI Images uses `/v1`. Private Native5005 is not OWUI's endpoint. Setup binds loopback by default; use `-ListenHost 0.0.0.0` to expose your LAN service explicitly.
 
 ## Normal
 No explicit mode needed. Extra JSON:
@@ -55,3 +55,5 @@ Use a timeout covering the full job, e.g.3600s. Rewrite captions once and cache 
 
 
 YuE2 music supersedes previous ACE-Step references: Q8_0 main + F16 VAE, no Gemma, client-side helper, MP3. See [music contract](MUSIC.md). Original pinned weights download only; CC-BY-NC-4.0 and upstream attribution apply. No song-generation claims beyond the saved short trials.
+
+Current30October: public5001/5003, private5005; `/media` GUI, `/api` documentation, `/openapi.json`, `/v1/media/generations` and `/v1/media/upscale`. Default video cache0.04/warmup1. Existing29October measurements are historical; no new generation performed.
