@@ -30,7 +30,7 @@ Other scenes from the earlier28October recipe: [night](examples/night-processed.
 
 - Real public Normal, without explicit mode/size: **163.85s**. Ordinary4× API on that saved PNG: **6.04s**. These are two requests. [Image battle, all arms and cold/warm caveats](benchmarks/image-current.json).
 - Real Pro + local user adapter +720p + faces + RIFE + YuE2 API examples: **190.76s** and **258.05s** for **17 native frames**, about **0.71s of footage**, not17seconds. The latter includes82.55s queue/profile readiness. [All video measurements](benchmarks/video.json).
-- Light cache0.04/0.08 matched control latents in the tested scene;0.08 did not establish a consistent speed benefit. Default video cache stays disabled. No universal speedup/long-clip claim.
+- Light cache0.04/0.08 matched control latents in the tested scene;0.08 did not establish a consistent speed benefit. The current default is Cache-DiT0.04/warmup1 by user choice30October; no new gain is claimed. No universal speedup/long-clip claim.
 
 ## Setup
 
