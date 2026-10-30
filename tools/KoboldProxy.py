@@ -486,7 +486,7 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                     helper_sha256=active.get('helper_sha256'),run_id=active.get('run_id'),
                     live_checked=False,automatic_model_switching=True)
 
-    forwarded_headers=('Content-Encoding','Content-Disposition','Cache-Control','ETag','Last-Modified','Vary','Location','Content-Range','Accept-Ranges')
+    forwarded_headers=('Content-Encoding','Content-Disposition','Cache-Control','ETag','Last-Modified','Vary','Location','Content-Range','Accept-Ranges','X-SFX-Id','X-SFX-Seconds','X-SFX-Generation-Seconds')
     class Handler(BaseHTTPRequestHandler):
         protocol_version='HTTP/1.1'
         def reply(self,data,status=200,content_type='application/json',headers=None):
@@ -574,6 +574,9 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                 if path=='/v1/audio/capabilities':
                     from AudioServices import capabilities
                     self.reply(capabilities(cfg));return
+                if path=='/v1/audio/sfx/capabilities':
+                    from AudioServices import capabilities
+                    self.reply(dict(available=capabilities(cfg)['sfx'],endpoint='/v1/audio/sfx',backend='SA3 Small SFX CPU Haswell',duration_min=.25,duration_max=60,duration_default=5,response_formats=['wav','mp3'],steps=8,long_audio='Real short generations with20ms crossfades; no repeated loop',video_model_switch=False));return
                 if path=='/v1/audio/voices':
                     from AudioServices import remote
                     status,headers,raw=remote(cfg,'/api/extra/speakers_list',timeout=10);self.reply(raw,status,headers.get('Content-Type','application/json'));return
@@ -602,7 +605,7 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                 if path=='/v1/media/capabilities':
                     self.reply(dict(backend='KoboldCpp',idle_model='photo-normal',automatic_exclusive_model_switching=True,gui='/media',openapi='/openapi.json',unified_generate='/v1/media/generations',unified_upscale='/v1/media/upscale',
                         images={'generate':'/v1/images/generations','automatic1111':'/sdapi/v1/txt2img','edit':'/v1/images/edits','capabilities':'/v1/images/capabilities'},
-                        audio={'generate':'/api/extra/music/generate','format':'MP3','capabilities':'/v1/music/capabilities'},
+                        audio={'generate':'/api/extra/music/generate','format':'MP3','capabilities':'/v1/music/capabilities','sfx':'/v1/audio/sfx','sfx_capabilities':'/v1/audio/sfx/capabilities'},
                         video={'generate':'/v1/videos/generations','media':VIDEO_MEDIA_PREFIX,'capabilities':'/v1/videos/capabilities','format':'MP4','default_soundtrack':True}));return
                 if path in ('/v1/images/capabilities','/api/extra/image-capabilities'):
                     cap=image_capabilities(cfg);cap['operations']['reference_synthesis']=dict(supported=True,endpoints=list(SYNTHESIS_PATHS),conditioning='text_descriptions_only',requires_client_visual_analysis=True,min_sources=2,max_sources=4,raw_images_accepted=False,native_reference_conditioning=False,exact_identity_guaranteed=False,schema_url='/v1/images/synthesis-schema');self.reply(cap);return
@@ -646,6 +649,23 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                 maximum=int(cfg['helper'].get('maxrequestsize',32))*1024*1024
                 if length<0 or length>maximum:self.reply(dict(error='Request exceeds configured size limit'),413);return
                 body=self.rfile.read(length)
+                if path=='/v1/audio/sfx':
+                    from SfxService import generate as generate_sfx,validate as validate_sfx
+                    from AudioServices import capabilities
+                    from VideoService import VideoBudget
+                    try:sfx_payload=validate_sfx(json.loads(body))
+                    except (ValueError,UnicodeError,TypeError) as error:raise VideoServiceError(str(error),'invalid_sfx_request',422) from error
+                    if not capabilities(cfg)['sfx']:raise VideoServiceError('SFX runtime/models are not installed.','sfx_unavailable',503)
+                    sfx_budget=VideoBudget(450,time.perf_counter)
+                    if not pipeline.lock.acquire(timeout=sfx_budget.remaining()):raise VideoServiceError('SFX queue deadline exceeded.','sfx_timeout',504)
+                    try:
+                        pipeline.begin('','sfx')
+                        output,report=generate_sfx(ROOT,cfg,sfx_payload,sfx_budget.remaining)
+                        data=output.read_bytes();sfx_budget.remaining()
+                        self.reply(data,content_type='audio/wav' if sfx_payload['response_format']=='wav' else 'audio/mpeg',headers={'Content-Disposition':'inline; filename="sfx.'+sfx_payload['response_format']+'"','X-SFX-Id':report['id'],'X-SFX-Seconds':str(report['actual_seconds']),'X-SFX-Generation-Seconds':str(round(report['generation_seconds'],4))})
+                    except TimeoutError as error:raise VideoServiceError('SFX deadline exceeded.','sfx_timeout',504) from error
+                    finally:pipeline.finish();pipeline.lock.release()
+                    return
                 if path in ('/v1/audio/speech','/api/extra/tts','/v1/audio/transcriptions','/api/extra/transcribe'):
                     from AudioServices import remote,services
                     opts=services(cfg);key='stt_enabled' if path.endswith(('transcriptions','transcribe')) else 'tts_enabled'

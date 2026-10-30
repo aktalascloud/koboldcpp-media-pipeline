@@ -39,7 +39,7 @@ def capabilities(cfg):
     root=Path(__file__).resolve().parent.parent;models=Path(opts['sfx_model_dir']);models=models if models.is_absolute() else root/models
     names=['stable-audio-3-small-sfx-dit-0.5B-v1.0-Q8_0.gguf','stable-audio-3-small-sfx-same-s-v1.0-Q8_0.gguf','stable-audio-3-small-sfx-conditioner-v1.0-F32.gguf','t5gemma-b-b-ul2-encoder-0.3B-v1.0-F16.gguf','t5gemma-b-b-ul2-v1.0-vocab.gguf']
     sfx=(root/'runtime/sa3/sa3-generate.exe').is_file() and models.is_dir() and all((models/n).is_file() for n in names)
-    return {'helper':opts['helper_enabled'],'tts':opts['tts_enabled'],'stt':opts['stt_enabled'],'sfx':sfx,'sfx_backend':'CPU Haswell','voice_selection_verified':opts['voice_selection_verified'],'helper_model':opts['helper_model'],'speaker_profiles':['female','male'],'languages':['ru','en'],'url_configured':bool(opts['base_url'])}
+    return {'helper':opts['helper_enabled'],'tts':opts['tts_enabled'],'stt':opts['stt_enabled'],'sfx':sfx,'sfx_endpoint':'/v1/audio/sfx','sfx_max_seconds':60,'sfx_backend':'CPU Haswell','voice_selection_verified':opts['voice_selection_verified'],'helper_model':opts['helper_model'],'speaker_profiles':['female','male'],'languages':['ru','en'],'url_configured':bool(opts['base_url'])}
 
 def select_voice(opts,speaker):
     profile=speaker.get('voice_profile')

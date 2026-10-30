@@ -55,7 +55,8 @@ class KoboldMediaBundle {
   bool extractOnly=Array.IndexOf(args,"--extract-only")>=0;
   try{
    using(var mutex=new Mutex(false,"Local\\KoboldMediaBundle-"+Hash(Path.GetFullPath(Root)).Substring(0,20))){
-    if(!mutex.WaitOne(0))throw new IOException("Another bundle launch is in progress");
+    try{if(!mutex.WaitOne(180000))throw new IOException("Another bundle extraction did not finish in time");}
+    catch(AbandonedMutexException){} // The new process owns the abandoned mutex.
     try{Extract();}finally{mutex.ReleaseMutex();}
    }
    if(extractOnly)return 0;

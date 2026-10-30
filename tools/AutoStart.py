@@ -14,6 +14,17 @@ def main():
         return 2
     (root/'logs').mkdir(exist_ok=True)
     (root/'runtime/tmp').mkdir(parents=True,exist_ok=True)
+    sys.path.insert(0,str(root/'tools'))
+    from BackendSupervisor import WindowsOperations,SupervisorError
+    try:
+        with WindowsOperations().owner_lock(root/'logs/autostart-entry.lock'):
+            return logged_launch(root,launch)
+    except SupervisorError as error:
+        if error.body['error']['code']=='supervisor_already_running':return 0
+        raise
+
+
+def logged_launch(root,launch):
     with (root/'logs/autostart.log').open('w',encoding='utf-8',buffering=1) as log:
         # pythonw has no console streams at logon. Launch expects real streams.
         sys.stdout=sys.stderr=log

@@ -18,7 +18,7 @@ def job_object():
 
 def run_owned(command,root,destination,timeout,memory_guard=False,environment=None):
     root=Path(root).resolve();destination=Path(destination).resolve()
-    if not any(destination.is_relative_to(root/f) for f in ('OUTPUTS/video','RESULTS/Video')):raise ValueError('Unexpected owned media destination')
+    if not any(destination.is_relative_to(root/f) for f in ('OUTPUTS/video','OUTPUTS/sfx','RESULTS/Video')):raise ValueError('Unexpected owned media destination')
     destination.mkdir(parents=True,exist_ok=True);k,job=job_object();began=time.perf_counter();monitor=None
     if not 0<float(timeout)<=900:raise ValueError('Invalid media timeout')
     child=None

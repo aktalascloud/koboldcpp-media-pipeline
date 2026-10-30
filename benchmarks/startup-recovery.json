@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-30",
+  "fixed": "Recovery of prior-boot incomplete launch intent only after immutable-profile, private port and both worker lock checks",
+  "command": "KoboldCpp.exe --background",
+  "launch_directory": "Windows/System32",
+  "ready_seconds": 63.181476299999986,
+  "profile": "photo-normal",
+  "old_intent_retired": true,
+  "checks": [
+    {
+      "case": "prior_boot",
+      "passed": true
+    },
+    {
+      "case": "current_boot",
+      "passed": true
+    },
+    {
+      "case": "occupied_port",
+      "passed": true
+    },
+    {
+      "case": "busy_worker",
+      "passed": true
+    },
+    {
+      "case": "missing_timestamp",
+      "passed": true
+    }
+  ],
+  "inference_started": false,
+  "windows_reboot_performed_by_agent": false,
+  "scope": "Original Run invocation had failed after an actual earlier Windows reboot; the exact registered command was then cold-tested against that preserved state. This is not a second physical reboot test."
+}

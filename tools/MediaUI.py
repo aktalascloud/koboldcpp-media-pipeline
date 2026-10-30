@@ -23,6 +23,8 @@ def schema():
         '/v1/media/capabilities':('get','Discover all media operations and automatic model switching.'),
         '/v1/media/audio-plan':('post','Создать план аудиодорожек с таймкодами выбранным хелпером.'),
         '/v1/audio/speech':('post','Речь через настроенный TTS. Язык и голос задаются в API.'),
+        '/v1/audio/sfx':('post','Генерация звуковых эффектов SA3 CPU,0.25–60секунд; ответ WAV либо MP3, фото-модель остаётся вGPU.'),
+        '/v1/audio/sfx/capabilities':('get','Доступность SFX, пределы длительности и форматы.'),
         '/v1/audio/transcriptions':('post','Распознавание аудио через настроенный STT.'),
         '/v1/audio/voices':('get','Список голосов подключённого сервера.'),
         '/v1/audio/capabilities':('get','Подключения хелпера/TTS/STT и проверка голосов.'),
@@ -52,7 +54,9 @@ def schema():
     audio={'type':'object','properties':{'enabled':{'type':'boolean'},'auto_plan':{'type':'boolean'},'prompt':{'type':'string'},'language':{'type':'string','enum':['ru','en']},'speakers':{'type':'array','maxItems':8,'items':{'type':'object','required':['id','voice_profile'],'properties':{'id':{'type':'string'},'voice_profile':{'type':'string','enum':['female','male']},'language':{'type':'string','enum':['ru','en']}}}},'tracks':{'type':'array','minItems':1,'maxItems':8,'items':track}}}
     paths['/v1/videos/generations']['post']['requestBody']['content']['application/json']['schema']={'type':'object','required':['prompt'],'properties':{'prompt':{'type':'string'},'frames':{'type':'integer','minimum':5,'maximum':121,'description':'4n+1 frames at24FPS'},'resolution':{'type':'string','enum':['360p','480p']},'orientation':{'type':'string','enum':['portrait','landscape']},'deadline_seconds':{'type':'number','exclusiveMinimum':True,'minimum':0,'maximum':900},'audio':audio}}
     paths['/v1/videos/soundtrack']['post']['requestBody']['content']['application/json']['schema']={'type':'object','required':['video_id','audio'],'additionalProperties':False,'properties':{'video_id':{'type':'string','pattern':'^[0-9a-f]{32}$'},'audio':audio}}
-    return {'openapi':'3.0.3','info':{'title':'KoboldCpp unified media API','version':'1.1'},'servers':[{'url':'/'}],'paths':paths}
+    paths['/v1/audio/sfx']['post']['requestBody']['content']['application/json']['schema']={'type':'object','required':['prompt'],'additionalProperties':False,'properties':{'prompt':{'type':'string','minLength':1,'maxLength':2000},'duration':{'type':'number','minimum':.25,'maximum':60,'default':5},'seed':{'type':'integer','minimum':0,'maximum':2147483647},'response_format':{'type':'string','enum':['wav','mp3'],'default':'wav'}}}
+    paths['/v1/audio/sfx']['post']['responses']['200']={'description':'Binary generated sound, not JSON','content':{'audio/wav':{'schema':{'type':'string','format':'binary'}},'audio/mpeg':{'schema':{'type':'string','format':'binary'}}}}
+    return {'openapi':'3.0.3','info':{'title':'KoboldCpp unified media API','version':'1.2'},'servers':[{'url':'/'}],'paths':paths}
 
 def public_settings(cfg):
     proxy=cfg['proxy'];defaults=cfg['defaults'];video=proxy.get('video',{})

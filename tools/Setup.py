@@ -163,6 +163,10 @@ def main():
     defaults['kcpp_proxy'].update(host=args.listen_host,autostart_enabled=False);exe_sha=sha(exe)
     for p in defaults['kcpp_proxy']['backend_supervisor']['profiles'].values():p.update(executable_sha256=exe_sha,helper_sha256=sha(inside(p['helper'])))
     helper['gendefaults']=json.dumps(defaults,ensure_ascii=False,separators=(',',':'));helper_path.write_text(json.dumps(helper,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    # Start.exe always opens the universal master. Build it locally from the
+    # installed runtime; no new third-party binary is mirrored by the code ZIP.
+    from BuildBundle import main as build_master
+    build_master()
     records=[]
     for path in sorted(ROOT.rglob('*')):
         rel=path.relative_to(ROOT)

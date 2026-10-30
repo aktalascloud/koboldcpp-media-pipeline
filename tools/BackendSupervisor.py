@@ -50,7 +50,19 @@ def write_json(path, value):
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(path.name + '.' + uuid.uuid4().hex + '.writing')
     temporary.write_text(json.dumps(value, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-    os.replace(temporary, path)
+    try:
+        for attempt in range(20):
+            try:
+                os.replace(temporary, path)
+                break
+            except OSError as error:
+                # Windows readers/AV may briefly deny DELETE sharing. Keep the
+                # complete old record; never fall back to truncating it in place.
+                if getattr(error, 'winerror', None) not in (5, 32, 33) or attempt == 19: raise
+                time.sleep(min(.01 * 2**attempt, .25))
+    finally:
+        try: temporary.unlink(missing_ok=True)
+        except OSError: pass
 
 
 def sha256(path):
@@ -84,6 +96,11 @@ class WindowsOperations:
     """Host operations, intentionally not used by the unit tests."""
     def monotonic(self): return time.monotonic()
     def sleep(self, seconds): time.sleep(seconds)
+
+    def boot_started(self):
+        kernel = ctypes.WinDLL('kernel32', use_last_error=True)
+        kernel.GetTickCount64.restype = ctypes.c_ulonglong
+        return time.time() - kernel.GetTickCount64() / 1000
 
     def _powershell(self, script):
         shell = Path(os.environ.get('SystemRoot', r'C:\Windows')) / 'System32/WindowsPowerShell/v1.0/powershell.exe'
@@ -479,6 +496,15 @@ class BackendSupervisor:
         profile = self.profiles.get(active.get('native_profile'))
         if not profile or not same_path(active.get('helper'), profile['helper']) or active.get('helper_sha256') != profile['helper_sha256'] or active.get('executable_sha256') != profile['executable_sha256']:
             raise SupervisorError('State is not owned by the configured immutable profile; preserved.', 'invalid_ownership')
+        # A reboot can interrupt _start between saving intent and recording its
+        # worker. No previous-boot worker can survive; current-boot ambiguity
+        # remains fail-closed. Both worker locks and the port must also be free.
+        boot = getattr(self.operations, 'boot_started', lambda: None)() if not active.get('worker') else None
+        started = active.get('started')
+        if not active.get('worker') and type(started) in (int, float) and boot is not None and 0 < started < boot - 5:
+            with self.operations.native_port_lock(profile['port']), self.operations.owner_lock(self.root / 'logs/native-worker.lock'):
+                self._retire_dead(state, active, reason='previous_boot_incomplete_launch_retired')
+            return None
         if self.active_file.exists():
             candidate = read_json(self.active_file)
             if candidate.get('run_id') == active.get('run_id'):
@@ -594,7 +620,7 @@ class BackendSupervisor:
             if observed is not None and observed != expected:
                 raise SupervisorError('Observed Native quantization differs from reviewed Helper.', 'quantization_mismatch')
 
-    def _retire_dead(self, state, active):
+    def _retire_dead(self, state, active, reason='stale_or_exited_preserved'):
         statuses = []
         for record in [active.get('worker'), active.get('native'), *active.get('listeners', [])]:
             if record:
@@ -607,7 +633,7 @@ class BackendSupervisor:
                 statuses.append({'pid': record['pid'], 'status': status})
         if self.operations.listeners(active['port']):
             raise SupervisorError('Private Native port is occupied; preserved.', 'foreign_listener')
-        state['history'].append({'reason': 'stale_or_exited_preserved', 'active': copy.deepcopy(active), 'identity_status': statuses, 'time': time.time()})
+        state['history'].append({'reason': reason, 'active': copy.deepcopy(active), 'identity_status': statuses, 'time': time.time()})
         state.pop('active', None); state['phase'] = 'stopped'; self._save(state)
 
     def _stop(self, state, active):

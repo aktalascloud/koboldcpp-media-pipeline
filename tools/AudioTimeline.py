@@ -1,6 +1,6 @@
 """Real timed audio stems: SA3 SFX, configured TTS, YuE2 music; no false Foley/lip-sync."""
 from pathlib import Path
-import json,math,re,hashlib,subprocess,time,os
+import json,math,re,hashlib,subprocess,time
 from AudioServices import services,select_voice,remote,plan
 
 def number(value):return type(value) in (int,float) and math.isfinite(value)
@@ -44,7 +44,6 @@ def validate(options,duration,cfg):
     return {'tracks':result,'speakers':speakers,'duration_seconds':duration,'voice_map':{t['speaker_id']+':'+t['language']:t['voice'] for t in result if t['kind']=='speech'}}
 
 def render(supervisor,root,folder,cfg,options,budget,metadata):
-    from OwnedMediaProcess import run_owned
     from MusicContract import prepare_music
     from NativeVideo import request_audio_deadline
     root=Path(root).resolve();folder=Path(folder).resolve();duration=metadata['frames']/metadata['fps'];timeline=options.get('_validated_timeline') or validate(options,duration,cfg)
@@ -61,12 +60,8 @@ def render(supervisor,root,folder,cfg,options,budget,metadata):
             with supervisor.lease('music',cfg) as active:target.write_bytes(request_audio_deadline(active['backend']+'/api/extra/music/generate',payload,timeout=budget.remaining()))
             supervisor.stop_idle()
         else:
-            exe=root/'runtime/sa3/sa3-generate.exe';opts=services(cfg);models=Path(opts['sfx_model_dir']);models=(models if models.is_absolute() else root/models).resolve()
-            if not models.is_relative_to(root):raise ValueError('Для портативности поместите SFX-модели в папку комплекта')
-            if not exe.is_file() or not (models/'stable-audio-3-small-sfx-dit-0.5B-v1.0-Q8_0.gguf').is_file():raise ValueError('SA3 SFX не установлен')
-            environment={**os.environ,'SA3_DEVICE':'cpu','SA3_GPU':'0'}
-            command=[str(exe),'--model','small-sfx','--models-dir',str(models),'--encoding','q8_0','--ae-encoding','q8_0','--t5-encoding','f16','--duration',str(max(.25,length)),'--steps','8','--threads',str(opts['sfx_threads']),'--seed',str(track.get('seed',424242+index)),'--prompt',track['prompt'],'--out',str(target)]
-            run_owned(command,root,stems/('worker-'+str(index)),min(900,budget.remaining()),environment=environment)
+            from SfxService import native_clip
+            native_clip(root,cfg,track['prompt'],max(.25,length),track.get('seed',424242+index),target,budget.remaining)
         if not target.is_file() or target.stat().st_size<44:raise RuntimeError('Пустой звук дорожки')
         probe=subprocess.run([str(root/'runtime/ffmpeg/ffmpeg.exe'),'-hide_banner','-i',str(target)],capture_output=True,text=True,errors='replace',timeout=min(30,budget.remaining()))
         match=re.search(r'Duration:\s*(\d+):(\d+):([0-9.]+)',probe.stderr)

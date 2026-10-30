@@ -1,0 +1,54 @@
+{
+  "date": "2026-10-30",
+  "startup": {
+    "ok": true,
+    "duplicate_registered_startup_exit_codes": [
+      0,
+      0
+    ],
+    "cold_ready_seconds": 18.82366890000003,
+    "startup_cwd": "Windows/System32",
+    "sfx_rows": [
+      {
+        "duration": 2,
+        "format": "wav",
+        "http_seconds": 10.567182100000082,
+        "id": "16396aa03feb4b8e93a60638f2bbc1f4",
+        "bytes": 384078,
+        "sha256": "83e097fefc13b18bb055ffe63fdb942cf0583305b0590bfe5f7b24cae2e9a125"
+      },
+      {
+        "duration": 6,
+        "format": "mp3",
+        "http_seconds": 17.171941999999945,
+        "id": "88b94587abdb434ba980ee722e24917b",
+        "bytes": 114045,
+        "sha256": "02c4b2a1db14ae9609c4510b080072d0294a7d16feac72c37d5f29fe124d54c3"
+      }
+    ],
+    "invalid_duration_rejected": true,
+    "photo_run_unchanged_by_sfx": true,
+    "image_video_music_inference_started": false
+  },
+  "atomic_state": {
+    "ok": true,
+    "cases": [
+      {
+        "case": "real_deny_delete_reader",
+        "seconds": 0.16095640000003186,
+        "passed": true
+      },
+      {
+        "case": "persistent_denial_preserves_old_record",
+        "passed": true
+      },
+      {
+        "case": "unrelated_io_not_retried",
+        "passed": true
+      }
+    ],
+    "inference_started": false
+  },
+  "scope": "Cold exact Run command twice from System32; SFX2s WAV and6s MP3 were actually generated. No token/photo/video/music generation tests.",
+  "native_sha256": "0986410a243b78d2b92c6d147a200372acadf0e552df7970ee178da0e4258fbb"
+}
