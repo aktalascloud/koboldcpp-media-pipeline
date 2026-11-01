@@ -61,7 +61,7 @@ def worker(root,capture,dest,manifest_sha):
     if not np.all(weights>0):raise RuntimeError('Uncovered Pro tile region')
     rgb=np.rint((np.clip(sums/weights[None,:,:,None],-1,1)+1)*127.5).astype(np.uint8)
     Image.fromarray(rgb[-1]).save(dest/'last-frame.png')
-    if dest.is_relative_to(root/'RESULTS/Video'):np.save(dest/'decoded.npy',rgb)
+    if dest.is_relative_to(root/'RESULTS/checks'):np.save(dest/'decoded.npy',rgb)
     ffmpeg=str(root/'runtime/ffmpeg/ffmpeg.exe');avi=dest/'decoded.avi'
     enc=subprocess.Popen([ffmpeg,'-hide_banner','-loglevel','error','-nostdin','-y','-f','rawvideo','-pix_fmt','rgb24','-s',f'{width}x{height}','-r','24','-i','pipe:0','-an','-c:v','ffv1',str(avi)],stdin=subprocess.PIPE,stdout=subprocess.DEVNULL,stderr=subprocess.PIPE)
     _,err=enc.communicate(rgb.tobytes(),timeout=60)
@@ -78,7 +78,7 @@ def worker(root,capture,dest,manifest_sha):
 def decode_pro(capture,destination,root,manifest_sha,timeout=300):
     from OwnedMediaProcess import run_owned
     root=Path(root).resolve();capture=Path(capture).resolve();dest=Path(destination).resolve()
-    if not any(dest.is_relative_to(root/p) for p in ('OUTPUTS/video','RESULTS/Video')) or dest.exists():raise ValueError('Invalid or existing Pro destination')
+    if not any(dest.is_relative_to(root/p) for p in ('RESULTS/generated/video','RESULTS/checks')) or dest.exists():raise ValueError('Invalid or existing Pro destination')
     meta,files=verify_assets(root,manifest_sha)
     command=[str(root/'runtime/python/python.exe'),'-I','-B',str(root/'tools/VideoPro.py'),'--worker','--root',str(root),'--capture',str(capture),'--dest',str(dest),'--manifest-sha',manifest_sha]
     process=run_owned(command,root,dest,timeout,memory_guard=True);result=json.loads((dest/'result.json').read_text());result.update(process)
@@ -88,5 +88,5 @@ if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--worker',action='store_true');p.add_argument('--root',type=Path,required=True);p.add_argument('--capture',type=Path,required=True);p.add_argument('--dest',type=Path,required=True);p.add_argument('--manifest-sha',required=True);a=p.parse_args()
     if not a.worker:raise SystemExit('This module is launched by the owned media controller')
     root=a.root.resolve();dest=a.dest.resolve()
-    if not any(dest.is_relative_to(root/f) for f in ('OUTPUTS/video','RESULTS/Video')):raise ValueError('Invalid decoder worker destination')
+    if not any(dest.is_relative_to(root/f) for f in ('RESULTS/generated/video','RESULTS/checks')):raise ValueError('Invalid decoder worker destination')
     worker(root,a.capture.resolve(),dest,a.manifest_sha)

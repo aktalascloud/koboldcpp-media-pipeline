@@ -293,7 +293,7 @@ def finish_native_video(answer: dict, plan: dict, output_dir: str | Path,
     destination = Path(output_dir)
     if not destination.is_absolute():destination=root/destination
     destination=destination.resolve()
-    allowed = [root/'OUTPUTS/video', root/'RESULTS/Video']
+    allowed = [root/'RESULTS/generated/video', root/'RESULTS/checks']
     if not any(destination.is_relative_to(path.resolve()) for path in allowed):
         raise ValueError('Output must stay within managed VIDEO outputs or benchmark artifacts')
     if not answer.get('animated'):

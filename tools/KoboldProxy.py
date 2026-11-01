@@ -38,7 +38,6 @@ from Resolution import choose_resolution
 from ImageEdits import EDIT_PATHS,ImageEditError,prepare_edit,prepare_a1111_edit,validate_edit_contract,validate_generation_contract,image_capabilities,model_contract
 from ReferenceSynthesis import SYNTHESIS_PATHS,synthesis_schema,prepare_synthesis
 from ImageModes import ImageModeError,resolve_image_mode
-from HelamanUpscale import HelamanUpscaler,configured_output_scale as helaman_output_scale
 from VideoService import VideoService,VideoServiceError,VIDEO_JSON_PATHS,VIDEO_MEDIA_PREFIX,is_video_request
 from BackendSupervisor import SupervisorError
 from FaceSizePolicy import scale_face_options
@@ -59,7 +58,9 @@ LOG=logging.getLogger('KoboldProxy')
 
 def upscale_api_scale(config):
     opts=config['proxy']['upscaler']
-    return helaman_output_scale(opts) if opts.get('runtime')=='helaman_atd' else int(opts.get('output_scale',2))
+    value=opts.get('output_scale',2)
+    if type(value) is not int or value not in (2,4):raise ValueError('Output scale must be2 or4')
+    return value
 
 def sr_api_response(final,report,config,requested_scale=None):
     opts=config['proxy']['upscaler'];scale=upscale_api_scale(config)
@@ -104,7 +105,7 @@ def image_encode(image,parameters=None,marker=None):
 def face_signature(options,legacy=False,include_policy=False):
     canonical=dict(options)
     detector=canonical.get('detector_model')
-    if detector and Path(detector).resolve()==(ROOT/'DETAILERS/faces/face_detection_yunet_2023mar.onnx').resolve():canonical.pop('detector_model',None)
+    if detector and Path(detector).resolve()==(ROOT/'MODELS/detailers/faces/face_detection_yunet_2023mar.onnx').resolve():canonical.pop('detector_model',None)
     reference={key:canonical.pop('_reference_'+key,None) for key in ('minimum_face','maximum_face')}
     for key in ('auto_size','reference_dimensions'):canonical.pop(key,None)
     if not include_policy:canonical.pop('after_upscale',None)
@@ -116,7 +117,9 @@ def face_signature(options,legacy=False,include_policy=False):
         for key in ('model','feature_guard_model','detector_model'):
             if canonical.get(key):
                 path=Path(canonical[key]).resolve()
-                canonical[key]=path.relative_to(ROOT).as_posix() if path.is_relative_to(ROOT) else path.name
+                value=path.relative_to(ROOT).as_posix() if path.is_relative_to(ROOT) else path.name
+                # Stable PNG provenance across the portable model-folder move.
+                canonical[key]=value.replace('MODELS/detailers/','DETAILERS/',1)
     return hashlib.sha256(json.dumps(canonical,sort_keys=True).encode()).hexdigest()[:16]
 def matching_face_marker(image,options):
     try:
@@ -238,12 +241,8 @@ class Pipeline:
         opts=config['proxy']['upscaler'];mode=opts.get('mode','onnx');started=time.perf_counter()
         if not config['proxy'].get('retain_face_session_for_images',False):self.release_restorer()
         self.update(stage='upscaler')
-        if opts.get('runtime')=='helaman_atd':
-            self.release_upscaler()
-            engine=HelamanUpscaler(opts)
-            try:final,info=engine.upscale(image)
-            finally:engine.close()
-        elif mode=='native':
+        if opts.get('runtime')=='helaman_atd':raise ValueError('Retired upscaler; select an ONNX upscaler in the GUI')
+        if mode=='native':
             self.release_upscaler()
             answer=request_json(config['backend']+'/sdapi/v1/upscale',dict(image=image_encode(image),upscaling_resize=2))
             final=image_decode(answer['image']);native_dimensions=list(final.size)

@@ -85,7 +85,7 @@ class VideoService:
         self.clock=clock or time.perf_counter
         VideoBudget(deadline_seconds,self.clock)
         self.deadline_seconds=float(deadline_seconds)
-        self.outputs=(self.root/'OUTPUTS/video').resolve()
+        self.outputs=(self.root/'RESULTS/generated/video').resolve()
         self.blocker=(self.root/'logs/video-owned-unload-blocker.json').resolve()
         if not self.outputs.is_relative_to(self.root) or not self.blocker.is_relative_to(self.root):
             raise ValueError('Video managed paths must remain inside portable root')

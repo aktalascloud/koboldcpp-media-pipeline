@@ -1,0 +1,455 @@
+{
+  "format": 1,
+  "installed_build": {
+    "native_version": "1.124.1",
+    "commit": "ed587d0beef557e10aa78a26b38b286e70c29e85",
+    "executable_sha256": "ca9e5127cc03caba04bb0943ff353be9aac788ba531a04da57ee0f7d5434992a",
+    "build_date": "2026-11-01",
+    "pgo_disabled_verified": true,
+    "lto_flags": "-flto=4 -fuse-linker-plugin",
+    "native_link_layout": "upstream-supported monolithic; KCPP_COMMONIZE=0; full backend LTO and explicit C ABI"
+  },
+  "installed_build_speed_measured": false,
+  "native": {
+    "date": "2026-10-25",
+    "source_commit": "e68c9b1005f967f8795fcee2e268d881e87d29a0",
+    "executable_sha256": "fb4a6ad11bd3951c80348e2c8a83df4fde6a08a42d71a86011ac5433708c2da8",
+    "model": "Qwen3-4B-Instruct-2507-heretic-uncens.i1-IQ4_XS.gguf",
+    "model_sha256": "78614724ef8ccb9d50831fb24b3be3b6a90a4b7c5d73230531fdb80e4386a98d",
+    "stock_version": "1.123.1",
+    "stock_executable_sha256": "ab53b529c6c9925ed5f67b2884a5b35cc6d13c645f310a71c7a9e5c996950376",
+    "context": 512,
+    "batch": 256,
+    "ubatch": 256,
+    "output_tokens": 64,
+    "runs_per_arm": {
+      "cpu": 4,
+      "vulkan": 2
+    },
+    "cpu_threads": [
+      16,
+      20
+    ],
+    "vulkan_threads": [
+      6,
+      4
+    ],
+    "stock_gpu_environment": {
+      "GGML_VK_ALLOW_GRAPHICS_QUEUE": "1"
+    },
+    "latest_gpu_environment": {
+      "GGML_VK_ALLOW_GRAPHICS_QUEUE": "1",
+      "GGML_VK_BATCHED_SUBMITS": "1",
+      "GGML_VK_MAX_NODES_PER_SUBMIT": "100",
+      "GGML_VK_GCN_TILE64": "1",
+      "GGML_VK_GCN_TILE_VARIANT": "k16",
+      "GGML_VK_IQ4_XS_ROWS": "4",
+      "GGML_VK_IQ4_XS_WG": "64"
+    },
+    "compiler": {
+      "pgo": false,
+      "lto": true,
+      "cpu_hot_variant": "tiled-haswell",
+      "vulkan_host_flags": "-fno-semantic-interposition -fno-ipa-cp-clone"
+    },
+    "correctness": {
+      "cpu": true,
+      "vulkan": true,
+      "grammar": true,
+      "batch_boundaries": true
+    },
+    "scope": "Manual same-session stock/latest controls. Prompt and output throughput separate; no intermediate builds. No new photo/music generation.",
+    "cpu": {
+      "stock": {
+        "prompt_tps": {
+          "mean": 39.4675,
+          "range": [
+            36.07,
+            41.0
+          ],
+          "runs": [
+            36.07,
+            40.65,
+            40.15,
+            41.0
+          ]
+        },
+        "generation_tps": {
+          "mean": 16.415,
+          "range": [
+            15.54,
+            17.16
+          ],
+          "runs": [
+            16.11,
+            17.16,
+            15.54,
+            16.85
+          ]
+        },
+        "prompt_seconds": {
+          "mean": 11.382,
+          "range": [
+            10.928,
+            12.422
+          ],
+          "runs": [
+            12.422,
+            11.02,
+            11.158,
+            10.928
+          ]
+        },
+        "generation_seconds": {
+          "mean": 3.90475,
+          "range": [
+            3.729,
+            4.119
+          ],
+          "runs": [
+            3.973,
+            3.729,
+            4.119,
+            3.798
+          ]
+        },
+        "native_seconds": {
+          "mean": 15.28675,
+          "range": [
+            14.726,
+            16.395
+          ],
+          "runs": [
+            16.395,
+            14.749,
+            15.277,
+            14.726
+          ]
+        }
+      },
+      "latest": {
+        "prompt_tps": {
+          "mean": 85.1525,
+          "range": [
+            81.62,
+            86.84
+          ],
+          "runs": [
+            81.62,
+            86.84,
+            85.56,
+            86.59
+          ]
+        },
+        "generation_tps": {
+          "mean": 17.0425,
+          "range": [
+            16.8,
+            17.17
+          ],
+          "runs": [
+            17.14,
+            17.17,
+            17.06,
+            16.8
+          ]
+        },
+        "prompt_seconds": {
+          "mean": 5.2645,
+          "range": [
+            5.159,
+            5.489
+          ],
+          "runs": [
+            5.489,
+            5.159,
+            5.236,
+            5.174
+          ]
+        },
+        "generation_seconds": {
+          "mean": 3.75525,
+          "range": [
+            3.727,
+            3.81
+          ],
+          "runs": [
+            3.733,
+            3.727,
+            3.751,
+            3.81
+          ]
+        },
+        "native_seconds": {
+          "mean": 9.01975,
+          "range": [
+            8.886,
+            9.222
+          ],
+          "runs": [
+            9.222,
+            8.886,
+            8.987,
+            8.984
+          ]
+        }
+      }
+    },
+    "vulkan": {
+      "stock": {
+        "prompt_tps": {
+          "mean": 411.01,
+          "range": [
+            410.63,
+            411.39
+          ],
+          "runs": [
+            411.39,
+            410.63
+          ]
+        },
+        "generation_tps": {
+          "mean": 17.035,
+          "range": [
+            17.03,
+            17.04
+          ],
+          "runs": [
+            17.04,
+            17.03
+          ]
+        },
+        "prompt_seconds": {
+          "mean": 1.0899999999999999,
+          "range": [
+            1.089,
+            1.091
+          ],
+          "runs": [
+            1.089,
+            1.091
+          ]
+        },
+        "generation_seconds": {
+          "mean": 3.7565,
+          "range": [
+            3.755,
+            3.758
+          ],
+          "runs": [
+            3.755,
+            3.758
+          ]
+        },
+        "native_seconds": {
+          "mean": 4.846500000000001,
+          "range": [
+            4.844,
+            4.849
+          ],
+          "runs": [
+            4.844,
+            4.849
+          ]
+        }
+      },
+      "latest": {
+        "prompt_tps": {
+          "mean": 712.81,
+          "range": [
+            712.24,
+            713.38
+          ],
+          "runs": [
+            713.38,
+            712.24
+          ]
+        },
+        "generation_tps": {
+          "mean": 23.655,
+          "range": [
+            23.64,
+            23.67
+          ],
+          "runs": [
+            23.64,
+            23.67
+          ]
+        },
+        "prompt_seconds": {
+          "mean": 0.6285000000000001,
+          "range": [
+            0.628,
+            0.629
+          ],
+          "runs": [
+            0.628,
+            0.629
+          ]
+        },
+        "generation_seconds": {
+          "mean": 2.7055,
+          "range": [
+            2.704,
+            2.707
+          ],
+          "runs": [
+            2.707,
+            2.704
+          ]
+        },
+        "native_seconds": {
+          "mean": 3.334,
+          "range": [
+            3.333,
+            3.335
+          ],
+          "runs": [
+            3.335,
+            3.333
+          ]
+        }
+      }
+    }
+  },
+  "image": {
+    "date": "2026-10-29",
+    "native_executable_sha256": "ff7d4d0bbc332613baef04ca524d7e0ecf0788076cf95e3a816045bcf07a64fd",
+    "recipe": "Ray/Afterlight0.25/RealismEnhancer1/Euler-simple8",
+    "normal_http_seconds": 163.85335280001163,
+    "separate_4x_http_seconds": 6.037676699925214,
+    "scope": "Two separate real API requests; not a new measurement for the installed build."
+  },
+  "music": {
+    "date": "2026-10-28",
+    "executable_sha256": "6c03b583f7a266facdfd045561013e164e88202b583a4bbe6d801938ae189c08",
+    "family": "yue2",
+    "public_api": {
+      "seconds": 57.01072500000009,
+      "restored_seconds": 61.065655899990816,
+      "mp3_bytes": 768384,
+      "resident_photo_restored": true
+    },
+    "russian_quality_user_accepted": true,
+    "long_song_not_tested": true
+  },
+  "video": {
+    "date": "2026-10-30",
+    "native_sha256": "0986410a243b78d2b92c6d147a200372acadf0e552df7970ee178da0e4258fbb",
+    "selected": {
+      "mode": "I2V from existing saved Ray photo, no new image generation",
+      "frames": 73,
+      "fps": 24,
+      "duration_seconds": 3.0416666666666665,
+      "native_resolution": [
+        480,
+        832
+      ],
+      "output_resolution": [
+        720,
+        1248
+      ],
+      "cache": "disabled in this manual quality check; global light default unchanged",
+      "http_seconds": 552.5706565999426,
+      "native_seconds": 271.9127,
+      "profile_ready_seconds": 22.2609,
+      "pro_seconds": 110.21640639996622,
+      "post_seconds": 84.41303050005808,
+      "audio_seconds": 39.463579699979164,
+      "resident_photo_ready": true
+    },
+    "audio_revision": {
+      "http_seconds": 57.955270900041796,
+      "tracks": [
+        {
+          "kind": "music",
+          "start": 0.0,
+          "end": 3.0416666666666665,
+          "volume": 0.16,
+          "speaker_id": null,
+          "voice": null,
+          "source_seconds": 6.0,
+          "render_seconds": 31.04123550001532,
+          "sha256": "c56ba238e5ad7cac03c0c455f2e742cc68850818f1c65a001f818a5278cac173"
+        },
+        {
+          "kind": "sfx",
+          "start": 0.15,
+          "end": 3.0416666666666665,
+          "volume": 0.32,
+          "speaker_id": null,
+          "voice": null,
+          "source_seconds": 2.89,
+          "render_seconds": 9.438589700032026,
+          "sha256": "15eab4fcd3e1e4cabc95b6869fbe1cfa0c3d9d57544a10ee41ce6820d833a6a7"
+        },
+        {
+          "kind": "speech",
+          "start": 0.4,
+          "end": 2.9,
+          "volume": 0.9,
+          "speaker_id": "narrator",
+          "voice": "shimmer",
+          "source_seconds": 2.25,
+          "render_seconds": 0.1892103001009673,
+          "sha256": "9e8424d76689b41badf02a6d5bef2aa603130fd24f1dc969a7f69a00bbeafd29"
+        }
+      ],
+      "voice_map": {
+        "narrator:ru": "shimmer"
+      },
+      "copied_rgb_frames_identical": 73,
+      "generated_video_again": false,
+      "source_video_preserved": true,
+      "audio_rms": 0.0957702100276947,
+      "audio_peak": 0.5036249756813049,
+      "resident_photo_ready": true
+    },
+    "rejected": {
+      "mode": "121-frame T2V with light cache, different scene; NOT a matched cache comparison",
+      "duration_seconds": 5.041666666666667,
+      "http_seconds": 854.7822273999918,
+      "reason": "Curtain obscures the face and noisy texture; not selected for quality"
+    },
+    "limits": [
+      "Separate music/SFX/TTS generators; no joint audio-video model or lip-sync.",
+      "Footstep activity window reviewed from actual frames; individual generated impacts are not guaranteed frame-accurate.",
+      "One run per clip, not a universal speed claim. Existing photo generation time is excluded."
+    ]
+  },
+  "sfx": {
+    "ok": true,
+    "duplicate_registered_startup_exit_codes": [
+      0,
+      0
+    ],
+    "cold_ready_seconds": 18.82366890000003,
+    "startup_cwd": "Windows/System32",
+    "sfx_rows": [
+      {
+        "duration": 2,
+        "format": "wav",
+        "http_seconds": 10.567182100000082,
+        "id": "16396aa03feb4b8e93a60638f2bbc1f4",
+        "bytes": 384078,
+        "sha256": "83e097fefc13b18bb055ffe63fdb942cf0583305b0590bfe5f7b24cae2e9a125"
+      },
+      {
+        "duration": 6,
+        "format": "mp3",
+        "http_seconds": 17.171941999999945,
+        "id": "88b94587abdb434ba980ee722e24917b",
+        "bytes": 114045,
+        "sha256": "02c4b2a1db14ae9609c4510b080072d0294a7d16feac72c37d5f29fe124d54c3"
+      }
+    ],
+    "invalid_duration_rejected": true,
+    "photo_run_unchanged_by_sfx": true,
+    "image_video_music_inference_started": false
+  },
+  "limits": [
+    "All measurements keep original dates/SHA; installed build has startup checks only.",
+    "No physical dual-NUMA measurement. No joint audio-video inference or lip-sync.",
+    "20s default/60s maximum is the OWUI orchestration specification; native single-call frame limit remains121."
+  ]
+}

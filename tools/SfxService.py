@@ -25,7 +25,7 @@ def native_clip(root,cfg,prompt,duration,seed,target,remaining):
 
 def generate(root,cfg,payload,remaining):
     from BackendSupervisor import write_json
-    p=validate(payload);root=Path(root).resolve();job_id=uuid.uuid4().hex;folder=root/'OUTPUTS/sfx'/job_id;folder.mkdir(parents=True)
+    p=validate(payload);root=Path(root).resolve();job_id=uuid.uuid4().hex;folder=root/'RESULTS/generated/sfx'/job_id;folder.mkdir(parents=True)
     began=time.perf_counter();parts=[];left=p['duration'];index=0
     # Short real generations bound CPU memory; extra20ms compensates each
     # crossfade. No repeated audio loop is used to simulate longer generation.

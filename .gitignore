@@ -25,6 +25,9 @@ artifacts/
 outputs/
 backups/
 state/
+MODELS/
+RESULTS/generated/
+results/generated/
 runtime/python/
 runtime/cache/
 runtime/tmp/

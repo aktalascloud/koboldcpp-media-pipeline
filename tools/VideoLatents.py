@@ -4,7 +4,7 @@ import hashlib,struct
 import numpy as np
 def read_wan_latents(path,root,expected_sha256=None):
     root=Path(root).resolve();path=Path(path).resolve()
-    if not any(path.is_relative_to(root/p) for p in ['runtime/tmp','RESULTS/Video','OUTPUTS/video']):raise ValueError('Unexpected latent snapshot location')
+    if not any(path.is_relative_to(root/p) for p in ['runtime/tmp','RESULTS/checks','RESULTS/generated/video']):raise ValueError('Unexpected latent snapshot location')
     size=path.stat().st_size
     if not 60<size<=128*1024**2+60:raise ValueError('Wan snapshot exceeds bounds')
     raw=path.read_bytes();magic,dimensions,count=struct.unpack('<8sIQ',raw[:20]);shape=struct.unpack('<5q',raw[20:60])

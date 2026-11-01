@@ -1,31 +1,23 @@
-# Медиасервер KoboldCpp · MOSS / YuE2 / Wan
+# Медиакомплект KoboldCpp
+[English](README.md) · [Установка/сборка](docs/BUILD.md) · [API и ТЗ OWUI](docs/API.ru.md) · [Лицензии](docs/LICENSES.md)
 
-[English](README.md) · [Комплект Windows](https://github.com/aktalascloud/koboldcpp-media-pipeline/releases/latest) · [ТЗ для фильтра OWUI](docs/MEDIA.ru.md) · [Лицензии](docs/LICENSES.md)
+Один переносимый Windows-сервер на [оптимизированном форке Haswell/AVX2/RX580Polaris/gfx803](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa). Запуск **Start.exe → KoboldCpp.exe**. Setup.ps1 нужен при установке/обновлении. Фото вGPU при простое; музыка/видео загружаются по требованию. Главные веса не зеркалируются.
 
-Один переносимый сервер на базе [оптимизированного KoboldCpp для Haswell/AVX2 и RX580 Polaris/gfx803](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa). Изображения, музыка и видео используют общий Native-слот. По умолчанию фото-модель находится в GPU; переключение и возврат автоматические. Запуск: **Start.exe**, Setup.ps1 только для установки/обновления.
+Фото: RayQ8/Afterlight.25/RealismEnhancer1,Euler/simple8,eta0,CacheDiT.08;Normal736×1104 безautoSR,High928×1392 сClear4x(новыйHigh не измерен). YuNet/GPEN20/SFace.97/Gater доSR, после него повторов нет. МузыкаYuE2MP3; SFXSA3CPU WAV/MP3 до60с. TTS/helper/STT настраиваются, голосаRU/EN явные.
 
-- Фото: Ray Q8 + Afterlight0.25 + RealismEnhancer1.0, Euler/simple8, CFG1, eta0, shift5, Cache-DiT0.08. Normal/edit736×1104 без авто-SR; явный enable_hr включает ClearReality4×. High928×1392 с4× настроен, новый набор High заново не измерен.
-- Музыка: YuE2-3B Q8/F16 VAE, MP3 stereo; текст и стиль готовит клиентская helper-LLM.
-- Видео: Wan5B Turbo Q4, полный энкодер и Pro FP32/DirectML, Euler/beta4, WG512, порогVAE576/тайл320. Генерация480p, ClearReality720p, лица; Tiny/Super-Tiny не используются. В один MP4 можно свести музыку YuE2, эффекты SA3 и речь внешнего TTS по таймкодам. Это отдельные генераторы, без синхронизации губ и автоматического распознавания событий. [Аудиодорожки](docs/VIDEO.ru.md). RIFE48FPS опционален и не удлиняет ролик.
+ВидеоWan5BTurbo/fullencoder/ProFP32/Euler-beta4,WG512,порог576,Clear720/лица/optionalRIFE. БезTiny/Helaman. Звук — отдельные генераторы и монтаж, безlip-sync. Native-проход<=121кадра/5.04с;20сdefault/60сmax — ТЗ оркестрации фильтром, не проверенная длинная Native-генерация.
 
-[Готовый API](docs/VIDEO.ru.md) · [Все фото-замеры](benchmarks/image-current.json) · [Все видео-замеры](benchmarks/video.json)
+| Saved test | Actual wall time | Scope |
+|---|---:|---|
+| PhotoNormal | 163.85s |29Oct, ff7d4d0b, one API |
+| Separate photo4x | 6.04s |saved PNG, separate API |
+| Video3.04s | 552.57s |30Oct,0986410a,I2V/Pro/Clear720/faces/all3audio |
+| Audio revision | 57.96s |73RGB frames unchanged, no video rerun |
+| Music32sMP3 | 57.01s |28Oct,6c03b583, photo return61.07s |
+| SFX2sWAV /6sMP3 |10.57s /17.17s |30Oct CPU, photo stayed resident |
 
-Реальные публичные запросы29октября2026 на EXE ff7d4d0b: Normal163.85с и отдельный4×6.04с. Видео с Pro, локальным пользовательским адаптером,720p,лицами,RIFE и музыкой —190.76с и258.05с для17исходных кадров (0.71с видео). Последняя цифра включает очередь/готовность профиля82.55с. Публичный комплект не распространяет и не включает приватный видеоадаптер. Лёгкий кэш0.04/0.08 совпал с контрольными латентами; устойчивого выигрыша0.08 нет.
 
-![Обычная генерация](examples/ray-realism-normal.png)
+[Все последние измерения/ограничения в одном файле](results/measurements.json). **Для текущей1.124.1/ed587d0b только проверка запуска, новых скоростей нет.** Видеозамеры включали частный пользовательский адаптер, в публичном комплекте его нет.
 
-[Полный4× без потерь](examples/ray-realism-4x.webp) · [Глаза4×](examples/ray-realism-eyes.png) · [Прежняя ночная сцена](examples/night-processed.png) · [Прежний часовщик](examples/watchmaker-processed.png)
-
-Крупные модели и LoRA не зеркалируются: оригинальные загрузки/импорт пользователя, SHA и лицензии сохранены. Pro один раз конвертируется на CPU тем же комплектным Python; при работе PyTorch не нужен. Нет второй runtime-копии, ключей, кешей, логов и PID-файлов в Git/релизе. [Оригинальный KoboldCpp](https://github.com/LostRuins/koboldcpp).
-
-## Приложение и API
-
-Нативная вкладка **Image Gen**: фото, модели, лица, восстановление, апскейл и img2img. **Audio**: модели и подключения хелпера/TTS/STT. **Video**: Wan/VAE/LoRA/SR/RIFE/кэш. **Extra**: RU/EN и автозапуск. Используются штатные диалоги выбора файлов. Save/Load сохраняет любой пользовательский `.kcpps`; длительность, текст речи, число кадров и прочие параметры запроса передаются через API.
-
-Общие API5001/5003, частный Native5005. `/api`, `/openapi.json` — документация; `/media` — дополнительный веб-интерфейс. После обработки возвращается фото-модель вGPU.
-
-Локальный KoboldCpp.exe (~371МиБ) содержит код/runtime, модели отдельно; обычный запуск открывает GUI, `--background` — автозапуск. Полный локальный EXE не зеркалируется без отдельной проверки прав на сторонние библиотеки. Публичный минимальный комплект запускается Start.exe; новые SFX-зависимости устанавливаются отдельно. Полная генерация на чистой машине пока не проверена.
-
-Ручной тест30октября, Native0986410a:3,04с/73кадра из готового фото → Pro/Clear720/лица + музыка/эффекты/женскаяRU-речь —552,57с. Корректировка звука по просмотренным кадрам без повторной генерации —57,96с;73из73RGB-кадров идентичны. Проба5,04с прошла854,78с, но исключена по качеству сцены. [Этапы и ограничения](benchmarks/audio-video-20261030.json).
-
-Автозапуск: восстановление незавершённой записи прошлого сеанса с проверкой блокировок, ограниченные повторы при конфликте атомарной записи Windows и защита от дублирования. Start.exe открывает только универсальный KoboldCpp.exe; Setup собирает его локально. [Отдельный SFX API](docs/SFX.ru.md):WAV/MP3,0.25–60с,CPU, фото остаётся вGPU. [ТЗ OWUI](docs/OWUI-T2V-I2V-AUDIO-TZ.ru.md).
+![Последний обычный результат](results/photo-normal.png)
+[Полный4x](results/photo-4x.webp) · [Глаза4x](results/photo-eyes.png). Последние примеры и данные только в results; модели/улучшалки/апскейлеры — MODELS, runtime один. [Правила локальной модели](AGENTS.md). Полный локальный EXE собирается на машине владельца; публично не зеркалируется без проверки прав на сторонний runtime. Полная генерация на чистой машине не тестировалась.

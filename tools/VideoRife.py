@@ -6,7 +6,7 @@ from OwnedMediaProcess import run_owned
 def available(root,model_dir=None):
     import os
     root=Path(root)
-    model=Path(model_dir) if model_dir else root/'DETAILERS/interpolation/rife-v4.6';model=model if model.is_absolute() else root/model
+    model=Path(model_dir) if model_dir else root/'MODELS/detailers/interpolation/rife-v4.6';model=model if model.is_absolute() else root/model
     paths=[root/'runtime/rife/rife-ncnn-vulkan.exe',model/'flownet.bin',model/'flownet.param']
     vcomp=(root/'runtime/rife/vcomp140.dll').is_file() or (Path(os.environ.get('SystemRoot','C:/Windows'))/'System32/vcomp140.dll').is_file()
     return all(p.is_file() for p in paths) and vcomp
@@ -14,7 +14,7 @@ def available(root,model_dir=None):
 def interpolate_video(source,destination,root,timeout=180,model_dir=None):
     if not available(root,model_dir):raise ValueError('Optional RIFE/runtime dependency is not initialized')
     root=Path(root).resolve();source=Path(source).resolve();dest=Path(destination).resolve();began=time.perf_counter()
-    if not any(dest.is_relative_to(root/p) for p in ('OUTPUTS/video','RESULTS/Video')) or dest.exists():raise ValueError('Invalid RIFE destination')
+    if not any(dest.is_relative_to(root/p) for p in ('RESULTS/generated/video','RESULTS/checks')) or dest.exists():raise ValueError('Invalid RIFE destination')
     cap=cv2.VideoCapture(str(source));frames=round(cap.get(cv2.CAP_PROP_FRAME_COUNT));fps=cap.get(cv2.CAP_PROP_FPS);width=round(cap.get(cv2.CAP_PROP_FRAME_WIDTH));height=round(cap.get(cv2.CAP_PROP_FRAME_HEIGHT));cap.release()
     if not 5<=frames<=121 or abs(fps-24)>.001:raise ValueError('RIFE expects a bounded24FPS clip')
     dest.mkdir(parents=True);inp=dest/'input';out=dest/'output';inp.mkdir();out.mkdir();ffmpeg=str(root/'runtime/ffmpeg/ffmpeg.exe')
@@ -23,7 +23,7 @@ def interpolate_video(source,destination,root,timeout=180,model_dir=None):
         if value<=0:raise TimeoutError('RIFE exceeded shared video budget')
         return value
     subprocess.run([ffmpeg,'-hide_banner','-loglevel','error','-nostdin','-y','-i',str(source),str(inp/'%08d.png')],check=True,timeout=remaining())
-    command=[str(root/'runtime/rife/rife-ncnn-vulkan.exe'),'-i',str(inp),'-o',str(out),'-n',str(frames*2),'-m',str((Path(model_dir) if Path(model_dir).is_absolute() else root/Path(model_dir)) if model_dir else root/'DETAILERS/interpolation/rife-v4.6'),'-g','0','-j','1:1:1','-f','%08d.png']
+    command=[str(root/'runtime/rife/rife-ncnn-vulkan.exe'),'-i',str(inp),'-o',str(out),'-n',str(frames*2),'-m',str((Path(model_dir) if Path(model_dir).is_absolute() else root/Path(model_dir)) if model_dir else root/'MODELS/detailers/interpolation/rife-v4.6'),'-g','0','-j','1:1:1','-f','%08d.png']
     process=run_owned(command,root,dest,remaining());files=sorted(out.glob('*.png'))
     if len(files)!=frames*2:raise RuntimeError('RIFE frame count mismatch')
     target=dest/'video.mp4'

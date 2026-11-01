@@ -76,7 +76,7 @@ class KoboldMediaBundle {
    if(!running){var launch=new ProcessStartInfo(Path.Combine(Root,"runtime/python/pythonw.exe"),"-I -B \""+Path.Combine(Root,"tools/AutoStart.py")+"\"");launch.WorkingDirectory=Root;launch.UseShellExecute=false;launch.CreateNoWindow=true;Process.Start(launch);}
    var deadline=DateTime.UtcNow.AddSeconds(180);bool ready=false;
    while(DateTime.UtcNow<deadline){try{var c=js.Deserialize<Dictionary<string,object>>(Get("/v1/media/capabilities"));if((string)c["backend"]=="KoboldCpp"){ready=true;break;}}catch(WebException){}Thread.Sleep(500);}
-   if(!ready)throw new IOException("Media startup timed out. Check logs/autostart.log; main models must be present in MODELS, DETAILERS and UPSCALERS.");
+   if(!ready)throw new IOException("Media startup timed out. Check logs/autostart.log; main models must be present in MODELS, MODELS/detailers and MODELS/upscalers.");
    return 0;
   }catch(Exception error){
    try{Directory.CreateDirectory(Path.Combine(Root,"logs"));File.WriteAllText(Path.Combine(Root,"logs/bundle-startup-error.log"),DateTime.Now.ToString("o")+"\n"+error.ToString());}catch{}

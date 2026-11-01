@@ -1,59 +1,28 @@
-# API / OpenWebUI
-AUTOMATIC1111 base: `http://YOUR_KOBOLD_HOST:5001`; OpenAI Images uses `/v1`. Private Native5005 is not OWUI's endpoint. Setup binds loopback by default; use `-ListenHost 0.0.0.0` to expose your LAN service explicitly.
+# Media API
+Base: http://YOUR_KOBOLD_HOST:5001 (alias5003). Private Native5005 is internal. GET /openapi.json and /v1/media/capabilities are authoritative. All JSON keys stay English; descriptions defaultRU, ?lang=en selectsEN where translated.
 
-## Normal
-No explicit mode needed. Extra JSON:
-```json
-{
-  "steps": 8,
-  "cfg_scale": 1,
-  "sampler_name": "euler",
-  "scheduler": "simple",
-  "eta": 0,
-  "flow_shift": 5,
-  "clip_skip": -1,
-  "cache_mode": "cache-dit",
-  "cache_options": "threshold=0.08,warmup=4,Fn=16,Bn=2",
-  "width": 736,
-  "height": 1104,
-  "enable_hr": false
-}
-```
-The server owns the selected image model, static Afterlight0.25 + RealismEnhancer1.0 and sampling profile. No LoRA tags/triggers. `enable_hr:true` requests proxy4Г—, not Native hires/img2img. Default Normal returns736Г—1104 with faces/Gater;4Г— returns2944Г—4416.
+| Operation | POST endpoint | Required/core fields |
+|---|---|---|
+| Image | /sdapi/v1/txt2img or /v1/images/generations | prompt; Normal is default |
+| Whole-frame redraw | /v1/images/edits | operation:img2img, one target, prompt |
+| Image4x | /sdapi/v1/extra-single-image | image(Base64), upscaling_resize:4 |
+| Music MP3 | /api/extra/music/generate | style, lyrics, duration(approximate cap) |
+| Video | /v1/videos/generations | prompt, frames, optional image(PNG Base64) |
+| Stored-video audio | /v1/videos/soundtrack | video_id, audio(tracks/speakers) |
+| SFX WAV/MP3 | /v1/audio/sfx | prompt(English), duration0.25..60, seed, response_format |
+| Speech WAV | /v1/audio/speech | input, voice, language, response_format:wav |
+| STT | /v1/audio/transcriptions | compatible multipart audio |
 
-## High through a filter
-Apply after common filter parameters; remove conflicting `size` overrides:
-```json
-{
-  "width": 928,
-  "height": 1392,
-  "steps": 8,
-  "cfg_scale": 1,
-  "sampler_name": "euler",
-  "scheduler": "simple",
-  "eta": 0,
-  "flow_shift": 5,
-  "clip_skip": -1,
-  "cache_mode": "cache-dit",
-  "cache_options": "threshold=0.08,warmup=4,Fn=16,Bn=2",
-  "kcpp_quality": "quality",
-  "enable_hr": true
-}
-```
-High selects928Г—1392 and defaults to4Г— (3712Г—5568). Selected Ray High generation/full-cycle is not measured; historical times do not apply.
+Image model/adapters/sampling are server-owned: RayQ8, Afterlight.25+RealismEnhancer1, Euler/simple8/eta0/CFG1/shift5, Cache-DiT.08. Normal736x1104 noautoSR; enable_hr:true requests proxyClear4x. High: kcpp_quality:quality,928x1392,default4x. High current adapter mix has no new timing. Faces/Gater run before SR, not again afterwards. GUI uses original Image Gen/Audio plus Video; Extra has language/startup; arbitrary.kcpps Save/Load.
 
-## Processing / routes
-- Generation: `/sdapi/v1/txt2img`, `/v1/images/generations`.
-- Redraw: `/sdapi/v1/img2img`; `/v1/images/edits` requires explicit `operation=img2img`. Final faces/Gater; no autoSR. [Limitations](EDITING.md).
-- Upscale: `/sdapi/v1/extra-single-image` or `/sdapi/v1/upscale`, `{"image":"BASE64_PNG","upscaling_resize":4}`. Faces/Gater before SR unless valid pixel-bound markers prove they ran already. No repeated pass after SR; preserve returned PNG/metadata.
-- YuNet960 detects; GPEN512 blends20%; SFace>=0.97 guards features, max2faces. Bounds scale by image area; large faces may be skipped. Gater Restore1Г— then optional ClearReality FP32 DirectML4Г—. Separate denoise/Gater Sharpen/Helaman disabled.
-- `/v1/images/capabilities`: instruction-edit/masks/raw references/multi-image are explicitly unsupported, not replaced by successful PNG generation.
-- [Reference synthesis](REFERENCE-SYNTHESIS.md): client-selected vision analysis/caption, text-only conditioning, no exact identity guarantee.
-- MusicMP3/API-only; returns to GPU-resident Normal. Video: `/v1/videos/generations`, full Pro decoder, optional YuE2 soundtrack; see [video contract](VIDEO.md) and [unified OWUI instructions](MEDIA.ru.md).
+Image edits are whole-frame img2img, not instruction editing. Unsupported masks/multiple-reference/instruction operations return422 without a fake successful image. /v1/images/synthesize accepts2–4 client vision TEXT analyses, not image conditioning or guaranteed identity.
 
-Use a timeout covering the full job, e.g.3600s. Rewrite captions once and cache them; normally120вЂ“180 coherent English words. Numeric timing scope: benchmarks/results.json.
+Video is Wan5B Turbo, full encoder+ProFP32, Euler/beta4, eta0/CFG1/shift5, lightCache.04,WG512,VAEthreshold576(actual320), native480p→Clear720/faces, optionalRIFE48FPS. One Native call: frames4n+1,5..121 at24FPS;121frames≈5.04s. PNG limit16MiB. Returned JSON has id,url,metadata. Resolve relative URLs against the Kobold base. Per-call deadline<=900s; default450. RIFE changes FPS, not duration.
 
+OWUI20s default/60s maximum is an orchestration specification, not implemented native long-video support. Generate actual sequential short clips using continue_from; drop overlapping boundary frames, assemble and analyze the REAL finished movie. Never fake duration by looping/slowing video. Exact H.264 montage may need one final high-quality reencode; subsequent audio mux copies that assembled video stream. Long continuity/identity is not guaranteed. /v1/videos/soundtrack works only on stored native clipIDs, not a client-assembled long file.
 
-YuE2 music supersedes previous ACE-Step references: Q8_0 main + F16 VAE, no Gemma, client-side helper, MP3. See [music contract](MUSIC.md). Original pinned weights download only; CC-BY-NC-4.0 and upstream attribution apply. No song-generation claims beyond the saved short trials.
+After vision, a chosen helper can plan sound via /v1/media/audio-plan: prompt(actual observations/timestamps),duration_seconds,speakers. It is text-only, not vision. Tracks:1..8 per server request, kind music/sfx/speech,start,end(seconds),volume0..1; English prompt for music/SFX, text+speaker_id for speech. Individual SA3 impacts may need onset refinement; no lip-sync. New standaloneSFX returns BINARY audio/wav or audio/mpeg, not JSON/URL; headers X-SFX-Seconds and X-SFX-Generation-Seconds report duration/render time. LongSFX uses real short generations/crossfades. /v1/audio/sfx/capabilities reports availability.
 
-Current30October: public5001/5003, private5005; `/media` GUI, `/api` documentation, `/openapi.json`, `/v1/media/generations` and `/v1/media/upscale`. Default video cache0.04/warmup1. Existing29October measurements are historical; no new generation performed.
+Voices: ru/shimmer=Masha, ru/sage=Sveta, ru/echo=Dima; en/shimmer=Heart, en/Ryan=Michael. Always set language; aliases are not additional voices. Stable speaker_id/language→voice. Use explicit user roles or offscreen narrator, not gender inference from images. The server timeline selects female/male profiles, not per-trackvoice; for Sveta/multiple female voices, call TTS explicitly and mix on OWUI. For20–60s assembled movies mix music/SFX/TTS on OWUI after real-frame analysis. Music duration is approximate; speech must fit naturally, never silently cut. MP4 audioAAC; musicMP3; SFXwav/mp3.
+
+Reuse the existing OWUI filter and configurable vision/helper selections. One Python file, existing FFmpeg/http client/storage. Client-side dedup and hash-based caches; no blind retry of expensive POST on lost response. Preserve ready video on audio failure. No shell commands/URLs supplied by LLM plans, private addresses in Git, or process-control/model-switch calls from the filter. Return files through authenticated OWUI storage. Timed audio is separate generators and mixing, not joint AV inference. Latest scopes/limits: ../results/measurements.json.

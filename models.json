@@ -52,7 +52,7 @@
       ]
     },
     {
-      "path": "UPSCALERS/ClearRealityV1-fp32.onnx",
+      "path": "MODELS/upscalers/ClearRealityV1-fp32.onnx",
       "bytes": 1718947,
       "sha256": "bbce9d5a653281cfae07788d620bd4ec45712709bdf6349a06a893159efd97ce",
       "url": "https://huggingface.co/Kim2091/ClearRealityV1/resolve/6bfd32e08342ad5d8ae5ac2fd6629a72d525c76e/ONNX/fp32/4x-ClearRealityV1-fp32-opset17.onnx",
@@ -60,11 +60,12 @@
       "source": "https://huggingface.co/Kim2091/ClearRealityV1",
       "license": "Apache-2.0; Kim2091; unmodified FP32 ONNX.",
       "legacy_paths": [
+        "UPSCALERS/ClearRealityV1-fp32.onnx",
         "tools/upscaler_models/ClearRealityV1-fp32.onnx"
       ]
     },
     {
-      "path": "DETAILERS/faces/face_detection_yunet_2023mar.onnx",
+      "path": "MODELS/detailers/faces/face_detection_yunet_2023mar.onnx",
       "bytes": 232589,
       "sha256": "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4",
       "url": null,
@@ -72,11 +73,12 @@
       "source": "https://github.com/opencv/opencv_zoo/tree/main/models/face_detection_yunet",
       "in_release": true,
       "legacy_paths": [
+        "DETAILERS/faces/face_detection_yunet_2023mar.onnx",
         "tools/detailer_models/face_detection_yunet_2023mar.onnx"
       ]
     },
     {
-      "path": "DETAILERS/faces/face_recognition_sface_2021dec.onnx",
+      "path": "MODELS/detailers/faces/face_recognition_sface_2021dec.onnx",
       "bytes": 38696353,
       "sha256": "0ba9fbfa01b5270c96627c4ef784da859931e02f04419c829e83484087c34e79",
       "url": null,
@@ -84,11 +86,12 @@
       "source": "https://github.com/opencv/opencv_zoo/tree/main/models/face_recognition_sface",
       "in_release": true,
       "legacy_paths": [
+        "DETAILERS/faces/face_recognition_sface_2021dec.onnx",
         "tools/detailer_models/face_recognition_sface_2021dec.onnx"
       ]
     },
     {
-      "path": "DETAILERS/restoration/1xGaterV3Restore_fp32.onnx",
+      "path": "MODELS/detailers/restoration/1xGaterV3Restore_fp32.onnx",
       "bytes": 86388840,
       "sha256": "6653528b62fe763403e18fa33a21c28755b27006e15d6be4b2c2c56c7ca4d27b",
       "url": null,
@@ -96,11 +99,12 @@
       "source": "https://github.com/Phhofm/models/releases/tag/1xgaterv3_r_restore",
       "in_release": true,
       "legacy_paths": [
+        "DETAILERS/restoration/1xGaterV3Restore_fp32.onnx",
         "tools/restoration_models/1xGaterV3Restore_fp32.onnx"
       ]
     },
     {
-      "path": "DETAILERS/faces/gpen_bfr_512.onnx",
+      "path": "MODELS/detailers/faces/gpen_bfr_512.onnx",
       "bytes": 284340240,
       "sha256": "d5f066b9068a8b74217f9712e28e875a6144629b108a6f7355acbdb3a2832c54",
       "url": "https://github.com/facefusion/facefusion-assets/releases/download/models-3.0.0/gpen_bfr_512.onnx",
@@ -108,6 +112,7 @@
       "source": "https://docs.facefusion.io/introduction/licenses",
       "in_release": false,
       "legacy_paths": [
+        "DETAILERS/faces/gpen_bfr_512.onnx",
         "tools/detailer_models/gpen_bfr_512.onnx"
       ]
     },
@@ -221,6 +226,69 @@
       "video_component": true,
       "source": "https://huggingface.co/Comfy-Org/Wan-2.2",
       "license": "Original Wan/encoder distributor terms; downloaded from original provider, not mirrored."
+    },
+    {
+      "path": "MODELS/audio/sfx/stable-audio-3-small-sfx-dit-0.5B-v1.0-Q8_0.gguf",
+      "bytes": 494224064,
+      "sha256": "cceae541b7241d0fd67b1d0bae036e03d0cd8cbdd7a485db7d5505ddc118943a",
+      "url": "https://huggingface.co/thepatch/stable-audio-3-small-sfx-GGUF/resolve/fcbd756cde8f9cc4d0213433d868063593d6ca22/stable-audio-3-small-sfx-dit-0.5B-v1.0-Q8_0.gguf",
+      "in_release": false,
+      "source": "https://huggingface.co/thepatch/stable-audio-3-small-sfx-GGUF",
+      "license": "Original Stable Audio community/Gemma terms; original downloads only."
+    },
+    {
+      "path": "MODELS/audio/sfx/stable-audio-3-small-sfx-same-s-v1.0-Q8_0.gguf",
+      "bytes": 115345696,
+      "sha256": "d1b4e26213df03032eabd72668cd33d06deb5d93cfaa19d1d6d3fba3bcb7adc8",
+      "url": "https://huggingface.co/thepatch/stable-audio-3-small-sfx-GGUF/resolve/fcbd756cde8f9cc4d0213433d868063593d6ca22/stable-audio-3-small-sfx-same-s-v1.0-Q8_0.gguf",
+      "in_release": false,
+      "source": "https://huggingface.co/thepatch/stable-audio-3-small-sfx-GGUF",
+      "license": "Original Stable Audio community/Gemma terms; original downloads only."
+    },
+    {
+      "path": "MODELS/audio/sfx/stable-audio-3-small-sfx-conditioner-v1.0-F32.gguf",
+      "bytes": 793184,
+      "sha256": "c4f253c47d8feadb236619b2fe72a5df9c6a99751382738ed4b96be7ad1bc517",
+      "url": "https://huggingface.co/thepatch/stable-audio-3-small-sfx-GGUF/resolve/fcbd756cde8f9cc4d0213433d868063593d6ca22/stable-audio-3-small-sfx-conditioner-v1.0-F32.gguf",
+      "in_release": false,
+      "source": "https://huggingface.co/thepatch/stable-audio-3-small-sfx-GGUF",
+      "license": "Original Stable Audio community/Gemma terms; original downloads only."
+    },
+    {
+      "path": "MODELS/audio/sfx/stable-audio-3-small-sfx-GGUF-LICENSE.md",
+      "bytes": 11852,
+      "sha256": "d6f6b1a4dce5c852bd6d7d9482d002baf0ccdb71e662250b73be9eec8764ee8d",
+      "url": "https://huggingface.co/thepatch/stable-audio-3-small-sfx-GGUF/resolve/fcbd756cde8f9cc4d0213433d868063593d6ca22/LICENSE.md",
+      "in_release": false,
+      "source": "https://huggingface.co/thepatch/stable-audio-3-small-sfx-GGUF",
+      "license": "Original Stable Audio community/Gemma terms; original downloads only."
+    },
+    {
+      "path": "MODELS/audio/sfx/t5gemma-b-b-ul2-encoder-0.3B-v1.0-F16.gguf",
+      "bytes": 563243808,
+      "sha256": "26d7da5bdbe78b1bd11ac5e4b9b7a20ed43295bdd9eb3c1159b2cee004d9de43",
+      "url": "https://huggingface.co/thepatch/t5gemma-b-b-ul2-GGUF/resolve/26caadf5cb1b6523370caff61f6a32337f46625e/t5gemma-b-b-ul2-encoder-0.3B-v1.0-F16.gguf",
+      "in_release": false,
+      "source": "https://huggingface.co/thepatch/t5gemma-b-b-ul2-GGUF",
+      "license": "Original Stable Audio community/Gemma terms; original downloads only."
+    },
+    {
+      "path": "MODELS/audio/sfx/t5gemma-b-b-ul2-v1.0-vocab.gguf",
+      "bytes": 13838496,
+      "sha256": "d58ef75568789d5d394a67231c853803bd24778d136aa0d1990210bcdd485d32",
+      "url": "https://huggingface.co/thepatch/t5gemma-b-b-ul2-GGUF/resolve/26caadf5cb1b6523370caff61f6a32337f46625e/t5gemma-b-b-ul2-v1.0-vocab.gguf",
+      "in_release": false,
+      "source": "https://huggingface.co/thepatch/t5gemma-b-b-ul2-GGUF",
+      "license": "Original Stable Audio community/Gemma terms; original downloads only."
+    },
+    {
+      "path": "MODELS/audio/sfx/t5gemma-b-b-ul2-GGUF-LICENSE.md",
+      "bytes": 10541,
+      "sha256": "e77acc0d3163bb7534675045c584b4d04b387b529239fc4b3647da0a01ba4745",
+      "url": "https://huggingface.co/thepatch/t5gemma-b-b-ul2-GGUF/resolve/26caadf5cb1b6523370caff61f6a32337f46625e/LICENSE.md",
+      "in_release": false,
+      "source": "https://huggingface.co/thepatch/t5gemma-b-b-ul2-GGUF",
+      "license": "Original Stable Audio community/Gemma terms; original downloads only."
     }
   ],
   "moss_sources": [
@@ -334,5 +402,14 @@
     "checkpoint_source": "https://huggingface.co/lightx2v/LightVAE/tree/4925ea978147b9de492d7a5fd4f9c6d1854ca1cc",
     "license_weights": "Apache-2.0",
     "installation": "Pinned original safetensors and upstream source are downloaded locally; one-time CPU export. No upstream Python or model weights redistributed."
-  }
+  },
+  "sfx_models": [
+    "MODELS/audio/sfx/stable-audio-3-small-sfx-dit-0.5B-v1.0-Q8_0.gguf",
+    "MODELS/audio/sfx/stable-audio-3-small-sfx-same-s-v1.0-Q8_0.gguf",
+    "MODELS/audio/sfx/stable-audio-3-small-sfx-conditioner-v1.0-F32.gguf",
+    "MODELS/audio/sfx/stable-audio-3-small-sfx-GGUF-LICENSE.md",
+    "MODELS/audio/sfx/t5gemma-b-b-ul2-encoder-0.3B-v1.0-F16.gguf",
+    "MODELS/audio/sfx/t5gemma-b-b-ul2-v1.0-vocab.gguf",
+    "MODELS/audio/sfx/t5gemma-b-b-ul2-GGUF-LICENSE.md"
+  ]
 }

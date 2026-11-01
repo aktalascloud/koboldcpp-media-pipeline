@@ -9,7 +9,7 @@ def prepare():
     if available(ROOT):print('RIFE already available; no download.');return True
     archive=ROOT/'runtime/cache/rife-20221029.zip';fetch(ARCHIVE,archive)
     prefix='rife-ncnn-vulkan-20221029-windows/'
-    mapping={'rife-ncnn-vulkan.exe':'runtime/rife/rife-ncnn-vulkan.exe','LICENSE':'runtime/rife/LICENSE','README.md':'runtime/rife/README.md','rife-v4.6/flownet.bin':'DETAILERS/interpolation/rife-v4.6/flownet.bin','rife-v4.6/flownet.param':'DETAILERS/interpolation/rife-v4.6/flownet.param'}
+    mapping={'rife-ncnn-vulkan.exe':'runtime/rife/rife-ncnn-vulkan.exe','LICENSE':'runtime/rife/LICENSE','README.md':'runtime/rife/README.md','rife-v4.6/flownet.bin':'MODELS/detailers/interpolation/rife-v4.6/flownet.bin','rife-v4.6/flownet.param':'MODELS/detailers/interpolation/rife-v4.6/flownet.param'}
     with zipfile.ZipFile(archive) as z:
         for source,target in mapping.items():
             data=z.read(prefix+source);p=ROOT/target;p.parent.mkdir(parents=True,exist_ok=True)

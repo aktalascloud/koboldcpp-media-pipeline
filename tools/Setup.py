@@ -158,6 +158,9 @@ def main():
         if args.include_rife:
             from SetupRife import prepare
             prepare()
+        if catalog.get('sfx_models'):
+            from BuildSfx import prepare
+            prepare()
     exe=ROOT/'koboldcpp-nocuda.exe'
     if not exe.is_file():raise RuntimeError('Pinned core Windows asset missing.')
     defaults['kcpp_proxy'].update(host=args.listen_host,autostart_enabled=False);exe_sha=sha(exe)

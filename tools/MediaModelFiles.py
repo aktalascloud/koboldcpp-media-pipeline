@@ -12,7 +12,7 @@ def sha(path):
 def selection(h,profiles,proxy):
     result={name:{**{k:profiles[key].get(k,'') for k in IMAGE_FIELDS},'sdlora':profiles[key].get('sdlora') or [],'sdloramult':profiles[key].get('sdloramult') or []} for name,key in [('photo','photo-normal'),('video','video')]}
     result['music']={k:profiles['music'].get(k,'') for k in MUSIC_FIELDS}
-    f=proxy['detailer'];result['post']={'upscaler':proxy['upscaler']['model'],'video_upscaler':proxy['video'].get('upscaler_model',proxy['upscaler']['model']),'rife':proxy['video'].get('rife_models','DETAILERS/interpolation/rife-v4.6'),'face':f['model'],'guard':f['feature_guard_model'],'detector':f.get('detector_model','DETAILERS/faces/face_detection_yunet_2023mar.onnx'),'restoration':proxy['photo_restoration']['model']}
+    f=proxy['detailer'];result['post']={'upscaler':proxy['upscaler']['model'],'video_upscaler':proxy['video'].get('upscaler_model',proxy['upscaler']['model']),'rife':proxy['video'].get('rife_models','MODELS/detailers/interpolation/rife-v4.6'),'face':f['model'],'guard':f['feature_guard_model'],'detector':f.get('detector_model','MODELS/detailers/faces/face_detection_yunet_2023mar.onnx'),'restoration':proxy['photo_restoration']['model']}
     return result
 
 def gguf_arch(path):
@@ -108,14 +108,14 @@ def prepare(chosen,h,profiles,proxy,root):
             source=Path(chosen['post'][name]);source=(source if source.is_absolute() else root/source).resolve()
             if not all((source/f).is_file() for f in ('flownet.bin','flownet.param')):raise ValueError('RIFE: выберите папку с flownet.bin и flownet.param')
             if not source.is_relative_to(root):
-                target=root/'DETAILERS/interpolation'/(source.name+'-'+sha(source/'flownet.param')[:10]);target.mkdir(parents=True,exist_ok=True)
+                target=root/'MODELS/detailers/interpolation'/(source.name+'-'+sha(source/'flownet.param')[:10]);target.mkdir(parents=True,exist_ok=True)
                 for filename in ('flownet.bin','flownet.param'):
                     destination=target/filename
                     if destination.exists() and sha(destination)!=sha(source/filename):raise ValueError('Другие файлы RIFE сохранены')
                     if not destination.exists():shutil.copy2(source/filename,destination)
                 source=target
             proxy['video']['rife_models']=source.relative_to(root).as_posix();continue
-        path=portable_file(chosen['post'][name],'UPSCALERS/imported' if name in ('upscaler','video_upscaler') else 'DETAILERS/imported',root)
+        path=portable_file(chosen['post'][name],'MODELS/upscalers/imported' if name in ('upscaler','video_upscaler') else 'MODELS/detailers/imported',root)
         if not path or Path(path).suffix.lower()!='.onnx':raise ValueError('Для '+name+' требуется совместимая ONNX-модель')
         import onnx
         graph=onnx.load(str(root/path),load_external_data=False);constants={t.name for t in graph.graph.initializer}
