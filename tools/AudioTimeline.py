@@ -1,6 +1,6 @@
 """Real timed audio stems: SA3 SFX, configured TTS, YuE2 music; no false Foley/lip-sync."""
 from pathlib import Path
-import json,math,re,hashlib,subprocess,time
+import json,math,re,hashlib,subprocess,time,shutil,wave
 from AudioServices import services,select_voice,remote,plan
 
 def number(value):return type(value) in (int,float) and math.isfinite(value)
@@ -18,23 +18,32 @@ def validate(options,duration,cfg):
     tracks=options.get('tracks')
     if options.get('auto_plan'):
         generated=plan(cfg,options.get('prompt',options.get('style','')),duration,speakers);tracks=generated.get('tracks')
-    if not isinstance(tracks,list) or not 1<=len(tracks)<=8:raise ValueError('Укажите1..8 аудиодорожек')
+    if not isinstance(tracks,list) or not 0<=len(tracks)<=8:raise ValueError('Укажите0..8 аудиодорожек')
     result=[];opts=services(cfg)
     for index,row in enumerate(tracks):
-        if not isinstance(row,dict) or set(row)-{'kind','prompt','text','start','end','volume','speaker_id','seed','fit','language'}:raise ValueError('Неизвестные поля аудиодорожки')
+        if not isinstance(row,dict) or set(row)-{'kind','prompt','text','start','end','volume','speaker_id','seed','fit','language','speech_video_id'}:raise ValueError('Неизвестные поля аудиодорожки')
         kind=row.get('kind');start=row.get('start');end=row.get('end');volume=row.get('volume',.7)
+        if 'speech_video_id' in row and kind!='speech':raise ValueError('speech_video_id is speech-only')
         if kind not in ('sfx','speech','music') or not number(start) or not number(end) or not 0<=start<end<=duration+.001 or not number(volume) or not 0<=volume<=1:raise ValueError('Проверьте kind/start/end/volume аудиодорожки')
         text=row.get('text','') if kind=='speech' else row.get('prompt','')
-        if not isinstance(text,str) or not text.strip() or len(text)>2000:raise ValueError('Для дорожки нужен text речи либо prompt звука')
+        if not (kind=='speech' and 'speech_video_id' in row) and (not isinstance(text,str) or not text.strip() or len(text)>2000):raise ValueError('Для дорожки нужен text речи либо prompt звука')
         item={**row,'start':float(start),'end':min(float(end),duration),'volume':float(volume),'index':index}
         if kind=='speech':
-            if not opts['tts_enabled']:raise ValueError('TTS не подключён в Audio')
+            if not opts['tts_enabled'] and 'speech_video_id' not in row:raise ValueError('TTS не подключён в Audio')
             speaker=by_id.get(row.get('speaker_id'))
             if speaker is None:raise ValueError('Дорожка речи должна ссылаться на описанного speaker_id')
             language=row.get('language',speaker.get('language',options.get('language','ru')))
             if not isinstance(language,str):raise ValueError('language: ru либо en')
             language=language.lower().split('-')[0]
             item['voice']=select_voice(opts,{**speaker,'language':language});item['language']=language
+            if 'speech_video_id' in row:
+                from VideoEditing import saved
+                source=saved(Path(__file__).resolve().parent.parent,row['speech_video_id'])
+                original=json.loads((source/'service.json').read_text(encoding='utf-8'))['metadata'].get('speech',{})
+                wav=source/'speech.wav'
+                if not wav.is_file() or original.get('language')!=language or original.get('voice')!=item['voice'] or hashlib.file_digest(wav.open('rb'),'sha256').hexdigest()!=original.get('audio_sha256'):raise ValueError('Stored lip-sync speech does not match the speaker/voice/language/hash')
+                if 'text' in row:raise ValueError('Stored speech and a new text cannot be combined')
+                item['_stored_speech']=str(wav)
             if row.get('fit','natural') not in ('natural','stretch'):raise ValueError('fit: natural либо stretch')
         if kind=='sfx':
             from AudioServices import capabilities
@@ -47,14 +56,17 @@ def render(supervisor,root,folder,cfg,options,budget,metadata):
     from MusicContract import prepare_music
     from NativeVideo import request_audio_deadline
     root=Path(root).resolve();folder=Path(folder).resolve();duration=metadata['frames']/metadata['fps'];timeline=options.get('_validated_timeline') or validate(options,duration,cfg)
+    if not timeline['tracks']:return {'enabled':False,'mode':'timed-multitrack','reason':'No confirmed or requested audio events; silence retained','lip_sync':False}
     stems=folder/'audio-tracks';stems.mkdir(exist_ok=True);reports=[];paths=[];began=time.perf_counter()
     for track in timeline['tracks']:
         budget.remaining();index=track['index'];length=track['end']-track['start'];kind=track['kind'];target=stems/(str(index)+('.mp3' if kind=='music' else '.wav'));tick=time.perf_counter()
         if kind=='speech':
-            payload={'model':'tts-1','input':track['text'],'voice':track['voice'],'language':track['language'],'response_format':'wav','seed':track.get('seed',int(hashlib.sha256(track['speaker_id'].encode()).hexdigest()[:7],16))}
-            status,headers,body=remote(cfg,'/v1/audio/speech',json.dumps(payload).encode(),timeout=budget.remaining())
-            if status!=200 or not body:raise RuntimeError('TTS вернул ошибку или пустое аудио')
-            target.write_bytes(body)
+            if track.get('_stored_speech'):shutil.copy2(track['_stored_speech'],target)
+            else:
+                payload={'model':'tts-1','input':track['text'],'voice':track['voice'],'language':track['language'],'response_format':'wav','seed':track.get('seed',int(hashlib.sha256(track['speaker_id'].encode()).hexdigest()[:7],16))}
+                status,headers,body=remote(cfg,'/v1/audio/speech',json.dumps(payload).encode(),timeout=budget.remaining())
+                if status!=200 or not body:raise RuntimeError('TTS вернул ошибку или пустое аудио')
+                target.write_bytes(body)
         elif kind=='music':
             payload=prepare_music({'style':track['prompt'],'lyrics':track.get('text',''),'duration':max(6,math.ceil(length))},cfg)
             with supervisor.lease('music',cfg) as active:target.write_bytes(request_audio_deadline(active['backend']+'/api/extra/music/generate',payload,timeout=budget.remaining()))
@@ -67,7 +79,9 @@ def render(supervisor,root,folder,cfg,options,budget,metadata):
         match=re.search(r'Duration:\s*(\d+):(\d+):([0-9.]+)',probe.stderr)
         if not match:raise RuntimeError('Не удалось определить длительность аудиодорожки')
         actual=int(match[1])*3600+int(match[2])*60+float(match[3]);speed=1.
-        if kind=='speech' and actual>length+.08:
+        if kind=='speech':
+            with wave.open(str(target),'rb') as wav:actual=wav.getnframes()/wav.getframerate()
+        if kind=='speech' and actual>length+1/48000:
             speed=actual/length
             if track.get('fit','natural')!='stretch' or not .5<=speed<=2:raise ValueError('Речь не помещается в таймкод. Увеличьте интервал или явно задайте fit=stretch (до2×); речь не обрезается молча.')
         paths.append((target,track,speed));reports.append({k:track.get(k) for k in ('kind','start','end','volume','speaker_id','voice')}|{'source_seconds':actual,'render_seconds':time.perf_counter()-tick,'sha256':hashlib.sha256(target.read_bytes()).hexdigest()})
@@ -76,13 +90,27 @@ def render(supervisor,root,folder,cfg,options,budget,metadata):
         command+=['-i',str(path)];length=track['end']-track['start'];delay=round(track['start']*1000)
         effect=f'atempo={speed},' if speed!=1 else ''
         filters.append(f'[{i}:a]aresample=48000,aformat=sample_fmts=fltp:channel_layouts=stereo,{effect}atrim=duration={length:.9f},asetpts=PTS-STARTPTS,volume={track["volume"]},afade=t=in:d={min(.01,length/4):.9f},afade=t=out:st={max(0,length-.025):.9f}:d={min(.025,length/3):.9f},adelay={delay}|{delay}[t{i}]')
-    labels=''.join(f'[t{i}]' for i in range(1,len(paths)+1));filters.append(labels+f'amix=inputs={len(paths)}:duration=longest:normalize=0,alimiter=limit=0.95,apad,atrim=duration={duration:.9f},asplit=2[a_mux][a_mp3]')
+    windows=[(t['start'],t['end']) for _,t,_ in paths if t['kind']=='speech']
+    mix_labels=[]
+    for i,(_,track,_) in enumerate(paths,1):
+        if windows and track['kind'] in ('music','sfx'):
+            gates=[f'max(0,min(1,min((t-({a-.08:.6f}))/.08,({b+.08:.6f}-t)/.08)))' for a,b in windows]
+            duck='1-0.68*min(1,'+'+'.join(gates)+')'
+            filters.append(f"[t{i}]volume='{duck}':eval=frame[d{i}]");mix_labels.append(f'[d{i}]')
+        else:mix_labels.append(f'[t{i}]')
+    labels=''.join(mix_labels);filters.append(labels+f'amix=inputs={len(paths)}:duration=longest:normalize=0,alimiter=limit=0.95:level=false,apad,atrim=duration={duration:.9f}[mixed]')
     target=folder/'video-timeline.work.mp4';source_audio=folder/'audio.mp3'
-    command+=['-filter_complex',';'.join(filters),'-map','0:v:0','-map','[a_mux]','-c:v','copy','-c:a','aac','-b:a','192k','-t',str(duration),'-movflags','+faststart',str(target),'-map','[a_mp3]','-c:a','libmp3lame','-q:a','2',str(source_audio)]
-    subprocess.run(command,check=True,timeout=budget.remaining(),stdout=subprocess.DEVNULL,stderr=subprocess.PIPE)
+    mixed=folder/'audio-mix.work.wav'
+    # One finite audio sink avoids FFmpeg multi-output/asplit scheduling hangs.
+    command+=['-filter_complex_threads','1','-filter_complex',';'.join(filters),'-map','[mixed]','-c:a','pcm_s16le','-t',str(duration),str(mixed)]
+    def run(args):subprocess.run(args,check=True,timeout=min(60,budget.remaining()),stdout=subprocess.DEVNULL,stderr=subprocess.PIPE)
+    run(command)
+    run([ffmpeg,'-v','error','-nostdin','-y','-i',str(folder/'video.mp4'),'-i',str(mixed),'-map','0:v:0','-map','1:a:0','-c:v','copy','-c:a','aac','-b:a','192k','-t',str(duration),'-movflags','+faststart',str(target)])
+    run([ffmpeg,'-v','error','-nostdin','-y','-i',str(mixed),'-c:a','libmp3lame','-q:a','2',str(source_audio)])
     import cv2
     check=cv2.VideoCapture(str(target));frames=round(check.get(cv2.CAP_PROP_FRAME_COUNT));fps=check.get(cv2.CAP_PROP_FPS);check.release()
     if frames!=metadata['frames'] or abs(fps-metadata['fps'])>.001:raise RuntimeError('Аудиомикс изменил число кадров или FPS')
     (folder/'video.mp4').rename(folder/'video-silent.mp4');target.rename(folder/'video.mp4')
+    mixed.unlink()
     report={'enabled':True,'mode':'timed-multitrack','tracks':reports,'voice_map':timeline['voice_map'],'seconds':time.perf_counter()-began,'duration_seconds':duration,'source_audio_format':'MP3 stereo','mp4_audio_codec':'AAC192k','video_stream':'copied without re-encoding','lip_sync':False,'visual_event_alignment':'client/helper-provided timestamps, not automatic lip synchronization'}
     (stems/'timeline.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8');return report

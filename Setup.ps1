@@ -1,10 +1,9 @@
-param([switch]$SkipModelDownloads,[switch]$IncludeDirtyBackup,[switch]$IncludeRife,[string]$MossSourceDirectory,[string]$GPENPath,[string]$ListenHost='127.0.0.1')
+param([switch]$SkipModelDownloads,[switch]$IncludeRife,[string]$MossSourceDirectory,[string]$GPENPath,[string]$ListenHost='127.0.0.1')
 $ErrorActionPreference='Stop'
 $taskRoot=[IO.Path]::GetFullPath($PSScriptRoot)
 $taskManifest=Get-Content -LiteralPath (Join-Path $taskRoot 'release-assets.json') -Raw|ConvertFrom-Json
 $taskModelManifest=Get-Content -LiteralPath (Join-Path $taskRoot 'models.json') -Raw|ConvertFrom-Json
 $taskModelPaths=@($taskModelManifest.models|ForEach-Object {$_.path})
-if($IncludeDirtyBackup){$taskModelPaths+=@($taskModelManifest.optional_dirty_backup.models|ForEach-Object {$_.path})}
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 function Assert-TaskNoReparse([string]$Path){
     $taskParent=[IO.Path]::GetDirectoryName($Path)
@@ -54,7 +53,6 @@ foreach($taskAsset in $taskManifest.assets){
 }
 $taskArguments=@('-I','-B',(Join-Path $taskRoot 'tools\Setup.py'),'--listen-host',$ListenHost)
 if($SkipModelDownloads){$taskArguments+='--skip-model-downloads'}
-if($IncludeDirtyBackup){$taskArguments+='--include-dirty-backup'}
 if($IncludeRife){$taskArguments+='--include-rife'}
 if($MossSourceDirectory){$taskArguments+=@('--moss-source-directory',(Resolve-Path -LiteralPath $MossSourceDirectory).Path)}
 if($GPENPath){$taskArguments+=@('--gpen-path',(Resolve-Path -LiteralPath $GPENPath).Path)}

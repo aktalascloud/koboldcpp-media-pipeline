@@ -44,7 +44,7 @@ def process_video(source,destination,root,model='clearreality',faces=False,tempo
             restorer=Restorer(face_model or root/'MODELS/detailers/faces/gpen_bfr_512.onnx',provider=face_provider,detector=detector,guard=guard,profile_prefix=str(destination/'ort-gpen') if profile_gpu and face_provider=='directml' else None,freeze_initializers=freeze_face_initializers)
         load_seconds=time.perf_counter()-started
         output=destination/'video.mp4';temporary=destination/'video.work.mp4'
-        command=[str(root/'runtime/ffmpeg/ffmpeg.exe'),'-hide_banner','-nostdin','-n','-f','rawvideo','-pixel_format','rgb24','-video_size',f'{size[0]}x{size[1]}','-framerate',str(fps),'-i','pipe:0','-an','-c:v','libx264','-preset','veryfast','-crf','18','-pix_fmt','yuv420p','-threads','8','-fps_mode','passthrough','-movflags','+faststart',str(temporary)]
+        command=[str(root/'runtime/ffmpeg/ffmpeg.exe'),'-hide_banner','-nostdin','-n','-f','rawvideo','-pixel_format','rgb24','-video_size',f'{size[0]}x{size[1]}','-framerate',str(fps),'-i','pipe:0','-an','-c:v','libx264','-preset','veryfast','-crf','18','-pix_fmt','yuv420p','-threads','16','-fps_mode','passthrough','-movflags','+faststart',str(temporary)]
         stderr=(destination/'encode.log').open('wb')
         encoder=subprocess.Popen(command,cwd=root,stdin=subprocess.PIPE,stdout=subprocess.DEVNULL,stderr=stderr,creationflags=subprocess.CREATE_NO_WINDOW,
             env={**os.environ,'TEMP':str(root/'runtime/tmp'),'TMP':str(root/'runtime/tmp')})

@@ -18,24 +18,6 @@
           "approved": true
         }
       ]
-    },
-    "MODELS/images/dirty-moss-q8_0.gguf": {
-      "adapters": [
-        {
-          "path": "MODELS/loras/turbo-dmd2-dynamic69.safetensors",
-          "weight": 1,
-          "role": "turbo",
-          "sha256": "d869785c75a20a409f1b590d4ad3a825b542a1fbb9f21589e5ad5e46e62c6910",
-          "approved": true
-        },
-        {
-          "path": "MODELS/loras/afterlight-v1.safetensors",
-          "weight": 0.25,
-          "role": "quality",
-          "sha256": "57d2a400af32a0afd9cd065c43ebeb6a0e44b153abaef0171ce6891b6b057d13",
-          "approved": true
-        }
-      ]
     }
   }
 }

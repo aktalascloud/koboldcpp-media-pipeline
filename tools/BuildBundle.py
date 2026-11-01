@@ -5,7 +5,7 @@ requires its separate third-party redistribution review; core/media code publica
 does not implicitly upload this large local executable.
 """
 from pathlib import Path
-import hashlib,json,subprocess,zipfile,sys
+import hashlib,json,subprocess,zipfile,sys,os
 ROOT=Path(__file__).resolve().parent.parent;BUILD=ROOT/'runtime/cache/bundle-build'
 def digest(p):
     with p.open('rb') as f:return hashlib.file_digest(f,'sha256').hexdigest()
@@ -44,7 +44,7 @@ def main():
         if check.testzip() is not None:raise RuntimeError('Corrupt media payload')
     proof={'format':1,'files':rows,'main_models_embedded':False,'generated_profiles_in_master':True,'local_owner_bundle':True,'redistribution_review_required':True}
     manifest.write_text(json.dumps(proof,separators=(',',':')),encoding='utf-8')
-    csc=Path('C:/Windows/Microsoft.NET/Framework64/v4.0.30319/csc.exe');output=ROOT/'KoboldCpp.exe'
+    csc=Path(os.environ.get('SystemRoot','C:/Windows'))/'Microsoft.NET/Framework64/v4.0.30319/csc.exe';output=ROOT/'KoboldCpp.exe'
     args=[str(csc),'/nologo','/target:winexe','/platform:x64','/optimize+','/win32icon:'+str(ROOT/'tools/kobold.ico'), '/out:'+str(output),'/r:System.Windows.Forms.dll','/r:System.Web.Extensions.dll','/r:System.IO.Compression.dll','/r:System.IO.Compression.FileSystem.dll','/resource:'+str(manifest)+',media-manifest.json','/resource:'+str(archive)+',media-payload.zip',str(ROOT/'tools/MediaBundle.cs')]
     subprocess.run(args,cwd=ROOT,check=True)
     result={'ok':True,'file':'KoboldCpp.exe','bytes':output.stat().st_size,'sha256':digest(output),'payload_files':len(rows),'payload_bytes':archive.stat().st_size,'native_sha256':digest(ROOT/'koboldcpp-nocuda.exe'),'main_models_embedded':False,'private_local_runtime':True,'public_release_uploaded':False}

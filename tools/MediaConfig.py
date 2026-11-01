@@ -40,7 +40,7 @@ def update(root,helper,payload,pid):
             if type(video[key]) is not bool:raise ValueError('Boolean required')
             proxy['video'][key]=video[key]
     if 'default_interpolate_fps' in video:
-        if type(video['default_interpolate_fps']) is not int or video['default_interpolate_fps'] not in (24,48):raise ValueError('FPS must be24 or48')
+        if type(video['default_interpolate_fps']) is not int or video['default_interpolate_fps'] not in (24,48,60):raise ValueError('FPS must be24,48 or60')
         proxy['video']['default_interpolate_fps']=video['default_interpolate_fps']
     faces=fields('faces',('enabled','visibility','minimum_feature_similarity','detector_resolution','max_faces'))
     for key,value in faces.items():

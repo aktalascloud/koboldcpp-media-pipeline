@@ -69,7 +69,7 @@ def main():
     native_environment = read_json(environment_file) if environment_file.is_file() else {}
     allowed_environment = {'GGML_VK_ALLOW_GRAPHICS_QUEUE', 'GGML_VK_POLARIS_SAFE',
         'GGML_VK_MAX_NODES_PER_SUBMIT', 'GGML_VK_BATCHED_SUBMITS', 'GGML_VK_FORCE_MMVQ',
-        'GGML_VK_DISABLE_MMVQ', 'GGML_VK_DISABLE_ASYNC', 'GGML_VK_GCN_TILE64',
+        'GGML_VK_DISABLE_MMVQ', 'GGML_VK_DISABLE_ASYNC', 'GGML_VK_DISABLE_GET_TENSOR_ASYNC', 'GGML_VK_GCN_TILE64',
         'GGML_VK_GCN_TILE_VARIANT', 'GGML_VK_IQ4_XS_ROWS', 'GGML_VK_IQ4_XS_WG', 'GGML_VK_GCN_CONV_WG'}
     profile_environment=h.get('kcpp_native_environment',{})
     if not isinstance(native_environment,dict) or not isinstance(profile_environment,dict):raise SupervisorError('Native environments must be objects.','invalid_profile_config')
@@ -80,6 +80,14 @@ def main():
         valid = isinstance(value, str) and (value in {'k16','m32','n32'} if key == 'GGML_VK_GCN_TILE_VARIANT' else value in {'256','512'} if key=='GGML_VK_GCN_CONV_WG' else bool(re.fullmatch(r'[0-9]{1,4}', value)))
         if not valid:
             raise SupervisorError('Invalid portable Vulkan option value.', 'invalid_profile_config')
+    # GGML's presence switches treat even "0" as enabled. Normalize the portable
+    # 0/1 interface here, so a profile can actually disable an inherited switch.
+    presence={'GGML_VK_ALLOW_GRAPHICS_QUEUE','GGML_VK_POLARIS_SAFE','GGML_VK_BATCHED_SUBMITS',
+        'GGML_VK_FORCE_MMVQ','GGML_VK_DISABLE_MMVQ','GGML_VK_DISABLE_ASYNC',
+        'GGML_VK_DISABLE_GET_TENSOR_ASYNC','GGML_VK_GCN_TILE64'}
+    if any(value not in ('0','1') for key,value in native_environment.items() if key in presence):
+        raise SupervisorError('Vulkan switches must be0 or1.','invalid_profile_config')
+    native_environment={key:value for key,value in native_environment.items() if key not in presence or value!='0'}
     if environment_file.is_file():
         for key in list(environment):
             if key.startswith('GGML_VK_'): environment.pop(key)

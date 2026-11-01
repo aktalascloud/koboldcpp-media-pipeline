@@ -2,7 +2,7 @@ param([Parameter(Mandatory=$true)][string]$OutputPath,[Parameter(Mandatory=$true
 $ErrorActionPreference='Stop'
 $root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))+'\'
 $target=[IO.Path]::GetFullPath($OutputPath)
-if(-not ($target.StartsWith($root+'OUTPUTS\video\',[StringComparison]::OrdinalIgnoreCase) -or $target.StartsWith($root+'RESULTS\Video\',[StringComparison]::OrdinalIgnoreCase))){throw 'Unexpected media monitor destination'}
+if(-not ($target.StartsWith($root+'RESULTS\generated\video\',[StringComparison]::OrdinalIgnoreCase) -or $target.StartsWith($root+'RESULTS\checks\',[StringComparison]::OrdinalIgnoreCase))){throw 'Unexpected media monitor destination'}
 $encoding=[Text.UTF8Encoding]::new($false)
 $failures=0
 for($sample=0;$sample -lt 900;$sample++){

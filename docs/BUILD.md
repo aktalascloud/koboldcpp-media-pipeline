@@ -8,3 +8,5 @@ Setup installs pinned original runtime/core assets, converts original MOSS weigh
 Run Start.exe (only opens KoboldCpp.exe). Extra enables Windows logon startup. Launch applies any selected.kcpps; Helper.kcpps is the internal snapshot. Source modules are in tools; models/processors/upscalers in MODELS; derived profiles in profiles; one runtime in runtime; all current proof/examples in results. Rebuild owner-local bundle: runtime/python/python.exe -I -B tools/BuildBundle.py. The complete private-MS-runtime bundle is not mirrored until redistribution review; public setup builds it locally. Native engine source/build: linked Core repository.
 
 Do not change driver/BIOS/TDR/clock/voltage, precision, model hashes or inference defaults to fix packaging. GET-only startup checks by default; no automatic generation benchmarks.
+
+Optional lip-sync: `runtime/python/python.exe -I -B tools/SetupLipSync.py --accept-noncommercial`. Read original checkpoint terms first; weights are not bundled. Configure audio connections/voices in the GUI. Keep active process/job state and loaded tmp DLLs; discard only inactive logs and completed codec intermediates.

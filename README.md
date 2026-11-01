@@ -1,23 +1,21 @@
 # KoboldCpp media pipeline
 [Русский](README.ru.md) · [Release](https://github.com/aktalascloud/koboldcpp-media-pipeline/releases/latest) · [Install/build](docs/BUILD.md) · [API / OWUI](docs/API.md) · [Licenses](docs/LICENSES.md)
 
-Portable Windows media around [our Haswell/AVX2 RX580Polaris/gfx803 fork](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa) of [original KoboldCpp](https://github.com/LostRuins/koboldcpp). Run **Start.exe → KoboldCpp.exe**. Models switch exclusively; image stays GPU-resident when idle. Setup.ps1 is initial installation/update, not the launcher. No main weights are mirrored.
+Portable Windows media around [our Haswell/AVX2 RX 580 Polaris/gfx803 fork](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa) of [original KoboldCpp](https://github.com/LostRuins/koboldcpp). Run **Start.exe → KoboldCpp.exe**. Models switch exclusively; image stays GPU-resident when idle. Setup.ps1 is initial installation/update, not the launcher. No main weights are mirrored.
 
-- Images: RayQ8/Afterlight.25/RealismEnhancer1,Euler/simple8,eta0,CacheDiT.08. Normal736×1104 noautoSR; High928×1392 defaultClear4x, new High mix unmeasured. YuNet/GPEN20/SFace.97/Gater beforeSR, no repeat afterwards.
-- Music: YuE2MP3. SFX: SA3CPU WAV/MP3,0.25–60s. Speech/helper/STT: configurable provider, RU/EN explicit voices.
-- Video: Wan5BTurbo/fullencoder/ProFP32/Euler-beta4,WG512,threshold576,Clear720/faces/optionalRIFE. NoTiny/Helaman. Timed audio is separate generation/mixing, not joint AV/lip-sync. Native call<=121frames/5.04s;20s default/60s maximum is the OWUI orchestration spec.
+- Default image recipe: Ray Q8, Afterlight0.25 + RealismEnhancer1, Euler/simple8, eta0, Cache-DiT0.08. Normal736×1104 without automatic SR; High928×1392 with ClearReality4x, current High mix unmeasured. YuNet/GPEN20%/SFace0.97/Gater before SR, no repeat afterwards. Models/presets are configurable.
+- Music: YuE2 MP3. SFX: SA3 CPU WAV/MP3,0.25–60s. Speech/helper/STT use a configurable provider and explicit RU/EN voices.
+- Video: Wan5B Turbo, full encoder + Pro FP32, Euler/beta4, WG512, threshold576, ClearReality720p/faces, RIFE48FPS default/60 optional. Audio-driven lip-sync is a separate optional stage; this is not joint AV inference. Native limit121 frames; conservative tested clip73. Client project15s default/30s maximum.
 
 ## Latest saved results
 | Saved test | Actual wall time | Scope |
 |---|---:|---|
 | PhotoNormal | 163.85s |29Oct, ff7d4d0b, one API |
 | Separate photo4x | 6.04s |saved PNG, separate API |
-| Video3.04s | 552.57s |30Oct,0986410a,I2V/Pro/Clear720/faces/all3audio |
-| Audio revision | 57.96s |73RGB frames unchanged, no video rerun |
 | Music32sMP3 | 57.01s |28Oct,6c03b583, photo return61.07s |
 | SFX2sWAV /6sMP3 |10.57s /17.17s |30Oct CPU, photo stayed resident |
 
-Settings/ranges/dates/SHA: [one measurement file](results/measurements.json). **Current native1.124.1/ed587d0b has startup checks only.** Video samples used a private user adapter, not enabled/distributed in this kit. Historical timings are not a new speed claim.
+Settings/ranges/dates/SHA: [one measurement file](results/measurements.json). **Current native1.124.1/91831fa has no new LLM token benchmark; image/video checks below are separate.** Video samples used a private user adapter, not enabled/distributed in this kit. Historical timings are not a new speed claim.
 
 | Actual Normal | Actual4x, full lossless image linked |
 |---|---|
@@ -25,3 +23,13 @@ Settings/ranges/dates/SHA: [one measurement file](results/measurements.json). **
 ![Unscaled4x eye pixels](results/photo-eyes.png)
 
 Only necessary code/config/licenses and current results. Models/detailers/upscalers under MODELS, one runtime; all evidence under results. [Local-model build rules](AGENTS.md). Full owner-local EXE is built locally, not mirrored without runtime redistribution review. Fresh-machine full inference has not been tested.
+
+## 1 November: verified changes
+| Manual check | Result | Scope |
+|---|---:|---|
+| Native image, prior / fresh warm | 147.91 /147.60s | same8-step736x1104 scene;12 RGB-identical outputs across flags |
+| I2V73 → Pro/Clear720/faces/RIFE48 | 583.63s |146 frames,3.04s; Native6053MiB VRAM, no OOM |
+| Stored-video lip-sync at60FPS | 29.12s API |183 frames; CPU, photo process unchanged |
+| Music + SFX + exact speech | 57.37s API | decoded video identical; exact WAV reused |
+
+Pro502 after relocation was caused by an obsolete PowerShell monitor path. Audio mixing now uses finite sequential mix/mux/MP3 steps, avoiding a reproduced FFmpeg dual-output hang. Generations have persistent idempotent job receipts. Optional Wav2Lip is non-commercial, original-provider only; no perfect identity/articulation guarantee.73 frames are the conservative measured clip size;15/30s remains client orchestration, not a measured long AI movie. Models/settings/context are configurable; API aliases do not select arbitrary weight files.

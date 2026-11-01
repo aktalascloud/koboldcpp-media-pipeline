@@ -3,6 +3,18 @@ import ctypes,subprocess,time,json
 from ctypes import wintypes as w
 from pathlib import Path
 
+class OwnedMediaError(RuntimeError):
+    def __init__(self,pid,exit_code):
+        super().__init__('Owned media worker failed:'+str(exit_code))
+        self.worker_pid=pid;self.exit_code=exit_code
+        self.status=503;self.code='video_worker_crashed'
+
+class MediaMonitorError(RuntimeError):
+    def __init__(self,pid,exit_code):
+        super().__init__('GPU memory monitor unavailable; owned decoder stopped')
+        self.monitor_pid=pid;self.monitor_exit_code=exit_code
+        self.status=503;self.code='video_memory_monitor_unavailable'
+
 def job_object():
     class Basic(ctypes.Structure):
         _fields_=[('user',ctypes.c_longlong),('job_user',ctypes.c_longlong),('flags',w.DWORD),('minimum',ctypes.c_size_t),('maximum',ctypes.c_size_t),('count',w.DWORD),('affinity',ctypes.c_size_t),('priority',w.DWORD),('scheduling',w.DWORD)]
@@ -35,14 +47,14 @@ def run_owned(command,root,destination,timeout,memory_guard=False,environment=No
             while child.poll() is None:
                 if time.perf_counter()-began>timeout:raise TimeoutError('Owned media process exceeded request budget')
                 if monitor is not None:
-                    if monitor.poll() is not None:raise RuntimeError('GPU memory monitor unavailable; stopped owned decoder')
+                    if monitor.poll() is not None:raise MediaMonitorError(monitor.pid,monitor.returncode)
                     try:
                         row=json.loads((destination/'gpu.jsonl').read_text().splitlines()[-1]);excessive=row['dedicated']>6500*2**20 or row['shared']>1024*2**20
                         spill=(spill or time.monotonic()) if excessive else None
-                        if spill and time.monotonic()-spill>=8:raise RuntimeError('Pro exceeded6500MiB dedicated/1024MiB shared policy')
+                        if spill and time.monotonic()-spill>=8:raise MemoryError('Pro exceeded6500MiB dedicated/1024MiB shared policy')
                     except (OSError,ValueError,IndexError):pass
                 time.sleep(.2)
-            if child.returncode:raise RuntimeError('Owned media worker failed:'+str(child.returncode))
+            if child.returncode:raise OwnedMediaError(child.pid,child.returncode)
         peaks={}
         if memory_guard:
             rows=[json.loads(line) for line in (destination/'gpu.jsonl').read_text().splitlines()]

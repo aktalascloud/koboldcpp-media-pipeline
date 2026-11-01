@@ -1,15 +1,12 @@
 {
   "format": 1,
   "installed_build": {
-    "native_version": "1.124.1",
-    "commit": "ed587d0beef557e10aa78a26b38b286e70c29e85",
-    "executable_sha256": "ca9e5127cc03caba04bb0943ff353be9aac788ba531a04da57ee0f7d5434992a",
-    "build_date": "2026-11-01",
-    "pgo_disabled_verified": true,
-    "lto_flags": "-flto=4 -fuse-linker-plugin",
-    "native_link_layout": "upstream-supported monolithic; KCPP_COMMONIZE=0; full backend LTO and explicit C ABI"
+    "source_commit": "91831fafa1ca81ce1bc2904b8f6b5eb4369a4bbb",
+    "native_sha256": "71e8aeca0c55ac4fe994b8fc30997061faf4359fdc82bdfedaa9e31b7959fca9",
+    "version": "1.124.1",
+    "date": "2026-11-01"
   },
-  "installed_build_speed_measured": false,
+  "installed_build_speed_measured": true,
   "native": {
     "date": "2026-10-25",
     "source_commit": "e68c9b1005f967f8795fcee2e268d881e87d29a0",
@@ -424,7 +421,6 @@
       0
     ],
     "cold_ready_seconds": 18.82366890000003,
-    "startup_cwd": "Windows/System32",
     "sfx_rows": [
       {
         "duration": 2,
@@ -451,5 +447,693 @@
     "All measurements keep original dates/SHA; installed build has startup checks only.",
     "No physical dual-NUMA measurement. No joint audio-video inference or lip-sync.",
     "20s default/60s maximum is the OWUI orchestration specification; native single-call frame limit remains121."
-  ]
+  ],
+  "current_image_native": {
+    "date": "2026-11-01",
+    "source_commit": "91831fafa1ca81ce1bc2904b8f6b5eb4369a4bbb",
+    "exe_sha256": "71e8aeca0c55ac4fe994b8fc30997061faf4359fdc82bdfedaa9e31b7959fca9",
+    "scope": "Native image generation only,8steps, same prompt/seed/geometry/adapters; no faces/Gater/SR. Cold model loading separate. Every repeat retained.",
+    "request": {
+      "width": 736,
+      "height": 1104,
+      "steps": 8,
+      "cfg_scale": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "flow_shift": 5,
+      "clip_skip": -1,
+      "cache_mode": "cache-dit",
+      "cache_options": "threshold=0.08,warmup=4,Fn=16,Bn=2",
+      "eta": 0,
+      "prompt": "Professional full-length photograph of an adult woman wearing a light silk dress and black high heels, standing beside a wooden wall clock in a warmly lit hotel lobby. Natural detailed eyes, realistic skin and fabric texture, both hands visible, sharp focus, neutral colors.",
+      "negative_prompt": "",
+      "seed": 424242,
+      "batch_size": 1,
+      "n_iter": 1,
+      "enable_hr": false
+    },
+    "runs": [
+      {
+        "name": "original-current",
+        "exe_sha256": "ca9e5127cc03caba04bb0943ff353be9aac788ba531a04da57ee0f7d5434992a",
+        "profile_sha256": "c7c5559d874967a04605f7319981603a52556f92d8633dd457675b56dff7f08b",
+        "environment_override": {},
+        "global_environment": {
+          "GGML_VK_ALLOW_GRAPHICS_QUEUE": "1",
+          "GGML_VK_BATCHED_SUBMITS": "1",
+          "GGML_VK_MAX_NODES_PER_SUBMIT": "100",
+          "GGML_VK_GCN_TILE64": "1",
+          "GGML_VK_GCN_TILE_VARIANT": "k16",
+          "GGML_VK_IQ4_XS_ROWS": "4",
+          "GGML_VK_IQ4_XS_WG": "64",
+          "GGML_VK_DISABLE_GET_TENSOR_ASYNC": "1"
+        },
+        "sdthreads": 20,
+        "cold_model_ready_seconds": 36.17259760000161,
+        "repeats": [
+          {
+            "seconds": 149.91859839999233,
+            "repeat": 0,
+            "rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c"
+          },
+          {
+            "seconds": 147.91350450000027,
+            "repeat": 1,
+            "rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c"
+          }
+        ]
+      },
+      {
+        "name": "fresh-current",
+        "exe_sha256": "71e8aeca0c55ac4fe994b8fc30997061faf4359fdc82bdfedaa9e31b7959fca9",
+        "profile_sha256": "c7c5559d874967a04605f7319981603a52556f92d8633dd457675b56dff7f08b",
+        "environment_override": {},
+        "global_environment": {
+          "GGML_VK_ALLOW_GRAPHICS_QUEUE": "1",
+          "GGML_VK_BATCHED_SUBMITS": "1",
+          "GGML_VK_MAX_NODES_PER_SUBMIT": "100",
+          "GGML_VK_GCN_TILE64": "1",
+          "GGML_VK_GCN_TILE_VARIANT": "k16",
+          "GGML_VK_IQ4_XS_ROWS": "4",
+          "GGML_VK_IQ4_XS_WG": "64",
+          "GGML_VK_DISABLE_GET_TENSOR_ASYNC": "1"
+        },
+        "sdthreads": 20,
+        "cold_model_ready_seconds": 11.827608899999177,
+        "repeats": [
+          {
+            "seconds": 149.54126779999933,
+            "repeat": 0,
+            "rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c"
+          },
+          {
+            "seconds": 147.60432050000236,
+            "repeat": 1,
+            "rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c"
+          }
+        ]
+      },
+      {
+        "name": "fresh-m32",
+        "exe_sha256": "71e8aeca0c55ac4fe994b8fc30997061faf4359fdc82bdfedaa9e31b7959fca9",
+        "profile_sha256": "68e107bb869d661a757945ff9fee7f9c3d0db2bc1d213ab168db7b712da850f2",
+        "environment_override": {
+          "GGML_VK_GCN_TILE_VARIANT": "m32"
+        },
+        "global_environment": {
+          "GGML_VK_ALLOW_GRAPHICS_QUEUE": "1",
+          "GGML_VK_BATCHED_SUBMITS": "1",
+          "GGML_VK_MAX_NODES_PER_SUBMIT": "100",
+          "GGML_VK_GCN_TILE64": "1",
+          "GGML_VK_GCN_TILE_VARIANT": "k16",
+          "GGML_VK_IQ4_XS_ROWS": "4",
+          "GGML_VK_IQ4_XS_WG": "64",
+          "GGML_VK_DISABLE_GET_TENSOR_ASYNC": "1"
+        },
+        "sdthreads": 20,
+        "cold_model_ready_seconds": 11.835362500001793,
+        "repeats": [
+          {
+            "seconds": 154.58228390000295,
+            "repeat": 0,
+            "rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c"
+          },
+          {
+            "seconds": 149.38012789998902,
+            "repeat": 1,
+            "rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c"
+          }
+        ]
+      },
+      {
+        "name": "fresh-n32",
+        "exe_sha256": "71e8aeca0c55ac4fe994b8fc30997061faf4359fdc82bdfedaa9e31b7959fca9",
+        "profile_sha256": "267997debe82d2aba66024e37c363bd8617d7175aa61df925106574fe76e26b4",
+        "environment_override": {
+          "GGML_VK_GCN_TILE_VARIANT": "n32"
+        },
+        "global_environment": {
+          "GGML_VK_ALLOW_GRAPHICS_QUEUE": "1",
+          "GGML_VK_BATCHED_SUBMITS": "1",
+          "GGML_VK_MAX_NODES_PER_SUBMIT": "100",
+          "GGML_VK_GCN_TILE64": "1",
+          "GGML_VK_GCN_TILE_VARIANT": "k16",
+          "GGML_VK_IQ4_XS_ROWS": "4",
+          "GGML_VK_IQ4_XS_WG": "64",
+          "GGML_VK_DISABLE_GET_TENSOR_ASYNC": "1"
+        },
+        "sdthreads": 20,
+        "cold_model_ready_seconds": 11.86936820000119,
+        "repeats": [
+          {
+            "seconds": 151.60420879999583,
+            "repeat": 0,
+            "rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c"
+          },
+          {
+            "seconds": 149.0105091000005,
+            "repeat": 1,
+            "rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c"
+          }
+        ]
+      },
+      {
+        "name": "fresh-submit50",
+        "exe_sha256": "71e8aeca0c55ac4fe994b8fc30997061faf4359fdc82bdfedaa9e31b7959fca9",
+        "profile_sha256": "ff628b05a2e0ec032b0431556f216f50130e4e7bb6d9e577a004983182a22cb7",
+        "environment_override": {
+          "GGML_VK_MAX_NODES_PER_SUBMIT": "50"
+        },
+        "global_environment": {
+          "GGML_VK_ALLOW_GRAPHICS_QUEUE": "1",
+          "GGML_VK_BATCHED_SUBMITS": "1",
+          "GGML_VK_MAX_NODES_PER_SUBMIT": "100",
+          "GGML_VK_GCN_TILE64": "1",
+          "GGML_VK_GCN_TILE_VARIANT": "k16",
+          "GGML_VK_IQ4_XS_ROWS": "4",
+          "GGML_VK_IQ4_XS_WG": "64",
+          "GGML_VK_DISABLE_GET_TENSOR_ASYNC": "1"
+        },
+        "sdthreads": 20,
+        "cold_model_ready_seconds": 11.839978700008942,
+        "repeats": [
+          {
+            "seconds": 151.0895889000094,
+            "repeat": 0,
+            "rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c"
+          },
+          {
+            "seconds": 148.13748679999844,
+            "repeat": 1,
+            "rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c"
+          }
+        ]
+      },
+      {
+        "name": "fresh-submit200",
+        "exe_sha256": "71e8aeca0c55ac4fe994b8fc30997061faf4359fdc82bdfedaa9e31b7959fca9",
+        "profile_sha256": "68468dc8200f9d8b93e81f163e4652546e476a6e21e8bb4be5aa9f330585bda5",
+        "environment_override": {
+          "GGML_VK_MAX_NODES_PER_SUBMIT": "200"
+        },
+        "global_environment": {
+          "GGML_VK_ALLOW_GRAPHICS_QUEUE": "1",
+          "GGML_VK_BATCHED_SUBMITS": "1",
+          "GGML_VK_MAX_NODES_PER_SUBMIT": "100",
+          "GGML_VK_GCN_TILE64": "1",
+          "GGML_VK_GCN_TILE_VARIANT": "k16",
+          "GGML_VK_IQ4_XS_ROWS": "4",
+          "GGML_VK_IQ4_XS_WG": "64",
+          "GGML_VK_DISABLE_GET_TENSOR_ASYNC": "1"
+        },
+        "sdthreads": 20,
+        "cold_model_ready_seconds": 11.8606596999889,
+        "repeats": [
+          {
+            "seconds": 149.536506000004,
+            "repeat": 0,
+            "rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c"
+          },
+          {
+            "seconds": 147.61317959999724,
+            "repeat": 1,
+            "rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c"
+          }
+        ]
+      }
+    ],
+    "winner": "fresh-current",
+    "os_file_cache_for_model_loading": "Uncontrolled; model-ready time is not an attributed binary speedup",
+    "rgb_all_identical": true,
+    "warm_before_seconds": 147.91350450000027,
+    "warm_after_seconds": 147.60432050000236,
+    "warm_improvement_percent": 0.2094681232572171
+  },
+  "current_video": {
+    "date": "2026-11-01",
+    "exe_sha256": "71e8aeca0c55ac4fe994b8fc30997061faf4359fdc82bdfedaa9e31b7959fca9",
+    "source_commit": "91831fafa1ca81ce1bc2904b8f6b5eb4369a4bbb",
+    "scope": "One real I2V73 call, Pro/Clear720/guarded faces/RIFE48; audio disabled, not a15s/30s full-project render",
+    "frames_in": 73,
+    "frames_out": 146,
+    "fps": 48,
+    "dimensions": [
+      720,
+      1248
+    ],
+    "duration_seconds": 3.0416666666666665,
+    "http_seconds": 583.6309,
+    "stages": {
+      "profile_ready_seconds": 22.173,
+      "native_call_seconds": 317.709,
+      "video_complete_seconds": 565.587,
+      "photo_restore_seconds": 18.0363
+    },
+    "pro": {
+      "load_seconds": [
+        3.606731200008653,
+        1.9108372000046074
+      ],
+      "decode_seconds": 112.35128099999565,
+      "worker_wall_seconds": 126.92803589999676,
+      "gpu_peak": {
+        "dedicated_mib": 3403.58203125,
+        "shared_mib": 269.8984375
+      },
+      "dml_nodes": 103842,
+      "cpu_core_nodes": []
+    },
+    "sr_faces_seconds": 84.05538839999645,
+    "rife_seconds": 12.005741799992393,
+    "native_memory": {
+      "scope": "Native I2V73 observed sampling interval; expected UMT5 text encoder remains CPU",
+      "samples": 124,
+      "dedicated_peak_mib": 6053.06640625,
+      "shared_peak_mib": 158.8203125
+    },
+    "oom": false,
+    "concurrent_queue_cancel_and_deadline_passed": true,
+    "client_disconnect_replay_succeeded": true
+  },
+  "lip_sync": {
+    "date": "2026-11-01",
+    "engine": "Wav2Lip GAN96 ONNX",
+    "model_sha256": "8e804de2ae264fdfad607339846dabcc728d84191e2fc3433b156c40c83f906c",
+    "license": "Non-commercial original-provider optional weights, not mirrored",
+    "scope": "Saved neutral3.04s footage; real RU/EN phonetic speech;48/60FPS and explicit two-face fixture; not ideal-articulation or identity proof",
+    "local_runs": [
+      {
+        "case": "ru-dml-audit",
+        "provider": "directml",
+        "seconds": 6.914752199998475,
+        "inference_seconds": 0.5627618000144139,
+        "processed_frames": 47,
+        "minimum_track_similarity": 0.2930340195583906,
+        "gpu_profile": {
+          "dml_nodes": 4324,
+          "cpu_core_nodes": []
+        }
+      },
+      {
+        "case": "ru-dml",
+        "provider": "directml",
+        "seconds": 6.28207570000086,
+        "inference_seconds": 0.41660270004649647,
+        "processed_frames": 47,
+        "minimum_track_similarity": 0.2930340195583906,
+        "gpu_profile": null
+      },
+      {
+        "case": "ru-cpu",
+        "provider": "cpu",
+        "seconds": 6.919920299988007,
+        "inference_seconds": 0.8766490999405505,
+        "processed_frames": 47,
+        "minimum_track_similarity": 0.2930340195583906,
+        "gpu_profile": null
+      },
+      {
+        "case": "en-dml",
+        "provider": "directml",
+        "seconds": 6.366287700002431,
+        "inference_seconds": 0.4274850000947481,
+        "processed_frames": 48,
+        "minimum_track_similarity": 0.2930340195583906,
+        "gpu_profile": null
+      },
+      {
+        "case": "sveta-dml",
+        "provider": "directml",
+        "seconds": 6.026004500003182,
+        "inference_seconds": 0.40443360002245754,
+        "processed_frames": 45,
+        "minimum_track_similarity": 0.2930340195583906,
+        "gpu_profile": null
+      }
+    ],
+    "api60": {
+      "http_seconds": 29.120885800002725,
+      "processing_seconds": 17.135983800006215,
+      "fps": 60.0,
+      "frames": 183,
+      "photo_run_unchanged": true
+    },
+    "mix": {
+      "http_seconds": 57.365787700007786,
+      "exact_wav_reused": true,
+      "decoded_video_identical": true,
+      "tracks": [
+        {
+          "kind": "speech",
+          "start": 0.0,
+          "end": 2.5,
+          "volume": 0.9,
+          "voice": "shimmer",
+          "source_seconds": 1.925,
+          "render_seconds": 0.17836019999231212,
+          "sha256": "9e6a693c8dad74fcb60a6de7fff882fb8afd65db8c7f1d5d6292608a3e4c756c"
+        },
+        {
+          "kind": "music",
+          "start": 0.0,
+          "end": 3.05,
+          "volume": 0.2,
+          "voice": null,
+          "source_seconds": 6.0,
+          "render_seconds": 30.078622500004712,
+          "sha256": "ccb67e59e3343011999238482a4e0c1f5bdd4cb358bddc55e4d24c07dd77d3bd"
+        },
+        {
+          "kind": "sfx",
+          "start": 0.8,
+          "end": 1.1,
+          "volume": 0.12,
+          "voice": null,
+          "source_seconds": 0.3,
+          "render_seconds": 8.643635699991137,
+          "sha256": "8e123093fa321cc571af5c96707c2951e0e4eb4eb788cfc4f07b011b3f278977"
+        }
+      ]
+    },
+    "two_face_explicit_passed": true,
+    "ambiguous_target_http": 422,
+    "voices": [
+      {
+        "language": "ru",
+        "voice": "shimmer",
+        "seconds": 1.925,
+        "sha256": "9e6a693c8dad74fcb60a6de7fff882fb8afd65db8c7f1d5d6292608a3e4c756c"
+      },
+      {
+        "language": "ru",
+        "voice": "sage",
+        "seconds": 1.875,
+        "sha256": "96815c565ec7457c0fb21cf68bbe0723b93a56b81b1c532294df0831210e62f9"
+      },
+      {
+        "language": "ru",
+        "voice": "echo",
+        "seconds": 1.825,
+        "sha256": "239a85d5b2da85d6525d2e070f932e5e7bd1ba2417050fb6cc632561332febd2"
+      },
+      {
+        "language": "en",
+        "voice": "shimmer",
+        "seconds": 1.975,
+        "sha256": "f7d06d843d39e120a26dcecd27134479195412674f57318fd10b0a052931fb16"
+      },
+      {
+        "language": "en",
+        "voice": "Ryan",
+        "seconds": 2.175,
+        "sha256": "41c693e1aa7b297142bad9923dfae85ae89a2a9b2a7a049ea1acc4f883c966b7"
+      }
+    ],
+    "stt": [
+      {
+        "language": "ru",
+        "voice": "shimmer",
+        "http": 200,
+        "transcript": {
+          "text": " Мама, папа..."
+        }
+      },
+      {
+        "language": "en",
+        "voice": "Ryan",
+        "http": 200,
+        "transcript": {
+          "text": " Maybe baby five."
+        }
+      }
+    ],
+    "rejected_initial_track_gate": {
+      "case": "initial fixed-first-frame SFace gate",
+      "result": "rejected at frame6, cosine0.336; source face changes pose/appearance. Static-photo LFW threshold was not a validated video-track criterion.",
+      "change": "Explicit spatial track kept; missing/ambiguous targets rejected. SFace drift remains reported, not claimed identity proof."
+    }
+  },
+  "source_review": {
+    "date": "2026-11-01",
+    "scope": "Full cached paginated PR/issue index; selected relevant diffs/comments inspected, not a line-by-line audit of every repository",
+    "upstream": "LostRuins/koboldcpp/concedo_experimental",
+    "adopted": [
+      {
+        "source": "https://github.com/LostRuins/koboldcpp/pull/2564",
+        "change": "Independent GGML_VK_DISABLE_GET_TENSOR_ASYNC fallback only. Preserve AVX2, FMA, current allocator and MMVQ policy.",
+        "measured_gain": null
+      },
+      {
+        "source": "https://github.com/LostRuins/koboldcpp/commit/fc458925f3410b5922f2e0aeade229846394d2a6",
+        "change": "Selected MOSS QKV views, shared modulation slices, bounded one-key-per-name CPU position cache. Exact three-file source patch retained; compatible Makefile source list.",
+        "measured_gain": null
+      }
+    ],
+    "reviewed_not_imported": [
+      {
+        "source": "https://github.com/LostRuins/koboldcpp/pull/2577",
+        "reason": "Untested CMake discovery; production uses explicit Make sources."
+      },
+      {
+        "source": "https://github.com/LostRuins/koboldcpp/issues/2574",
+        "reason": "Upstream already disables async for GCN. Added independent fallback, no driver changes."
+      },
+      {
+        "source": "https://github.com/LostRuins/koboldcpp/issues/2493",
+        "reason": "No established standalone upstream fix; previous boundary/context checks retained, do not assert fixed from issue comments."
+      },
+      {
+        "source": "https://github.com/Nexesenex/croco.cpp/pull/337",
+        "reason": "Older broad CPU/CUDA sync; evaluate operation-specific changes rather than replacing modern GGML. Existing bounded RMS optimization retained."
+      },
+      {
+        "source": "https://github.com/Nexesenex/croco.cpp/pull/325",
+        "reason": "2024 KV defrag implementation predates current memory interface; not transplanted wholesale."
+      },
+      {
+        "source": "https://github.com/Elypha/hybrid-cpp/issues/1",
+        "reason": "CUDA issue, not RX580 Vulkan. Existing opt-in HybridMoE/SLRU retained."
+      }
+    ],
+    "fork_index": "build/references/forks/review-2026-11-01.json",
+    "discussion_index": "build/references/discussions/review-2026-11-01.json"
+  },
+  "video_failure_fix": {
+    "stage": "pro_vae",
+    "observed_failure": "GPU memory monitor rejected the current RESULTS/generated/video output path because its guard still expected removed OUTPUTS/video or old RESULTS/Video. It exited, so the owner policy stopped the decoder.",
+    "native_completed": true,
+    "latents_preserved": true,
+    "fix": "Update exact portable allowed roots in MediaGpuMonitor.ps1; sync PowerShell support files into the public kit; distinguish monitor/backend failures as503.",
+    "historical_409_seconds": "Original logs unavailable; this reproduces the same502 class but does not prove the historical request had this exact cause."
+  },
+  "audio_mix_failure_fix": [
+    {
+      "case": "original",
+      "seconds": 5.024502999993274,
+      "timeout": true
+    },
+    {
+      "case": "threads1",
+      "seconds": 5.023731699999189,
+      "timeout": true
+    },
+    {
+      "case": "single finite WAV sink, then independent MP4 mux/MP3 encode",
+      "mix_seconds": 0.09734,
+      "original_stems_all_decode": true,
+      "change": "No dual-output/asplit graph; each bounded codec stage max60s, no video regeneration."
+    }
+  ],
+  "ffmpeg": {
+    "date": "2026-11-01",
+    "scope": "Saved73-frame720x1248 video looped4times ONLY for runtime benchmark; x264veryfast/CRF18, alternating3repeats; no new media generation.8threads matches the application policy.",
+    "candidate_url": "https://github.com/GyanD/codexffmpeg/releases/download/9.0.2/ffmpeg-9.0.2-essentials_build.zip",
+    "archive_sha256": "60f467265b1e312373dbcd92200c2618a74850f98d3d078e94296bb3fa2047ba",
+    "candidate_exe": "runtime\\cache\\ffmpeg-compare\\gyan\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+    "rows": [
+      {
+        "runtime": "current",
+        "threads": 8,
+        "repeat": 0,
+        "seconds": 1.2772844999999506,
+        "bytes": 5087585,
+        "cpu": "MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2"
+      },
+      {
+        "runtime": "gyan",
+        "threads": 8,
+        "repeat": 0,
+        "seconds": 3.1268290000007255,
+        "bytes": 5063251,
+        "cpu": "MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2"
+      },
+      {
+        "runtime": "current",
+        "threads": 8,
+        "repeat": 1,
+        "seconds": 1.1603963000088697,
+        "bytes": 5087585,
+        "cpu": "MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2"
+      },
+      {
+        "runtime": "gyan",
+        "threads": 8,
+        "repeat": 1,
+        "seconds": 1.1487418000033358,
+        "bytes": 5063251,
+        "cpu": "MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2"
+      },
+      {
+        "runtime": "current",
+        "threads": 8,
+        "repeat": 2,
+        "seconds": 1.1722735999937868,
+        "bytes": 5087585,
+        "cpu": "MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2"
+      },
+      {
+        "runtime": "gyan",
+        "threads": 8,
+        "repeat": 2,
+        "seconds": 1.1657443000003695,
+        "bytes": 5063251,
+        "cpu": "MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2"
+      },
+      {
+        "runtime": "current",
+        "threads": 16,
+        "repeat": 0,
+        "seconds": 0.9169874999934109,
+        "bytes": 5085008,
+        "cpu": "MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2"
+      },
+      {
+        "runtime": "gyan",
+        "threads": 16,
+        "repeat": 0,
+        "seconds": 0.9228700999956345,
+        "bytes": 5063441,
+        "cpu": "MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2"
+      },
+      {
+        "runtime": "current",
+        "threads": 16,
+        "repeat": 1,
+        "seconds": 0.9416463999950793,
+        "bytes": 5085008,
+        "cpu": "MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2"
+      },
+      {
+        "runtime": "gyan",
+        "threads": 16,
+        "repeat": 1,
+        "seconds": 0.9559925000066869,
+        "bytes": 5063441,
+        "cpu": "MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2"
+      },
+      {
+        "runtime": "current",
+        "threads": 16,
+        "repeat": 2,
+        "seconds": 0.9488421999994898,
+        "bytes": 5085008,
+        "cpu": "MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2"
+      },
+      {
+        "runtime": "gyan",
+        "threads": 16,
+        "repeat": 2,
+        "seconds": 0.9605104999936884,
+        "bytes": 5063441,
+        "cpu": "MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2"
+      }
+    ],
+    "summary": {
+      "current": {
+        "8": {
+          "median": 1.1722735999937868,
+          "runs": [
+            1.2772844999999506,
+            1.1603963000088697,
+            1.1722735999937868
+          ]
+        },
+        "16": {
+          "median": 0.9416463999950793,
+          "runs": [
+            0.9169874999934109,
+            0.9416463999950793,
+            0.9488421999994898
+          ]
+        }
+      },
+      "gyan": {
+        "8": {
+          "median": 1.1657443000003695,
+          "runs": [
+            3.1268290000007255,
+            1.1487418000033358,
+            1.1657443000003695
+          ]
+        },
+        "16": {
+          "median": 0.9559925000066869,
+          "runs": [
+            0.9228700999956345,
+            0.9559925000066869,
+            0.9605104999936884
+          ]
+        }
+      }
+    },
+    "decoded_frame_hash_identical": false,
+    "source_ssim": {
+      "current": 0.966255,
+      "gyan": 0.967043
+    },
+    "amf": {
+      "works": true,
+      "seconds": 1.0207730999973137,
+      "error": null
+    },
+    "current_runtime_retained_until_review": true,
+    "executable_bytes": {
+      "current": 169886208,
+      "gyan": 105423872
+    },
+    "ssim16": {
+      "current": 0.966253,
+      "gyan": 0.967034
+    },
+    "amf12": {
+      "works": true,
+      "seconds": 2.502218099994934
+    },
+    "selected": {
+      "runtime": "current BtbN pinned build",
+      "threads": 16,
+      "median_seconds": 0.9416463999950793,
+      "previous_threads": 8,
+      "previous_median_seconds": 1.1722735999937868,
+      "wall_reduction_percent": 19.67349601662358,
+      "scope": "Video codec stage only; no neural generation speed claim"
+    }
+  },
+  "current_build_measured_scopes": [
+    "Native image comparison only; LLM token numbers retain their historical SHA",
+    "One I2V73 full video pipeline",
+    "Stored-video RIFE/lip-sync/audio mix"
+  ],
+  "project_duration": {
+    "default_seconds": 15,
+    "max_seconds": 30,
+    "recommended_native_frames": 73,
+    "validated_long_project_render": false,
+    "orchestration": "OWUI client,5/10 Native segments at73frames, shared boundary removal and exact24FPS trim; post RIFE48/60"
+  },
+  "quiet_audio_plan": {
+    "tracks": [],
+    "http_seconds": 2.1282467,
+    "scope": "Actual configured helper with schema; no invented ambient effects"
+  }
 }

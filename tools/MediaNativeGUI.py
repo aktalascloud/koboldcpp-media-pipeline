@@ -12,7 +12,7 @@ FIELDS=[
  ('video_frames','Видео','Кадры (4n+1)',int,5,121),('video_scheduler','Видео','Euler / шедулер',('beta','simple','normal','sgm_uniform'),None,None),
  ('video_cache','Видео','Cache-DiT, порог',float,0,.08),('video_vram','Видео','VRAM Native, МиБ',int,4096,7500),
  ('video_upscale','Видео','ClearReality до720p',bool,None,None),('video_faces','Видео','Улучшение лиц',bool,None,None),
- ('video_audio','Видео','Музыкальная дорожка',bool,None,None),('video_fps','Видео','FPS (RIFE)',('24','48'),None,None),
+ ('video_audio','Видео','Музыкальная дорожка',bool,None,None),('video_fps','Видео','FPS (RIFE)',('24','48','60'),None,None),
  ('music_duration','Музыка','Длительность, с',int,1,360),('music_steps','Музыка','Шаги YuE2',int,1,64),
  ('music_guidance','Музыка','Guidance',float,0,20),('music_cot','Музыка','CoT',('off','melody','full'),None,None),
  ('normal_sr','Апскейл','Авто4×: обычный режим',bool,None,None),('high_sr','Апскейл','Авто4×: High',bool,None,None),
@@ -36,7 +36,7 @@ def load_values(root=ROOT,configuration=None):
     h=configuration or read(root/'Helper.kcpps');d=gd(h);p=d['kcpp_proxy'];v=p['video'];f=p['detailer'];m=p.get('music_defaults',{})
     vp=profile_data(h,root)['video']
     values=dict(photo_steps=d['steps'],photo_sampler=d['sampler_name'],photo_scheduler=d['scheduler'],photo_cfg=d['cfg_scale'],photo_shift=d['flow_shift'],photo_cache=threshold(d.get('cache_options'),0) if d.get('cache_mode')!='disabled' else 0,
-        video_frames=v.get('default_frames',17),video_scheduler=v['scheduler'],video_cache=threshold(v.get('default_cache_options'),0) if v.get('default_cache_mode')!='disabled' else 0,video_vram=vp.get('sdvramlimit',6500),video_upscale=v.get('default_upscale_to')=='720p',video_faces=v.get('default_enhance_faces',True),video_audio=v.get('default_audio',True),video_fps=str(v.get('default_interpolate_fps',24)),
+        video_frames=v.get('default_frames',17),video_scheduler=v['scheduler'],video_cache=threshold(v.get('default_cache_options'),0) if v.get('default_cache_mode')!='disabled' else 0,video_vram=vp.get('sdvramlimit',6500),video_upscale=v.get('default_upscale_to')=='720p',video_faces=v.get('default_enhance_faces',True),video_audio=v.get('default_audio',True),video_fps=str(v.get('default_interpolate_fps',48)),
         music_duration=m.get('duration',32),music_steps=m.get('num_inference_steps',8),music_guidance=m.get('guidance_scale',1.01),music_cot=m.get('cot','off'),
         normal_sr=p['image_modes']['normal']['auto_upscale'],high_sr=p['image_modes']['quality']['auto_upscale'],sr_tile=p['upscaler'].get('tile',0),sr_padding=p['upscaler'].get('padding',32),
         face_enabled=f.get('enabled',True),face_percent=float(f.get('visibility',.2))*100,face_similarity=f.get('minimum_feature_similarity',.97),face_resolution=f.get('detector_resolution',960),face_max=f.get('max_faces',2),gater=p['photo_restoration']['enabled'],autostart=p.get('autostart_enabled',False),image_edit_enabled=p.get('image_edit_enabled',True))

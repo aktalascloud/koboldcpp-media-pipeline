@@ -323,7 +323,7 @@ def finish_native_video(answer: dict, plan: dict, output_dir: str | Path,
     temporary, final_file = destination/'video.work.mp4', destination/'video.mp4'
     command = [str(ffmpeg), '-hide_banner', '-nostdin', '-n', '-hwaccel', 'none',
                '-i', str(native_file), '-map', '0:v:0', '-an', '-c:v', 'libx264',
-               '-preset', 'veryfast', '-crf', '18', '-pix_fmt', 'yuv420p', '-threads', '8',
+               '-preset', 'veryfast', '-crf', '18', '-pix_fmt', 'yuv420p', '-threads', '16',
                '-fps_mode', 'passthrough', '-movflags', '+faststart', '-progress', 'pipe:1',
                '-nostats', '-f', 'mp4', str(temporary)]
     report = dict(status='prepared_not_executed', native_header=metadata,

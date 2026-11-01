@@ -123,12 +123,8 @@ def install_original(row,directory):
     return target
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--skip-model-downloads',action='store_true');parser.add_argument('--check-only',action='store_true')
-    parser.add_argument('--moss-source-directory',type=Path);parser.add_argument('--gpen-path',type=Path);parser.add_argument('--include-dirty-backup',action='store_true');parser.add_argument('--include-rife',action='store_true');parser.add_argument('--listen-host',default='127.0.0.1');args=parser.parse_args();ipaddress.ip_address(args.listen_host)
+    parser.add_argument('--moss-source-directory',type=Path);parser.add_argument('--gpen-path',type=Path);parser.add_argument('--include-rife',action='store_true');parser.add_argument('--listen-host',default='127.0.0.1');args=parser.parse_args();ipaddress.ip_address(args.listen_host)
     catalog=json.loads((ROOT/'models.json').read_text(encoding='utf-8'))
-    if args.include_dirty_backup:
-        optional=catalog['optional_dirty_backup'];known={r['path'] for r in catalog['models']}
-        catalog['models'] += [r for r in optional['models'] if r['path'] not in known]
-        catalog['moss_sources'].append(optional['source'])
     if args.check_only:
         rows=inventory(catalog);ready=all(r['ok'] for r in rows);print(json.dumps(dict(ready=ready,assets=rows,inference_started=False,registry_changed=False),indent=2));return 0 if ready else 2
     helper_path=ROOT/'Helper.kcpps';helper=json.loads(helper_path.read_text(encoding='utf-8-sig'));defaults=json.loads(helper['gendefaults'])
@@ -155,12 +151,18 @@ def main():
         if catalog.get('video_pro_models'):
             from SetupPro import prepare
             prepare()
-        if args.include_rife:
+        if args.include_rife or defaults['kcpp_proxy'].get('video',{}).get('default_interpolate_fps',24) in (48,60):
             from SetupRife import prepare
             prepare()
         if catalog.get('sfx_models'):
             from BuildSfx import prepare
             prepare()
+    # Preserve operator controls; supply new tested defaults missing from an old asset.
+    policy_source=ROOT/'native-environment.json';policy_target=ROOT/'runtime/native-environment.json'
+    if policy_source.is_file():
+        policy=json.loads(policy_target.read_text()) if policy_target.exists() else {}
+        for key,value in json.loads(policy_source.read_text()).items():policy.setdefault(key,value)
+        policy_target.parent.mkdir(parents=True,exist_ok=True);policy_target.write_text(json.dumps(policy,indent=2)+'\n',encoding='utf-8')
     exe=ROOT/'koboldcpp-nocuda.exe'
     if not exe.is_file():raise RuntimeError('Pinned core Windows asset missing.')
     defaults['kcpp_proxy'].update(host=args.listen_host,autostart_enabled=False);exe_sha=sha(exe)

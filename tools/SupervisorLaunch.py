@@ -62,6 +62,11 @@ def launch(root, helper, arguments):
             _verify_front(operations, port, root, helper, script, python)
             print('Verified public supervisor already running; no duplicate launched.')
             return 0
+        # Previous frontend is stopped. Keep only the current successful log;
+        # a still-open file is preserved by Windows, never force-closed.
+        for old in (root/'logs').glob('SupervisorProxy-*.log'):
+            try:old.unlink()
+            except OSError:pass
         log_file = root / 'logs' / ('SupervisorProxy-'+time.strftime('%Y%m%d-%H%M%S')+'.log')
         log_file.parent.mkdir(parents=True, exist_ok=True)
         with log_file.open('w', encoding='utf-8') as output:

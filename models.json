@@ -320,58 +320,6 @@
     }
   ],
   "no_main_model_weights_in_repository_or_release": true,
-  "optional_dirty_backup": {
-    "models": [
-      {
-        "path": "MODELS/images/dirty-moss-q8_0.gguf",
-        "bytes": 5401126112,
-        "sha256": "8276dcb69a1550924b44b35ff7d0264357196349ae0d7d74edba88ca91f0653b",
-        "generated_role": "backup_image",
-        "in_release": false,
-        "source": "https://civitai.com/models/3015644?modelVersionId=3423156",
-        "license": "Original author terms; no weights redistributed."
-      },
-      {
-        "path": "MODELS/loras/turbo-dmd2-dynamic69.safetensors",
-        "bytes": 628397016,
-        "sha256": "d869785c75a20a409f1b590d4ad3a825b542a1fbb9f21589e5ad5e46e62c6910",
-        "in_release": false,
-        "url": null,
-        "required_user_file": true,
-        "aliases": [
-          "lodestones-8-steps-dmd2-lora_resized_from_128_to_dynamic_69.safetensors"
-        ],
-        "source": "https://civitai.com/models/3006599?modelVersionId=3420002",
-        "license": "Original turbo author terms; exact user-supplied dynamic-rank derivative, not redistributed."
-      },
-      {
-        "path": "MODELS/loras/afterlight-v1.safetensors",
-        "bytes": 72608488,
-        "sha256": "57d2a400af32a0afd9cd065c43ebeb6a0e44b153abaef0171ce6891b6b057d13",
-        "in_release": false,
-        "url": "https://civitai.com/api/download/models/3424873",
-        "aliases": [
-          "Moss-Afterlight-V1.safetensors"
-        ],
-        "source": "https://civitai.com/models/3016917?modelVersionId=3424873",
-        "license": "Original Afterlight author terms; downloaded from original distributor, not mirrored."
-      }
-    ],
-    "source": {
-      "role": "backup_image",
-      "path": "MODELS/source/dirtyMoss_int8.safetensors",
-      "bytes": 5413715446,
-      "sha256": "dd17ac4099151719ffd233d83d3f6ab376080fa93d91326ab033242a2fa1e43e",
-      "url": "https://civitai.com/api/download/models/3423156?fileId=3317587",
-      "aliases": [
-        "dirtyMoss_3317587.safetensors",
-        "dirtyMoss_int8.safetensors"
-      ],
-      "source": "https://civitai.com/models/3015644?modelVersionId=3423156",
-      "model_name": "Dirty MOSS compatible Q8_0",
-      "description": "Verified author INT8 ConvRot decoded with per-row scales and inverse rotation; standard Q8_0 matrices, turbo adapter separate."
-    }
-  },
   "video_pro_models": [
     {
       "role": "start",

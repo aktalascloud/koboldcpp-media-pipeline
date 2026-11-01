@@ -43,3 +43,6 @@ YuE2 music supersedes previous ACE-Step references: Q8_0 main + F16 VAE, no Gemm
 
 ## Optional SFX
 [sa3.cpp](https://github.com/betweentwomidnights/sa3.cpp) and ggml: MIT, source commit recorded in the audio guide. SA3 Small SFX and T5Gemma weights retain original Stable Audio community/Gemma terms, not MIT; original downloads only. The new native CPU runtime and its GCC dependencies are not mirrored by this code-only release.
+
+## Optional lip-sync
+[Original Wav2Lip](https://github.com/Rudrabha/Wav2Lip) checkpoints are restricted to non-commercial research/personal use under the original authors/LRS2 terms. Our NumPy/ONNX wrapper does not change that license. SetupLipSync.py downloads the pinned ONNX from its original [FaceFusion assets](https://github.com/facefusion/facefusion-assets/releases/tag/models-3.0.0) with explicit non-commercial acceptance. No weights are mirrored; do not describe the optional checkpoint as MIT or commercially unrestricted.

@@ -464,6 +464,7 @@ class BackendSupervisor:
         return value
 
     def _save(self, state):
+        state['history']=state.get('history',[])[-16:]
         state['updated'] = time.time()
         write_json(self.state_file, state)
 
@@ -633,6 +634,12 @@ class BackendSupervisor:
                 statuses.append({'pid': record['pid'], 'status': status})
         if self.operations.listeners(active['port']):
             raise SupervisorError('Private Native port is occupied; preserved.', 'foreign_listener')
+        log=Path(active.get('native_log','')).resolve()
+        if log.is_relative_to((self.root/'logs').resolve()) and log.name.startswith('Native-') and log.is_file() and not log.is_symlink():
+            if active.get('exit_code') != 0:
+                (self.root/'logs/last-error.log').write_bytes(log.read_bytes()[-32768:])
+            try:log.unlink()
+            except OSError:pass
         state['history'].append({'reason': reason, 'active': copy.deepcopy(active), 'identity_status': statuses, 'time': time.time()})
         state.pop('active', None); state['phase'] = 'stopped'; self._save(state)
 
@@ -668,10 +675,6 @@ class BackendSupervisor:
             raise SupervisorError('Private Native slot is occupied by an unowned process; preserved.', 'foreign_listener')
         run_id = uuid.uuid4().hex
         log_file = self.root / 'logs' / ('Native-' + profile['name'] + '-' + run_id + '.log')
-        if self.active_file.exists():
-            archive = self.root / 'logs/native-history' / (run_id + '-previous-active.json')
-            archive.parent.mkdir(parents=True, exist_ok=True)
-            archive.write_bytes(self.active_file.read_bytes())
         active = dict(run_id=run_id, native_profile=profile['name'], helper=str(profile['helper']),
                       helper_sha256=profile['helper_sha256'], executable=str(profile['executable']),
                       executable_sha256=profile['executable_sha256'], port=profile['port'],

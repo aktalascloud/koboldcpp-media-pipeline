@@ -1,18 +1,16 @@
 # Медиакомплект KoboldCpp
 [English](README.md) · [Установка/сборка](docs/BUILD.md) · [API и ТЗ OWUI](docs/API.ru.md) · [Лицензии](docs/LICENSES.md)
 
-Один переносимый Windows-сервер на [оптимизированном форке Haswell/AVX2/RX580Polaris/gfx803](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa). Запуск **Start.exe → KoboldCpp.exe**. Setup.ps1 нужен при установке/обновлении. Фото вGPU при простое; музыка/видео загружаются по требованию. Главные веса не зеркалируются.
+Один переносимый Windows-сервер на [оптимизированном форке Haswell/AVX2/RX 580 Polaris/gfx803](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa). Запуск **Start.exe → KoboldCpp.exe**. Setup.ps1 нужен при установке/обновлении. Фото в GPU при простое; музыка/видео загружаются по требованию. Главные веса не зеркалируются.
 
-Фото: RayQ8/Afterlight.25/RealismEnhancer1,Euler/simple8,eta0,CacheDiT.08;Normal736×1104 безautoSR,High928×1392 сClear4x(новыйHigh не измерен). YuNet/GPEN20/SFace.97/Gater доSR, после него повторов нет. МузыкаYuE2MP3; SFXSA3CPU WAV/MP3 до60с. TTS/helper/STT настраиваются, голосаRU/EN явные.
+Пример конфигурации фото: Ray Q8, Afterlight0,25 + RealismEnhancer1, Euler/simple8, eta0, Cache-DiT0,08. Normal736×1104 без автоапскейла; High928×1392 с ClearReality4x, текущая связка High не измерена. YuNet/GPEN20%/SFace0,97/Gater выполняются до апскейла, без повтора после него. Модели и параметры выбираются в конфигурации. Музыка — YuE2 MP3; эффекты — SA3 CPU WAV/MP3 до60 с. TTS/хелпер/STT настраиваются, язык и голоса RU/EN задаются явно.
 
-ВидеоWan5BTurbo/fullencoder/ProFP32/Euler-beta4,WG512,порог576,Clear720/лица/optionalRIFE. БезTiny/Helaman. Звук — отдельные генераторы и монтаж, безlip-sync. Native-проход<=121кадра/5.04с;20сdefault/60сmax — ТЗ оркестрации фильтром, не проверенная длинная Native-генерация.
+Видео: Wan5B Turbo, полный энкодер + Pro FP32, Euler/beta4, WG512, порог576, ClearReality720p/лица, RIFE48 FPS по умолчанию или60 по запросу. Звук и lip-sync — отдельные этапы, не совместная AV-генерация. Предел Native —121 кадр, проверенный проход —73. Проект15 с по умолчанию, максимум30 с: его собирает клиент; длинный AI-рендер пока не измерен.
 
 | Saved test | Actual wall time | Scope |
 |---|---:|---|
 | PhotoNormal | 163.85s |29Oct, ff7d4d0b, one API |
 | Separate photo4x | 6.04s |saved PNG, separate API |
-| Video3.04s | 552.57s |30Oct,0986410a,I2V/Pro/Clear720/faces/all3audio |
-| Audio revision | 57.96s |73RGB frames unchanged, no video rerun |
 | Music32sMP3 | 57.01s |28Oct,6c03b583, photo return61.07s |
 | SFX2sWAV /6sMP3 |10.57s /17.17s |30Oct CPU, photo stayed resident |
 
@@ -21,3 +19,13 @@
 
 ![Последний обычный результат](results/photo-normal.png)
 [Полный4x](results/photo-4x.webp) · [Глаза4x](results/photo-eyes.png). Последние примеры и данные только в results; модели/улучшалки/апскейлеры — MODELS, runtime один. [Правила локальной модели](AGENTS.md). Полный локальный EXE собирается на машине владельца; публично не зеркалируется без проверки прав на сторонний runtime. Полная генерация на чистой машине не тестировалась.
+
+## Проверено 1 ноября
+| Проверка | Время | Что измерено |
+|---|---:|---|
+| Генерация прежним / свежим Native | 147,91 /147,60 с | повторный запрос,8 шагов,736×1104;12 побитово одинаковых RGB |
+| I2V73 → Pro/Clear720/лица/RIFE48 | 583,63 с |146 кадров,3,04 с; пик Native6053 МиБ VRAM, без OOM |
+| Lip-sync сохранённого60FPS видео | 29,12 с API |183 кадра; CPU, процесс фото не менялся |
+| Музыка + SFX + исходный WAV речи | 57,37 с API | видеокадры совпали, речь повторно не генерировалась |
+
+Причина воспроизведённого502 — устаревший путь PowerShell-монитора после переноса папок. Аудиомикс теперь состоит из ограниченных последовательных этапов, без зависавшего двойного вывода FFmpeg. Для генерации ведётся журнал идемпотентных заданий. Необязательный Wav2Lip — Non-Commercial, только исходный распространитель; идеальная артикуляция/личность не гарантируется.73 кадра — проверенный размер прохода;15/30 с собирает клиент, полный длинный AI-рендер не измерен. Модели, настройки и контекст задаются конфигурацией, API alias не выбирает произвольный файл весов.

@@ -564,6 +564,11 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
         def do_GET(self):
             try:
                 cfg=pipeline.config();path=urllib.parse.urlsplit(self.path).path
+                if path.startswith('/v1/videos/jobs/'):
+                    try:self.reply(videos.jobs.get(path.rsplit('/',1)[-1]))
+                    except KeyError:self.reply({'error':{'code':'job_not_found'}},404)
+                    except ValueError:self.reply({'error':{'code':'invalid_request_id'}},422)
+                    return
                 if path in ('/api','/docs','/media','/videoui'):
                     self.reply(media_page(),content_type='text/html; charset=utf-8');return
                 if path in ('/openapi.json','/v1/media/openapi.json'):
@@ -592,15 +597,17 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                     self.reply(music_capabilities(cfg));return
                 if path in ('/v1/videos/capabilities','/api/extra/video/capabilities'):
                     from VideoRife import available as rife_available
-                    interpolation=[24,48] if rife_available(ROOT,cfg['proxy'].get('video',{}).get('rife_models')) else [24]
+                    interpolation=[24,48,60] if rife_available(ROOT,cfg['proxy'].get('video',{}).get('rife_models')) else [24]
+                    from VideoLipSync import capabilities as lip_capabilities
+                    lip=lip_capabilities(ROOT,cfg['proxy'].get('video',{}).get('lipsync_provider','cpu'))
                     self.reply(dict(enabled=bool(cfg['proxy'].get('video',{}).get('enabled',False)),backend='KoboldCpp Native',model='kobold-wan22-turbo',
                         generation_endpoints=list(VIDEO_JSON_PATHS),upscale_endpoints=list(VIDEO_UPSCALE_PATHS),fps=24,frames=dict(min=5,max=121,grid='4n+1'),
                         resolutions={'480p':[832,480]},inputs=['text','one PNG start frame','continue_from generated video_id'],
                         output='MP4 URL',upscale_to='720p short edge, original aspect ratio',optional_guarded_faces=True,
-                        native_jpeg_quality=None,validated_frames=17,vae=cfg['proxy'].get('video',{}).get('codec'),sampling=dict(sampler_name='euler',scheduler=cfg['proxy'].get('video',{}).get('scheduler','simple'),steps=4,cfg_scale=1,flow_shift=5,eta=0,cache_mode=cfg['proxy'].get('video',{}).get('default_cache_mode','disabled'),cache_options=cfg['proxy'].get('video',{}).get('default_cache_options','')),
+                        native_jpeg_quality=None,validated_frames=73,recommended_clip_frames=73,vae=cfg['proxy'].get('video',{}).get('codec'),sampling=dict(sampler_name='euler',scheduler=cfg['proxy'].get('video',{}).get('scheduler','simple'),steps=4,cfg_scale=1,flow_shift=5,eta=0,cache_mode=cfg['proxy'].get('video',{}).get('default_cache_mode','disabled'),cache_options=cfg['proxy'].get('video',{}).get('default_cache_options','')),
                         optional_cache=dict(supported=cfg['proxy'].get('video',{}).get('native_cache_forwarding_verified',False),modes=['disabled','cache-dit','easycache'],default=cfg['proxy'].get('video',{}).get('default_cache_mode','disabled'),threshold_max=0.3,cache_dit_warmup='1..3; video4-step contract'),
                         vae_tiling_threshold=cfg['proxy'].get('video',{}).get('vae_tiling_threshold'),conv_workgroup=cfg['proxy'].get('video',{}).get('conv_workgroup'),
-                        schedulers=['simple','normal','discrete','beta','sgm_uniform'],interpolate_fps=interpolation,audio=dict(generators=['YuE2 music','SA3 SFX CPU','configured TTS'],default_enabled=cfg['proxy'].get('video',{}).get('default_audio',True),mode='timed-multitrack',track_kinds=['music','sfx','speech'],max_tracks=8,timestamps='seconds within native clip duration',languages=['ru','en'],lip_sync=False,scene_sound_conditioning=False),deadline_seconds=videos.deadline_seconds,max_deadline_seconds=900,continuous_long_video_validated=False));return
+                        schedulers=['simple','normal','discrete','beta','sgm_uniform'],interpolate_fps=interpolation,default_interpolate_fps=cfg['proxy'].get('video',{}).get('default_interpolate_fps',48),project_duration=dict(default_seconds=15,max_seconds=30,execution='client segmented orchestration; one Native call remains max121frames'),jobs=dict(status='/v1/videos/jobs/{request_id}',idempotency_header='Idempotency-Key',cancel='queued only',automatic_retry=False),lip_sync=lip,audio=dict(generators=['YuE2 music','SA3 SFX CPU','configured TTS'],default_enabled=cfg['proxy'].get('video',{}).get('default_audio',True),mode='timed-multitrack',track_kinds=['music','sfx','speech'],max_tracks=8,timestamps='seconds within native clip duration',languages=['ru','en'],lip_sync=lip['supported'],scene_sound_conditioning=False),deadline_seconds=videos.deadline_seconds,max_deadline_seconds=900,continuous_long_video_validated=False));return
                 if path=='/v1/media/capabilities':
                     self.reply(dict(backend='KoboldCpp',idle_model='photo-normal',automatic_exclusive_model_switching=True,gui='/media',openapi='/openapi.json',unified_generate='/v1/media/generations',unified_upscale='/v1/media/upscale',
                         images={'generate':'/v1/images/generations','automatic1111':'/sdapi/v1/txt2img','edit':'/v1/images/edits','capabilities':'/v1/images/capabilities'},
@@ -633,7 +640,7 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                         target=path+'?'+urllib.parse.urlencode(query,doseq=True)
                         status,headers,raw=request(cfg['backend']+target);self.reply(raw,status,headers.get('Content-Type','application/json'),headers);return
                 self.forward(config=cfg)
-            except (BrokenPipeError,ConnectionResetError):pass
+            except ConnectionError:pass
             except (SupervisorError,VideoServiceError) as error:self.reply(error.body,error.status,headers=getattr(error,'headers',None))
             except Exception as error:LOG.exception('GET failed');self.reply(dict(error=type(error).__name__,detail=str(error)),503)
         def do_POST(self):
@@ -648,6 +655,44 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                 maximum=int(cfg['helper'].get('maxrequestsize',32))*1024*1024
                 if length<0 or length>maximum:self.reply(dict(error='Request exceeds configured size limit'),413);return
                 body=self.rfile.read(length)
+                if path.startswith('/v1/videos/jobs/') and path.endswith('/cancel'):
+                    from VideoJobs import JobConflict
+                    try:self.reply(videos.jobs.cancel_queued(path.split('/')[-2]))
+                    except KeyError:self.reply({'error':{'code':'job_not_found'}},404)
+                    except JobConflict as error:self.reply({'error':{'code':'job_not_queued','message':str(error)}},409)
+                    except ValueError:self.reply({'error':{'code':'invalid_request_id'}},422)
+                    return
+                if path=='/v1/videos/import':
+                    from VideoEditing import import_mp4
+                    if self.headers.get('Content-Type','').split(';')[0]!='video/mp4':raise VideoServiceError('Content-Type must be video/mp4',status=422)
+                    try:self.reply(import_mp4(ROOT,body,videos.public_base_url))
+                    except ValueError as error:raise VideoServiceError(str(error),status=422) from error
+                    return
+                if path in ('/v1/videos/lipsync','/v1/videos/interpolate'):
+                    from VideoEditing import lipsync,interpolate,StoredVideoMissing
+                    operation=lipsync if path.endswith('/lipsync') else interpolate
+                    from VideoService import VideoBudget
+                    try:payload=json.loads(body)
+                    except (ValueError,UnicodeError) as error:raise VideoServiceError('Expected JSON',status=422) from error
+                    budget=VideoBudget(300,time.perf_counter)
+                    with pipeline.lock:
+                        pipeline.begin('',path.rsplit('/',1)[-1])
+                        try:
+                            cpu_only=operation is lipsync and (payload.get('mode')=='voiceover' or cfg['proxy'].get('video',{}).get('lipsync_provider','cpu')=='cpu')
+                            if cpu_only:result=operation(ROOT,cfg,payload,videos.public_base_url,timeout=budget.remaining())
+                            else:
+                                pipeline.release_gpu()
+                                with backend_supervisor.lock:
+                                    backend_supervisor.stop_idle()
+                                    with backend_supervisor.gpu_lease():result=operation(ROOT,cfg,payload,videos.public_base_url,timeout=budget.remaining())
+                            self.reply(result)
+                        except StoredVideoMissing as error:raise VideoServiceError(str(error),'video_not_found',404) from error
+                        except ValueError as error:raise VideoServiceError(str(error),status=422) from error
+                        except FileNotFoundError as error:raise VideoServiceError('Lip-sync model missing','lipsync_not_available',503) from error
+                        except TimeoutError as error:raise VideoServiceError('Lip-sync deadline exceeded','lipsync_timeout',504) from error
+                        finally:
+                            pipeline.finish();threading.Thread(target=restore_photo_after_video,args=(cfg,),daemon=True).start()
+                    return
                 if path=='/v1/audio/sfx':
                     from SfxService import generate as generate_sfx,validate as validate_sfx
                     from AudioServices import capabilities
@@ -742,17 +787,33 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                         if videos is None:raise VideoServiceError('Video supervisor unavailable.','video_backend_unavailable',503)
                         if cfg['proxy'].get('video',{}).get('enabled',True) is False:
                             raise VideoServiceError('Видеогенерация отложена до завершения проверки качества. Фото и музыка доступны.','video_deferred',503)
+                        from VideoJobs import JobConflict
+                        try:receipt,fresh=videos.jobs.claim(video_payload,self.headers.get('Idempotency-Key'),cfg.get('helper_sha256',''))
+                        except JobConflict as error:raise VideoServiceError(str(error),'idempotency_conflict',409) from error
+                        except ValueError as error:raise VideoServiceError(str(error),status=422) from error
+                        request_id=receipt['request_id']
+                        if not fresh:
+                            if receipt['status']=='succeeded':self.reply(receipt['result'])
+                            elif receipt['status']=='failed':self.reply(receipt.get('error',{}),receipt.get('http_status') or 502)
+                            else:self.reply(receipt,202,headers={'Location':'/v1/videos/jobs/'+request_id})
+                            return
+                        stage='queue';video_budget=None
+                        def progress(value):
+                            nonlocal stage
+                            stage=value;videos.jobs.stage(request_id,value)
                         try:
                             with videos.client_deadline(self.connection,video_payload.get('deadline_seconds')) as video_budget:
-                                with pipeline.lock:
+                                from VideoService import queued_lock
+                                with queued_lock(pipeline.lock,video_budget,cancelled=lambda:videos.jobs.get(request_id)['status'] not in ('queued','running')):
+                                    stage='validation';videos.jobs.stage(request_id,stage)
                                     pipeline.begin(video_payload.get('genkey',''),'video')
                                     try:
                                         video_options=cfg['proxy'].get('video',{})
                                         upscale_to=video_payload.get('upscale_to',video_options.get('default_upscale_to','720p'));faces=video_payload.get('enhance_faces',video_options.get('default_enhance_faces',True))
-                                        interpolate_fps=video_payload.get('interpolate_fps',video_options.get('default_interpolate_fps',24))
-                                        if interpolate_fps==48:
+                                        interpolate_fps=video_payload.get('interpolate_fps',video_options.get('default_interpolate_fps',48))
+                                        if interpolate_fps in (48,60):
                                             from VideoRife import available
-                                            if not available(ROOT,video_options.get('rife_models')):raise VideoServiceError('RIFE48FPS не установлен; доступен24FPS.','video_interpolation_unavailable',422)
+                                            if not available(ROOT,video_options.get('rife_models')):raise VideoServiceError('RIFE48/60FPS не установлен; доступен24FPS.','video_interpolation_unavailable',422)
                                         from VideoAudio import audio_options
                                         try:
                                             requested_audio=video_payload.get('audio')
@@ -767,35 +828,56 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                                         except ValueError as error:raise VideoServiceError(str(error),status=422) from error
                                         if upscale_to not in (None,'720p') or type(faces) is not bool:raise VideoServiceError('Некорректные upscale_to/enhance_faces.',status=422)
                                         if path not in VIDEO_JSON_PATHS:raise VideoServiceError('Для Pro MP4 используйте /v1/videos/generations, не raw A1111.',status=422)
+                                        stage='native';videos.jobs.stage(request_id,stage)
                                         result=videos.generate(path,video_payload,dict(self.headers),cfg,budget=video_budget)
+                                        stage='pro_sr_rife';videos.jobs.stage(request_id,stage,video_id=result['id'])
                                         with backend_supervisor.lock:
                                             videos.require_unblocked();backend_supervisor.stop_idle()
-                                            with backend_supervisor.gpu_lease():result=videos.enhance(result,cfg,video_budget,upscale_to,faces,interpolate_fps)
+                                            with backend_supervisor.gpu_lease():result=videos.enhance(result,cfg,video_budget,upscale_to,faces,interpolate_fps,progress=progress)
+                                        stage='audio';videos.jobs.stage(request_id,stage)
                                         result=videos.soundtrack(result,cfg,video_budget,audio)
                                         # Reply only after actual Pro/RIFE/audio, never latent metadata.
                                         video_budget.remaining()
+                                        # Commit verified output before ancillary photo reloading. A lost
+                                        # response/restore timeout must not turn a complete video into an unknown retry.
+                                        stage='photo_restore';videos.jobs.stage(request_id,stage)
+                                        result=videos.finalize_result(result,video_budget,photo_ready=False)
+                                        result['request_id']=request_id;result['metadata']['request_id']=request_id
+                                        videos.jobs.finish(request_id,result=result)
+                                        result['metadata']['video_complete_seconds']=result['metadata']['total_seconds']
+                                        restore_started=time.perf_counter()
                                         prior_ready=backend_supervisor.readiness_seconds
                                         try:
                                             backend_supervisor.readiness_seconds=min(float(prior_ready),video_budget.remaining())
                                             ready=restore_photo(cfg)
+                                        except Exception as restore_error:
+                                            ready=False
+                                            result['metadata']['photo_restore_warning']=type(restore_error).__name__
+                                            LOG.error('Photo restore pending after completed video request=%s type=%s',request_id,type(restore_error).__name__)
                                         finally:backend_supervisor.readiness_seconds=prior_ready
-                                        result=videos.finalize_result(result,video_budget,photo_ready=ready)
-                                        self.reply(result)
+                                        result['metadata'].update(resident_photo_ready=bool(ready),photo_restore_seconds=round(time.perf_counter()-restore_started,4),total_seconds=round(video_budget.elapsed(),4))
+                                        videos.jobs.finish(request_id,result=result)
+                                        try:self.reply(result)
+                                        except ConnectionError:self.close_connection=True
                                     finally:
                                         pipeline.finish()
                                         threading.Thread(target=restore_photo_after_video,args=(cfg,),daemon=True).start()
-                        except (BrokenPipeError,ConnectionResetError,OSError):
-                            self.close_connection=True
-                            LOG.info('Video client disconnected or reached its deadline')
-                        except VideoServiceError as error:
-                            if video_budget.cancelled.is_set() or video_budget.clock()>=video_budget.until:
-                                self.close_connection=True
-                                try:self.connection.shutdown(socket.SHUT_RDWR)
-                                except OSError:pass
-                                try:self.connection.close()
-                                except OSError:pass
-                                LOG.info('Video deadline expired; response socket closed after cleanup')
-                            else:self.reply(error.body,error.status,headers=getattr(error,'headers',None))
+                        except Exception as error:
+                            if isinstance(error,JobConflict):failure=VideoServiceError(str(error),'job_cancelled',409)
+                            elif isinstance(error,VideoServiceError):failure=error
+                            else:
+                                timeout=isinstance(error,TimeoutError) or (video_budget is not None and video_budget.clock()>=video_budget.until)
+                                resource=isinstance(error,MemoryError) or (isinstance(error,OSError) and getattr(error,'winerror',None) in (8,14,1450,1455))
+                                failure=VideoServiceError('Video failed at '+stage+': '+type(error).__name__,
+                                    'video_deadline_exceeded' if timeout else 'video_resource_exhausted' if resource else getattr(error,'code','video_stage_failed'),504 if timeout else 503 if resource else getattr(error,'status',502))
+                            failure.body['error'].update(request_id=request_id,stage=stage,status_url='/v1/videos/jobs/'+request_id)
+                            if hasattr(error,'worker_pid'):failure.body['error'].update(worker_pid=error.worker_pid,worker_exit_code=error.exit_code)
+                            if hasattr(error,'monitor_pid'):failure.body['error'].update(monitor_pid=error.monitor_pid,monitor_exit_code=error.monitor_exit_code)
+                            videos.jobs.finish(request_id,error=failure.body,status_code=failure.status)
+                            # Bounded diagnostics, no prompt/body/base64 in traceback logs.
+                            LOG.error('Video request=%s stage=%s type=%s code=%s',request_id,stage,type(error).__name__,failure.body['error']['code'])
+                            if video_budget is not None and video_budget.cancelled.is_set():self.close_connection=True
+                            else:self.reply(failure.body,failure.status)
                         return
                 if path in SYNTHESIS_PATHS:
                     try:synthesis_fields=json.loads(body)
@@ -868,7 +950,7 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                         self.reply(sr_api_response(final,report,cfg,requested_scale))
                         LOG.info(json.dumps(dict(kind='upscale',**report),ensure_ascii=False))
                     finally:pipeline.finish()
-            except (BrokenPipeError,ConnectionResetError):pass
+            except ConnectionError:pass
             except (ImageEditError,ImageModeError,ImageBudgetError,SupervisorError,VideoServiceError,MusicRequestError) as error:self.reply(error.body,error.status,headers=getattr(error,'headers',None))
             except Exception as error:LOG.exception('POST failed');self.reply(dict(error=type(error).__name__,detail=str(error)),502)
         def log_message(self,format,*args):LOG.info(format,*args)

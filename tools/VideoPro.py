@@ -66,7 +66,7 @@ def worker(root,capture,dest,manifest_sha):
     enc=subprocess.Popen([ffmpeg,'-hide_banner','-loglevel','error','-nostdin','-y','-f','rawvideo','-pix_fmt','rgb24','-s',f'{width}x{height}','-r','24','-i','pipe:0','-an','-c:v','ffv1',str(avi)],stdin=subprocess.PIPE,stdout=subprocess.DEVNULL,stderr=subprocess.PIPE)
     _,err=enc.communicate(rgb.tobytes(),timeout=60)
     if enc.returncode:raise RuntimeError('Pro AVI encoder failed:'+err.decode(errors='replace')[-300:])
-    subprocess.run([ffmpeg,'-hide_banner','-loglevel','error','-nostdin','-y','-i',str(avi),'-c:v','libx264','-preset','veryfast','-crf','18','-pix_fmt','yuv420p','-threads','8',str(dest/'video.mp4')],check=True,timeout=60)
+    subprocess.run([ffmpeg,'-hide_banner','-loglevel','error','-nostdin','-y','-i',str(avi),'-c:v','libx264','-preset','veryfast','-crf','18','-pix_fmt','yuv420p','-threads','16',str(dest/'video.mp4')],check=True,timeout=60)
     cpu=[];gpu=0
     for path in profiles:
         events=json.loads(path.read_text());path.unlink();gpu+=sum(e.get('args',{}).get('provider')=='DmlExecutionProvider' for e in events)

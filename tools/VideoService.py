@@ -22,6 +22,7 @@ import uuid
 import hashlib
 
 from NativeVideo import prepare_request, finish_native_video
+from BackendSupervisor import write_json
 
 VIDEO_JSON_PATHS=('/api/extra/video/generate','/v1/videos/generations')
 VIDEO_MEDIA_PREFIX='/api/extra/video/media/'
@@ -31,7 +32,7 @@ SIZES={(640,352):('360p','landscape'),(352,640):('360p','portrait'),
 
 
 class VideoServiceError(ValueError):
-    def __init__(self,message,code='invalid_video_request',status=400,headers=None):
+    def __init__(self,message,code='invalid_video_request',status=422,headers=None):
         super().__init__(message);self.status=status;self.headers=headers or {}
         self.body={'error':{'message':message,'type':code,'code':code}}
 
@@ -47,6 +48,15 @@ class VideoBudget:
         if self.cancelled.is_set() or value<=0:raise TimeoutError('Total video request deadline exhausted')
         return value
     def elapsed(self):return self.clock()-self.started
+
+@contextmanager
+def queued_lock(lock,budget,cancelled=None):
+    while not lock.acquire(timeout=min(.5,budget.remaining())):
+        if cancelled and cancelled():raise VideoServiceError('Queued request cancelled.','job_cancelled',409)
+    try:
+        if cancelled and cancelled():raise VideoServiceError('Queued request cancelled.','job_cancelled',409)
+        budget.remaining();yield
+    finally:lock.release()
 
 
 def is_video_request(path,payload):
@@ -86,6 +96,8 @@ class VideoService:
         VideoBudget(deadline_seconds,self.clock)
         self.deadline_seconds=float(deadline_seconds)
         self.outputs=(self.root/'RESULTS/generated/video').resolve()
+        from VideoJobs import VideoJobs
+        self.jobs=VideoJobs(self.root)
         self.blocker=(self.root/'logs/video-owned-unload-blocker.json').resolve()
         if not self.outputs.is_relative_to(self.root) or not self.blocker.is_relative_to(self.root):
             raise ValueError('Video managed paths must remain inside portable root')
@@ -238,7 +250,8 @@ class VideoService:
             if key in payload and payload[key]!=expected:raise VideoServiceError('Для выбранной Turbo-модели требуется '+key+'='+str(expected),status=422)
         if payload.get('scheduler','simple') not in ('simple','normal','discrete','beta','sgm_uniform'):
             raise VideoServiceError('Непроверенный Euler scheduler.',status=422)
-        if payload.get('interpolate_fps') not in (None,24,48):raise VideoServiceError('interpolate_fps:24 или48.',status=422)
+        rate=payload.get('interpolate_fps')
+        if rate is not None and (type(rate) is not int or rate not in (24,48,60)):raise VideoServiceError('interpolate_fps:24,48 или60.',status=422)
         if payload.get('model','kobold-video') not in ('kobold-video','kobold-wan22-turbo'):raise VideoServiceError('Неизвестная видео-модель; веса управляются сервером.',status=422)
         if payload.get('negative_prompt',''):raise VideoServiceError('CFG1 Turbo не использует negative_prompt; задайте позитивное описание.',status=422)
         if any(key in payload for key in ('seconds','duration','duration_seconds')):
@@ -364,7 +377,7 @@ class VideoService:
                               temporal_processing='No stretching, duplication or interpolation; I2V continuation is not yet a validated seamless extension.')
                 if not destination.is_dir():
                     raise VideoServiceError('Результат видео не сохранён.','video_postprocess_failed',502)
-                (destination/'service.json').write_text(json.dumps(dict(created=created,metadata=metadata,active_profile=active),ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+                write_json(destination/'service.json',dict(created=created,metadata=metadata,active_profile=active))
                 budget.remaining()
                 if urllib.parse.urlsplit(path).path=='/sdapi/v1/txt2img':
                     returned=dict(answer);returned['kcpp_video']=metadata;return returned
@@ -381,8 +394,9 @@ class VideoService:
             if isinstance(error,VideoServiceError):failure=error
             else:
                 timed_out=isinstance(error,TimeoutError) or self.clock()>=budget.until
+                resource=isinstance(error,MemoryError) or (isinstance(error,OSError) and getattr(error,'winerror',None) in (8,14,1450,1455))
                 failure=VideoServiceError('Видео не завершено: '+str(error),
-                    'video_deadline_exceeded' if timed_out else 'video_generation_failed',504 if timed_out else 502)
+                    'video_deadline_exceeded' if timed_out else 'video_resource_exhausted' if resource else 'video_generation_failed',504 if timed_out else 503 if resource else 502)
             failure.body['error'].update(video_id=job_id,deadline_seconds=budget.seconds,
                 request_seconds=round(budget.elapsed(),4),native_avi_preserved=(destination/'native.avi').is_file(),
                 partial_encoder_output_preserved=(destination/'video.work.mp4').is_file(),**cleanup)
@@ -392,7 +406,7 @@ class VideoService:
             if acquired and prior_readiness is not None:self.supervisor.readiness_seconds=prior_readiness
             if acquired:self.supervisor.lock.release()
 
-    def enhance(self,result,cfg,budget,upscale_to=None,faces=False,interpolate_fps=None):
+    def enhance(self,result,cfg,budget,upscale_to=None,faces=False,interpolate_fps=None,progress=None):
         """Only saved generated media. Caller holds the global pipeline/GPU locks."""
         from VideoPost import process_video
         metadata=dict(result.get('metadata') or result.get('kcpp_video') or {})
@@ -402,18 +416,21 @@ class VideoService:
         folder=(self.outputs/identity).resolve();source=folder/'native.avi'
         options=cfg.get('proxy',{}).get('video',{})
         if metadata.get('native_output')=='latents':
+            if progress:progress('pro_vae')
             from VideoPro import decode_pro
             pro=decode_pro(folder/'latents.bin',folder/'pro',self.root,options['pro_manifest_sha256'],timeout=budget.remaining())
             shutil.copy2(folder/'pro/decoded.avi',source);shutil.copy2(folder/'pro/video.mp4',folder/'video.mp4');shutil.copy2(folder/'pro/last-frame.png',folder/'last-frame.png')
             metadata.update(vae_decoder=pro['decoder'],native_output='Pro RGB',pro_vae={k:v for k,v in pro.items() if k not in ('capture','output')},output_bytes=(folder/'video.mp4').stat().st_size)
             result=dict(result);result['metadata']=metadata
         if not(upscale_to or faces):
+            if progress:progress('rife')
             return self.interpolate(result,cfg,budget,interpolate_fps)
         if not folder.is_relative_to(self.outputs) or not source.is_file():raise VideoServiceError('Исходный Native AVI не найден.','video_not_found',404)
         model=options.get('upscaler','clearreality') if upscale_to else 'lanczos'
         if model not in ('clearreality','paragon2x','lanczos'):raise VideoServiceError('Неизвестный проверенный видео-апскейлер.',status=422)
         face_options=cfg.get('proxy',{}).get('detailer',{})
         faces=faces and face_options.get('enabled',True) and float(face_options.get('visibility',.2))>0
+        if progress:progress('upscale_faces')
         report=process_video(source,folder/'enhanced',self.root,model=model,faces=faces,target_short_edge=720 if upscale_to else 480,
             face_provider=options.get('face_provider','directml'),face_visibility=max(.001,float(face_options.get('visibility',.2))),
             upscaler_path=options.get('upscaler_model',cfg.get('proxy',{}).get('upscaler',{}).get('model')),upscaler_sha256=options.get('upscaler_model_sha256',cfg.get('proxy',{}).get('upscaler',{}).get('model_sha256')),
@@ -429,22 +446,26 @@ class VideoService:
         metadata.update(native_video_url=self.public_base_url+VIDEO_MEDIA_PREFIX+identity+'/video-native480.mp4',native_last_frame_url=self.public_base_url+VIDEO_MEDIA_PREFIX+identity+'/native-last-frame.png')
         (folder/'enhancement.json').write_text(json.dumps(metadata,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
         result=dict(result);result['metadata']=metadata;result['url']=metadata['url'];result['data']=[dict(url=metadata['url'],mime_type='video/mp4')]
+        if progress:progress('rife')
         return self.interpolate(result,cfg,budget,interpolate_fps)
 
     def interpolate(self,result,cfg,budget,fps):
         if fps in (None,24):return result
-        if fps!=48:raise VideoServiceError('Только интерполяция48FPS.',status=422)
+        if fps not in (48,60):raise VideoServiceError('Интерполяция48 или60FPS.',status=422)
         from VideoRife import interpolate_video
         metadata=dict(result['metadata']);folder=self.outputs/metadata['id']
-        report=interpolate_video(folder/'video.mp4',folder/'rife',self.root,timeout=budget.remaining(),model_dir=cfg.get('proxy',{}).get('video',{}).get('rife_models'))
-        (folder/'video.mp4').rename(folder/'video-24fps.mp4');shutil.copy2(report['output'],folder/'video.mp4')
-        metadata.update(native_frames=metadata['frames'],frames=report['output_frames'],fps=48,frame_interpolation=report,total_seconds=round(budget.elapsed(),4),output_bytes=(folder/'video.mp4').stat().st_size)
+        report=interpolate_video(folder/'video.mp4',folder/'rife',self.root,timeout=budget.remaining(),model_dir=cfg.get('proxy',{}).get('video',{}).get('rife_models'),target_fps=fps)
+        (folder/'video.mp4').rename(folder/'video-24fps.mp4');Path(report['output']).replace(folder/'video.mp4')
+        metadata.update(native_frames=metadata['frames'],frames=report['output_frames'],fps=fps,duration_seconds=report['output_duration_seconds'],frame_interpolation=report,total_seconds=round(budget.elapsed(),4),output_bytes=(folder/'video.mp4').stat().st_size)
         result=dict(result);result['metadata']=metadata;return result
 
     def soundtrack(self,result,cfg,budget,options):
         from VideoAudio import generate_soundtrack
+        import subprocess
         metadata=dict(result['metadata']);folder=self.outputs/metadata['id']
         try:audio=generate_soundtrack(self.supervisor,self.root,folder,cfg,options,budget,metadata)
+        except (TimeoutError,subprocess.TimeoutExpired) as error:raise VideoServiceError('Audio processing deadline exceeded; video is preserved.','video_audio_timeout',504) from error
+        except ValueError as error:raise VideoServiceError(str(error),'invalid_audio_timeline',422) from error
         except Exception as error:raise VideoServiceError('Не удалось создать или присоединить звук; видео сохранено без выдачи ложного успешного результата.','video_audio_failed',502) from error
         metadata['audio']=audio
         if audio['enabled']:metadata['audio_source_url']=self.public_base_url+VIDEO_MEDIA_PREFIX+metadata['id']+'/audio.mp3'
@@ -458,7 +479,7 @@ class VideoService:
         metadata.update(status='completed',total_seconds=round(budget.elapsed(),4),output_bytes=file.stat().st_size,output_sha256=digest)
         if photo_ready is not None:metadata['resident_photo_ready']=bool(photo_ready)
         previous=json.loads((folder/'service.json').read_text()) if (folder/'service.json').exists() else {'created':result['created']}
-        previous['metadata']=metadata;(folder/'service.json').write_text(json.dumps(previous,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+        previous['metadata']=metadata;write_json(folder/'service.json',previous)
         budget.remaining();result=dict(result);result['metadata']=metadata;return result
 
     def upscale_saved(self,payload,cfg,budget):
@@ -500,13 +521,20 @@ class VideoService:
         new_id=uuid.uuid4().hex;target=self.outputs/new_id;target.mkdir();shutil.copy2(source,target/'video.mp4')
         if (original/'last-frame.png').is_file():shutil.copy2(original/'last-frame.png',target/'last-frame.png')
         metadata={k:old[k] for k in ('model','width','height','frames','fps','duration_seconds')}
+        if old.get('lip_sync'):
+            metadata.update({k:old[k] for k in ('lip_sync','speech','speech_segments','mouth') if k in old})
+            if (original/'speech.wav').is_file():shutil.copy2(original/'speech.wav',target/'speech.wav')
+            tracks=options.get('_validated_timeline',{}).get('tracks',[])
+            for segment in old.get('speech_segments',[{'video_id':identity,**old.get('speech',{})}]):
+                matching=[t for t in tracks if t.get('kind')=='speech' and t.get('speech_video_id')==segment['video_id'] and t.get('start')==segment.get('start',0) and t.get('fit','natural')=='natural']
+                if not matching:raise VideoServiceError('Reuse every onscreen speech_video_id at its original start,fit=natural; do not re-TTS or retime it.',status=422)
         metadata.update(id=new_id,source_video_id=identity,source_output_sha256=digest,source_generation_seconds=old.get('total_seconds'),rendered_this_request=['audio_mix','photo_restore'],url=self.public_base_url+VIDEO_MEDIA_PREFIX+new_id+'/video.mp4',relative_url=VIDEO_MEDIA_PREFIX+new_id+'/video.mp4',last_frame_url=self.public_base_url+VIDEO_MEDIA_PREFIX+new_id+'/last-frame.png',deadline_seconds=budget.seconds)
         result=dict(id=new_id,object='video',created=int(time.time()),metadata=metadata,url=metadata['url'])
         return self.soundtrack(result,cfg,budget,options)
 
     def open_media(self,path,headers=None):
         decoded=urllib.parse.unquote(urllib.parse.urlsplit(path).path)
-        match=re.fullmatch(re.escape(VIDEO_MEDIA_PREFIX)+r'([0-9a-f]{32})/(video\.mp4|video-native480\.mp4|video-24fps\.mp4|audio\.mp3|last-frame\.png|native-last-frame\.png)',decoded)
+        match=re.fullmatch(re.escape(VIDEO_MEDIA_PREFIX)+r'([0-9a-f]{32})/(video\.mp4|video-native480\.mp4|video-24fps\.mp4|audio\.mp3|speech\.wav|last-frame\.png|native-last-frame\.png)',decoded)
         if not match:raise VideoServiceError('Видео не найдено.','video_not_found',404)
         file=(self.outputs/match[1]/match[2]).resolve()
         if not file.is_relative_to(self.outputs) or not file.is_file():
@@ -527,7 +555,7 @@ class VideoService:
                 start=max(0,total-suffix)
             if start>=total or start>end:raise VideoServiceError('Range вне файла.','invalid_range',416,error_headers)
             status=206
-        returned={'Content-Type':'video/mp4' if match[2].endswith('.mp4') else ('audio/mpeg' if match[2].endswith('.mp3') else 'image/png'),
+        returned={'Content-Type':'video/mp4' if match[2].endswith('.mp4') else ('audio/mpeg' if match[2].endswith('.mp3') else 'audio/wav' if match[2].endswith('.wav') else 'image/png'),
                   'Content-Length':str(end-start+1),'Accept-Ranges':'bytes',
                   'X-Content-Type-Options':'nosniff','Cache-Control':'no-store'}
         if status==206:returned['Content-Range']=f'bytes {start}-{end}/{total}'
