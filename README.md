@@ -3,6 +3,8 @@
 
 Portable Windows media around [our Haswell/AVX2 RX 580 Polaris/gfx803 fork](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa) of [original KoboldCpp](https://github.com/LostRuins/koboldcpp). Run **Start.exe → KoboldCpp.exe**. Models switch exclusively; image stays GPU-resident when idle. Setup.ps1 is initial installation/update, not the launcher. No main weights are mirrored.
 
+Goal: one portable KoboldCpp.exe with one runtime and a common on-demand API for photo, audio, video, effects and their combinations. The experimental core tracks official updates and selected security/model/performance patches for AVX2/Polaris; user-selected models and settings stay configurable.
+
 - Default image recipe: Ray Q8, Afterlight0.25 + RealismEnhancer1, Euler/simple8, eta0, Cache-DiT0.08. Normal736×1104 without automatic SR; High928×1392 with ClearReality4x, current High mix unmeasured. YuNet/GPEN20%/SFace0.97/Gater before SR, no repeat afterwards. Models/presets are configurable.
 - Music: YuE2 MP3. SFX: SA3 CPU WAV/MP3,0.25–60s. Speech/helper/STT use a configurable provider and explicit RU/EN voices.
 - Video: Wan5B Turbo, full encoder + Pro FP32, Euler/beta4, WG512, threshold576, ClearReality720p/faces, RIFE48FPS default/60 optional. Audio-driven lip-sync is a separate optional stage; this is not joint AV inference. Native limit121 frames; conservative tested clip73. Client project15s default/30s maximum.
@@ -15,7 +17,7 @@ Portable Windows media around [our Haswell/AVX2 RX 580 Polaris/gfx803 fork](http
 | Music32sMP3 | 57.01s |28Oct,6c03b583, photo return61.07s |
 | SFX2sWAV /6sMP3 |10.57s /17.17s |30Oct CPU, photo stayed resident |
 
-Settings/ranges/dates/SHA: [one measurement file](results/measurements.json). **Current native1.124.1/91831fa has no new LLM token benchmark; image/video checks below are separate.** Video samples used a private user adapter, not enabled/distributed in this kit. Historical timings are not a new speed claim.
+Settings/ranges/dates/SHA: [one measurement file](results/measurements.json). **Current native1.124.2/6d2fedf has startup/GET acceptance only; saved image/video/token measurements retain their own SHA.** Video samples used a private user adapter, not enabled/distributed in this kit. Historical timings are not a new speed claim.
 
 | Actual Normal | Actual4x, full lossless image linked |
 |---|---|
