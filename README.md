@@ -5,11 +5,22 @@ Portable Windows media around [our Haswell/AVX2 RX 580 Polaris/gfx803 fork](http
 
 Goal: one portable KoboldCpp.exe with one runtime and a common on-demand API for photo, audio, video, effects and their combinations. The experimental core tracks official updates and selected security/model/performance patches for AVX2/Polaris; user-selected models and settings stay configurable.
 
-- Default image recipe: Ray Q8, Afterlight0.25 + RealismEnhancer1, Euler/simple8, eta0, Cache-DiT0.08. Normal736×1104 without automatic SR; High928×1392 with ClearReality4x, current High mix unmeasured. YuNet/GPEN20%/SFace0.97/Gater before SR, no repeat afterwards. Models/presets are configurable.
+- Default image recipe: Ray Q8, Afterlight0.25 + RealismEnhancer1, Euler/simple8, eta0, Cache-DiT0.08. Normal736×1104 without automatic SR; High928×1392 with ClearReality4x, supplemental High controls saved in the photo evidence. YuNet/GPEN20%/SFace0.97/Gater before SR, no repeat afterwards. Models/presets are configurable.
 - Music: YuE2 MP3. SFX: SA3 CPU WAV/MP3,0.25–60s. Speech/helper/STT use a configurable provider and explicit RU/EN voices.
 - Video: Wan5B Turbo, full encoder + Pro FP32, Euler/beta4, WG512, threshold576, ClearReality720p/faces, RIFE48FPS default/60 optional. Audio-driven lip-sync is a separate optional stage; this is not joint AV inference. Native limit121 frames; conservative tested clip73. Client project15s default/30s maximum.
 
 ## Latest saved results
+
+Manual Normal photo comparison, **2026-11-02**: same current Ray/text/VAE/LoRAs and8 Euler/simple/Cache-DiT0.08 settings. Official stock `c66550f4` → fork `cb260832`, warm model-ready medians:
+
+| Time | Stock | Latest | Less time |
+|---|---:|---:|---:|
+| Native736×1104 |176.670s|146.815s|16.90%|
+| Native + faces/Gater |184.423s|154.698s|16.12%|
+
+The new FFN-view patch adds0.47% Native /0.37% pipeline versus the prior fork.184 CPU/Vulkan checks and17 unprofiled generations retained identical RGB. Public Normal API and separate4x2944×4416 passed, without repeating faces/Gater. Lossless PNG3 encoding1.566→1.052s, payload+1.4%, exact pixels/text. Full SR HTTP ranges overlap; no whole-request SR gain claimed. The matched engine table held PNG6 fixed; PNG3 is a separate serialization change. [Every repeat, first call, return control, model/SHA, API result and limitation](results/photo-latest.json).
+
+Earlier media results retain their own dates/SHA:
 | Saved test | Actual wall time | Scope |
 |---|---:|---|
 | PhotoNormal | 163.85s |29Oct, ff7d4d0b, one API |
@@ -17,7 +28,7 @@ Goal: one portable KoboldCpp.exe with one runtime and a common on-demand API for
 | Music32sMP3 | 57.01s |28Oct,6c03b583, photo return61.07s |
 | SFX2sWAV /6sMP3 |10.57s /17.17s |30Oct CPU, photo stayed resident |
 
-Settings/ranges/dates/SHA: [one measurement file](results/measurements.json). **Current native1.124.2/6d2fedf has startup/GET acceptance only; saved image/video/token measurements retain their own SHA.** Video samples used a private user adapter, not enabled/distributed in this kit. Historical timings are not a new speed claim.
+Settings/ranges/dates/SHA: [one measurement file](results/measurements.json). **Current native1.124.2/cb260832 has explicit manual photo/Normal4x acceptance; saved video/token timings retain their own SHA.** Video samples used a private user adapter, not enabled/distributed in this kit. Historical timings are not a new speed claim.
 
 | Actual Normal | Actual4x, full lossless image linked |
 |---|---|

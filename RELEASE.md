@@ -1,5 +1,5 @@
-Unified portable media update · 2026-11-02
-- Pin the accepted native 1.124.2 / 6d2fedf core: YuE2 VRAM lifetime fixes, SheetSage2 engine support, WebP input and reasoning-budget grammar repair. Existing media models/settings are retained.
-- One locally built KoboldCpp.exe, one runtime, unified demand-loaded photo/audio/video/effects API. Preserve resident idle photo, exclusive model ownership, generation receipts and optional explicit lip-sync.
-- Source/hash/startup/visible-window/GET checks only; no new inference or speed benchmark. All saved timings retain their dates and executable SHA. [Proof](results/measurements.json).
-- [Build](docs/BUILD.md) · [API](docs/API.md) · [Licenses](docs/LICENSES.md). Models, LoRA weights, private runtime and credentials are not mirrored. Optional Wav2Lip/GPEN retain non-commercial terms.
+Normal photo and lossless4x delivery · 2026-11-02
+- Pin accepted Core1.124.2 / cb260832 with gated Polaris SCALE/MOSS FFN views. Same current model weights and user settings;184 CPU/Vulkan cases and17 unprofiled generations retained identical RGB.
+- Official stock→latest warm Normal: Native176.670→146.815s; faces/Gater pipeline184.423→154.698s. The incremental patch is0.47% Native /0.37% pipeline versus prior fork. [All first/repeated/return controls, SHA and limits](results/photo-latest.json).
+- Real Normal + separate4x2944×4416 API checks passed without repeated restoration. Lossless PNG3 encoding1.566→1.052s, file+1.4%, exact RGB/text; overlapping SR HTTP ranges do not prove a whole-request gain.
+- One locally built portable KoboldCpp.exe; original pinned runtime/model downloads reused. No weights/private runtime mirrored. Manual tests only; no new LLM/video benchmark. [Licenses](docs/LICENSES.md).

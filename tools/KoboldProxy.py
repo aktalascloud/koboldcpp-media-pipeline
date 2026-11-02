@@ -100,7 +100,8 @@ def image_encode(image,parameters=None,marker=None):
     if marker:
         marker={**marker,'version':VERSION,'rgb_sha256':hashlib.sha256(image.convert('RGB').tobytes()).hexdigest()}
         tags.add_text('kcpp_proxy_detailer',json.dumps(marker,separators=(',',':')))
-    image.save(out,format='PNG',pnginfo=tags)
+    # Lossless level3: measured faster on Haswell; RGB/text unchanged, ~1.4% larger.
+    image.save(out,format='PNG',pnginfo=tags,compress_level=3)
     return base64.b64encode(out.getvalue()).decode()
 def face_signature(options,legacy=False,include_policy=False):
     canonical=dict(options)

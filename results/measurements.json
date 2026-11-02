@@ -1,10 +1,10 @@
 {
   "format": 1,
   "installed_build": {
-    "source_commit": "91831fafa1ca81ce1bc2904b8f6b5eb4369a4bbb",
-    "native_sha256": "71e8aeca0c55ac4fe994b8fc30997061faf4359fdc82bdfedaa9e31b7959fca9",
-    "version": "1.124.1",
-    "date": "2026-11-01"
+    "source_commit": "6d2fedf8624e5f05926af3191f9efdcb13c4133c",
+    "native_sha256": "cb260832775124d2fb2bdc7021222a1f6526c82e64456dfdb469bb4c2419ff61",
+    "version": "1.124.2",
+    "date": "2026-11-02"
   },
   "installed_build_speed_measured": true,
   "native": {
@@ -667,7 +667,9 @@
     "rgb_all_identical": true,
     "warm_before_seconds": 147.91350450000027,
     "warm_after_seconds": 147.60432050000236,
-    "warm_improvement_percent": 0.2094681232572171
+    "warm_improvement_percent": 0.2094681232572171,
+    "historical": true,
+    "superseded_by_photo_comparison": "photo-latest.json"
   },
   "current_video": {
     "date": "2026-11-01",
@@ -1119,11 +1121,11 @@
       "scope": "Video codec stage only; no neural generation speed claim"
     }
   },
-  "current_build_measured_scopes": [
-    "Native image comparison only; LLM token numbers retain their historical SHA",
-    "One I2V73 full video pipeline",
-    "Stored-video RIFE/lip-sync/audio mix"
-  ],
+  "current_build_measured_scopes": {
+    "photo": "photo-latest.json",
+    "llm_tokens": false,
+    "video_current_sha_measured": false
+  },
   "project_duration": {
     "default_seconds": 15,
     "max_seconds": 30,
@@ -1135,5 +1137,24 @@
     "tracks": [],
     "http_seconds": 2.1282467,
     "scope": "Actual configured helper with schema; no invented ambient effects"
+  },
+  "photo_current": {
+    "date": "2026-11-02",
+    "file": "photo-latest.json",
+    "executable_sha256": "cb260832775124d2fb2bdc7021222a1f6526c82e64456dfdb469bb4c2419ff61",
+    "normal_native_time_reduction_vs_stock_percent": 16.899020773192962,
+    "normal_pipeline_time_reduction_vs_stock_percent": 16.11806502518518,
+    "incremental_native_time_reduction_percent": 0.4704813620909909,
+    "normal_dimensions": [
+      736,
+      1104
+    ],
+    "upscale_dimensions": [
+      2944,
+      4416
+    ],
+    "all_tested_rgb_exact": true,
+    "user_settings_preserved": true,
+    "llm_tokens_measured": false
   }
 }
