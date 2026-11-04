@@ -102,6 +102,19 @@ class WindowsOperations:
         kernel.GetTickCount64.restype = ctypes.c_ulonglong
         return time.time() - kernel.GetTickCount64() / 1000
 
+    def inaccessible_pid_replaced(self, record):
+        """Read-only fallback for a protected, demonstrably reused non-Native PID."""
+        pid=int(record['pid'])
+        row=self._powershell("Get-CimInstance Win32_Process -Filter 'ProcessId = "+str(pid)+
+            "' | ForEach-Object { [pscustomobject]@{pid=$_.ProcessId;name=$_.Name;created_ticks=$_.CreationDate.ToFileTimeUtc()} } | ConvertTo-Json -Compress")
+        if not isinstance(row,dict) or row.get('pid')!=pid:return False
+        name=str(row.get('name','')).lower()
+        # A live Native/worker remains ambiguous even if its PID was recycled.
+        forbidden={'koboldcpp-nocuda.exe','python.exe','pythonw.exe',Path(record['executable']).name.lower()}
+        ticks=row.get('created_ticks')
+        return bool(name and name not in forbidden and type(ticks) is int and
+                    ticks>record['created_ticks']+10_000_000)
+
     def _powershell(self, script):
         shell = Path(os.environ.get('SystemRoot', r'C:\Windows')) / 'System32/WindowsPowerShell/v1.0/powershell.exe'
         try:
@@ -471,7 +484,12 @@ class BackendSupervisor:
     def _identity_status(self, record):
         if not isinstance(record, dict) or not isinstance(record.get('pid'), int) or not isinstance(record.get('created_ticks'), int) or not record.get('executable'):
             raise SupervisorError('Recorded process has no creation identity; preserved.', 'invalid_ownership')
-        current = self.operations.process(record['pid'])
+        try:
+            current = self.operations.process(record['pid'])
+        except PermissionError as error:
+            replaced=getattr(self.operations,'inaccessible_pid_replaced',lambda record:False)
+            if error.winerror==5 and replaced(record):return 'reused_inaccessible'
+            raise
         if current is None: return 'dead'
         if current['created_ticks'] == record['created_ticks'] and same_path(current['executable'], record['executable']): return 'owned'
         return 'reused'

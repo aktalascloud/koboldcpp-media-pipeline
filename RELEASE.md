@@ -1,5 +1,5 @@
-Normal photo and lossless4x delivery · 2026-11-02
-- Pin accepted Core1.124.2 / cb260832 with gated Polaris SCALE/MOSS FFN views. Same current model weights and user settings;184 CPU/Vulkan cases and17 unprofiled generations retained identical RGB.
-- Official stock→latest warm Normal: Native176.670→146.815s; faces/Gater pipeline184.423→154.698s. The incremental patch is0.47% Native /0.37% pipeline versus prior fork. [All first/repeated/return controls, SHA and limits](results/photo-latest.json).
-- Real Normal + separate4x2944×4416 API checks passed without repeated restoration. Lossless PNG3 encoding1.566→1.052s, file+1.4%, exact RGB/text; overlapping SR HTTP ranges do not prove a whole-request gain.
-- One locally built portable KoboldCpp.exe; original pinned runtime/model downloads reused. No weights/private runtime mirrored. Manual tests only; no new LLM/video benchmark. [Licenses](docs/LICENSES.md).
+Portable media maintenance · 2026-11-04
+- Pin accepted Core1.125 / 2df2c89f:82 official commits, retained Haswell/Polaris/MOSS/Pro ports and PR2581 Vulkan build fix.
+- Fix stale protected-PID reuse: read-only name/creation-time proof can retire a demonstrably replaced non-Native PID; Native/Python ambiguity and occupied ports still fail closed.6 offline cases and5 boot-recovery cases passed; no processes terminated by the fix.
+- Source/hash, registered startup, dated visible window and GET capabilities verified. Current settings/context and exact four profiles retained; resident photo restored. No new inference or speed tests.
+- [November2 manual photo evidence](results/photo-latest.json) keeps its own cb260832 SHA; it is not a benchmark of this release. Original pinned runtime/model assets reused; no weights/private owner EXE mirrored. [Licenses](docs/LICENSES.md).

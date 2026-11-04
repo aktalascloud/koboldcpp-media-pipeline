@@ -9,11 +9,13 @@ Goal: one portable KoboldCpp.exe with one runtime and a common on-demand API for
 - Music: YuE2 MP3. SFX: SA3 CPU WAV/MP3,0.25–60s. Speech/helper/STT use a configurable provider and explicit RU/EN voices.
 - Video: Wan5B Turbo, full encoder + Pro FP32, Euler/beta4, WG512, threshold576, ClearReality720p/faces, RIFE48FPS default/60 optional. Audio-driven lip-sync is a separate optional stage; this is not joint AV inference. Native limit121 frames; conservative tested clip73. Client project15s default/30s maximum.
 
+**Current maintenance:1.125 / 2df2c89f,2026-11-04.** Fresh official source and retained ports; build/hash/startup/visible-window/GET checks only, no generation benchmarks. Stale protected PID reuse is now handled by read-only name/creation-time proof; ambiguous Native/Python/port ownership remains blocked.
+
 ## Latest saved results
 
 Manual Normal photo comparison, **2026-11-02**: same current Ray/text/VAE/LoRAs and8 Euler/simple/Cache-DiT0.08 settings. Official stock `c66550f4` → fork `cb260832`, warm model-ready medians:
 
-| Time | Stock | Latest | Less time |
+| Time | Stock | Measured cb260832 | Less time |
 |---|---:|---:|---:|
 | Native736×1104 |176.670s|146.815s|16.90%|
 | Native + faces/Gater |184.423s|154.698s|16.12%|
@@ -28,7 +30,7 @@ Earlier media results retain their own dates/SHA:
 | Music32sMP3 | 57.01s |28Oct,6c03b583, photo return61.07s |
 | SFX2sWAV /6sMP3 |10.57s /17.17s |30Oct CPU, photo stayed resident |
 
-Settings/ranges/dates/SHA: [one measurement file](results/measurements.json). **Current native1.124.2/cb260832 has explicit manual photo/Normal4x acceptance; saved video/token timings retain their own SHA.** Video samples used a private user adapter, not enabled/distributed in this kit. Historical timings are not a new speed claim.
+Settings/ranges/dates/SHA: [one measurement file](results/measurements.json). **Current native1.125/2df2c89f has startup/GET acceptance only. The November2 photo cb260832 and saved video/token timings retain their own SHA.** Video samples used a private user adapter, not enabled/distributed in this kit. Historical timings are not a new speed claim.
 
 | Actual Normal | Actual4x, full lossless image linked |
 |---|---|

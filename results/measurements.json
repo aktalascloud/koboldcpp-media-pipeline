@@ -1,12 +1,12 @@
 {
   "format": 1,
   "installed_build": {
-    "source_commit": "6d2fedf8624e5f05926af3191f9efdcb13c4133c",
-    "native_sha256": "cb260832775124d2fb2bdc7021222a1f6526c82e64456dfdb469bb4c2419ff61",
-    "version": "1.124.2",
-    "date": "2026-11-02"
+    "source_commit": "ab00ee527009d8f4cd2c6da9fbf21045d22c98d2",
+    "native_sha256": "2df2c89fd6d5ceef0f452cfc666311bbaac08c48085a83876a11dcb901095cb8",
+    "version": "1.125",
+    "date": "2026-11-04"
   },
-  "installed_build_speed_measured": true,
+  "installed_build_speed_measured": false,
   "native": {
     "date": "2026-10-25",
     "source_commit": "e68c9b1005f967f8795fcee2e268d881e87d29a0",
@@ -1122,9 +1122,11 @@
     }
   },
   "current_build_measured_scopes": {
-    "photo": "photo-latest.json",
-    "llm_tokens": false,
-    "video_current_sha_measured": false
+    "date": "2026-11-04",
+    "build_source_hash_startup_window_get": true,
+    "inference_tests": false,
+    "benchmarks": false,
+    "last_manual_photo": "photo-latest.json;2November2026/cb260832"
   },
   "project_duration": {
     "default_seconds": 15,
