@@ -1,5 +1,5 @@
-Portable media maintenance · 2026-11-07
+Portable media diff follow-up · 2026-11-07
 
-- Core 1.125 `05e9dc7a` with the reviewed non-ReBAR Vulkan allocation policy and Haswell CPU ports.
-- Cold startup and resident photo profile verified. The installer pins the verified Core asset and reuses the existing runtime and source-distributed components.
-- [Historical November 6 media measurements](results/performance-2026-11-06.json) · [Licenses](docs/LICENSES.md).
+- Pin Core 1.125 `da9c0018` with Haswell GELU/GEGLU and the long-row Vulkan RMSNorm fix.
+- Warm Normal via API 155.312 → 155.430 s, separate 4× 5.499 → 5.498 s. RGB hashes matched on the existing settings. [Measurement data](results/performance-2026-11-07-r1.json).
+- Verified startup, exact derived profiles and pinned components. [Licenses](docs/LICENSES.md).
