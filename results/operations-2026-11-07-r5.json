@@ -1,0 +1,1105 @@
+{
+  "date": "2026-11-07",
+  "accepted_native_context": {
+    "source": "2d469743d30d09737633607071fe83dc2283bfec",
+    "native_sha256": "efddce0e7f8518d735c809cbf925e3718786dddd6221da30eb9bc96107eaaca7",
+    "patch_sha256": "7bd8728c5d77449c2165c693fd9fd3099fdb0736f53446e85779dc20cd6813e4",
+    "patch_count": 65
+  },
+  "scope": "Synthetic source/operator qualification on actual Haswell/RX580 CPU/Vulkan objects;fixture binaries have their own hashes. GLU/SiTU timings belong to their fixture/component cohorts,not runs of the portable EXE. Current EXE image gains are measured separately.",
+  "glu": {
+    "graph_pair_controls": 224,
+    "non_bit_exact": 0,
+    "fused_controls": 168,
+    "guarded_fallback_controls": 56,
+    "timings": [
+      {
+        "backend": "CPU",
+        "split": false,
+        "before_us": {
+          "median": 1242.225,
+          "min": 1227.635,
+          "max": 1258.19,
+          "repeats": [
+            1242.225,
+            1231.825,
+            1250.395,
+            1258.19,
+            1227.635,
+            1245.76,
+            1231.675
+          ]
+        },
+        "after_us": {
+          "median": 1163.135,
+          "min": 1147.765,
+          "max": 1196.345,
+          "repeats": [
+            1176.815,
+            1186.035,
+            1147.765,
+            1196.345,
+            1153.845,
+            1163.135,
+            1157.675
+          ]
+        },
+        "less_time_percent": 6.366801505363351
+      },
+      {
+        "backend": "CPU",
+        "split": true,
+        "before_us": {
+          "median": 1299.85,
+          "min": 1293.66,
+          "max": 1318.335,
+          "repeats": [
+            1301.48,
+            1318.335,
+            1296.46,
+            1293.66,
+            1299.035,
+            1299.85,
+            1308.31
+          ]
+        },
+        "after_us": {
+          "median": 1252.84,
+          "min": 1230.275,
+          "max": 1296.21,
+          "repeats": [
+            1236.77,
+            1296.21,
+            1268.395,
+            1244.44,
+            1252.84,
+            1263.52,
+            1230.275
+          ]
+        },
+        "less_time_percent": 3.6165711428241765
+      },
+      {
+        "backend": "Vulkan0",
+        "split": false,
+        "before_us": {
+          "median": 158.805,
+          "min": 158.02,
+          "max": 159.32,
+          "repeats": [
+            158.805,
+            158.325,
+            158.615,
+            159.015,
+            159.22,
+            159.32,
+            158.02
+          ]
+        },
+        "after_us": {
+          "median": 95.07,
+          "min": 93.75,
+          "max": 98.665,
+          "repeats": [
+            98.665,
+            95.465,
+            93.75,
+            94.385,
+            93.785,
+            96.27,
+            95.07
+          ]
+        },
+        "less_time_percent": 40.13412675923303
+      },
+      {
+        "backend": "Vulkan0",
+        "split": true,
+        "before_us": {
+          "median": 260.585,
+          "min": 260.08,
+          "max": 263.495,
+          "repeats": [
+            263.495,
+            260.555,
+            262.22,
+            260.585,
+            261.575,
+            260.435,
+            260.08
+          ]
+        },
+        "after_us": {
+          "median": 221.19,
+          "min": 220.515,
+          "max": 224.91,
+          "repeats": [
+            220.515,
+            222.89,
+            224.91,
+            222.94,
+            221.19,
+            221.045,
+            220.66
+          ]
+        },
+        "less_time_percent": 15.117907784408157
+      }
+    ]
+  },
+  "situ": {
+    "graph_pair_controls": 224,
+    "non_bit_exact": 0,
+    "fused_controls": 168,
+    "guarded_fallback_controls": 56,
+    "timings": [
+      {
+        "backend": "CPU",
+        "split": false,
+        "before_us": {
+          "median": 4447.685,
+          "min": 4435.8,
+          "max": 4484.75,
+          "repeats": [
+            4447.685,
+            4462.08,
+            4470.355,
+            4484.75,
+            4444.93,
+            4435.8,
+            4443.465
+          ]
+        },
+        "after_us": {
+          "median": 3862.545,
+          "min": 3848.94,
+          "max": 3870.765,
+          "repeats": [
+            3866.685,
+            3870.765,
+            3862.545,
+            3858.395,
+            3850.605,
+            3848.94,
+            3863.34
+          ]
+        },
+        "less_time_percent": 13.15605758951005
+      },
+      {
+        "backend": "CPU",
+        "split": true,
+        "before_us": {
+          "median": 4548.525,
+          "min": 4538.78,
+          "max": 4579.72,
+          "repeats": [
+            4543.415,
+            4543.985,
+            4538.78,
+            4551.71,
+            4548.64,
+            4548.525,
+            4579.72
+          ]
+        },
+        "after_us": {
+          "median": 4167.605,
+          "min": 4155.88,
+          "max": 4208.395,
+          "repeats": [
+            4208.395,
+            4167.605,
+            4184.8,
+            4166.89,
+            4155.88,
+            4159.61,
+            4183.72
+          ]
+        },
+        "less_time_percent": 8.374582969204303
+      },
+      {
+        "backend": "Vulkan0",
+        "split": false,
+        "before_us": {
+          "median": 344.31,
+          "min": 342.725,
+          "max": 345.64,
+          "repeats": [
+            343.715,
+            342.725,
+            345.64,
+            343.44,
+            344.68,
+            345.1,
+            344.31
+          ]
+        },
+        "after_us": {
+          "median": 97.045,
+          "min": 96.44,
+          "max": 98.21,
+          "repeats": [
+            97.045,
+            96.86,
+            97.495,
+            96.885,
+            98.21,
+            96.44,
+            97.26
+          ]
+        },
+        "less_time_percent": 71.81464378031426
+      },
+      {
+        "backend": "Vulkan0",
+        "split": true,
+        "before_us": {
+          "median": 474.52,
+          "min": 473.49,
+          "max": 490.44,
+          "repeats": [
+            474.14,
+            490.44,
+            475.52,
+            476.295,
+            473.53,
+            474.52,
+            473.49
+          ]
+        },
+        "after_us": {
+          "median": 222.985,
+          "min": 222.51,
+          "max": 224.905,
+          "repeats": [
+            222.985,
+            222.96,
+            222.51,
+            222.92,
+            224.905,
+            223.74,
+            223.745
+          ]
+        },
+        "less_time_percent": 53.008303127370816
+      }
+    ]
+  },
+  "rms": {
+    "graph_pair_controls": 176,
+    "non_bit_exact": 0,
+    "max_abs_error": 0,
+    "trace_active": true,
+    "before_us": {
+      "median": 211.91,
+      "min": 210.0,
+      "max": 213.275,
+      "repeats": [
+        212.845,
+        213.275,
+        210.47,
+        211.91,
+        210.0,
+        210.77,
+        212.33
+      ]
+    },
+    "after_us": {
+      "median": 108.625,
+      "min": 108.465,
+      "max": 109.515,
+      "repeats": [
+        108.935,
+        108.705,
+        108.625,
+        109.515,
+        108.605,
+        108.465,
+        108.475
+      ]
+    },
+    "less_time_percent": 48.740031145297536,
+    "scope": "Native Vulkan3072x128;baseline retains ordinary RMS+weight fusion,then separate modulation.176 pair controls include external output consumers,gapped4D views and misaligned-vector fallback. No MOSS full-model claim."
+  },
+  "placement": {
+    "device_selector_cases": 9,
+    "shared_owner_cases": 2,
+    "source_extracted": true,
+    "physical_multigpu_test": false
+  },
+  "expert_bounds": {
+    "cases": [
+      {
+        "id": -1,
+        "exit_code": 0,
+        "valid": true,
+        "guarded": true
+      },
+      {
+        "id": 0,
+        "exit_code": 0,
+        "valid": true,
+        "guarded": true
+      },
+      {
+        "id": 1,
+        "exit_code": 0,
+        "valid": true,
+        "guarded": true
+      },
+      {
+        "id": -2,
+        "exit_code": 86,
+        "valid": false,
+        "guarded": true
+      },
+      {
+        "id": 2,
+        "exit_code": 86,
+        "valid": false,
+        "guarded": true
+      },
+      {
+        "id": 2147483647,
+        "exit_code": 86,
+        "valid": false,
+        "guarded": true
+      }
+    ],
+    "release_NDEBUG_object": true
+  },
+  "segment_use_counts": {
+    "cases": 6,
+    "passed": true,
+    "scope": "Extracted actual segment constructor and real GGML metadata,including views/external consumers."
+  },
+  "rejected": {
+    "avx2_transposed_layout": {
+      "configurations": 240,
+      "comparisons": 880,
+      "timings": [
+        {
+          "subblock": 16,
+          "bias": 4,
+          "num_k": 1,
+          "trials": [
+            {
+              "before_us": 1.4153,
+              "after_us": 1.5586
+            },
+            {
+              "before_us": 1.4284,
+              "after_us": 1.5339
+            },
+            {
+              "before_us": 1.3917,
+              "after_us": 1.5282
+            },
+            {
+              "before_us": 1.4999,
+              "after_us": 1.5302
+            },
+            {
+              "before_us": 1.4441,
+              "after_us": 1.5312
+            },
+            {
+              "before_us": 1.3894,
+              "after_us": 1.5381
+            },
+            {
+              "before_us": 1.4017,
+              "after_us": 1.5448
+            }
+          ]
+        },
+        {
+          "subblock": 16,
+          "bias": 32,
+          "num_k": 1,
+          "trials": [
+            {
+              "before_us": 1.3967,
+              "after_us": 1.5639
+            },
+            {
+              "before_us": 1.5089,
+              "after_us": 1.5667
+            },
+            {
+              "before_us": 1.4062,
+              "after_us": 1.5321
+            },
+            {
+              "before_us": 1.403,
+              "after_us": 1.552
+            },
+            {
+              "before_us": 1.3905,
+              "after_us": 1.5346
+            },
+            {
+              "before_us": 1.3962,
+              "after_us": 1.5324
+            },
+            {
+              "before_us": 1.3947,
+              "after_us": 1.545
+            }
+          ]
+        },
+        {
+          "subblock": 16,
+          "bias": 128,
+          "num_k": 1,
+          "trials": [
+            {
+              "before_us": 1.5276,
+              "after_us": 1.5359
+            },
+            {
+              "before_us": 1.3889,
+              "after_us": 1.5711
+            },
+            {
+              "before_us": 1.3856,
+              "after_us": 1.5556
+            },
+            {
+              "before_us": 1.4018,
+              "after_us": 1.5374
+            },
+            {
+              "before_us": 1.3871,
+              "after_us": 1.5402
+            },
+            {
+              "before_us": 1.4753,
+              "after_us": 1.5388
+            },
+            {
+              "before_us": 1.4418,
+              "after_us": 1.5375
+            }
+          ]
+        },
+        {
+          "subblock": 32,
+          "bias": 128,
+          "num_k": 1,
+          "trials": [
+            {
+              "before_us": 1.3574,
+              "after_us": 1.5981
+            },
+            {
+              "before_us": 1.3624,
+              "after_us": 1.5463
+            },
+            {
+              "before_us": 1.3493,
+              "after_us": 1.5524
+            },
+            {
+              "before_us": 1.4018,
+              "after_us": 1.6075
+            },
+            {
+              "before_us": 1.3638,
+              "after_us": 1.5419
+            },
+            {
+              "before_us": 1.3561,
+              "after_us": 1.5709
+            },
+            {
+              "before_us": 1.3412,
+              "after_us": 1.5564
+            }
+          ]
+        },
+        {
+          "subblock": 16,
+          "bias": 4,
+          "num_k": 2,
+          "trials": [
+            {
+              "before_us": 1.4003,
+              "after_us": 1.7419
+            },
+            {
+              "before_us": 1.3768,
+              "after_us": 1.6649
+            },
+            {
+              "before_us": 1.3966,
+              "after_us": 1.6554
+            },
+            {
+              "before_us": 1.3765,
+              "after_us": 1.6698
+            },
+            {
+              "before_us": 1.548,
+              "after_us": 1.6656
+            },
+            {
+              "before_us": 1.3732,
+              "after_us": 1.67
+            },
+            {
+              "before_us": 1.4746,
+              "after_us": 1.6498
+            }
+          ]
+        },
+        {
+          "subblock": 16,
+          "bias": 32,
+          "num_k": 2,
+          "trials": [
+            {
+              "before_us": 1.4093,
+              "after_us": 1.6547
+            },
+            {
+              "before_us": 1.3886,
+              "after_us": 1.6573
+            },
+            {
+              "before_us": 1.4656,
+              "after_us": 1.6532
+            },
+            {
+              "before_us": 1.4049,
+              "after_us": 1.6531
+            },
+            {
+              "before_us": 1.45,
+              "after_us": 1.6813
+            },
+            {
+              "before_us": 1.3728,
+              "after_us": 1.6539
+            },
+            {
+              "before_us": 1.3748,
+              "after_us": 1.6959
+            }
+          ]
+        },
+        {
+          "subblock": 16,
+          "bias": 128,
+          "num_k": 2,
+          "trials": [
+            {
+              "before_us": 1.3863,
+              "after_us": 1.6794
+            },
+            {
+              "before_us": 1.3938,
+              "after_us": 1.658
+            },
+            {
+              "before_us": 1.4446,
+              "after_us": 1.6607
+            },
+            {
+              "before_us": 1.3908,
+              "after_us": 1.692
+            },
+            {
+              "before_us": 1.3907,
+              "after_us": 1.6725
+            },
+            {
+              "before_us": 1.3797,
+              "after_us": 1.6503
+            },
+            {
+              "before_us": 1.4015,
+              "after_us": 1.6486
+            }
+          ]
+        },
+        {
+          "subblock": 32,
+          "bias": 128,
+          "num_k": 2,
+          "trials": [
+            {
+              "before_us": 1.3351,
+              "after_us": 1.735
+            },
+            {
+              "before_us": 1.3433,
+              "after_us": 1.7067
+            },
+            {
+              "before_us": 1.3383,
+              "after_us": 1.7436
+            },
+            {
+              "before_us": 1.3474,
+              "after_us": 1.6822
+            },
+            {
+              "before_us": 1.3454,
+              "after_us": 1.6818
+            },
+            {
+              "before_us": 1.3975,
+              "after_us": 1.6885
+            },
+            {
+              "before_us": 1.3419,
+              "after_us": 1.6885
+            }
+          ]
+        },
+        {
+          "subblock": 16,
+          "bias": 4,
+          "num_k": 4,
+          "trials": [
+            {
+              "before_us": 1.4004,
+              "after_us": 1.6641
+            },
+            {
+              "before_us": 1.4004,
+              "after_us": 1.6848
+            },
+            {
+              "before_us": 1.3873,
+              "after_us": 1.6482
+            },
+            {
+              "before_us": 1.4672,
+              "after_us": 1.6621
+            },
+            {
+              "before_us": 1.4003,
+              "after_us": 1.6902
+            },
+            {
+              "before_us": 1.3866,
+              "after_us": 1.6485
+            },
+            {
+              "before_us": 1.3892,
+              "after_us": 1.6851
+            }
+          ]
+        },
+        {
+          "subblock": 16,
+          "bias": 32,
+          "num_k": 4,
+          "trials": [
+            {
+              "before_us": 1.3838,
+              "after_us": 1.6569
+            },
+            {
+              "before_us": 1.4578,
+              "after_us": 1.6583
+            },
+            {
+              "before_us": 1.3777,
+              "after_us": 1.6746
+            },
+            {
+              "before_us": 1.3916,
+              "after_us": 1.6956
+            },
+            {
+              "before_us": 1.3924,
+              "after_us": 1.6483
+            },
+            {
+              "before_us": 1.3863,
+              "after_us": 1.6423
+            },
+            {
+              "before_us": 1.3843,
+              "after_us": 1.7288
+            }
+          ]
+        },
+        {
+          "subblock": 16,
+          "bias": 128,
+          "num_k": 4,
+          "trials": [
+            {
+              "before_us": 1.3961,
+              "after_us": 1.6776
+            },
+            {
+              "before_us": 1.3851,
+              "after_us": 1.6518
+            },
+            {
+              "before_us": 1.4249,
+              "after_us": 1.6537
+            },
+            {
+              "before_us": 1.4229,
+              "after_us": 1.6596
+            },
+            {
+              "before_us": 1.3849,
+              "after_us": 1.6656
+            },
+            {
+              "before_us": 1.3955,
+              "after_us": 1.6747
+            },
+            {
+              "before_us": 1.4071,
+              "after_us": 1.6463
+            }
+          ]
+        },
+        {
+          "subblock": 32,
+          "bias": 128,
+          "num_k": 4,
+          "trials": [
+            {
+              "before_us": 1.3474,
+              "after_us": 1.7018
+            },
+            {
+              "before_us": 1.3772,
+              "after_us": 1.7016
+            },
+            {
+              "before_us": 1.3868,
+              "after_us": 1.7222
+            },
+            {
+              "before_us": 1.3454,
+              "after_us": 1.7523
+            },
+            {
+              "before_us": 1.3472,
+              "after_us": 1.6918
+            },
+            {
+              "before_us": 1.3634,
+              "after_us": 1.7045
+            },
+            {
+              "before_us": 1.345,
+              "after_us": 1.7036
+            }
+          ]
+        }
+      ],
+      "bit_exact": true,
+      "decision": "Bit-exact but slower8.38..26.44percent across12 measured shapes;not retained,no packing benefit claimed."
+    },
+    "h3_chunking": [
+      {
+        "backend": "CPU",
+        "tokens": 17,
+        "chunk": 1,
+        "non_bit_exact_values": 3649,
+        "max_abs_error": 8.19563866e-08
+      },
+      {
+        "backend": "CPU",
+        "tokens": 17,
+        "chunk": 7,
+        "non_bit_exact_values": 0,
+        "max_abs_error": 0
+      },
+      {
+        "backend": "CPU",
+        "tokens": 17,
+        "chunk": 16,
+        "non_bit_exact_values": 204,
+        "max_abs_error": 6.70552254e-08
+      },
+      {
+        "backend": "CPU",
+        "tokens": 128,
+        "chunk": 1,
+        "non_bit_exact_values": 27278,
+        "max_abs_error": 8.94069672e-08
+      },
+      {
+        "backend": "CPU",
+        "tokens": 128,
+        "chunk": 7,
+        "non_bit_exact_values": 0,
+        "max_abs_error": 0
+      },
+      {
+        "backend": "CPU",
+        "tokens": 128,
+        "chunk": 16,
+        "non_bit_exact_values": 0,
+        "max_abs_error": 0
+      },
+      {
+        "backend": "Vulkan0",
+        "tokens": 17,
+        "chunk": 1,
+        "non_bit_exact_values": 4199,
+        "max_abs_error": 4.32133675e-07
+      },
+      {
+        "backend": "Vulkan0",
+        "tokens": 17,
+        "chunk": 7,
+        "non_bit_exact_values": 4199,
+        "max_abs_error": 4.32133675e-07
+      },
+      {
+        "backend": "Vulkan0",
+        "tokens": 17,
+        "chunk": 16,
+        "non_bit_exact_values": 250,
+        "max_abs_error": 2.86847353e-07
+      },
+      {
+        "backend": "Vulkan0",
+        "tokens": 128,
+        "chunk": 1,
+        "non_bit_exact_values": 31715,
+        "max_abs_error": 5.14090061e-07
+      },
+      {
+        "backend": "Vulkan0",
+        "tokens": 128,
+        "chunk": 7,
+        "non_bit_exact_values": 31715,
+        "max_abs_error": 5.14090061e-07
+      },
+      {
+        "backend": "Vulkan0",
+        "tokens": 128,
+        "chunk": 16,
+        "non_bit_exact_values": 0,
+        "max_abs_error": 0
+      }
+    ],
+    "rms_reduction_prototypes": [
+      {
+        "rms_probe": "rms-original.spv",
+        "width": 512,
+        "rows": 1,
+        "non_bit_exact_values": 0,
+        "max_abs_error": 0
+      },
+      {
+        "rms_probe": "rms-wave.spv",
+        "width": 512,
+        "rows": 1,
+        "non_bit_exact_values": 0,
+        "max_abs_error": 0
+      },
+      {
+        "rms_probe": "rms-original.spv",
+        "width": 512,
+        "rows": 7,
+        "non_bit_exact_values": 0,
+        "max_abs_error": 0
+      },
+      {
+        "rms_probe": "rms-wave.spv",
+        "width": 512,
+        "rows": 7,
+        "non_bit_exact_values": 0,
+        "max_abs_error": 0
+      },
+      {
+        "rms_probe": "rms-original.spv",
+        "width": 1024,
+        "rows": 1,
+        "non_bit_exact_values": 0,
+        "max_abs_error": 0
+      },
+      {
+        "rms_probe": "rms-wave.spv",
+        "width": 1024,
+        "rows": 1,
+        "non_bit_exact_values": 0,
+        "max_abs_error": 0
+      },
+      {
+        "rms_probe": "rms-original.spv",
+        "width": 1024,
+        "rows": 7,
+        "non_bit_exact_values": 0,
+        "max_abs_error": 0
+      },
+      {
+        "rms_probe": "rms-wave.spv",
+        "width": 1024,
+        "rows": 7,
+        "non_bit_exact_values": 0,
+        "max_abs_error": 0
+      },
+      {
+        "rms_probe": "rms-original.spv",
+        "width": 3072,
+        "rows": 1,
+        "non_bit_exact_values": 0,
+        "max_abs_error": 0
+      },
+      {
+        "rms_probe": "rms-wave.spv",
+        "width": 3072,
+        "rows": 1,
+        "non_bit_exact_values": 0,
+        "max_abs_error": 0
+      },
+      {
+        "rms_probe": "rms-original.spv",
+        "width": 3072,
+        "rows": 7,
+        "non_bit_exact_values": 1796,
+        "max_abs_error": 0.000244140625
+      },
+      {
+        "rms_probe": "rms-wave.spv",
+        "width": 3072,
+        "rows": 7,
+        "non_bit_exact_values": 0,
+        "max_abs_error": 0
+      }
+    ],
+    "q5k_original_gemv": {
+      "controls": [
+        {
+          "activation": 0,
+          "expected": 0,
+          "actual0": 0,
+          "wrong_columns": 0
+        },
+        {
+          "activation": 1,
+          "expected": 499968,
+          "actual0": 499968,
+          "wrong_columns": 0
+        },
+        {
+          "activation": 16,
+          "expected": 7999488,
+          "actual0": 7999488,
+          "wrong_columns": 0
+        },
+        {
+          "activation": 64,
+          "expected": 31997952,
+          "actual0": 31997952,
+          "wrong_columns": 0
+        },
+        {
+          "activation": 127,
+          "expected": 63495936,
+          "actual0": -2564352,
+          "wrong_columns": 8
+        },
+        {
+          "activation": -128,
+          "expected": -63995904,
+          "actual0": 2064384,
+          "wrong_columns": 8
+        }
+      ],
+      "decision": "Max-scale valid127/-128 activation controls fail all8 columns;not integrated. Original pinned head51f8084."
+    },
+    "q6k_original_gemv": {
+      "controls": [
+        {
+          "activation": 0,
+          "expected": 0,
+          "actual0": 0,
+          "wrong_columns": 0
+        },
+        {
+          "activation": 1,
+          "expected": 1007872,
+          "actual0": 1007872,
+          "wrong_columns": 0
+        },
+        {
+          "activation": 16,
+          "expected": 16125952,
+          "actual0": 16125952,
+          "wrong_columns": 0
+        },
+        {
+          "activation": 64,
+          "expected": 64503808,
+          "actual0": 64503808,
+          "wrong_columns": 0
+        },
+        {
+          "activation": 127,
+          "expected": 127999744,
+          "actual0": 127999744,
+          "wrong_columns": 0
+        },
+        {
+          "activation": -128,
+          "expected": -129007616,
+          "actual0": -129007616,
+          "wrong_columns": 0
+        }
+      ],
+      "decision": "Six boundary controls pass;not a full random/GEMM/model/speed qualification,dispatch remains unchanged."
+    }
+  },
+  "fixture_sha256": {
+    "glu-check.cpp": "49bc75992ded23ecfc46360d9763b48ce22a8a33583bd9aab9d0fc0aec3d9ad5",
+    "glu-check.exe": "a44f5c8e7f0753d5a4dcd2170b74b5acff0ddcf83a277de5274c09b54771aa10",
+    "situ-native-check.cpp": "cf33921adab5a6086f6f54dfac4ea70f9309c00996708a95c2b7f2d519180ccf",
+    "situ-native-check.exe": "659e0d46f92468cd8a987e6ac18d6e85aae2e3e8b370fa2cee758f2713d1e736",
+    "rms-native-check.cpp": "90b54638bd07d7556f93bae0109ac5d611a393d8ff69dd9692c34ee3b2ee5a9d",
+    "rms-native-check.exe": "8675da0c07d8267a6f468e10dbd6d4ae1e23d64aea1d0d81953574dc2a848e56",
+    "extra-checks.h": "f2d43ebe6a2f33b27b3a95321586aa851e471d3508471e97f1a456d8a59eb21c",
+    "segment-check.inc": "c6f9bf58245e959b457e3ffe84bd087008ca62f79f5836b2a8b441ea8ee350cd",
+    "tile-check.cpp": "b7e5870799ecd8e821bc037681b934d54eaef6567a47a4085dd1cfd25d4f1864",
+    "tile-adapted.inc": "8d8bd6c99e729276473fd164c6c1a560b98681c2a14f5b9e08f964d21a88d098",
+    "tile-check.exe": "070e52d614f2d68e3a1a0f280476b9bc794192831d7cb0dbf2c2fbf75bcff4eb",
+    "q5-contract.cpp": "04d28296d88e3ba21536474c6723a013a4db8802cfdaf67b6877830895e48a14",
+    "q5-contract.exe": "e6a5cc2e420228d8604b210d890ba00f7ba691823d1fa0a7c5ddd50bafafc01d",
+    "q6-contract.cpp": "2620c7f2da5181d96e57d4e54d13e3666b6f6072c7ec96edb21d32bbd6ac027d",
+    "q6-contract.exe": "268deb58b3124a0b8733ff48bc362bf99838b88232cb029c391a902a292ee7f7"
+  },
+  "limits": [
+    "No compiler ran during inference timing. Tile fixture uses one available CPU affinity bit;user process affinity/settings unchanged.",
+    "No High,new full-LLM tokens/s,physical multi-GPU or dual-socket page-placement measurement.",
+    "Raw host-coherent Vulkan RMS/SiTU prototypes are numerical checks only;no raw-buffer speed claim.",
+    "Original non-precise SiTU prototype differed508 values;precise stage rounding replaced it. Native CPU planner registration was fixed before acceptance.",
+    "Rejected H3 and first fixture-capacity/layout failures are retained;they do not qualify changed chunking defaults."
+  ],
+  "image_evidence": "performance-2026-11-07-r4.json",
+  "fixture_run_receipts": {
+    "glu": {
+      "executable_sha256": "a44f5c8e7f0753d5a4dcd2170b74b5acff0ddcf83a277de5274c09b54771aa10",
+      "source_sha256": "49bc75992ded23ecfc46360d9763b48ce22a8a33583bd9aab9d0fc0aec3d9ad5",
+      "arguments": [],
+      "native_component_build": "b5a5715d4c3716caa4fbe28e438e0cfa22807ff6ef591e2f5c7b76e783414628",
+      "scope": "Exact operator fixture identity recorded before this run;not a portable EXE timing."
+    },
+    "situ-native": {
+      "executable_sha256": "659e0d46f92468cd8a987e6ac18d6e85aae2e3e8b370fa2cee758f2713d1e736",
+      "source_sha256": "cf33921adab5a6086f6f54dfac4ea70f9309c00996708a95c2b7f2d519180ccf",
+      "arguments": [
+        "--situ-only"
+      ],
+      "native_component_build": "b5a5715d4c3716caa4fbe28e438e0cfa22807ff6ef591e2f5c7b76e783414628",
+      "scope": "Exact operator fixture identity recorded before this run;not a portable EXE timing."
+    }
+  }
+}

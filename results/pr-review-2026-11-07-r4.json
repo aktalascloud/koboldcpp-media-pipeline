@@ -1,0 +1,3231 @@
+{
+  "date": "2026-11-07",
+  "official_source": "2d469743d30d09737633607071fe83dc2283bfec",
+  "native_executable_sha256": "efddce0e7f8518d735c809cbf925e3718786dddd6221da30eb9bc96107eaaca7",
+  "retained_native_patches": 65,
+  "previous_native_patches": 58,
+  "queue": {
+    "entries": 332,
+    "pending": 0,
+    "status_counts": {
+      "adapted_qualified": 6,
+      "adaptation_not_enabled_numerical_difference": 1,
+      "reviewed_new_model_backend_deferred": 1,
+      "reviewed_new_conditioning_deferred": 1,
+      "reviewed_no_native_change": 20,
+      "reviewed_packed_format_backend_deferred": 4,
+      "reviewed_model_recipe_deferred": 3,
+      "partly_adapted_native_validation": 4,
+      "already_reviewed_documented": 17,
+      "reviewed_no_setting_change": 2,
+      "reviewed_policy_preserved": 1,
+      "partly_adapted_pending_qualification": 2,
+      "already_equivalent": 6,
+      "reviewed_reference_capability_deferred": 1,
+      "already_supported_scoped": 5,
+      "reviewed_build_layout_preserved": 2,
+      "already_reviewed_retained": 8,
+      "already_official_ancestry": 18,
+      "reviewed_template_policy_preserved": 1,
+      "reviewed_legacy_alias_deferred": 1,
+      "already_official_ancestor": 17,
+      "reviewed_adapter_refactor_deferred": 1,
+      "reviewed_video_ingestion_deferred": 1,
+      "reviewed_benchmark_draft_deferred": 1,
+      "reviewed_sync_bundle_scoped": 9,
+      "other_isa_checked_logic": 9,
+      "reviewed_transferable_view_logic": 1,
+      "reviewed_build_CI_scope": 2,
+      "build_not_applicable": 5,
+      "other_backend_platform": 2,
+      "reviewed_example_ownership": 1,
+      "other_backend_checked_logic": 22,
+      "rejected_debug_reproducer": 1,
+      "reviewed_other_ISA_guard": 2,
+      "reviewed_test_idea": 2,
+      "rejected_unsafe_fragment": 1,
+      "already_supported_other_backend": 1,
+      "reviewed_additional_model_validation_deferred": 10,
+      "reviewed_audio_preprocess_validation_deferred": 1,
+      "other_capability_checked_logic": 3,
+      "reviewed_API_boundary": 1,
+      "reviewed_deferred_context_validation": 4,
+      "reviewed_build_docs_scope": 5,
+      "other_server_checked_logic": 3,
+      "other_device_checked_logic": 6,
+      "reviewed_new_mask_operator_deferred": 1,
+      "reviewed_other_backend_quant_logic": 1,
+      "reviewed_speculation_contract_deferred": 4,
+      "not_enabled_arithmetic_and_dispatch_change": 1,
+      "reviewed_example_policy": 1,
+      "already_equivalent_or_build_validated": 1,
+      "reviewed_opt_in_MoE_policy": 2,
+      "reviewed_deferred_moe_validation": 1,
+      "native_post_images_already_present": 14,
+      "reviewed_other_Vulkan_capability": 3,
+      "adaptation_rejected_measured": 1,
+      "not_enabled_reduction_change": 1,
+      "reviewed_vendor_workaround": 1,
+      "reviewed_YaRN_feature_deferred": 1,
+      "deferred_quantized_kv_validation": 1,
+      "reviewed_format_and_precision_boundary": 14,
+      "reviewed_source_layout_refactor": 1,
+      "reviewed_grammar_contract_deferred": 1,
+      "reviewed_parallel_reduction_deferred": 2,
+      "reviewed_API_pruning_scope": 1,
+      "reviewed_multi_sequence_contract_deferred": 1,
+      "reviewed_recurrent_alias_validation_deferred": 1,
+      "reviewed_transform_shape_feature_deferred": 1,
+      "reviewed_model_specific_IO_attention_deferred": 2,
+      "already_equivalent_scoped": 3,
+      "not_enabled_precision_change": 2,
+      "reviewed_scheduler_test_scope": 1,
+      "reviewed_sampling_policy_deferred": 1,
+      "not_enabled_quantizer_change": 1,
+      "reviewed_training_scope": 2,
+      "reviewed_recovered_repack_validation_deferred": 1,
+      "reviewed_API_policy_preserved": 1,
+      "recovered_kernel_rejected_correctness": 1,
+      "recovered_repack_kernel_validation_deferred": 1,
+      "reviewed_other_ISA_format_boundary": 7,
+      "reviewed_model_math_policy": 1,
+      "reviewed_model_kernel_framework_boundary": 6,
+      "partly_adapted_boundary_other_distributed_scope": 2,
+      "other_framework_checked_logic": 7,
+      "reviewed_foreign_vector_logic": 7,
+      "reviewed_runner_speculative_state_contract": 3,
+      "reviewed_large_bundle_intended_delta": 3,
+      "already_supported_other_framework": 2,
+      "reviewed_deferred_state_validation": 1,
+      "reviewed_model_mask_semantics": 1,
+      "reviewed_quantizer_contract": 1,
+      "reviewed_cached_diff_scope": 1,
+      "reviewed_NUMA_placement_deferred": 1,
+      "reviewed_queue_policy_deferred": 1,
+      "reviewed_new_operator_boundary": 1
+    },
+    "depth_counts": {
+      "full_RMS_shader_host_logic_and_real_native_Vulkan_experiment": 1,
+      "full_diff_and_real_CPU_Vulkan_MLP_experiment": 1,
+      "full_diff_and_cpu_vulkan_experiment": 1,
+      "RelayVSR_model_API_and_CUDA_window_attention_diffs": 1,
+      "ControlNet_Union_type_API_and_model_graph_diffs": 1,
+      "full_diff": 63,
+      "packed_weight_loader_operator_and_CUDA_dispatch_diffs": 4,
+      "H3_integration_and_latent_hires_graph_diffs": 3,
+      "common_graph_and_backend_registration_kernel_boundaries": 4,
+      "full_diff_and_source_experiment": 2,
+      "prior_canonical_evidence": 25,
+      "full_server_diff": 1,
+      "runner_graphcut_cache_prefetch_diffs": 1,
+      "full_diff_and_current_source": 9,
+      "full_diff_and_real_CPU_Vulkan_operator_experiment": 1,
+      "MOSS_reference_input_and_conditioning_graph_diffs": 1,
+      "MOSS_model_graph_and_current_native_integration": 1,
+      "full_diff_and_current_recipe": 7,
+      "exact_merge_ancestry": 35,
+      "template_and_test_diffs_with_maintainer_comments": 1,
+      "full_diff_current_source_and_comments": 1,
+      "adapter_model_loader_diff_and_discussion": 1,
+      "native_media_C_ABI_and_ffmpeg_boundary_diffs_with_comments": 1,
+      "native_benchmark_POD_exclusivity_and_marshalling_diffs_with_comments": 1,
+      "full_file_map_and_version_diff": 2,
+      "complete_file_maps_hunk_postimages_deduplicated_CPU_Vulkan_guard_screen_and_selected_candidate_reviews": 9,
+      "release_ABI_script_and_CI_workflow_diffs": 2,
+      "RVV_target_extension_and_kernel_guards": 1,
+      "changed_file_map_and_native_boundary_hunks": 13,
+      "architecture_metadata_tensor_graph_tokenizer_and_API_boundaries": 10,
+      "log_mel_preprocessor_cgraph_custom_DFT_and_thread_test_diffs": 1,
+      "full_diff_and_live_device_properties": 2,
+      "speech_converter_PCM_and_llama_server_route_diffs": 1,
+      "full_changed_file_map_and_build_or_doc_hunks": 5,
+      "full_diff_and_native_server_boundary": 3,
+      "full_Vulkan_mask_shader_and_host_type_shape_boundaries": 1,
+      "CUDA_TQ_layout_dequant_getrows_and_integer_dot_diffs": 1,
+      "batch_embedding_device_feature_and_draft_rollback_diffs": 4,
+      "full_diff_and_native_post_images": 1,
+      "x86_repack_and_sgemm_diffs": 1,
+      "full_diff_and_build": 1,
+      "cache_miss_CPU_share_admission_and_tuning_diffs": 2,
+      "CPU_Vulkan_RPC_interface_and_cache_group_diffs": 1,
+      "all_native_hunk_post_images": 14,
+      "native_selector_state_and_shader_layout_diffs": 3,
+      "full_native_diff_and_AVX2_experiment": 1,
+      "Vulkan_pipeline_specialization_and_pack_unpack_shader_diffs": 1,
+      "Vulkan_RPC_RoPE_constant_and_fusion_guard_diffs": 1,
+      "GGML_type_registry_loader_scale_and_backend_kernel_diffs": 14,
+      "tiled_source_split_includes_and_build_diffs": 1,
+      "context_and_sampling_diffs_and_native_call_boundary": 1,
+      "object_state_budget_recursion_key_order_and_native_generator_boundary": 1,
+      "native_guard_and_kernel_hunks": 3,
+      "Vulkan_selector_push_constants_scratch_and_shader_partial_reduction_diffs": 2,
+      "operator_API_allocator_and_backend_removal_diffs": 1,
+      "FA_rows_CPU_Vulkan_KV_graph_and_model_cache_diffs": 1,
+      "CPU_GDN_inplace_kernel_cache_views_and_graph_order_diffs": 1,
+      "full_H12_H20_Kronecker_FWHT_branch_and_tests_diffs": 1,
+      "QSA_gather_cache_and_lazy_reader_diffs": 2,
+      "native_dispatch_workspace_and_microkernel_source": 1,
+      "async_contract_test_and_SLEEP_operator_diffs": 1,
+      "model_registry_converter_and_graph_boundaries_with_current_source": 2,
+      "CPU_repack_and_Vulkan_count_experts_diffs_with_release_controls": 1,
+      "LASX_repack_and_CPU_dispatch_diffs": 1,
+      "section_aware_sampler_state_and_CLI_diffs": 1,
+      "native_submission_and_platform_boundary_diffs_and_current_source": 1,
+      "backward_OUT_PROD_ID_optimizer_and_training_entry_diffs": 2,
+      "recovered_full_pinned_x86_source_diff_and_repack_layout_review": 1,
+      "full_router_default_model_diff": 1,
+      "recovered_pinned_source_and_real_Haswell_boundary_experiment": 1,
+      "recovered_pinned_source_and_real_Haswell_boundary_controls": 1,
+      "SWA_cache_architecture_diffs_and_current_memory_components": 1,
+      "CPU_kernel_binding_and_capability_hunks": 7,
+      "CPU_expert_projection_and_router_weight_diffs": 1,
+      "full_CPU_boundary_diff_and_release_object_experiment": 1,
+      "changed_CPU_cache_RoPE_indexer_and_CuTe_Triton_dispatch_hunks": 6,
+      "CPU_expert_map_bounds_BF16_rounding_and_Gloo_SHM_diffs": 2,
+      "full_diff_and_GGML_conversion_boundary": 1,
+      "full_diff_and_native_batch_boundary": 2,
+      "vector_kernel_layout_rounding_and_dispatch_hunks": 7,
+      "CPU_batch_block_table_sampler_vocab_and_convolution_state_diffs": 3,
+      "full_changed_file_maps_header_moves_CI_and_telemetry_guard_hunks": 3,
+      "full_CPU_operator_diffs_and_tests_boundary": 1,
+      "full_CPU_kernel_diffs": 1,
+      "bidirectional_ALiBi_attention_and_Jina_model_diffs": 1,
+      "GPTQ_g_idx_scale_zero_layout_and_loader_diffs": 1,
+      "cached_full_diff_CPU_boundary_screen_live_provider_unavailable": 1,
+      "NUMA_split_parallel_loop_loader_and_mbind_diffs": 1,
+      "chunked_hash_tree_missing_chunk_heap_and_scheduler_diffs": 1,
+      "CPU_activation_IR_and_binding_diffs": 1
+    }
+  },
+  "scope": "Fixed332 follow-up entries from prior focused search metadata/native candidates. Per-entry decisions distinguish full diffs/actual experiments/exact ancestry/post-images/scoped native boundaries. This is not a line-by-line semantic audit of every bundled/foreign backend or whole repository.",
+  "limits": [
+    "Provider file maps contain explicit null patches;large sync/cross-branch bundles retain scoped depth rather than a false whole-code audit claim.",
+    "Full Q5K/Q6K/Q5_0 x86 source supplements recovered at pinned heads;Q6 Git blob checked.",
+    "vllm53661 live connector unavailable;earlier same-day full diff artifact used,not a fabricated fresh head.",
+    "Deferred model/format/MTP/training/NUMA checks need their own assets/context contracts and are not advertised as qualified features.",
+    "Completed earlier29812-entry text-screen queue is not restarted."
+  ],
+  "entries": [
+    {
+      "repo": "leejet/stable-diffusion.cpp",
+      "n": 2273,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2273",
+      "title": "perf(vulkan): accelerate MOSS normalization and SiTU staging",
+      "status": "adapted_qualified",
+      "deferred": true,
+      "review_depth": "full_RMS_shader_host_logic_and_real_native_Vulkan_experiment",
+      "reason": "Replaced foreign shared-tree reduction with current native wave64 reduction; rejected original1796 differing values at3072x7. Native graph fusion:176 pair controls/352 graphs bit-exact,external consumers/strides/offset fallbacks covered; trace proves activation.7 alternating20-run trials median211.91->108.625us,48.74percent less operator time. No full MOSS model speed claim."
+    },
+    {
+      "repo": "leejet/stable-diffusion.cpp",
+      "n": 2257,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2257",
+      "title": "fix: chunk MiniMax-H3 MLP to respect backend buffer limits",
+      "status": "adaptation_not_enabled_numerical_difference",
+      "deferred": true,
+      "review_depth": "full_diff_and_real_CPU_Vulkan_MLP_experiment",
+      "reason": "Forced small-buffer chunking with current operators: twelve synthetic F32 MLP cases, CPU changes bits for some batch/chunk sizes; Vulkan results retained separately. No automatic chunk policy or model recipe changed. This is not evidence of full H3 model quality."
+    },
+    {
+      "repo": "leejet/stable-diffusion.cpp",
+      "n": 2250,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2250",
+      "title": "refactor: replace manual gated activations with native ggml GLU",
+      "status": "adapted_qualified",
+      "deferred": true,
+      "review_depth": "full_diff_and_cpu_vulkan_experiment",
+      "reason": "F32 contiguous-row packed helper and common LLM SwiGLU;224 bit-exact cases,operator repeats retained. Other GLU families not bulk-rewritten."
+    },
+    {
+      "repo": "leejet/stable-diffusion.cpp",
+      "n": 2285,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2285",
+      "title": "feat: add RelayVSR video upscaling with CUDA window attention",
+      "status": "reviewed_new_model_backend_deferred",
+      "review_depth": "RelayVSR_model_API_and_CUDA_window_attention_diffs",
+      "reason": "Adds a checkpoint-pair-dependent2x/4x video super-resolution model with a16-frame reference window. Current configurable ClearReality image SR is a different model. No weights downloaded or CUDA-only custom attention substituted on RX580."
+    },
+    {
+      "repo": "leejet/stable-diffusion.cpp",
+      "n": 2284,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2284",
+      "title": "feat: ControlNet Union support for SDXL",
+      "status": "reviewed_new_conditioning_deferred",
+      "review_depth": "ControlNet_Union_type_API_and_model_graph_diffs",
+      "reason": "SDXL Union conditioning is additional-model support, not acceleration of current Ray. Requires matching ControlNet weights/control inputs and numerical image fixtures before exposing this capability."
+    },
+    {
+      "repo": "leejet/stable-diffusion.cpp",
+      "n": 2279,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2279",
+      "title": "docs: add Quo to UIs",
+      "status": "reviewed_no_native_change",
+      "review_depth": "full_diff",
+      "reason": "README adds a UI link only"
+    },
+    {
+      "repo": "leejet/stable-diffusion.cpp",
+      "n": 2278,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2278",
+      "title": "perf: accelerate packed INT4 CUDA inference with CUTLASS",
+      "status": "reviewed_packed_format_backend_deferred",
+      "review_depth": "packed_weight_loader_operator_and_CUDA_dispatch_diffs",
+      "reason": "Packed W4/I8 ConvRot scales and CUDA tensor-core kernels are a different weight/activation representation. RX580 lacks BF16/matrix/int-dot acceleration; current RayQ8/user weights and math remain. No automatic quantization or conversion introduced."
+    },
+    {
+      "repo": "leejet/stable-diffusion.cpp",
+      "n": 2277,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2277",
+      "title": "Add NodeTool link to README",
+      "status": "reviewed_no_native_change",
+      "review_depth": "full_diff",
+      "reason": "README adds NodeTool link only"
+    },
+    {
+      "repo": "leejet/stable-diffusion.cpp",
+      "n": 2276,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2276",
+      "title": "feat: support packed INT4 convrot models",
+      "status": "reviewed_packed_format_backend_deferred",
+      "review_depth": "packed_weight_loader_operator_and_CUDA_dispatch_diffs",
+      "reason": "Packed W4/I8 ConvRot scales and CUDA tensor-core kernels are a different weight/activation representation. RX580 lacks BF16/matrix/int-dot acceleration; current RayQ8/user weights and math remain. No automatic quantization or conversion introduced."
+    },
+    {
+      "repo": "leejet/stable-diffusion.cpp",
+      "n": 2274,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2274",
+      "title": "Add Prisme project to the README",
+      "status": "reviewed_no_native_change",
+      "review_depth": "full_diff",
+      "reason": "README adds Prisme link only"
+    },
+    {
+      "repo": "leejet/stable-diffusion.cpp",
+      "n": 2272,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2272",
+      "title": "feat: add P-H3-Image generation and editing support",
+      "status": "reviewed_model_recipe_deferred",
+      "review_depth": "H3_integration_and_latent_hires_graph_diffs",
+      "reason": "H3 image/edit and latent second-pass recipes are separate model behaviors. Current Normal/Ray recipe and High settings not altered. Synthetic H3 chunk study retained; no full H3 model quality/performance claim."
+    },
+    {
+      "repo": "leejet/stable-diffusion.cpp",
+      "n": 2270,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2270",
+      "title": "feat: add P-H3-Image support",
+      "status": "reviewed_model_recipe_deferred",
+      "review_depth": "H3_integration_and_latent_hires_graph_diffs",
+      "reason": "H3 image/edit and latent second-pass recipes are separate model behaviors. Current Normal/Ray recipe and High settings not altered. Synthetic H3 chunk study retained; no full H3 model quality/performance claim."
+    },
+    {
+      "repo": "leejet/stable-diffusion.cpp",
+      "n": 2269,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2269",
+      "title": "perf(cuda): fuse MOSS modulation and direct RoPE F16 output",
+      "status": "partly_adapted_native_validation",
+      "review_depth": "common_graph_and_backend_registration_kernel_boundaries",
+      "reason": "Transferred native F32 GLU/SiTU and RMS-vector-modulation logic, not the foreign extension ABI. CUDA Sm80 BF16/CUTLASS, F16 RoPE output and fused ConvRot/int8 paths require unavailable hardware or change precision. Native RMS qualification recorded separately; no whole-model MOSS claim."
+    },
+    {
+      "repo": "leejet/stable-diffusion.cpp",
+      "n": 2265,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2265",
+      "title": "perf: fuse Z-Image GPU operations and optimize BF16 GEMM",
+      "status": "partly_adapted_native_validation",
+      "review_depth": "common_graph_and_backend_registration_kernel_boundaries",
+      "reason": "Transferred native F32 GLU/SiTU and RMS-vector-modulation logic, not the foreign extension ABI. CUDA Sm80 BF16/CUTLASS, F16 RoPE output and fused ConvRot/int8 paths require unavailable hardware or change precision. Native RMS qualification recorded separately; no whole-model MOSS claim."
+    },
+    {
+      "repo": "leejet/stable-diffusion.cpp",
+      "n": 2262,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2262",
+      "title": "fix: layer split across cuda",
+      "status": "adapted_qualified",
+      "review_depth": "full_diff_and_source_experiment",
+      "reason": "Auto discrete-device preference9 checks and preserve-first shared-node ownership2 checks; explicit user assignments preserved, physical multi-GPU not measured."
+    },
+    {
+      "repo": "leejet/stable-diffusion.cpp",
+      "n": 2259,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2259",
+      "title": "fix: prefer discrete GPUs in auto-fit device selection",
+      "status": "adapted_qualified",
+      "review_depth": "full_diff_and_source_experiment",
+      "reason": "Auto discrete-device preference9 checks and preserve-first shared-node ownership2 checks; explicit user assignments preserved, physical multi-GPU not measured."
+    },
+    {
+      "repo": "leejet/stable-diffusion.cpp",
+      "n": 2258,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2258",
+      "title": "feat: add custom modulate operator and ConvRot fusion",
+      "status": "partly_adapted_native_validation",
+      "review_depth": "common_graph_and_backend_registration_kernel_boundaries",
+      "reason": "Transferred native F32 GLU/SiTU and RMS-vector-modulation logic, not the foreign extension ABI. CUDA Sm80 BF16/CUTLASS, F16 RoPE output and fused ConvRot/int8 paths require unavailable hardware or change precision. Native RMS qualification recorded separately; no whole-model MOSS claim."
+    },
+    {
+      "repo": "leejet/stable-diffusion.cpp",
+      "n": 2253,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2253",
+      "title": "refactor: move model-specific operators and fusions into backend extensions",
+      "status": "partly_adapted_native_validation",
+      "review_depth": "common_graph_and_backend_registration_kernel_boundaries",
+      "reason": "Transferred native F32 GLU/SiTU and RMS-vector-modulation logic, not the foreign extension ABI. CUDA Sm80 BF16/CUTLASS, F16 RoPE output and fused ConvRot/int8 paths require unavailable hardware or change precision. Native RMS qualification recorded separately; no whole-model MOSS claim."
+    },
+    {
+      "repo": "leejet/stable-diffusion.cpp",
+      "n": 2252,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2252",
+      "title": "perf(vulkan): update ggml for H3 inference optimizations",
+      "status": "already_reviewed_documented",
+      "reason": "Explicit semantic disposition in an earlier published review"
+    },
+    {
+      "repo": "leejet/stable-diffusion.cpp",
+      "n": 2249,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2249",
+      "title": "feat: MiniMax-H3 latent hires second pass",
+      "status": "reviewed_model_recipe_deferred",
+      "review_depth": "H3_integration_and_latent_hires_graph_diffs",
+      "reason": "H3 image/edit and latent second-pass recipes are separate model behaviors. Current Normal/Ray recipe and High settings not altered. Synthetic H3 chunk study retained; no full H3 model quality/performance claim."
+    },
+    {
+      "repo": "leejet/stable-diffusion.cpp",
+      "n": 2244,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2244",
+      "title": "refactor: `make_hires_sigma_schedule()` simplification",
+      "status": "reviewed_no_setting_change",
+      "review_depth": "full_diff",
+      "reason": "Equivalent hires sigma schedule slicing, only high-res path; no Normal recipe or sigma policy change required."
+    },
+    {
+      "repo": "leejet/stable-diffusion.cpp",
+      "n": 2243,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2243",
+      "title": "feat: Added sleep-idle-seconds",
+      "status": "reviewed_policy_preserved",
+      "review_depth": "full_server_diff",
+      "reason": "SDCPP example idle-unload policy conflicts with current photo-resident idle behavior. Existing supervisor owns demand loading; no second model lifecycle or sleep timer added."
+    },
+    {
+      "repo": "leejet/stable-diffusion.cpp",
+      "n": 2240,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2240",
+      "title": "perf: optimize H3 inference and segmented weight prefetch",
+      "status": "partly_adapted_pending_qualification",
+      "review_depth": "runner_graphcut_cache_prefetch_diffs",
+      "reason": "Adapted original use-count preservation for external segment consumers. Broader asynchronous prefetch/cache-output binding needs model-specific allocation/eviction tests; not blanket-imported into upstream GGML scheduler ABI."
+    },
+    {
+      "repo": "leejet/stable-diffusion.cpp",
+      "n": 2235,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2235",
+      "title": "perf: accelerate INT8 diffusion inference with CUDA fusions",
+      "status": "reviewed_packed_format_backend_deferred",
+      "review_depth": "packed_weight_loader_operator_and_CUDA_dispatch_diffs",
+      "reason": "Packed W4/I8 ConvRot scales and CUDA tensor-core kernels are a different weight/activation representation. RX580 lacks BF16/matrix/int-dot acceleration; current RayQ8/user weights and math remain. No automatic quantization or conversion introduced."
+    },
+    {
+      "repo": "leejet/stable-diffusion.cpp",
+      "n": 2232,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2232",
+      "title": "moss-image : view qkv slices instead of slice+reshape",
+      "status": "already_equivalent",
+      "review_depth": "full_diff_and_current_source",
+      "reason": "MOSS QKV view/stride logic already retained in existing approved patch series."
+    },
+    {
+      "repo": "leejet/stable-diffusion.cpp",
+      "n": 2210,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2210",
+      "title": "perf(moss): use optional fused SiTU activation",
+      "status": "adapted_qualified",
+      "review_depth": "full_diff_and_real_CPU_Vulkan_operator_experiment",
+      "reason": "Native SiTU:224 graph controls,168 fused and56 guarded fallback across both backends,zero differing bits.7 alternating operator trials:CPU8..14percent less time,Vulkan53..72percent; not whole-model gains."
+    },
+    {
+      "repo": "leejet/stable-diffusion.cpp",
+      "n": 2203,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2203",
+      "title": "feat: add image reference support to MOSS-Image",
+      "status": "reviewed_reference_capability_deferred",
+      "review_depth": "MOSS_reference_input_and_conditioning_graph_diffs",
+      "reason": "MOSS references require explicit model/API capability validation; current API contract rejects unsupported references/instruction edits. No silent reference acceptance or identity claim."
+    },
+    {
+      "repo": "leejet/stable-diffusion.cpp",
+      "n": 2148,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2148",
+      "title": "feat: add moss-image support",
+      "status": "already_supported_scoped",
+      "review_depth": "MOSS_model_graph_and_current_native_integration",
+      "reason": "Current official contains MOSS model/integration and loader support. Native QKV view and SiTU/RMS adaptations are recorded separately; no second copy of its base model implementation."
+    },
+    {
+      "repo": "leejet/stable-diffusion.cpp",
+      "n": 2010,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2010",
+      "title": "feat: packed int4 convrot model loading and dispatch",
+      "status": "reviewed_packed_format_backend_deferred",
+      "review_depth": "packed_weight_loader_operator_and_CUDA_dispatch_diffs",
+      "reason": "Packed W4/I8 ConvRot scales and CUDA tensor-core kernels are a different weight/activation representation. RX580 lacks BF16/matrix/int-dot acceleration; current RayQ8/user weights and math remain. No automatic quantization or conversion introduced."
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2581,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2581",
+      "title": "fix Vulkan build",
+      "status": "already_reviewed_documented",
+      "reason": "Explicit semantic disposition in an earlier published review"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2580,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2580",
+      "title": "build: automatically select ISA libraries on Linux",
+      "status": "already_reviewed_documented",
+      "reason": "Explicit semantic disposition in an earlier published review"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2577,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2577",
+      "title": "sd: switch CMakeLists.txt to build-time source file discovery",
+      "status": "reviewed_build_layout_preserved",
+      "review_depth": "full_diff_and_current_recipe",
+      "reason": "CMake glob discovery or static-archive Make layout; current supported monolithic KCPP_COMMONIZE=0 and separately qualified CPU/Vulkan LTO recipes preserved. No inference improvement demonstrated from archive repackaging."
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2576,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2576",
+      "title": "sd: sync with master-1028-37bc88b",
+      "status": "already_reviewed_retained",
+      "reason": "Exact source is already represented in the accepted58-patch catalog"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2575,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2575",
+      "title": "sd: sync with master-1004-a85db96",
+      "status": "already_reviewed_documented",
+      "reason": "Explicit semantic disposition in an earlier published review"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2573,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2573",
+      "title": "Horde chat reasoning and limits",
+      "status": "already_official_ancestry",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Exact upstream PR merge is already an ancestor of2d46974; retained local overrides remain separately documented",
+      "head": "6364e8477ecf9f420e4e760a56f953f834461bc8",
+      "merge": "3b28abd048dd23351956e66fa80c45f2b9c00123"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2571,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2571",
+      "title": "Honor Anthropic tool_choice auto and any in /v1/messages",
+      "status": "already_official_ancestry",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Exact upstream PR merge is already an ancestor of2d46974; retained local overrides remain separately documented",
+      "head": "67ee386004d8db944f9fa085ada93673b0430f5d",
+      "merge": "1f6860e6382c68e781a9dcd39580e407b5fbf3c2"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2568,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2568",
+      "title": "Honor stop_sequences in Anthropic /v1/messages",
+      "status": "already_official_ancestry",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Exact upstream PR merge is already an ancestor of2d46974; retained local overrides remain separately documented",
+      "head": "5ee717ac315995e453bbb2b51aee42f3f6df9cc6",
+      "merge": "ac19fdb07f2496de3e86a0125a238e7a914ca125"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2567,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2567",
+      "title": "Include content, stop_reason, stop_sequence in Anthropic message_start",
+      "status": "already_official_ancestry",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Exact upstream PR merge is already an ancestor of2d46974; retained local overrides remain separately documented",
+      "head": "40f6c60ac65692ed6108274ff982553eb8f5c48d",
+      "merge": "fe40e10260f2b0fdee706227b3e4ba6cbc4e1899"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2566,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2566",
+      "title": "Mask passwords and keys in the startup argument print.",
+      "status": "already_official_ancestry",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Exact upstream PR merge is already an ancestor of2d46974; retained local overrides remain separately documented",
+      "head": "f8185d92928666856efd8a4adc7f347023fb1ac5",
+      "merge": "99f5afb8b47e95219126a318db4fd707acb80105"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2565,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2565",
+      "title": "README: add Runcrate to Cloud GPUs",
+      "status": "reviewed_no_native_change",
+      "review_depth": "full_diff",
+      "reason": "Cloud-provider README link only."
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2564,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2564",
+      "title": "AZ-000 - fix: support legacy AMD hardware in CPU and Vulkan paths",
+      "status": "already_reviewed_retained",
+      "reason": "Exact source is already represented in the accepted58-patch catalog"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2562,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2562",
+      "title": "sd: sync with master-997-cd7f986",
+      "status": "already_official_ancestry",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Exact upstream PR merge is already an ancestor of2d46974; retained local overrides remain separately documented",
+      "head": "e2ce82f646670622349decbac1809a076111f93d",
+      "merge": "1dafa60373604c1224b90147d464de3ebaee52bf"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2560,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2560",
+      "title": "add glm 5 & mimo chat templates",
+      "status": "reviewed_template_policy_preserved",
+      "review_depth": "template_and_test_diffs_with_maintainer_comments",
+      "reason": "GLM5/MiMo templates also rewrite unrelated existing formats. Current official already supports GLM5 and ChatML-based MiMo; no blanket prompt-tag or thinking-policy change to current user templates."
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2559,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2559",
+      "title": "add support for glm5next",
+      "status": "reviewed_legacy_alias_deferred",
+      "review_depth": "full_diff_current_source_and_comments",
+      "reason": "Official glm5-next/GLM5V already supported. Proposed alias/pixel-key defaults are for pre-upstream Unsloth files; require legacy-GGUF/mmproj fixtures before expanding metadata defaults. No mandatory rewrite of existing GLM spacing."
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2557,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2557",
+      "title": "Fix Soprano implementation include placement",
+      "status": "already_official_ancestry",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Exact upstream PR merge is already an ancestor of2d46974; retained local overrides remain separately documented",
+      "head": "b63f54a225a6aa19bafafd52b790eaa9e77b6f91",
+      "merge": "141c72f0ae97bc008688013154e9cbe4f680b33a"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2553,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2553",
+      "title": "sd: sync with master-995-fd21ecf",
+      "status": "already_official_ancestry",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Exact upstream PR merge is already an ancestor of2d46974; retained local overrides remain separately documented",
+      "head": "656309b64c6686b15252e79baaf8c3750cff7fbf",
+      "merge": "05bfc32e4a906e812dafb19fc325dee99cda5238"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2550,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2550",
+      "title": "Respect configured SWA padding including zero",
+      "status": "already_equivalent",
+      "review_depth": "full_diff_and_current_source",
+      "reason": "Current backend directly respects swa_padding, including zero; obsolete minimum512 is absent. No user cache policy changed."
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2548,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2548",
+      "title": "sd: detect file type by content instead of extension",
+      "status": "already_official_ancestry",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Exact upstream PR merge is already an ancestor of2d46974; retained local overrides remain separately documented",
+      "head": "e89793bd31e6c54e3fe2579cfd65598b016ad4ba",
+      "merge": "21b12cc8db0f69ca847ca65ef695f2bb1e876bc1"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2547,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2547",
+      "title": "lookahead sampler",
+      "status": "already_reviewed_documented",
+      "reason": "Explicit semantic disposition in an earlier published review"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2546,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2546",
+      "title": "build: use -Ofast only for legacy ggml",
+      "status": "already_official_ancestry",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Exact upstream PR merge is already an ancestor of2d46974; retained local overrides remain separately documented",
+      "head": "c5ee18ea3d4a552f80fda237558e5c8c24061bff",
+      "merge": "08fb3a6d8717ed44301aabe2ece7136245c7be2b"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2544,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2544",
+      "title": "Expose lazy tensor loading and the upstream MoE GPU cache",
+      "status": "already_official_ancestry",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Exact upstream PR merge is already an ancestor of2d46974; retained local overrides remain separately documented",
+      "head": "86a959cd99491defdc5569f96fb2dcd192adc970",
+      "merge": "43e511ef6e0a117f2bb7ffad3078cca164a99af8"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2543,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2543",
+      "title": "Enable CUDA graphs with explicit architectures and add opt-in ADD capture",
+      "status": "already_reviewed_documented",
+      "reason": "Explicit semantic disposition in an earlier published review"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2542,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2542",
+      "title": "sd: sync with master-975-95b3090",
+      "status": "already_official_ancestry",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Exact upstream PR merge is already an ancestor of2d46974; retained local overrides remain separately documented",
+      "head": "a88f174fdb0670091c730e5d8a8f7938149970c4",
+      "merge": "aa034e10046327cb78e33fac371c67689a3693c8"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2538,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2538",
+      "title": "build: refactor the Makefile to use static libraries for ggml",
+      "status": "reviewed_build_layout_preserved",
+      "review_depth": "full_diff_and_current_recipe",
+      "reason": "CMake glob discovery or static-archive Make layout; current supported monolithic KCPP_COMMONIZE=0 and separately qualified CPU/Vulkan LTO recipes preserved. No inference improvement demonstrated from archive repackaging."
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2535,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2535",
+      "title": "sd: fix h3 incoherence with flash attention",
+      "status": "already_official_ancestry",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Exact upstream PR merge is already an ancestor of2d46974; retained local overrides remain separately documented",
+      "head": "42c1762db884013b68575fea0af89e0a9d762f03",
+      "merge": "96600d1ef72c7c877e817925f33913b27a40d2cc"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2534,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2534",
+      "title": "sd: add a non-default target for a Vulkan sdmain binary",
+      "status": "already_official_ancestry",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Exact upstream PR merge is already an ancestor of2d46974; retained local overrides remain separately documented",
+      "head": "eccbdbac9368c2bc353383cbce095af5dad33163",
+      "merge": "aa2bc070c9334d4f597d7edb8a601a683ff6a9c5"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2532,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2532",
+      "title": "Skip unsupported tools without a name in compress_tools_array",
+      "status": "already_equivalent",
+      "review_depth": "full_diff_and_current_source",
+      "reason": "Current compress_tools_array also rejects non-dict outer/functions and invalid properties; broader guards already retained."
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2530,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2530",
+      "title": "sd: model loading refactors",
+      "status": "already_official_ancestry",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Exact upstream PR merge is already an ancestor of2d46974; retained local overrides remain separately documented",
+      "head": "8a602a6be7436977845a49ecbf3fa09e8803303e",
+      "merge": "2698d1dca07e140df21397a25245cb2fbfa159a9"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2529,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2529",
+      "title": "sd: add support for Z-Image L2P and Iris-3B",
+      "status": "already_official_ancestry",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Exact upstream PR merge is already an ancestor of2d46974; retained local overrides remain separately documented",
+      "head": "92075283267ba80297e128bce6aac8981b5cc79c",
+      "merge": "1297da34ec60fd5796dc1d28e825c0b59fad7d44"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2527,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2527",
+      "title": "sd: move model path fixups from sdcpp to sdtype_adapter",
+      "status": "already_official_ancestry",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Exact upstream PR merge is already an ancestor of2d46974; retained local overrides remain separately documented",
+      "head": "7f9aadd65f93647eff19ec4c779505e03c8fc07a",
+      "merge": "a84d884ca16e131a89c0e8a0c8f2e8532011e539"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2524,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2524",
+      "title": "sd: sync with master-956-1b0ba10",
+      "status": "already_official_ancestry",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Exact upstream PR merge is already an ancestor of2d46974; retained local overrides remain separately documented",
+      "head": "e5427baeabd388c8356ab13ba469a872beddde89",
+      "merge": "72ce86d26bad22eb3ca7b456afe46ffc1a575462"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2519,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2519",
+      "title": "sd: minor code cleanups",
+      "status": "already_official_ancestor",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Merged PR commit is an exact ancestor of accepted official source; not re-applied.",
+      "merge_commit": "30c73134dd24cf0f0f0fc3dc91691592b95a662a"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2518,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2518",
+      "title": "sd: move the model swapping patch to sdtype_adapter",
+      "status": "reviewed_adapter_refactor_deferred",
+      "review_depth": "adapter_model_loader_diff_and_discussion",
+      "reason": "Moves model-file swapping and adds extra metadata loads; no demonstrated model-ready speed gain. Existing official loader and supervisor ownership preserved. Alternate safetensors/role-assignment fixtures required before changing file-role heuristics."
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2514,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2514",
+      "title": "sd: support for custom sigma lists",
+      "status": "already_official_ancestor",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Merged PR commit is an exact ancestor of accepted official source; not re-applied.",
+      "merge_commit": "bbb221144ccf67057ee1350bc37477403c2e8cbd"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2508,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2508",
+      "title": "fix(build): apply Vulkan LDFLAGS on FreeBSD as well as OpenBSD",
+      "status": "already_official_ancestor",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Merged PR commit is an exact ancestor of accepted official source; not re-applied.",
+      "merge_commit": "f154c6046d8379b87aeca4553e4179a63158bf34"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2504,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2504",
+      "title": "sd: sync with master-929-3f8527a",
+      "status": "already_official_ancestor",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Merged PR commit is an exact ancestor of accepted official source; not re-applied.",
+      "merge_commit": "5ad52fd5c34bc5a101d2fc5b8f8f4937d05b7c91"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2502,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2502",
+      "title": "fix: keep an integer minimum from accepting a shorter number",
+      "status": "already_official_ancestor",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Merged PR commit is an exact ancestor of accepted official source; not re-applied.",
+      "merge_commit": "93896f420c59d679d724199004fea95fd02cf8d8"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2496,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2496",
+      "title": "sd: sync with master-917-4c3cf75",
+      "status": "already_official_ancestor",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Merged PR commit is an exact ancestor of accepted official source; not re-applied.",
+      "merge_commit": "40fbf48a16bc7c55312b7dff24c9596b967015ae"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2491,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2491",
+      "title": "sd: sync with master-885-b8248a8",
+      "status": "already_official_ancestor",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Merged PR commit is an exact ancestor of accepted official source; not re-applied.",
+      "merge_commit": "a915109d87490a88e7da5b2cf358f8df8fc35f0d"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2484,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2484",
+      "title": "sd: round `info` floating point parameters",
+      "status": "already_official_ancestor",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Merged PR commit is an exact ancestor of accepted official source; not re-applied.",
+      "merge_commit": "b3887208fc452884e18cb41d8e1d020f8b745a01"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2483,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2483",
+      "title": "sd: fix: inhibit ggml log changes from sdcpp code",
+      "status": "already_official_ancestor",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Merged PR commit is an exact ancestor of accepted official source; not re-applied.",
+      "merge_commit": "3f490d113356ab48acd986a5ade48821bae2710b"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2477,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2477",
+      "title": "sd: sync with master-872-cc515a0",
+      "status": "already_official_ancestor",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Merged PR commit is an exact ancestor of accepted official source; not re-applied.",
+      "merge_commit": "15e978865c8132caddc9cafd16eeb85a8fb84086"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2462,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2462",
+      "title": "Updated websearch handling.",
+      "status": "already_official_ancestor",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Merged PR commit is an exact ancestor of accepted official source; not re-applied.",
+      "merge_commit": "9cc044a78dbef3a028b387c24062937f488a3bde"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2460,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2460",
+      "title": "sd: fix video LoRAs",
+      "status": "already_official_ancestor",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Merged PR commit is an exact ancestor of accepted official source; not re-applied.",
+      "merge_commit": "3f0a4186246dc15b6c6af8e1154451557ace9f0c"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2458,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2458",
+      "title": "sd: sync with master-866-42d6c0a",
+      "status": "already_official_ancestor",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Merged PR commit is an exact ancestor of accepted official source; not re-applied.",
+      "merge_commit": "0bd509c5967054a29acbf871427e241c3ed89967"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2457,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2457",
+      "title": "sd: sync with master-852-14eddb3",
+      "status": "already_official_ancestor",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Merged PR commit is an exact ancestor of accepted official source; not re-applied.",
+      "merge_commit": "469f4560039dd86c1946d3a3164cf4fdac11e760"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2453,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2453",
+      "title": "sd: sync with master-849-d04e895",
+      "status": "already_official_ancestor",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Merged PR commit is an exact ancestor of accepted official source; not re-applied.",
+      "merge_commit": "27786379e5fc30ae004f76baadc8e5703a615105"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2452,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2452",
+      "title": "sd: merge upstream int8 convrot and fp8 scaled at master-841-6b3edaa",
+      "status": "already_official_ancestor",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Merged PR commit is an exact ancestor of accepted official source; not re-applied.",
+      "merge_commit": "da1a9d4f4cdd8320fc8c7089efcb2fd8e3642650"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2444,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2444",
+      "title": "Optimize koboldcpp.sh for local users",
+      "status": "already_official_ancestor",
+      "review_depth": "exact_merge_ancestry",
+      "reason": "Merged PR commit is an exact ancestor of accepted official source; not re-applied.",
+      "merge_commit": "6c8df269ea1d92c5f200e58239177ba8e2b66d53"
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2359,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2359",
+      "title": "Add video input support for VLM inference",
+      "status": "reviewed_video_ingestion_deferred",
+      "review_depth": "native_media_C_ABI_and_ffmpeg_boundary_diffs_with_comments",
+      "reason": "Adds VLM video ingestion/frame-budget/ffmpeg paths and C ABI fields, not generation acceleration of current photo model. Needs a video-capable projector and timestamp/context-budget tests; does not replace existing native output-video pipeline or its frame/FPS policy."
+    },
+    {
+      "repo": "LostRuins/koboldcpp",
+      "n": 2345,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2345",
+      "title": "feat: add native continuous batching benchmark",
+      "status": "reviewed_benchmark_draft_deferred",
+      "review_depth": "native_benchmark_POD_exclusivity_and_marshalling_diffs_with_comments",
+      "reason": "New opt-in cohort benchmark/export112-byte ABI; not an inference optimization. Author draft lacks loaded-model smoke proof. Current manually requested photo/4x uses existing production Pipeline and owned Native; no extra benchmark scheduler or default generation added."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1680,
+      "url": "https://github.com/ggml-org/ggml/pull/1680",
+      "title": "ggml : bump version to 0.29.0",
+      "status": "reviewed_no_native_change",
+      "review_depth": "full_file_map_and_version_diff",
+      "reason": "Only version/author updates; no runtime implementation."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1679,
+      "url": "https://github.com/ggml-org/ggml/pull/1679",
+      "title": "sync : llama.cpp",
+      "status": "reviewed_sync_bundle_scoped",
+      "review_depth": "complete_file_maps_hunk_postimages_deduplicated_CPU_Vulkan_guard_screen_and_selected_candidate_reviews",
+      "reason": "Aggregate llama syncs overlap previously reviewed Native candidates and current official code. Recorded target-file/new-hunk coverage,missing provider patches and deduplicated guard contexts in sync-boundary-review.json. Current small-graph submission,semaphore reuse,tiled dispatch,host-import/RPC scaffolding checked;release CPU expert assert strengthened separately. Not a line-by-line semantic audit of every foreign backend/generated file;unsupported async/RPC/dtype feature expansions not wholesale-imported."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1678,
+      "url": "https://github.com/ggml-org/ggml/pull/1678",
+      "title": "examples: fix greedy sampling at --temp 0 for GPT-2/GPT-J",
+      "status": "already_equivalent",
+      "review_depth": "full_diff_and_current_source",
+      "reason": "Legacy example temp<=0 greedy path; current production greedy optimization already tested898 cases in accepted patch catalog."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1677,
+      "url": "https://github.com/ggml-org/ggml/pull/1677",
+      "title": "CUDA/HIP: add J=128 tiles for Q4_K, Q6_K, Q4_0 and Q4_1 on gfx1030",
+      "status": "other_isa_checked_logic",
+      "review_depth": "full_diff",
+      "reason": "CUDA/HIP gfx1030 wide J128 integer tiles; RX580 reports int-dot0, no matrix cores and32KiB LDS. Existing scalar FP32 Polaris64x64 tuning retained; no unsupported wide tile forced."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1676,
+      "url": "https://github.com/ggml-org/ggml/pull/1676",
+      "title": "ggml : bump version to v.28.0",
+      "status": "reviewed_no_native_change",
+      "review_depth": "full_file_map_and_version_diff",
+      "reason": "Only version/author updates; no runtime implementation."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1675,
+      "url": "https://github.com/ggml-org/ggml/pull/1675",
+      "title": "sync : llama.cpp",
+      "status": "reviewed_sync_bundle_scoped",
+      "review_depth": "complete_file_maps_hunk_postimages_deduplicated_CPU_Vulkan_guard_screen_and_selected_candidate_reviews",
+      "reason": "Aggregate llama syncs overlap previously reviewed Native candidates and current official code. Recorded target-file/new-hunk coverage,missing provider patches and deduplicated guard contexts in sync-boundary-review.json. Current small-graph submission,semaphore reuse,tiled dispatch,host-import/RPC scaffolding checked;release CPU expert assert strengthened separately. Not a line-by-line semantic audit of every foreign backend/generated file;unsupported async/RPC/dtype feature expansions not wholesale-imported."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1666,
+      "url": "https://github.com/ggml-org/ggml/pull/1666",
+      "title": "ci : upload API/ABI reports as artifacts",
+      "status": "reviewed_no_native_change",
+      "review_depth": "full_diff",
+      "reason": "API/ABI reporting, CI strict flag, release-description links only; pinned native build recipe unaffected."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1665,
+      "url": "https://github.com/ggml-org/ggml/pull/1665",
+      "title": "ci : fix --strict mode for API check",
+      "status": "reviewed_no_native_change",
+      "review_depth": "full_diff",
+      "reason": "API/ABI reporting, CI strict flag, release-description links only; pinned native build recipe unaffected."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1659,
+      "url": "https://github.com/ggml-org/ggml/pull/1659",
+      "title": "ggml : bump version to 0.27.0",
+      "status": "reviewed_no_native_change",
+      "review_depth": "full_diff",
+      "reason": "Version/release-prompt changes only; repository content is untrusted, not executable instructions."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1657,
+      "url": "https://github.com/ggml-org/ggml/pull/1657",
+      "title": "sync : llama.cpp",
+      "status": "reviewed_sync_bundle_scoped",
+      "review_depth": "complete_file_maps_hunk_postimages_deduplicated_CPU_Vulkan_guard_screen_and_selected_candidate_reviews",
+      "reason": "Aggregate llama syncs overlap previously reviewed Native candidates and current official code. Recorded target-file/new-hunk coverage,missing provider patches and deduplicated guard contexts in sync-boundary-review.json. Current small-graph submission,semaphore reuse,tiled dispatch,host-import/RPC scaffolding checked;release CPU expert assert strengthened separately. Not a line-by-line semantic audit of every foreign backend/generated file;unsupported async/RPC/dtype feature expansions not wholesale-imported."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1656,
+      "url": "https://github.com/ggml-org/ggml/pull/1656",
+      "title": "ggml : fix argument order in ggml_rms_norm_back comment",
+      "status": "reviewed_no_native_change",
+      "review_depth": "full_diff",
+      "reason": "Documentation argument order in RMS-back comment only."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1654,
+      "url": "https://github.com/ggml-org/ggml/pull/1654",
+      "title": "sam : remove redundant layout copies in the image encoder and mask head",
+      "status": "reviewed_transferable_view_logic",
+      "review_depth": "full_diff",
+      "reason": "SAM QKV strided views and mask-matmul operand swap. SAM is not current runtime; MOSS view reduction already separately retained. Operand swapping can change floating reductions, so no blanket replacement."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1653,
+      "url": "https://github.com/ggml-org/ggml/pull/1653",
+      "title": "scripts : add apiabi release check",
+      "status": "reviewed_build_CI_scope",
+      "review_depth": "release_ABI_script_and_CI_workflow_diffs",
+      "reason": "ABI release worktree checks and AMD/CUDA CI job movement, not runtime kernels. Current explicit Native C ABI,matching signatures/hashes,sequential links and local RX580 proofs remain. No unrelated hosted/self-hosted jobs started."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1652,
+      "url": "https://github.com/ggml-org/ggml/pull/1652",
+      "title": "ggml : bump version to 0.26.0",
+      "status": "reviewed_no_native_change",
+      "review_depth": "full_diff",
+      "reason": "Version/release-prompt changes only; repository content is untrusted, not executable instructions."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1651,
+      "url": "https://github.com/ggml-org/ggml/pull/1651",
+      "title": "sync : llama.cpp",
+      "status": "reviewed_sync_bundle_scoped",
+      "review_depth": "complete_file_maps_hunk_postimages_deduplicated_CPU_Vulkan_guard_screen_and_selected_candidate_reviews",
+      "reason": "Aggregate llama syncs overlap previously reviewed Native candidates and current official code. Recorded target-file/new-hunk coverage,missing provider patches and deduplicated guard contexts in sync-boundary-review.json. Current small-graph submission,semaphore reuse,tiled dispatch,host-import/RPC scaffolding checked;release CPU expert assert strengthened separately. Not a line-by-line semantic audit of every foreign backend/generated file;unsupported async/RPC/dtype feature expansions not wholesale-imported."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1647,
+      "url": "https://github.com/ggml-org/ggml/pull/1647",
+      "title": "cmake: avoid linking MATH_LIBRARY-NOTFOUND",
+      "status": "build_not_applicable",
+      "review_depth": "full_diff_and_current_recipe",
+      "reason": "CMake math-library/LTO flag fixes; Windows pinned Make recipes already pass explicit compile/link ISA flags, no CMake dependency."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1646,
+      "url": "https://github.com/ggml-org/ggml/pull/1646",
+      "title": "sycl: fix SYCL_DNNL flag report",
+      "status": "other_backend_platform",
+      "review_depth": "full_diff",
+      "reason": "SYCL feature-report macro or OpenBSD getexecpath; no corresponding Windows CPU/Vulkan change."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1645,
+      "url": "https://github.com/ggml-org/ggml/pull/1645",
+      "title": "ggml : bump version to 0.25.3",
+      "status": "reviewed_no_native_change",
+      "review_depth": "full_diff",
+      "reason": "Version/release-prompt changes only; repository content is untrusted, not executable instructions."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1642,
+      "url": "https://github.com/ggml-org/ggml/pull/1642",
+      "title": "ggml : bump version to 0.25.2",
+      "status": "reviewed_no_native_change",
+      "review_depth": "full_diff",
+      "reason": "Version/release-prompt changes only; repository content is untrusted, not executable instructions."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1641,
+      "url": "https://github.com/ggml-org/ggml/pull/1641",
+      "title": "ci : move cuda to hf-jobs and add amd-vulkan",
+      "status": "reviewed_build_CI_scope",
+      "review_depth": "release_ABI_script_and_CI_workflow_diffs",
+      "reason": "ABI release worktree checks and AMD/CUDA CI job movement, not runtime kernels. Current explicit Native C ABI,matching signatures/hashes,sequential links and local RX580 proofs remain. No unrelated hosted/self-hosted jobs started."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1640,
+      "url": "https://github.com/ggml-org/ggml/pull/1640",
+      "title": "mnist : make mnist_model move-only",
+      "status": "reviewed_example_ownership",
+      "review_depth": "full_diff",
+      "reason": "MNIST model move-only lifetime fix; that example is outside portable runtime. Native shared-node first-owner adaptation has separate tests."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1639,
+      "url": "https://github.com/ggml-org/ggml/pull/1639",
+      "title": "sync : llama.cpp",
+      "status": "reviewed_sync_bundle_scoped",
+      "review_depth": "complete_file_maps_hunk_postimages_deduplicated_CPU_Vulkan_guard_screen_and_selected_candidate_reviews",
+      "reason": "Aggregate llama syncs overlap previously reviewed Native candidates and current official code. Recorded target-file/new-hunk coverage,missing provider patches and deduplicated guard contexts in sync-boundary-review.json. Current small-graph submission,semaphore reuse,tiled dispatch,host-import/RPC scaffolding checked;release CPU expert assert strengthened separately. Not a line-by-line semantic audit of every foreign backend/generated file;unsupported async/RPC/dtype feature expansions not wholesale-imported."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1638,
+      "url": "https://github.com/ggml-org/ggml/pull/1638",
+      "title": "scripts : make-release-desc - link previous release in changelog title",
+      "status": "reviewed_no_native_change",
+      "review_depth": "full_diff",
+      "reason": "API/ABI reporting, CI strict flag, release-description links only; pinned native build recipe unaffected."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1637,
+      "url": "https://github.com/ggml-org/ggml/pull/1637",
+      "title": "ggml : bump version to 0.25.1",
+      "status": "reviewed_no_native_change",
+      "review_depth": "full_diff",
+      "reason": "Version/release-prompt changes only; repository content is untrusted, not executable instructions."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1636,
+      "url": "https://github.com/ggml-org/ggml/pull/1636",
+      "title": "sync : llama.cpp",
+      "status": "reviewed_sync_bundle_scoped",
+      "review_depth": "complete_file_maps_hunk_postimages_deduplicated_CPU_Vulkan_guard_screen_and_selected_candidate_reviews",
+      "reason": "Aggregate llama syncs overlap previously reviewed Native candidates and current official code. Recorded target-file/new-hunk coverage,missing provider patches and deduplicated guard contexts in sync-boundary-review.json. Current small-graph submission,semaphore reuse,tiled dispatch,host-import/RPC scaffolding checked;release CPU expert assert strengthened separately. Not a line-by-line semantic audit of every foreign backend/generated file;unsupported async/RPC/dtype feature expansions not wholesale-imported."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1635,
+      "url": "https://github.com/ggml-org/ggml/pull/1635",
+      "title": "ggml : bump version to 0.25.0",
+      "status": "reviewed_no_native_change",
+      "review_depth": "full_diff",
+      "reason": "Version/release-prompt changes only; repository content is untrusted, not executable instructions."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1634,
+      "url": "https://github.com/ggml-org/ggml/pull/1634",
+      "title": "sync : llama.cpp",
+      "status": "reviewed_sync_bundle_scoped",
+      "review_depth": "complete_file_maps_hunk_postimages_deduplicated_CPU_Vulkan_guard_screen_and_selected_candidate_reviews",
+      "reason": "Aggregate llama syncs overlap previously reviewed Native candidates and current official code. Recorded target-file/new-hunk coverage,missing provider patches and deduplicated guard contexts in sync-boundary-review.json. Current small-graph submission,semaphore reuse,tiled dispatch,host-import/RPC scaffolding checked;release CPU expert assert strengthened separately. Not a line-by-line semantic audit of every foreign backend/generated file;unsupported async/RPC/dtype feature expansions not wholesale-imported."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1632,
+      "url": "https://github.com/ggml-org/ggml/pull/1632",
+      "title": "sync : llama.cpp",
+      "status": "reviewed_sync_bundle_scoped",
+      "review_depth": "complete_file_maps_hunk_postimages_deduplicated_CPU_Vulkan_guard_screen_and_selected_candidate_reviews",
+      "reason": "Aggregate llama syncs overlap previously reviewed Native candidates and current official code. Recorded target-file/new-hunk coverage,missing provider patches and deduplicated guard contexts in sync-boundary-review.json. Current small-graph submission,semaphore reuse,tiled dispatch,host-import/RPC scaffolding checked;release CPU expert assert strengthened separately. Not a line-by-line semantic audit of every foreign backend/generated file;unsupported async/RPC/dtype feature expansions not wholesale-imported."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1631,
+      "url": "https://github.com/ggml-org/ggml/pull/1631",
+      "title": "add getexecpath for get_executable_path() on OpenBSD",
+      "status": "other_backend_platform",
+      "review_depth": "full_diff",
+      "reason": "SYCL feature-report macro or OpenBSD getexecpath; no corresponding Windows CPU/Vulkan change."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1627,
+      "url": "https://github.com/ggml-org/ggml/pull/1627",
+      "title": "ggml : bump version to 0.24.0",
+      "status": "reviewed_no_native_change",
+      "review_depth": "full_diff",
+      "reason": "Version/release-prompt changes only; repository content is untrusted, not executable instructions."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1626,
+      "url": "https://github.com/ggml-org/ggml/pull/1626",
+      "title": "sync : llama.cpp",
+      "status": "reviewed_sync_bundle_scoped",
+      "review_depth": "complete_file_maps_hunk_postimages_deduplicated_CPU_Vulkan_guard_screen_and_selected_candidate_reviews",
+      "reason": "Aggregate llama syncs overlap previously reviewed Native candidates and current official code. Recorded target-file/new-hunk coverage,missing provider patches and deduplicated guard contexts in sync-boundary-review.json. Current small-graph submission,semaphore reuse,tiled dispatch,host-import/RPC scaffolding checked;release CPU expert assert strengthened separately. Not a line-by-line semantic audit of every foreign backend/generated file;unsupported async/RPC/dtype feature expansions not wholesale-imported."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1625,
+      "url": "https://github.com/ggml-org/ggml/pull/1625",
+      "title": "fix(cuda): include <cuda/execution> and <cuda/stream_ref> for CUB top-k path (CCCL 3.2+)",
+      "status": "other_backend_checked_logic",
+      "review_depth": "full_diff",
+      "reason": "CUDA typed binary inputs or CCCL headers. New GLU/SiTU explicitly validate F32 inputs; no unsupported CUDA code imported."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1623,
+      "url": "https://github.com/ggml-org/ggml/pull/1623",
+      "title": "simple : temporary change to trigger Vulkan crash on macOS",
+      "status": "rejected_debug_reproducer",
+      "review_depth": "full_diff",
+      "reason": "Temporary macOS crash-reproducer thread added to example, not a production fix."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1620,
+      "url": "https://github.com/ggml-org/ggml/pull/1620",
+      "title": "Fix builds on s390x",
+      "status": "build_not_applicable",
+      "review_depth": "full_diff_and_current_recipe",
+      "reason": "CMake math-library/LTO flag fixes; Windows pinned Make recipes already pass explicit compile/link ISA flags, no CMake dependency."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1591,
+      "url": "https://github.com/ggml-org/ggml/pull/1591",
+      "title": "Handle F32 x F16 src1 in CUDA binary broadcast ops",
+      "status": "other_backend_checked_logic",
+      "review_depth": "full_diff",
+      "reason": "CUDA typed binary inputs or CCCL headers. New GLU/SiTU explicitly validate F32 inputs; no unsupported CUDA code imported."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1571,
+      "url": "https://github.com/ggml-org/ggml/pull/1571",
+      "title": "Gate RVV code on the target extension",
+      "status": "reviewed_other_ISA_guard",
+      "review_depth": "RVV_target_extension_and_kernel_guards",
+      "reason": "Correctly guards RISC-V vector extensions. Haswell target already explicitly excludes AVX512/VNNI/PGO; no foreign extension enabled."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1534,
+      "url": "https://github.com/ggml-org/ggml/pull/1534",
+      "title": "sycl: fix soft_max_f32 max reduction",
+      "status": "other_backend_checked_logic",
+      "review_depth": "full_diff",
+      "reason": "SYCL max reduction initializes inactive lanes and sums all subgroup partials. Current GCN RMS subgroup partials are explicitly bounded; new staged tests exercise wave64, no assumed warp32."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 1518,
+      "url": "https://github.com/ggml-org/ggml/pull/1518",
+      "title": "tests : add OLMoE-sized K-quant shapes to test_mul_mat_id (ref #1506)",
+      "status": "reviewed_test_idea",
+      "review_depth": "full_diff",
+      "reason": "Adds OLMoE K-quant MUL_MAT_ID test shapes, no implementation change. Current user models/settings retained; MoE full-model performance not claimed."
+    },
+    {
+      "repo": "ggml-org/ggml",
+      "n": 657,
+      "url": "https://github.com/ggml-org/ggml/pull/657",
+      "title": "Return an error when a tensor's name in gguf is long",
+      "status": "rejected_unsafe_fragment",
+      "review_depth": "full_diff_and_current_source",
+      "reason": "Proposed name-length test precedes fread and accesses uninitialized name; current GGUF reader checks string length after reading, already guarded."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31844,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31844",
+      "title": "cuda: respect src1 GGML_PREC_F32 in F32/F16 mul_mat",
+      "status": "other_backend_checked_logic",
+      "review_depth": "changed_file_map_and_native_boundary_hunks",
+      "reason": "Reviewed backend-specific implementation/guard changes: WebGPU submission/group norm, Metal/CUDA precision and matrix paths, SYCL allocation/GDN/MoE, OpenCL attention/strides/formats. No such backend is loaded. Preserve typed precision, external-use/alias and byte-stride principles in native adaptations; no unsupported matrix/int-dot path copied. Not a line-by-line audit of those foreign kernels."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31831,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31831",
+      "title": "opencl: improve q8_0 and MoE small-n verification for spec",
+      "status": "other_backend_checked_logic",
+      "review_depth": "changed_file_map_and_native_boundary_hunks",
+      "reason": "Reviewed backend-specific implementation/guard changes: WebGPU submission/group norm, Metal/CUDA precision and matrix paths, SYCL allocation/GDN/MoE, OpenCL attention/strides/formats. No such backend is loaded. Preserve typed precision, external-use/alias and byte-stride principles in native adaptations; no unsupported matrix/int-dot path copied. Not a line-by-line audit of those foreign kernels."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31829,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31829",
+      "title": "opencl: add arange",
+      "status": "already_supported_other_backend",
+      "review_depth": "full_diff",
+      "reason": "OpenCL ARANGE; current Vulkan/CPU already implement ARANGE. No additional runtime/backend switched."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31821,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31821",
+      "title": "metal: respect src1 GGML_PREC_F32 in F32/F16 mul_mm",
+      "status": "other_backend_checked_logic",
+      "review_depth": "changed_file_map_and_native_boundary_hunks",
+      "reason": "Reviewed backend-specific implementation/guard changes: WebGPU submission/group norm, Metal/CUDA precision and matrix paths, SYCL allocation/GDN/MoE, OpenCL attention/strides/formats. No such backend is loaded. Preserve typed precision, external-use/alias and byte-stride principles in native adaptations; no unsupported matrix/int-dot path copied. Not a line-by-line audit of those foreign kernels."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31819,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31819",
+      "title": "mtmd: support MageVL-Cowork model",
+      "status": "reviewed_additional_model_validation_deferred",
+      "review_depth": "architecture_metadata_tensor_graph_tokenizer_and_API_boundaries",
+      "reason": "Reviewed KailA supersession, Dory/Ripple/GRT/Inkling/Puzzle/DiffusionGemma/LFM audio/MageVL model-specific changes. These need corresponding conversion/projector/context or vocoder fixtures; several add new cache/graph/decoder contracts. No model was downloaded, user recipe replaced or untested architecture advertised as supported by this build. This is scoped graph/API review, not full model validation."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31813,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31813",
+      "title": "Kaila/pr31148 upstream reconciled",
+      "status": "reviewed_additional_model_validation_deferred",
+      "review_depth": "architecture_metadata_tensor_graph_tokenizer_and_API_boundaries",
+      "reason": "Reviewed KailA supersession, Dory/Ripple/GRT/Inkling/Puzzle/DiffusionGemma/LFM audio/MageVL model-specific changes. These need corresponding conversion/projector/context or vocoder fixtures; several add new cache/graph/decoder contracts. No model was downloaded, user recipe replaced or untested architecture advertised as supported by this build. This is scoped graph/API review, not full model validation."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31808,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31808",
+      "title": "mtmd: move log-mel computation to cgraph",
+      "status": "reviewed_audio_preprocess_validation_deferred",
+      "review_depth": "log_mel_preprocessor_cgraph_custom_DFT_and_thread_test_diffs",
+      "reason": "Moves per-request thread creation into a backend graph and keeps DFT on CPU after Metal divergence. Current Whisper/AudioCpp/media queue is a different path. Needs waveform/mel and loaded audio-projector controls; no unmeasured DFT replacement or thread-setting change."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31804,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31804",
+      "title": "vulkan: improve RDNA4 MMVQ performance for Q3_K, Q5_K and IQ4_XS",
+      "status": "already_reviewed_documented",
+      "reason": "Explicit semantic disposition in an earlier published review"
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31803,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31803",
+      "title": "CUDA: fix shared memory bank conflicts in the lightning indexer",
+      "status": "other_backend_checked_logic",
+      "review_depth": "full_diff",
+      "reason": "CUDA MMA shared-memory bank padding and half2 copies; scalar GCN path has different memory layout, no direct replacement."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31799,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31799",
+      "title": "SYCL : ROLL op handles permuted source",
+      "status": "other_backend_checked_logic",
+      "review_depth": "full_diff",
+      "reason": "SYCL ROLL fixed to use tensor byte strides; transferable stride principle is respected in new GLU/SiTU tests with gapped4D views. No SYCL code imported."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31785,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31785",
+      "title": "llama : add missing link to pthread",
+      "status": "build_not_applicable",
+      "review_depth": "full_diff_and_current_recipe",
+      "reason": "CMake pthread/FreeBSD/SPIRV-Headers fixes; pinned Windows Make build already links pthread and explicit Vulkan/SPIRV include paths."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31764,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31764",
+      "title": "vulkan: add IQ4_NL scalar MMQ (integer dot) matmul",
+      "status": "other_capability_checked_logic",
+      "review_depth": "full_diff_and_live_device_properties",
+      "reason": "Hoisted integer-dot K-quant tiles or IQ4 scalar MMQ still execute dotPacked4x8EXT. RX580 advertises int-dot0; retain real capability gate. Scalar FP32 and AVX2 IQ4 decoder use separately qualified paths."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31763,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31763",
+      "title": "server: add oai-compat /v1/audio/speech endpoint",
+      "status": "reviewed_API_boundary",
+      "review_depth": "speech_converter_PCM_and_llama_server_route_diffs",
+      "reason": "Adds llama-server speech handling. This product already owns a unified on-demand speech API with explicit providers/voices/asset validation; no second server or unvalidated vocoder introduced."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31750,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31750",
+      "title": "llama: use KV-only graphs for MTP draft catch-up",
+      "status": "reviewed_deferred_context_validation",
+      "review_depth": "full_diff_and_current_source",
+      "reason": "Recurrent alias/rollback ordering or no-output MTP KV-only graphs; requires synthetic context rollback/sequence-reuse controls and model-specific MTP validation. No MTP/rewind settings enabled or altered; not qualified by a photo test."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31701,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31701",
+      "title": "ggml : fix FreeBSD Vulkan build by setting _XOPEN_SOURCE=700",
+      "status": "build_not_applicable",
+      "review_depth": "full_diff_and_current_recipe",
+      "reason": "CMake pthread/FreeBSD/SPIRV-Headers fixes; pinned Windows Make build already links pthread and explicit Vulkan/SPIRV include paths."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31692,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31692",
+      "title": "model : add Ripple (ricursiveai)",
+      "status": "reviewed_additional_model_validation_deferred",
+      "review_depth": "architecture_metadata_tensor_graph_tokenizer_and_API_boundaries",
+      "reason": "Reviewed KailA supersession, Dory/Ripple/GRT/Inkling/Puzzle/DiffusionGemma/LFM audio/MageVL model-specific changes. These need corresponding conversion/projector/context or vocoder fixtures; several add new cache/graph/decoder contracts. No model was downloaded, user recipe replaced or untested architecture advertised as supported by this build. This is scoped graph/API review, not full model validation."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31658,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31658",
+      "title": "vulkan: detect ReBAR support, avoid BAR allocations if unavailable",
+      "status": "already_reviewed_retained",
+      "reason": "Exact source is already represented in the accepted58-patch catalog"
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31646,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31646",
+      "title": "llama.cpp : bump version to 0.9.0",
+      "status": "reviewed_build_docs_scope",
+      "review_depth": "full_changed_file_map_and_build_or_doc_hunks",
+      "reason": "CI runners/version/docs/ARM build variants; pinned Windows Haswell Make recipe is unchanged. No production inference implementation for current target."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31621,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31621",
+      "title": "server : enable prompt cache reuse with multimodal projector",
+      "status": "other_server_checked_logic",
+      "review_depth": "full_diff_and_native_server_boundary",
+      "reason": "llama-server prompt cache/media-shift/parent-slot policies differ from Kobold own continuous batching and legacy rewind cache. No second server queue/cache or policy switch; valid request settings preserved."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31587,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31587",
+      "title": "vulkan: Re-enable large coopmat matmul configuration on fixed AMD proprietary drivers",
+      "status": "other_device_checked_logic",
+      "review_depth": "full_diff",
+      "reason": "Cooperative-matrix driver tile/layout optimizations; RX580 exposes no cooperative matrix support. Scalar path and fixed hardware gates retained."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31575,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31575",
+      "title": "Grt",
+      "status": "reviewed_additional_model_validation_deferred",
+      "review_depth": "architecture_metadata_tensor_graph_tokenizer_and_API_boundaries",
+      "reason": "Reviewed KailA supersession, Dory/Ripple/GRT/Inkling/Puzzle/DiffusionGemma/LFM audio/MageVL model-specific changes. These need corresponding conversion/projector/context or vocoder fixtures; several add new cache/graph/decoder contracts. No model was downloaded, user recipe replaced or untested architecture advertised as supported by this build. This is scoped graph/API review, not full model validation."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31559,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31559",
+      "title": "ggml-vulkan: skip host buffer allocation on single iGPUs",
+      "status": "other_device_checked_logic",
+      "review_depth": "full_diff",
+      "reason": "Single iGPU host-buffer policy; current discrete RX580 needs staging buffers. Do not remove its host transfers."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31544,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31544",
+      "title": "vulkan: add TOP_K_MASK",
+      "status": "reviewed_new_mask_operator_deferred",
+      "review_depth": "full_Vulkan_mask_shader_and_host_type_shape_boundaries",
+      "reason": "Bit-moving F32/F16 TOP_K_MASK needs no half arithmetic, but requires duplicate picks,NaN/live-score,block/extra-cell,barrier and alias controls before enabling on GCN. Current Ray photo does not use this sparse model op; no unsupported capability advertised."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31530,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31530",
+      "title": "docs : fix Vulkan example command in build.md",
+      "status": "reviewed_no_native_change",
+      "review_depth": "full_diff",
+      "reason": "Version/docs/CI helper only, no runtime change; workflow cancellation script is not executed."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31529,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31529",
+      "title": "ci: move runners to Ubuntu 26.04",
+      "status": "reviewed_build_docs_scope",
+      "review_depth": "full_changed_file_map_and_build_or_doc_hunks",
+      "reason": "CI runners/version/docs/ARM build variants; pinned Windows Haswell Make recipe is unchanged. No production inference implementation for current target."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31526,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31526",
+      "title": "vulkan: allow dequantized KV optimization with CM2",
+      "status": "other_capability_checked_logic",
+      "review_depth": "full_diff",
+      "reason": "Coopmat2 dequant-KV reuse and aligned block strides; RX580 has no CM2. No new KV quantization or precision settings applied."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31518,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31518",
+      "title": "CUDA: fix Volta crash",
+      "status": "other_backend_checked_logic",
+      "review_depth": "full_diff",
+      "reason": "Volta MMA selector/dispatch use one eligibility predicate and minimum tile width. RX580 no MMA; current GCN capability gates remain shared with dispatch."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31512,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31512",
+      "title": "Maple cuda fast support",
+      "status": "reviewed_other_backend_quant_logic",
+      "review_depth": "CUDA_TQ_layout_dequant_getrows_and_integer_dot_diffs",
+      "reason": "Maple CUDA ternary support uses CUDA MMQ/GEMV and specific packed layouts. Current CPU Maple/base types remain; no integer-dot acceleration fabricated for RX580."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31506,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31506",
+      "title": "dflash: copy hidden features via device copies",
+      "status": "reviewed_speculation_contract_deferred",
+      "review_depth": "batch_embedding_device_feature_and_draft_rollback_diffs",
+      "reason": "Device feature injection, trimmed vocab/adaptive depth and deferred MTP catch-up alter draft/context lifetime or require new draft assets/options. Current native sampler and fixed settings stay intact. Need loaded target/draft token-acceptance/rollback and per-slot tests; photo/operator tests cannot qualify these paths."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31505,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31505",
+      "title": "llama : probe the fused top-k mask with a graph that builds it",
+      "status": "already_equivalent",
+      "review_depth": "full_diff_and_native_post_images",
+      "reason": "Fused top-k probe must exercise a graph that actually builds the mask; native post-images present, no duplicate patch."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31504,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31504",
+      "title": "ggml-cpu: batch-invariant batched matmul",
+      "status": "not_enabled_arithmetic_and_dispatch_change",
+      "review_depth": "x86_repack_and_sgemm_diffs",
+      "reason": "Batch-invariant GEMM groups integer scales differently and disables F32/BF16 tinyBLAS entirely. This changes numerical paths and can lose throughput; keep current Haswell kernels until paired CPU-context numerical/speed controls."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31497,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31497",
+      "title": "speculative : do not apply the MoE cache to the draft model",
+      "status": "reviewed_example_policy",
+      "review_depth": "full_diff",
+      "reason": "Example disables draft MoE cache; current Kobold speculative lifecycle is separate and MoE opt-in. No cache policy changed globally."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31490,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31490",
+      "title": "[WebGPU] Implement group norm kernel",
+      "status": "other_backend_checked_logic",
+      "review_depth": "changed_file_map_and_native_boundary_hunks",
+      "reason": "Reviewed backend-specific implementation/guard changes: WebGPU submission/group norm, Metal/CUDA precision and matrix paths, SYCL allocation/GDN/MoE, OpenCL attention/strides/formats. No such backend is loaded. Preserve typed precision, external-use/alias and byte-stride principles in native adaptations; no unsupported matrix/int-dot path copied. Not a line-by-line audit of those foreign kernels."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31465,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31465",
+      "title": "[SYCL] exact rounding in CPY to Q4_1, Q5_1 and Q8_0",
+      "status": "other_backend_checked_logic",
+      "review_depth": "full_diff",
+      "reason": "SYCL/Metal quantizer rounding and compiler fast-fp guard; pinned GCC build has no fast-math. No new quantization or rounding policy applied to user weights."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31454,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31454",
+      "title": "fixes issue #31445 Compile bug: Vulkan backend fails to build since #…",
+      "status": "already_equivalent_or_build_validated",
+      "review_depth": "full_diff_and_build",
+      "reason": "C++ cmath classification compatibility; accepted current GGML compiles both CPU/Vulkan with pinned GCC. No unqualified FP8 conversion change."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31426,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31426",
+      "title": "tests: fix CI flakes of TOPK_MOE caused by near ties",
+      "status": "reviewed_test_idea",
+      "review_depth": "full_diff",
+      "reason": "Generates separated TopK test scores to remove near-tie CI flakes; no production sampler change."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31420,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31420",
+      "title": "ggml-cpu : fully unroll the AVX2 iq1_s, iq1_m, iq2_xxs, iq2_s block loops with clang",
+      "status": "already_reviewed_documented",
+      "reason": "Explicit semantic disposition in an earlier published review"
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31416,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31416",
+      "title": "vulkan: Explicitly include SPIRV-Headers",
+      "status": "build_not_applicable",
+      "review_depth": "full_diff_and_current_recipe",
+      "reason": "CMake pthread/FreeBSD/SPIRV-Headers fixes; pinned Windows Make build already links pthread and explicit Vulkan/SPIRV include paths."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31391,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31391",
+      "title": "cuda : gather batched tensor reads into mapped host memory (PR to master)",
+      "status": "other_backend_checked_logic",
+      "review_depth": "changed_file_map_and_native_boundary_hunks",
+      "reason": "Reviewed backend-specific implementation/guard changes: WebGPU submission/group norm, Metal/CUDA precision and matrix paths, SYCL allocation/GDN/MoE, OpenCL attention/strides/formats. No such backend is loaded. Preserve typed precision, external-use/alias and byte-stride principles in native adaptations; no unsupported matrix/int-dot path copied. Not a line-by-line audit of those foreign kernels."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31379,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31379",
+      "title": "SYCL: Fuse GDN with GET_ROWS to remove temporary copy",
+      "status": "other_backend_checked_logic",
+      "review_depth": "changed_file_map_and_native_boundary_hunks",
+      "reason": "Reviewed backend-specific implementation/guard changes: WebGPU submission/group norm, Metal/CUDA precision and matrix paths, SYCL allocation/GDN/MoE, OpenCL attention/strides/formats. No such backend is loaded. Preserve typed precision, external-use/alias and byte-stride principles in native adaptations; no unsupported matrix/int-dot path copied. Not a line-by-line audit of those foreign kernels."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31345,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31345",
+      "title": "CUDA: use an fp32 result for quantized src0 in the cuBLAS fallback",
+      "status": "other_backend_checked_logic",
+      "review_depth": "full_diff",
+      "reason": "CUDA cuBLAS output precision guard; not applied to Vulkan default-precision policy. New SiTU restricts types to F32 and does not use F16 intermediates."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31341,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31341",
+      "title": "opencl: add initial iq1 support",
+      "status": "other_backend_checked_logic",
+      "review_depth": "changed_file_map_and_native_boundary_hunks",
+      "reason": "Reviewed backend-specific implementation/guard changes: WebGPU submission/group norm, Metal/CUDA precision and matrix paths, SYCL allocation/GDN/MoE, OpenCL attention/strides/formats. No such backend is loaded. Preserve typed precision, external-use/alias and byte-stride principles in native adaptations; no unsupported matrix/int-dot path copied. Not a line-by-line audit of those foreign kernels."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31286,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31286",
+      "title": "moe-cache : --moe-cache-cpu-share auto, CRF admission for the CPU misses",
+      "status": "reviewed_opt_in_MoE_policy",
+      "review_depth": "cache_miss_CPU_share_admission_and_tuning_diffs",
+      "reason": "CPU share/CRF admission is an opt-in cache policy depending on actual expert reuse, upload bandwidth and CPU throughput. No automatic share, cache size or HybridMoE activation on this system; allocation/context tests still required for that optional feature."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31285,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31285",
+      "title": "sycl : refuse device buffers that would exceed VRAM",
+      "status": "other_backend_checked_logic",
+      "review_depth": "changed_file_map_and_native_boundary_hunks",
+      "reason": "Reviewed backend-specific implementation/guard changes: WebGPU submission/group norm, Metal/CUDA precision and matrix paths, SYCL allocation/GDN/MoE, OpenCL attention/strides/formats. No such backend is loaded. Preserve typed precision, external-use/alias and byte-stride principles in native adaptations; no unsupported matrix/int-dot path copied. Not a line-by-line audit of those foreign kernels."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31197,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31197",
+      "title": "vulkan: store CM1 attention P row-major and reuse its fragments",
+      "status": "other_device_checked_logic",
+      "review_depth": "full_diff",
+      "reason": "Cooperative-matrix driver tile/layout optimizations; RX580 exposes no cooperative matrix support. Scalar path and fixed hardware gates retained."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31148,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31148",
+      "title": "llama: add KailA architecture support",
+      "status": "reviewed_additional_model_validation_deferred",
+      "review_depth": "architecture_metadata_tensor_graph_tokenizer_and_API_boundaries",
+      "reason": "Reviewed KailA supersession, Dory/Ripple/GRT/Inkling/Puzzle/DiffusionGemma/LFM audio/MageVL model-specific changes. These need corresponding conversion/projector/context or vocoder fixtures; several add new cache/graph/decoder contracts. No model was downloaded, user recipe replaced or untested architecture advertised as supported by this build. This is scoped graph/API review, not full model validation."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31139,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31139",
+      "title": "Add max allocation size reporting and split MoE cache groups",
+      "status": "reviewed_deferred_moe_validation",
+      "review_depth": "CPU_Vulkan_RPC_interface_and_cache_group_diffs",
+      "reason": "Separates maximum allocation from pool block size and splits MoE banks. Useful for opt-in MoE, but changes backend interfaces across every backend and cache grouping. Current user profiles do not enable it; requires allocation/cache eviction tests, not a photo-only acceptance."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31120,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31120",
+      "title": "sycl: fix f32 to q2_0/q4_0/q5_0 rounding in CPY",
+      "status": "other_backend_checked_logic",
+      "review_depth": "full_diff",
+      "reason": "SYCL/Metal quantizer rounding and compiler fast-fp guard; pinned GCC build has no fast-math. No new quantization or rounding policy applied to user weights."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31114,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31114",
+      "title": "vulkan: skip maxStorageBufferRange pre-check for non-compute tensors",
+      "status": "native_post_images_already_present",
+      "review_depth": "all_native_hunk_post_images",
+      "reason": "Every full mapped native hunk post-image is already present. Non-target/example/server paths are listed separately; no whole-repository semantic audit implied."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31084,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31084",
+      "title": "ggml : update CUDA radix Top-K to make tied selections deterministic",
+      "status": "other_backend_checked_logic",
+      "review_depth": "changed_file_map_and_native_boundary_hunks",
+      "reason": "Reviewed backend-specific implementation/guard changes: WebGPU submission/group norm, Metal/CUDA precision and matrix paths, SYCL allocation/GDN/MoE, OpenCL attention/strides/formats. No such backend is loaded. Preserve typed precision, external-use/alias and byte-stride principles in native adaptations; no unsupported matrix/int-dot path copied. Not a line-by-line audit of those foreign kernels."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31079,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31079",
+      "title": "vulkan : fix out-of-bounds NVFP4 UE4M3 scale lookup",
+      "status": "native_post_images_already_present",
+      "review_depth": "all_native_hunk_post_images",
+      "reason": "Every full mapped native hunk post-image is already present. Non-target/example/server paths are listed separately; no whole-repository semantic audit implied."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31061,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31061",
+      "title": "ggml-cpu: unroll x86 quantized vec_dot accumulator chains (Q4_0, Q4_K, Q5_K, IQ3_S, IQ3_XXS)",
+      "status": "already_reviewed_retained",
+      "reason": "Exact source is already represented in the accepted58-patch catalog"
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31058,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31058",
+      "title": "improve gemm4xN Q8_0 on AVX2",
+      "status": "already_reviewed_retained",
+      "reason": "Exact source is already represented in the accepted58-patch catalog"
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31045,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31045",
+      "title": "vulkan : enable MMQ with mixed signedness integer dots",
+      "status": "reviewed_other_Vulkan_capability",
+      "review_depth": "native_selector_state_and_shader_layout_diffs",
+      "reason": "Mixed signedness integer dots and cooperative-matrix attention tile/GQA variants require capabilities absent on RX580. Kept true feature gates; the native wave64 RMS adaptation is separate and uses ordinary F32 arithmetic."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31031,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31031",
+      "title": "Trimmed draft vocab support (1/2) - reduced draft LM head from a user supplied token list",
+      "status": "reviewed_speculation_contract_deferred",
+      "review_depth": "batch_embedding_device_feature_and_draft_rollback_diffs",
+      "reason": "Device feature injection, trimmed vocab/adaptive depth and deferred MTP catch-up alter draft/context lifetime or require new draft assets/options. Current native sampler and fixed settings stay intact. Need loaded target/draft token-acceptance/rollback and per-slot tests; photo/operator tests cannot qualify these paths."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 31022,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31022",
+      "title": "vulkan: hoist K-quant dequant in mul_mat_vecq",
+      "status": "other_capability_checked_logic",
+      "review_depth": "full_diff_and_live_device_properties",
+      "reason": "Hoisted integer-dot K-quant tiles or IQ4 scalar MMQ still execute dotPacked4x8EXT. RX580 advertises int-dot0; retain real capability gate. Scalar FP32 and AVX2 IQ4 decoder use separately qualified paths."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30991,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30991",
+      "title": "cpu : add AVX-VNNI tiled matmul",
+      "status": "adaptation_rejected_measured",
+      "review_depth": "full_native_diff_and_AVX2_experiment",
+      "reason": "Adapted VNNI transposed4x8 logic to bounded act-bias Haswell maddubs/madd without any VNNI instruction.880 comparisons bit-exact including full-range int8, but7 alternating repeats across12 shapes regress8.38..26.44 percent. Not retained; current kernel preserved."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30967,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30967",
+      "title": "docs: openvino backend details, fix SYCL docs",
+      "status": "reviewed_build_docs_scope",
+      "review_depth": "full_changed_file_map_and_build_or_doc_hunks",
+      "reason": "CI runners/version/docs/ARM build variants; pinned Windows Haswell Make recipe is unchanged. No production inference implementation for current target."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30966,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30966",
+      "title": "llama_moe_cache: run missed experts on CPU, add tuning script",
+      "status": "reviewed_opt_in_MoE_policy",
+      "review_depth": "cache_miss_CPU_share_admission_and_tuning_diffs",
+      "reason": "CPU share/CRF admission is an opt-in cache policy depending on actual expert reuse, upload bandwidth and CPU throughput. No automatic share, cache size or HybridMoE activation on this system; allocation/context tests still required for that optional feature."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30943,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30943",
+      "title": "mtmd : lfm2 resize matches torchvision",
+      "status": "native_post_images_already_present",
+      "review_depth": "all_native_hunk_post_images",
+      "reason": "Every full mapped native hunk post-image is already present. Non-target/example/server paths are listed separately; no whole-repository semantic audit implied."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30904,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30904",
+      "title": "vulkan: optimize mul_mat_vec kernel for iq3_xxs",
+      "status": "not_enabled_reduction_change",
+      "review_depth": "full_diff",
+      "reason": "TPB8/16 and per-column accumulators change grouping of IQ3_XXS FMAs; not a bit-exact replacement. Kept as reviewed candidate, no current-model gain claimed."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30878,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30878",
+      "title": "delta_net_base: refactor conv state",
+      "status": "reviewed_deferred_context_validation",
+      "review_depth": "full_diff",
+      "reason": "Recurrent rollback windows replaced by strided SET_ROWS and new state-slot input. Requires rollback and tensor-parallel view validation on recurrent contexts; no unrelated state layout rewritten."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30853,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30853",
+      "title": "ggml-cpu : add AVX512BW/VL path for iq3_xxs dot product",
+      "status": "other_isa_checked_logic",
+      "review_depth": "full_diff",
+      "reason": "AVX512BW/VL mask-sub sign expansion; Haswell existing sign_epi8 path remains. Hardware masks are unavailable, table-removal speed unproven."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30829,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30829",
+      "title": "vulkan: cap scalar flash attention at 8 rows for large heads on Qualcomm Adreno GPUs",
+      "status": "other_device_checked_logic",
+      "review_depth": "full_diff",
+      "reason": "Adreno divergent-subgroup and head-size spill workarounds. Do not disable working GCN wave64 arithmetic or impose another vendor tile without qualification."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30826,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30826",
+      "title": "vulkan: disable subgroup arithmetic on Qualcomm's driver",
+      "status": "other_device_checked_logic",
+      "review_depth": "full_diff",
+      "reason": "Adreno divergent-subgroup and head-size spill workarounds. Do not disable working GCN wave64 arithmetic or impose another vendor tile without qualification."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30824,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30824",
+      "title": "vulkan: run rms_norm with a runtime loop count",
+      "status": "already_reviewed_documented",
+      "reason": "Explicit semantic disposition in an earlier published review"
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30821,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30821",
+      "title": "vulkan: avoid 8-bit vector pack/unpack, which miscompiles on multiple Qualcomm Adreno GPUs",
+      "status": "reviewed_vendor_workaround",
+      "review_depth": "Vulkan_pipeline_specialization_and_pack_unpack_shader_diffs",
+      "reason": "Avoids8-bit vector pack/unpack miscompilation on Qualcomm through specialization and scalar alternatives. RX580 current byte unpack is working; do not globally force another vendor workaround or claim its gain. Native AVX2 transposed experiment and exact IQ4 decoding are separate."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30802,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30802",
+      "title": "ggml : support YaRN truncation config on openvino, sycl, vulkan, webgpu, rpc",
+      "status": "reviewed_YaRN_feature_deferred",
+      "review_depth": "Vulkan_RPC_RoPE_constant_and_fusion_guard_diffs",
+      "reason": "Propagates model-selected YaRN truncate into correction dimensions and removes unsupported-mode guards only once the implementation handles it. No user RoPE/scale setting changed; requires nontruncated-context numerical/fused cache-write tests before expanding supported cases."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30779,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30779",
+      "title": "server: visit parent slots before child slots",
+      "status": "other_server_checked_logic",
+      "review_depth": "full_diff_and_native_server_boundary",
+      "reason": "llama-server prompt cache/media-shift/parent-slot policies differ from Kobold own continuous batching and legacy rewind cache. No second server queue/cache or policy switch; valid request settings preserved."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30769,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30769",
+      "title": "vulkan: Implement test-fusion interface",
+      "status": "native_post_images_already_present",
+      "review_depth": "all_native_hunk_post_images",
+      "reason": "Every full mapped native hunk post-image is already present. Non-target/example/server paths are listed separately; no whole-repository semantic audit implied."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30738,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30738",
+      "title": "vulkan: add dequant+transpose fast path for Q4_0 KV cache in flash attention",
+      "status": "deferred_quantized_kv_validation",
+      "review_depth": "full_diff",
+      "reason": "Q4 dequant+transpose uses F16 scratch and a different attention path. Current profiles/precision unchanged; requires quantized-KV numerical and scratch-allocation qualification, not an image-only test."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30737,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30737",
+      "title": "ggml-cpu : compute f32 gelu_quick and geglu_quick without the fp16 table",
+      "status": "already_reviewed_documented",
+      "reason": "Explicit semantic disposition in an earlier published review"
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30718,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30718",
+      "title": "Add `JQ2_K`, `JQ3_K`, `JQ4_K`, `JQ5_K` and `JQ6_K` quantization types (CPU + Metal + CUDA + Vulkan)",
+      "status": "reviewed_format_and_precision_boundary",
+      "review_depth": "GGML_type_registry_loader_scale_and_backend_kernel_diffs",
+      "reason": "JQ/IQ2NL/IQ3NL/HQQ/STQ/PTQ and additional MXFP/scaled-FP8 representations need matched converters, fixtures and stable enum/wire IDs. Some proposed numeric IDs collide across series. Current weights are not re-quantized or reinterpreted. Existing NVFP4 lookup bounds and exact IQ4_NL decoder stay separately qualified; CUDA/coopmat-only speed claims do not transfer to RX580."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30717,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30717",
+      "title": "Add `JQ2_K`, `JQ3_K`, `JQ4_K`, `JQ5_K` and `JQ6_K` quantization types (CPU + Metal + CUDA)",
+      "status": "reviewed_format_and_precision_boundary",
+      "review_depth": "GGML_type_registry_loader_scale_and_backend_kernel_diffs",
+      "reason": "JQ/IQ2NL/IQ3NL/HQQ/STQ/PTQ and additional MXFP/scaled-FP8 representations need matched converters, fixtures and stable enum/wire IDs. Some proposed numeric IDs collide across series. Current weights are not re-quantized or reinterpreted. Existing NVFP4 lookup bounds and exact IQ4_NL decoder stay separately qualified; CUDA/coopmat-only speed claims do not transfer to RX580."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30716,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30716",
+      "title": "Add `JQ2_K`, `JQ3_K`, `JQ4_K`, `JQ5_K` and `JQ6_K` quantization types (CPU + Metal)",
+      "status": "reviewed_format_and_precision_boundary",
+      "review_depth": "GGML_type_registry_loader_scale_and_backend_kernel_diffs",
+      "reason": "JQ/IQ2NL/IQ3NL/HQQ/STQ/PTQ and additional MXFP/scaled-FP8 representations need matched converters, fixtures and stable enum/wire IDs. Some proposed numeric IDs collide across series. Current weights are not re-quantized or reinterpreted. Existing NVFP4 lookup bounds and exact IQ4_NL decoder stay separately qualified; CUDA/coopmat-only speed claims do not transfer to RX580."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30715,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30715",
+      "title": "Add `JQ2_K`, `JQ3_K`, `JQ4_K`, `JQ5_K` and `JQ6_K` quantization types (CPU)",
+      "status": "reviewed_format_and_precision_boundary",
+      "review_depth": "GGML_type_registry_loader_scale_and_backend_kernel_diffs",
+      "reason": "JQ/IQ2NL/IQ3NL/HQQ/STQ/PTQ and additional MXFP/scaled-FP8 representations need matched converters, fixtures and stable enum/wire IDs. Some proposed numeric IDs collide across series. Current weights are not re-quantized or reinterpreted. Existing NVFP4 lookup bounds and exact IQ4_NL decoder stay separately qualified; CUDA/coopmat-only speed claims do not transfer to RX580."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30603,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30603",
+      "title": "llama.cpp : bump version to 0.7.0",
+      "status": "reviewed_no_native_change",
+      "review_depth": "full_diff",
+      "reason": "Version/docs/CI helper only, no runtime change; workflow cancellation script is not executed."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30591,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30591",
+      "title": "vulkan: add tiled-transpose concat shader for Qwen models",
+      "status": "already_reviewed_retained",
+      "reason": "Exact source is already represented in the accepted58-patch catalog"
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30586,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30586",
+      "title": "scripts : add ci-status.sh for listing active CI runs",
+      "status": "reviewed_no_native_change",
+      "review_depth": "full_diff",
+      "reason": "Version/docs/CI helper only, no runtime change; workflow cancellation script is not executed."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30505,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30505",
+      "title": "ggml-cpu : select the NEON fp32->fp16 conversion",
+      "status": "native_post_images_already_present",
+      "review_depth": "all_native_hunk_post_images",
+      "reason": "Every full mapped native hunk post-image is already present. Non-target/example/server paths are listed separately; no whole-repository semantic audit implied."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30351,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30351",
+      "title": "vulkan: derive coopmat1 flash attention tile shape from the device",
+      "status": "reviewed_other_Vulkan_capability",
+      "review_depth": "native_selector_state_and_shader_layout_diffs",
+      "reason": "Mixed signedness integer dots and cooperative-matrix attention tile/GQA variants require capabilities absent on RX580. Kept true feature gates; the native wave64 RMS adaptation is separate and uses ordinary F32 arithmetic."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30343,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30343",
+      "title": "ggml-cpu : keep the FP16->FP32 lookup table on x86 with F16C (#30342)",
+      "status": "native_post_images_already_present",
+      "review_depth": "all_native_hunk_post_images",
+      "reason": "Every full mapped native hunk post-image is already present. Non-target/example/server paths are listed separately; no whole-repository semantic audit implied."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30306,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30306",
+      "title": "dory support for llama.cpp",
+      "status": "reviewed_additional_model_validation_deferred",
+      "review_depth": "architecture_metadata_tensor_graph_tokenizer_and_API_boundaries",
+      "reason": "Reviewed KailA supersession, Dory/Ripple/GRT/Inkling/Puzzle/DiffusionGemma/LFM audio/MageVL model-specific changes. These need corresponding conversion/projector/context or vocoder fixtures; several add new cache/graph/decoder contracts. No model was downloaded, user recipe replaced or untested architecture advertised as supported by this build. This is scoped graph/API review, not full model validation."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30296,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30296",
+      "title": "cpu : reduce AVX2 tiled accumulators together",
+      "status": "native_post_images_already_present",
+      "review_depth": "all_native_hunk_post_images",
+      "reason": "Every full mapped native hunk post-image is already present. Non-target/example/server paths are listed separately; no whole-repository semantic audit implied."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30280,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30280",
+      "title": "RDNA3/4 Vulkan Large-Tile Split-K Optimization",
+      "status": "native_post_images_already_present",
+      "review_depth": "all_native_hunk_post_images",
+      "reason": "Every full mapped native hunk post-image is already present. Non-target/example/server paths are listed separately; no whole-repository semantic audit implied."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30270,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30270",
+      "title": "cpu: fix AVX2 CPUs not using F16C when available",
+      "status": "already_equivalent",
+      "review_depth": "full_diff_and_current_source",
+      "reason": "AVX2+F16C mapping already active, F16->F32 lookup retained; no duplicate ISA patch."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30247,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30247",
+      "title": "opencl: decode gemma-4 global attention through the FA decomposition at depth",
+      "status": "other_backend_checked_logic",
+      "review_depth": "changed_file_map_and_native_boundary_hunks",
+      "reason": "Reviewed backend-specific implementation/guard changes: WebGPU submission/group norm, Metal/CUDA precision and matrix paths, SYCL allocation/GDN/MoE, OpenCL attention/strides/formats. No such backend is loaded. Preserve typed precision, external-use/alias and byte-stride principles in native adaptations; no unsupported matrix/int-dot path copied. Not a line-by-line audit of those foreign kernels."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30232,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30232",
+      "title": "ggml-cpu : vectorize GELU and GEGLU",
+      "status": "already_reviewed_retained",
+      "reason": "Exact source is already represented in the accepted58-patch catalog"
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30206,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30206",
+      "title": "ggml : support `truncate=false` for YaRN",
+      "status": "native_post_images_already_present",
+      "review_depth": "all_native_hunk_post_images",
+      "reason": "Every full mapped native hunk post-image is already present. Non-target/example/server paths are listed separately; no whole-repository semantic audit implied."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30200,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30200",
+      "title": "ggml-cpu:  Split tiled implementation into arch/ folders in preparati…",
+      "status": "reviewed_source_layout_refactor",
+      "review_depth": "tiled_source_split_includes_and_build_diffs",
+      "reason": "Moves tiled implementation into architecture files. Current monolithic pinned recipes already compile the tested Haswell implementation; file movement alone is not a speedup, no build layout churn."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30196,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30196",
+      "title": "sampling : read context outputs with one synchronization",
+      "status": "reviewed_deferred_context_validation",
+      "review_depth": "context_and_sampling_diffs_and_native_call_boundary",
+      "reason": "Batched llama_outputs includes all output rows and synchronization; Kobold uses its own native sampler/getters. A full-output loop is not automatically faster for its selected row. Keep until selected-row and speculative synchronization can be measured."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30193,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30193",
+      "title": "chat : accept JSON tool argument keys in any order for Qwen3-Coder/Nemotron",
+      "status": "reviewed_grammar_contract_deferred",
+      "review_depth": "object_state_budget_recursion_key_order_and_native_generator_boundary",
+      "reason": "Any-order tool JSON grammar expands accepted-language/state-budget behavior. Kobold uses its own kcpp generator and sampler integration. Requires recursive-schema,duplicate-key,state-budget and loaded grammar tests; no silent grammar/sampling behavior rewrite based on photo qualification."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30190,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30190",
+      "title": "vulkan: fold verify tokens and GQA heads into one flash-attention row tile",
+      "status": "reviewed_other_Vulkan_capability",
+      "review_depth": "native_selector_state_and_shader_layout_diffs",
+      "reason": "Mixed signedness integer dots and cooperative-matrix attention tile/GQA variants require capabilities absent on RX580. Kept true feature gates; the native wave64 RMS adaptation is separate and uses ordinary F32 arithmetic."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30188,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30188",
+      "title": "server: discard prompt state for cache_prompt=false tasks",
+      "status": "other_server_checked_logic",
+      "review_depth": "full_diff_and_native_server_boundary",
+      "reason": "llama-server prompt cache/media-shift/parent-slot policies differ from Kobold own continuous batching and legacy rewind cache. No second server queue/cache or policy switch; valid request settings preserved."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30156,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30156",
+      "title": "sycl: Add device-side MoE scheduler",
+      "status": "other_backend_checked_logic",
+      "review_depth": "changed_file_map_and_native_boundary_hunks",
+      "reason": "Reviewed backend-specific implementation/guard changes: WebGPU submission/group norm, Metal/CUDA precision and matrix paths, SYCL allocation/GDN/MoE, OpenCL attention/strides/formats. No such backend is loaded. Preserve typed precision, external-use/alias and byte-stride principles in native adaptations; no unsupported matrix/int-dot path copied. Not a line-by-line audit of those foreign kernels."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30146,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30146",
+      "title": "vulkan: improve small-n split-K selection on RDNA3 and RDNA4",
+      "status": "native_post_images_already_present",
+      "review_depth": "all_native_hunk_post_images",
+      "reason": "Every full mapped native hunk post-image is already present. Non-target/example/server paths are listed separately; no whole-repository semantic audit implied."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30139,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30139",
+      "title": "graph : read recurrent states in place instead of copying (#28841)",
+      "status": "reviewed_deferred_context_validation",
+      "review_depth": "full_diff_and_current_source",
+      "reason": "Recurrent alias/rollback ordering or no-output MTP KV-only graphs; requires synthetic context rollback/sequence-reuse controls and model-specific MTP validation. No MTP/rewind settings enabled or altered; not qualified by a photo test."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30047,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30047",
+      "title": "metal : few-row MMA kernels for MUL_MAT_ID and more src0 types",
+      "status": "other_backend_checked_logic",
+      "review_depth": "changed_file_map_and_native_boundary_hunks",
+      "reason": "Reviewed backend-specific implementation/guard changes: WebGPU submission/group norm, Metal/CUDA precision and matrix paths, SYCL allocation/GDN/MoE, OpenCL attention/strides/formats. No such backend is loaded. Preserve typed precision, external-use/alias and byte-stride principles in native adaptations; no unsupported matrix/int-dot path copied. Not a line-by-line audit of those foreign kernels."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 30036,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30036",
+      "title": "ggml-cpu : add VNNI repack kernels for Q8_0 and Q4_0 on x86",
+      "status": "other_isa_checked_logic",
+      "review_depth": "native_guard_and_kernel_hunks",
+      "reason": "New VNNI/VBMI/AVX512 dot/repack families need unavailable instructions. Transposed layout logic was independently adapted to AVX2 from30991 and measured slower; no ISA flags or weight layout changed."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 29929,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/29929",
+      "title": "vulkan: Support split_k for conv3d",
+      "status": "reviewed_parallel_reduction_deferred",
+      "review_depth": "Vulkan_selector_push_constants_scratch_and_shader_partial_reduction_diffs",
+      "reason": "Conv3D split-K and stream-K add partial/scratch synchronization and change reduction grouping. No bit-exact current-model qualification; preserve numerical path and existing measured Polaris tile. GPU throughput figures from other devices are not assigned to RX580."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 29806,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/29806",
+      "title": "ggml-cpu: support BF16/FP16/FP32 K tails in tinyBLAS on x86",
+      "status": "already_reviewed_documented",
+      "reason": "Explicit semantic disposition in an earlier published review"
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 29801,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/29801",
+      "title": "ggml : prune",
+      "status": "reviewed_API_pruning_scope",
+      "review_depth": "operator_API_allocator_and_backend_removal_diffs",
+      "reason": "Deletes deprecated GGML paths. Native also serves SDCPP/audio/legacy models and needs exact interface compatibility; no evidence that broad removals speed current generations, retain required operations."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 29791,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/29791",
+      "title": "vulkan: add fp8 and scaled matmul support",
+      "status": "reviewed_format_and_precision_boundary",
+      "review_depth": "GGML_type_registry_loader_scale_and_backend_kernel_diffs",
+      "reason": "JQ/IQ2NL/IQ3NL/HQQ/STQ/PTQ and additional MXFP/scaled-FP8 representations need matched converters, fixtures and stable enum/wire IDs. Some proposed numeric IDs collide across series. Current weights are not re-quantized or reinterpreted. Existing NVFP4 lookup bounds and exact IQ4_NL decoder stay separately qualified; CUDA/coopmat-only speed claims do not transfer to RX580."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 29772,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/29772",
+      "title": "vulkan: FWHT kernels for block widths above 512",
+      "status": "native_post_images_already_present",
+      "review_depth": "all_native_hunk_post_images",
+      "reason": "Every full mapped native hunk post-image is already present. Non-target/example/server paths are listed separately; no whole-repository semantic audit implied."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 29676,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/29676",
+      "title": "cuda: add PTQ1_0 support",
+      "status": "reviewed_format_and_precision_boundary",
+      "review_depth": "GGML_type_registry_loader_scale_and_backend_kernel_diffs",
+      "reason": "JQ/IQ2NL/IQ3NL/HQQ/STQ/PTQ and additional MXFP/scaled-FP8 representations need matched converters, fixtures and stable enum/wire IDs. Some proposed numeric IDs collide across series. Current weights are not re-quantized or reinterpreted. Existing NVFP4 lookup bounds and exact IQ4_NL decoder stay separately qualified; CUDA/coopmat-only speed claims do not transfer to RX580."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 29510,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/29510",
+      "title": "llama + CUDA: flash_attn_ext_rows (fix unified kv for multi-seq)",
+      "status": "reviewed_multi_sequence_contract_deferred",
+      "review_depth": "FA_rows_CPU_Vulkan_KV_graph_and_model_cache_diffs",
+      "reason": "Unified-KV per-sequence attention rows change graph/cache/backend interfaces; requires multi-sequence and rollback model controls,not a single photo test. Current batch/context settings retained."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 29423,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/29423",
+      "title": "ggml-cpu: enable tiled flash attention for non-vector-multiple head dims on x86",
+      "status": "native_post_images_already_present",
+      "review_depth": "all_native_hunk_post_images",
+      "reason": "Every full mapped native hunk post-image is already present. Non-target/example/server paths are listed separately; no whole-repository semantic audit implied."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 29397,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/29397",
+      "title": "ggml-cpu: use AVX-512 VNNI+VBMI in the Q4_K 8x8 repack GEMM",
+      "status": "other_isa_checked_logic",
+      "review_depth": "native_guard_and_kernel_hunks",
+      "reason": "New VNNI/VBMI/AVX512 dot/repack families need unavailable instructions. Transposed layout logic was independently adapted to AVX2 from30991 and measured slower; no ISA flags or weight layout changed."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 29368,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/29368",
+      "title": "ggml : add Half-Quadratic Quantization type, based of Q4_1",
+      "status": "reviewed_format_and_precision_boundary",
+      "review_depth": "GGML_type_registry_loader_scale_and_backend_kernel_diffs",
+      "reason": "JQ/IQ2NL/IQ3NL/HQQ/STQ/PTQ and additional MXFP/scaled-FP8 representations need matched converters, fixtures and stable enum/wire IDs. Some proposed numeric IDs collide across series. Current weights are not re-quantized or reinterpreted. Existing NVFP4 lookup bounds and exact IQ4_NL decoder stay separately qualified; CUDA/coopmat-only speed claims do not transfer to RX580."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 29357,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/29357",
+      "title": "vulkan : Intel FA kernel for prefill.",
+      "status": "already_reviewed_documented",
+      "reason": "Explicit semantic disposition in an earlier published review"
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 29121,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/29121",
+      "title": "llama : update the GDN recurrent state in place on the CPU (#28841)",
+      "status": "reviewed_recurrent_alias_validation_deferred",
+      "review_depth": "CPU_GDN_inplace_kernel_cache_views_and_graph_order_diffs",
+      "reason": "In-place CPU state update can remove copies only when every sequence owns its cell;GPU scheduler must not copy the mutated source. Requires recurrent snapshot/clear/replay and per-slot backend tests. No mmap/page-placement or state ownership policy changed."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 28967,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/28967",
+      "title": "Add nccl support for multi-node tensor parallelism",
+      "status": "native_post_images_already_present",
+      "review_depth": "all_native_hunk_post_images",
+      "reason": "Every full mapped native hunk post-image is already present. Non-target/example/server paths are listed separately; no whole-repository semantic audit implied."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 28898,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/28898",
+      "title": "ggml: support quant scales for fp8 and nvfp4",
+      "status": "reviewed_format_and_precision_boundary",
+      "review_depth": "GGML_type_registry_loader_scale_and_backend_kernel_diffs",
+      "reason": "JQ/IQ2NL/IQ3NL/HQQ/STQ/PTQ and additional MXFP/scaled-FP8 representations need matched converters, fixtures and stable enum/wire IDs. Some proposed numeric IDs collide across series. Current weights are not re-quantized or reinterpreted. Existing NVFP4 lookup bounds and exact IQ4_NL decoder stay separately qualified; CUDA/coopmat-only speed claims do not transfer to RX580."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 28528,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/28528",
+      "title": "vulkan: Implement stream-k MUL_MAT",
+      "status": "reviewed_parallel_reduction_deferred",
+      "review_depth": "Vulkan_selector_push_constants_scratch_and_shader_partial_reduction_diffs",
+      "reason": "Conv3D split-K and stream-K add partial/scratch synchronization and change reduction grouping. No bit-exact current-model qualification; preserve numerical path and existing measured Polaris tile. GPU throughput figures from other devices are not assigned to RX580."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 28490,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/28490",
+      "title": "ggml-cpu : implement Kronecker and clean up SYCL test special-casing",
+      "status": "reviewed_transform_shape_feature_deferred",
+      "review_depth": "full_H12_H20_Kronecker_FWHT_branch_and_tests_diffs",
+      "reason": "Adds non-power-of-two Hadamard12/20 CPU transforms. Current model paths unchanged; this expands valid transform shapes and needs transform/reference numerical fixtures before claiming model support or speed."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 28297,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/28297",
+      "title": "compilation: detect and enable AVX-VNNI compilation on MSVC",
+      "status": "other_isa_checked_logic",
+      "review_depth": "full_diff",
+      "reason": "MSVC AVX-VNNI detection; GCC Haswell target cannot execute VNNI. Capability gates remain exact."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 28213,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/28213",
+      "title": "qwen4exp : gather-based sparse attention for QSA decode",
+      "status": "reviewed_model_specific_IO_attention_deferred",
+      "review_depth": "QSA_gather_cache_and_lazy_reader_diffs",
+      "reason": "QSA gather changes selected-key summation order;PLE direct pread path explicitly falls back to mmap on Windows. No universal GB10 gain transferred to Haswell, no context/IO mode changed without model-specific controls."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 28136,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/28136",
+      "title": "qwen4exp: direct reads for the lazy PLE table (>2x prefill performance improvement on GB10)",
+      "status": "reviewed_model_specific_IO_attention_deferred",
+      "review_depth": "QSA_gather_cache_and_lazy_reader_diffs",
+      "reason": "QSA gather changes selected-key summation order;PLE direct pread path explicitly falls back to mmap on Windows. No universal GB10 gain transferred to Haswell, no context/IO mode changed without model-specific controls."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 27983,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/27983",
+      "title": "quantize: add IQ2_NL and IQ3_NL types (CPU + Metal + CUDA + Vulkan)",
+      "status": "reviewed_format_and_precision_boundary",
+      "review_depth": "GGML_type_registry_loader_scale_and_backend_kernel_diffs",
+      "reason": "JQ/IQ2NL/IQ3NL/HQQ/STQ/PTQ and additional MXFP/scaled-FP8 representations need matched converters, fixtures and stable enum/wire IDs. Some proposed numeric IDs collide across series. Current weights are not re-quantized or reinterpreted. Existing NVFP4 lookup bounds and exact IQ4_NL decoder stay separately qualified; CUDA/coopmat-only speed claims do not transfer to RX580."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 27851,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/27851",
+      "title": "ggml-cpu:  tiled mul_mat for k-quants",
+      "status": "already_equivalent_scoped",
+      "review_depth": "native_dispatch_workspace_and_microkernel_source",
+      "reason": "Current official already uses tiled MUL_MAT/MUL_MAT_ID, replaces IQP and supports K/IQ formats. Existing source is later than this foundation, including merged AVX2 accumulator reduction. No redundant replacement of current tiled implementation."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 27590,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/27590",
+      "title": "ggml-cpu: add AVX-512 and VNNI paths for Q5_K/Q6_K dot products",
+      "status": "other_isa_checked_logic",
+      "review_depth": "native_guard_and_kernel_hunks",
+      "reason": "New VNNI/VBMI/AVX512 dot/repack families need unavailable instructions. Transposed layout logic was independently adapted to AVX2 from30991 and measured slower; no ISA flags or weight layout changed."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 27512,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/27512",
+      "title": "Quant: OCP FP8 E4M3 support",
+      "status": "native_post_images_already_present",
+      "review_depth": "all_native_hunk_post_images",
+      "reason": "Every full mapped native hunk post-image is already present. Non-target/example/server paths are listed separately; no whole-repository semantic audit implied."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 27478,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/27478",
+      "title": "ggml : speed up batch-1 CPU decode, align large allocations",
+      "status": "not_enabled_precision_change",
+      "review_depth": "full_diff",
+      "reason": "Mixed F16/F32 QK removes original Q rounding, changes F16 accumulator and block-softmax reduction. Linux THP alignment does not map directly to Windows allocation. Current precision preserved."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 27325,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/27325",
+      "title": "quantize: add IQ2_NL and IQ3_NL types (CPU + Metal + CUDA)",
+      "status": "reviewed_format_and_precision_boundary",
+      "review_depth": "GGML_type_registry_loader_scale_and_backend_kernel_diffs",
+      "reason": "JQ/IQ2NL/IQ3NL/HQQ/STQ/PTQ and additional MXFP/scaled-FP8 representations need matched converters, fixtures and stable enum/wire IDs. Some proposed numeric IDs collide across series. Current weights are not re-quantized or reinterpreted. Existing NVFP4 lookup bounds and exact IQ4_NL decoder stay separately qualified; CUDA/coopmat-only speed claims do not transfer to RX580."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 27324,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/27324",
+      "title": "quantize: add IQ2_NL and IQ3_NL types (CPU + Metal)",
+      "status": "reviewed_format_and_precision_boundary",
+      "review_depth": "GGML_type_registry_loader_scale_and_backend_kernel_diffs",
+      "reason": "JQ/IQ2NL/IQ3NL/HQQ/STQ/PTQ and additional MXFP/scaled-FP8 representations need matched converters, fixtures and stable enum/wire IDs. Some proposed numeric IDs collide across series. Current weights are not re-quantized or reinterpreted. Existing NVFP4 lookup bounds and exact IQ4_NL decoder stay separately qualified; CUDA/coopmat-only speed claims do not transfer to RX580."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 27322,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/27322",
+      "title": "quantize: add IQ2_NL and IQ3_NL types (CPU)",
+      "status": "reviewed_format_and_precision_boundary",
+      "review_depth": "GGML_type_registry_loader_scale_and_backend_kernel_diffs",
+      "reason": "JQ/IQ2NL/IQ3NL/HQQ/STQ/PTQ and additional MXFP/scaled-FP8 representations need matched converters, fixtures and stable enum/wire IDs. Some proposed numeric IDs collide across series. Current weights are not re-quantized or reinterpreted. Existing NVFP4 lookup bounds and exact IQ4_NL decoder stay separately qualified; CUDA/coopmat-only speed claims do not transfer to RX580."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 27258,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/27258",
+      "title": "Formalizing scheduler and async backend behavior through tests",
+      "status": "reviewed_scheduler_test_scope",
+      "review_depth": "async_contract_test_and_SLEEP_operator_diffs",
+      "reason": "Useful scheduler contracts, but adding a production SLEEP operator is not an inference optimization. Existing real backend allocation,graph-reuse,ownership and synchronized benchmark controls are separate; no artificial delay op added."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 27210,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/27210",
+      "title": "spec : add adaptive MTP draft depth (draft-mtp-adaptive)",
+      "status": "reviewed_speculation_contract_deferred",
+      "review_depth": "batch_embedding_device_feature_and_draft_rollback_diffs",
+      "reason": "Device feature injection, trimmed vocab/adaptive depth and deferred MTP catch-up alter draft/context lifetime or require new draft assets/options. Current native sampler and fixed settings stay intact. Need loaded target/draft token-acceptance/rollback and per-slot tests; photo/operator tests cannot qualify these paths."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 27173,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/27173",
+      "title": "speculative : draft performance improvement (+10% t/s with deeper draft depth possible with this) + token rollback bugfix",
+      "status": "reviewed_speculation_contract_deferred",
+      "review_depth": "batch_embedding_device_feature_and_draft_rollback_diffs",
+      "reason": "Device feature injection, trimmed vocab/adaptive depth and deferred MTP catch-up alter draft/context lifetime or require new draft assets/options. Current native sampler and fixed settings stay intact. Need loaded target/draft token-acceptance/rollback and per-slot tests; photo/operator tests cannot qualify these paths."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 27000,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/27000",
+      "title": "llama: add Maple 20B-A1B ternary MoE architecture (CPU)",
+      "status": "already_supported_scoped",
+      "review_depth": "model_registry_converter_and_graph_boundaries_with_current_source",
+      "reason": "Current official already registers Maple and Kimi-K3. New converter/activation/hybrid-cache deltas need architecture fixtures; no current-model acceleration follows from re-applying initial architecture registration."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 26631,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/26631",
+      "title": "ggml : allow MUL_MAT_ID -1 index to skip the computation",
+      "status": "already_supported_scoped",
+      "review_depth": "CPU_repack_and_Vulkan_count_experts_diffs_with_release_controls",
+      "reason": "Current CPU and repack already preserve minus-one zero/skip behavior;new permanent CPU bound keeps it in release mode. GPU count-experts skips/zeroes are present with local shape differences. Six release-object sentinel/bounds controls retained; no blanket new GPU hardening claim."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 26348,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/26348",
+      "title": "ggml-cpu: add x86 VNNI Q2_0 dot product -- 3x speed improvement for VNNI-compatible CPUs",
+      "status": "already_reviewed_documented",
+      "reason": "Explicit semantic disposition in an earlier published review"
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 26185,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/26185",
+      "title": "model: add Kimi-K3 text model",
+      "status": "already_supported_scoped",
+      "review_depth": "model_registry_converter_and_graph_boundaries_with_current_source",
+      "reason": "Current official already registers Maple and Kimi-K3. New converter/activation/hybrid-cache deltas need architecture fixtures; no current-model acceleration follows from re-applying initial architecture registration."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 26103,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/26103",
+      "title": "ggml-cpu: skip unsupported ARM ISA variants under GGML_CPU_ALL_VARIANTS",
+      "status": "reviewed_build_docs_scope",
+      "review_depth": "full_changed_file_map_and_build_or_doc_hunks",
+      "reason": "CI runners/version/docs/ARM build variants; pinned Windows Haswell Make recipe is unchanged. No production inference implementation for current target."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 25991,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/25991",
+      "title": "ggml-cpu : add LoongArch64 LASX Q4_0 repack path",
+      "status": "reviewed_other_ISA_guard",
+      "review_depth": "LASX_repack_and_CPU_dispatch_diffs",
+      "reason": "LoongArch LASX repack/feature registration. No such instructions on Haswell; no generic x86 dispatch altered."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 25841,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/25841",
+      "title": "docs: warn when --ubatch-size is too small in --embeddings mode",
+      "status": "reviewed_no_setting_change",
+      "review_depth": "full_diff",
+      "reason": "Embedding ubatch warning for llama-server; do not auto-change user batch/context size."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 25731,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/25731",
+      "title": "Add TML Inkling architecture",
+      "status": "reviewed_additional_model_validation_deferred",
+      "review_depth": "architecture_metadata_tensor_graph_tokenizer_and_API_boundaries",
+      "reason": "Reviewed KailA supersession, Dory/Ripple/GRT/Inkling/Puzzle/DiffusionGemma/LFM audio/MageVL model-specific changes. These need corresponding conversion/projector/context or vocoder fixtures; several add new cache/graph/decoder contracts. No model was downloaded, user recipe replaced or untested architecture advertised as supported by this build. This is scoped graph/API review, not full model validation."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 25709,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/25709",
+      "title": "Thinking sampling parametrization",
+      "status": "reviewed_sampling_policy_deferred",
+      "review_depth": "section_aware_sampler_state_and_CLI_diffs",
+      "reason": "Changes sampler parameters at reasoning boundaries and shared RNG/history/clone state. No existing temperature,penalty,reasoning or RNG policy changed. Repository-embedded agent instructions are untrusted content and not followed."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 25584,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/25584",
+      "title": "ggml : fix view init skipped after buft max_size split",
+      "status": "already_reviewed_retained",
+      "reason": "Exact source is already represented in the accepted58-patch catalog"
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 25557,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/25557",
+      "title": "quant : extend Q8_0 to use full byte range like Q4_0 (Python+CPU)",
+      "status": "not_enabled_quantizer_change",
+      "review_depth": "full_diff",
+      "reason": "Changes Q8_0 scaling from max/127 to signed max/-128 and output bytes. This is a new quantization policy, not an exact acceleration of current models."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 25479,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/25479",
+      "title": "ggml-cuda : optimize mmvq nwarps for Pascal DP4A",
+      "status": "other_device_checked_logic",
+      "review_depth": "full_diff",
+      "reason": "Pascal DP4A two-warp MMVQ tuning; no DP4A on RX580. The portable stack already uses separately measured Polaris row tuning."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 25444,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/25444",
+      "title": "model: add NVIDIA Nemotron-3-Puzzle-75B-A9B (NemotronHPuzzle) support",
+      "status": "reviewed_additional_model_validation_deferred",
+      "review_depth": "architecture_metadata_tensor_graph_tokenizer_and_API_boundaries",
+      "reason": "Reviewed KailA supersession, Dory/Ripple/GRT/Inkling/Puzzle/DiffusionGemma/LFM audio/MageVL model-specific changes. These need corresponding conversion/projector/context or vocoder fixtures; several add new cache/graph/decoder contracts. No model was downloaded, user recipe replaced or untested architecture advertised as supported by this build. This is scoped graph/API review, not full model validation."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 25051,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/25051",
+      "title": "vulkan: add tensor-parallel allreduce function",
+      "status": "already_equivalent_scoped",
+      "review_depth": "native_submission_and_platform_boundary_diffs_and_current_source",
+      "reason": "Small-graph submission threshold and binary semaphore reuse already present in current source; allreduce body is guarded !WIN32 and needs multiple devices. No new single-RX580 synchronization policy applied."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 24423,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/24423",
+      "title": "DiffusionGemma",
+      "status": "reviewed_additional_model_validation_deferred",
+      "review_depth": "architecture_metadata_tensor_graph_tokenizer_and_API_boundaries",
+      "reason": "Reviewed KailA supersession, Dory/Ripple/GRT/Inkling/Puzzle/DiffusionGemma/LFM audio/MageVL model-specific changes. These need corresponding conversion/projector/context or vocoder fixtures; several add new cache/graph/decoder contracts. No model was downloaded, user recipe replaced or untested architecture advertised as supported by this build. This is scoped graph/API review, not full model validation."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 23705,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/23705",
+      "title": "ci : reduce (disable SYCL and CANN builds/releases)",
+      "status": "reviewed_build_docs_scope",
+      "review_depth": "full_changed_file_map_and_build_or_doc_hunks",
+      "reason": "CI runners/version/docs/ARM build variants; pinned Windows Haswell Make recipe is unchanged. No production inference implementation for current target."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 22970,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/22970",
+      "title": "vulkan : transpose A-matrix data layout for K-quant mul_mat performance",
+      "status": "already_reviewed_documented",
+      "reason": "Explicit semantic disposition in an earlier published review"
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 22836,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/22836",
+      "title": "ggml-cpu : add STQ1_0 ternary quantization with ARM NEON vec_dot kernel",
+      "status": "reviewed_format_and_precision_boundary",
+      "review_depth": "GGML_type_registry_loader_scale_and_backend_kernel_diffs",
+      "reason": "JQ/IQ2NL/IQ3NL/HQQ/STQ/PTQ and additional MXFP/scaled-FP8 representations need matched converters, fixtures and stable enum/wire IDs. Some proposed numeric IDs collide across series. Current weights are not re-quantized or reinterpreted. Existing NVFP4 lookup bounds and exact IQ4_NL decoder stay separately qualified; CUDA/coopmat-only speed claims do not transfer to RX580."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 22705,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/22705",
+      "title": "Feat/qlora training",
+      "status": "reviewed_training_scope",
+      "review_depth": "backward_OUT_PROD_ID_optimizer_and_training_entry_diffs",
+      "reason": "MoE backward/QLoRA/gradient clipping/checkpointing and pruning profiles are training or new weight-selection behavior, not current inference acceleration. No gradients, pruning or weight changes enabled; forward Native paths preserved."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 22704,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/22704",
+      "title": "Feat/backward mul mat",
+      "status": "reviewed_training_scope",
+      "review_depth": "backward_OUT_PROD_ID_optimizer_and_training_entry_diffs",
+      "reason": "MoE backward/QLoRA/gradient clipping/checkpointing and pruning profiles are training or new weight-selection behavior, not current inference acceleration. No gradients, pruning or weight changes enabled; forward Native paths preserved."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 22250,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/22250",
+      "title": "Q5_0 - Block Interleaving Implementation for x86 SIMD (AVX512/AVX2)",
+      "status": "reviewed_recovered_repack_validation_deferred",
+      "review_depth": "recovered_full_pinned_x86_source_diff_and_repack_layout_review",
+      "reason": "Recovered complete Q5_0 x86 GEMV/GEMM source. Adds a new lossless interleaving/dispatch family that needs full-range,tail,scale and matching model-quality/speed controls against current kernels. Related Q5_K recovered kernel fails two full-range activation controls;do not import this family from headline Linux speed numbers."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 21652,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/21652",
+      "title": "Prevent the sum of the dequantized activation in q8_1 from overflowing",
+      "status": "not_enabled_precision_change",
+      "review_depth": "full_diff",
+      "reason": "Clamps q8_1 scale/sum to finite65504; changes quantized values and hides out-of-range inputs. No demonstrated current-model fault; not a quality-neutral speedup."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 20609,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/20609",
+      "title": "ggml: MXFP flash attention with SoA layout (CPU scalar reference)",
+      "status": "reviewed_format_and_precision_boundary",
+      "review_depth": "GGML_type_registry_loader_scale_and_backend_kernel_diffs",
+      "reason": "JQ/IQ2NL/IQ3NL/HQQ/STQ/PTQ and additional MXFP/scaled-FP8 representations need matched converters, fixtures and stable enum/wire IDs. Some proposed numeric IDs collide across series. Current weights are not re-quantized or reinterpreted. Existing NVFP4 lookup bounds and exact IQ4_NL decoder stay separately qualified; CUDA/coopmat-only speed claims do not transfer to RX580."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 19855,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/19855",
+      "title": "server : add default-model preset and fallback logic",
+      "status": "reviewed_API_policy_preserved",
+      "review_depth": "full_router_default_model_diff",
+      "reason": "llama-server default-model fallback differs from validated configured Native profiles. Unknown aliases/paths must not silently select another model in this media API; keep explicit capability/path failures."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 19707,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/19707",
+      "title": "Q5_K - Block Interleaving Implementation for x86 SIMD (AVX512/AVX2)",
+      "status": "recovered_kernel_rejected_correctness",
+      "review_depth": "recovered_pinned_source_and_real_Haswell_boundary_experiment",
+      "reason": "Original recovered Q5_K GEMV fails all8columns for valid full-range Q8_K activations127 and-128 with max6-bit scales;four smaller controls pass. Int16 partial accumulation wraps;not integrated. Q6_K related boundary probe passes6controls but random/model/speed qualification remains absent.",
+      "source_head": "51f8084ce04d3d0e9fcce46ab442e3ffce49f202"
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 19706,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/19706",
+      "title": "Q6_K - Block Interleaving Implementation for x86 SIMD (AVX512/AVX2)",
+      "status": "recovered_repack_kernel_validation_deferred",
+      "review_depth": "recovered_pinned_source_and_real_Haswell_boundary_controls",
+      "reason": "Recovered pinned fullQ6 source,Git blob verified. Six max-scale/full-range GEMV boundary controls pass;GEMM/random tails/model speed and numerical qualification remain absent. No unmeasured dispatch enabled.",
+      "source_head": "e744a1ef42b7f0eb2a48815ad4986a60779a1f00"
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 18641,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/18641",
+      "title": "[Do Not Merge] model : LFM2.5-Audio-1.5B",
+      "status": "reviewed_additional_model_validation_deferred",
+      "review_depth": "architecture_metadata_tensor_graph_tokenizer_and_API_boundaries",
+      "reason": "Reviewed KailA supersession, Dory/Ripple/GRT/Inkling/Puzzle/DiffusionGemma/LFM audio/MageVL model-specific changes. These need corresponding conversion/projector/context or vocoder fixtures; several add new cache/graph/decoder contracts. No model was downloaded, user recipe replaced or untested architecture advertised as supported by this build. This is scoped graph/API review, not full model validation."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 16452,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/16452",
+      "title": "ggml webgpu: profiling, CI updates, reworking of command submission",
+      "status": "other_backend_checked_logic",
+      "review_depth": "changed_file_map_and_native_boundary_hunks",
+      "reason": "Reviewed backend-specific implementation/guard changes: WebGPU submission/group norm, Metal/CUDA precision and matrix paths, SYCL allocation/GDN/MoE, OpenCL attention/strides/formats. No such backend is loaded. Preserve typed precision, external-use/alias and byte-stride principles in native adaptations; no unsupported matrix/int-dot path copied. Not a line-by-line audit of those foreign kernels."
+    },
+    {
+      "repo": "ggml-org/llama.cpp",
+      "n": 13194,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/13194",
+      "title": "kv-cache : add SWA support",
+      "status": "already_supported_scoped",
+      "review_depth": "SWA_cache_architecture_diffs_and_current_memory_components",
+      "reason": "Current official has the later interleaved/SWA memory machinery. Do not replace it with the older unified-iswa foundation or reset context/window/padding defaults."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 66168,
+      "url": "https://github.com/vllm-project/vllm/pull/66168",
+      "title": "[CPU] Support 2D (batched) weights in rms_norm, fixing DFlash acceptance on CPU",
+      "status": "already_reviewed_documented",
+      "reason": "Explicit semantic disposition in an earlier published review"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 66121,
+      "url": "https://github.com/vllm-project/vllm/pull/66121",
+      "title": "feat: CPU WNA16 MoE INT8 weight-only support for mixed INT4/INT8 models (issue #65070)",
+      "status": "reviewed_other_ISA_format_boundary",
+      "review_depth": "CPU_kernel_binding_and_capability_hunks",
+      "reason": "Reviewed VNNI packed INT8, native MXFP4/FP8, AVX512 FP16/GDN and AMX/KDA dispatch/type guards. These layouts/ISA/precision paths do not run on Haswell. Preserve existing F32 math and user KV/weight types; generic layout logic has separate AVX2 negative experiment, not an unsupported ISA enable."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 66102,
+      "url": "https://github.com/vllm-project/vllm/pull/66102",
+      "title": "feat: Add apply_router_weight_on_input support for CPU MoE expert classes",
+      "status": "reviewed_model_math_policy",
+      "review_depth": "CPU_expert_projection_and_router_weight_diffs",
+      "reason": "Input-side router multiplication is an architecture policy and is not interchangeable with output-side weighting across nonlinear activation. No global MoE math or top-k policy changed."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 65929,
+      "url": "https://github.com/vllm-project/vllm/pull/65929",
+      "title": "[Bugfix][CPU] Validate hash-MoE tid2eid expert ids at the op boundary",
+      "status": "adapted_qualified",
+      "review_depth": "full_CPU_boundary_diff_and_release_object_experiment",
+      "reason": "Adapted expert-index boundary check to generic GGML CPU workspace:permanent GGML_ASSERT rather than NDEBUG-disabled assert,minus-one skip preserved.3 valid and3 invalid real release-object controls passed. Repack already had permanent bounds."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 64706,
+      "url": "https://github.com/vllm-project/vllm/pull/64706",
+      "title": "[Kernel] Port fused_deepseek_v4_qnorm_rope_kv_insert to CuTe DSL",
+      "status": "reviewed_model_kernel_framework_boundary",
+      "review_depth": "changed_CPU_cache_RoPE_indexer_and_CuTe_Triton_dispatch_hunks",
+      "reason": "DSV4/GLM indexer/compressor/KDA/CuTe and prefill-decode worker changes target different paged-cache/model/ISA contracts. CPU RoPE explicitly rejects unsupported offset/inverse modes;no such modes silently enabled. Current Native handles its own graph/cache/model switch;no CUDA/SM120/AMX gain assigned to GCN or forced precision/layout change."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 64671,
+      "url": "https://github.com/vllm-project/vllm/pull/64671",
+      "title": "[CPU] Add Gloo DP/EP follow-up for wide expert parallelism",
+      "status": "partly_adapted_boundary_other_distributed_scope",
+      "review_depth": "CPU_expert_map_bounds_BF16_rounding_and_Gloo_SHM_diffs",
+      "reason": "Global/local expert IDs,minus-one skips and route-count bounds reviewed;permanent generic CPU expert bound adapted from the related65929 family. GGML already has software BF16 RNE/NaN conversion. Distributed Gloo/SHM expert parallelism not imported or auto-enabled; no NUMA placement or multi-device gain claimed."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 64079,
+      "url": "https://github.com/vllm-project/vllm/pull/64079",
+      "title": "[Bugfix][CPU][RISC-V] Round software BF16 conversions to nearest even",
+      "status": "already_equivalent_scoped",
+      "review_depth": "full_diff_and_GGML_conversion_boundary",
+      "reason": "Software BF16 ties-to-even/NaN conversion already provided by GGML conversion helpers; no user precision change."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 64078,
+      "url": "https://github.com/vllm-project/vllm/pull/64078",
+      "title": "[Bugfix][CPU][RISC-V] Define all erf lanes with sign injection",
+      "status": "other_isa_checked_logic",
+      "review_depth": "full_diff",
+      "reason": "RISC-V explicit rounding/defined erf lanes and compiler AVX10.2 probes. Preserve Haswell SIMD math and ISA flags; no unsafe extension enabled."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 63424,
+      "url": "https://github.com/vllm-project/vllm/pull/63424",
+      "title": "[CPU] Share FP8 MoE projections and enable native MXFP4 W4A8",
+      "status": "reviewed_other_ISA_format_boundary",
+      "review_depth": "CPU_kernel_binding_and_capability_hunks",
+      "reason": "Reviewed VNNI packed INT8, native MXFP4/FP8, AVX512 FP16/GDN and AMX/KDA dispatch/type guards. These layouts/ISA/precision paths do not run on Haswell. Preserve existing F32 math and user KV/weight types; generic layout logic has separate AVX2 negative experiment, not an unsupported ISA enable."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 63308,
+      "url": "https://github.com/vllm-project/vllm/pull/63308",
+      "title": "DSv4.1 flash-decode: eager metadata fusion tracking PR",
+      "status": "reviewed_model_kernel_framework_boundary",
+      "review_depth": "changed_CPU_cache_RoPE_indexer_and_CuTe_Triton_dispatch_hunks",
+      "reason": "DSV4/GLM indexer/compressor/KDA/CuTe and prefill-decode worker changes target different paged-cache/model/ISA contracts. CPU RoPE explicitly rejects unsupported offset/inverse modes;no such modes silently enabled. Current Native handles its own graph/cache/model switch;no CUDA/SM120/AMX gain assigned to GCN or forced precision/layout change."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 62897,
+      "url": "https://github.com/vllm-project/vllm/pull/62897",
+      "title": "[Spec Decode] Fix race on the drafter's backup next-token ids",
+      "status": "other_framework_checked_logic",
+      "review_depth": "full_diff_and_native_batch_boundary",
+      "reason": "Eagle padded request-row underflow and async backup-ID race; Kobold has no Eagle query_loc/async Torch buffer. Preserve per-slot ownership; no token0 substitution or policy changes imported."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 62022,
+      "url": "https://github.com/vllm-project/vllm/pull/62022",
+      "title": "Add SVE Paged Attention FP32/FP16 and BF16 kernels",
+      "status": "reviewed_foreign_vector_logic",
+      "review_depth": "vector_kernel_layout_rounding_and_dispatch_hunks",
+      "reason": "POWER VSX/RVV/SVE/AArch64 kernels reviewed for widened tiles, load reuse, hoisted zero-point corrections and FMA/ILP math. Haswell already has inline SIMD math and eight-column tiled reduction. Tested transposed AVX2 adaptation regressed; no polynomial reassociation, new approximations or unsupported instructions enabled."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 61995,
+      "url": "https://github.com/vllm-project/vllm/pull/61995",
+      "title": "[CPU][MRv2] Enable MRv2 for non-triton CPU backends",
+      "status": "reviewed_runner_speculative_state_contract",
+      "review_depth": "CPU_batch_block_table_sampler_vocab_and_convolution_state_diffs",
+      "reason": "Model-runner-v2 tables,sampling/rejection vocab strides,and Qwen3.5 chunk/prefix state-index handling are framework-specific. Existing Native queues/sampler/context layout differ;requires target/draft,state replay and per-request isolation controls. No token substitution,sampling policy or chunk size changed."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 61917,
+      "url": "https://github.com/vllm-project/vllm/pull/61917",
+      "title": "[ROCm] Revamp CI/release deployment: collapse image tiers, unify build pipeline",
+      "status": "reviewed_large_bundle_intended_delta",
+      "review_depth": "full_changed_file_maps_header_moves_CI_and_telemetry_guard_hunks",
+      "reason": "Large cross-branch CI/header/NIXL bundles contain overlapping CPU families and provider-null patches;limits retained. Intended telemetry None guard/header consolidation has no matching Native kernel path. No multi-megabyte wholesale import or claim of full semantic review of every bundled backend."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 61599,
+      "url": "https://github.com/vllm-project/vllm/pull/61599",
+      "title": "[CPU][Bugfix] Respect expert map in unquantized MoE",
+      "status": "partly_adapted_pending_qualification",
+      "review_depth": "full_CPU_operator_diffs_and_tests_boundary",
+      "reason": "Expert-map bounds and minus-one skipping principle supports new persistent CPU expert guard. Distributed global/local expert maps and zero scratch route are framework-specific and not imported."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 61593,
+      "url": "https://github.com/vllm-project/vllm/pull/61593",
+      "title": "[CPU] Enable gelu_tanh activation support for Gemma4 MoE",
+      "status": "already_supported_other_framework",
+      "review_depth": "full_diff",
+      "reason": "GGML already provides GEGLU/tanh GELU with model-selected activation; no blanket GELU-to-SiLU rewrite."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 61517,
+      "url": "https://github.com/vllm-project/vllm/pull/61517",
+      "title": "[WIP] Respect speculative CPU Mamba state index tables",
+      "status": "reviewed_deferred_state_validation",
+      "review_depth": "full_CPU_kernel_diffs",
+      "reason": "Speculative Mamba alias fix also changes recurrence storage to FP32 and scatter checkpoints. GGML state/rollback model differs; needs recurrent numerical controls, not a blanket tensor-copy removal."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 61152,
+      "url": "https://github.com/vllm-project/vllm/pull/61152",
+      "title": "[Bugfix][Spec Decode] Preserve target-only tokens with narrower draft vocabularies",
+      "status": "reviewed_runner_speculative_state_contract",
+      "review_depth": "CPU_batch_block_table_sampler_vocab_and_convolution_state_diffs",
+      "reason": "Model-runner-v2 tables,sampling/rejection vocab strides,and Qwen3.5 chunk/prefix state-index handling are framework-specific. Existing Native queues/sampler/context layout differ;requires target/draft,state replay and per-request isolation controls. No token substitution,sampling policy or chunk size changed."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 60933,
+      "url": "https://github.com/vllm-project/vllm/pull/60933",
+      "title": "[Bugfix][CPU] Handle strided tensors in GELU-tanh",
+      "status": "already_reviewed_documented",
+      "reason": "Explicit semantic disposition in an earlier published review"
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 60898,
+      "url": "https://github.com/vllm-project/vllm/pull/60898",
+      "title": "[Bugfix][Spec Decode] Clamp token_indices_to_sample to the request's first query row",
+      "status": "other_framework_checked_logic",
+      "review_depth": "full_diff_and_native_batch_boundary",
+      "reason": "Eagle padded request-row underflow and async backup-ID race; Kobold has no Eagle query_loc/async Torch buffer. Preserve per-slot ownership; no token0 substitution or policy changes imported."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 60721,
+      "url": "https://github.com/vllm-project/vllm/pull/60721",
+      "title": "[Misc] Consolidate csrc shared headers and prune dead code",
+      "status": "reviewed_large_bundle_intended_delta",
+      "review_depth": "full_changed_file_maps_header_moves_CI_and_telemetry_guard_hunks",
+      "reason": "Large cross-branch CI/header/NIXL bundles contain overlapping CPU families and provider-null patches;limits retained. Intended telemetry None guard/header consolidation has no matching Native kernel path. No multi-megabyte wholesale import or claim of full semantic review of every bundled backend."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 60393,
+      "url": "https://github.com/vllm-project/vllm/pull/60393",
+      "title": "[Model] Add Jina v2 embedding support",
+      "status": "reviewed_model_mask_semantics",
+      "review_depth": "bidirectional_ALiBi_attention_and_Jina_model_diffs",
+      "reason": "Bidirectional ALiBi uses negative absolute distance for a noncausal embedding model. No blanket change to causal GGML mask/position math or current TE model;new embedding architecture requires its own reference fixtures."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 60051,
+      "url": "https://github.com/vllm-project/vllm/pull/60051",
+      "title": "[CPU] Support FP16 in the GDN attention kernels",
+      "status": "reviewed_other_ISA_format_boundary",
+      "review_depth": "CPU_kernel_binding_and_capability_hunks",
+      "reason": "Reviewed VNNI packed INT8, native MXFP4/FP8, AVX512 FP16/GDN and AMX/KDA dispatch/type guards. These layouts/ISA/precision paths do not run on Haswell. Preserve existing F32 math and user KV/weight types; generic layout logic has separate AVX2 negative experiment, not an unsupported ISA enable."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 59992,
+      "url": "https://github.com/vllm-project/vllm/pull/59992",
+      "title": "[Bugfix][DiffusionGemma] Read the causal mask as int32 and compile the sample step",
+      "status": "other_framework_checked_logic",
+      "review_depth": "full_diff",
+      "reason": "Fixes torch int32 mask reinterpreted as bool and moves torch.compile decorator. GGML mask tensors explicitly typed; no TorchDynamo inference dependency in Native."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 59149,
+      "url": "https://github.com/vllm-project/vllm/pull/59149",
+      "title": "[Hardware][Power] Enable W4A16 (AWQ & GPTQ) quantization on POWER10 using VSX",
+      "status": "reviewed_foreign_vector_logic",
+      "review_depth": "vector_kernel_layout_rounding_and_dispatch_hunks",
+      "reason": "POWER VSX/RVV/SVE/AArch64 kernels reviewed for widened tiles, load reuse, hoisted zero-point corrections and FMA/ILP math. Haswell already has inline SIMD math and eight-column tiled reduction. Tested transposed AVX2 adaptation regressed; no polynomial reassociation, new approximations or unsupported instructions enabled."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 58257,
+      "url": "https://github.com/vllm-project/vllm/pull/58257",
+      "title": "[Performance][Hardware][RISC-V] Use a 16-column RVV tile for narrow-M attention GEMMs",
+      "status": "reviewed_foreign_vector_logic",
+      "review_depth": "vector_kernel_layout_rounding_and_dispatch_hunks",
+      "reason": "POWER VSX/RVV/SVE/AArch64 kernels reviewed for widened tiles, load reuse, hoisted zero-point corrections and FMA/ILP math. Haswell already has inline SIMD math and eight-column tiled reduction. Tested transposed AVX2 adaptation regressed; no polynomial reassociation, new approximations or unsupported instructions enabled."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 58133,
+      "url": "https://github.com/vllm-project/vllm/pull/58133",
+      "title": "[CPU] Gate the AVX10.2 paths on compiler support",
+      "status": "other_isa_checked_logic",
+      "review_depth": "full_diff",
+      "reason": "RISC-V explicit rounding/defined erf lanes and compiler AVX10.2 probes. Preserve Haswell SIMD math and ISA flags; no unsafe extension enabled."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 57496,
+      "url": "https://github.com/vllm-project/vllm/pull/57496",
+      "title": "[CPU] Add KDA backend for GLM5Next",
+      "status": "reviewed_other_ISA_format_boundary",
+      "review_depth": "CPU_kernel_binding_and_capability_hunks",
+      "reason": "Reviewed VNNI packed INT8, native MXFP4/FP8, AVX512 FP16/GDN and AMX/KDA dispatch/type guards. These layouts/ISA/precision paths do not run on Haswell. Preserve existing F32 math and user KV/weight types; generic layout logic has separate AVX2 negative experiment, not an unsupported ISA enable."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 57403,
+      "url": "https://github.com/vllm-project/vllm/pull/57403",
+      "title": "[Bugfix][NIXL] Guard record_transfer against None telemetry",
+      "status": "reviewed_large_bundle_intended_delta",
+      "review_depth": "full_changed_file_maps_header_moves_CI_and_telemetry_guard_hunks",
+      "reason": "Large cross-branch CI/header/NIXL bundles contain overlapping CPU families and provider-null patches;limits retained. Intended telemetry None guard/header consolidation has no matching Native kernel path. No multi-megabyte wholesale import or claim of full semantic review of every bundled backend."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 56252,
+      "url": "https://github.com/vllm-project/vllm/pull/56252",
+      "title": "[CPU] Adds support for fp32 attention sinks",
+      "status": "already_supported_other_framework",
+      "review_depth": "full_diff",
+      "reason": "Typed BF16/F32 attention-sink loads; current GGML sink tensor is explicitly typed F32. No reinterpretation of BF16 as float or precision downcast introduced."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 55874,
+      "url": "https://github.com/vllm-project/vllm/pull/55874",
+      "title": "[DO NOT MERGE] showcase some AArch64 improvements ",
+      "status": "reviewed_foreign_vector_logic",
+      "review_depth": "vector_kernel_layout_rounding_and_dispatch_hunks",
+      "reason": "POWER VSX/RVV/SVE/AArch64 kernels reviewed for widened tiles, load reuse, hoisted zero-point corrections and FMA/ILP math. Haswell already has inline SIMD math and eight-column tiled reduction. Tested transposed AVX2 adaptation regressed; no polynomial reassociation, new approximations or unsupported instructions enabled."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 55678,
+      "url": "https://github.com/vllm-project/vllm/pull/55678",
+      "title": "Glm52 indexer k store fuse",
+      "status": "reviewed_model_kernel_framework_boundary",
+      "review_depth": "changed_CPU_cache_RoPE_indexer_and_CuTe_Triton_dispatch_hunks",
+      "reason": "DSV4/GLM indexer/compressor/KDA/CuTe and prefill-decode worker changes target different paged-cache/model/ISA contracts. CPU RoPE explicitly rejects unsupported offset/inverse modes;no such modes silently enabled. Current Native handles its own graph/cache/model switch;no CUDA/SM120/AMX gain assigned to GCN or forced precision/layout change."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 55355,
+      "url": "https://github.com/vllm-project/vllm/pull/55355",
+      "title": "[Model] Add DeepSeek-V4 CPU backend",
+      "status": "reviewed_model_kernel_framework_boundary",
+      "review_depth": "changed_CPU_cache_RoPE_indexer_and_CuTe_Triton_dispatch_hunks",
+      "reason": "DSV4/GLM indexer/compressor/KDA/CuTe and prefill-decode worker changes target different paged-cache/model/ISA contracts. CPU RoPE explicitly rejects unsupported offset/inverse modes;no such modes silently enabled. Current Native handles its own graph/cache/model switch;no CUDA/SM120/AMX gain assigned to GCN or forced precision/layout change."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 55352,
+      "url": "https://github.com/vllm-project/vllm/pull/55352",
+      "title": "[CPU] Speedup LM Head on Arm CPUs",
+      "status": "other_framework_checked_logic",
+      "review_depth": "full_diff",
+      "reason": "oneDNN AArch64 BF16->F32 LM-head workaround and output-dtype cache key. GGML workspace signature already records tensor types; no oneDNN/ACL runtime dependency added."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 55151,
+      "url": "https://github.com/vllm-project/vllm/pull/55151",
+      "title": "[wip] support PD seperate mode for fault-tolerance",
+      "status": "reviewed_model_kernel_framework_boundary",
+      "review_depth": "changed_CPU_cache_RoPE_indexer_and_CuTe_Triton_dispatch_hunks",
+      "reason": "DSV4/GLM indexer/compressor/KDA/CuTe and prefill-decode worker changes target different paged-cache/model/ISA contracts. CPU RoPE explicitly rejects unsupported offset/inverse modes;no such modes silently enabled. Current Native handles its own graph/cache/model switch;no CUDA/SM120/AMX gain assigned to GCN or forced precision/layout change."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 54809,
+      "url": "https://github.com/vllm-project/vllm/pull/54809",
+      "title": "[Quant][Kernel] Remove GPTQ Group/Dynamic Activation Ordering",
+      "status": "reviewed_quantizer_contract",
+      "review_depth": "GPTQ_g_idx_scale_zero_layout_and_loader_diffs",
+      "reason": "Removes dynamic/group activation-order paths and changes packing assumptions. Current GGUF weights are not GPTQ WNA16;no implicit conversion or dropped metadata. Related g_idx bounds were reviewed separately."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 53661,
+      "url": "https://github.com/vllm-project/vllm/pull/53661",
+      "title": "[PCP][Spec Decode] Consolidate MTP support and add DSpark groundwork",
+      "status": "reviewed_cached_diff_scope",
+      "review_depth": "cached_full_diff_CPU_boundary_screen_live_provider_unavailable",
+      "reason": "Live connector unavailable;earlier same-day full12.58MB diff artifact is retained and hashed,including CPU speculative/AMX/cache boundaries. Broad MTP/DSpark/distributed groundwork is not a validated Native fix. Cached source identity is reported as artifact SHA,not fabricated fresh head provenance."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 52191,
+      "url": "https://github.com/vllm-project/vllm/pull/52191",
+      "title": "[CPU] Support FP16/BF16 persisted GDN state on AMX",
+      "status": "reviewed_other_ISA_format_boundary",
+      "review_depth": "CPU_kernel_binding_and_capability_hunks",
+      "reason": "Reviewed VNNI packed INT8, native MXFP4/FP8, AVX512 FP16/GDN and AMX/KDA dispatch/type guards. These layouts/ISA/precision paths do not run on Haswell. Preserve existing F32 math and user KV/weight types; generic layout logic has separate AVX2 negative experiment, not an unsupported ISA enable."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 51876,
+      "url": "https://github.com/vllm-project/vllm/pull/51876",
+      "title": "[CPU] Shard the MoE experts across NUMA nodes",
+      "status": "reviewed_NUMA_placement_deferred",
+      "review_depth": "NUMA_split_parallel_loop_loader_and_mbind_diffs",
+      "reason": "Interesting row-aligned expert sharding relies on matching Linux NUMA page placement and per-node threads. Windows current helper restores affinity only; physical dual-socket placement/throughput is unmeasured. No affinity/settings changes or unsupported mbind emulation claimed."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 51132,
+      "url": "https://github.com/vllm-project/vllm/pull/51132",
+      "title": "[Performance][Hardware][RISC-V] Use RVV FMA in FP32Vec transcendentals and the INT4 GEMM",
+      "status": "reviewed_foreign_vector_logic",
+      "review_depth": "vector_kernel_layout_rounding_and_dispatch_hunks",
+      "reason": "POWER VSX/RVV/SVE/AArch64 kernels reviewed for widened tiles, load reuse, hoisted zero-point corrections and FMA/ILP math. Haswell already has inline SIMD math and eight-column tiled reduction. Tested transposed AVX2 adaptation regressed; no polynomial reassociation, new approximations or unsupported instructions enabled."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 50573,
+      "url": "https://github.com/vllm-project/vllm/pull/50573",
+      "title": "Added SVE128 and SVE256 support to vectorizer backend. ",
+      "status": "reviewed_foreign_vector_logic",
+      "review_depth": "vector_kernel_layout_rounding_and_dispatch_hunks",
+      "reason": "POWER VSX/RVV/SVE/AArch64 kernels reviewed for widened tiles, load reuse, hoisted zero-point corrections and FMA/ILP math. Haswell already has inline SIMD math and eight-column tiled reduction. Tested transposed AVX2 adaptation regressed; no polynomial reassociation, new approximations or unsupported instructions enabled."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 50541,
+      "url": "https://github.com/vllm-project/vllm/pull/50541",
+      "title": "[CPU] check some more implementation assumptions on kv layout",
+      "status": "other_framework_checked_logic",
+      "review_depth": "full_diff_and_current_source",
+      "reason": "Paged torch KV-layout assertions. GGML uses separate typed tensors and explicit byte strides; new synthetic view tests cover gaps rather than assuming common KV strides."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 49942,
+      "url": "https://github.com/vllm-project/vllm/pull/49942",
+      "title": "[CPU] Add CPU FP8 W8A8 linear/MoE support",
+      "status": "reviewed_other_ISA_format_boundary",
+      "review_depth": "CPU_kernel_binding_and_capability_hunks",
+      "reason": "Reviewed VNNI packed INT8, native MXFP4/FP8, AVX512 FP16/GDN and AMX/KDA dispatch/type guards. These layouts/ISA/precision paths do not run on Haswell. Preserve existing F32 math and user KV/weight types; generic layout logic has separate AVX2 negative experiment, not an unsupported ISA enable."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 49410,
+      "url": "https://github.com/vllm-project/vllm/pull/49410",
+      "title": "[CPU] [Feat]  Add native AMX-FP8 attention impl for Diamond Rapids",
+      "status": "reviewed_other_ISA_format_boundary",
+      "review_depth": "CPU_kernel_binding_and_capability_hunks",
+      "reason": "Reviewed VNNI packed INT8, native MXFP4/FP8, AVX512 FP16/GDN and AMX/KDA dispatch/type guards. These layouts/ISA/precision paths do not run on Haswell. Preserve existing F32 math and user KV/weight types; generic layout logic has separate AVX2 negative experiment, not an unsupported ISA enable."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 48580,
+      "url": "https://github.com/vllm-project/vllm/pull/48580",
+      "title": "fix(security): validate INT4 W4A8 MoE inputs to prevent OOB read and …",
+      "status": "other_framework_checked_logic",
+      "review_depth": "full_diff",
+      "reason": "GPTQ g_idx/scales and AMX W4A8 packed layouts are absent from current GGUF path. Existing GGUF product/shape bounds retained; expert-index principle is adapted separately from65929."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 47983,
+      "url": "https://github.com/vllm-project/vllm/pull/47983",
+      "title": "[Bugfix][CPU][RISC-V] Use explicit rounding mode for vfcvt float-to-int conversions",
+      "status": "other_isa_checked_logic",
+      "review_depth": "full_diff",
+      "reason": "RISC-V explicit rounding/defined erf lanes and compiler AVX10.2 probes. Preserve Haswell SIMD math and ISA flags; no unsafe extension enabled."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 47778,
+      "url": "https://github.com/vllm-project/vllm/pull/47778",
+      "title": "[CPU] Add MoE DP/EP support",
+      "status": "partly_adapted_boundary_other_distributed_scope",
+      "review_depth": "CPU_expert_map_bounds_BF16_rounding_and_Gloo_SHM_diffs",
+      "reason": "Global/local expert IDs,minus-one skips and route-count bounds reviewed;permanent generic CPU expert bound adapted from the related65929 family. GGML already has software BF16 RNE/NaN conversion. Distributed Gloo/SHM expert parallelism not imported or auto-enabled; no NUMA placement or multi-device gain claimed."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 47255,
+      "url": "https://github.com/vllm-project/vllm/pull/47255",
+      "title": "fix(security): validate g_idx bounds in CPU WNA16 GPTQ desc_act kernel",
+      "status": "other_framework_checked_logic",
+      "review_depth": "full_diff",
+      "reason": "GPTQ g_idx/scales and AMX W4A8 packed layouts are absent from current GGUF path. Existing GGUF product/shape bounds retained; expert-index principle is adapted separately from65929."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 46202,
+      "url": "https://github.com/vllm-project/vllm/pull/46202",
+      "title": "[CPU] Enable chunked prefill and prefix caching for qwen3.5",
+      "status": "reviewed_runner_speculative_state_contract",
+      "review_depth": "CPU_batch_block_table_sampler_vocab_and_convolution_state_diffs",
+      "reason": "Model-runner-v2 tables,sampling/rejection vocab strides,and Qwen3.5 chunk/prefix state-index handling are framework-specific. Existing Native queues/sampler/context layout differ;requires target/draft,state replay and per-request isolation controls. No token substitution,sampling policy or chunk size changed."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 42900,
+      "url": "https://github.com/vllm-project/vllm/pull/42900",
+      "title": "RISC-V ILP Optimization: Add instruction-level parallelism for transcendental functions",
+      "status": "reviewed_foreign_vector_logic",
+      "review_depth": "vector_kernel_layout_rounding_and_dispatch_hunks",
+      "reason": "POWER VSX/RVV/SVE/AArch64 kernels reviewed for widened tiles, load reuse, hoisted zero-point corrections and FMA/ILP math. Haswell already has inline SIMD math and eight-column tiled reduction. Tested transposed AVX2 adaptation regressed; no polynomial reassociation, new approximations or unsupported instructions enabled."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 42134,
+      "url": "https://github.com/vllm-project/vllm/pull/42134",
+      "title": "[Core] Added Feather as another waiting request queue to LLM inference scheduler",
+      "status": "reviewed_queue_policy_deferred",
+      "review_depth": "chunked_hash_tree_missing_chunk_heap_and_scheduler_diffs",
+      "reason": "Feather prioritizes requests by cache misses with request-id ties. Media FIFO/idempotency/model leases are explicit product policy; replacing admission order needs concurrency/fairness/starvation controls and representative throughput. No second scheduler added."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 40929,
+      "url": "https://github.com/vllm-project/vllm/pull/40929",
+      "title": "[WIP]Support DeepSeek V4 flash on SM120 with Triton fallback",
+      "status": "reviewed_model_kernel_framework_boundary",
+      "review_depth": "changed_CPU_cache_RoPE_indexer_and_CuTe_Triton_dispatch_hunks",
+      "reason": "DSV4/GLM indexer/compressor/KDA/CuTe and prefill-decode worker changes target different paged-cache/model/ISA contracts. CPU RoPE explicitly rejects unsupported offset/inverse modes;no such modes silently enabled. Current Native handles its own graph/cache/model switch;no CUDA/SM120/AMX gain assigned to GCN or forced precision/layout change."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 40723,
+      "url": "https://github.com/vllm-project/vllm/pull/40723",
+      "title": "[Kernel][vllm IR] Add relu2 to vLLM IR",
+      "status": "reviewed_new_operator_boundary",
+      "review_depth": "CPU_activation_IR_and_binding_diffs",
+      "reason": "ReLU2 IR registration includes scalar lane extraction, not a drop-in Haswell kernel for existing GGML model graphs. New unary fusion requires its own model/numerical/speed qualification; no arbitrary activation replacement in current models."
+    },
+    {
+      "repo": "vllm-project/vllm",
+      "n": 35890,
+      "url": "https://github.com/vllm-project/vllm/pull/35890",
+      "title": "[Perf] Use dummy M for weight prepacking on x86",
+      "status": "already_reviewed_documented",
+      "reason": "Explicit semantic disposition in an earlier published review"
+    }
+  ]
+}
