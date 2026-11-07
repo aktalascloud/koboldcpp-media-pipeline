@@ -1,0 +1,512 @@
+{
+  "date": "2026-11-07",
+  "scope": "Direct human-requested Normal736x1104 and separate4x2944x4416;no High. Three Normal/arm,first separate,warm median of two;two SR/arm,photo resident before every call. Same production Pipeline/private Native HTTP and shared Pillow13 media code,including PNG/base64/JSON encoding.",
+  "hardware": {
+    "cpu": [
+      {
+        "Name": "Intel(R) Xeon(R) CPU E5-2696 v3 @ 2.30GHz",
+        "NumberOfCores": 10,
+        "NumberOfLogicalProcessors": 20
+      }
+    ],
+    "gpu": [
+      {
+        "Name": "AMD Radeon RX 580X",
+        "DriverVersion": "31.0.14037.18001"
+      }
+    ]
+  },
+  "source_commit": "2d469743d30d09737633607071fe83dc2283bfec",
+  "patch_sha256": "af2cc7d11aa67c8ef5fe945f4bc49de141e33780a21897a795f0fe758aa7448c",
+  "executable_sha256": "ebe56a513028935093bb2390d233975fcb71a8fd702e880e4b9f9419f57792b4",
+  "retained_native_patches": 70,
+  "arm_order": [
+    "stock",
+    "previous",
+    "fork"
+  ],
+  "payload": {
+    "prompt": "Professional full-length photograph of an adult woman wearing a light silk dress and black high heels, standing beside a wooden wall clock in a warmly lit hotel lobby. Natural detailed eyes, realistic skin and fabric texture, both hands visible, sharp focus, neutral colors.",
+    "negative_prompt": "",
+    "seed": 424242,
+    "batch_size": 1,
+    "n_iter": 1,
+    "kcpp_quality": "normal"
+  },
+  "settings_sha256": {
+    "Helper.kcpps": "9427cbb9efa8defd1f363a9be14c6a24267521ae3a1d1a7bee120bf079fd1654",
+    "profiles\\music.kcpps": "89b27cb9fcf0783ace14ef3004a8558f04f68ec643aa52e2d65eaa8aba5ec33e",
+    "profiles\\photo-normal.kcpps": "7dcd9443f96fe1f6141524587a1454e6a8dd0b42ca1ba673259f06fad43163ec",
+    "profiles\\photo-quality.kcpps": "ce1e44bfece9128eb49db39b038fd735bcb66f7a5d8c9d36f9d4f45d7209733a",
+    "profiles\\video.kcpps": "bf15115402c68882d29b308c6c92b02e4efdf95265731d9368bb2c7beeadb2f8",
+    "runtime\\native-environment.json": "cfee531f14d40e8a76140363ada05d6a1bf1b8598b38b803f0c9ce0f1b1cf0a2"
+  },
+  "stock_provenance": {
+    "url": "https://github.com/LostRuins/koboldcpp/releases/download/rolling/koboldcpp-nocuda.exe",
+    "asset_updated_at": "2026-11-03T16:45:50Z",
+    "bytes": 90693664,
+    "sha256": "db00fc384476e328ed613ea767a2df12900e7fba327fcefcb271e0b0df717024",
+    "checked": "2026-11-07",
+    "reported_version": "1.125",
+    "source_identity_limit": "No embedded exact source receipt. Latest available official rolling binary,not an identically compiled2d4697 control. Differences include upstream/compiler/fork code."
+  },
+  "previous_provenance": {
+    "sha256": "efddce0e7f8518d735c809cbf925e3718786dddd6221da30eb9bc96107eaaca7",
+    "official_source": "2d469743d30d09737633607071fe83dc2283bfec",
+    "retained_native_patches": 65
+  },
+  "before": {
+    "executable_sha256": "db00fc384476e328ed613ea767a2df12900e7fba327fcefcb271e0b0df717024",
+    "first_normal": {
+      "repeat": 0,
+      "seconds": 191.05658069998026,
+      "native_seconds": 178.901,
+      "pipeline_seconds": 191.048,
+      "raw_rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c",
+      "rgb_sha256": "4c81e5654981ff11ded1ae7786c4fcb538a7fbf8d33835f4e91a300c99b995e3",
+      "dimensions": [
+        736,
+        1104
+      ]
+    },
+    "normal": {
+      "median": 182.84784909995506,
+      "min": 182.82205159997102,
+      "max": 182.8736465999391,
+      "repeats": [
+        182.8736465999391,
+        182.82205159997102
+      ]
+    },
+    "native": {
+      "median": 176.0,
+      "min": 175.958,
+      "max": 176.042,
+      "repeats": [
+        175.958,
+        176.042
+      ]
+    },
+    "upscale": {
+      "median": 2.8089197499793954,
+      "min": 2.7729320999933407,
+      "max": 2.84490739996545,
+      "repeats": [
+        2.84490739996545,
+        2.7729320999933407
+      ]
+    },
+    "sr_inference": {
+      "median": 0.9447,
+      "min": 0.9278,
+      "max": 0.9616,
+      "repeats": [
+        0.9616,
+        0.9278
+      ]
+    },
+    "normal_repeats": [
+      {
+        "repeat": 0,
+        "seconds": 191.05658069998026,
+        "native_seconds": 178.901,
+        "pipeline_seconds": 191.048,
+        "raw_rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c",
+        "rgb_sha256": "4c81e5654981ff11ded1ae7786c4fcb538a7fbf8d33835f4e91a300c99b995e3",
+        "dimensions": [
+          736,
+          1104
+        ]
+      },
+      {
+        "repeat": 1,
+        "seconds": 182.8736465999391,
+        "native_seconds": 175.958,
+        "pipeline_seconds": 182.866,
+        "raw_rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c",
+        "rgb_sha256": "4c81e5654981ff11ded1ae7786c4fcb538a7fbf8d33835f4e91a300c99b995e3",
+        "dimensions": [
+          736,
+          1104
+        ]
+      },
+      {
+        "repeat": 2,
+        "seconds": 182.82205159997102,
+        "native_seconds": 176.042,
+        "pipeline_seconds": 182.814,
+        "raw_rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c",
+        "rgb_sha256": "4c81e5654981ff11ded1ae7786c4fcb538a7fbf8d33835f4e91a300c99b995e3",
+        "dimensions": [
+          736,
+          1104
+        ]
+      }
+    ],
+    "sr_repeats": [
+      {
+        "repeat": 0,
+        "seconds": 2.84490739996545,
+        "inference_seconds": 0.9616,
+        "rgb_sha256": "8986f021a095423d06e93f101d9949f0ccff8ccb51488522d4f2f522d1d05ef7",
+        "dimensions": [
+          2944,
+          4416
+        ],
+        "restoration_repeated": false,
+        "native_resident_before_call": true
+      },
+      {
+        "repeat": 1,
+        "seconds": 2.7729320999933407,
+        "inference_seconds": 0.9278,
+        "rgb_sha256": "8986f021a095423d06e93f101d9949f0ccff8ccb51488522d4f2f522d1d05ef7",
+        "dimensions": [
+          2944,
+          4416
+        ],
+        "restoration_repeated": false,
+        "native_resident_before_call": true
+      }
+    ],
+    "model_ready_seconds": [
+      11.284537999890745,
+      14.089298699982464
+    ],
+    "combined_normal_plus_4x_seconds": 185.65676884993445
+  },
+  "previous": {
+    "executable_sha256": "efddce0e7f8518d735c809cbf925e3718786dddd6221da30eb9bc96107eaaca7",
+    "first_normal": {
+      "repeat": 0,
+      "seconds": 161.21994609991089,
+      "native_seconds": 149.914,
+      "pipeline_seconds": 161.212,
+      "raw_rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c",
+      "rgb_sha256": "4c81e5654981ff11ded1ae7786c4fcb538a7fbf8d33835f4e91a300c99b995e3",
+      "dimensions": [
+        736,
+        1104
+      ]
+    },
+    "normal": {
+      "median": 151.1004305999959,
+      "min": 151.08306500001345,
+      "max": 151.11779619997833,
+      "repeats": [
+        151.08306500001345,
+        151.11779619997833
+      ]
+    },
+    "native": {
+      "median": 142.9645,
+      "min": 142.928,
+      "max": 143.001,
+      "repeats": [
+        143.001,
+        142.928
+      ]
+    },
+    "upscale": {
+      "median": 2.7610408500186168,
+      "min": 2.7455422000493854,
+      "max": 2.776539499987848,
+      "repeats": [
+        2.7455422000493854,
+        2.776539499987848
+      ]
+    },
+    "sr_inference": {
+      "median": 0.9256500000000001,
+      "min": 0.923,
+      "max": 0.9283,
+      "repeats": [
+        0.923,
+        0.9283
+      ]
+    },
+    "normal_repeats": [
+      {
+        "repeat": 0,
+        "seconds": 161.21994609991089,
+        "native_seconds": 149.914,
+        "pipeline_seconds": 161.212,
+        "raw_rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c",
+        "rgb_sha256": "4c81e5654981ff11ded1ae7786c4fcb538a7fbf8d33835f4e91a300c99b995e3",
+        "dimensions": [
+          736,
+          1104
+        ]
+      },
+      {
+        "repeat": 1,
+        "seconds": 151.08306500001345,
+        "native_seconds": 143.001,
+        "pipeline_seconds": 151.075,
+        "raw_rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c",
+        "rgb_sha256": "4c81e5654981ff11ded1ae7786c4fcb538a7fbf8d33835f4e91a300c99b995e3",
+        "dimensions": [
+          736,
+          1104
+        ]
+      },
+      {
+        "repeat": 2,
+        "seconds": 151.11779619997833,
+        "native_seconds": 142.928,
+        "pipeline_seconds": 151.11,
+        "raw_rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c",
+        "rgb_sha256": "4c81e5654981ff11ded1ae7786c4fcb538a7fbf8d33835f4e91a300c99b995e3",
+        "dimensions": [
+          736,
+          1104
+        ]
+      }
+    ],
+    "sr_repeats": [
+      {
+        "repeat": 0,
+        "seconds": 2.7455422000493854,
+        "inference_seconds": 0.923,
+        "rgb_sha256": "8986f021a095423d06e93f101d9949f0ccff8ccb51488522d4f2f522d1d05ef7",
+        "dimensions": [
+          2944,
+          4416
+        ],
+        "restoration_repeated": false,
+        "native_resident_before_call": true
+      },
+      {
+        "repeat": 1,
+        "seconds": 2.776539499987848,
+        "inference_seconds": 0.9283,
+        "rgb_sha256": "8986f021a095423d06e93f101d9949f0ccff8ccb51488522d4f2f522d1d05ef7",
+        "dimensions": [
+          2944,
+          4416
+        ],
+        "restoration_repeated": false,
+        "native_resident_before_call": true
+      }
+    ],
+    "model_ready_seconds": [
+      11.768135400023311,
+      13.631697700009681
+    ],
+    "combined_normal_plus_4x_seconds": 153.8614714500145
+  },
+  "after": {
+    "executable_sha256": "ebe56a513028935093bb2390d233975fcb71a8fd702e880e4b9f9419f57792b4",
+    "first_normal": {
+      "repeat": 0,
+      "seconds": 158.03037589997984,
+      "native_seconds": 147.21,
+      "pipeline_seconds": 158.021,
+      "raw_rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c",
+      "rgb_sha256": "4c81e5654981ff11ded1ae7786c4fcb538a7fbf8d33835f4e91a300c99b995e3",
+      "dimensions": [
+        736,
+        1104
+      ]
+    },
+    "normal": {
+      "median": 150.9990341499797,
+      "min": 150.83009820000734,
+      "max": 151.16797009995207,
+      "repeats": [
+        151.16797009995207,
+        150.83009820000734
+      ]
+    },
+    "native": {
+      "median": 142.9675,
+      "min": 142.909,
+      "max": 143.026,
+      "repeats": [
+        143.026,
+        142.909
+      ]
+    },
+    "upscale": {
+      "median": 2.743549350008834,
+      "min": 2.7269237999571487,
+      "max": 2.7601749000605196,
+      "repeats": [
+        2.7269237999571487,
+        2.7601749000605196
+      ]
+    },
+    "sr_inference": {
+      "median": 0.925,
+      "min": 0.9218,
+      "max": 0.9282,
+      "repeats": [
+        0.9218,
+        0.9282
+      ]
+    },
+    "normal_repeats": [
+      {
+        "repeat": 0,
+        "seconds": 158.03037589997984,
+        "native_seconds": 147.21,
+        "pipeline_seconds": 158.021,
+        "raw_rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c",
+        "rgb_sha256": "4c81e5654981ff11ded1ae7786c4fcb538a7fbf8d33835f4e91a300c99b995e3",
+        "dimensions": [
+          736,
+          1104
+        ]
+      },
+      {
+        "repeat": 1,
+        "seconds": 151.16797009995207,
+        "native_seconds": 143.026,
+        "pipeline_seconds": 151.16,
+        "raw_rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c",
+        "rgb_sha256": "4c81e5654981ff11ded1ae7786c4fcb538a7fbf8d33835f4e91a300c99b995e3",
+        "dimensions": [
+          736,
+          1104
+        ]
+      },
+      {
+        "repeat": 2,
+        "seconds": 150.83009820000734,
+        "native_seconds": 142.909,
+        "pipeline_seconds": 150.822,
+        "raw_rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c",
+        "rgb_sha256": "4c81e5654981ff11ded1ae7786c4fcb538a7fbf8d33835f4e91a300c99b995e3",
+        "dimensions": [
+          736,
+          1104
+        ]
+      }
+    ],
+    "sr_repeats": [
+      {
+        "repeat": 0,
+        "seconds": 2.7269237999571487,
+        "inference_seconds": 0.9218,
+        "rgb_sha256": "8986f021a095423d06e93f101d9949f0ccff8ccb51488522d4f2f522d1d05ef7",
+        "dimensions": [
+          2944,
+          4416
+        ],
+        "restoration_repeated": false,
+        "native_resident_before_call": true
+      },
+      {
+        "repeat": 1,
+        "seconds": 2.7601749000605196,
+        "inference_seconds": 0.9282,
+        "rgb_sha256": "8986f021a095423d06e93f101d9949f0ccff8ccb51488522d4f2f522d1d05ef7",
+        "dimensions": [
+          2944,
+          4416
+        ],
+        "restoration_repeated": false,
+        "native_resident_before_call": true
+      }
+    ],
+    "model_ready_seconds": [
+      10.552668899996206,
+      13.10458209994249
+    ],
+    "combined_normal_plus_4x_seconds": 153.74258349998854
+  },
+  "comparison": {
+    "native": {
+      "stock_or_previous_seconds": 176.0,
+      "fork_seconds": 142.9675,
+      "saved_seconds": 33.0325,
+      "less_time_percent": 18.768465909090903,
+      "throughput_speedup_percent": 23.104901463619342,
+      "ranges_overlap": false
+    },
+    "normal": {
+      "stock_or_previous_seconds": 182.84784909995506,
+      "fork_seconds": 150.9990341499797,
+      "saved_seconds": 31.84881494997535,
+      "less_time_percent": 17.418205960172372,
+      "throughput_speedup_percent": 21.09206534284287,
+      "ranges_overlap": false
+    },
+    "upscale": {
+      "stock_or_previous_seconds": 2.8089197499793954,
+      "fork_seconds": 2.743549350008834,
+      "saved_seconds": 0.06537039997056127,
+      "less_time_percent": 2.32724341701257,
+      "throughput_speedup_percent": 2.382694518338102,
+      "ranges_overlap": false
+    },
+    "combined": {
+      "stock_or_previous_seconds": 185.65676884993445,
+      "fork_seconds": 153.74258349998854,
+      "saved_seconds": 31.91418534994591,
+      "less_time_percent": 17.189885156162553,
+      "throughput_speedup_percent": 20.758195044867513,
+      "definition": "Sum of independently measured warm Normal and resident-before-every-call4x medians; not one joint request."
+    }
+  },
+  "incremental_comparison": {
+    "native": {
+      "stock_or_previous_seconds": 142.9645,
+      "fork_seconds": 142.9675,
+      "saved_seconds": -0.0030000000000143245,
+      "less_time_percent": -0.0020984230350906685,
+      "throughput_speedup_percent": -0.0020983790022355286,
+      "ranges_overlap": true
+    },
+    "normal": {
+      "stock_or_previous_seconds": 151.1004305999959,
+      "fork_seconds": 150.9990341499797,
+      "saved_seconds": 0.10139645001618192,
+      "less_time_percent": 0.06710533491768311,
+      "throughput_speedup_percent": 0.06715039641609355,
+      "ranges_overlap": true
+    },
+    "upscale": {
+      "stock_or_previous_seconds": 2.7610408500186168,
+      "fork_seconds": 2.743549350008834,
+      "saved_seconds": 0.017491500009782612,
+      "less_time_percent": 0.6335110909230002,
+      "throughput_speedup_percent": 0.6375500411438306,
+      "ranges_overlap": true
+    },
+    "combined": {
+      "stock_or_previous_seconds": 153.8614714500145,
+      "fork_seconds": 153.74258349998854,
+      "saved_seconds": 0.11888795002596453,
+      "less_time_percent": 0.07726947422609376,
+      "throughput_speedup_percent": 0.07732922611254356,
+      "definition": "Sum of independently measured warm Normal and resident-before-every-call4x medians; not one joint request."
+    }
+  },
+  "correctness": {
+    "normal_raw_rgb_identical": true,
+    "normal_finished_rgb_identical": true,
+    "upscaled_rgb_identical": true,
+    "raw_rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c",
+    "normal_rgb_sha256": "4c81e5654981ff11ded1ae7786c4fcb538a7fbf8d33835f4e91a300c99b995e3",
+    "upscale_rgb_sha256": "8986f021a095423d06e93f101d9949f0ccff8ccb51488522d4f2f522d1d05ef7",
+    "profile_bytes_preserved": true,
+    "user_settings_preserved": true,
+    "models_or_numerical_settings_changed": false
+  },
+  "limits": [
+    "The total is a sum of phase medians,not a timed joint API request.",
+    "Public5001 queue/transport,model loading and photo return are excluded;all model-ready waits retained separately.",
+    "Arms run in the stated order,not randomized;warm samples are small and all repeats/ranges are retained.",
+    "SR uses the same shared media code;overlapping ranges must not be advertised as an upscaler gain.",
+    "No High,new whole-LLM tokens/s or full MOSS/H3 model claim;isolated operator gains are separate.",
+    "All incremental phase ranges overlap;Native median is3ms slower. The0.119s phase-sum difference does not establish an incremental Normal/SR gain. Qualified operator improvements are separate."
+  ],
+  "operation_evidence": [
+    "operations-2026-11-07-r6.json"
+  ],
+  "incremental_conclusion": {
+    "additional_photo_speedup_demonstrated": false,
+    "reason": "All incremental phase ranges overlap;Native median is3ms slower. The0.119s phase-sum difference does not establish an incremental Normal/SR gain. Qualified operator improvements are separate."
+  }
+}

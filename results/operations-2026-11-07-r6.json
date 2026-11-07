@@ -1,0 +1,1030 @@
+{
+  "date": "2026-11-07",
+  "accepted_native_context": {
+    "source": "2d469743d30d09737633607071fe83dc2283bfec",
+    "native_sha256": "ebe56a513028935093bb2390d233975fcb71a8fd702e880e4b9f9419f57792b4",
+    "patch_sha256": "af2cc7d11aa67c8ef5fe945f4bc49de141e33780a21897a795f0fe758aa7448c",
+    "patch_count": 70
+  },
+  "scope": "Actual GGML CPU/Vulkan operator fixtures;operator timings are not portable EXE or full-model timings. No compiler overlaps any timed inference.",
+  "fwht": {
+    "power_controls": 136,
+    "non_bit_exact": 0,
+    "nonfinite_policy": "64 adversarial controls require exact finite/infinite/zero bits and matching NaN classes;NaN payload equality is not promised.",
+    "kronecker_controls": 88,
+    "bad_dense_reference": 0,
+    "dense_max_abs_tolerance": 4e-05,
+    "matrix_orthogonality": [
+      {
+        "order": 12,
+        "column_pairs": 144,
+        "orthogonal": true
+      },
+      {
+        "order": 20,
+        "column_pairs": 400,
+        "orthogonal": true
+      }
+    ],
+    "timings": [
+      {
+        "width": 32,
+        "rows": 4,
+        "before_us": {
+          "median": 0.3047,
+          "min": 0.3031,
+          "max": 0.3048,
+          "repeats": [
+            0.3031,
+            0.3048,
+            0.3047,
+            0.3047,
+            0.3037,
+            0.3047,
+            0.3042
+          ]
+        },
+        "after_us": {
+          "median": 0.1949,
+          "min": 0.1944,
+          "max": 0.195,
+          "repeats": [
+            0.1946,
+            0.1944,
+            0.195,
+            0.1944,
+            0.195,
+            0.195,
+            0.1949
+          ]
+        },
+        "less_time_percent": 36.035444699704634
+      },
+      {
+        "width": 128,
+        "rows": 4,
+        "before_us": {
+          "median": 0.8605,
+          "min": 0.8596,
+          "max": 0.8789,
+          "repeats": [
+            0.8614,
+            0.8596,
+            0.8596,
+            0.8605,
+            0.8789,
+            0.8607,
+            0.8605
+          ]
+        },
+        "after_us": {
+          "median": 0.4218,
+          "min": 0.4206,
+          "max": 0.4233,
+          "repeats": [
+            0.4233,
+            0.4218,
+            0.4206,
+            0.4218,
+            0.4223,
+            0.4224,
+            0.4218
+          ]
+        },
+        "less_time_percent": 50.98198721673446
+      },
+      {
+        "width": 512,
+        "rows": 4,
+        "before_us": {
+          "median": 3.1735,
+          "min": 3.1687,
+          "max": 3.1887,
+          "repeats": [
+            3.1714,
+            3.1687,
+            3.1887,
+            3.1734,
+            3.1735,
+            3.1856,
+            3.1735
+          ]
+        },
+        "after_us": {
+          "median": 1.5539,
+          "min": 1.5517,
+          "max": 1.5554,
+          "repeats": [
+            1.5544,
+            1.5543,
+            1.5554,
+            1.5517,
+            1.5528,
+            1.5539,
+            1.5522
+          ]
+        },
+        "less_time_percent": 51.03513470931149
+      },
+      {
+        "width": 4096,
+        "rows": 4,
+        "before_us": {
+          "median": 26.294,
+          "min": 26.2822,
+          "max": 26.3249,
+          "repeats": [
+            26.3249,
+            26.294,
+            26.3154,
+            26.3096,
+            26.2869,
+            26.2911,
+            26.2822
+          ]
+        },
+        "after_us": {
+          "median": 14.1305,
+          "min": 14.1177,
+          "max": 14.1503,
+          "repeats": [
+            14.1503,
+            14.1305,
+            14.1378,
+            14.1177,
+            14.1247,
+            14.1187,
+            14.1338
+          ]
+        },
+        "less_time_percent": 46.25960295124363
+      }
+    ],
+    "scope": "Real typed F32/F16 kernel with4D row strides,1/4 simulated worker partitions. Timings are single-thread four-row F32,7 alternating1000-call trials;no whole-model throughput claim."
+  },
+  "topk": {
+    "exact_controls": 120,
+    "non_bit_exact": 0,
+    "capability_fallback_controls": 136,
+    "cpu_us": {
+      "median": 1055.3,
+      "min": 1041.805,
+      "max": 1068.98,
+      "repeats": [
+        1068.98,
+        1063.78,
+        1045.495,
+        1047.625,
+        1066.425,
+        1055.3,
+        1041.805
+      ]
+    },
+    "gpu_us": {
+      "median": 161.59,
+      "min": 158.165,
+      "max": 163.845,
+      "repeats": [
+        163.485,
+        158.21,
+        161.59,
+        159.41,
+        163.845,
+        158.165,
+        162.985
+      ]
+    },
+    "less_time_percent": 84.68776651189235,
+    "scope": "Resident32768-cell masks,64 rows,67 picks plus blocks/scores/extras;7 alternating20-run trials. F16 uses packed32-bit stores and no half arithmetic. CPU/GPU comparison excludes scheduler transfers and does not predict whole-model gain."
+  },
+  "yarn": {
+    "yarn_cases": 24,
+    "bad_nmse": 0,
+    "max_nmse": 4.75426362858e-08,
+    "max_abs_error": 0.000815197825432,
+    "fused_pairs": 8,
+    "fused_non_bit_exact": 0,
+    "half_nontruncated_cpu_fallbacks": 12,
+    "legacy_truncated_half_observations": 12,
+    "legacy_half_max_nmse": 2.98491549457e-07,
+    "scope": "F32 Normal/NeoX forward/back,truncate true/false and8 GPU fused/unfused pairs. New nontruncated F16 remains CPU fallback after strict control failure. Legacy truncated F16 observations are informational,not requalified or numerically changed. MROPE/model-level/remote coverage is not claimed."
+  },
+  "rms_wide_cache": {
+    "exact_pairs": 176,
+    "non_bit_exact": 0,
+    "before_cached4_us": {
+      "median": 108.1,
+      "min": 107.71,
+      "max": 108.685,
+      "repeats": [
+        108.39,
+        107.71,
+        108.585,
+        108.1,
+        108.015,
+        108.065,
+        108.685
+      ]
+    },
+    "after_cached8_us": {
+      "median": 103.24,
+      "min": 102.795,
+      "max": 104.75,
+      "repeats": [
+        103.105,
+        103.24,
+        102.795,
+        103.095,
+        104.75,
+        103.25,
+        103.305
+      ]
+    },
+    "less_time_percent": 4.495837187789087,
+    "before_fixture_trials": [
+      {
+        "before_us": 209.84,
+        "after_us": 108.39
+      },
+      {
+        "before_us": 210.245,
+        "after_us": 107.71
+      },
+      {
+        "before_us": 209.885,
+        "after_us": 108.585
+      },
+      {
+        "before_us": 209.325,
+        "after_us": 108.1
+      },
+      {
+        "before_us": 209.63,
+        "after_us": 108.015
+      },
+      {
+        "before_us": 209.34,
+        "after_us": 108.065
+      },
+      {
+        "before_us": 211.54,
+        "after_us": 108.685
+      }
+    ],
+    "after_fixture_trials": [
+      {
+        "before_us": 209.94,
+        "after_us": 103.105
+      },
+      {
+        "before_us": 208.915,
+        "after_us": 103.24
+      },
+      {
+        "before_us": 209.985,
+        "after_us": 102.795
+      },
+      {
+        "before_us": 209.11,
+        "after_us": 103.095
+      },
+      {
+        "before_us": 209.4,
+        "after_us": 104.75
+      },
+      {
+        "before_us": 208.835,
+        "after_us": 103.25
+      },
+      {
+        "before_us": 209.075,
+        "after_us": 103.305
+      }
+    ],
+    "scope": "3072x128 fused RMS modulation,7 alternating20-run trials in each fixture. Old fixture identity matches published r5 evidence;its original component-build receipt was unavailable,explicitly recorded. No full-model gain."
+  },
+  "rejected_or_unqualified": {
+    "nontruncated_fp16_yarn": {
+      "initial": {
+        "yarn_cases": 48,
+        "bad_nmse": 24,
+        "max_nmse": 3.00535528561e-07,
+        "max_abs_error": 0.0008544921875,
+        "fused_pairs": 8,
+        "fused_non_bit_exact": 0
+      },
+      "decision": "Strict1e-7 NMSE failed;do not relax threshold. New F16 paths and fusions remain CPU fallback."
+    },
+    "q5_widening": {
+      "controls": [
+        {
+          "activation": 0,
+          "expected": 0,
+          "actual0": 0,
+          "wrong_columns": 0
+        },
+        {
+          "activation": 1,
+          "expected": 499968,
+          "actual0": 499968,
+          "wrong_columns": 0
+        },
+        {
+          "activation": 16,
+          "expected": 7999488,
+          "actual0": 7999488,
+          "wrong_columns": 0
+        },
+        {
+          "activation": 64,
+          "expected": 31997952,
+          "actual0": 31997952,
+          "wrong_columns": 0
+        },
+        {
+          "activation": 127,
+          "expected": 63495936,
+          "actual0": 63495936,
+          "wrong_columns": 0
+        },
+        {
+          "activation": -128,
+          "expected": -63995904,
+          "actual0": -63995904,
+          "wrong_columns": 0
+        }
+      ],
+      "decision": "Private adaptation widens two safe four-product partials before int32 combination;fixes the two observed overflow extrema. Not enabled:random repack/GEMM/model/speed qualification remains absent.",
+      "gemm_static_review": "The recovered Haswell GEMM combines two four-maddubs I16 partials with add_epi16 before widening. Their valid max range can exceed32767. This is a static risk inference,not a GEMM test result;the private widening prototype repairs GEMV only."
+    },
+    "prior_experiments": "operations-2026-11-07-r5.json"
+  },
+  "fixture_run_receipts": {
+    "deferred": {
+      "executable_sha256": "8ad9b43f8fecba4b7a731b3a1222290bee11f65e695d6c6ded3c4472d8a825df",
+      "source_sha256": "626ee4a6e7be48df8aabac121b9f82b67835168a2d4bf9aef3dca6ed7c4c5352",
+      "arguments": [],
+      "native_component_build": "4923fb3749c06323a43cdcabf99dccc41be3a30f53cfbb1b9b91cd93538b853f",
+      "scope": "Exact operator fixture identity recorded before this run;not a portable EXE timing.",
+      "baseline_context": null,
+      "include_sha256": {
+        "hadamard-tables.inc": "f0f356467efeedee79e9cb7ff966223d58d316e6e7b5e0c39dc479ce3f60a7b9",
+        "initial-yarn-check.inc": "563018c95eb49d84f5a43058b8f67cf412b40a7977fa5b65e965488eb3b5852e",
+        "old-fwht.inc": "66474e0ba59c35a5ad43c850f734e1e16c3a9311c8b4e3d5f6ccd387167a6446",
+        "yarn-check.inc": "a010ed1b425baf3d02eb1d545dd75602e2c5115f0349811e55daf5f9c7b9b051"
+      }
+    },
+    "rms65": {
+      "executable_sha256": "8675da0c07d8267a6f468e10dbd6d4ae1e23d64aea1d0d81953574dc2a848e56",
+      "source_sha256": "90b54638bd07d7556f93bae0109ac5d611a393d8ff69dd9692c34ee3b2ee5a9d",
+      "arguments": [],
+      "native_component_build": null,
+      "scope": "Exact operator fixture identity recorded before this run;not a portable EXE timing.",
+      "baseline_context": "Recorded accepted RMS fixture from operations-2026-11-07-r5.json;its own prior component-build receipt is unavailable",
+      "include_sha256": {
+        "hadamard-tables.inc": "f0f356467efeedee79e9cb7ff966223d58d316e6e7b5e0c39dc479ce3f60a7b9",
+        "initial-yarn-check.inc": "563018c95eb49d84f5a43058b8f67cf412b40a7977fa5b65e965488eb3b5852e",
+        "old-fwht.inc": "66474e0ba59c35a5ad43c850f734e1e16c3a9311c8b4e3d5f6ccd387167a6446",
+        "yarn-check.inc": "563018c95eb49d84f5a43058b8f67cf412b40a7977fa5b65e965488eb3b5852e"
+      }
+    },
+    "rms-native": {
+      "executable_sha256": "d2dbe04c6a763c3d76b14114f23b189db3baf04e13ccc4c0fc3cbbb206b804dc",
+      "source_sha256": "90b54638bd07d7556f93bae0109ac5d611a393d8ff69dd9692c34ee3b2ee5a9d",
+      "arguments": [],
+      "native_component_build": "4923fb3749c06323a43cdcabf99dccc41be3a30f53cfbb1b9b91cd93538b853f",
+      "scope": "Exact operator fixture identity recorded before this run;not a portable EXE timing.",
+      "baseline_context": null,
+      "include_sha256": {
+        "hadamard-tables.inc": "f0f356467efeedee79e9cb7ff966223d58d316e6e7b5e0c39dc479ce3f60a7b9",
+        "initial-yarn-check.inc": "563018c95eb49d84f5a43058b8f67cf412b40a7977fa5b65e965488eb3b5852e",
+        "old-fwht.inc": "66474e0ba59c35a5ad43c850f734e1e16c3a9311c8b4e3d5f6ccd387167a6446",
+        "yarn-check.inc": "a010ed1b425baf3d02eb1d545dd75602e2c5115f0349811e55daf5f9c7b9b051"
+      }
+    }
+  },
+  "fixture_sha256": {
+    "deferred-check.cpp": "626ee4a6e7be48df8aabac121b9f82b67835168a2d4bf9aef3dca6ed7c4c5352",
+    "deferred-check.exe": "8ad9b43f8fecba4b7a731b3a1222290bee11f65e695d6c6ded3c4472d8a825df",
+    "hadamard-tables.inc": "f0f356467efeedee79e9cb7ff966223d58d316e6e7b5e0c39dc479ce3f60a7b9",
+    "initial-yarn-check.inc": "563018c95eb49d84f5a43058b8f67cf412b40a7977fa5b65e965488eb3b5852e",
+    "old-fwht.inc": "66474e0ba59c35a5ad43c850f734e1e16c3a9311c8b4e3d5f6ccd387167a6446",
+    "q5-widen-contract.cpp": "afd76776f2c7fb2a767b1e0526f3c7e395397a3877fb05f9a86ae063d2acf5b9",
+    "q5-widen-contract.exe": "848835617a124d9d68c7a4a4d322c04d23f382a62aea555d0f92e9da8671f040",
+    "rms-native-check.cpp": "90b54638bd07d7556f93bae0109ac5d611a393d8ff69dd9692c34ee3b2ee5a9d",
+    "rms-native-check.exe": "d2dbe04c6a763c3d76b14114f23b189db3baf04e13ccc4c0fc3cbbb206b804dc",
+    "rms65-check.cpp": "90b54638bd07d7556f93bae0109ac5d611a393d8ff69dd9692c34ee3b2ee5a9d",
+    "rms65-check.exe": "8675da0c07d8267a6f468e10dbd6d4ae1e23d64aea1d0d81953574dc2a848e56",
+    "yarn-check.inc": "a010ed1b425baf3d02eb1d545dd75602e2c5115f0349811e55daf5f9c7b9b051"
+  },
+  "source_diff_receipts": [
+    {
+      "number": 19706,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/19706",
+      "complete_file_map_sha256": "2938f472fbccab41948d410d18d1c5eab3f74a00d4da95fb8a1a88163dc68a7c",
+      "files": [
+        {
+          "path": "ggml/src/ggml-cpu/arch-fallback.h",
+          "diff_bytes": 1095,
+          "sha256": "d04def19048c5c929eee36f6c2f2a55a9503e6cfbc76a700c6202ce3733d2bb8"
+        },
+        {
+          "path": "ggml/src/ggml-cpu/arch/x86/repack.cpp",
+          "diff_bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "ggml/src/ggml-cpu/repack.cpp",
+          "diff_bytes": 466,
+          "sha256": "085b682bbf3072c11c219e354bcefedce7899637329eff64e3ef814a0b06994e"
+        }
+      ]
+    },
+    {
+      "number": 19707,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/19707",
+      "complete_file_map_sha256": "790f1ae8a8693895b0c8694ff1edeb3f315c991b05babb9db70026e18b99a905",
+      "files": [
+        {
+          "path": "ggml/src/ggml-cpu/arch-fallback.h",
+          "diff_bytes": 955,
+          "sha256": "a0bde1c68bb0383e4170fb068fac80b5d42763f4225162d38aee9f8771aef82a"
+        },
+        {
+          "path": "ggml/src/ggml-cpu/arch/x86/repack.cpp",
+          "diff_bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "ggml/src/ggml-cpu/repack.cpp",
+          "diff_bytes": 469,
+          "sha256": "4727ef20eef7c0a2384695921fa5503af14df3cbbedf6caaf54c1558c5939778"
+        }
+      ]
+    },
+    {
+      "number": 27258,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/27258",
+      "complete_file_map_sha256": "3abf328a1188386e3c788f4ae7e8f284042d837bfa4a6331f873e7c76f34f04d",
+      "files": [
+        {
+          "path": "ggml/include/ggml-rpc.h",
+          "diff_bytes": 456,
+          "sha256": "1805a66f83f307c653ccaba5933ca55e2a276da661f4897d21cdf211359fec91"
+        },
+        {
+          "path": "ggml/include/ggml.h",
+          "diff_bytes": 694,
+          "sha256": "ee05d340ef1fb52f75447959407a25b656eed753d1c57325df2014a17a83af8e"
+        },
+        {
+          "path": "ggml/src/ggml-cpu/ggml-cpu.c",
+          "diff_bytes": 739,
+          "sha256": "f63e115d511ea01a807c9c0a16d843df4a7598669fcf7d58e1a2417e24faab34"
+        },
+        {
+          "path": "ggml/src/ggml-cpu/ops.cpp",
+          "diff_bytes": 726,
+          "sha256": "910a50f63ed92550eca9b6816c0ba59715a2285df483ec3f8151a90117e1b50e"
+        },
+        {
+          "path": "ggml/src/ggml-cpu/ops.h",
+          "diff_bytes": 720,
+          "sha256": "c92dee5549b25b4ee566b899bb2ff9f7b2a5a147d84d929e770a5b3a5d2bc0a5"
+        },
+        {
+          "path": "ggml/src/ggml-cuda/ggml-cuda.cu",
+          "diff_bytes": 1183,
+          "sha256": "c1abf5d63bb842f1ab21533402e7ab88a192ca8aaea66d2f79e4e221bcdf5d6e"
+        },
+        {
+          "path": "ggml/src/ggml-cuda/sleep.cu",
+          "diff_bytes": 1140,
+          "sha256": "84500ed0e305dffca2487f7c4660475391c516a4e558dfe2ed0bceb58338fc54"
+        },
+        {
+          "path": "ggml/src/ggml-cuda/sleep.cuh",
+          "diff_bytes": 118,
+          "sha256": "a2d7e96c45b8472aaa1183a124d1157c9db3cf12b614bea7f94044f675c260bc"
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan-debug.cpp",
+          "diff_bytes": 601,
+          "sha256": "4e33c04c4c8f2cdc6eaa6ee658ba63935fdd8b1e5cfa99dbf7a09dbe7fc5ee9f"
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan-push-constants.h",
+          "diff_bytes": 223,
+          "sha256": "139b0e6a1bc5f2b7f1b6af16a2ae3684a499795b6a9afbe1521b75287501947e"
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan-types.h",
+          "diff_bytes": 491,
+          "sha256": "9b48ac0b736f43354d37ddbae0c953b90df321fcf75c4727d3c15fa0132f66f9"
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan.cpp",
+          "diff_bytes": 6371,
+          "sha256": "e30b7f090c7e1a3994034307ce66f1bf5a54d23bf3220d248ce4b4f827f55848"
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/vulkan-shaders/sleep.comp",
+          "diff_bytes": 1028,
+          "sha256": "4d7dc5afd9c6c0a4669b4304c4f62b9634888747e323ede39f8f4ed420ec2a41"
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/vulkan-shaders/vulkan-shaders-gen.cpp",
+          "diff_bytes": 859,
+          "sha256": "e1f422cb526c63d3c6ef814e6fe17260339c8a6f21c1a6c3bb637d3b5dbefe40"
+        },
+        {
+          "path": "ggml/src/ggml.c",
+          "diff_bytes": 1335,
+          "sha256": "5e92813fd0bd2ab5eafd09b7cb698b754ff11864570d3f9fada3f1ab9f15c099"
+        },
+        {
+          "path": "tests/CMakeLists.txt",
+          "diff_bytes": 414,
+          "sha256": "f2f7954440d3d07add83d6bf1e735efb5c8ae3d042000f3c2851eedc41cabb99"
+        },
+        {
+          "path": "tests/test-backend-ops.cpp",
+          "diff_bytes": 1769,
+          "sha256": "a26d7d2f14bc7a53b0ba3b2713b724e5c1bb6933528770d749873eadcffb0a8f"
+        },
+        {
+          "path": "tests/test-backend-sched.cpp",
+          "diff_bytes": 42182,
+          "sha256": "db7193c1d3b69ec692e6a6912f29737eb263c013bf878a51d5b8c125944da1d9"
+        },
+        {
+          "path": "tests/test-sleep.cpp",
+          "diff_bytes": 5891,
+          "sha256": "d49cd8262e1ebde80374d0a4f03d03c3efa8b97ca45b21067127d7c7003c29e9"
+        }
+      ]
+    },
+    {
+      "number": 28490,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/28490",
+      "complete_file_map_sha256": "81993c5c54b9279d2fcc9ea136d22b62cd06b95be131c94de71d8c392fca16aa",
+      "files": [
+        {
+          "path": "ggml/src/ggml-cpu/ops.cpp",
+          "diff_bytes": 5111,
+          "sha256": "1df2c63cbfc07b72bf38464cb271cff40ac96886c09518243490c52c752b3684"
+        },
+        {
+          "path": "tests/test-backend-ops.cpp",
+          "diff_bytes": 8552,
+          "sha256": "653a3ff5c5566a2f453e99389fb9d041a8a6226129ae28cdae62efe853fe35d0"
+        }
+      ]
+    },
+    {
+      "number": 28528,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/28528",
+      "complete_file_map_sha256": "e131b045fc21f7c5066bf9f63107ae3f537bf8ea21d7a9baa786a15d9f8fec47",
+      "files": [
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan-common.h",
+          "diff_bytes": 1539,
+          "sha256": "3d2d9eddf4fd4343ee32141639b9066a951f67cddc6f58639db5ea96660bf54b"
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan-debug.cpp",
+          "diff_bytes": 1597,
+          "sha256": "1acc2ab64de479770eaa577d1224d2da2bc8e96a1a7409c4bef5ceea1e136bbe"
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan-push-constants.h",
+          "diff_bytes": 2969,
+          "sha256": "18461e3e284c0bd57581db3b1c0fc5fb06f1c080e59936409ca81db94c919b33"
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan-types.h",
+          "diff_bytes": 1150,
+          "sha256": "e6615cd53cf6fccf15624499085cde0b6619a78c10b26e44498411eb7d10a85d"
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan.cpp",
+          "diff_bytes": 28573,
+          "sha256": "bc77e74ded51766957699e63e295c1d3141795a41bcd2c93cb7f76b5eed6f78b"
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/vulkan-shaders/mul_mat_stream_k_fixup.comp",
+          "diff_bytes": 4250,
+          "sha256": "9ba2ee385685cccefe51bab1850353988c5e3d25de2045da3b0876d4f3cc7c5e"
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/vulkan-shaders/mul_mm.comp",
+          "diff_bytes": 13134,
+          "sha256": "92f24cbb5567ce69e2abcdf9cddd257809159b113658f87ec3add8f9374ca10f"
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/vulkan-shaders/mul_mm_cm2.comp",
+          "diff_bytes": 10261,
+          "sha256": "297b0d24bd6bb25fdbaaed456a553bff7a22f0176bb8520cfb5dc99f3c9d3e19"
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/vulkan-shaders/vulkan-shaders-gen.cpp",
+          "diff_bytes": 473,
+          "sha256": "081511e24bd02d525949a42b9c8a0851006e0830085a5428f320499985eb3e7c"
+        },
+        {
+          "path": "tests/test-backend-ops.cpp",
+          "diff_bytes": 918,
+          "sha256": "777ac7ca79232979747c6e1ba58ee069810f22f63ffed304bfe2d05f34d76aa3"
+        }
+      ]
+    },
+    {
+      "number": 29121,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/29121",
+      "complete_file_map_sha256": "d6cd5fd06c51a89ccf80b684cefd1402edab310b4fcac9e612d47199a62b95c3",
+      "files": [
+        {
+          "path": "ggml/include/ggml.h",
+          "diff_bytes": 1271,
+          "sha256": "ff868d773bc025a5f0419ba9a7718386c6e534c2e648656e2c10b561b66f1824"
+        },
+        {
+          "path": "ggml/src/ggml-cpu/ops.cpp",
+          "diff_bytes": 2343,
+          "sha256": "166fbf12dae2f77d79eb77df2109592e6eaaffb9aac967835f47cc561fd69a1a"
+        },
+        {
+          "path": "ggml/src/ggml.c",
+          "diff_bytes": 2417,
+          "sha256": "d810c97d2d498089456211ae4083dc8e7b102de370c3309a840f6765c3ca386e"
+        },
+        {
+          "path": "src/llama-graph.cpp",
+          "diff_bytes": 1513,
+          "sha256": "bc1a3d099e2b94502fe0afb02e5d47ba8c1e961bad0842b1985987b893eb9620"
+        },
+        {
+          "path": "src/llama-graph.h",
+          "diff_bytes": 545,
+          "sha256": "4742bde56b644bd6dad7e39206b0f8e025930edf960b71a82c03a975937a0c74"
+        },
+        {
+          "path": "src/llama-memory-recurrent.cpp",
+          "diff_bytes": 7242,
+          "sha256": "ad324494e2656b4793bb86b73e4a97b831e4caf2d1bf935f9115ae625117d20d"
+        },
+        {
+          "path": "src/llama-memory-recurrent.h",
+          "diff_bytes": 1834,
+          "sha256": "5b1193810fd630db25da0931f07a8579554f89f801a0b06c4da0ca712ac7b548"
+        },
+        {
+          "path": "src/models/bailingmoe3.cpp",
+          "diff_bytes": 587,
+          "sha256": "7a44a5c2edba653fea232108d0920b00112bc4062f4ec7c7344fc30d91ad48c6"
+        },
+        {
+          "path": "src/models/delta-net-base.cpp",
+          "diff_bytes": 3941,
+          "sha256": "a05198760ffcb9d281d2c4b91a03284f773ad6f0e9269199cf6a9d51e68b052e"
+        },
+        {
+          "path": "src/models/kimi-k3.cpp",
+          "diff_bytes": 551,
+          "sha256": "57cbafe1217f1669956831fb8a2002be9220717a6addb45826d640be24007dc2"
+        },
+        {
+          "path": "src/models/models.h",
+          "diff_bytes": 1451,
+          "sha256": "2953816e31574a6f889d941458b823a66cc4a9c1159024e79e1120a867303c9f"
+        },
+        {
+          "path": "src/models/qwen35.cpp",
+          "diff_bytes": 516,
+          "sha256": "4dca0396b16481ce2eef97e1bbaa39fa226176871721dd72bc9f8190a0aaa22d"
+        },
+        {
+          "path": "src/models/qwen35moe.cpp",
+          "diff_bytes": 519,
+          "sha256": "17673224d47f3fb8618787f76fcf21547e4a8cb27d431bddacccbc43f8f5425a"
+        },
+        {
+          "path": "src/models/qwen3next.cpp",
+          "diff_bytes": 519,
+          "sha256": "8a2ec4783df61addcfd7bcc80653f6a08a1bca86dc6cf28afe6e7d7721d3ecf2"
+        },
+        {
+          "path": "src/models/qwen4exp.cpp",
+          "diff_bytes": 536,
+          "sha256": "9018de1cb091909aefefbc5416c93e5d3463fd0016f1083afc24e5ae2495d2f6"
+        },
+        {
+          "path": "tests/CMakeLists.txt",
+          "diff_bytes": 264,
+          "sha256": "77314683a6784d26bcffc870bb046364762576ec1179a915b34f2da234c139fb"
+        },
+        {
+          "path": "tests/test-gdn-inplace.cpp",
+          "diff_bytes": 10389,
+          "sha256": "915bf2244da8cee861422f933d07529ca9b545801cfc79775d4c7a030fbc03e7"
+        }
+      ]
+    },
+    {
+      "number": 29929,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/29929",
+      "complete_file_map_sha256": "6dccdbd575e6e01ccf5b6e84ac69bb6f5dc3ec7688fcd544feada7485c5b98f6",
+      "files": [
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan-types.h",
+          "diff_bytes": 1345,
+          "sha256": "a2d693ba33462062668f7c1623a176105ef84f9e4fede74bd5b5e973bca5b483"
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan.cpp",
+          "diff_bytes": 8905,
+          "sha256": "058fcb560c350d9ff81840e156dfbc843bff8ce06ca19905f8ebe77238d43947"
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/vulkan-shaders/conv3d_mm.comp",
+          "diff_bytes": 3016,
+          "sha256": "b7c7ee6cbed913a26f83b00426def9c58422e4e91b7d2eaf9e3e08520fdee405"
+        },
+        {
+          "path": "tests/test-backend-ops.cpp",
+          "diff_bytes": 542,
+          "sha256": "b8ba6c01272db995a2385548e64f28712875b8ae34ff86879e40d8ca7f9f6cbb"
+        }
+      ]
+    },
+    {
+      "number": 30193,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30193",
+      "complete_file_map_sha256": "92ebe68ed7611205982b9e3fdf8f474f1781a6d9d902e294f9b5b6535871b332",
+      "files": [
+        {
+          "path": "common/json-schema-to-grammar.cpp",
+          "diff_bytes": 14319,
+          "sha256": "3196c26201317094a378740f27bc38948eb89cecf0fd96aab8b2ee2818c0b009"
+        },
+        {
+          "path": "common/json-schema-to-grammar.h",
+          "diff_bytes": 467,
+          "sha256": "8867e54f0bb7f4a5766e0be8d63069c65cae9b6b1eca5a55a04fa9c0aec94020"
+        },
+        {
+          "path": "docs/llguidance.md",
+          "diff_bytes": 683,
+          "sha256": "71ff799de3a802db1277513e693a05d925580ed70b81a8ca67a1e302b9676907"
+        },
+        {
+          "path": "grammars/README.md",
+          "diff_bytes": 1194,
+          "sha256": "dbf610c3eedc77d4e50faedd84a8c8aae988f5e721c7f2df2da30fb2067d6bb8"
+        },
+        {
+          "path": "tests/test-chat.cpp",
+          "diff_bytes": 1770,
+          "sha256": "58e6b960d75e97e711180b868eb1282032c77316908e3d9f1726014711e47108"
+        },
+        {
+          "path": "tests/test-grammar-integration.cpp",
+          "diff_bytes": 17352,
+          "sha256": "78d487240d73c7bb66b69b926fc0e74f6839cc9e884c1b81def6eb0961ca1cca"
+        },
+        {
+          "path": "tests/test-json-schema-to-grammar.cpp",
+          "diff_bytes": 15668,
+          "sha256": "f3765dd34c32d8de15d88d00b90a7599f413d452c552017b9ac720623433b492"
+        }
+      ]
+    },
+    {
+      "number": 30196,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30196",
+      "complete_file_map_sha256": "ad313485ad3a7771d9a05f345c3595a2c56157abb88bb0ddcc4e882e7c6067a0",
+      "files": [
+        {
+          "path": "common/sampling.cpp",
+          "diff_bytes": 7032,
+          "sha256": "94c89d569d7c7fe76b7c434b48a4e5294b2bf1ba35fb1a3153d9583e65c174cc"
+        },
+        {
+          "path": "common/sampling.h",
+          "diff_bytes": 624,
+          "sha256": "5c231af9427e53a997f684988e4194f46e5c1690557c3d2869da4c58136f5bc0"
+        },
+        {
+          "path": "common/speculative.cpp",
+          "diff_bytes": 8987,
+          "sha256": "0f5af57165d0d9fe114bd33f5d05476473cd123819632b383661ff9707a3f836"
+        },
+        {
+          "path": "src/llama-context.cpp",
+          "diff_bytes": 2011,
+          "sha256": "63e7f52e7fdbc5ed3ce84526770e92530f3056bf6842179ae9c78e111a533049"
+        },
+        {
+          "path": "src/llama-context.h",
+          "diff_bytes": 638,
+          "sha256": "e428b3efebc0de28ec53dd86cc37b27cc0b9e736fff22089e7987ff8417c2389"
+        },
+        {
+          "path": "src/llama-sampler.h",
+          "diff_bytes": 2637,
+          "sha256": "9b31e0c64f0cec87a37f37906a83efc256782f267d0ba0875d93f99e897abb58"
+        }
+      ]
+    },
+    {
+      "number": 30738,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30738",
+      "complete_file_map_sha256": "26e20c7b5f4e20546f6ea901f15a32f5e17bfeca35ed30e2fedc2c1124cd0098",
+      "files": [
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan.cpp",
+          "diff_bytes": 2562,
+          "sha256": "01fbba76666704282ec7fe27b10c802082eaf577a4a70f2546a93521ac663ad7"
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/vulkan-shaders/dequant_q4_0.comp",
+          "diff_bytes": 651,
+          "sha256": "9e919c8c41dedcb82663800b2e34a8aade2959c3f2a84caa8a21143f8753f793"
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/vulkan-shaders/vulkan-shaders-gen.cpp",
+          "diff_bytes": 583,
+          "sha256": "53b1add16a85992a1ed7895c65a5379487f266abcc683c14698c2b7f76e7b3ff"
+        },
+        {
+          "path": "tests/test-backend-ops.cpp",
+          "diff_bytes": 1971,
+          "sha256": "090caf42a8d4398d82ff9316d6d11f7886174e687f5c23fd369a66675318834f"
+        }
+      ]
+    },
+    {
+      "number": 30802,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30802",
+      "complete_file_map_sha256": "9d04b291fd42b5e01869e4f032bf8fc43b5d687bfe6a353c4411faaa1ccec84a",
+      "files": [
+        {
+          "path": "ggml/src/ggml-openvino/ggml-openvino.cpp",
+          "diff_bytes": 453,
+          "sha256": "249cec148d6140ac5307c82e23029dff432d6031572a1c9c7373e90c9df14d40"
+        },
+        {
+          "path": "ggml/src/ggml-openvino/openvino/utils.cpp",
+          "diff_bytes": 2815,
+          "sha256": "a65210b3d80043f39dcfb42a52d13d0ee4d2ffd47e76dd81f8d8a50ba42e3a01"
+        },
+        {
+          "path": "ggml/src/ggml-rpc/ggml-rpc.cpp",
+          "diff_bytes": 474,
+          "sha256": "e6a935d8752deb9cfa127b520344ffc243d133c2ae63efa1e0a64ce6921c6c09"
+        },
+        {
+          "path": "ggml/src/ggml-sycl/ggml-sycl.cpp",
+          "diff_bytes": 316,
+          "sha256": "25f67fadd7794af8b51daeb40ef3f7a14406e89ce8b31e210685b4c7f573590b"
+        },
+        {
+          "path": "ggml/src/ggml-sycl/rope.cpp",
+          "diff_bytes": 385,
+          "sha256": "2f36545b95a10bf178f9a0f47988786c85b2b458001b6cd3446154811e4ba0ee"
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan-debug.cpp",
+          "diff_bytes": 1251,
+          "sha256": "6d85b69bd8667fabb538d2bffdbd1994648620a6aa64de7cabc287aeb28eb6a7"
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan.cpp",
+          "diff_bytes": 3404,
+          "sha256": "adc037f4cae47e30f2cc3269bc55baf1e5dbcec01c5521e24782fb59b53f4b3c"
+        },
+        {
+          "path": "ggml/src/ggml-webgpu/ggml-webgpu.cpp",
+          "diff_bytes": 1120,
+          "sha256": "85741e8e6443ee193741590648908109edf8c9f10ca46eac8d505b90471d3838"
+        }
+      ]
+    },
+    {
+      "number": 31544,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31544",
+      "complete_file_map_sha256": "878e2b07892d3a6533a2d9ea59dc667a117712e903b519b35adcf8a830cc8421",
+      "files": [
+        {
+          "path": "docs/ops.md",
+          "diff_bytes": 965,
+          "sha256": "b216107ea10a3af661f6f2f800a5dc30fd24c0437719ef4055ed28c24a5f5c67"
+        },
+        {
+          "path": "docs/ops/Vulkan.csv",
+          "diff_bytes": 4555,
+          "sha256": "0aaf7205b8c4ce3095a44e108bdf912f1e3cdb53974968e912faa78598becf19"
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan-common.h",
+          "diff_bytes": 1103,
+          "sha256": "2e16d1aa3956cf8e95cd3624a7884aa0475c3ec28ec09a858df7d791511e64e9"
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan-push-constants.h",
+          "diff_bytes": 1903,
+          "sha256": "6df7518e3fb7f1b2c22329b318ffb658e7fc72d97ccfff6ba4e4ccf25073df79"
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan-types.h",
+          "diff_bytes": 485,
+          "sha256": "d91f2531c0cf0606661b3e825e100f73b6724e8649a011236734e60afae91feb"
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan.cpp",
+          "diff_bytes": 5584,
+          "sha256": "b0ea76a99273f787d881f1fed84b14091b9616e984d4fe8ec57cb6a1ad94d5f8"
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/vulkan-shaders/top_k_mask.comp",
+          "diff_bytes": 3187,
+          "sha256": "c046b9c87c8924ae3a80650f3138aeecc72779c0fa590460a4dca78522aebac9"
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/vulkan-shaders/vulkan-shaders-gen.cpp",
+          "diff_bytes": 801,
+          "sha256": "66975357fd04c515066064d147b8a0d25f41d8931b2e733b760c83d19969ec30"
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "All accepted image settings,models,steps,precision and four profile bytes remain unchanged.",
+    "The real Normal/separate4x comparison is recorded independently in performance-2026-11-07-r5.json.",
+    "No new High,full LLM token-rate,MOSS/GDN/quantized-KV,multi-GPU or dual-socket performance claim.",
+    "Initial failed candidates and the stricter F16 rejection are retained;unsupported formats/layouts use original fallbacks."
+  ],
+  "image_evidence": "performance-2026-11-07-r5.json",
+  "source_heads": [
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30802",
+      "number": 30802,
+      "title": "ggml : support YaRN truncation config on openvino, sycl, vulkan, webgpu, rpc",
+      "state": "open",
+      "merged": false,
+      "base_sha": "15e50990bb2110e04798cbced77b7d0a5e1d772b",
+      "head_sha": "eb8f08c50eadedb70f4360225f48e2b1e71ae98c",
+      "head_repo_full_name": "tokinasin/llama.cpp",
+      "created_at": "2026-10-19T09:38:25Z",
+      "updated_at": "2026-11-05T11:47:58Z",
+      "changed_files": 8
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31544",
+      "number": 31544,
+      "title": "vulkan: add TOP_K_MASK",
+      "state": "open",
+      "merged": false,
+      "base_sha": "3f8af15a76ac8675812e856da45454bafc90f12c",
+      "head_sha": "c73dc854302150e0520682a7f25f048b573e934e",
+      "head_repo_full_name": "developer0hye/llama.cpp",
+      "created_at": "2026-11-02T14:13:19Z",
+      "updated_at": "2026-11-07T04:23:41Z",
+      "changed_files": 8
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/pull/28490",
+      "number": 28490,
+      "title": "ggml-cpu : implement Kronecker and clean up SYCL test special-casing",
+      "state": "open",
+      "merged": false,
+      "base_sha": "9a16f1dbe4722a93ab75a2d15e29aa71ef764c7b",
+      "head_sha": "d3cbd211da1ae71623a803a2ff966a08cb4d662e",
+      "head_repo_full_name": "philip-jingxin/llama.cpp",
+      "created_at": "2026-09-06T12:49:30Z",
+      "updated_at": "2026-11-07T00:48:50Z",
+      "changed_files": 2
+    }
+  ],
+  "review_source_only_sha256": {
+    "q5-gemm-full.inc": "056780d1a549b156b8c2e704a0f51ae131408d614689b4881b59be3413157c18",
+    "q5-gemm-haswell.inc": "4e64793963e500ac675e69291ebe89f23aa23acdc82fed1eed43d6b6ab63e8cd",
+    "q6-gemm-full.inc": "0de4289116ec1e1de7557d7a78deeffdb3d098541d41e99b0125047142c61365",
+    "q6-gemm-haswell.inc": "ac174db6158599960578947ffe2ec1d7a7968ec950000d3c34b4f43aaa562a7e"
+  },
+  "initial_rejected_candidate_native_sha256": "3127e1c4ce0ae640597331d8166d4f7501abae5a1c40987408837b2f893e961c",
+  "discussion_counts": {
+    "19706": 1,
+    "19707": 0,
+    "27258": 45,
+    "28490": 23,
+    "28528": 14,
+    "29121": 1,
+    "29929": 1,
+    "30193": 24,
+    "30196": 39,
+    "30738": 9,
+    "30802": 0,
+    "31544": 7
+  }
+}

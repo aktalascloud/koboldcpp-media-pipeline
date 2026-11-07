@@ -9,20 +9,20 @@ Goal: one portable KoboldCpp.exe with one runtime and a common on-demand API for
 - Music: YuE2 MP3. SFX: SA3 CPU WAV/MP3,0.25–60s. Speech/helper/STT use a configurable provider and explicit RU/EN voices.
 - Video: Wan5B Turbo, full encoder + Pro FP32, Euler/beta4, WG512, threshold576, ClearReality720p/faces, RIFE48FPS default/60 optional. Audio-driven lip-sync is a separate optional stage; this is not joint AV inference. Native limit121 frames; conservative tested clip73. Client project15 s default/30 s maximum.
 
-**Core1.125 · 2026-11-07 · `efddce0e`.** 65 Native patches,7 new adaptations;Pillow13.0.0. [Catalog and PR review](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/blob/concedo_experimental/performance/review-2026-11-07-r5.md) · [Separate media patch](patches/pillow13-security/README.md).
+**Core1.125 · 2026-11-07 · `ebe56a51`.** 70 Native patches,5 new;Pillow13.0.0. [PR review](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/blob/concedo_experimental/performance/review-2026-11-07-r6.md) · [Media patch](patches/pillow13-security/README.md).
 
 ## Manual Normal+4× · 2026-11-07
 
-Latest available official rolling1.125 `db00fc38`,updated November3 → `efddce0e`. Three arms:stock,previous0519dcbf,new EXE;the same current models,settings,prompt and seed424242,no High.3 Normal/arm,first separate,warm median of two;2 separate4×/arm with photo resident before every call.
+Official rolling1.125 `db00fc38`,updated November3 → `ebe56a51`. Three arms:stock,preceding efddce0e,new EXE. Current models,settings,prompt and seed424242 preserved;no High.3 Normal/arm,first separate,warm median of two;2 separate4×/arm,photo resident before every call.
 
-| Stage | Official1.125 | Fork efddce0e | Less time |
+| Stage | Official1.125 | New fork | Less time |
 |---|---:|---:|---:|
-| Native | 176.810 s | 143.500 s | 33.310 s / 18.84% |
-| Normal ready | 185.187 s | 152.333 s | 32.854 s / 17.74% |
-| Separate4× | 2.838 s | 2.772 s | 0.066 s / 2.33% |
-| Normal+4×* | 188.025 s | 155.105 s | 32.920 s / 17.51% |
+| Native | 176.000 s | 142.968 s | 33.032 s / 18.77% |
+| Normal ready | 182.848 s | 150.999 s | 31.849 s / 17.42% |
+| Separate4× | 2.809 s | 2.744 s | 0.065 s / 2.33% |
+| Normal+4×* | 185.657 s | 153.743 s | 31.914 s / 17.19% |
 
-*Sum of independently measured phase medians,not one joint API request. Production Pipeline/private Native HTTP includes PNG/base64/JSON;public5001 queue/transport,model loading and photo return are excluded. All9 raw/finished RGB and6 SR outputs match. Against previous0519dcbf,the sum saves **2.745s / 1.74%**;separate4× takes **33.5ms longer**. SR shares identical media code;this is not an upscaler-kernel gain. [Every repeat,range,load,hash and limit](results/performance-2026-11-07-r4.json). Arm order is fixed,sample size small.
+*Sum of separately measured phase medians,not one API request. Production Pipeline/private Native HTTP includes PNG/base64/JSON;public5001 queue/transport,model loading and photo return are excluded. All9 raw/finished RGB and6 SR outputs match. Against preceding efddce0e,no additional photo speedup is demonstrated:phase ranges overlap and Native is essentially unchanged. Observed phase-sum change **-0.119s / -0.08%**;4× changes by **-17.5ms**. SR code is shared,this is not an upscaler-kernel gain. [Every repeat,range,load,hash and limit](results/performance-2026-11-07-r5.json). Arm order is fixed.
 
 | Actual Normal | Actual4x, full lossless image linked |
 |---|---|
