@@ -1,0 +1,102 @@
+{
+  "date": "2026-11-07",
+  "source_commit": "9958bb20b97595a9b19238aa4750c9498668e4c3",
+  "native_executable_sha256": "0519dcbfe1f2b90bee8e22c4017520f3c279c214449c3018f68b342be6057f70",
+  "native_patches": 58,
+  "new_since_previous_published_native": 12,
+  "new_sdcpp_ports": 3,
+  "leejet_master": "5a1ba5d895bec4e07deab80d6d791721cd59d9c2",
+  "lostruins_master": "bcc7e29568b94a25f78e99d34a8fa048d77536b1",
+  "lostruins_default_date": "2026-08-11",
+  "lostruins_other_branches": [
+    {
+      "name": "fix_mem_leak",
+      "head": "804d1c71bdd0bf0cce74ec6bf4e599f9613529e7",
+      "date": "2026-08-12",
+      "scope": "Old VAE cleanup API; current vendored code has a newer workspace lifecycle. No blind rollback."
+    },
+    {
+      "name": "add_ltx_a2v_support",
+      "head": "ae7f9ef61dd16f7f05f27124d3059c4b60153427",
+      "date": "2026-06-17",
+      "scope": "Old audio/video branch, outside the retained two-month PR window; no new model recipe or weights selected."
+    }
+  ],
+  "selected_prs": [
+    {
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2263",
+      "title": "fix: support integer LoRA scalar conversion to FP32",
+      "head": "d1aaf418df791152e9b9029ada47f7ea3bd32d29",
+      "base": "1350cf5097b644dbb3abcbc8cdf4521fdfbccef3",
+      "diff_sha256": "c9bfc1db48067cbeaa4bfec1f1e7e0eeb550625368cb0237742ffe3fb143e163",
+      "decision": "adapted",
+      "reason": "I32 to F32 LoRA scalar conversion;10 extreme/integer values and4 control paths."
+    },
+    {
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2251",
+      "title": "perf: optimize Vulkan kernels, graph fusion, and workspace reuse",
+      "head": "1e0e4f36938dfc163f255678c37d93790b3223ac",
+      "base": "e239e4b0fd3de49834cec67031a44796ca465abc",
+      "diff_sha256": "4a3a72f6500c0046ab6f36448b0da7e39c2ece993e316f4731aea68d891d6d93",
+      "decision": "partly adapted",
+      "reason": "Cache matching scheduler-fallback memory plans. Preserve this fork direct path, scheduler flag and single-device gate.15 invalidation/control cases; warm operation timings only. Broader3D decomposition/backend updates not copied."
+    },
+    {
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2256",
+      "title": "fix: retry Vulkan capacity checks after memory reclamation",
+      "head": "f9355068ea78d19645270119e4aa89ce25299211",
+      "base": "45a63ac460b9403df7a739bbc8662cb7d867eace",
+      "diff_sha256": "99dbe67bb856cec4de215861c685af4cf84f14853f97db489fbb7876e7c46941",
+      "decision": "adapted",
+      "reason": "This tree lacks the new SD Vulkan cache-clear extension. Synchronize pending Vulkan frees once when the budget allows, and honor the final detailed query only without remaining reclamation.17 stubbed capacity-provider cases; no sleep or budget change."
+    },
+    {
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2257",
+      "title": "fix: chunk MiniMax-H3 MLP to respect backend buffer limits",
+      "head": "792cdfa292a8eb184a0a073e6e1686ba35f3667c",
+      "base": "45a63ac460b9403df7a739bbc8662cb7d867eace",
+      "diff_sha256": "1bad5fb17df58d66ef456587bfd4f94ef858e9865a6f12697e5a75cf87547eff",
+      "decision": "not enabled",
+      "reason": "H3 expanded-MLP chunking changes graph shape and needs model/backend numerical qualification. No H3 weights were downloaded or selected."
+    },
+    {
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2283",
+      "title": "fix: clean LoRA multiplier and prompt spacing in image metadata",
+      "head": "149883deed15e35b7745529443c2cfbf27250de4",
+      "base": "5a1ba5d895bec4e07deab80d6d791721cd59d9c2",
+      "diff_sha256": "7785eb56f4c3757c09a96289ecde51555edac3b33a3d8bd1757287f0082f1c32",
+      "decision": "rejected",
+      "reason": "Four-decimal multiplier rounding is lossy for replay; prompt whitespace trimming changes tokenization. Preserve exact weights and prompts."
+    },
+    {
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2273",
+      "title": "perf(vulkan): accelerate MOSS normalization and SiTU staging",
+      "head": "93e39d7018b34aefb313ab161532bc3fb52ca028",
+      "base": "3e92bf990ad70566212ee5eb27ad7570fb7ed2af",
+      "diff_sha256": "ca1352859ed59f2425fdd5aa93c520f09004a6830df5764b751f2fabee936b28",
+      "decision": "already partly retained; further extension deferred",
+      "reason": "Earlier FA V staging is retained. New RMS-affine/SiTU extension registration depends on a different GGML extension ABI. Do not replace the shared LLM/media GGML or enable an unqualified shader. Existing normalization and its validated math stay in place."
+    },
+    {
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2280",
+      "title": "perf(vulkan): accelerate packed INT4 with cooperative matrices",
+      "head": "5c8ae89d28d5ed41af552e40dfc6864ba7d6e79d",
+      "base": "f5df5f8b84f139f1e80496902da90798a0d92896",
+      "diff_sha256": "490b9a3960ff497e4988fd47ea8d39a600f5fc5480eb365b236897dee25fbe12",
+      "decision": "not enabled",
+      "reason": "Packed W4 integer-dot/cooperative-matrix kernels require hardware capabilities absent on Polaris, and can change FP accumulation order. No feature spoofing or automatic weight conversion."
+    },
+    {
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2250",
+      "title": "refactor: replace manual gated activations with native ggml GLU",
+      "head": "5dc18c7247939d096b643336cd9b76011b1c806e",
+      "base": "37bc88b5e97a213821949732ea66c58ae8ffc784",
+      "diff_sha256": "150ea15ebb5b565eff92f5f4e79993410e6c7eb9539e7a303b2a645d034973b7",
+      "decision": "not enabled",
+      "reason": "Bulk GLU replacements span many models and need numerical checks against this fork CPU/GPU activation/table implementations. No broad arithmetic rewrite without that evidence."
+    }
+  ],
+  "scope": "Fresh upstream head/commit review,34 recent PR metadata results and8 selected full diffs/comments. Earlier two-month inventory/diff queue remains separately documented; no new whole-repository semantic audit is claimed.",
+  "whole_model_speed_measured": false,
+  "prior_focused_review": "pr-review-2026-11-07-r3.json"
+}

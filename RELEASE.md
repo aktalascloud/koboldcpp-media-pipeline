@@ -1,5 +1,8 @@
-Portable media completed-source review · 2026-11-07
+Media security and SDCPP update · 2026-11-07
 
-- Pin Core1.125 `5e7c8de5` and its46 described patches; current models/settings stay configurable.
-- Normal warm API 155.430 s → 155.695 s; separate4× API 5.498 s → 5.475 s. RGB hashes match. [All repeats](results/performance-2026-11-07-r2.json).
-- [CPU operation gains and working-set controls](results/operations-2026-11-07-r2.json) are separate from whole-model throughput. Startup, exact profiles and pinned components verified. [Licenses](docs/LICENSES.md).
+- Core1.125 `0519dcbf`,official `9958bb2`,58 Native patches. SDCPP memory planning/reclamation and integer LoRA fixes retain existing model math/settings.
+- Pillow12.3.0→13.0.0 from original hash-pinned wheels;9 saved-image/processing controls retain exact pixels. [Separate patch](patches/pillow13-security/README.md) · [Security scope](results/security-2026-11-07.json).
+- One portable master,unchanged profiles. [Operation checks and first-miss costs](results/operations-2026-11-07-r4.json).
+- Runtime/model base assets are reused; Setup applies the Pillow security update before loading models or building its local master. No main or non-commercial weights mirrored.
+
+Manual Normal+4×: **187.107→158.073s**, **29.034s / 15.52% less time**,sum of independently measured phase medians. Same settings/seed,no High,exact RGB. [All repeats,cohort identities and scope](results/performance-2026-11-07-r3.json). No new LLM token benchmark.

@@ -1,0 +1,269 @@
+{
+  "date": "2026-11-07",
+  "source_commit": "8192a34451989f938bdd2b7d92a26517dadd30a1",
+  "native_executable_sha256": "0bbe1cf2a1af12ee07e7add158a1a281ce483c92c86a08f616b25f66386bde9d",
+  "patch_sha256": "bebc3cce213c249ba85f39a4f9de60395d1cacfd4b7bb56d864b683a54e7aacd",
+  "whole_model_speed_measured": false,
+  "checks": {
+    "gguf-check": {
+      "gguf_roundtrips": 8,
+      "shape_bounds": 4,
+      "canary_exact": true
+    },
+    "rpc-check": {
+      "rpc_deep_nodes": 300000,
+      "rpc_contract_cases": 8,
+      "deserializer": "stub"
+    },
+    "quant-before": {
+      "quant_cases": 256,
+      "failed": 188,
+      "types": 9,
+      "isa": "AVX2/FMA/F16C"
+    },
+    "quant-after": {
+      "quant_cases": 256,
+      "failed": 0,
+      "types": 9,
+      "isa": "AVX2/FMA/F16C"
+    }
+  },
+  "rpc_bounds": {
+    "rpc_span_cases": 4320,
+    "production_predicates": 5
+  },
+  "iq4_decode": {
+    "exact_scale_cases": 65536,
+    "packed_byte_cases": 256,
+    "rgb_or_model_test": false,
+    "trials": [
+      {
+        "elements": 32,
+        "repeat": 0,
+        "before_us": 0.0299264,
+        "after_us": 0.0082192
+      },
+      {
+        "elements": 32,
+        "repeat": 1,
+        "before_us": 0.0293688,
+        "after_us": 0.0085184
+      },
+      {
+        "elements": 32,
+        "repeat": 2,
+        "before_us": 0.029544,
+        "after_us": 0.0081688
+      },
+      {
+        "elements": 32,
+        "repeat": 3,
+        "before_us": 0.0299768,
+        "after_us": 0.0085
+      },
+      {
+        "elements": 32,
+        "repeat": 4,
+        "before_us": 0.029464,
+        "after_us": 0.0083664
+      },
+      {
+        "elements": 32,
+        "repeat": 5,
+        "before_us": 0.030116,
+        "after_us": 0.0081992
+      },
+      {
+        "elements": 32,
+        "repeat": 6,
+        "before_us": 0.0293624,
+        "after_us": 0.0087712
+      },
+      {
+        "elements": 160,
+        "repeat": 0,
+        "before_us": 0.115376,
+        "after_us": 0.022572
+      },
+      {
+        "elements": 160,
+        "repeat": 1,
+        "before_us": 0.11426,
+        "after_us": 0.022124
+      },
+      {
+        "elements": 160,
+        "repeat": 2,
+        "before_us": 0.113976,
+        "after_us": 0.022124
+      },
+      {
+        "elements": 160,
+        "repeat": 3,
+        "before_us": 0.11588,
+        "after_us": 0.022484
+      },
+      {
+        "elements": 160,
+        "repeat": 4,
+        "before_us": 0.117216,
+        "after_us": 0.022612
+      },
+      {
+        "elements": 160,
+        "repeat": 5,
+        "before_us": 0.114932,
+        "after_us": 0.022124
+      },
+      {
+        "elements": 160,
+        "repeat": 6,
+        "before_us": 0.116448,
+        "after_us": 0.023888
+      },
+      {
+        "elements": 4096,
+        "repeat": 0,
+        "before_us": 2.7643,
+        "after_us": 0.5204
+      },
+      {
+        "elements": 4096,
+        "repeat": 1,
+        "before_us": 2.7809,
+        "after_us": 0.509
+      },
+      {
+        "elements": 4096,
+        "repeat": 2,
+        "before_us": 2.8854,
+        "after_us": 0.5098
+      },
+      {
+        "elements": 4096,
+        "repeat": 3,
+        "before_us": 2.7545,
+        "after_us": 0.5136
+      },
+      {
+        "elements": 4096,
+        "repeat": 4,
+        "before_us": 2.7618,
+        "after_us": 0.5165
+      },
+      {
+        "elements": 4096,
+        "repeat": 5,
+        "before_us": 2.7765,
+        "after_us": 0.509
+      },
+      {
+        "elements": 4096,
+        "repeat": 6,
+        "before_us": 2.7418,
+        "after_us": 0.5084
+      },
+      {
+        "elements": 65536,
+        "repeat": 0,
+        "before_us": 47.2371,
+        "after_us": 12.422
+      },
+      {
+        "elements": 65536,
+        "repeat": 1,
+        "before_us": 47.0092,
+        "after_us": 12.4915
+      },
+      {
+        "elements": 65536,
+        "repeat": 2,
+        "before_us": 46.9785,
+        "after_us": 12.3624
+      },
+      {
+        "elements": 65536,
+        "repeat": 3,
+        "before_us": 47.484,
+        "after_us": 12.263
+      },
+      {
+        "elements": 65536,
+        "repeat": 4,
+        "before_us": 47.3114,
+        "after_us": 12.24
+      },
+      {
+        "elements": 65536,
+        "repeat": 5,
+        "before_us": 47.4827,
+        "after_us": 12.4203
+      },
+      {
+        "elements": 65536,
+        "repeat": 6,
+        "before_us": 47.369,
+        "after_us": 12.439
+      }
+    ],
+    "scope": "Isolated production IQ4_NL decoder, Haswell/O3/LTO; finite warm input, alternating order, seven repetitions, one eligible thread pinned and restored. No model speed claim.",
+    "summary": [
+      {
+        "elements": 32,
+        "before_median_us": 0.029544,
+        "after_median_us": 0.0083664,
+        "less_time_percent": 71.68155970755483,
+        "before_range_us": [
+          0.0293624,
+          0.030116
+        ],
+        "after_range_us": [
+          0.0081688,
+          0.0087712
+        ]
+      },
+      {
+        "elements": 160,
+        "before_median_us": 0.115376,
+        "after_median_us": 0.022484,
+        "less_time_percent": 80.51241159339897,
+        "before_range_us": [
+          0.113976,
+          0.117216
+        ],
+        "after_range_us": [
+          0.022124,
+          0.023888
+        ]
+      },
+      {
+        "elements": 4096,
+        "before_median_us": 2.7643,
+        "after_median_us": 0.5098,
+        "less_time_percent": 81.55771804796873,
+        "before_range_us": [
+          2.7418,
+          2.8854
+        ],
+        "after_range_us": [
+          0.5084,
+          0.5204
+        ]
+      },
+      {
+        "elements": 65536,
+        "before_median_us": 47.3114,
+        "after_median_us": 12.4203,
+        "less_time_percent": 73.74776480932714,
+        "before_range_us": [
+          46.9785,
+          47.484
+        ],
+        "after_range_us": [
+          12.24,
+          12.4915
+        ]
+      }
+    ]
+  }
+}

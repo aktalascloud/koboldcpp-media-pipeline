@@ -1,0 +1,9 @@
+{
+  "repository": "aktalascloud/koboldcpp-media-pipeline",
+  "base": "cc06bc09d2066f57a6a1a7d09bac754393188637",
+  "patch_sha256": "b4b7617c98e551d25634f580904b041ea7c7c4fc0c9da99ebeaf378e83d5086a",
+  "local_version": "13.0.0",
+  "local_pixel_controls": 9,
+  "wheels_mirrored": false,
+  "source": "https://pillow.readthedocs.io/en/stable/releasenotes/13.0.0.html"
+}

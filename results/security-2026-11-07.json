@@ -1,0 +1,117 @@
+{
+  "date": "2026-11-07",
+  "source_commit": "8192a34451989f938bdd2b7d92a26517dadd30a1",
+  "native_executable_sha256": "0519dcbfe1f2b90bee8e22c4017520f3c279c214449c3018f68b342be6057f70",
+  "advisories": [
+    {
+      "id": "GHSA-qhvp-gj7g-rw26",
+      "status": "already upstream",
+      "proof": "All six named GPT-J/GPT-2 loader files reject n_dims outside1..2 before the fixed-size array loop; source inspection, no unsafe model executed."
+    },
+    {
+      "id": "GHSA-xv6q-pfc5-4vf3",
+      "status": "already upstream",
+      "proof": "bff9a7a TTS hardening: checked DAC layer/quantizer indices and zero guard; Kokoro cells/resblocks; Dia encoder checks its own vector."
+    },
+    {
+      "id": "GHSA-4pq2-hqcm-7phq",
+      "status": "already upstream",
+      "proof": "990de01 legacy hardening: positive/divisible header dimensions, tensor type checks, bounded legacy LoRA names, evaluation-window checks and RWKV vocabulary checks. No new claim of full legacy-parser fuzz coverage."
+    },
+    {
+      "id": "GHSA-h59g-8cq4-cqjj",
+      "status": "extended",
+      "proof": "HTTP context bound already upstream; this patch additionally caps direct native C ABI repetition history by context before allocation."
+    }
+  ],
+  "pillow": {
+    "before": "12.3.0",
+    "after": "13.0.0",
+    "wheel": {
+      "version": "13.0.0",
+      "filename": "pillow-13.0.0-cp312-cp312-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/ff/cd/73a79ecdc822076002eb24b5e1e4a530b0bb5310fcb6d239abbec877110b/pillow-13.0.0-cp312-cp312-win_amd64.whl",
+      "sha256": "ff3fe9eb621fbb9db4c4be33ab946f6bac5f98ab50ca8d3260503653656c961b",
+      "bytes": 7272166
+    },
+    "identical_pixel_cases": 9,
+    "controls": {
+      "photo-native.png": {
+        "size": [
+          736,
+          1104
+        ],
+        "mode": "RGB",
+        "sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c"
+      },
+      "photo-normal.png": {
+        "size": [
+          736,
+          1104
+        ],
+        "mode": "RGB",
+        "sha256": "45e5e5f0914d26a175954a4ef3baefd3fe4db4b9dab0c5c4dfb3d667b7bb15bd"
+      },
+      "photo-eyes.png": {
+        "size": [
+          200,
+          115
+        ],
+        "mode": "RGB",
+        "sha256": "a5416b77916bf4df74edf9e40768180e5bbfa483df7b6c8d45a885222c56f957"
+      },
+      "photo-4x.webp": {
+        "size": [
+          2944,
+          4416
+        ],
+        "mode": "RGB",
+        "sha256": "05099036641fa08b869aea3a3102c57cf2aa7bbba6b54566bd0c151155584b84"
+      },
+      "resize": {
+        "size": [
+          113,
+          89
+        ],
+        "mode": "RGB",
+        "sha256": "152faa5e816438a2e0b17ecbb4fb8014a70ccb58205cffaca16ef28de4f28e1c"
+      },
+      "blur": {
+        "size": [
+          37,
+          29
+        ],
+        "mode": "RGB",
+        "sha256": "05bfdb39b38fe94633ba202bcc103f4abd929ddd8d8cf0ce7ccb75207388ed1e"
+      },
+      "rotate": {
+        "size": [
+          37,
+          29
+        ],
+        "mode": "RGB",
+        "sha256": "54710a1714d350197cc2aee032a0943922bf45600605fa40c222f1ec0543ee5f"
+      },
+      "composite": {
+        "size": [
+          37,
+          29
+        ],
+        "mode": "RGB",
+        "sha256": "ac49134f7bd69277344d18d942a54d281123b85fb67f32a8a3a2cc5b564f9928"
+      },
+      "jpeg95": {
+        "size": [
+          37,
+          29
+        ],
+        "mode": "RGB",
+        "sha256": "fe21e9b37bbf8f6a16e5d2b2e14c27d7517bc6c4c007e35997bf128905d3e759"
+      }
+    },
+    "installed_verified": true
+  },
+  "scope": "Source checks and bounded non-model fixtures; no hostile request sent to the running service and no universal security certification.",
+  "original_validation_native_sha256": "0bbe1cf2a1af12ee07e7add158a1a281ce483c92c86a08f616b25f66386bde9d",
+  "current_source_review": "SDCPP follow-up retains all earlier security changes; original fixtures keep their own cohort."
+}

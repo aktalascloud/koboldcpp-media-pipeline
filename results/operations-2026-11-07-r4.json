@@ -1,0 +1,102 @@
+{
+  "date": "2026-11-07",
+  "measured_at": "2026-11-07T09:56:53.477638+00:00",
+  "source_commit": "9958bb20b97595a9b19238aa4750c9498668e4c3",
+  "native_executable_sha256": "0519dcbfe1f2b90bee8e22c4017520f3c279c214449c3018f68b342be6057f70",
+  "patch_sha256": "b85178a8b60e947d2c4ba2fa92b9a712e9ce8e1d0bf67f52140fbb27de239c48",
+  "whole_model_speed_measured": false,
+  "workspace": {
+    "scope": "Warm repeated fallback memory planning only. Real GGML CPU backends with synthetic fallback, SD backend discovery/logging stubs, one allowed thread pinned/restored. Direct supported graphs retain the original fast path. No inference or GPU timing.",
+    "summary": {
+      "uncached_median_us": 789.66875,
+      "cached_median_us": 221.7625,
+      "less_time_percent": 71.91702216910572,
+      "uncached_range_us": [
+        738.24375,
+        803.678125
+      ],
+      "cached_range_us": [
+        181.2625,
+        242.453125
+      ]
+    },
+    "raw": {
+      "workspace_contract_cases": 15,
+      "backends": "real CPU, synthetic fallback",
+      "graph_nodes": 512,
+      "first_uncached_us": 902.8,
+      "first_cached_miss_us": 973.5,
+      "trials": [
+        {
+          "repeat": 0,
+          "uncached_us": 803.678125,
+          "cached_us": 242.453125
+        },
+        {
+          "repeat": 1,
+          "uncached_us": 793.671875,
+          "cached_us": 235.290625
+        },
+        {
+          "repeat": 2,
+          "uncached_us": 794.646875,
+          "cached_us": 233.3
+        },
+        {
+          "repeat": 3,
+          "uncached_us": 788.821875,
+          "cached_us": 221.7625
+        },
+        {
+          "repeat": 4,
+          "uncached_us": 789.66875,
+          "cached_us": 201.13125
+        },
+        {
+          "repeat": 5,
+          "uncached_us": 783.546875,
+          "cached_us": 190.584375
+        },
+        {
+          "repeat": 6,
+          "uncached_us": 738.24375,
+          "cached_us": 181.2625
+        }
+      ]
+    },
+    "cold_scope": "Two single unpinned first-pass samples; the cached miss is slower. No statistical cold-start claim.",
+    "input_shape": [
+      128,
+      4,
+      1,
+      1
+    ],
+    "input_strides_bytes": [
+      4,
+      544,
+      2176,
+      2176
+    ],
+    "timed_graph": "512 SCALE nodes; final and node128 are outputs; no tensor compute is executed."
+  },
+  "scalar": {
+    "i32_scalar_values": 10,
+    "control_paths": 4,
+    "weights_or_models_loaded": false
+  },
+  "capacity": {
+    "capacity_cases": 17,
+    "production_tail_extracted": true,
+    "backend_memory_queries": "stub"
+  },
+  "fixture": {
+    "executable_sha256": "93e1fdd95a266a1083636f2541717ae9f220e7d55114706c1e02a96bd0e5be41",
+    "production_cpp_sha256": "6cec808c45651e2d833dc17b6801659935144feb3ee1672ab616e6a5e62fe1bf",
+    "compiler": "GCC13.2, baseline x64 ISA, Haswell tuning, O3/LTO; linked CPU compute objects use Haswell/AVX2",
+    "measurement_official_base": "8192a34451989f938bdd2b7d92a26517dadd30a1",
+    "current_official_base": "9958bb20b97595a9b19238aa4750c9498668e4c3",
+    "native_sha_role": "Build containing the checked source; timings belong to the separate fixture EXE, not to whole Native requests.",
+    "later_official_change": "9958bb2 changes koboldcpp.py only; the measured SDCPP C++ source is unchanged."
+  },
+  "earlier_decoder_evidence": "operations-2026-11-07-r3.json; retained with its own0bbe1cf2 SHA and measurement date"
+}

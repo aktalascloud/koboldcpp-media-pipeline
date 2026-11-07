@@ -4,6 +4,7 @@ $taskRoot=[IO.Path]::GetFullPath($PSScriptRoot)
 $taskManifest=Get-Content -LiteralPath (Join-Path $taskRoot 'release-assets.json') -Raw|ConvertFrom-Json
 $taskModelManifest=Get-Content -LiteralPath (Join-Path $taskRoot 'models.json') -Raw|ConvertFrom-Json
 $taskModelPaths=@($taskModelManifest.models|ForEach-Object {$_.path})
+$taskSecurePillow=Test-Path -LiteralPath (Join-Path $taskRoot 'runtime\python\Lib\site-packages\pillow-13.0.0.dist-info\METADATA')
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 function Assert-TaskNoReparse([string]$Path){
     $taskParent=[IO.Path]::GetDirectoryName($Path)
@@ -23,6 +24,10 @@ foreach($taskAsset in $taskManifest.assets){
         foreach($taskEntry in $taskZip.Entries){
             $taskName=$taskEntry.FullName.Replace('\','/')
             if($taskName.StartsWith('/') -or $taskName.Split('/') -contains '..' -or $taskName.Contains(':')){throw 'Unsafe release archive path'}
+            if($taskAsset.name -eq 'media-windows-runtime.zip'){
+                if($taskName -in @('runtime/requirements.lock.txt','runtime/versions.json')){continue}
+                if($taskSecurePillow -and ($taskName.StartsWith('runtime/python/Lib/site-packages/PIL/') -or $taskName.StartsWith('runtime/python/Lib/site-packages/pillow-12.3.0.dist-info/'))){continue}
+            }
             $taskAllowed=$false
             foreach($taskPrefix in $taskAsset.extract_prefixes){if(($taskPrefix.EndsWith('/') -and $taskName.StartsWith($taskPrefix,[StringComparison]::Ordinal)) -or $taskName -eq $taskPrefix){$taskAllowed=$true;break}}
             if(-not $taskAllowed -or $taskName.EndsWith('/')){continue}

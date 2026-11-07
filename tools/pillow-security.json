@@ -1,0 +1,28 @@
+{
+  "version": "13.0.0",
+  "wheel": {
+    "version": "13.0.0",
+    "filename": "pillow-13.0.0-cp312-cp312-win_amd64.whl",
+    "url": "https://files.pythonhosted.org/packages/ff/cd/73a79ecdc822076002eb24b5e1e4a530b0bb5310fcb6d239abbec877110b/pillow-13.0.0-cp312-cp312-win_amd64.whl",
+    "sha256": "ff3fe9eb621fbb9db4c4be33ab946f6bac5f98ab50ca8d3260503653656c961b",
+    "bytes": 7272166
+  },
+  "pip": {
+    "filename": "pip-26.1.1-py3-none-any.whl",
+    "url": "https://files.pythonhosted.org/packages/3a/eb/fea4d1d51c49832120f7f285d07306db3960f423a2612c6057caf3e8196f/pip-26.1.1-py3-none-any.whl",
+    "sha256": "99cb1c2899893b075ff56e4ed0af55669a955b49ad7fb8d8603ecdaf4ed653fb",
+    "bytes": 1812777
+  },
+  "source": "https://pillow.readthedocs.io/en/stable/releasenotes/13.0.0.html",
+  "accepted_baseline_sha256": {
+    "PIL/_avif.cp312-win_amd64.pyd": "fc1a8eee5d661ec89d2b26381ff7bae85eada84295d0c7feb4aee55680e5daf8",
+    "PIL/_imaging.cp312-win_amd64.pyd": "f791f26ad9ee887309d59ffd8f1fa741ae43ece5bb5aaa5d4d0dc91f5e13b0ef",
+    "PIL/_imagingcms.cp312-win_amd64.pyd": "0577416aab0bd6fd6cd7e1f738bdcd3f096a99e42133528310b4ad841fd3fc94",
+    "PIL/_imagingft.cp312-win_amd64.pyd": "64f302c5d4b9b7ee282705dfc04844f250b09f1888cdd39e259a46c2cf214f26",
+    "PIL/_imagingmath.cp312-win_amd64.pyd": "9b0df6aed0119b06197f57b3de11ec9b1cf048ed021c0619bd3844c18d1af25d",
+    "PIL/_imagingmorph.cp312-win_amd64.pyd": "84437b6f739d4be7bc508a0132bbb8542e0dd32d3882646b87e93a5e9a0c1000",
+    "PIL/_imagingtk.cp312-win_amd64.pyd": "cf40f8cceb3d77f576c96ea46c7ef4f8c0da110361ab6f0226e2d8075b67d8e4",
+    "PIL/_webp.cp312-win_amd64.pyd": "a4be15c1c22433cc77236355faf1bc9a5d766cf2a22b7253ef58eec857e0035e"
+  },
+  "baseline_note": "Known accepted portable12.3.0 binaries with stale wheel RECORD hashes; checked against the accepted portable manifest. Other modified files are preserved."
+}

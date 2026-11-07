@@ -1,5 +1,7 @@
 # Component licenses and attribution
 
+Pillow13.0.0 is obtained directly from PyPI with a pinned Windows CPython3.12 wheel SHA256. Its HPND and bundled codec notices remain in the installed wheel metadata. The pinned pip26.1.1 bootstrap wheel is MIT; it is cached locally only. Neither wheel is mirrored in this repository or its code release. [Security changes](https://pillow.readthedocs.io/en/stable/releasenotes/13.0.0.html).
+
 Original wrapper code: AGPL-3.0. Every runtime/checkpoint has independent terms. Neither this repository license nor a mirror changes the model author's grant.
 
 | Component | Source / terms | Current distribution |

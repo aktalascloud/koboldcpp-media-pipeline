@@ -1,9 +1,2 @@
-* text=auto
-*.py text eol=lf
-*.ps1 text eol=lf
-*.json text eol=lf
-*.kcpps text eol=lf
-*.md text eol=lf
-*.txt text eol=lf
-*.cs text eol=lf
-*.png binary
+# SHA-bound patch artifacts include significant context-space lines.
+*.patch -text -whitespace

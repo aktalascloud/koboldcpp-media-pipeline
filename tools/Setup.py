@@ -124,6 +124,8 @@ def install_original(row,directory):
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--skip-model-downloads',action='store_true');parser.add_argument('--check-only',action='store_true')
     parser.add_argument('--moss-source-directory',type=Path);parser.add_argument('--gpen-path',type=Path);parser.add_argument('--include-rife',action='store_true');parser.add_argument('--listen-host',default='127.0.0.1');args=parser.parse_args();ipaddress.ip_address(args.listen_host)
+    from UpdatePillow import install as update_pillow
+    update_pillow(ROOT)
     catalog=json.loads((ROOT/'models.json').read_text(encoding='utf-8'))
     if args.check_only:
         rows=inventory(catalog);ready=all(r['ok'] for r in rows);print(json.dumps(dict(ready=ready,assets=rows,inference_started=False,registry_changed=False),indent=2));return 0 if ready else 2

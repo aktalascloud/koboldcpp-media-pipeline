@@ -1,0 +1,207 @@
+{
+  "date": "2026-11-07",
+  "source_commit": "8192a34451989f938bdd2b7d92a26517dadd30a1",
+  "native_executable_sha256": "0bbe1cf2a1af12ee07e7add158a1a281ce483c92c86a08f616b25f66386bde9d",
+  "retained_native_patches": 55,
+  "new_native_patches": 9,
+  "selected_prs": 20,
+  "decisions": [
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31843",
+      "title": "rpc : avoid stack exhaustion in create_node with deep graphs",
+      "head": "2514265f81b506b112d2841097876033318e0137",
+      "base": "c0ab6e5c0bab3fb21e6cb9d2371f3c41d85ea775",
+      "diff_sha256": "ce268f202ca95ec93a17baf8853c145b94fb6c1e904b2351fffa824b1946c152",
+      "decision": "adapted",
+      "reason": "Iterative reachable-node materialization; tensor_map replaces the redundant extra seen set; 300000-node traversal and shared/view/error contracts."
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31845",
+      "title": "gguf : retain zero-sized dimensions while trimming trailing ones",
+      "head": "8025df58c4d12ec6b19fc37c0ac1adbe5b397ef0",
+      "base": "cf659f240b232e15700b1721bbb43c1d973c52e9",
+      "diff_sha256": "4f17220823a3860485666d0b2cccb345c3a09f709db1a582cbc1bf77944d511d",
+      "decision": "adapted",
+      "reason": "Writer trims trailing ones, retaining zero axes; eight real GGUF round trips preserve the following tensor."
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31841",
+      "title": "llama : reuse scheduler buffers across requests",
+      "head": "52b443a0f06d4448a2fb4d4306e61e1481f523c9",
+      "base": "c0ab6e5c0bab3fb21e6cb9d2371f3c41d85ea775",
+      "diff_sha256": "b9578f2035bd0e33f91d96c264fee550328c5f3687fbfcf3d660d461a46782e6",
+      "decision": "adapted",
+      "reason": "Retain scheduler capacity and its allocated buffers; preserve explicit no-pipeline retry. Startup/build checked; no multi-request speed claim."
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31419",
+      "title": "ggml-backend: don't upload inputs that are not read ",
+      "head": "6f21a64a0293b23952ca97c2f5c6fea66955c051",
+      "base": "889f2ec96deacbc2d8a9a67dbe181eaa43a2fb3b",
+      "diff_sha256": "8eafde510269d1bfa1901afe91496f15c6ffffd82dbe56146fd0ea65383c6a6d",
+      "decision": "not enabled",
+      "reason": "Conditional graph-branch input uploads need the matching forward-select semantics and backend transfer tests. No measured benefit on the current fixed graph; avoid a speculative global-copy gate."
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31266",
+      "title": "vulkan: avoid redundant scans when zeroing skipped rows",
+      "head": "d3909e1776c476c222743712fc002d623e15a7b2",
+      "base": "19ff817fb25e9a1b838b1d7f9f4325f7bf9779c4",
+      "diff_sha256": "e551c511827cf642f892d3d975245097ae4e50394caa5c53388a2f4b2d432afd",
+      "decision": "already upstream",
+      "reason": "count_experts.comp already counts skipped rows and cooperatively clears only the skipped slots."
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31196",
+      "title": "vulkan: reuse Q8_0 weights in MMVQ for 9-16 columns",
+      "head": "7709e9ef244563fc2f58ab2488aa6b8e0f7b064e",
+      "base": "74b104c9ba5717116b7e65e0cd35397778653304",
+      "diff_sha256": "6a930f912d12f4b57b4b3967303c789f7ad5df9c2964a55c46795274a6bf2509",
+      "decision": "not enabled",
+      "reason": "Wide Q8 MMVQ uses integer-dot hardware absent on Polaris. Reusing A is useful, but a scalar wide kernel has different register/occupancy costs and no qualification here; no capability spoof."
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30487",
+      "title": "vulkan : check combined K+V f16 scratch size in FA dequant path",
+      "head": "c4b3e91c432313170496cd0c092f36b360a113af",
+      "base": "3f8af15a76ac8675812e856da45454bafc90f12c",
+      "diff_sha256": "bddf8fa747d32f6d931468fabc28be8012de6284c1afc5ad159b7fe2221e1bec",
+      "decision": "already upstream",
+      "reason": "Combined K+V allocation limits are checked in the accepted Vulkan source."
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31211",
+      "title": "ggml-cpu x86: fix Q8_0 dot product sign error for -128 (issue #29351)",
+      "head": "52d9833fedc7789734248a15a117844f3dd4aefc",
+      "base": "caa8191df159f764fb0160e3d2fc6be008948aee",
+      "diff_sha256": "922afd9af08e9a5e8391d2f2369e235f0027ad2ffccfa9428e8d3efa84f034b7",
+      "decision": "rejected",
+      "reason": "Clamping -128 to -127 changes the dot product. Use exact operand contracts from29359 instead."
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/pull/29359",
+      "title": "ggml-cpu x86: exact -128 handling in int8 dot-product helpers (fix #29351; excludes q1_0, iq2_*, iq3_*, sgemm, repack)",
+      "head": "9c86968a048a27b5222e3db6357f617907110f67",
+      "base": "53ed051ce5e8193652e449f43216ca3859454f49",
+      "diff_sha256": "1fd05d9bdb6881e3fbc20a5208485cef0531a8bd2e9d13d29ddaa2d22d6fbde8",
+      "decision": "adapted",
+      "reason": "Thirty checked x86 hunks; bounded-weight operand order and guarded Q8 widening. Nine type pairs,256 cases:188 failures before,zero after; excluded kernels remain excluded."
+    },
+    {
+      "url": "https://github.com/ggml-org/ggml/pull/1673",
+      "title": "gguf: fix tensor shape overflow check mismatch and add regression test (#1668)",
+      "head": "497dfdc4791b2988a22c7a8cbff158a171d9de89",
+      "base": "da8e2a54b919557b816b1c2beb432ccb766f7ce0",
+      "diff_sha256": "041dee9a46024a5114262a3fe63e98537cfc3b1dcd9106684af95e732c153985",
+      "decision": "adapted",
+      "reason": "Reader bound matches the constructor even after zero axes and rejects equality before an assert."
+    },
+    {
+      "url": "https://github.com/ggml-org/ggml/pull/1671",
+      "title": "ggml-rpc : fix tensor bounds checks, recv_msg length_error, and destr…",
+      "head": "14e1e905c8e7455d1cdcee800030437cddc975c9",
+      "base": "da8e2a54b919557b816b1c2beb432ccb766f7ce0",
+      "diff_sha256": "eb456a3efb9bea64b6051591e094942da0a2e14fbcfbf7808ac085921390d543",
+      "decision": "adapted",
+      "reason": "Remaining deserialize/set/hash/get/copy bounds use checked subtraction; receive length_error/destructor synchronization already upstream.4320 span cases."
+    },
+    {
+      "url": "https://github.com/ggml-org/ggml/pull/1644",
+      "title": "ggml : fix ubsan error in `ggml_graph_nbytes`",
+      "head": "8dc59f82aa89d81ff86e1b790d1a689332a961c5",
+      "base": "a0d15e246b70dcdd5dc2bde32640778d6701732c",
+      "diff_sha256": "de1bc37ad00a7fbf150e3c28d202be3095600a954abacbe5d8132cd5620f1ba3",
+      "decision": "already upstream",
+      "reason": "ggml_graph_nbytes already uses the non-null1024 sentinel and subtracts it."
+    },
+    {
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2583",
+      "title": "Add new config option for the soft-limit percent",
+      "head": "cfcaf23cbfc779c9b1f55a9a7ee948189ecb7313",
+      "base": "6d2fedf8624e5f05926af3191f9efdcb13c4133c",
+      "diff_sha256": "74e769843fdc076ccc93d7ce0ab551ea71209716529fe06c5e2eceb1766632df",
+      "decision": "not enabled",
+      "reason": "Maintainer resolved warning noise with quiet-mode gating; preserve current settings rather than add a redundant warning option."
+    },
+    {
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2569",
+      "title": "Enable option for RPC server tensor cache in host mode",
+      "head": "de155c6b84095d8656c4df58ecfc672dfc94b5db",
+      "base": "ac19fdb07f2496de3e86a0125a238e7a914ca125",
+      "diff_sha256": "391685bb036b5f0571dd82490078845da78339848f449a21ab6759340f0e74ac",
+      "decision": "already upstream",
+      "reason": "Explicit RPC cache directory and GUI field are present; leave optional caching unchanged."
+    },
+    {
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2531",
+      "title": "sd: fix VAE tiling adjustment to never reduce tile size",
+      "head": "f6d88b26df96442a1c050c28a94733c345cb54f2",
+      "base": "8bb561d758b85b3f8ff405ff23ee963e464ef85e",
+      "diff_sha256": "06d38c3f8f6f6bdfa0f4bfccd63b829836812693ab536f02fb67e2045bb78d95",
+      "decision": "already upstream",
+      "reason": "VAE threshold rounds to64 and respects the upstream256 minimum without shrinking the default tile."
+    },
+    {
+      "url": "https://github.com/ggml-org/ggml/pull/1672",
+      "title": "vulkan: fix struct padding in VkDeviceQueueInfo2 for translation layers",
+      "head": "072081928c86e848141d0bfafdcd4c4eb9a55d43",
+      "base": "da8e2a54b919557b816b1c2beb432ccb766f7ce0",
+      "diff_sha256": "7d3ef8d5cfcf449bd56613c68fcbc09d14445de8ff97aaf4e1f1703b5d8b5b22",
+      "decision": "adapted",
+      "reason": "Zero full flagged queue descriptors, use ordinary getQueue without flags; preserve selected queues and NVIDIA synchronization."
+    },
+    {
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2434",
+      "title": "fix grammar rejection cache: store reject indices, not candidate pointers",
+      "head": "e069a43007d4073a16ec5f51780abc5a804133b5",
+      "base": "6d8d651ebaa9f3af123cee4167c3b2fa3ad64463",
+      "diff_sha256": "c4fbe7cb621bd184095e470947b9704b14d9335418979274ffc951d27b93a3cf",
+      "decision": "already upstream",
+      "reason": "Current grammar memo stores candidate indices and rebuilds current pointers; it no longer caches stale candidate pointers."
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30367",
+      "title": "server : clear slot cache when the global lora config changes",
+      "head": "f410eebbe0fb43dfc37cee868f68e6f592f21e20",
+      "base": "b2f036c0f138414dedc987446f1d9d802f920275",
+      "diff_sha256": "4e2940163d57dbdf45f959061165f4c92cbc0785696bce75b0726f4adf5fe2a1",
+      "decision": "not a matching component",
+      "reason": "Patch targets llama-server slot/global-LoRA handling. Kobold uses its own adapter/request lifecycle; no llama-server slot implementation is built. No assertion that arbitrary dynamic-LoRA paths were exhaustively tested."
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31833",
+      "title": "vulkan: Add 'readonly' to decodeBuf declarations.",
+      "head": "054c1f3d1efdca7f4a189ab2f597b2e24203dde8",
+      "base": "bcb0152876e8f0b684ba70d3defcab6cdf35adb5",
+      "diff_sha256": "c134769fc63eb28373f3639def72493650cfaade10cb738c126f1ae0db685876",
+      "decision": "not enabled",
+      "reason": "Readonly decodeBuf is a cooperative-matrix2 path. Polaris does not execute it; no unmeasured device code change is needed for this build."
+    },
+    {
+      "url": "https://github.com/ggml-org/ggml/pull/1633",
+      "title": "fix for two functions when top_k exceeds the vocabulary size.",
+      "head": "a57b656f51c0fe5acbb2e5037a7c68eb4a00379c",
+      "base": "179b60f27b1019d42da01ac532cabdb8f73ba8b7",
+      "diff_sha256": "d97f2202f27a837786991004346cf1e0444f5086e3094ad22f12de01fa833748",
+      "decision": "not a matching component",
+      "reason": "Changes GPT examples; current production sampler already bounds top-k by the candidate count."
+    }
+  ],
+  "search_scope": "Four focused searches,100-result cap per search; metadata screening is separate from these20 semantic diff reviews. Earlier exhaustive November7 remaining queue is unchanged.",
+  "strata": {
+    "commit": "157f5810bf0458b940521baf59f32fd2f71345c2",
+    "aggregate_sha256": "170e86120643e48e3ab25f8f71235c16aad605db67bc99e64b6245e778af14ac",
+    "scope": "All patch artifacts fetched/pinned, aggregate file index and full-text screen, selected CPU/memory/I-O/security diffs reviewed. The1580kB aggregate is not claimed line-by-line semantically audited.",
+    "adapted": [
+      "Exact IQ4_NL split-half decode adapted to AVX2 shared row decoder",
+      "Pillow13 security wheel, original-provider download"
+    ],
+    "not_selected": [
+      "CUDA PCIe overlap/static addresses require the Strata CUDA verifier and cannot be enabled in Vulkan by copying streams; existing backend async copies retain their dependencies.",
+      "Transposed reduction and staged codebooks were not selected upstream on P40 after noisy/regressing model tests. No unsupported RX580 integer-dot/warp32 assumptions.",
+      "AVX1 h2f and row interleaving target a different kernel; Haswell uses F16C and existing AVX2 dots.",
+      "NUMA arena changes are off by default on their source and unmeasured on this single-node machine; existing affinity policy is preserved."
+    ]
+  },
+  "whole_model_speed_measured": false
+}
