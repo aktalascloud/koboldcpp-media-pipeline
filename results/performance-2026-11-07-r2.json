@@ -1,0 +1,347 @@
+{
+  "date": "2026-11-07",
+  "scope": "Manual current Normal profile and separate 4x through the public loopback API. Three Normal calls per arm (warm comparison excludes first); two upscales per arm. Historical original-stock evidence remains separately dated.",
+  "source_commit": "004173000d5384a5d9c953d97d45475b5efbb395",
+  "patch_sha256": "a45b0a6c8809510897d6319a1330f5eaa62202768cf4f62fa0b89a91a6494410",
+  "executable_sha256": "5e7c8de54808cef1173cb4f0fef25ad6024b42ecefdee7e51ed2339732f69736",
+  "payload": {
+    "prompt": "Professional full-length photograph of an adult woman wearing a light silk dress and black high heels, standing beside a wooden wall clock in a warmly lit hotel lobby. Natural detailed eyes, realistic skin and fabric texture, both hands visible, sharp focus, neutral colors.",
+    "negative_prompt": "",
+    "seed": 424242,
+    "batch_size": 1,
+    "n_iter": 1,
+    "kcpp_quality": "normal"
+  },
+  "before": {
+    "executable_sha256": "da9c0018478627b935cb49c52767ee8c34a767e16093ba6da39d4fc8480889d4",
+    "first_normal": {
+      "http_seconds": 164.4829254000215,
+      "native_seconds": 150.194,
+      "pipeline_seconds": 164.463,
+      "raw_rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c",
+      "rgb_sha256": "4c81e5654981ff11ded1ae7786c4fcb538a7fbf8d33835f4e91a300c99b995e3",
+      "dimensions": [
+        736,
+        1104
+      ]
+    },
+    "normal_repeats": [
+      {
+        "http_seconds": 164.4829254000215,
+        "native_seconds": 150.194,
+        "pipeline_seconds": 164.463,
+        "raw_rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c",
+        "rgb_sha256": "4c81e5654981ff11ded1ae7786c4fcb538a7fbf8d33835f4e91a300c99b995e3",
+        "dimensions": [
+          736,
+          1104
+        ]
+      },
+      {
+        "http_seconds": 155.52165729994886,
+        "native_seconds": 146.387,
+        "pipeline_seconds": 155.503,
+        "raw_rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c",
+        "rgb_sha256": "4c81e5654981ff11ded1ae7786c4fcb538a7fbf8d33835f4e91a300c99b995e3",
+        "dimensions": [
+          736,
+          1104
+        ]
+      },
+      {
+        "http_seconds": 155.33837329992093,
+        "native_seconds": 146.58,
+        "pipeline_seconds": 155.32,
+        "raw_rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c",
+        "rgb_sha256": "4c81e5654981ff11ded1ae7786c4fcb538a7fbf8d33835f4e91a300c99b995e3",
+        "dimensions": [
+          736,
+          1104
+        ]
+      }
+    ],
+    "upscale_repeats": [
+      {
+        "http_seconds": 5.5457396999699995,
+        "pipeline_seconds": 4.1191,
+        "inference_seconds": 0.9575,
+        "rgb_sha256": "8986f021a095423d06e93f101d9949f0ccff8ccb51488522d4f2f522d1d05ef7",
+        "dimensions": [
+          2944,
+          4416
+        ],
+        "photo_return_seconds": 16.126950600068085
+      },
+      {
+        "http_seconds": 5.450818400015123,
+        "pipeline_seconds": 4.0129,
+        "inference_seconds": 0.9198,
+        "rgb_sha256": "8986f021a095423d06e93f101d9949f0ccff8ccb51488522d4f2f522d1d05ef7",
+        "dimensions": [
+          2944,
+          4416
+        ],
+        "photo_return_seconds": 66.09316779999062
+      }
+    ],
+    "settings_sha256": {
+      "Helper.kcpps": "97061be63cb6d1a1faf3b99d9d984dc5885ad434ed0be6a5837960d5a3345f7e",
+      "profiles\\music.kcpps": "89b27cb9fcf0783ace14ef3004a8558f04f68ec643aa52e2d65eaa8aba5ec33e",
+      "profiles\\photo-normal.kcpps": "7dcd9443f96fe1f6141524587a1454e6a8dd0b42ca1ba673259f06fad43163ec",
+      "profiles\\photo-quality.kcpps": "ce1e44bfece9128eb49db39b038fd735bcb66f7a5d8c9d36f9d4f45d7209733a",
+      "profiles\\video.kcpps": "bf15115402c68882d29b308c6c92b02e4efdf95265731d9368bb2c7beeadb2f8",
+      "runtime\\native-environment.json": "cfee531f14d40e8a76140363ada05d6a1bf1b8598b38b803f0c9ce0f1b1cf0a2"
+    },
+    "normal_warm_native": {
+      "median": 146.4835,
+      "min": 146.387,
+      "max": 146.58,
+      "repeats": [
+        146.387,
+        146.58
+      ]
+    },
+    "normal_warm_pipeline": {
+      "median": 155.4115,
+      "min": 155.32,
+      "max": 155.503,
+      "repeats": [
+        155.503,
+        155.32
+      ]
+    },
+    "normal_warm_public_http": {
+      "median": 155.4300152999349,
+      "min": 155.33837329992093,
+      "max": 155.52165729994886,
+      "repeats": [
+        155.52165729994886,
+        155.33837329992093
+      ]
+    },
+    "upscale_inference": {
+      "median": 0.93865,
+      "min": 0.9198,
+      "max": 0.9575,
+      "repeats": [
+        0.9575,
+        0.9198
+      ]
+    },
+    "upscale_pipeline": {
+      "median": 4.066000000000001,
+      "min": 4.0129,
+      "max": 4.1191,
+      "repeats": [
+        4.1191,
+        4.0129
+      ]
+    },
+    "upscale_public_http": {
+      "median": 5.498279049992561,
+      "min": 5.450818400015123,
+      "max": 5.5457396999699995,
+      "repeats": [
+        5.5457396999699995,
+        5.450818400015123
+      ]
+    }
+  },
+  "after": {
+    "executable_sha256": "5e7c8de54808cef1173cb4f0fef25ad6024b42ecefdee7e51ed2339732f69736",
+    "first_normal": {
+      "http_seconds": 161.3457822999917,
+      "native_seconds": 148.68,
+      "pipeline_seconds": 161.326,
+      "raw_rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c",
+      "rgb_sha256": "4c81e5654981ff11ded1ae7786c4fcb538a7fbf8d33835f4e91a300c99b995e3",
+      "dimensions": [
+        736,
+        1104
+      ]
+    },
+    "normal_repeats": [
+      {
+        "http_seconds": 161.3457822999917,
+        "native_seconds": 148.68,
+        "pipeline_seconds": 161.326,
+        "raw_rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c",
+        "rgb_sha256": "4c81e5654981ff11ded1ae7786c4fcb538a7fbf8d33835f4e91a300c99b995e3",
+        "dimensions": [
+          736,
+          1104
+        ]
+      },
+      {
+        "http_seconds": 156.24136039998848,
+        "native_seconds": 146.657,
+        "pipeline_seconds": 156.222,
+        "raw_rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c",
+        "rgb_sha256": "4c81e5654981ff11ded1ae7786c4fcb538a7fbf8d33835f4e91a300c99b995e3",
+        "dimensions": [
+          736,
+          1104
+        ]
+      },
+      {
+        "http_seconds": 155.1487220999552,
+        "native_seconds": 146.634,
+        "pipeline_seconds": 155.119,
+        "raw_rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c",
+        "rgb_sha256": "4c81e5654981ff11ded1ae7786c4fcb538a7fbf8d33835f4e91a300c99b995e3",
+        "dimensions": [
+          736,
+          1104
+        ]
+      }
+    ],
+    "upscale_repeats": [
+      {
+        "http_seconds": 5.5331723999697715,
+        "pipeline_seconds": 4.1129,
+        "inference_seconds": 0.9218,
+        "rgb_sha256": "8986f021a095423d06e93f101d9949f0ccff8ccb51488522d4f2f522d1d05ef7",
+        "dimensions": [
+          2944,
+          4416
+        ],
+        "photo_return_seconds": 21.461753199924715
+      },
+      {
+        "http_seconds": 5.417232299922034,
+        "pipeline_seconds": 3.9954,
+        "inference_seconds": 0.9165,
+        "rgb_sha256": "8986f021a095423d06e93f101d9949f0ccff8ccb51488522d4f2f522d1d05ef7",
+        "dimensions": [
+          2944,
+          4416
+        ],
+        "photo_return_seconds": 10.564315999974497
+      }
+    ],
+    "settings_sha256": {
+      "Helper.kcpps": "65ca9dd3f184319b64ae1b8f6d0cf89ad357ba6e7436dd445a2d47ae5e5f4e8f",
+      "profiles\\music.kcpps": "89b27cb9fcf0783ace14ef3004a8558f04f68ec643aa52e2d65eaa8aba5ec33e",
+      "profiles\\photo-normal.kcpps": "7dcd9443f96fe1f6141524587a1454e6a8dd0b42ca1ba673259f06fad43163ec",
+      "profiles\\photo-quality.kcpps": "ce1e44bfece9128eb49db39b038fd735bcb66f7a5d8c9d36f9d4f45d7209733a",
+      "profiles\\video.kcpps": "bf15115402c68882d29b308c6c92b02e4efdf95265731d9368bb2c7beeadb2f8",
+      "runtime\\native-environment.json": "cfee531f14d40e8a76140363ada05d6a1bf1b8598b38b803f0c9ce0f1b1cf0a2"
+    },
+    "normal_warm_native": {
+      "median": 146.6455,
+      "min": 146.634,
+      "max": 146.657,
+      "repeats": [
+        146.657,
+        146.634
+      ]
+    },
+    "normal_warm_pipeline": {
+      "median": 155.6705,
+      "min": 155.119,
+      "max": 156.222,
+      "repeats": [
+        156.222,
+        155.119
+      ]
+    },
+    "normal_warm_public_http": {
+      "median": 155.69504124997184,
+      "min": 155.1487220999552,
+      "max": 156.24136039998848,
+      "repeats": [
+        156.24136039998848,
+        155.1487220999552
+      ]
+    },
+    "upscale_inference": {
+      "median": 0.9191499999999999,
+      "min": 0.9165,
+      "max": 0.9218,
+      "repeats": [
+        0.9218,
+        0.9165
+      ]
+    },
+    "upscale_pipeline": {
+      "median": 4.05415,
+      "min": 3.9954,
+      "max": 4.1129,
+      "repeats": [
+        4.1129,
+        3.9954
+      ]
+    },
+    "upscale_public_http": {
+      "median": 5.475202349945903,
+      "min": 5.417232299922034,
+      "max": 5.5331723999697715,
+      "repeats": [
+        5.5331723999697715,
+        5.417232299922034
+      ]
+    }
+  },
+  "comparison": {
+    "normal_warm_native": {
+      "before_median_seconds": 146.4835,
+      "after_median_seconds": 146.6455,
+      "less_time_percent": -0.11059266060682305,
+      "ranges_overlap": false
+    },
+    "normal_warm_pipeline": {
+      "before_median_seconds": 155.4115,
+      "after_median_seconds": 155.6705,
+      "less_time_percent": -0.16665433381699568,
+      "ranges_overlap": true
+    },
+    "normal_warm_public_http": {
+      "before_median_seconds": 155.4300152999349,
+      "after_median_seconds": 155.69504124997184,
+      "less_time_percent": -0.17051143533990398,
+      "ranges_overlap": true
+    },
+    "upscale_inference": {
+      "before_median_seconds": 0.93865,
+      "after_median_seconds": 0.9191499999999999,
+      "less_time_percent": 2.0774516592979353,
+      "ranges_overlap": true
+    },
+    "upscale_pipeline": {
+      "before_median_seconds": 4.066000000000001,
+      "after_median_seconds": 4.05415,
+      "less_time_percent": 0.291441219872135,
+      "ranges_overlap": true
+    },
+    "upscale_public_http": {
+      "before_median_seconds": 5.498279049992561,
+      "after_median_seconds": 5.475202349945903,
+      "less_time_percent": 0.41970769102178673,
+      "ranges_overlap": true
+    }
+  },
+  "correctness": {
+    "normal_raw_rgb_identical": true,
+    "normal_finished_rgb_identical": true,
+    "upscaled_rgb_identical": true,
+    "raw_rgb_sha256": "95d4dfa4613e6284681fd188348e3ad9de29f21e93af800edd9994f7815d7b8c",
+    "normal_rgb_sha256": "4c81e5654981ff11ded1ae7786c4fcb538a7fbf8d33835f4e91a300c99b995e3",
+    "upscale_rgb_sha256": "8986f021a095423d06e93f101d9949f0ccff8ccb51488522d4f2f522d1d05ef7",
+    "profile_bytes_preserved": true,
+    "deployment_settings_check": "check_deployment_settings.py"
+  },
+  "operation_measurements": "operations-2026-11-07-r2.json",
+  "source_review": "https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/blob/concedo_experimental/performance/review-2026-11-07-r2.json",
+  "historical_stock_comparison": {
+    "date": "2026-11-02",
+    "evidence": "photo-latest.json",
+    "stock_sha256": "c66550f4852a03ba992132a55bc0b1bb401851967005f10a3b7b7434484aed14",
+    "measured_fork_sha256": "cb260832775124d2fb2bdc7021222a1f6526c82e64456dfdb469bb4c2419ff61"
+  },
+  "limits": [
+    "No new LLM tokens/s result. Operation gains are not whole-pipeline gains.",
+    "Native warm is0.162s (0.11%) longer in these controls. No new repeatable photo acceleration is claimed; API/SR ranges overlap.",
+    "Upscaling and photo return are separate; restoration is not repeated on marked images.",
+    "The prior source/ISA-gated candidate was superseded before this manual image comparison."
+  ]
+}

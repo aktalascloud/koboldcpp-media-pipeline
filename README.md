@@ -9,7 +9,7 @@ Goal: one portable KoboldCpp.exe with one runtime and a common on-demand API for
 - Music: YuE2 MP3. SFX: SA3 CPU WAV/MP3,0.25–60s. Speech/helper/STT use a configurable provider and explicit RU/EN voices.
 - Video: Wan5B Turbo, full encoder + Pro FP32, Euler/beta4, WG512, threshold576, ClearReality720p/faces, RIFE48FPS default/60 optional. Audio-driven lip-sync is a separate optional stage; this is not joint AV inference. Native limit121 frames; conservative tested clip73. Client project15s default/30s maximum.
 
-**Core 1.125 · 2026-11-07 · `da9c0018`.** Verified startup and current Normal/4× outputs. [New measurement data](results/performance-2026-11-07-r1.json).
+**Core 1.125 · 2026-11-07 · `5e7c8de5`.** Normal/4× RGB-identical controls and unchanged user settings. [New measurements](results/performance-2026-11-07-r2.json) · [CPU operation scope](results/operations-2026-11-07-r2.json) · [All46 patches](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/tree/concedo_experimental/performance/patches/series/).
 
 ## Latest saved results
 
