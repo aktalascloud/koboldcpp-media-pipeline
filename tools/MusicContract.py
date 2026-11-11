@@ -2,6 +2,10 @@
 from __future__ import annotations
 import math
 
+SEMANTIC_TOKENS_PER_SECOND = 25
+MAX_MUSIC_SECONDS = 300
+MAX_SEMANTIC_TOKENS = MAX_MUSIC_SECONDS * SEMANTIC_TOKENS_PER_SECOND
+
 class MusicRequestError(ValueError):
     status=422
     def __init__(self,message,code='invalid_music_request'):
@@ -16,6 +20,8 @@ def capabilities(config):
         generate_endpoint='/api/extra/music/generate',prepare_endpoint='/api/extra/music/prepare',
         output_format='mp3',stereo=True,default_steps=config.get('proxy',{}).get('music_defaults',{}).get('num_inference_steps',8),
         duration_control='semantic_max_tokens / 25 is an approximate upper bound' if family=='yue2' else 'duration',
+        max_duration_seconds=MAX_MUSIC_SECONDS if family=='yue2' else None,
+        max_semantic_tokens=MAX_SEMANTIC_TOKENS if family=='yue2' else None,
         locally_tested_seconds=32 if family=='yue2' else None,
         russian_vocals='user-confirmed on the saved short trial' if family=='yue2' else 'previous configuration',
         official_yue2_language_tags=['Chinese','English'] if family=='yue2' else None)
@@ -47,8 +53,10 @@ def prepare_music(payload,config):
     result.setdefault('guidance_scale',1.01 if result['cot']=='off' else 1.)
     duration=result.pop('duration',None)
     if duration is not None:
-        if isinstance(duration,bool) or not isinstance(duration,(int,float)) or not math.isfinite(duration) or not 1<=duration<=360:raise MusicRequestError('duration must be 1..360 seconds; it is an approximate cap, not an exact duration.')
-        tokens=math.ceil(duration*25)
+        if (isinstance(duration, bool) or not isinstance(duration, (int, float))
+                or not 1 <= duration <= MAX_MUSIC_SECONDS):
+            raise MusicRequestError(f'duration must be 1..{MAX_MUSIC_SECONDS} seconds.')
+        tokens=math.ceil(duration * SEMANTIC_TOKENS_PER_SECOND)
         if 'semantic_max_tokens' in result and result['semantic_max_tokens']!=tokens:raise MusicRequestError('duration and semantic_max_tokens conflict.')
         result['semantic_max_tokens']=tokens
     result.setdefault('semantic_max_tokens',750)
@@ -58,7 +66,9 @@ def prepare_music(payload,config):
         if key.endswith(('_min_tokens','_max_tokens','_top_k','_penalty_window')) or key in ('num_inference_steps','seed'):
             if isinstance(value,bool) or not isinstance(value,int) or value<0:raise MusicRequestError(key+' must be a nonnegative integer.')
     if not 1<=result['num_inference_steps']<=64:raise MusicRequestError('num_inference_steps must be 1..64.')
-    if not 1<=result['semantic_max_tokens']<=9000 or result['semantic_min_tokens']>result['semantic_max_tokens']:raise MusicRequestError('Invalid semantic token range (maximum 9000).')
+    if (not 1 <= result['semantic_max_tokens'] <= MAX_SEMANTIC_TOKENS
+            or result['semantic_min_tokens'] > result['semantic_max_tokens']):
+        raise MusicRequestError(f'Invalid semantic token range (maximum {MAX_SEMANTIC_TOKENS}).')
     if isinstance(result['guidance_scale'],bool) or not isinstance(result['guidance_scale'],(int,float)) or not 0<=result['guidance_scale']<=20:raise MusicRequestError('guidance_scale must be 0..20.')
     if 'seed' in result and result['seed']>=2**63:raise MusicRequestError('seed must be below 2**63.')
     for prefix in ('semantic','abc'):

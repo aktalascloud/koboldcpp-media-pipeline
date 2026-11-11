@@ -2,6 +2,8 @@
 from pathlib import Path
 import hashlib,json,subprocess,sys,threading,time,urllib.request
 
+from MusicContract import MAX_MUSIC_SECONDS
+
 ROOT=Path(__file__).resolve().parent.parent
 # name, tab, label, type/choices, lower, upper
 FIELDS=[
@@ -13,7 +15,7 @@ FIELDS=[
  ('video_cache','Видео','Cache-DiT, порог',float,0,.08),('video_vram','Видео','VRAM Native, МиБ',int,4096,7500),
  ('video_upscale','Видео','ClearReality до720p',bool,None,None),('video_faces','Видео','Улучшение лиц',bool,None,None),
  ('video_audio','Видео','Музыкальная дорожка',bool,None,None),('video_fps','Видео','FPS (RIFE)',('24','48','60'),None,None),
- ('music_duration','Музыка','Длительность, с',int,1,360),('music_steps','Музыка','Шаги YuE2',int,1,64),
+ ('music_duration','Музыка','Длительность, с',int,1,MAX_MUSIC_SECONDS),('music_steps','Музыка','Шаги YuE2',int,1,64),
  ('music_guidance','Музыка','Guidance',float,0,20),('music_cot','Музыка','CoT',('off','melody','full'),None,None),
  ('normal_sr','Апскейл','Авто4×: обычный режим',bool,None,None),('high_sr','Апскейл','Авто4×: High',bool,None,None),
  ('sr_tile','Апскейл','Тайл (0 = авто)',int,0,1024),('sr_padding','Апскейл','Перекрытие тайлов',int,8,64),

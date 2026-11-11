@@ -9,6 +9,8 @@
 
 **Core 1.125 · 2026-11-11 · Native 5f103234.** Официальная база f49df57. [81 патчей](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/tree/concedo_experimental/performance/patches/series).
 
+Публичный API YuE2 принимает длительность до 300 секунд или бюджет до 7 500 семантических токенов. [Патч длительности](patches/media-music-five-minute-limit/README.md).
+
 ## FlashAttention, декодирование и рендер · 11 ноября
 
 | Нагрузка | Было → стало | Изменение |

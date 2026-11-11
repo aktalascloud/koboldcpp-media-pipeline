@@ -11,6 +11,8 @@ Goal: one portable KoboldCpp.exe with one runtime and a common on-demand API for
 
 **Core 1.125 · 2026-11-11 · Native 5f103234.** Official base f49df57. [81 patches](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/tree/concedo_experimental/performance/patches/series).
 
+YuE2 accepts up to 300 seconds or 7,500 semantic tokens through the public music API. [Duration patch](patches/media-music-five-minute-limit/README.md).
+
 ## FlashAttention, decode and render · November 11
 
 | Workload | Before → after | Change |
