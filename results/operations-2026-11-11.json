@@ -1,0 +1,656 @@
+{
+  "date": "2026-11-11",
+  "official_source": "f49df57b4a82f6d641c419c7fadc9e4b896f6781",
+  "native_executable_sha256": "33615ff0474faa097deb188a4f326247f6f8ce99fd634da720b9573728c93a6e",
+  "patch_sha256": "0008ad1a466b666f462cc22ba972788dc799f168c5dbf41d7becf1b8c762c1b0",
+  "scope": "Single-thread Haswell AVX2 fixture with loops extracted from the accepted source and the existing GGML vector implementations. Alternating execution order over nine pairs. GDN times cover per-token state update and attention output math, with snapshots and graph overhead outside the timer.",
+  "operation_fixture_sha256": "84fee05062d2893486787896a9acaeaaf2feb70f66a72162d5485d46e8fef2f7",
+  "exact_controls": {
+    "scale_bit_exact": 108,
+    "gdn_state_and_output_bit_exact": 648
+  },
+  "results": [
+    {
+      "op": "scale_f32",
+      "width": 1024,
+      "kda": false,
+      "old_us": [
+        0.159621,
+        0.158853,
+        0.158433,
+        0.158351,
+        0.158433,
+        0.158423,
+        0.158351,
+        0.158443,
+        0.158546
+      ],
+      "new_us": [
+        0.070405,
+        0.070415,
+        0.070312,
+        0.070343,
+        0.070538,
+        0.070323,
+        0.070661,
+        0.070241,
+        0.070466
+      ],
+      "old_median_us": 0.158433,
+      "new_median_us": 0.070405,
+      "less_time_percent": 55.56165697802857,
+      "ranges_overlap": false
+    },
+    {
+      "op": "scale_f32",
+      "width": 1536,
+      "kda": false,
+      "old_us": [
+        0.217865,
+        0.217773,
+        0.217803,
+        0.217942,
+        0.217819,
+        0.217696,
+        0.217803,
+        0.219478,
+        0.219539
+      ],
+      "new_us": [
+        0.110614,
+        0.108848,
+        0.110307,
+        0.110553,
+        0.111091,
+        0.109478,
+        0.110799,
+        0.109478,
+        0.11126
+      ],
+      "old_median_us": 0.217819,
+      "new_median_us": 0.110553,
+      "less_time_percent": 49.245474453560064,
+      "ranges_overlap": false
+    },
+    {
+      "op": "scale_f32",
+      "width": 3072,
+      "kda": false,
+      "old_us": [
+        0.440553,
+        0.440553,
+        0.440707,
+        0.439355,
+        0.440522,
+        0.442181,
+        0.440522,
+        0.439416,
+        0.44
+      ],
+      "new_us": [
+        0.225192,
+        0.225008,
+        0.225376,
+        0.225008,
+        0.225038,
+        0.226206,
+        0.22467,
+        0.225837,
+        0.224854
+      ],
+      "old_median_us": 0.440522,
+      "new_median_us": 0.225038,
+      "less_time_percent": 48.91560466900632,
+      "ranges_overlap": false
+    },
+    {
+      "op": "scale_f32",
+      "width": 4096,
+      "kda": false,
+      "old_us": [
+        0.628103,
+        0.622941,
+        0.625686,
+        0.624785,
+        0.625973,
+        0.624826,
+        0.624703,
+        0.622491,
+        0.611757
+      ],
+      "new_us": [
+        0.360918,
+        0.360918,
+        0.36059,
+        0.360139,
+        0.361532,
+        0.357804,
+        0.361,
+        0.360713,
+        0.362065
+      ],
+      "old_median_us": 0.624785,
+      "new_median_us": 0.360918,
+      "less_time_percent": 42.23324823739366,
+      "ranges_overlap": false
+    },
+    {
+      "op": "scale_f32",
+      "width": 32768,
+      "kda": false,
+      "old_us": [
+        8.477377,
+        8.494098,
+        8.446885,
+        8.499672,
+        8.445574,
+        8.479016,
+        8.441967,
+        8.480656,
+        8.434426
+      ],
+      "new_us": [
+        6.32623,
+        6.281311,
+        6.27541,
+        6.293443,
+        6.379016,
+        6.387213,
+        6.269836,
+        6.358689,
+        6.332787
+      ],
+      "old_median_us": 8.477377,
+      "new_median_us": 6.32623,
+      "less_time_percent": 25.375148468683186,
+      "ranges_overlap": false
+    },
+    {
+      "op": "scale_f32",
+      "width": 262144,
+      "kda": false,
+      "old_us": [
+        206.6,
+        205.7125,
+        205.985,
+        205.89,
+        205.9325,
+        205.9375,
+        206.0675,
+        205.7975,
+        205.9675
+      ],
+      "new_us": [
+        87.23,
+        87.145,
+        87.1175,
+        87.1575,
+        87.1325,
+        87.185,
+        87.16,
+        87.345,
+        87.285
+      ],
+      "old_median_us": 205.9375,
+      "new_median_us": 87.16,
+      "less_time_percent": 57.67647951441579,
+      "ranges_overlap": false
+    },
+    {
+      "op": "scale_f32",
+      "width": 2097152,
+      "kda": false,
+      "old_us": [
+        1656.9975,
+        1645.1275,
+        1647.5275,
+        1641.96,
+        1650.87,
+        1644.3625,
+        1649.215,
+        1644.3025,
+        1646.1125
+      ],
+      "new_us": [
+        716.5975,
+        710.465,
+        718.5,
+        712.1775,
+        718.495,
+        711.0575,
+        717.6375,
+        711.445,
+        716.7425
+      ],
+      "old_median_us": 1646.1125,
+      "new_median_us": 716.5975,
+      "less_time_percent": 56.46728276469561,
+      "ranges_overlap": false
+    },
+    {
+      "op": "gdn",
+      "width": 64,
+      "kda": false,
+      "old_us": [
+        1.658467,
+        1.656733,
+        1.659267,
+        1.657533,
+        1.6586,
+        1.651867,
+        1.658067,
+        1.656333,
+        1.6612
+      ],
+      "new_us": [
+        1.445667,
+        1.444133,
+        1.444867,
+        1.447933,
+        1.445333,
+        1.447667,
+        1.446533,
+        1.445533,
+        1.442667
+      ],
+      "old_median_us": 1.658067,
+      "new_median_us": 1.445533,
+      "less_time_percent": 12.818179241248995,
+      "ranges_overlap": false
+    },
+    {
+      "op": "gdn",
+      "width": 192,
+      "kda": false,
+      "old_us": [
+        13.909667,
+        13.873467,
+        13.873533,
+        13.875533,
+        13.899733,
+        13.9536,
+        13.930733,
+        13.940733,
+        13.909533
+      ],
+      "new_us": [
+        13.504133,
+        13.502733,
+        13.510267,
+        13.512933,
+        13.504133,
+        13.491667,
+        13.513333,
+        13.492333,
+        13.5198
+      ],
+      "old_median_us": 13.909533,
+      "new_median_us": 13.504133,
+      "less_time_percent": 2.9145478859714413,
+      "ranges_overlap": false
+    },
+    {
+      "op": "gdn",
+      "width": 192,
+      "kda": true,
+      "old_us": [
+        26.795667,
+        26.668067,
+        26.741267,
+        26.783067,
+        26.749133,
+        26.6796,
+        26.806067,
+        26.640733,
+        26.710467
+      ],
+      "new_us": [
+        26.030733,
+        26.030067,
+        26.029667,
+        26.0304,
+        26.031067,
+        26.0392,
+        26.029267,
+        26.0294,
+        26.0374
+      ],
+      "old_median_us": 26.741267,
+      "new_median_us": 26.0304,
+      "less_time_percent": 2.6583145817286824,
+      "ranges_overlap": false
+    },
+    {
+      "op": "gdn",
+      "width": 256,
+      "kda": false,
+      "old_us": [
+        27.820867,
+        27.844533,
+        27.819333,
+        27.8068,
+        27.8232,
+        27.821467,
+        27.830467,
+        27.8156,
+        27.822267
+      ],
+      "new_us": [
+        16.222,
+        16.252667,
+        16.215467,
+        16.226133,
+        16.212067,
+        16.252267,
+        16.2294,
+        16.203933,
+        16.219133
+      ],
+      "old_median_us": 27.821467,
+      "new_median_us": 16.222,
+      "less_time_percent": 41.69250672511266,
+      "ranges_overlap": false
+    },
+    {
+      "op": "gdn",
+      "width": 256,
+      "kda": true,
+      "old_us": [
+        44.852667,
+        44.910733,
+        44.947467,
+        44.9492,
+        44.938667,
+        44.934533,
+        44.944867,
+        44.9666,
+        44.9248
+      ],
+      "new_us": [
+        38.938267,
+        38.9568,
+        38.939933,
+        38.890533,
+        38.9708,
+        38.991,
+        38.951733,
+        38.9222,
+        38.9236
+      ],
+      "old_median_us": 44.938667,
+      "new_median_us": 38.939933,
+      "less_time_percent": 13.348713703501701,
+      "ranges_overlap": false
+    }
+  ],
+  "prototype_regressions": [
+    {
+      "op": "scale_f32",
+      "width": 4099,
+      "kda": false,
+      "old_us": [
+        0.613776,
+        0.609676,
+        0.609471,
+        0.625215,
+        0.645633,
+        0.608487,
+        0.612997,
+        0.609758,
+        0.609553
+      ],
+      "new_us": [
+        0.6959,
+        0.669537,
+        0.675605,
+        0.676015,
+        0.676999,
+        0.681632,
+        0.703895,
+        0.690037,
+        0.677655
+      ],
+      "old_median_us": 0.609758,
+      "new_median_us": 0.677655,
+      "less_time_percent": -11.135073258571438,
+      "ranges_overlap": false
+    },
+    {
+      "op": "gdn",
+      "width": 96,
+      "kda": false,
+      "old_us": [
+        3.546133,
+        3.448933,
+        3.399333,
+        3.493467,
+        3.450667,
+        3.512867,
+        3.479467,
+        3.426933,
+        3.216533
+      ],
+      "new_us": [
+        3.6286,
+        3.6308,
+        3.669067,
+        3.661,
+        3.6292,
+        3.6364,
+        3.684267,
+        3.600933,
+        3.661867
+      ],
+      "old_median_us": 3.450667,
+      "new_median_us": 3.6364,
+      "less_time_percent": -5.382524595969418,
+      "ranges_overlap": false
+    },
+    {
+      "op": "gdn",
+      "width": 96,
+      "kda": true,
+      "old_us": [
+        11.0644,
+        10.9688,
+        10.883933,
+        11.085067,
+        10.9098,
+        10.968533,
+        10.8786,
+        10.8966,
+        10.887733
+      ],
+      "new_us": [
+        11.6698,
+        11.640133,
+        11.6664,
+        11.67,
+        11.652267,
+        11.686133,
+        11.704,
+        11.5876,
+        11.6874
+      ],
+      "old_median_us": 10.9098,
+      "new_median_us": 11.6698,
+      "less_time_percent": -6.966213862765591,
+      "ranges_overlap": false
+    },
+    {
+      "op": "gdn",
+      "width": 128,
+      "kda": true,
+      "old_us": [
+        14.730267,
+        14.926933,
+        14.8746,
+        14.886067,
+        15.1976,
+        14.867267,
+        15.055533,
+        14.894933,
+        15.028067
+      ],
+      "new_us": [
+        15.033333,
+        15.0368,
+        15.052467,
+        14.975067,
+        15.028667,
+        15.043533,
+        15.109533,
+        15.100333,
+        15.0626
+      ],
+      "old_median_us": 14.894933,
+      "new_median_us": 15.043533,
+      "less_time_percent": -0.9976547057982676,
+      "ranges_overlap": true
+    }
+  ],
+  "provisional_regressions": [
+    {
+      "op": "gdn",
+      "width": 32,
+      "kda": false,
+      "old_us": [
+        0.54,
+        0.539067,
+        0.54,
+        0.539933,
+        0.540333,
+        0.539067,
+        0.5408,
+        0.539,
+        0.5408
+      ],
+      "new_us": [
+        0.672667,
+        0.672667,
+        0.672667,
+        0.6758,
+        0.672667,
+        0.673667,
+        0.672667,
+        0.672667,
+        0.672667
+      ],
+      "old_median_us": 0.54,
+      "new_median_us": 0.672667,
+      "less_time_percent": -24.56796296296295,
+      "ranges_overlap": false
+    },
+    {
+      "op": "gdn",
+      "width": 32,
+      "kda": true,
+      "old_us": [
+        2.6782,
+        2.6788,
+        2.6774,
+        2.677933,
+        2.676,
+        2.675,
+        2.673667,
+        2.674667,
+        2.673333
+      ],
+      "new_us": [
+        2.8118,
+        2.8118,
+        2.816067,
+        2.811733,
+        2.811867,
+        2.8118,
+        2.8118,
+        2.8132,
+        2.811867
+      ],
+      "old_median_us": 2.676,
+      "new_median_us": 2.8118,
+      "less_time_percent": -5.074738415545577,
+      "ranges_overlap": false
+    },
+    {
+      "op": "gdn",
+      "width": 64,
+      "kda": true,
+      "old_us": [
+        6.734867,
+        6.7448,
+        6.7454,
+        6.741733,
+        6.735133,
+        6.7502,
+        6.732333,
+        6.733733,
+        6.7364
+      ],
+      "new_us": [
+        7.188,
+        7.157933,
+        7.169667,
+        7.1768,
+        7.179267,
+        7.1708,
+        7.166733,
+        7.171733,
+        7.171467
+      ],
+      "old_median_us": 6.7364,
+      "new_median_us": 7.171467,
+      "less_time_percent": -6.458449617006123,
+      "ranges_overlap": false
+    }
+  ],
+  "repack": {
+    "results": [
+      {
+        "q": 5,
+        "stress": false,
+        "gemv_outputs": 10080,
+        "gemm_outputs": 10080,
+        "gemv_failures": 0,
+        "gemm_failures": 0,
+        "max_abs_gemv": 0,
+        "max_abs_gemm": 0,
+        "guard_failures": 0
+      },
+      {
+        "q": 5,
+        "stress": true,
+        "gemv_outputs": 10080,
+        "gemm_outputs": 10080,
+        "gemv_failures": 0,
+        "gemm_failures": 10080,
+        "max_abs_gemv": 0,
+        "max_abs_gemm": 129024,
+        "guard_failures": 0
+      },
+      {
+        "q": 6,
+        "stress": false,
+        "gemv_outputs": 10080,
+        "gemm_outputs": 10080,
+        "gemv_failures": 0,
+        "gemm_failures": 0,
+        "max_abs_gemv": 0,
+        "max_abs_gemm": 0,
+        "guard_failures": 0
+      },
+      {
+        "q": 6,
+        "stress": true,
+        "gemv_outputs": 10080,
+        "gemm_outputs": 10080,
+        "gemv_failures": 0,
+        "gemm_failures": 0,
+        "max_abs_gemv": 0,
+        "max_abs_gemm": 0,
+        "guard_failures": 0
+      }
+    ],
+    "scope": "Archived PR Haswell kernels and current packers. Q5 GEMV uses local widening. Q5/Q6 GEMM use original Haswell bodies. Reference is decoded weights times integer activations in double precision. Production repack dispatch unchanged."
+  }
+}

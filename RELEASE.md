@@ -1,7 +1,7 @@
-Haswell/Polaris deferred-PR update ·2026-11-07
+Haswell and Polaris update · 2026-11-11
 
-- Official 2d469743d30d09737633607071fe83dc2283bfec;Native SHA256 ebe56a513028935093bb2390d233975fcb71a8fd702e880e4b9f9419f57792b4.70 separate patches,5 new adaptations/own optimizations;O3/Haswell+LTO,no PGO.
-- Normal+separate4× phase medians **185.657→153.743s** vs official rolling1.125. Observed time difference vs preceding efddce0e **-0.119s**,within overlapping phase ranges;no incremental Normal speedup demonstrated. All9 Normal and6 SR RGB outputs match;settings preserved. [All repeats,ranges,hashes and limits](results/performance-2026-11-07-r5.json).
-- Phase sum is not one API request;model load/return/public queue/transport excluded. Fixed order,small warm sample;shared SR code. [Operator gains and rejected FP16/Q5 experiments](results/operations-2026-11-07-r6.json) are separate from full generation.
-- [12 deeper deferred-PR follow-ups and remaining validation limits](results/pr-review-2026-11-07-r5.json);not a whole-repository line-by-line audit. F32 YaRN,duplicate-safe packed TopK,typed Hadamard12/20,own AVX2 low stages and wide RMS cache. [70-patch catalog](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/tree/concedo_experimental/performance/patches/series).
-- Existing Pillow13/runtime/model assets and licensing retained;no main or non-commercial weights mirrored. No new High/full-LLM token benchmark.
+- Official `f49df57b4a82f6d641c419c7fadc9e4b896f6781`. Native SHA-256 `33615ff0474faa097deb188a4f326247f6f8ce99fd634da720b9573728c93a6e`. Haswell AVX2, LTO, 72 ordered local patches.
+- ABDM Normal plus separate 4× phase sum 154.085 → 154.636 s versus the prior installed Native. All tested RGB outputs match. [Repeats and settings fingerprints](results/performance-2026-11-11-abdm.json).
+- AVX2 state-row scheduling and single-pass Scale. CLIP allocation failures and graph metadata allocation. [Operation results](results/operations-2026-11-11.json) · [PR decisions](results/pr-review-2026-11-11.json).
+
+[Native patch catalog](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/tree/concedo_experimental/performance/patches/series) · [Licenses](docs/LICENSES.md).

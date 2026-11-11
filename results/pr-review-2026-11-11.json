@@ -1,0 +1,402 @@
+{
+  "date": "2026-11-11",
+  "official_source": "f49df57b4a82f6d641c419c7fadc9e4b896f6781",
+  "executable_sha256": "33615ff0474faa097deb188a4f326247f6f8ce99fd634da720b9573728c93a6e",
+  "new_official_commits": 50,
+  "configured_discussion_sources": 24,
+  "discussion_errors": [],
+  "selected_paginated_file_records": 74,
+  "decisions": [
+    {
+      "repository": "LostRuins/koboldcpp",
+      "number": 2593,
+      "url": "https://github.com/LostRuins/koboldcpp/issues/2593",
+      "decision": "Related mmproj VRAM failure report. Adapted the common CLIP reserve error propagation. The reported large Gemma 4 workload was not reproduced."
+    },
+    {
+      "repository": "LostRuins/koboldcpp",
+      "number": 2596,
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2596",
+      "decision": "Persistent SmartCache could save repeated prompt processing. The proposed writer opens and truncates the destination before validating the slot, and the restore format needs bounded allocations and strong model identity before a local port."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 19707,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/19707",
+      "decision": "Reopened Haswell GEMV and GEMM. Local widening matched 20,160 GEMV outputs. Original GEMM mismatched all 10,080 extrema outputs despite passing the 10,080 random checks. Keep the current production dispatcher."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 19706,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/19706",
+      "decision": "Reopened Haswell GEMV, GEMM and four-row tail. Both paths matched 20,160 synthetic outputs each with current packers and independent dequantized reference. Whole-model benefit remains unmeasured."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 29121,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/29121",
+      "decision": "The prior in-place approach changes state ownership. This pass preserves input/output ownership and snapshot placement, adapting only local state-row scheduling from the newer proposal."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 30738,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/30738",
+      "decision": "F16 scratch conversion changes cache arithmetic and memory pressure. No quality-preserving production adaptation for this cohort."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 29929,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/29929",
+      "decision": "Split-K is useful for idle compute units, but split accumulators change summation. Matrix instructions targeted by this proposal are unavailable on Polaris."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31988,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31988",
+      "decision": "Adapted allocation error propagation at the common reserve call. Existing clip initialization exception boundary handles all warmup branches."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31990,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31990",
+      "decision": "Read narrow-N tiles, stage accounting, selection and split heuristic. New matrix tiles depend on cooperative matrix capabilities. A scalar port would need its own measured layout and equivalent accumulation order."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31994,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31994",
+      "decision": "Metal uses a subgroup-width specialization for AMD eGPUs. Native Vulkan already has wave64 capability selection. Exact Metal kernels have separate subgroup layout, memory and store contracts."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31996,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31996",
+      "decision": "Missing target and draft context guards in upstream example binaries. Kobold does not execute those example entry points."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 32000,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/32000",
+      "decision": "Uses only filenames for imatrix provenance in the llama quantizer CLI. No execution through the current Native media generation or converter."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 32008,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/32008",
+      "decision": "Adds an allocated vendor data buffer to the optional Vulkan device-fault report. Requires VK_EXT_device_fault and a driver report for a targeted test."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 32009,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/32009",
+      "decision": "The scheduler reuse principle is already ported. Additional parameter equality guards in the proposal concern the newer scheduler configuration interface."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 32015,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/32015",
+      "decision": "Explicit lifetime of every sampling-chain output is relevant to multi-sequence backend sampling. Requires qualification with sampler/sequence overlap; no sampling-policy change was made."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 32023,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/32023",
+      "decision": "Changes native template scopes, member lookup and string processing. Requires template semantic comparisons. The current photo pipeline does not use this parser for its prompt."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 32024,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/32024",
+      "decision": "Intel UMA staging policy. This RX 580 has discrete device memory."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 32027,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/32027",
+      "decision": "New Q6_K and IQ3_XXS routines require AVX512-VNNI."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 32028,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/32028",
+      "decision": "Adapted row locality using the original dot, MAD and scale functions. The submitted fused FMA and horizontal reduction change summation. Local trials excluded widths 32, 96 and 128 and the width-64 KDA variant. Retained width 64 with scalar decay and both modes at widths 192 and 256."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 32043,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/32043",
+      "decision": "Ported uninitialized graph metadata reserve. The allocator initializes each object on use and the external-memory ggml context does not free that storage."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 32045,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/32045",
+      "decision": "Removes DFlash draft KV entries from the rejected position onward. Requires an exact draft and main rollback comparison with partial accept."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 32047,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/32047",
+      "decision": "Skips adapter delta graphs based on persistent Granite switch state. Needs a Granite checkpoint and multi-token validation before considering it for production."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 32059,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/32059",
+      "decision": "Parent-linked Jinja render scopes change lookup and lifetime across nested evaluation. Needs representative tool-call and template coverage."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 32061,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/32061",
+      "decision": "Lazy loop iteration and direct accumulation are promising for long template histories. Error order, filtered loops and scope handling require a separate correctness cohort."
+    },
+    {
+      "repository": "leejet/stable-diffusion.cpp",
+      "number": 2196,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2196",
+      "decision": "Grouped temporal Wan decode shares causal cache state and changes chunk scheduling. The active Wan profile needs its own exact frame and memory controls before changing it."
+    },
+    {
+      "repository": "leejet/stable-diffusion.cpp",
+      "number": 2197,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2197",
+      "decision": "Balances the final one-frame temporal decode tail. Relevant to grouped decode, with no effect on the current photo cohort."
+    },
+    {
+      "repository": "leejet/stable-diffusion.cpp",
+      "number": 2288,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/issues/2288",
+      "decision": "MOSS GPU/CPU contention report. Current branch already has wave64 gates on the retained RMS fusion. Workload-wide contention was outside this test."
+    },
+    {
+      "repository": "leejet/stable-diffusion.cpp",
+      "number": 2290,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2290",
+      "decision": "Workspace pointer offset/planning feeds CUDA extensions including attention, convrot and INT8 CUTLASS. Reusing scratch requires live-range and ownership verification before a Vulkan port."
+    },
+    {
+      "repository": "leejet/stable-diffusion.cpp",
+      "number": 2291,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/issues/2291",
+      "decision": "Reported Flux Vulkan QKV-chunking regression. Do not force new chunk dispatch for active MOSS without same-profile proof."
+    },
+    {
+      "repository": "leejet/stable-diffusion.cpp",
+      "number": 2294,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2294",
+      "decision": "Vulkan chunk preference can be below its hardware buffer limit. Patch affects pinned multi-device allocation decisions. Removing the limit unconditionally lacks an on-card OOM fallback proof."
+    },
+    {
+      "repository": "leejet/stable-diffusion.cpp",
+      "number": 2300,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2300",
+      "decision": "SeedVR2 and RelayVSR add a separate video restoration model path. They require new weights and backend checks. The current ClearReality/RIFE route remains in the benchmark."
+    },
+    {
+      "repository": "leejet/stable-diffusion.cpp",
+      "number": 2301,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2301",
+      "decision": "Krea2 LoRA name mapping preserves text-fusion names. Needs the model-specific LoRA assets and loader fixtures."
+    },
+    {
+      "repository": "leejet/stable-diffusion.cpp",
+      "number": 2302,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2302",
+      "decision": "Merges LoRA weights into F32 before quantizing during convert. Runtime adapter execution in the current profile is a separate route."
+    },
+    {
+      "repository": "leejet/stable-diffusion.cpp",
+      "number": 2307,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2307",
+      "decision": "The proposed process-wide mutex/map avoids repeated CUDA property queries. Local Vulkan get_type is a cached flag lookup; adding a map/lock would add overhead there."
+    },
+    {
+      "repository": "leejet/stable-diffusion.cpp",
+      "number": 2309,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2309",
+      "decision": "Capacity-proportional layer splitting applies to multiple devices. This benchmark has one Vulkan device."
+    },
+    {
+      "repository": "leejet/stable-diffusion.cpp",
+      "number": 2320,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2320",
+      "decision": "Bias is fused into the CUDA CUTLASS INT8 GEMM epilogue. Polaris has no hardware integer-dot route on this driver."
+    },
+    {
+      "repository": "leejet/stable-diffusion.cpp",
+      "number": 2321,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2321",
+      "decision": "Runner execution and residency refactor changes allocation ownership and fallback across model families. Needs model-load, unload and VRAM pressure checks."
+    },
+    {
+      "repository": "leejet/stable-diffusion.cpp",
+      "number": 2322,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2322",
+      "decision": "Refactors QKV splitting and touches data movement in multiple graphs. Given the prior Flux regression, preserve current graph behavior pending a shape-specific proof."
+    },
+    {
+      "repository": "leejet/stable-diffusion.cpp",
+      "number": 2323,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2323",
+      "decision": "CUDA fuses RMSNorm and RoPE for Sol-H3-VAE. The rounding-conscious structure is relevant to a future Vulkan fusion, with a separate H3 VAE workload."
+    },
+    {
+      "repository": "leejet/stable-diffusion.cpp",
+      "number": 2326,
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2326",
+      "decision": "Validates ComfyUI original-shape array type and element count, but constructs the reshaped tensor before bounding the full dimension product. Current ABDM GGUF stores its real dimensions. Keep format import separate."
+    },
+    {
+      "repository": "ikawrakow/ik_llama.cpp",
+      "number": 2871,
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2871",
+      "decision": "Correct activation source for fused IQK up/gate scratch. Local native GGML uses different operation and allocation paths."
+    },
+    {
+      "repository": "ikawrakow/ik_llama.cpp",
+      "number": 2872,
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2872",
+      "decision": "Independent head/row work sizing reduces idle workers in IQK FA. Native CPU FA has different scheduling and tile scratch ownership."
+    },
+    {
+      "repository": "ikawrakow/ik_llama.cpp",
+      "number": 2873,
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2873",
+      "decision": "Short-circuit modulo for one-row and in-range IQK row maps. Local native backend has no DataInfo row-mapping path."
+    },
+    {
+      "repository": "ikawrakow/ik_llama.cpp",
+      "number": 2875,
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2875",
+      "decision": "Widens dense IQK mask pointer offsets. Native CPU FA already multiplies tensor byte strides represented as size_t."
+    },
+    {
+      "repository": "ikawrakow/ik_llama.cpp",
+      "number": 2877,
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2877",
+      "decision": "Relaxes the IQK-only decode FA shape/worker threshold. A shared numerical contract does not make the scheduling route equivalent."
+    },
+    {
+      "repository": "ikawrakow/ik_llama.cpp",
+      "number": 2885,
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2885",
+      "decision": "Keeps F32 or mismatched up/gate projections out of the fork IQK fusion. Local graph has no GGML_OP_FUSED_UP_GATE and retains ordinary projections."
+    },
+    {
+      "repository": "ikawrakow/ik_llama.cpp",
+      "number": 2887,
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2887",
+      "decision": "Unifies IQK legacy quant dot types with their fork-specific interleaved activation representation. Reusing the change would break the native packed format."
+    },
+    {
+      "repository": "ikawrakow/ik_llama.cpp",
+      "number": 2888,
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2888",
+      "decision": "IQK index mask and fork-only G128 interleave fixes. No shared dispatch on this build."
+    },
+    {
+      "repository": "Schaka/rocm-gfx803",
+      "number": 8,
+      "url": "https://github.com/Schaka/rocm-gfx803/pull/8",
+      "decision": "ROCm PyTorch selects the existing sort fallback for both broken gfx803 selection kernels, with a Boolean exception. The retained GGML Vulkan mask takes precomputed indices and has separate semantics."
+    },
+    {
+      "repository": "engeldlgado/toshllm",
+      "number": 149,
+      "url": "https://github.com/engeldlgado/toshllm/pull/149",
+      "decision": "Read Metal wave64 kernels and SSE4.1 fallback patch from pinned PR head. Vulkan already uses FP32 accumulator variants and vector activation loads for aligned mat-vec. The Metal tile order and shared buffers require a dedicated Vulkan numeric test, and the SSE fallback is bypassed on Haswell."
+    },
+    {
+      "repository": "RL-Align/RL-Kernel",
+      "number": 660,
+      "url": "https://github.com/RL-Align/RL-Kernel/pull/660",
+      "decision": "Read sequential GDN reference contract and state semantics. This is useful for checking state/output separately, not a production C++ AVX2 implementation."
+    },
+    {
+      "repository": "Memorithm/SML-GENIUS",
+      "number": 936,
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/936",
+      "decision": "PSHUFB/MADD decoder operates on a new BPB3-K weight encoding. Its comparison with stock Q3_K does not establish equivalent weights or output."
+    },
+    {
+      "repository": "Memorithm/SML-GENIUS",
+      "number": 938,
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/938",
+      "decision": "Autovectorization research isolates a new BPB3-K decoder. Requires a format and compiler-specific validation."
+    },
+    {
+      "repository": "Memorithm/SML-GENIUS",
+      "number": 939,
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/939",
+      "decision": "Precomputes activation sums for new BPB3-K. Native K-quant Q8_K already stores block sums for minimum offsets."
+    },
+    {
+      "repository": "Memorithm/SML-GENIUS",
+      "number": 940,
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/940",
+      "decision": "Broadcast and offset variants use new BPB3-K layout. Preserve current loaded weights."
+    },
+    {
+      "repository": "Memorithm/SML-GENIUS",
+      "number": 941,
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/941",
+      "decision": "Four-row activation reuse in new format. The archived native Q5/Q6 repack probes cover the applicable interleaving idea separately."
+    },
+    {
+      "repository": "Memorithm/SML-GENIUS",
+      "number": 943,
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/943",
+      "decision": "Paired preencoded Q3 format is a representation change. No model or quant changes."
+    },
+    {
+      "repository": "Memorithm/SML-GENIUS",
+      "number": 944,
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/944",
+      "decision": "Alternative pair-shuffle implementation shares the new format boundary."
+    },
+    {
+      "repository": "Memorithm/SML-GENIUS",
+      "number": 945,
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/945",
+      "decision": "Different Q4 representation and packing require a separate exact re-encoding proof."
+    }
+  ],
+  "github_search": {
+    "avx2": {
+      "returned": 100,
+      "matched": 4019,
+      "github_incomplete": false
+    },
+    "gfx803": {
+      "returned": 7,
+      "matched": 7,
+      "github_incomplete": false
+    },
+    "haswell": {
+      "returned": 100,
+      "matched": 339,
+      "github_incomplete": false
+    },
+    "polaris": {
+      "returned": 100,
+      "matched": 1268,
+      "github_incomplete": false
+    },
+    "rx580": {
+      "returned": 17,
+      "matched": 17,
+      "github_incomplete": false
+    },
+    "vulkan": {
+      "returned": 100,
+      "matched": 12838,
+      "github_incomplete": false
+    }
+  },
+  "limits": [
+    "Explicit decisions cover selected code and review discussions. Inventory and search hits are not semantic audits.",
+    "GitHub search returns up to the first 100 updated hits per query in this pass. Earlier ledgers remain dated.",
+    "Official commits are the baseline. Review focuses on pending ports and fork patches."
+  ]
+}
