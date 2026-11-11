@@ -9,20 +9,20 @@ Goal: one portable KoboldCpp.exe with one runtime and a common on-demand API for
 - Music: YuE2 MP3. SFX: SA3 CPU WAV/MP3,0.25–60s. Speech/helper/STT use a configurable provider and explicit RU/EN voices.
 - Video: Wan5B Turbo, full encoder + Pro FP32, Euler/beta4, WG512, threshold576, ClearReality720p/faces, RIFE48FPS default/60 optional. Audio-driven lip-sync is a separate optional stage; this is not joint AV inference. Native limit121 frames; conservative tested clip73. Client project15 s default/30 s maximum.
 
-**Core 1.125 · 2026-11-11 · `33615ff0`.** Official base `f49df57`. [72 separate patches](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/tree/concedo_experimental/performance/patches/series).
+**Core 1.125 · 2026-11-11 · `e8743bce`.** Official base `f49df57`. [74 separate patches](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/tree/concedo_experimental/performance/patches/series).
 
 ## ABDM Normal + 4× · 2026-11-11
 
-`ebe56a51` → `33615ff0`. Same ABDM MOSS Q8_0 profile and seed 424242. Three Normal and two separate 4× runs per build. The first Normal run is listed separately. The total sums the phase medians. Raw, finished and upscaled RGB matched in all repeats.
+`33615ff0` → `e8743bce`. Same ABDM MOSS Q8_0 profile and seed 424242. Three Normal and two separate 4× runs per build. The first Normal run is listed separately. The total sums the phase medians. Raw, finished and upscaled RGB matched in all repeats.
 
 | Stage | Before | After | Time change |
 |---|---:|---:|---:|
-| Native | 143.178 s | 143.509 s | +0.330 s (+0.23%) |
-| Finished Normal | 151.348 s | 151.950 s | +0.602 s (+0.40%) |
-| Separate 4× | 2.737 s | 2.686 s | -0.051 s (-1.87%) |
-| Phase sum | 154.085 s | 154.636 s | +0.551 s (+0.36%) |
+| Native | 143.197 s | 143.278 s | +0.081 s (+0.06%) |
+| Finished Normal | 152.858 s | 151.646 s | -1.212 s (-0.79%) |
+| Separate 4× | 2.757 s | 2.670 s | -0.087 s (-3.15%) |
+| Phase sum | 155.615 s | 154.316 s | -1.298 s (-0.83%) |
 
-The report lists all repeat ranges. [Repeats and hashes](results/performance-2026-11-11-abdm.json) · [CPU operations](results/operations-2026-11-11.json) · [PR review](results/pr-review-2026-11-11.json)
+Overlapping phase ranges leave the speed difference inconclusive. [Repeats and hashes](results/performance-2026-11-11-two-week.json) · [CPU operations](results/operations-2026-11-11-two-week.json) · [PR review](results/pr-review-2026-11-11-two-week.json)
 
 ## Ray Artshoot examples · November 7
 

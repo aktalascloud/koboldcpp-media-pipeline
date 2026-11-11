@@ -1,0 +1,87 @@
+diff --git a/tools/KoboldProxy.py b/tools/KoboldProxy.py
+index b30323f..a810bbb 100644
+--- a/tools/KoboldProxy.py
++++ b/tools/KoboldProxy.py
+@@ -41,7 +41,7 @@ from ImageModes import ImageModeError,resolve_image_mode
+ from VideoService import VideoService,VideoServiceError,VIDEO_JSON_PATHS,VIDEO_MEDIA_PREFIX,is_video_request
+ from BackendSupervisor import SupervisorError
+ from FaceSizePolicy import scale_face_options
+-from PhotoRestoration import restore_once,matching_marker as matching_restoration_marker,attach_marker as attach_restoration_marker,prewarm_model as prewarm_restoration_model
++from PhotoRestoration import restore_once,rgb_sha,matching_marker as matching_restoration_marker,attach_marker as attach_restoration_marker,prewarm_model as prewarm_restoration_model
+ from ImageBudget import ImageBudgetError,apply_image_gpu_budget,prewarm_image_budget
+ from NativeVideo import request_json_deadline
+ from PhotoCapture import capture_stage
+@@ -98,7 +98,7 @@ def image_encode(image,parameters=None,marker=None):
+         if isinstance(value,str) and len(value)<32768:tags.add_text(key,value)
+     if parameters:tags.add_text('parameters',parameters)
+     if marker:
+-        marker={**marker,'version':VERSION,'rgb_sha256':hashlib.sha256(image.convert('RGB').tobytes()).hexdigest()}
++        marker={**marker,'version':VERSION,'rgb_sha256':rgb_sha(image)}
+         tags.add_text('kcpp_proxy_detailer',json.dumps(marker,separators=(',',':')))
+     # Lossless level3: measured faster on Haswell; RGB/text unchanged, ~1.4% larger.
+     image.save(out,format='PNG',pnginfo=tags,compress_level=3)
+@@ -122,13 +122,15 @@ def face_signature(options,legacy=False,include_policy=False):
+                 # Stable PNG provenance across the portable model-folder move.
+                 canonical[key]=value.replace('MODELS/detailers/','DETAILERS/',1)
+     return hashlib.sha256(json.dumps(canonical,sort_keys=True).encode()).hexdigest()[:16]
+-def matching_face_marker(image,options):
++def matching_face_marker(image,options,*,rgb_digest=None):
+     try:
+         marker=json.loads(image.info.get('kcpp_proxy_detailer',''))
+         signatures={face_signature(candidate,legacy=legacy,include_policy=include_policy)
+                     for candidate in (options,{**options,'after_upscale':False},{**options,'after_upscale':True})
+                     for legacy in (False,True) for include_policy in (False,True)}
+-        if marker.get('signature') in signatures and int(marker.get('faces',0))>0 and marker.get('rgb_sha256')==hashlib.sha256(image.convert('RGB').tobytes()).hexdigest():return marker
++        if marker.get('signature') in signatures and int(marker.get('faces',0))>0:
++            digest=rgb_digest if rgb_digest is not None else rgb_sha(image)
++            if marker.get('rgb_sha256')==digest:return marker
+     except (ValueError,TypeError,AttributeError):pass
+     return None
+ def request(url,body=None,headers=None,method=None):
+@@ -277,15 +279,16 @@ class Pipeline:
+         return final,info
+     def finish_photo(self,image,options,base,config,upscale=False):
+         options=dict(options or {})
+-        report=dict(base_rgb_sha256=hashlib.sha256(image.convert('RGB').tobytes()).hexdigest(),input_dimensions=list(image.size),native_dimensions=list(image.size))
++        base_digest=rgb_sha(image)
++        report=dict(base_rgb_sha256=base_digest,input_dimensions=list(image.size),native_dimensions=list(image.size))
+         # A matching marker prevents repeating the same restoration before SR.
+         # The selected profile skips repeated restoration after SR.
+-        prior=matching_face_marker(image,options) if options.get('enabled',True) else None
++        prior=matching_face_marker(image,options,rgb_digest=base_digest) if options.get('enabled',True) else None
+         before_upscale=bool(upscale and config['proxy'].get('faces_before_upscale',False))
+         repeat_after_upscale=bool(upscale and config['proxy'].get('repeat_faces_after_upscale',False))
+         first_marker=prior
+         restoration_options=config['proxy'].get('photo_restoration',{})
+-        restoration_marker=matching_restoration_marker(image,restoration_options)
++        restoration_marker=matching_restoration_marker(image,restoration_options,rgb_digest=base_digest)
+         final=image;scale=1
+         if before_upscale:
+             try:final,before=self.process_faces(final,options,base,config)
+diff --git a/tools/PhotoRestoration.py b/tools/PhotoRestoration.py
+index 4f54288..acc8611 100644
+--- a/tools/PhotoRestoration.py
++++ b/tools/PhotoRestoration.py
+@@ -49,10 +49,11 @@ def prewarm_model(options):
+ 
+ 
+ def rgb_sha(image):
+-    return hashlib.sha256(image.convert('RGB').tobytes()).hexdigest()
++    rgb = image if image.mode == 'RGB' else image.convert('RGB')
++    return hashlib.sha256(rgb.tobytes()).hexdigest()
+ 
+ 
+-def matching_marker(image, options):
++def matching_marker(image, options, *, rgb_digest=None):
+     if not options.get('enabled', False):
+         return None
+     try:
+@@ -60,7 +61,7 @@ def matching_marker(image, options):
+         if (marker.get('kind') == KIND and marker.get('model_sha256') == expected_sha(options)
+                 and marker.get('passes') == 1 and marker.get('strength') == 1
+                 and marker.get('output_dimensions') == list(image.size)
+-                and marker.get('rgb_sha256') == rgb_sha(image)):
++                and marker.get('rgb_sha256') == (rgb_digest if rgb_digest is not None else rgb_sha(image))):
+             return marker
+     except (ValueError, TypeError, AttributeError):
+         pass

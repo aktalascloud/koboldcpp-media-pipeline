@@ -1,0 +1,3754 @@
+{
+  "date": "2026-11-11",
+  "cutoff_utc": "2026-10-28T05:15:23Z",
+  "source_commit": "f49df57b4a82f6d641c419c7fadc9e4b896f6781",
+  "native_sha256": "e8743bce1b4046a41c46ad07bb8fbdfec66b03ecbb350a98710e0150cc7b4b84",
+  "repositories": 30,
+  "created_records": 1188,
+  "inventory_errors": [],
+  "counts": {
+    "previous_within_window": 48,
+    "title_shortlist": 242,
+    "fresh_targeted": 34,
+    "pr_file_scopes": 118,
+    "file_fetch_errors": 0
+  },
+  "decisions": [
+    {
+      "number": 2581,
+      "title": "fix Vulkan build",
+      "url": "https://github.com/LostRuins/koboldcpp/pull/2581",
+      "created": "2026-11-03T23:07:00Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "LostRuins/koboldcpp",
+      "previous_decision": "Explicit semantic disposition in an earlier published review",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 8,
+      "title": "Fix gfx803 TensorTopK selection fallback",
+      "url": "https://github.com/Schaka/rocm-gfx803/pull/8",
+      "created": "2026-11-10T06:20:13Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "Schaka/rocm-gfx803",
+      "previous_decision": "ROCm PyTorch selects the existing sort fallback for both broken gfx803 selection kernels, with a Boolean exception. The retained GGML Vulkan mask takes precomputed indices and has separate semantics.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 2887,
+      "title": "ggml: fix the vec_dot types of the legacy quants",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2887",
+      "created": "2026-11-10T08:19:17Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ikawrakow/ik_llama.cpp",
+      "previous_decision": "Unifies IQK legacy quant dot types with their fork-specific interleaved activation representation. Reusing the change would break the native packed format.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 32045,
+      "title": "fix: roll back draft KV cache for rejected positions in DFlash accept()",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/32045",
+      "created": "2026-11-10T20:42:06Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "Removes DFlash draft KV entries from the rejected position onward. Requires an exact draft and main rollback comparison with partial accept.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 32043,
+      "title": "llama : avoid touching unused graph metadata pages",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/32043",
+      "created": "2026-11-10T19:50:55Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "Ported uninitialized graph metadata reserve. The allocator initializes each object on use and the external-memory ggml context does not free that storage.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 32028,
+      "title": "ggml-cpu : fuse the gated delta net state passes on AVX2",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/32028",
+      "created": "2026-11-10T16:54:59Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "Adapted row locality using the original dot, MAD and scale functions. The submitted fused FMA and horizontal reduction change summation. Local trials excluded widths 32, 96 and 128 and the width-64 KDA variant. Retained width 64 with scalar decay and both modes at widths 192 and 256.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 32024,
+      "title": "vulkan: use GPU copies on UMA with uncached memory on Intel",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/32024",
+      "created": "2026-11-10T15:22:33Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "Intel UMA staging policy. This RX 580 has discrete device memory.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 32015,
+      "title": "graph : mark every sampling chain as an output to prevent aliasing",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/32015",
+      "created": "2026-11-10T13:26:39Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "Explicit lifetime of every sampling-chain output is relevant to multi-sequence backend sampling. Requires qualification with sampler/sequence overlap; no sampling-policy change was made.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 32009,
+      "title": "llama : reuse backend scheduler when sched_params are compatible",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/32009",
+      "created": "2026-11-10T11:29:52Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "The scheduler reuse principle is already ported. Additional parameter equality guards in the proposal concern the newer scheduler configuration interface.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 32008,
+      "title": "Vulkan: Allocate the device fault vendor binary buffer",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/32008",
+      "created": "2026-11-10T11:10:33Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "Adds an allocated vendor data buffer to the optional Vulkan device-fault report. Requires VK_EXT_device_fault and a driver report for a targeted test.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 32000,
+      "title": "quantize: fix imatrix GGUF filepath metadata leak",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/32000",
+      "created": "2026-11-10T06:57:00Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "Uses only filenames for imatrix provenance in the llama quantizer CLI. No execution through the current Native media generation or converter.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 31996,
+      "title": "speculative-simple, speculative: fix init error handling causing crash",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31996",
+      "created": "2026-11-10T03:24:04Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "Missing target and draft context guards in upstream example binaries. Kobold does not execute those example entry points.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 31990,
+      "title": "vulkan: optimize matrix multiplication for narrow N",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31990",
+      "created": "2026-11-10T00:47:38Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "Read narrow-N tiles, stage accounting, selection and split heuristic. New matrix tiles depend on cooperative matrix capabilities. A scalar port would need its own measured layout and equivalent accumulation order.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 31845,
+      "title": "gguf : retain zero-sized dimensions while trimming trailing ones",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31845",
+      "created": "2026-11-07T08:10:54Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "adapted",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 31843,
+      "title": "rpc : avoid stack exhaustion in create_node with deep graphs",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31843",
+      "created": "2026-11-07T07:15:00Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "adapted",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 31841,
+      "title": "llama : reuse scheduler buffers across requests",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31841",
+      "created": "2026-11-07T07:01:34Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "adapted",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 31833,
+      "title": "vulkan: Add 'readonly' to decodeBuf declarations.",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31833",
+      "created": "2026-11-06T23:30:59Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "not enabled",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 31808,
+      "title": "mtmd: move log-mel computation to cgraph",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31808",
+      "created": "2026-11-06T13:47:19Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "Moves per-request thread creation into a backend graph and keeps DFT on CPU after Metal divergence. Current Whisper/AudioCpp/media queue is a different path. Needs waveform/mel and loaded audio-projector controls; no unmeasured DFT replacement or thread-setting change.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 31804,
+      "title": "vulkan: improve RDNA4 MMVQ performance for Q3_K, Q5_K and IQ4_XS",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31804",
+      "created": "2026-11-06T13:01:13Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "Explicit semantic disposition in an earlier published review",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 31764,
+      "title": "vulkan: add IQ4_NL scalar MMQ (integer dot) matmul",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31764",
+      "created": "2026-11-06T01:59:53Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "Hoisted integer-dot K-quant tiles or IQ4 scalar MMQ still execute dotPacked4x8EXT. RX580 advertises int-dot0; retain real capability gate. Scalar FP32 and AVX2 IQ4 decoder use separately qualified paths.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 31750,
+      "title": "llama: use KV-only graphs for MTP draft catch-up",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31750",
+      "created": "2026-11-05T19:24:39Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "Recurrent alias/rollback ordering or no-output MTP KV-only graphs; requires synthetic context rollback/sequence-reuse controls and model-specific MTP validation. No MTP/rewind settings enabled or altered; not qualified by a photo test.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 31701,
+      "title": "ggml : fix FreeBSD Vulkan build by setting _XOPEN_SOURCE=700",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31701",
+      "created": "2026-11-05T00:05:49Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "CMake pthread/FreeBSD/SPIRV-Headers fixes; pinned Windows Make build already links pthread and explicit Vulkan/SPIRV include paths.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 31658,
+      "title": "vulkan: detect ReBAR support, avoid BAR allocations if unavailable",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31658",
+      "created": "2026-11-04T13:52:04Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "Exact source is already represented in the accepted58-patch catalog",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 31587,
+      "title": "vulkan: Re-enable large coopmat matmul configuration on fixed AMD proprietary drivers",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31587",
+      "created": "2026-11-03T09:40:33Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "Cooperative-matrix driver tile/layout optimizations; RX580 exposes no cooperative matrix support. Scalar path and fixed hardware gates retained.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 31559,
+      "title": "ggml-vulkan: skip host buffer allocation on single iGPUs",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31559",
+      "created": "2026-11-02T20:55:29Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "Single iGPU host-buffer policy; current discrete RX580 needs staging buffers. Do not remove its host transfers.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 31544,
+      "title": "vulkan: add TOP_K_MASK",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31544",
+      "created": "2026-11-02T14:13:19Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "Replaced duplicate scatter stores with shared atomic bitset and one writer per32-bit word. F16 odd/misaligned layouts,empty buffers,oversized masks/ranges retain CPU fallback. Real bitwise controls and resident timing are in operations r6;not a whole-model claim.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 31530,
+      "title": "docs : fix Vulkan example command in build.md",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31530",
+      "created": "2026-11-02T07:22:09Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "Version/docs/CI helper only, no runtime change; workflow cancellation script is not executed.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 31526,
+      "title": "vulkan: allow dequantized KV optimization with CM2",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31526",
+      "created": "2026-11-02T03:09:51Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "Coopmat2 dequant-KV reuse and aligned block strides; RX580 has no CM2. No new KV quantization or precision settings applied.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 31518,
+      "title": "CUDA: fix Volta crash",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31518",
+      "created": "2026-11-01T22:08:19Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "Volta MMA selector/dispatch use one eligibility predicate and minimum tile width. RX580 no MMA; current GCN capability gates remain shared with dispatch.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 31505,
+      "title": "llama : probe the fused top-k mask with a graph that builds it",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31505",
+      "created": "2026-11-01T14:13:05Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "Fused top-k probe must exercise a graph that actually builds the mask; native post-images present, no duplicate patch.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 31504,
+      "title": "ggml-cpu: batch-invariant batched matmul",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31504",
+      "created": "2026-11-01T13:56:51Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "Batch-invariant GEMM groups integer scales differently and disables F32/BF16 tinyBLAS entirely. This changes numerical paths and can lose throughput; keep current Haswell kernels until paired CPU-context numerical/speed controls.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 31454,
+      "title": "fixes issue #31445 Compile bug: Vulkan backend fails to build since #…",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31454",
+      "created": "2026-10-31T03:22:14Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "C++ cmath classification compatibility; accepted current GGML compiles both CPU/Vulkan with pinned GCC. No unqualified FP8 conversion change.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 31420,
+      "title": "ggml-cpu : fully unroll the AVX2 iq1_s, iq1_m, iq2_xxs, iq2_s block loops with clang",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31420",
+      "created": "2026-10-30T12:39:38Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "Explicit semantic disposition in an earlier published review",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 31416,
+      "title": "vulkan: Explicitly include SPIRV-Headers",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31416",
+      "created": "2026-10-30T11:38:13Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "CMake pthread/FreeBSD/SPIRV-Headers fixes; pinned Windows Make build already links pthread and explicit Vulkan/SPIRV include paths.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 31379,
+      "title": "SYCL: Fuse GDN with GET_ROWS to remove temporary copy",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31379",
+      "created": "2026-10-29T15:18:30Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "Reviewed backend-specific implementation/guard changes: WebGPU submission/group norm, Metal/CUDA precision and matrix paths, SYCL allocation/GDN/MoE, OpenCL attention/strides/formats. No such backend is loaded. Preserve typed precision, external-use/alias and byte-stride principles in native adaptations; no unsupported matrix/int-dot path copied. Not a line-by-line audit of those foreign kernels.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 31345,
+      "title": "CUDA: use an fp32 result for quantized src0 in the cuBLAS fallback",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31345",
+      "created": "2026-10-29T02:00:26Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "previous_decision": "CUDA cuBLAS output precision guard; not applied to Vulkan default-precision policy. New SiTU restricts types to F32 and does not use F16 intermediates.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 2326,
+      "title": "feat: read ComfyUI-GGUF original tensor shapes",
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2326",
+      "created": "2026-11-10T19:03:21Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "leejet/stable-diffusion.cpp",
+      "previous_decision": "Validates ComfyUI original-shape array type and element count, but constructs the reshaped tensor before bounding the full dimension product. Current ABDM GGUF stores its real dimensions. Keep format import separate.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 2321,
+      "title": "refactor: unify runner execution and weight residency",
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2321",
+      "created": "2026-11-10T14:48:34Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "leejet/stable-diffusion.cpp",
+      "previous_decision": "Runner execution and residency refactor changes allocation ownership and fallback across model families. Needs model-load, unload and VRAM pressure checks.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 2291,
+      "title": "Vulkan: Flux sampling ~6x slower since b1f5a51 (#2286 QKV chunking) - bisected across official release builds, SDXL unaffected",
+      "url": "https://github.com/leejet/stable-diffusion.cpp/issues/2291",
+      "created": "2026-11-07T22:43:24Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "leejet/stable-diffusion.cpp",
+      "previous_decision": "Reported Flux Vulkan QKV-chunking regression. Do not force new chunk dispatch for active MOSS without same-profile proof.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 2273,
+      "title": "perf(vulkan): accelerate MOSS normalization and SiTU staging",
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2273",
+      "created": "2026-11-04T18:50:29Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "leejet/stable-diffusion.cpp",
+      "previous_decision": "Replaced foreign shared-tree reduction with current native wave64 reduction; rejected original1796 differing values at3072x7. Native graph fusion:176 pair controls/352 graphs bit-exact,external consumers/strides/offset fallbacks covered; trace proves activation.7 alternating20-run trials median211.91->108.625us,48.74percent less operator time. No full MOSS model speed claim.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 2252,
+      "title": "perf(vulkan): update ggml for H3 inference optimizations",
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2252",
+      "created": "2026-10-31T09:35:40Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "leejet/stable-diffusion.cpp",
+      "previous_decision": "Explicit semantic disposition in an earlier published review",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 149,
+      "title": "Metal kernels for AMD Polaris (gfx803): prefill and decode performance work",
+      "url": "https://github.com/engeldlgado/toshllm/pull/149",
+      "created": "2026-11-03T04:53:36Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "engeldlgado/toshllm",
+      "previous_decision": "Read Metal wave64 kernels and SSE4.1 fallback patch from pinned PR head. Vulkan already uses FP32 accumulator variants and vector activation loads for aligned mat-vec. The Metal tile order and shared buffers require a dedicated Vulkan numeric test, and the SSE fallback is bypassed on Haswell.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 945,
+      "title": "research(BPB3-K): native Q3_K versus AVX2 146B Q4, 160B padded and two-block 228B",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/945",
+      "created": "2026-11-10T19:17:57Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "Memorithm/SML-GENIUS",
+      "previous_decision": "Different Q4 representation and packing require a separate exact re-encoding proof.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 944,
+      "title": "research(BPB3-K): 114-byte paired signed-i8 scale load via VPSHUFB in AVX2",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/944",
+      "created": "2026-11-10T18:44:37Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "Memorithm/SML-GENIUS",
+      "previous_decision": "Alternative pair-shuffle implementation shares the new format boundary.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 941,
+      "title": "research(BPB3-K): fused AVX2 1/2/4 row microtiles reuse Q8 activations and bias",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/941",
+      "created": "2026-11-10T18:09:10Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "Memorithm/SML-GENIUS",
+      "previous_decision": "Four-row activation reuse in new format. The archived native Q5/Q6 repack probes cover the applicable interleaving idea separately.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 940,
+      "title": "research(BPB3-K): AVX2 32-bit plane broadcast and lossless unsigned-offset bitplanes",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/940",
+      "created": "2026-11-10T16:46:19Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "Memorithm/SML-GENIUS",
+      "previous_decision": "Broadcast and offset variants use new BPB3-K layout. Preserve current loaded weights.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 939,
+      "title": "research(BPB3-K): replace repeated sign correction with cached Q8_K sums in AVX2",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/939",
+      "created": "2026-11-10T16:40:20Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "Memorithm/SML-GENIUS",
+      "previous_decision": "Precomputes activation sums for new BPB3-K. Native K-quant Q8_K already stores block sums for minimum offsets.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 936,
+      "title": "research(BPB3-K): Haswell AVX2 PSHUFB decoder plus MADD against original Q3_K",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/936",
+      "created": "2026-11-10T15:38:12Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "Memorithm/SML-GENIUS",
+      "previous_decision": "PSHUFB/MADD decoder operates on a new BPB3-K weight encoding. Its comparison with stock Q3_K does not establish equivalent weights or output.",
+      "review_depth": "dated prior decision reused within window"
+    },
+    {
+      "number": 2592,
+      "title": "[Bug] Crash on startup after compiling with Vulkan (LLAMA_VULKAN=1) on Termux/Android: Missing symbol '_android_log_write'",
+      "url": "https://github.com/LostRuins/koboldcpp/issues/2592",
+      "created": "2026-11-09T16:11:56Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "LostRuins/koboldcpp",
+      "decision": "Termux Android linker cannot resolve android logging. The Windows portable build uses a different toolchain and ABI.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 2586,
+      "title": "Can't run Bonsai-2-27B-PQ2_0-MTP.gguf",
+      "url": "https://github.com/LostRuins/koboldcpp/issues/2586",
+      "created": "2026-11-05T13:59:34Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "LostRuins/koboldcpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 2584,
+      "title": "Chatterbox Turbo TTS with --ttsgpu crashes on Turing (RTX 2080 Ti, CC 7.5) CUDA: ggml-cuda/fattn.cu:842 fatal error",
+      "url": "https://github.com/LostRuins/koboldcpp/issues/2584",
+      "created": "2026-11-05T09:31:56Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "LostRuins/koboldcpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 2574,
+      "title": "Corrupted Gemma 4 generation on legacy AMD GCN under Windows Vulkan",
+      "url": "https://github.com/LostRuins/koboldcpp/issues/2574",
+      "created": "2026-10-29T23:20:51Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "LostRuins/koboldcpp",
+      "decision": "GCN Windows corruption was traced to asynchronous tensor readback. The active profile already uses the narrower verified readback setting.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 5,
+      "title": "Build source-pinned Schaka gfx803 Nix binary factory and fail-closed admission",
+      "url": "https://github.com/chboishabba/gfx803_compat_graph/pull/5",
+      "created": "2026-11-04T03:20:24Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "chboishabba/gfx803_compat_graph",
+      "file_count": 64,
+      "focus": [],
+      "other_file_roots": [
+        ".github",
+        "CHANGELOG.md",
+        "README.md",
+        "devlog.md",
+        "docs",
+        "flake.nix",
+        "nix",
+        "patches",
+        "plan.md",
+        "scripts",
+        "status.md",
+        "tests"
+      ],
+      "decision": "Nix packaging and fail-closed ROCm admission. Native runtime here is Vulkan on Windows.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 2891,
+      "title": "llama-quantize: keep the input scales of NVFP4_KS weights",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2891",
+      "created": "2026-11-11T00:14:29Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ikawrakow/ik_llama.cpp",
+      "file_count": 3,
+      "focus": [],
+      "other_file_roots": [
+        "src"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 2890,
+      "title": "iqk: use correct iq4_ks_r16 block type in DequantIQ4KS on AVX-512",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2890",
+      "created": "2026-11-10T20:10:45Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ikawrakow/ik_llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "ggml"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 2884,
+      "title": "CUDA: P100 GQA decode flash attention through the tile kernel",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2884",
+      "created": "2026-11-10T06:29:01Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ikawrakow/ik_llama.cpp",
+      "file_count": 2,
+      "focus": [],
+      "other_file_roots": [
+        "ggml"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 2882,
+      "title": "scripts: add progress output to repack_ternary_to_prism.py",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2882",
+      "created": "2026-11-09T20:42:05Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ikawrakow/ik_llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "scripts"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 2876,
+      "title": "CUDA: fp32 K-quant MMQ scale multiply on sm_61 and AMD",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2876",
+      "created": "2026-11-09T05:02:46Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ikawrakow/ik_llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "ggml"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 2860,
+      "title": "graphs : restore the FFN LayerNorm for starcoder2, starcoder, gpt2, bloom, mpt, codeshell, orion, jais",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2860",
+      "created": "2026-11-06T19:29:04Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ikawrakow/ik_llama.cpp",
+      "file_count": 8,
+      "focus": [],
+      "other_file_roots": [
+        "src"
+      ],
+      "decision": "LayerNorm restore for model-specific architectures. The current official implementations already contain the applicable restoration.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 2858,
+      "title": "ggml: NVFP4 type with row scales and loading of mainline NVFP4 GGUFs",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2858",
+      "created": "2026-11-06T14:58:03Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ikawrakow/ik_llama.cpp",
+      "file_count": 34,
+      "focus": [],
+      "other_file_roots": [
+        "examples",
+        "ggml",
+        "gguf-py",
+        "include",
+        "src"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 2853,
+      "title": "loader : load the n-gram tables from a separate GGUF (--ngram-file)",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2853",
+      "created": "2026-11-05T20:50:27Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ikawrakow/ik_llama.cpp",
+      "file_count": 8,
+      "focus": [],
+      "other_file_roots": [
+        "common",
+        "docs",
+        "include",
+        "src"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 2846,
+      "title": "Bug: llama_lora_adapter_set: drop the flash_attn check — it silently disables all LoRA when FA is on",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/issues/2846",
+      "created": "2026-11-05T11:46:41Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ikawrakow/ik_llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 2834,
+      "title": "iqk: fix iq4_kss quantization (#2833)",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2834",
+      "created": "2026-11-04T15:35:51Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ikawrakow/ik_llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "ggml"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 2833,
+      "title": "Bug: quantization bug in IQ4_KSS",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/issues/2833",
+      "created": "2026-11-04T14:55:38Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ikawrakow/ik_llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 2825,
+      "title": "Bug: laughable crash when using -sp with tool call",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/issues/2825",
+      "created": "2026-11-02T19:45:13Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ikawrakow/ik_llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 2824,
+      "title": "Enable CUDA graphs also when there are Hadamard rotations",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2824",
+      "created": "2026-11-02T17:05:04Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ikawrakow/ik_llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "ggml"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 2820,
+      "title": "Bug: KV cache mismatch issue on LFM2.5-24B-A2B",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/issues/2820",
+      "created": "2026-11-02T04:26:15Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ikawrakow/ik_llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 2816,
+      "title": "qwen4exp: load GGUFs with merged weight pairs",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2816",
+      "created": "2026-11-01T20:04:07Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ikawrakow/ik_llama.cpp",
+      "file_count": 6,
+      "focus": [],
+      "other_file_roots": [
+        "src"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 2812,
+      "title": "Gyro Trellis quants",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2812",
+      "created": "2026-11-01T07:34:52Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ikawrakow/ik_llama.cpp",
+      "file_count": 48,
+      "focus": [],
+      "other_file_roots": [
+        "ggml",
+        "gguf-py",
+        "include",
+        "src"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 2807,
+      "title": "ggml: improve Q8_0_R16 setup cost and extend to Q4_0, Q5_0, Q6_0, IQ4_NL and MXFP4 quants",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2807",
+      "created": "2026-10-30T15:15:21Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ikawrakow/ik_llama.cpp",
+      "file_count": 2,
+      "focus": [],
+      "other_file_roots": [
+        "ggml"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 2803,
+      "title": "CUDA: bind a static cuBLAS workspace per stream",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2803",
+      "created": "2026-10-30T10:14:51Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ikawrakow/ik_llama.cpp",
+      "file_count": 6,
+      "focus": [],
+      "other_file_roots": [
+        "ggml"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 2799,
+      "title": "raon: share expanded MLA prefill path",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2799",
+      "created": "2026-10-29T20:04:14Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ikawrakow/ik_llama.cpp",
+      "file_count": 4,
+      "focus": [],
+      "other_file_roots": [
+        "src"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 2796,
+      "title": "CPU: tweak activation quantization",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2796",
+      "created": "2026-10-29T15:31:53Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ikawrakow/ik_llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "ggml"
+      ],
+      "decision": "Fused CPU activation quantization and row scheduling are coupled to IQK representations. Current GGML uses block-partitioned preparation and ordinary repack.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 2791,
+      "title": "dsv4: reuse the decode graph of DeepSeek-V4.1",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2791",
+      "created": "2026-10-29T04:53:50Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ikawrakow/ik_llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "src"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 2788,
+      "title": " minimax-m3 : load M3.1 GGUFs by skipping the indexer tensors on every layer",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2788",
+      "created": "2026-10-29T00:35:33Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ikawrakow/ik_llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "src"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 2786,
+      "title": "Gyro-models: add Trellis Quants Support",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2786",
+      "created": "2026-10-28T16:49:01Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ikawrakow/ik_llama.cpp",
+      "file_count": 39,
+      "focus": [],
+      "other_file_roots": [
+        "ggml",
+        "gguf-py",
+        "include",
+        "src"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 18,
+      "title": "Release v1.2.4: RAM-Expertenspeicher, CPU-Pool, Prefill-Fenster",
+      "url": "https://github.com/sirfyyn/FastLocalExperts/pull/18",
+      "created": "2026-11-03T16:03:31Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "sirfyyn/FastLocalExperts",
+      "file_count": 21,
+      "focus": [
+        {
+          "path": "ggml/src/ggml-cpu/arch/x86/quants.c",
+          "added": 194,
+          "removed": 0,
+          "hunks_available": true
+        },
+        {
+          "path": "ggml/src/ggml-cpu/ggml-cpu.c",
+          "added": 68,
+          "removed": 0,
+          "hunks_available": true
+        },
+        {
+          "path": "src/llama-context.cpp",
+          "added": 26,
+          "removed": 1,
+          "hunks_available": true
+        },
+        {
+          "path": "src/llama-context.h",
+          "added": 4,
+          "removed": 0,
+          "hunks_available": true
+        },
+        {
+          "path": "src/llama-graph.cpp",
+          "added": 242,
+          "removed": 141,
+          "hunks_available": true
+        },
+        {
+          "path": "src/llama-graph.h",
+          "added": 12,
+          "removed": 0,
+          "hunks_available": true
+        }
+      ],
+      "other_file_roots": [
+        "NOTICE-strata.md",
+        "docs",
+        "ggml",
+        "src"
+      ],
+      "decision": "CPU pool and expert RAM persistence are a separate prefill policy. The loaded media models do not use this expert manager.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 17,
+      "title": "v1.2.3: two-slot q8_0 crash fix, async CPU subgraphs, ISTA recipe",
+      "url": "https://github.com/sirfyyn/FastLocalExperts/pull/17",
+      "created": "2026-11-02T19:25:30Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "sirfyyn/FastLocalExperts",
+      "file_count": 7,
+      "focus": [
+        {
+          "path": "src/llama-graph.cpp",
+          "added": 5,
+          "removed": 0,
+          "hunks_available": true
+        }
+      ],
+      "other_file_roots": [
+        "docs",
+        "ggml",
+        "src"
+      ],
+      "decision": "Expert cache slot ownership and asynchronous CPU subgraphs use a separate dispatcher. Direct reuse would cross Native scheduler ownership boundaries.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 11,
+      "title": "DSpark: Markov-Kopf-Tensornamen passend zu gguf-py",
+      "url": "https://github.com/sirfyyn/FastLocalExperts/pull/11",
+      "created": "2026-11-01T09:29:32Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "sirfyyn/FastLocalExperts",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "src"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 32062,
+      "title": "CUDA backend: fatal CUDA error + NVIDIA driver reset (nvlddmkm Event 153) during sustained batched prompt processing while an NVENC encoder shares the GPU — Vulkan build is stable at the same VRAM footprint (depth-dependent)",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/32062",
+      "created": "2026-11-11T03:47:07Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 32050,
+      "title": "Eval bug: Qwen3-TTS repeated requests produce different audio with Vulkan cooperative matrices on Radeon 8060S",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/32050",
+      "created": "2026-11-10T23:47:07Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "Audio repeat discrepancy is reported for an 8060S cooperative-matrix route. This device has no cooperative matrices.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 32041,
+      "title": "Misc. bug:  scripts/moe-cache-tune.py crashes on Windows with \"ValueError: Unsupported signal: 2\" and leaves llama-server running",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/32041",
+      "created": "2026-11-10T19:36:37Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 32004,
+      "title": "CUDA: skip graph compat check when graph is being reused",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/32004",
+      "created": "2026-11-10T09:42:01Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "ggml"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 32001,
+      "title": "CUDA: refactor graph and concurrent stream state out of common.cuh",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/32001",
+      "created": "2026-11-10T07:41:17Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 3,
+      "focus": [],
+      "other_file_roots": [
+        "ggml"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31987,
+      "title": "Misc. bug: auto_fgdn hardcoded false so the fused GDN probe never runs",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31987",
+      "created": "2026-11-10T00:09:29Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "Auto fused GDN discovery depends on model and backend support. The measured Haswell change preserves existing dispatcher policy.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 31974,
+      "title": "server: CUDA VMM-pool OOM during prompt processing aborts the process (ggml_cuda_mul_mat_q → ggml_abort) instead of failing",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31974",
+      "created": "2026-11-09T21:10:42Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31966,
+      "title": "ui : keep streaming reasoning box inside the viewport when zoomed",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31966",
+      "created": "2026-11-09T19:39:09Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 2,
+      "focus": [],
+      "other_file_roots": [
+        "tools"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31948,
+      "title": "gguf/models: reject zero-valued ssm_dt_rank and wkv_head_size to prevent SIGFPE on model load",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31948",
+      "created": "2026-11-09T14:27:03Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 5,
+      "focus": [],
+      "other_file_roots": [
+        "ggml",
+        "src"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31947,
+      "title": "Eval bug: unsloth/GLM-5.3-Flash-GGUF:UD-IQ3_XXS says it will load all layers on GPU and crashes with VRAM OOM",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31947",
+      "created": "2026-11-09T14:12:08Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31940,
+      "title": "tests : keep dummy ffn.act scales away from zero",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31940",
+      "created": "2026-11-09T12:35:47Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "tests"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31934,
+      "title": "scripts : fix device_room() free-memory accounting with draft models",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31934",
+      "created": "2026-11-09T09:50:27Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "scripts"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31932,
+      "title": "llama : skip LoRA scale when 1, add --fold-scale to convert_lora_to_gguf",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31932",
+      "created": "2026-11-09T09:14:16Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 2,
+      "focus": [
+        {
+          "path": "src/llama-graph.cpp",
+          "added": 13,
+          "removed": 7,
+          "hunks_available": true
+        }
+      ],
+      "other_file_roots": [
+        "convert_lora_to_gguf.py",
+        "src"
+      ],
+      "decision": "LoRA scaling and converter folding affect llama text adapters. The active photo uses the separate stable-diffusion adapter path.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 31931,
+      "title": "vulkan: make the radix top-k tie selection deterministic",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31931",
+      "created": "2026-11-09T08:04:13Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 3,
+      "focus": [
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan.cpp",
+          "added": 3,
+          "removed": 3,
+          "hunks_available": true
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/vulkan-shaders/topk_radix_select.comp",
+          "added": 88,
+          "removed": 16,
+          "hunks_available": true
+        }
+      ],
+      "other_file_roots": [
+        "ggml",
+        "tests"
+      ],
+      "decision": "Deterministic radix TopK ties require subgroup ballot, arithmetic and full-subgroup support. It is distinct from the accepted duplicate-safe TopK mask. Ties need a separate token test.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 31930,
+      "title": "vulkan: Divide GROUP_NORM workgroup to 2D to avoid maxComputeWorkGroupCount limit",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31930",
+      "created": "2026-11-09T07:50:37Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 2,
+      "focus": [
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan.cpp",
+          "added": 9,
+          "removed": 3,
+          "hunks_available": true
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/vulkan-shaders/group_norm.comp",
+          "added": 6,
+          "removed": 2,
+          "hunks_available": true
+        }
+      ],
+      "other_file_roots": [
+        "ggml"
+      ],
+      "decision": "Adapted physical Vulkan dispatch limits and bounded indexing. Retains F32 normalization math; invalid or uneven shapes stay outside the Vulkan route.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 31926,
+      "title": "Misc. bug: GROUP_NORM unit test triggers GGML_ASSERT for Vulkan on Windows Intel GPU",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31926",
+      "created": "2026-11-09T06:00:16Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31924,
+      "title": "hexagon: fix per-head flash attention mask buffers",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31924",
+      "created": "2026-11-09T03:35:14Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 4,
+      "focus": [],
+      "other_file_roots": [
+        "ggml",
+        "tests"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31917,
+      "title": "scripts: fix device_room() free VRAM calculation with draft models",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31917",
+      "created": "2026-11-09T00:45:40Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "scripts"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31916,
+      "title": "cuda : add optimized h100 q6_k prefill path",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31916",
+      "created": "2026-11-08T23:37:39Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 6,
+      "focus": [],
+      "other_file_roots": [
+        "ggml",
+        "tests"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31911,
+      "title": "scripts/moe-cache-tune.py: device_room() under-reports free VRAM when a draft model is loaded",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31911",
+      "created": "2026-11-08T20:58:31Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31908,
+      "title": "Eval bug: gguf_init_from_reader: tensor name 0 is too long: 76 >= 64",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31908",
+      "created": "2026-11-08T19:10:13Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31906,
+      "title": "Eval bug: llama-server not run QuantStack / Qwen-Image-GGUF",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31906",
+      "created": "2026-11-08T18:57:38Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31901,
+      "title": "Eval bug: llama.cpp auto-picks the wrong EOT token for Llama 3 GGUFs without `eot_token_id`, causing generation to never stop",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31901",
+      "created": "2026-11-08T15:26:43Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31900,
+      "title": "Misc. bug: Vulkan, Intel Arc 140T iGPU (Windows): device→host read-back ~10x slower than host→device (prompt_save and context checkpoints)",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31900",
+      "created": "2026-11-08T15:24:35Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31898,
+      "title": "ggml: allow reserving scratch memory in graph_optimize",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31898",
+      "created": "2026-11-08T15:14:29Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 3,
+      "focus": [],
+      "other_file_roots": [
+        "ggml",
+        "tests"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31891,
+      "title": "llama, gguf-split, quant : robustness fixes for giant-tensor models",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31891",
+      "created": "2026-11-08T11:20:23Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 3,
+      "focus": [
+        {
+          "path": "src/llama-kv-cache.cpp",
+          "added": 7,
+          "removed": 3,
+          "hunks_available": true
+        }
+      ],
+      "other_file_roots": [
+        "src",
+        "tools"
+      ],
+      "decision": "Giant-tensor robustness spans tokenizer, quantization and split tooling. Existing local GGUF size guards stay in force.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 31890,
+      "title": "vulkan: Fix out of bounds reads/writes on MoltenVK",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31890",
+      "created": "2026-11-08T11:08:54Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 8,
+      "focus": [
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan-push-constants.h",
+          "added": 2,
+          "removed": 1,
+          "hunks_available": true
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan.cpp",
+          "added": 5,
+          "removed": 4,
+          "hunks_available": true
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/vulkan-shaders/cumsum.comp",
+          "added": 2,
+          "removed": 0,
+          "hunks_available": true
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/vulkan-shaders/l2_norm.comp",
+          "added": 2,
+          "removed": 0,
+          "hunks_available": true
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/vulkan-shaders/norm.comp",
+          "added": 2,
+          "removed": 0,
+          "hunks_available": true
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/vulkan-shaders/rms_norm_back.comp",
+          "added": 2,
+          "removed": 0,
+          "hunks_available": true
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/vulkan-shaders/sum_rows.comp",
+          "added": 2,
+          "removed": 0,
+          "hunks_available": true
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/vulkan-shaders/sum_rows.glsl",
+          "added": 1,
+          "removed": 1,
+          "hunks_available": true
+        }
+      ],
+      "other_file_roots": [
+        "ggml"
+      ],
+      "decision": "Read bounds changes to row dispatch and shaders. The retained RMS patch already handles wide grids; other MoltenVK row operations need separate Linux/Windows buffer-bound tests.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 31884,
+      "title": "cuda : remove unused quantize_cuda_t typedef",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31884",
+      "created": "2026-11-08T09:30:14Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "ggml"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31879,
+      "title": "Misc. bug: convert_lora_to_gguf.py ignores use_rslora, so rsLoRA adapters run sqrt(r) times too weak",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31879",
+      "created": "2026-11-08T09:08:43Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31860,
+      "title": "workaround: gpt-oss gguf conversion for p-e-w/gpt-oss-20b-heretic-ara-v4",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31860",
+      "created": "2026-11-07T19:20:59Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "conversion"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31848,
+      "title": "Feature Request: clover quantization fails with Failed to load model: This GGUF is missing the metadata key 'clover_moe.expert_shared_count'",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31848",
+      "created": "2026-11-07T09:09:28Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31838,
+      "title": "ROCm/HIP: fixed BLAS workspace instead of rocBLAS allocating one per call",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31838",
+      "created": "2026-11-07T01:55:20Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 2,
+      "focus": [],
+      "other_file_roots": [
+        "ggml"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31836,
+      "title": "Vulkan: GLM-OCR vision encoder produces garbage on Intel Arc A380 for full-page images (works on CPU and SYCL)",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31836",
+      "created": "2026-11-07T01:02:41Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31835,
+      "title": "Gate copying split inputs with the flag GGML_TENSOR_FLAG_COMPUTE of consuming graph nodes",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31835",
+      "created": "2026-11-07T00:14:59Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "ggml"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31830,
+      "title": "Feature request: make mixed-vendor (e.g. Intel Vulkan target + NVIDIA CUDA draft) speculative decoding actually worth using",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31830",
+      "created": "2026-11-06T20:11:30Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31828,
+      "title": "Vulkan output corruption on Intel Arc B-series persists under long-context/RAG prompts despite GGML_VK_DISABLE_COOPMAT workaround",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31828",
+      "created": "2026-11-06T19:45:55Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31823,
+      "title": "Misc. bug: SYCL and Flash Attention problem / warnings",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31823",
+      "created": "2026-11-06T19:07:16Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31820,
+      "title": "Hexagon : gated fusion for gate/up matmul + GLU",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31820",
+      "created": "2026-11-06T18:36:33Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 7,
+      "focus": [],
+      "other_file_roots": [
+        "ggml"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31818,
+      "title": "ggml-cuda : add d_state=64 fast path to SSM_SCAN kernel",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31818",
+      "created": "2026-11-06T18:21:04Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 3,
+      "focus": [],
+      "other_file_roots": [
+        "ggml",
+        "tests"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31809,
+      "title": "Fix grammar-prefill crash when a chat template's generation-prompt contains boilerplate that isn't valid grammar content",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31809",
+      "created": "2026-11-06T13:57:35Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "common"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31802,
+      "title": "ggml-cuda: fused q8_0/q4_0 KV dequant in the MMA flash-attention kernels",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31802",
+      "created": "2026-11-06T12:39:40Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 3,
+      "focus": [],
+      "other_file_roots": [
+        "ggml"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31777,
+      "title": "Eval bug: [Vulkan] Windows VIDEO_TDR_FAILURE (0x116) during Intel Arc multi-GPU inference; reduced micro-batch size avoids crash",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31777",
+      "created": "2026-11-06T03:38:41Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31776,
+      "title": "ggml : enable MXFP4 dense repack and IME2 acceleration for SpacemiT CPU backend",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31776",
+      "created": "2026-11-06T03:16:05Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 2,
+      "focus": [],
+      "other_file_roots": [
+        "ggml"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31774,
+      "title": "Discussion: Possible fast paths for greedy and draft sampling",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31774",
+      "created": "2026-11-06T02:31:17Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31769,
+      "title": "Proposal: Quantized-KV GQA flash attention for AMD gfx906 (MI50)",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31769",
+      "created": "2026-11-06T02:30:46Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31767,
+      "title": "Proposal: FastMTP speculative draft graph and scatter",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31767",
+      "created": "2026-11-06T02:30:33Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31766,
+      "title": "Proposal: CUDA GQA flash attention for q8_0 K / q4_0 V",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31766",
+      "created": "2026-11-06T02:30:27Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31748,
+      "title": "sycl: large register file flash_attn_tile",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31748",
+      "created": "2026-11-05T18:55:50Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 2,
+      "focus": [],
+      "other_file_roots": [
+        "ggml",
+        "tests"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31745,
+      "title": "gguf-split : support long path on windows",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31745",
+      "created": "2026-11-05T18:20:39Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "tools"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31744,
+      "title": "hexagon: Implement set_tensor_n and improve repacking/tiling robustness",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31744",
+      "created": "2026-11-05T17:48:37Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 6,
+      "focus": [],
+      "other_file_roots": [
+        "docs",
+        "ggml"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31739,
+      "title": "Eval bug: new Better UD 3.1 quants support on vulkan backend in AMD strix halo gfx1151",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31739",
+      "created": "2026-11-05T15:04:39Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31734,
+      "title": "Eval bug: CPU F16 dot product accumulates in F16 on ARM (FP16 arithmetic, no SVE), overflows to inf",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31734",
+      "created": "2026-11-05T13:46:51Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31733,
+      "title": "llama: refactoring: move model to class member of llm_graph_context",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31733",
+      "created": "2026-11-05T13:42:37Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 174,
+      "focus": [
+        {
+          "path": "src/llama-context.cpp",
+          "added": 1,
+          "removed": 0,
+          "hunks_available": true
+        },
+        {
+          "path": "src/llama-graph.cpp",
+          "added": 1,
+          "removed": 0,
+          "hunks_available": true
+        },
+        {
+          "path": "src/llama-graph.h",
+          "added": 5,
+          "removed": 0,
+          "hunks_available": true
+        }
+      ],
+      "other_file_roots": [
+        "src"
+      ],
+      "decision": "Model/member refactor is already part of the official history.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 31717,
+      "title": "gguf-py : external chat templates have precedence over tokenizer_config",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31717",
+      "created": "2026-11-05T10:10:29Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "gguf-py"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31713,
+      "title": "[ggml-cpu] AVX-512BW _1x8/_1x4/_1x3/_1x2 multi-column kernels, BMI2+SWAR IQ2_XXS sign unpacker & SwiGLU-H2 quantization for 284B DeepSeek-V4-Flash in 57.61 GiB RAM (+77.1% pp)",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31713",
+      "created": "2026-11-05T06:16:23Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "New main matrix path requires AVX512BW. BMI2 sign unpacking is separable but needs an IQ2 format, dot-product and model test.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 31703,
+      "title": "nemotron-h: fix RoPE and FFN activation for correct logits",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31703",
+      "created": "2026-11-05T00:46:45Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 3,
+      "focus": [],
+      "other_file_roots": [
+        "src"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31698,
+      "title": "llama, mtmd: (chatterbox) add use_classifier_free_guidance as gguf metadata",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31698",
+      "created": "2026-11-04T23:33:20Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 11,
+      "focus": [],
+      "other_file_roots": [
+        "common",
+        "conversion",
+        "gguf-py",
+        "src",
+        "tools"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31693,
+      "title": "llama: add graph build_rope",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31693",
+      "created": "2026-11-04T22:53:17Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 138,
+      "focus": [
+        {
+          "path": "src/llama-context.cpp",
+          "added": 0,
+          "removed": 1,
+          "hunks_available": true
+        },
+        {
+          "path": "src/llama-graph.cpp",
+          "added": 43,
+          "removed": 4,
+          "hunks_available": true
+        },
+        {
+          "path": "src/llama-graph.h",
+          "added": 7,
+          "removed": 5,
+          "hunks_available": true
+        },
+        {
+          "path": "src/llama-kv-cache-dsa.cpp",
+          "added": 1,
+          "removed": 18,
+          "hunks_available": true
+        },
+        {
+          "path": "src/llama-kv-cache.cpp",
+          "added": 19,
+          "removed": 93,
+          "hunks_available": true
+        },
+        {
+          "path": "src/llama-kv-cache.h",
+          "added": 5,
+          "removed": 1,
+          "hunks_available": true
+        }
+      ],
+      "other_file_roots": [
+        "src"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31669,
+      "title": "GDN: use replay instead of rollback [WIP]",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31669",
+      "created": "2026-11-04T15:32:03Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 43,
+      "focus": [
+        {
+          "path": "ggml/src/ggml-cpu/ggml-cpu.c",
+          "added": 4,
+          "removed": 3,
+          "hunks_available": true
+        },
+        {
+          "path": "ggml/src/ggml-cpu/ops.cpp",
+          "added": 53,
+          "removed": 3,
+          "hunks_available": true
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan-debug.cpp",
+          "added": 2,
+          "removed": 2,
+          "hunks_available": true
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan-push-constants.h",
+          "added": 4,
+          "removed": 0,
+          "hunks_available": true
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan-types.h",
+          "added": 2,
+          "removed": 2,
+          "hunks_available": true
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan.cpp",
+          "added": 31,
+          "removed": 9,
+          "hunks_available": true
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/vulkan-shaders/gated_delta_net.comp",
+          "added": 62,
+          "removed": 1,
+          "hunks_available": true
+        },
+        {
+          "path": "src/llama-context.cpp",
+          "added": 16,
+          "removed": 0,
+          "hunks_available": true
+        },
+        {
+          "path": "src/llama-graph.cpp",
+          "added": 65,
+          "removed": 6,
+          "hunks_available": true
+        },
+        {
+          "path": "src/llama-graph.h",
+          "added": 13,
+          "removed": 0,
+          "hunks_available": true
+        }
+      ],
+      "other_file_roots": [
+        "ggml",
+        "src",
+        "tests"
+      ],
+      "decision": "GDN replay changes the state reconstruction strategy and is still a draft. The existing accepted GDN change only reorganizes independent arithmetic rows.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 31662,
+      "title": "metal : guard flash-attn vec output scratch zeroing",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31662",
+      "created": "2026-11-04T15:04:39Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "ggml"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31660,
+      "title": "graph: store the MTP conv snapshots of every recurrent model in one set_rows",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31660",
+      "created": "2026-11-04T14:48:38Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 11,
+      "focus": [
+        {
+          "path": "src/llama-context.cpp",
+          "added": 1,
+          "removed": 1,
+          "hunks_available": true
+        },
+        {
+          "path": "src/llama-graph.cpp",
+          "added": 61,
+          "removed": 19,
+          "hunks_available": true
+        },
+        {
+          "path": "src/llama-graph.h",
+          "added": 9,
+          "removed": 3,
+          "hunks_available": true
+        }
+      ],
+      "other_file_roots": [
+        "src"
+      ],
+      "decision": "Coalesces recurrent MTP snapshot writes across models. Requires multi-token state-layout and rollback proof.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 31657,
+      "title": "qwen2 : add nvfp4 scales to build_ffn",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31657",
+      "created": "2026-11-04T13:51:19Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "src"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31654,
+      "title": "Historical HIP TILE flash-attention repeatability difference with an experimental guarded-loop patch (MI210, D512/D576)",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31654",
+      "created": "2026-11-04T13:06:34Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31653,
+      "title": "fix the ram usage of llama-quantize on windows",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31653",
+      "created": "2026-11-04T13:04:12Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "src"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31651,
+      "title": "[Apple] Metal: tiled K-quant GEMM for 64-lane GPUs - 6.8x matmul, 2.7x prefill",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31651",
+      "created": "2026-11-04T12:21:11Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31635,
+      "title": "llama : follow ctx_other devices and flash attention in Gemma4 assistant",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31635",
+      "created": "2026-11-04T03:07:03Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [
+        {
+          "path": "src/llama-context.cpp",
+          "added": 29,
+          "removed": 0,
+          "hunks_available": true
+        }
+      ],
+      "other_file_roots": [
+        "src"
+      ],
+      "decision": "Gemma4 assistant inherits target-device and flash-attention choice. Needs a Gemma4 assistant pair and exact draft acceptance checks.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 31634,
+      "title": "Add GGML_CUDA_GDN_ORDERED option for 4 columns GDN implementation.",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31634",
+      "created": "2026-11-04T01:55:42Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "ggml"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31632,
+      "title": "server : realtime: send an error event instead of crashing on exceptions",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31632",
+      "created": "2026-11-03T23:36:57Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "tools"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31631,
+      "title": "gguf-py : validate every tokenizer merge pair, not only the first",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31631",
+      "created": "2026-11-03T23:11:41Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "gguf-py"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31630,
+      "title": "Add GGML_CUDA_GDN_ORDERED option for 4 columns GDN implementation.",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31630",
+      "created": "2026-11-03T22:56:08Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "ggml"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31629,
+      "title": "Misc. bug: The Vulkan coopmat_stage shared-memory budget undercounts the shader allocation",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31629",
+      "created": "2026-11-03T22:38:49Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "Cooperative-matrix shared-memory staging budget report. The RX 580 uses scalar Vulkan pipelines.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 31627,
+      "title": "gguf-py : reject scalar arrays that exceed remaining file size",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31627",
+      "created": "2026-11-03T22:28:32Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 2,
+      "focus": [],
+      "other_file_roots": [
+        "gguf-py"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31626,
+      "title": "Misc. bug: server: a tool with an invalid schema in /v1/realtime crashes llama-server",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31626",
+      "created": "2026-11-03T22:20:00Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31620,
+      "title": "common : fix -hf tag matching inside longer quant names",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31620",
+      "created": "2026-11-03T19:42:19Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 2,
+      "focus": [],
+      "other_file_roots": [
+        "common",
+        "tests"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31611,
+      "title": "conversion : resolve quantized_layers from source tensor names",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31611",
+      "created": "2026-11-03T15:13:22Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "conversion"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31609,
+      "title": "fix llama-export-lora crash for bf16 base models",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31609",
+      "created": "2026-11-03T14:23:02Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 2,
+      "focus": [],
+      "other_file_roots": [
+        "ggml",
+        "tools"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31608,
+      "title": "model : enable NVFP4 LFM3 ggufs",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31608",
+      "created": "2026-11-03T14:17:19Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 3,
+      "focus": [],
+      "other_file_roots": [
+        "src"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31602,
+      "title": "conversion : filter quantized layer names as tensor names",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31602",
+      "created": "2026-11-03T11:41:37Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "conversion"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31597,
+      "title": "ggml: fix OOB read in ggml_flash_attn_ext with narrow mask",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31597",
+      "created": "2026-11-03T10:53:35Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [
+        {
+          "path": "ggml/src/ggml-cpu/ops.cpp",
+          "added": 5,
+          "removed": 0,
+          "hunks_available": true
+        }
+      ],
+      "other_file_roots": [
+        "ggml"
+      ],
+      "decision": "Adds an assertion for a narrow CPU attention mask in the one-chunk path. A local port should validate masks before execution in tiled and untiled paths.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 31590,
+      "title": "CANN: Fix flash attention NaNs by passing attention_mask",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31590",
+      "created": "2026-11-03T09:58:16Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "ggml"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31582,
+      "title": "model : add dense FFN support for Qwen3Next (#31551)",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31582",
+      "created": "2026-11-03T08:23:41Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 4,
+      "focus": [],
+      "other_file_roots": [
+        "gguf-py",
+        "src",
+        "tests"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31579,
+      "title": "tools : reject mismatched shards in GGUF split merge",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31579",
+      "created": "2026-11-03T07:31:55Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "tools"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31563,
+      "title": "cli : fix crash on invalid UTF-8 in prompt or files",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31563",
+      "created": "2026-11-02T21:18:48Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "tools"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31560,
+      "title": "Vulkan: KHR_coopmat gives nondeterministic, wrong results on Intel Arc Pro B70 (BMG G31, Mesa 26.2.5) — encoder/decision model, F16 and Q8_0",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31560",
+      "created": "2026-11-02T21:01:33Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31557,
+      "title": "Vulkan: Arc Pro B60 regression between 65840ed and 29c720e (tg128 20.1 -> 13.0 t/s, pp512 1117 -> 821 t/s)",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31557",
+      "created": "2026-11-02T20:36:22Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31551,
+      "title": "llama : add dense FFN support for Qwen3Next (Qwen3.5/3.8-27B dense) and fix SIGFPE when n_expert_used == 0",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31551",
+      "created": "2026-11-02T17:53:48Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31541,
+      "title": "Compile bug: FreeBSD ggml vulkan compilation issue",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31541",
+      "created": "2026-11-02T12:52:13Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31538,
+      "title": "Misc. bug: iGPU: CPU-resident layers use the Vulkan host buffer, consuming device memory",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31538",
+      "created": "2026-11-02T09:51:23Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31532,
+      "title": "graph: reorder GDN (qwen3.5) graph for HTP fusion and zero-copy recur…",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31532",
+      "created": "2026-11-02T08:12:20Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 5,
+      "focus": [],
+      "other_file_roots": [
+        "src"
+      ],
+      "decision": "HTP/GDN graph reorder changes ownership and graph topology for a separate backend. Kept the qualified local per-row Haswell implementation.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 31525,
+      "title": "cuda : pair GQA query heads in vector flash attention for SM70 long-KV decode",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31525",
+      "created": "2026-11-02T02:38:38Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 2,
+      "focus": [],
+      "other_file_roots": [
+        "ggml",
+        "tests"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31522,
+      "title": "imatrix : fix --nextn crash",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31522",
+      "created": "2026-11-02T00:19:31Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "tools"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31519,
+      "title": "batched-bench: validate shapes and warm unified KV cache",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31519",
+      "created": "2026-11-01T22:38:35Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 4,
+      "focus": [],
+      "other_file_roots": [
+        "common",
+        "tools"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31514,
+      "title": "Feature Request: separate cache types for the SWA and full-attention KV caches",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31514",
+      "created": "2026-11-01T18:59:56Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31511,
+      "title": "granite : pass weight scale tensors to build_ffn for NVFP4 support",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31511",
+      "created": "2026-11-01T18:19:18Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "src"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31509,
+      "title": "Eval bug: vulkan: random all-NaN logits on Radeon 680M, gone with integer dot product disabled",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31509",
+      "created": "2026-11-01T17:18:27Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "RDNA iGPU integer-dot corruption report. This RX 580 reports no accelerated integer dot product.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 31501,
+      "title": "gguf-split: fix tensor data offset mismatch with non-default alignment",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31501",
+      "created": "2026-11-01T10:37:55Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "tools"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31495,
+      "title": "Misc. bug: --spec-type draft-mtp cuts HIP prefill throughput by ~80% (Vulkan unaffected)",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31495",
+      "created": "2026-11-01T06:00:30Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31484,
+      "title": "opencl : cache flash-attention programs on disk",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31484",
+      "created": "2026-10-31T21:45:44Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "ggml"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31480,
+      "title": "Eval bug: DeepSeek-V4.1-Flash (deepseek41) outputs gibberish on Vulkan with flash attention enabled (correct with -fa off)",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31480",
+      "created": "2026-10-31T18:53:10Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31477,
+      "title": "Eval bug: draft-mtp token generation ~35% slower with -np 1 than with -np 2/4 (Vulkan, single request)",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31477",
+      "created": "2026-10-31T17:12:40Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31466,
+      "title": "[SYCL] run Q4_0 prompt matmul in oneDNN without converting weights to f16",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31466",
+      "created": "2026-10-31T11:19:05Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31461,
+      "title": "Feature Request: one-token FLASH_ATTN_EXT path for GQA",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31461",
+      "created": "2026-10-31T07:53:19Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31456,
+      "title": "gptneox: FFN uses tanh GELU (LLM_FFN_GELU) but GPT-NeoX/Pythia are trained with exact erf GELU",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31456",
+      "created": "2026-10-31T04:21:01Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31452,
+      "title": "[RFC] Deterministic Layer & MoE Streaming: Run 70B/141B on 16GB RAM with Standard GGUF (Zero-OOM mmap Alternative)",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31452",
+      "created": "2026-10-31T02:33:43Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31448,
+      "title": "Eval bug: granite: build_ffn() passes NULL for NVFP4 weight scales → garbage output",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31448",
+      "created": "2026-10-31T00:15:13Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31445,
+      "title": "Compile bug: Vulkan backend fails to build since #27512 (`signbit`/`isnan`/`isinf` undeclared in `ggml_fp32_to_f8_e4m3`), GCC 16.2 and clang 22 with libstdc++ 16",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31445",
+      "created": "2026-10-30T22:10:04Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31418,
+      "title": "vulkan: support batched tensor copy API",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31418",
+      "created": "2026-10-30T12:27:44Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 4,
+      "focus": [
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan-buffers.cpp",
+          "added": 250,
+          "removed": 59,
+          "hunks_available": true
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan-common.h",
+          "added": 9,
+          "removed": 0,
+          "hunks_available": true
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan-types.h",
+          "added": 15,
+          "removed": 0,
+          "hunks_available": true
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan.cpp",
+          "added": 48,
+          "removed": 0,
+          "hunks_available": true
+        }
+      ],
+      "other_file_roots": [
+        "ggml"
+      ],
+      "decision": "Batched Vulkan transfers change staging lifetimes and callback contracts. Current GCN targeted async-readback workaround must survive any adaptation.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 31415,
+      "title": "llama : fix MTP graph reallocations when switching inputs",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31415",
+      "created": "2026-10-30T10:35:08Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "src"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31403,
+      "title": "server : don't crash when the prompt is consumed entirely by media chunks",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31403",
+      "created": "2026-10-30T02:40:03Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "tools"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31402,
+      "title": "Misc. bug: Vulkan DeviceLostError on AMD 8845HS (Radeon 780M) starting from b10369",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31402",
+      "created": "2026-10-30T02:24:39Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31399,
+      "title": "ggml-cpu: let the tiled flash-attention kernel read a q8_0 KV cache",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31399",
+      "created": "2026-10-30T01:10:47Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [
+        {
+          "path": "ggml/src/ggml-cpu/ops.cpp",
+          "added": 19,
+          "removed": 1,
+          "hunks_available": true
+        }
+      ],
+      "other_file_roots": [
+        "ggml"
+      ],
+      "decision": "Tiled attention dequantizes K into F32 whereas the current Q8 path uses quantized-dot inputs. A production change needs attention and greedy-token comparison.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 31393,
+      "title": "Research: ggml-cuda shared-memory failure with Vulkan acceleration structures",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31393",
+      "created": "2026-10-29T22:58:15Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31392,
+      "title": "draft-mtp: unconditional sched_need_reserve in set_sampler() rebuilds the scheduler every request — host RSS grows per request, never released",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31392",
+      "created": "2026-10-29T22:32:31Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31387,
+      "title": "quant : allow manual tensor types with F32, F16 and BF16 targets",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31387",
+      "created": "2026-10-29T18:23:26Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 2,
+      "focus": [],
+      "other_file_roots": [
+        "src",
+        "tests"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31386,
+      "title": "quant : allow quantization for LFM3-Audio codec decoder",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31386",
+      "created": "2026-10-29T18:18:19Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 2,
+      "focus": [],
+      "other_file_roots": [
+        "conversion",
+        "src"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31385,
+      "title": "Eval bug: DeepSeek-V4.1-Flash-1017 GGUF issues",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31385",
+      "created": "2026-10-29T17:13:13Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31369,
+      "title": "Eval bug: SYCL server-intel image crashes (SIGSEGV) in oneAPI 2026.1 persistent device code cache",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31369",
+      "created": "2026-10-29T11:03:33Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31368,
+      "title": "memory: refuse rollbacks past the snapshots of the last ubatch",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31368",
+      "created": "2026-10-29T11:00:52Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 7,
+      "focus": [
+        {
+          "path": "src/llama-kv-cache-dsv4.cpp",
+          "added": 23,
+          "removed": 9,
+          "hunks_available": true
+        },
+        {
+          "path": "src/llama-kv-cache-dsv4.h",
+          "added": 5,
+          "removed": 1,
+          "hunks_available": true
+        }
+      ],
+      "other_file_roots": [
+        "src",
+        "tests"
+      ],
+      "decision": "Rejects DeepSeek V4 rollback outside saved snapshots. Requires an actual recurrent model, rejected speculative tails and state restore checks.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 31356,
+      "title": "gemma4: graph optimizations (massive gains on pp for E2B and E4B)",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31356",
+      "created": "2026-10-29T07:16:57Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 2,
+      "focus": [],
+      "other_file_roots": [
+        "common",
+        "src"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31346,
+      "title": "Misc. bug: test-llama-context crashing on deepseek41-moe.gguf",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31346",
+      "created": "2026-10-29T03:23:38Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31344,
+      "title": "tests : fix comp_padding CUDA graph reservation",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31344",
+      "created": "2026-10-29T00:27:54Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "tests"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31343,
+      "title": "gguf-py : fix crash when extra_special_tokens is not a dict",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31343",
+      "created": "2026-10-28T23:10:09Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 2,
+      "focus": [],
+      "other_file_roots": [
+        "gguf-py"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31327,
+      "title": "HIP/CUDA: enable GDN mma kernel on CDNA",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31327",
+      "created": "2026-10-28T16:41:40Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "ggml"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31323,
+      "title": "vulkan: optimize prompt processing Flash Attention for RDNA3 and RDNA4",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31323",
+      "created": "2026-10-28T15:35:13Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 9,
+      "focus": [
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan-common.h",
+          "added": 1,
+          "removed": 1,
+          "hunks_available": true
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan-types.h",
+          "added": 4,
+          "removed": 1,
+          "hunks_available": true
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/ggml-vulkan.cpp",
+          "added": 108,
+          "removed": 27,
+          "hunks_available": true
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/vulkan-shaders/flash_attn.comp",
+          "added": 10,
+          "removed": 8,
+          "hunks_available": true
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/vulkan-shaders/flash_attn_base.glsl",
+          "added": 9,
+          "removed": 0,
+          "hunks_available": true
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/vulkan-shaders/flash_attn_cm1.comp",
+          "added": 121,
+          "removed": 38,
+          "hunks_available": true
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/vulkan-shaders/flash_attn_cm1_flip.comp",
+          "added": 441,
+          "removed": 0,
+          "hunks_available": true
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/vulkan-shaders/flash_attn_cm2.comp",
+          "added": 9,
+          "removed": 6,
+          "hunks_available": true
+        },
+        {
+          "path": "ggml/src/ggml-vulkan/vulkan-shaders/vulkan-shaders-gen.cpp",
+          "added": 8,
+          "removed": 0,
+          "hunks_available": true
+        }
+      ],
+      "other_file_roots": [
+        "ggml"
+      ],
+      "decision": "RDNA3/4 FlashAttention layout relies on their hardware features. The RX 580 is wave64 GCN without those matrix paths.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 31310,
+      "title": "gguf-py: fix np_roundf dropping the sign",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31310",
+      "created": "2026-10-28T11:14:08Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 5,
+      "focus": [],
+      "other_file_roots": [
+        "gguf-py",
+        "pyproject.toml",
+        "requirements",
+        "tools"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 31302,
+      "title": "Eval bug: draft-mtp context reallocates its graph on every draft cycle after an image (mtmd) request",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31302",
+      "created": "2026-10-28T09:03:06Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31298,
+      "title": "Eval bug: glm-ocr GGUF (Ollama conversion) has no chat_template — default framing causes template-token repetition loops; pass-through template fixes it",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31298",
+      "created": "2026-10-28T07:35:55Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 31296,
+      "title": "Title: CUDA: fuse NVFP4 gate/up matmuls and GLU in MMQ",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31296",
+      "created": "2026-10-28T06:53:24Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/llama.cpp",
+      "file_count": 6,
+      "focus": [],
+      "other_file_roots": [
+        "ggml",
+        "tests"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 1685,
+      "title": "docs : sync ggml_type enum in gguf.md",
+      "url": "https://github.com/ggml-org/ggml/pull/1685",
+      "created": "2026-11-08T10:24:35Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "ggml-org/ggml",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "docs"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 1684,
+      "title": "docs/gguf.md: ggml_type list stops at MXFP4 (39); GGUF files in the wild use newer codes",
+      "url": "https://github.com/ggml-org/ggml/issues/1684",
+      "created": "2026-11-07T22:05:47Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "ggml-org/ggml",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 2304,
+      "title": "CUDA (Windows): Z-Image still fails \"workspace capacity check\" mid-sampling above ~768x432 on master-1053 (follow-up to #1989)",
+      "url": "https://github.com/leejet/stable-diffusion.cpp/issues/2304",
+      "created": "2026-11-08T20:12:04Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "leejet/stable-diffusion.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 2295,
+      "title": "[Bug] Vulkan DEVICE_LOST on GTX 1080 with short prompts",
+      "url": "https://github.com/leejet/stable-diffusion.cpp/issues/2295",
+      "created": "2026-11-08T08:11:48Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "leejet/stable-diffusion.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 2293,
+      "title": "fix: use patch token count for the Flux scheduler",
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2293",
+      "created": "2026-11-08T07:29:46Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "leejet/stable-diffusion.cpp",
+      "file_count": 3,
+      "focus": [],
+      "other_file_roots": [
+        "src"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 2280,
+      "title": "perf(vulkan): accelerate packed INT4 with cooperative matrices",
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2280",
+      "created": "2026-11-06T16:35:27Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "leejet/stable-diffusion.cpp",
+      "file_count": 6,
+      "focus": [],
+      "other_file_roots": [
+        "docs",
+        "src"
+      ],
+      "decision": "Packed INT4 cooperative matrix path is outside Polaris capability.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 2275,
+      "title": "[Bug] MiniMax-H3 on Vulkan: SIGSEGV in ggml_vk_tensor_subbuffer (ggml_vk_mul) at 1024x1024x192 frames, after #2257",
+      "url": "https://github.com/leejet/stable-diffusion.cpp/issues/2275",
+      "created": "2026-11-05T04:22:15Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "leejet/stable-diffusion.cpp",
+      "decision": "H3 video view/subbuffer crash needs a same-model graph or synthetic view reproducer. Keep this issue separate from Scale correctness.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 2271,
+      "title": "[Bug] metal: quantised matvec assumes 32-wide simdgroups — silent data loss at width 64 (RDNA)",
+      "url": "https://github.com/leejet/stable-diffusion.cpp/issues/2271",
+      "created": "2026-11-04T11:42:47Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "leejet/stable-diffusion.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 2268,
+      "title": "[Bug] MiniMax-H3 Video VAE decoding extremely slow on AMD RX 7900 XTX (Vulkan) — 309s total, ~77s per iteration",
+      "url": "https://github.com/leejet/stable-diffusion.cpp/issues/2268",
+      "created": "2026-11-03T10:51:02Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "leejet/stable-diffusion.cpp",
+      "decision": "Long H3 VAE timings are from RDNA3 and another model. No direct Polaris performance inference.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 2267,
+      "title": "[Bug] Flux scheduler counts latent pixels instead of 2x2 patches (image_seq_len=16384 at 1024px, mu=3.23): 4 px grid artifact with Chroma1-HD",
+      "url": "https://github.com/leejet/stable-diffusion.cpp/issues/2267",
+      "created": "2026-11-03T02:45:02Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "leejet/stable-diffusion.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 2261,
+      "title": "[Bug] \"type i32 unsupported for integer quantization: no dequantization available\"",
+      "url": "https://github.com/leejet/stable-diffusion.cpp/issues/2261",
+      "created": "2026-11-01T20:37:38Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "leejet/stable-diffusion.cpp",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 2256,
+      "title": "fix: retry Vulkan capacity checks after memory reclamation",
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2256",
+      "created": "2026-11-01T13:30:35Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "leejet/stable-diffusion.cpp",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "src"
+      ],
+      "decision": "Retries capacity planning after reclaim, related to existing workspace release and image-budget checks. Needs forced OOM and placement validation.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 2254,
+      "title": "[Bug] ggml commit cc937ae causes Krea2 generation to OOM on AMD dGPU",
+      "url": "https://github.com/leejet/stable-diffusion.cpp/issues/2254",
+      "created": "2026-11-01T06:13:41Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "leejet/stable-diffusion.cpp",
+      "decision": "AMD Krea2 OOM report uses different weights and an allocator version. Preserve current MOSS residency and fallback.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 2251,
+      "title": "perf: optimize Vulkan kernels, graph fusion, and workspace reuse",
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2251",
+      "created": "2026-10-30T15:54:58Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "leejet/stable-diffusion.cpp",
+      "file_count": 6,
+      "focus": [
+        {
+          "path": "src/core/compute_workspace.cpp",
+          "added": 54,
+          "removed": 1,
+          "hunks_available": true
+        },
+        {
+          "path": "src/core/compute_workspace.h",
+          "added": 4,
+          "removed": 1,
+          "hunks_available": true
+        },
+        {
+          "path": "src/core/ggml_extend.cpp",
+          "added": 26,
+          "removed": 13,
+          "hunks_available": true
+        },
+        {
+          "path": "src/core/ggml_runner.cpp",
+          "added": 1,
+          "removed": 1,
+          "hunks_available": true
+        }
+      ],
+      "other_file_roots": [
+        "docs",
+        "ggml",
+        "src"
+      ],
+      "decision": "Reviewed workspace caching, Vulkan switches, and conv3d layout. Current code already has measured workspace memoization and local fusion. Remaining layout changes need video correctness tests.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 2242,
+      "title": "[Bug] MiniMax-H3 DiT: MLP fc1 output exceeds Vulkan's 4 GiB buffer limit above 37,449 tokens; the MLP of every layer falls back to CPU",
+      "url": "https://github.com/leejet/stable-diffusion.cpp/issues/2242",
+      "created": "2026-10-28T20:43:57Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "leejet/stable-diffusion.cpp",
+      "decision": "Large H3 FFN activation exceeds the Vulkan single buffer limit. Chunk planning changes execution geometry; current MOSS stays on its tested path.",
+      "review_depth": "targeted diff or issue discussion"
+    },
+    {
+      "number": 157,
+      "title": "feat(models): add divider lines between GGUF file rows in repo cards",
+      "url": "https://github.com/engeldlgado/toshllm/pull/157",
+      "created": "2026-11-07T18:53:52Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "engeldlgado/toshllm",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "Sources"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 150,
+      "title": "Local Image-to-3D Generation Workspace (similar to TRELLIS / Image to 3D)",
+      "url": "https://github.com/engeldlgado/toshllm/issues/150",
+      "created": "2026-11-03T10:54:04Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "engeldlgado/toshllm",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 946,
+      "title": "research(BPB3-K): true complete SmolLM2 Q4-146 inference with live Rust AVX2 and stock Q3_K",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/946",
+      "created": "2026-11-10T19:48:02Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "Memorithm/SML-GENIUS",
+      "file_count": 5,
+      "focus": [],
+      "other_file_roots": [
+        ".github",
+        "research"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 942,
+      "title": "research(BPB3-K): compare exact 130B scale-preencoded AVX2 tile against 110B reused-Q8 baseline",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/942",
+      "created": "2026-11-10T18:25:01Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "Memorithm/SML-GENIUS",
+      "file_count": 4,
+      "focus": [],
+      "other_file_roots": [
+        ".github",
+        "research"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 937,
+      "title": "research(BPB3-K): hand-written AVX2 no-stack kernel and three-way stock/Rust/asm bench",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/937",
+      "created": "2026-11-10T15:56:59Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "Memorithm/SML-GENIUS",
+      "file_count": 5,
+      "focus": [],
+      "other_file_roots": [
+        ".github",
+        "research"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 932,
+      "title": "feat(sml-runtime): Cycloid-8 measure verified zero-copy borrow vs resident copy+CRC",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/932",
+      "created": "2026-11-10T06:35:18Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "Memorithm/SML-GENIUS",
+      "file_count": 2,
+      "focus": [],
+      "other_file_roots": [
+        "crates",
+        "docs"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 930,
+      "title": "feat(sml-runtime): Cycloid-7 zero-copy immutable borrow of verified resident pages",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/930",
+      "created": "2026-11-10T06:15:23Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "Memorithm/SML-GENIUS",
+      "file_count": 2,
+      "focus": [],
+      "other_file_roots": [
+        "crates",
+        "docs"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 894,
+      "title": "research(bpb3k): qualify stock-order fused AVX2 v2 against original SmolLM2",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/894",
+      "created": "2026-11-08T20:35:45Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "Memorithm/SML-GENIUS",
+      "file_count": 12,
+      "focus": [],
+      "other_file_roots": [
+        ".github",
+        "crates",
+        "research"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 885,
+      "title": "BPB3 real-model Gate B — live SmolLM2 inference versus optimized GGUF (exact-quality falsification)",
+      "url": "https://github.com/Memorithm/SML-GENIUS/issues/885",
+      "created": "2026-11-08T14:52:20Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "Memorithm/SML-GENIUS",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 869,
+      "title": "test(context-2): G9 SWE1/SWC2 restart-and-rollback crash-point harness",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/869",
+      "created": "2026-11-08T01:18:44Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "Memorithm/SML-GENIUS",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "crates"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 853,
+      "title": "BPB-3 E1/E2 — mesurer puis réduire les erreurs de reconstruction après qualification GGUF K",
+      "url": "https://github.com/Memorithm/SML-GENIUS/issues/853",
+      "created": "2026-11-07T15:39:01Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "Memorithm/SML-GENIUS",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 852,
+      "title": "research(bpb3): qualify real GGUF Q3_K/Q4_K byte decoders against pinned gguf-py",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/852",
+      "created": "2026-11-07T15:33:55Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "Memorithm/SML-GENIUS",
+      "file_count": 5,
+      "focus": [],
+      "other_file_roots": [
+        ".github",
+        "research"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 846,
+      "title": "research(bpb3): independent INT2/INT3/INT4 quantization quality frontier",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/846",
+      "created": "2026-11-07T10:08:24Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "Memorithm/SML-GENIUS",
+      "file_count": 2,
+      "focus": [],
+      "other_file_roots": [
+        ".github",
+        "research"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 837,
+      "title": "research: BPB-3 Boolean Posit blocks and 537M-coefficient resident corpus evidence",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/837",
+      "created": "2026-11-06T21:05:33Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "Memorithm/SML-GENIUS",
+      "file_count": 4,
+      "focus": [],
+      "other_file_roots": [
+        ".github",
+        "research"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 833,
+      "title": "research(pceq3): omit certified-zero and quantized-zero i8 payloads",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/833",
+      "created": "2026-11-06T19:37:16Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "Memorithm/SML-GENIUS",
+      "file_count": 5,
+      "focus": [],
+      "other_file_roots": [
+        "crates",
+        "docs"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 831,
+      "title": "research(pceq1): paired end-to-end quantization benchmark for Dell and Thor",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/831",
+      "created": "2026-11-06T18:28:24Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "Memorithm/SML-GENIUS",
+      "file_count": 2,
+      "focus": [],
+      "other_file_roots": [
+        "crates",
+        "docs"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 830,
+      "title": "research(pceq0): fused producer-carried block quantization with exact oracle",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/830",
+      "created": "2026-11-06T18:07:30Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "Memorithm/SML-GENIUS",
+      "file_count": 3,
+      "focus": [],
+      "other_file_roots": [
+        "crates",
+        "docs"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 829,
+      "title": "Research PCEQ-0: producer-carried quantization scale to eliminate additional DRAM rereads",
+      "url": "https://github.com/Memorithm/SML-GENIUS/issues/829",
+      "created": "2026-11-06T17:56:39Z",
+      "kind": "issue",
+      "relevant": true,
+      "repository": "Memorithm/SML-GENIUS",
+      "decision": "No production change after title screening",
+      "review_depth": "title"
+    },
+    {
+      "number": 807,
+      "title": "feat(sml-store): G1 CONTEXT-3 two-level shortlist (secondary-key order in overflowing buckets, same cap)",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/807",
+      "created": "2026-11-03T21:21:57Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "Memorithm/SML-GENIUS",
+      "file_count": 4,
+      "focus": [],
+      "other_file_roots": [
+        "crates",
+        "docs"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    },
+    {
+      "number": 778,
+      "title": "test(sml-core): cover V888 CSR recurrence across 64-bit workspace boundary",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/778",
+      "created": "2026-11-02T00:56:03Z",
+      "kind": "PR",
+      "relevant": true,
+      "repository": "Memorithm/SML-GENIUS",
+      "file_count": 1,
+      "focus": [],
+      "other_file_roots": [
+        "crates"
+      ],
+      "decision": "No production change after path screening",
+      "review_depth": "paginated changed-file scope"
+    }
+  ]
+}

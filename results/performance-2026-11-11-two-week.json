@@ -1,0 +1,318 @@
+{
+  "date": "2026-11-11",
+  "source_commit": "f49df57b4a82f6d641c419c7fadc9e4b896f6781",
+  "executable_sha256": "e8743bce1b4046a41c46ad07bb8fbdfec66b03ecbb350a98710e0150cc7b4b84",
+  "patch_sha256": "c8e654aadbae5b353221e530598c902732b05a3f2ab46b10d6f0c9d6b5a8b80e",
+  "model": {
+    "name": "ABDM MOSS Q8_0",
+    "sha256": "92e2a40e6752c83da3526ec6f2da1653bed433cabde48627792a568eac0f008f",
+    "bytes": 5401115648
+  },
+  "hardware": {
+    "cpu": "Intel Xeon E5-2696 v3, 10 cores, 20 threads",
+    "vulkan_device": "AMD Radeon RX 580 2048SP (AMD proprietary driver) | uma: 0 | rebar: 0 | fp16: 0 | bf16: 0 | fp4: 0 | warp size: 64 | shared memory: 32768 | int dot: 0 | matrix cores: none",
+    "windows_display_driver": "31.0.14037.18001"
+  },
+  "payload": {
+    "prompt": "Professional full-length photograph of an adult woman wearing a light silk dress and black high heels, standing beside a wooden wall clock in a warmly lit hotel lobby. Natural detailed eyes, realistic skin and fabric texture, both hands visible, sharp focus, neutral colors.",
+    "negative_prompt": "",
+    "seed": 424242,
+    "batch_size": 1,
+    "n_iter": 1,
+    "kcpp_quality": "normal"
+  },
+  "settings_sha256": {
+    "Helper.kcpps": "282741a7d54bf97c8eae4c45a7222d900ceb41d70a98a2cac012dc5b1ee83d53",
+    "profiles\\music.kcpps": "89b27cb9fcf0783ace14ef3004a8558f04f68ec643aa52e2d65eaa8aba5ec33e",
+    "profiles\\photo-normal.kcpps": "843293d4413b02e0f4585c7dc46d3857c6289abc26b2de9e95d7946416c928fd",
+    "profiles\\photo-quality.kcpps": "b5d0f6f5b1d780fc40fd4bddb2454cd8f13793c1698d3eb1d6a76e0419823347",
+    "profiles\\video.kcpps": "bf15115402c68882d29b308c6c92b02e4efdf95265731d9368bb2c7beeadb2f8",
+    "runtime\\native-environment.json": "cfee531f14d40e8a76140363ada05d6a1bf1b8598b38b803f0c9ce0f1b1cf0a2"
+  },
+  "before": {
+    "executable_sha256": "33615ff0474faa097deb188a4f326247f6f8ce99fd634da720b9573728c93a6e",
+    "version": "1.125",
+    "media_source_sha256": {
+      "KoboldProxy.py": "1806ac8c2d3def7e84bcb10655a47ce96684406c2c33eaaa389ec1703770058d",
+      "PhotoRestoration.py": "efa35ba3943a2c4e3e0566bff0cc7c471cab7564b2714067568448bb562ebbfe"
+    },
+    "first_normal": {
+      "repeat": 0,
+      "seconds": 163.1939629999997,
+      "native_seconds": 150.156,
+      "pipeline_seconds": 163.187,
+      "raw_rgb_sha256": "b855f359697ff79444b38facce5ce78146c972f99227b5dfd42edd24371a72d0",
+      "rgb_sha256": "e8f4feac7cb16dc5a5772c4a31e8a71b70cb8e8fecf4213065cdf8a6d3ed81e0",
+      "dimensions": [
+        736,
+        1104
+      ]
+    },
+    "native": {
+      "median": 143.197,
+      "min": 143.107,
+      "max": 143.287,
+      "repeats": [
+        143.107,
+        143.287
+      ]
+    },
+    "normal": {
+      "median": 152.8578399500002,
+      "min": 150.8972759999997,
+      "max": 154.8184039000007,
+      "repeats": [
+        150.8972759999997,
+        154.8184039000007
+      ]
+    },
+    "upscale": {
+      "median": 2.756840650000413,
+      "min": 2.6960703000004287,
+      "max": 2.8176110000003973,
+      "repeats": [
+        2.8176110000003973,
+        2.6960703000004287
+      ]
+    },
+    "normal_repeats": [
+      {
+        "repeat": 0,
+        "seconds": 163.1939629999997,
+        "native_seconds": 150.156,
+        "pipeline_seconds": 163.187,
+        "raw_rgb_sha256": "b855f359697ff79444b38facce5ce78146c972f99227b5dfd42edd24371a72d0",
+        "rgb_sha256": "e8f4feac7cb16dc5a5772c4a31e8a71b70cb8e8fecf4213065cdf8a6d3ed81e0",
+        "dimensions": [
+          736,
+          1104
+        ]
+      },
+      {
+        "repeat": 1,
+        "seconds": 150.8972759999997,
+        "native_seconds": 143.107,
+        "pipeline_seconds": 150.89,
+        "raw_rgb_sha256": "b855f359697ff79444b38facce5ce78146c972f99227b5dfd42edd24371a72d0",
+        "rgb_sha256": "e8f4feac7cb16dc5a5772c4a31e8a71b70cb8e8fecf4213065cdf8a6d3ed81e0",
+        "dimensions": [
+          736,
+          1104
+        ]
+      },
+      {
+        "repeat": 2,
+        "seconds": 154.8184039000007,
+        "native_seconds": 143.287,
+        "pipeline_seconds": 154.811,
+        "raw_rgb_sha256": "b855f359697ff79444b38facce5ce78146c972f99227b5dfd42edd24371a72d0",
+        "rgb_sha256": "e8f4feac7cb16dc5a5772c4a31e8a71b70cb8e8fecf4213065cdf8a6d3ed81e0",
+        "dimensions": [
+          736,
+          1104
+        ]
+      }
+    ],
+    "sr_repeats": [
+      {
+        "repeat": 0,
+        "seconds": 2.8176110000003973,
+        "inference_seconds": 0.9788,
+        "rgb_sha256": "23fdd13c496cfdb1636809bc99fee54d92601e32f92bd5be83112030da8291fd",
+        "dimensions": [
+          2944,
+          4416
+        ],
+        "restoration_repeated": false,
+        "native_resident_before_call": true
+      },
+      {
+        "repeat": 1,
+        "seconds": 2.6960703000004287,
+        "inference_seconds": 0.9391,
+        "rgb_sha256": "23fdd13c496cfdb1636809bc99fee54d92601e32f92bd5be83112030da8291fd",
+        "dimensions": [
+          2944,
+          4416
+        ],
+        "restoration_repeated": false,
+        "native_resident_before_call": true
+      }
+    ],
+    "model_ready_seconds": [
+      19.212272000000667,
+      80.65825109999969
+    ]
+  },
+  "after": {
+    "executable_sha256": "e8743bce1b4046a41c46ad07bb8fbdfec66b03ecbb350a98710e0150cc7b4b84",
+    "version": "1.125",
+    "media_source_sha256": {
+      "KoboldProxy.py": "7aa2e6b46a6a2041269f3c18b5c3bc026b40cdba99d587d208f6665aee82b006",
+      "PhotoRestoration.py": "0b958a1d2dd315f115203be6d242ccd466c791767d9d2315526e2fc1d9c03dec"
+    },
+    "first_normal": {
+      "repeat": 0,
+      "seconds": 157.00116530000014,
+      "native_seconds": 145.546,
+      "pipeline_seconds": 156.993,
+      "raw_rgb_sha256": "b855f359697ff79444b38facce5ce78146c972f99227b5dfd42edd24371a72d0",
+      "rgb_sha256": "e8f4feac7cb16dc5a5772c4a31e8a71b70cb8e8fecf4213065cdf8a6d3ed81e0",
+      "dimensions": [
+        736,
+        1104
+      ]
+    },
+    "native": {
+      "median": 143.278,
+      "min": 143.254,
+      "max": 143.302,
+      "repeats": [
+        143.254,
+        143.302
+      ]
+    },
+    "normal": {
+      "median": 151.64616730000034,
+      "min": 151.6161807999997,
+      "max": 151.67615380000098,
+      "repeats": [
+        151.6161807999997,
+        151.67615380000098
+      ]
+    },
+    "upscale": {
+      "median": 2.6700559499995506,
+      "min": 2.6671528999995644,
+      "max": 2.672958999999537,
+      "repeats": [
+        2.672958999999537,
+        2.6671528999995644
+      ]
+    },
+    "normal_repeats": [
+      {
+        "repeat": 0,
+        "seconds": 157.00116530000014,
+        "native_seconds": 145.546,
+        "pipeline_seconds": 156.993,
+        "raw_rgb_sha256": "b855f359697ff79444b38facce5ce78146c972f99227b5dfd42edd24371a72d0",
+        "rgb_sha256": "e8f4feac7cb16dc5a5772c4a31e8a71b70cb8e8fecf4213065cdf8a6d3ed81e0",
+        "dimensions": [
+          736,
+          1104
+        ]
+      },
+      {
+        "repeat": 1,
+        "seconds": 151.6161807999997,
+        "native_seconds": 143.254,
+        "pipeline_seconds": 151.609,
+        "raw_rgb_sha256": "b855f359697ff79444b38facce5ce78146c972f99227b5dfd42edd24371a72d0",
+        "rgb_sha256": "e8f4feac7cb16dc5a5772c4a31e8a71b70cb8e8fecf4213065cdf8a6d3ed81e0",
+        "dimensions": [
+          736,
+          1104
+        ]
+      },
+      {
+        "repeat": 2,
+        "seconds": 151.67615380000098,
+        "native_seconds": 143.302,
+        "pipeline_seconds": 151.669,
+        "raw_rgb_sha256": "b855f359697ff79444b38facce5ce78146c972f99227b5dfd42edd24371a72d0",
+        "rgb_sha256": "e8f4feac7cb16dc5a5772c4a31e8a71b70cb8e8fecf4213065cdf8a6d3ed81e0",
+        "dimensions": [
+          736,
+          1104
+        ]
+      }
+    ],
+    "sr_repeats": [
+      {
+        "repeat": 0,
+        "seconds": 2.672958999999537,
+        "inference_seconds": 0.9539,
+        "rgb_sha256": "23fdd13c496cfdb1636809bc99fee54d92601e32f92bd5be83112030da8291fd",
+        "dimensions": [
+          2944,
+          4416
+        ],
+        "restoration_repeated": false,
+        "native_resident_before_call": true
+      },
+      {
+        "repeat": 1,
+        "seconds": 2.6671528999995644,
+        "inference_seconds": 0.9376,
+        "rgb_sha256": "23fdd13c496cfdb1636809bc99fee54d92601e32f92bd5be83112030da8291fd",
+        "dimensions": [
+          2944,
+          4416
+        ],
+        "restoration_repeated": false,
+        "native_resident_before_call": true
+      }
+    ],
+    "model_ready_seconds": [
+      12.185929399998713,
+      13.034244000000399
+    ]
+  },
+  "comparison": {
+    "native": {
+      "previous_seconds": 143.197,
+      "candidate_seconds": 143.278,
+      "saved_seconds": -0.08099999999998886,
+      "less_time_percent": -0.05656543084002763,
+      "ranges_overlap": true
+    },
+    "normal": {
+      "previous_seconds": 152.8578399500002,
+      "candidate_seconds": 151.64616730000034,
+      "saved_seconds": 1.211672649999855,
+      "less_time_percent": 0.7926794271044257,
+      "ranges_overlap": true
+    },
+    "upscale": {
+      "previous_seconds": 2.756840650000413,
+      "candidate_seconds": 2.6700559499995506,
+      "saved_seconds": 0.08678470000086236,
+      "less_time_percent": 3.1479766522177988,
+      "ranges_overlap": false
+    },
+    "combined": {
+      "previous_seconds": 155.6146806000006,
+      "candidate_seconds": 154.3162232499999,
+      "saved_seconds": 1.2984573500007173,
+      "less_time_percent": 0.8344054333397577
+    }
+  },
+  "correctness": {
+    "raw_rgb": {
+      "all_bit_exact": true,
+      "sha256": [
+        "b855f359697ff79444b38facce5ce78146c972f99227b5dfd42edd24371a72d0"
+      ]
+    },
+    "normal_rgb": {
+      "all_bit_exact": true,
+      "sha256": [
+        "e8f4feac7cb16dc5a5772c4a31e8a71b70cb8e8fecf4213065cdf8a6d3ed81e0"
+      ]
+    },
+    "upscaled_rgb": {
+      "all_bit_exact": true,
+      "sha256": [
+        "23fdd13c496cfdb1636809bc99fee54d92601e32f92bd5be83112030da8291fd"
+      ]
+    }
+  },
+  "scope": "Prior installed Native and media code, then candidate Native and media code. Identical current Normal profile and seed. Three Normal runs per arm including a separately reported first run and two separate 4× runs. Production media Pipeline and private Native HTTP, including encoding.",
+  "limits": [
+    "Fixed arm order and two warm samples per arm.",
+    "Combined time sums separate medians. Model startup, GPU return, public queue and transport are excluded.",
+    "The same media upscaler code runs in both arms.",
+    "No fresh official rolling control, High profile or whole-model CPU tokens/s measurement."
+  ]
+}

@@ -49,10 +49,11 @@ def prewarm_model(options):
 
 
 def rgb_sha(image):
-    return hashlib.sha256(image.convert('RGB').tobytes()).hexdigest()
+    rgb = image if image.mode == 'RGB' else image.convert('RGB')
+    return hashlib.sha256(rgb.tobytes()).hexdigest()
 
 
-def matching_marker(image, options):
+def matching_marker(image, options, *, rgb_digest=None):
     if not options.get('enabled', False):
         return None
     try:
@@ -60,7 +61,7 @@ def matching_marker(image, options):
         if (marker.get('kind') == KIND and marker.get('model_sha256') == expected_sha(options)
                 and marker.get('passes') == 1 and marker.get('strength') == 1
                 and marker.get('output_dimensions') == list(image.size)
-                and marker.get('rgb_sha256') == rgb_sha(image)):
+                and marker.get('rgb_sha256') == (rgb_digest if rgb_digest is not None else rgb_sha(image))):
             return marker
     except (ValueError, TypeError, AttributeError):
         pass
