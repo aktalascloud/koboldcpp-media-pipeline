@@ -1,0 +1,64 @@
+{
+  "date": "2026-11-11",
+  "cutoff_utc": "2026-10-28T00:00:00Z",
+  "inventory": {
+    "checked": "2026-11-11T08:41:12.008640+00:00",
+    "configured_sources": 24,
+    "retrieval_errors": [],
+    "forks_checked": 13,
+    "fork_discovery_errors": [
+      {
+        "repository": "wbruna/koboldcpp",
+        "error": "Command '['C:\\\\AI\\\\build\\\\toolchain\\\\gh\\\\bin\\\\gh.exe', 'api', 'repos/wbruna/koboldcpp']' returned non-zero exit status 1."
+      }
+    ]
+  },
+  "source_commit": "f49df57b4a82f6d641c419c7fadc9e4b896f6781",
+  "native_sha256": "5f103234e8de2dd31bca3146fc256dba4d45889e146381261784e19c7b316d0b",
+  "parent_review": "pr-review-2026-11-11-multimodal.json",
+  "counts": {
+    "targeted diff analysis": 4,
+    "issue description": 1
+  },
+  "decisions": [
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31990,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31990",
+      "decision": "Narrow-N cooperative-matrix tuning. RX 580 uses scalar Vulkan and the measured matmul shapes have hundreds or thousands of N columns.",
+      "review_depth": "targeted diff analysis",
+      "diff_sha256": "25476281a012a802f754a10cd84fb93a3d743ca1def0c5fc2296e2212f1298c9"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31323,
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31323",
+      "decision": "RDNA3/RDNA4 attention kernel uses architecture-specific features. The local patch uses existing scalar staging and verified wave64 capabilities.",
+      "review_depth": "targeted diff analysis",
+      "diff_sha256": "02db2b734208dd3fb2e7a58aae1a719009d4ccd29285ce37b9944bb2f183d90b"
+    },
+    {
+      "repository": "0xShug0/audio.cpp",
+      "number": 1243,
+      "url": "https://github.com/0xShug0/audio.cpp/pull/1243",
+      "decision": "SYCL-specific YuE2 changes. The local Vulkan render keeps the current graph and solver, with host allocation reuse.",
+      "review_depth": "targeted diff analysis",
+      "diff_sha256": "09723ff2aa55f9b23e8d42f34a2c1d0595063f9d9b142b18549a87fb827162de"
+    },
+    {
+      "repository": "0xShug0/audio.cpp",
+      "number": 1254,
+      "url": "https://github.com/0xShug0/audio.cpp/pull/1254",
+      "decision": "Shared DiT runtime changes graph and weight ownership. The measured YuE2 NAR graph retains its existing backend lifetime.",
+      "review_depth": "targeted diff analysis",
+      "diff_sha256": "310a68dc4e2b3fbf5254a2b01d0ec42d4d3f4e5d2d16b5f3af894fe529fbe0f5"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31629,
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31629",
+      "decision": "Issue documents cooperative matrix shared-memory accounting. The selected scalar staging uses its separate existing LDS check.",
+      "review_depth": "issue description"
+    }
+  ]
+}
