@@ -9,20 +9,23 @@ Goal: one portable KoboldCpp.exe with one runtime and a common on-demand API for
 - Music: YuE2 MP3. SFX: SA3 CPU WAV/MP3,0.25–60s. Speech/helper/STT use a configurable provider and explicit RU/EN voices.
 - Video: Wan5B Turbo, full encoder + Pro FP32, Euler/beta4, WG512, threshold576, ClearReality720p/faces, RIFE48FPS default/60 optional. Audio-driven lip-sync is a separate optional stage; this is not joint AV inference. Native limit121 frames; conservative tested clip73. Client project15 s default/30 s maximum.
 
-**Core 1.125 · 2026-11-11 · `e8743bce`.** Official base `f49df57`. [74 separate patches](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/tree/concedo_experimental/performance/patches/series).
+**Core 1.125 · 2026-11-11 · Native `fdc3d11d`.** Official base `f49df57`. [77 patches](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/tree/concedo_experimental/performance/patches/series).
 
-## ABDM Normal + 4× · 2026-11-11
+## Text, music and photo · November 11
 
-`33615ff0` → `e8743bce`. Same ABDM MOSS Q8_0 profile and seed 424242. Three Normal and two separate 4× runs per build. The first Normal run is listed separately. The total sums the phase medians. Raw, finished and upscaled RGB matched in all repeats.
+| Workload | Before → after | Change |
+|---|---:|---:|
+| CPU · prompt | 72.313 → 73.305 tok/s | ≈+1.37% |
+| CPU · decode | 17.251 → 17.148 tok/s | ≈-0.60% |
+| RX 580 · prompt | 312.988 → 313.767 tok/s | ≈+0.25% |
+| RX 580 · decode | 34.261 → 34.381 tok/s | +0.35% |
+| YuE2 · 32 s | 43.900 → 43.910 s | +0.02% |
+| ABDM Normal | 150.809 → 151.281 s | +0.31% |
+| ABDM 4× | 2.712 → 2.639 s | ≈-2.70% |
 
-| Stage | Before | After | Time change |
-|---|---:|---:|---:|
-| Native | 143.197 s | 143.278 s | +0.081 s (+0.06%) |
-| Finished Normal | 152.858 s | 151.646 s | -1.212 s (-0.79%) |
-| Separate 4× | 2.757 s | 2.670 s | -0.087 s (-3.15%) |
-| Phase sum | 155.615 s | 154.316 s | -1.298 s (-0.83%) |
+Same Qwen3-4B IQ4_XS control, YuE2 profile and ABDM Normal profile. Text, semantic codes, MP3, PCM and RGB matched. The ≈ marker indicates overlapping ranges. Whole YuE2 timing uses one warm sample per executable.
 
-Overlapping phase ranges leave the speed difference inconclusive. [Repeats and hashes](results/performance-2026-11-11-two-week.json) · [CPU operations](results/operations-2026-11-11-two-week.json) · [PR review](results/pr-review-2026-11-11-two-week.json)
+[Repeats and hashes](results/performance-2026-11-11-multimodal.json) · [Operations](results/operations-2026-11-11-multimodal.json) · [PR diffs](results/pr-review-2026-11-11-multimodal.json)
 
 ## Ray Artshoot examples · November 7
 

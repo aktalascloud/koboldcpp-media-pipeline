@@ -89,8 +89,13 @@ def settings(path):
     if proxy.get('photo_restoration',{}).get('enabled') and not Path(proxy['photo_restoration'].get('model','')).is_file():raise ValueError('Configured Gater restoration model is absent')
     return dict(helper=helper,defaults=defaults,proxy=proxy,port=front,backend='http://127.0.0.1:'+str(back),helper_sha256=hashlib.sha256(data).hexdigest())
 def image_decode(value):
-    im=Image.open(io.BytesIO(base64.b64decode(value.split(',')[-1])))
-    return im.convert('RGBA' if 'A' in im.getbands() else 'RGB')
+    with io.BytesIO(base64.b64decode(value.split(',')[-1])) as data:
+        im=Image.open(data)
+        mode='RGBA' if 'A' in im.getbands() else 'RGB'
+        if im.format=='PNG' and im.mode==mode and not im.is_animated:
+            im.load()
+            return im
+        return im.convert(mode)
 def image_encode(image,parameters=None,marker=None):
     out=io.BytesIO();tags=PngImagePlugin.PngInfo()
     for key,value in image.info.items():

@@ -1,0 +1,1655 @@
+{
+  "date": "2026-11-11",
+  "cutoff_utc": "2026-10-28T05:15:23Z",
+  "source_commit": "f49df57b4a82f6d641c419c7fadc9e4b896f6781",
+  "native_sha256": "fdc3d11d36d0126856ce91c648af4d08d58ba179f3fb5954e40435d1f1db038d",
+  "parent_review": "pr-review-2026-11-11-two-week.json",
+  "counts": {
+    "issue description": 65,
+    "unified diff file and hunk screening": 64,
+    "targeted change analysis": 22,
+    "unified diff and official history": 15
+  },
+  "decisions": [
+    {
+      "repository": "LostRuins/koboldcpp",
+      "number": 2586,
+      "title": "Can't run Bonsai-2-27B-PQ2_0-MTP.gguf",
+      "url": "https://github.com/LostRuins/koboldcpp/issues/2586",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "LostRuins/koboldcpp",
+      "number": 2584,
+      "title": "Chatterbox Turbo TTS with --ttsgpu crashes on Turing (RTX 2080 Ti, CC 7.5) CUDA: ggml-cuda/fattn.cu:842 fatal error",
+      "url": "https://github.com/LostRuins/koboldcpp/issues/2584",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ikawrakow/ik_llama.cpp",
+      "number": 2891,
+      "title": "llama-quantize: keep the input scales of NVFP4_KS weights",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2891",
+      "diff_sha256": "acbd9b86ee9414ae15751a5f1d2aebe61f4ccbbd91bdfb6aef69cabed644441b",
+      "files": 3,
+      "hunks": 8,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "No change selected after file and hunk screening"
+    },
+    {
+      "repository": "ikawrakow/ik_llama.cpp",
+      "number": 2890,
+      "title": "iqk: use correct iq4_ks_r16 block type in DequantIQ4KS on AVX-512",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2890",
+      "diff_sha256": "d9dd6532096a2a946fd8f76994b902ca275178619c6e2388abe15b40b99198cc",
+      "files": 1,
+      "hunks": 1,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "No change selected after file and hunk screening"
+    },
+    {
+      "repository": "ikawrakow/ik_llama.cpp",
+      "number": 2884,
+      "title": "CUDA: P100 GQA decode flash attention through the tile kernel",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2884",
+      "diff_sha256": "ffb000d0b489df0261860706989d3752ef73c3c3f7f4cee486ebdce78070cc32",
+      "files": 2,
+      "hunks": 5,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Changes restricted to other GPU backends"
+    },
+    {
+      "repository": "ikawrakow/ik_llama.cpp",
+      "number": 2882,
+      "title": "scripts: add progress output to repack_ternary_to_prism.py",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2882",
+      "diff_sha256": "474bb35c64a007386b1d183f54ab4a8270705f85ad9a74723ece74bb8865625f",
+      "files": 1,
+      "hunks": 4,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Tooling, tests or examples outside the measured Native runtime"
+    },
+    {
+      "repository": "ikawrakow/ik_llama.cpp",
+      "number": 2876,
+      "title": "CUDA: fp32 K-quant MMQ scale multiply on sm_61 and AMD",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2876",
+      "diff_sha256": "7f333cb1bdd3c83c5d7a9ee80e2597df00c651b0ce8ce1d05c1fdb2dbdb24921",
+      "files": 1,
+      "hunks": 4,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Changes restricted to other GPU backends"
+    },
+    {
+      "repository": "ikawrakow/ik_llama.cpp",
+      "number": 2858,
+      "title": "ggml: NVFP4 type with row scales and loading of mainline NVFP4 GGUFs",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2858",
+      "diff_sha256": "93e732714464ffb0466e9d94ba8909652056dfddd49dbc0bbceba13262a58c39",
+      "files": 34,
+      "hunks": 93,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "No change selected after file and hunk screening"
+    },
+    {
+      "repository": "ikawrakow/ik_llama.cpp",
+      "number": 2853,
+      "title": "loader : load the n-gram tables from a separate GGUF (--ngram-file)",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2853",
+      "diff_sha256": "218fbbb7f82c0fcb2a72d9eb30974d1f31f02b1637dc50d3748c8d551a6af699",
+      "files": 8,
+      "hunks": 16,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "No change selected after file and hunk screening"
+    },
+    {
+      "repository": "ikawrakow/ik_llama.cpp",
+      "number": 2846,
+      "title": "Bug: llama_lora_adapter_set: drop the flash_attn check — it silently disables all LoRA when FA is on",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/issues/2846",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ikawrakow/ik_llama.cpp",
+      "number": 2834,
+      "title": "iqk: fix iq4_kss quantization (#2833)",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2834",
+      "diff_sha256": "d1274e1335d2d10805659bbe4bb779b1e897125b7e045ed93fab6cfa59aa65f9",
+      "files": 1,
+      "hunks": 3,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "No change selected after file and hunk screening"
+    },
+    {
+      "repository": "ikawrakow/ik_llama.cpp",
+      "number": 2833,
+      "title": "Bug: quantization bug in IQ4_KSS",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/issues/2833",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ikawrakow/ik_llama.cpp",
+      "number": 2825,
+      "title": "Bug: laughable crash when using -sp with tool call",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/issues/2825",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ikawrakow/ik_llama.cpp",
+      "number": 2824,
+      "title": "Enable CUDA graphs also when there are Hadamard rotations",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2824",
+      "diff_sha256": "9c34dd96a4d11579c1c745f5309818dd77cf89af3bb58edc8214e2c7643bff69",
+      "files": 1,
+      "hunks": 1,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Changes restricted to other GPU backends"
+    },
+    {
+      "repository": "ikawrakow/ik_llama.cpp",
+      "number": 2820,
+      "title": "Bug: KV cache mismatch issue on LFM2.5-24B-A2B",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/issues/2820",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ikawrakow/ik_llama.cpp",
+      "number": 2816,
+      "title": "qwen4exp: load GGUFs with merged weight pairs",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2816",
+      "diff_sha256": "bb48bdc0d7003fb2c69cac44acb16e6f186832d52d8ffbcd8b3cd40cbe02835c",
+      "files": 6,
+      "hunks": 15,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "No change selected after file and hunk screening"
+    },
+    {
+      "repository": "ikawrakow/ik_llama.cpp",
+      "number": 2812,
+      "title": "Gyro Trellis quants",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2812",
+      "diff_sha256": "46c0a3dc170def36f011ea4e10218b6a4013a1aaca5c020f319ee2c9c43fe573",
+      "files": 48,
+      "hunks": 103,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "No change selected after file and hunk screening"
+    },
+    {
+      "repository": "ikawrakow/ik_llama.cpp",
+      "number": 2807,
+      "title": "ggml: improve Q8_0_R16 setup cost and extend to Q4_0, Q5_0, Q6_0, IQ4_NL and MXFP4 quants",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2807",
+      "diff_sha256": "5c8362c5e217357bc2cb9c696bf129eb051fccc959333bc31131029082779d3a",
+      "files": 2,
+      "hunks": 7,
+      "review_depth": "targeted change analysis",
+      "decision": "IQK repack layouts and kernel contracts are fork-specific. The current weights and compute layouts were preserved."
+    },
+    {
+      "repository": "ikawrakow/ik_llama.cpp",
+      "number": 2803,
+      "title": "CUDA: bind a static cuBLAS workspace per stream",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2803",
+      "diff_sha256": "d77b29aaafd9f4100c4f0454c57aa103e782fbcf6b342b69465a256aa8253c73",
+      "files": 6,
+      "hunks": 16,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Changes restricted to other GPU backends"
+    },
+    {
+      "repository": "ikawrakow/ik_llama.cpp",
+      "number": 2799,
+      "title": "raon: share expanded MLA prefill path",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2799",
+      "diff_sha256": "70517b1f557e9203f4d083b3f7af1747fef7ec5116f83b50d171f2731631abd1",
+      "files": 4,
+      "hunks": 7,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "No change selected after file and hunk screening"
+    },
+    {
+      "repository": "ikawrakow/ik_llama.cpp",
+      "number": 2791,
+      "title": "dsv4: reuse the decode graph of DeepSeek-V4.1",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2791",
+      "diff_sha256": "e5e38ee4fe5a190c4328520ed7b2b171e897c409fa6ade144da63b41475f13ea",
+      "files": 1,
+      "hunks": 2,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "No change selected after file and hunk screening"
+    },
+    {
+      "repository": "ikawrakow/ik_llama.cpp",
+      "number": 2788,
+      "title": " minimax-m3 : load M3.1 GGUFs by skipping the indexer tensors on every layer",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2788",
+      "diff_sha256": "055a654eaa3210c65f6b1163e0d4e2a96871c307e7e189012664d764d7053982",
+      "files": 1,
+      "hunks": 1,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "No change selected after file and hunk screening"
+    },
+    {
+      "repository": "ikawrakow/ik_llama.cpp",
+      "number": 2786,
+      "title": "Gyro-models: add Trellis Quants Support",
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2786",
+      "diff_sha256": "b6090362de8e614bfc92c81061f8fc1f18b76c7f83a215c802e88f22bacb8f03",
+      "files": 39,
+      "hunks": 71,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "No change selected after file and hunk screening"
+    },
+    {
+      "repository": "sirfyyn/FastLocalExperts",
+      "number": 11,
+      "title": "DSpark: Markov-Kopf-Tensornamen passend zu gguf-py",
+      "url": "https://github.com/sirfyyn/FastLocalExperts/pull/11",
+      "diff_sha256": "0b3c6311059f10b1b2e9bfb0c70efa993a41750a30b89fe3ba74915bbe488bf1",
+      "files": 1,
+      "hunks": 1,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "No change selected after file and hunk screening"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 32062,
+      "title": "CUDA backend: fatal CUDA error + NVIDIA driver reset (nvlddmkm Event 153) during sustained batched prompt processing while an NVENC encoder shares the GPU — Vulkan build is stable at the same VRAM footprint (depth-dependent)",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/32062",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 32041,
+      "title": "Misc. bug:  scripts/moe-cache-tune.py crashes on Windows with \"ValueError: Unsupported signal: 2\" and leaves llama-server running",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/32041",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 32004,
+      "title": "CUDA: skip graph compat check when graph is being reused",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/32004",
+      "diff_sha256": "0dbf4eee3945a23902c73afff3970877215d6b0242d0ffb9f4bbcd53d46f1e0e",
+      "files": 1,
+      "hunks": 1,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Changes restricted to other GPU backends"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 32001,
+      "title": "CUDA: refactor graph and concurrent stream state out of common.cuh",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/32001",
+      "diff_sha256": "fbb5af5f94f1d62e6d9ee570bfcfe0e6138e38b0d730d3eea2bafa19d56d8027",
+      "files": 3,
+      "hunks": 9,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Changes restricted to other GPU backends"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31974,
+      "title": "server: CUDA VMM-pool OOM during prompt processing aborts the process (ggml_cuda_mul_mat_q → ggml_abort) instead of failing",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31974",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31966,
+      "title": "ui : keep streaming reasoning box inside the viewport when zoomed",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31966",
+      "diff_sha256": "5732e9f61e488db219138d91cc6024297de4ab2133f1b27cc1130cbcd1ce3733",
+      "files": 2,
+      "hunks": 2,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Tooling, tests or examples outside the measured Native runtime"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31948,
+      "title": "gguf/models: reject zero-valued ssm_dt_rank and wkv_head_size to prevent SIGFPE on model load",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31948",
+      "diff_sha256": "2051201ff626f8edb4cd1bb31805e2d4602fd7cc2dbce733ac89fef5f1e6bd39",
+      "files": 5,
+      "hunks": 5,
+      "review_depth": "targeted change analysis",
+      "decision": "Adapted the recurrent rank guards. A blanket ban on zero tensor dimensions would also reject legitimate empty tensors."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31947,
+      "title": "Eval bug: unsloth/GLM-5.3-Flash-GGUF:UD-IQ3_XXS says it will load all layers on GPU and crashes with VRAM OOM",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31947",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31940,
+      "title": "tests : keep dummy ffn.act scales away from zero",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31940",
+      "diff_sha256": "affc2c01fe0f52e775a0fb61efb341aaec7148c4fe137935ebe7f5eba88106f8",
+      "files": 1,
+      "hunks": 2,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Tooling, tests or examples outside the measured Native runtime"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31934,
+      "title": "scripts : fix device_room() free-memory accounting with draft models",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31934",
+      "diff_sha256": "da540e7c4f5e1ec5a3dd3a6098bb35e073a31193e59ec9f498a19c7148add41f",
+      "files": 1,
+      "hunks": 1,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Tooling, tests or examples outside the measured Native runtime"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31926,
+      "title": "Misc. bug: GROUP_NORM unit test triggers GGML_ASSERT for Vulkan on Windows Intel GPU",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31926",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31924,
+      "title": "hexagon: fix per-head flash attention mask buffers",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31924",
+      "diff_sha256": "aa95000efb9fc61ebd3b36a924143109e2c938d3d1b3c8ce32e95a54132e9303",
+      "files": 4,
+      "hunks": 21,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "No change selected after file and hunk screening"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31917,
+      "title": "scripts: fix device_room() free VRAM calculation with draft models",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31917",
+      "diff_sha256": "bc1beed7e593dbf1b350da465e2c64f2024f472a0283a0708a59a59e39fa5359",
+      "files": 1,
+      "hunks": 1,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Tooling, tests or examples outside the measured Native runtime"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31916,
+      "title": "cuda : add optimized h100 q6_k prefill path",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31916",
+      "diff_sha256": "0d995c2393978f20f7440f135237543931c91039396a6ba68b6d422095177330",
+      "files": 6,
+      "hunks": 10,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "No change selected after file and hunk screening"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31911,
+      "title": "scripts/moe-cache-tune.py: device_room() under-reports free VRAM when a draft model is loaded",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31911",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31908,
+      "title": "Eval bug: gguf_init_from_reader: tensor name 0 is too long: 76 >= 64",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31908",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31906,
+      "title": "Eval bug: llama-server not run QuantStack / Qwen-Image-GGUF",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31906",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31901,
+      "title": "Eval bug: llama.cpp auto-picks the wrong EOT token for Llama 3 GGUFs without `eot_token_id`, causing generation to never stop",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31901",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31900,
+      "title": "Misc. bug: Vulkan, Intel Arc 140T iGPU (Windows): device→host read-back ~10x slower than host→device (prompt_save and context checkpoints)",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31900",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31898,
+      "title": "ggml: allow reserving scratch memory in graph_optimize",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31898",
+      "diff_sha256": "a0678438711d2d43b51fcb74fcd72eb263c62659aa2c15af4c1480872bfc3e15",
+      "files": 3,
+      "hunks": 9,
+      "review_depth": "targeted change analysis",
+      "decision": "Adds scheduler scratch lifetime semantics that cross the local Vulkan and SD graph allocation boundary. No wholesale port."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31884,
+      "title": "cuda : remove unused quantize_cuda_t typedef",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31884",
+      "diff_sha256": "eba4290b4de97dea2b175f3b7af04a3c95133b25c4b90914be831a1aae1b461b",
+      "files": 1,
+      "hunks": 1,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Changes restricted to other GPU backends"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31879,
+      "title": "Misc. bug: convert_lora_to_gguf.py ignores use_rslora, so rsLoRA adapters run sqrt(r) times too weak",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31879",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31860,
+      "title": "workaround: gpt-oss gguf conversion for p-e-w/gpt-oss-20b-heretic-ara-v4",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31860",
+      "diff_sha256": "e765cc8b6124607173666c04a870e9ee13387f80dd772c3c2c514f678b1245d6",
+      "files": 1,
+      "hunks": 1,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "No change selected after file and hunk screening"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31848,
+      "title": "Feature Request: clover quantization fails with Failed to load model: This GGUF is missing the metadata key 'clover_moe.expert_shared_count'",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31848",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31838,
+      "title": "ROCm/HIP: fixed BLAS workspace instead of rocBLAS allocating one per call",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31838",
+      "diff_sha256": "9c1673d9d2eb9911fa6d907c431c256cc8270e268276024b31dcc00932da4929",
+      "files": 2,
+      "hunks": 2,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Changes restricted to other GPU backends"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31836,
+      "title": "Vulkan: GLM-OCR vision encoder produces garbage on Intel Arc A380 for full-page images (works on CPU and SYCL)",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31836",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31835,
+      "title": "Gate copying split inputs with the flag GGML_TENSOR_FLAG_COMPUTE of consuming graph nodes",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31835",
+      "diff_sha256": "c09835a8703b5e710a42e45c4be5ebd847ec6a94a24ce9634a89c60f0c24ff26",
+      "files": 1,
+      "hunks": 8,
+      "review_depth": "targeted change analysis",
+      "decision": "Skipping unused split inputs is promising on branches built by graph-select. The copy-needed table and event ordering need a dedicated mixed-backend lifetime test."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31830,
+      "title": "Feature request: make mixed-vendor (e.g. Intel Vulkan target + NVIDIA CUDA draft) speculative decoding actually worth using",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31830",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31828,
+      "title": "Vulkan output corruption on Intel Arc B-series persists under long-context/RAG prompts despite GGML_VK_DISABLE_COOPMAT workaround",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31828",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31823,
+      "title": "Misc. bug: SYCL and Flash Attention problem / warnings",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31823",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31820,
+      "title": "Hexagon : gated fusion for gate/up matmul + GLU",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31820",
+      "diff_sha256": "25ff3e2df1c45718d74887b529d3067213ea3ab183b91093c25018be9f269155",
+      "files": 7,
+      "hunks": 38,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Changes restricted to other GPU backends"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31818,
+      "title": "ggml-cuda : add d_state=64 fast path to SSM_SCAN kernel",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31818",
+      "diff_sha256": "fb9632df61715f599b44b92d6d0bf751a4ac3d967539c802942650a35e926a0e",
+      "files": 3,
+      "hunks": 5,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "No change selected after file and hunk screening"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31809,
+      "title": "Fix grammar-prefill crash when a chat template's generation-prompt contains boilerplate that isn't valid grammar content",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31809",
+      "diff_sha256": "76a7944d7e95e022a2c4b4b63eb0f105385ac9f452e275f62840de892e768b1f",
+      "files": 1,
+      "hunks": 1,
+      "review_depth": "targeted change analysis",
+      "decision": "Grammar fallback reinitializes the sampler when prefill fails. Explicit continuation and grammar correctness need their own regression tests."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31802,
+      "title": "ggml-cuda: fused q8_0/q4_0 KV dequant in the MMA flash-attention kernels",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31802",
+      "diff_sha256": "bda79b91630644486789da62c72e02433fd7497a16b8bd0006a2f91dc22b5304",
+      "files": 3,
+      "hunks": 25,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Changes restricted to other GPU backends"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31777,
+      "title": "Eval bug: [Vulkan] Windows VIDEO_TDR_FAILURE (0x116) during Intel Arc multi-GPU inference; reduced micro-batch size avoids crash",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31777",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31776,
+      "title": "ggml : enable MXFP4 dense repack and IME2 acceleration for SpacemiT CPU backend",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31776",
+      "diff_sha256": "088b3cb98abcdf6d792469169b58a3286ee735a9463b41fcfb2c7b30109445bc",
+      "files": 2,
+      "hunks": 7,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "No change selected after file and hunk screening"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31774,
+      "title": "Discussion: Possible fast paths for greedy and draft sampling",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31774",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31769,
+      "title": "Proposal: Quantized-KV GQA flash attention for AMD gfx906 (MI50)",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31769",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31767,
+      "title": "Proposal: FastMTP speculative draft graph and scatter",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31767",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31766,
+      "title": "Proposal: CUDA GQA flash attention for q8_0 K / q4_0 V",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31766",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31748,
+      "title": "sycl: large register file flash_attn_tile",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31748",
+      "diff_sha256": "a24fca73ef03425b903adbac4143bb41e440e506919f0cac5d645a4fa213d147",
+      "files": 2,
+      "hunks": 2,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "No change selected after file and hunk screening"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31745,
+      "title": "gguf-split : support long path on windows",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31745",
+      "diff_sha256": "0133892f5447094ffef86b8afe526a4e28c24804d6aae7af71200646db51d8a5",
+      "files": 1,
+      "hunks": 10,
+      "review_depth": "targeted change analysis",
+      "decision": "Windows path handling applies to gguf-split, not the Native loader used in the measurements."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31744,
+      "title": "hexagon: Implement set_tensor_n and improve repacking/tiling robustness",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31744",
+      "diff_sha256": "710afdb62b3d2372af52c272cedf479bbd2db9655de0940056d608634d4eabc5",
+      "files": 6,
+      "hunks": 51,
+      "review_depth": "unified diff and official history",
+      "decision": "Commit already in the accepted official history",
+      "upstream_commit": "67107ac34f62882d8b53ea41ad68010ea635b9be"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31739,
+      "title": "Eval bug: new Better UD 3.1 quants support on vulkan backend in AMD strix halo gfx1151",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31739",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31734,
+      "title": "Eval bug: CPU F16 dot product accumulates in F16 on ARM (FP16 arithmetic, no SVE), overflows to inf",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31734",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31717,
+      "title": "gguf-py : external chat templates have precedence over tokenizer_config",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31717",
+      "diff_sha256": "69e4145fe8fd75685cca101a5b9a21a5cfd25aa54842ae2eb9ec7a3dd3b2df50",
+      "files": 1,
+      "hunks": 1,
+      "review_depth": "targeted change analysis",
+      "decision": "Changes template precedence in GGUF conversion. Existing runtime chat-template precedence remains intact."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31703,
+      "title": "nemotron-h: fix RoPE and FFN activation for correct logits",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31703",
+      "diff_sha256": "860c091f281afbac9c272ed993c54806910d8b289a9625786a0f043a0cb54c77",
+      "files": 3,
+      "hunks": 9,
+      "review_depth": "targeted change analysis",
+      "decision": "Nemotron-H model behavior changes require separate model-specific correctness controls."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31698,
+      "title": "llama, mtmd: (chatterbox) add use_classifier_free_guidance as gguf metadata",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31698",
+      "diff_sha256": "6a523431296ef3d3bd85f7769085ac1dba2367575e24f654aa7fa4ad93c714be",
+      "files": 11,
+      "hunks": 12,
+      "review_depth": "unified diff and official history",
+      "decision": "Commit already in the accepted official history",
+      "upstream_commit": "b1c902f026d32535b5e8eae55e5e47b379e57672"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31693,
+      "title": "llama: add graph build_rope",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31693",
+      "diff_sha256": "2a6a75ac3ad1b71226f1fc28e84b55acb802025b03779562b14fcf362741d3b1",
+      "files": 138,
+      "hunks": 426,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "No change selected after file and hunk screening"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31662,
+      "title": "metal : guard flash-attn vec output scratch zeroing",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31662",
+      "diff_sha256": "0aac75fd752128aea92157b402c51ba653a06622716ba514ad9e235ec0cec328",
+      "files": 1,
+      "hunks": 1,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Changes restricted to other GPU backends"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31657,
+      "title": "qwen2 : add nvfp4 scales to build_ffn",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31657",
+      "diff_sha256": "46f45ce24c72df2c15517caad02e5fb3a6e66385b6f78191c6b21557f1f27eaa",
+      "files": 1,
+      "hunks": 1,
+      "review_depth": "unified diff and official history",
+      "decision": "Commit already in the accepted official history",
+      "upstream_commit": "330f0189c9fc71ef631f40211660a87d99251cc1"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31654,
+      "title": "Historical HIP TILE flash-attention repeatability difference with an experimental guarded-loop patch (MI210, D512/D576)",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31654",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31653,
+      "title": "fix the ram usage of llama-quantize on windows",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31653",
+      "diff_sha256": "b80d6995043f4e909e8225e740f8232f4fa666633a64290999678ccdfba2e784",
+      "files": 1,
+      "hunks": 1,
+      "review_depth": "targeted change analysis",
+      "decision": "Memory use in the standalone quantize tool does not affect the current inference build."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31651,
+      "title": "[Apple] Metal: tiled K-quant GEMM for 64-lane GPUs - 6.8x matmul, 2.7x prefill",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31651",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31634,
+      "title": "Add GGML_CUDA_GDN_ORDERED option for 4 columns GDN implementation.",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31634",
+      "diff_sha256": "bc16a65380b4ec83e1c5a34a46348f1921566dbb14e9ac1f59cacd0c5f25ba1a",
+      "files": 1,
+      "hunks": 10,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Changes restricted to other GPU backends"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31632,
+      "title": "server : realtime: send an error event instead of crashing on exceptions",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31632",
+      "diff_sha256": "a3f71e2fdbaeead70fb6800f2f6ee8e7761e6f2cefe37f1ee2ef2533fddcab1c",
+      "files": 1,
+      "hunks": 4,
+      "review_depth": "unified diff and official history",
+      "decision": "Commit already in the accepted official history",
+      "upstream_commit": "6f1e6543704bc5b080c7a98e7b6f707b31f6ed51"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31631,
+      "title": "gguf-py : validate every tokenizer merge pair, not only the first",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31631",
+      "diff_sha256": "cd55a627bf90186baa10a7fcc4059739e559c41757b27c68444b3f12da1db8fe",
+      "files": 1,
+      "hunks": 1,
+      "review_depth": "unified diff and official history",
+      "decision": "Commit already in the accepted official history",
+      "upstream_commit": "034e2535a90718762d3bda169ff1a06bcf3e5d1e"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31630,
+      "title": "Add GGML_CUDA_GDN_ORDERED option for 4 columns GDN implementation.",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31630",
+      "diff_sha256": "bc16a65380b4ec83e1c5a34a46348f1921566dbb14e9ac1f59cacd0c5f25ba1a",
+      "files": 1,
+      "hunks": 10,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Changes restricted to other GPU backends"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31627,
+      "title": "gguf-py : reject scalar arrays that exceed remaining file size",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31627",
+      "diff_sha256": "b647c56871017da9aecb02a56f87b522fdab4f684fdd1ba3e4fd47754b163758",
+      "files": 2,
+      "hunks": 2,
+      "review_depth": "targeted change analysis",
+      "decision": "Bounds check is in the Python GGUF reader. Native uses the separate C++ reader and already carries local read bounds."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31626,
+      "title": "Misc. bug: server: a tool with an invalid schema in /v1/realtime crashes llama-server",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31626",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31620,
+      "title": "common : fix -hf tag matching inside longer quant names",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31620",
+      "diff_sha256": "974a07cad2566d49007253a5990390703290ec8550ec88fb1a30e98dcfe6ac77",
+      "files": 2,
+      "hunks": 21,
+      "review_depth": "unified diff and official history",
+      "decision": "Commit already in the accepted official history",
+      "upstream_commit": "4b29d02629b76160350ded907c64b733d98a54d1"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31611,
+      "title": "conversion : resolve quantized_layers from source tensor names",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31611",
+      "diff_sha256": "199f896695505e76367193117fc7919555fe6fbaa8258c3de7c9741a2a908448",
+      "files": 1,
+      "hunks": 4,
+      "review_depth": "unified diff and official history",
+      "decision": "Commit already in the accepted official history",
+      "upstream_commit": "9c9074e14e029a16fc3298e6bc6a3ef00a0b9c11"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31609,
+      "title": "fix llama-export-lora crash for bf16 base models",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31609",
+      "diff_sha256": "ad0a0613fa686b58e96fc9b7e8a6d7ab4e2604c14b0c8a87b5807db4febffd8a",
+      "files": 2,
+      "hunks": 3,
+      "review_depth": "unified diff and official history",
+      "decision": "Commit already in the accepted official history",
+      "upstream_commit": "162e2bb2e42a0bbf6f9c2d3d8a9eb3cc40b4a4ea"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31608,
+      "title": "model : enable NVFP4 LFM3 ggufs",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31608",
+      "diff_sha256": "a509b33982dc2f88f57ecb8e96df9c1761a30e1e4944239375c968e44bcf9d39",
+      "files": 3,
+      "hunks": 4,
+      "review_depth": "unified diff and official history",
+      "decision": "Commit already in the accepted official history",
+      "upstream_commit": "d1044bc82712fbf08996080bef6298b24a27e9c7"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31602,
+      "title": "conversion : filter quantized layer names as tensor names",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31602",
+      "diff_sha256": "bcf24e00ca7dd791752b2d0bced7c558852a3fb44d7aa6ae355fd960bc137d5e",
+      "files": 1,
+      "hunks": 1,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "No change selected after file and hunk screening"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31590,
+      "title": "CANN: Fix flash attention NaNs by passing attention_mask",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31590",
+      "diff_sha256": "cd8e0a59871754f8fccb1b57f1ad70fccbee789a506675e3553061e27c991c3d",
+      "files": 1,
+      "hunks": 7,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Changes restricted to other GPU backends"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31582,
+      "title": "model : add dense FFN support for Qwen3Next (#31551)",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31582",
+      "diff_sha256": "2c47caf8147bb549c2f3ce3f969e1e84cbbecde41f43b4697cc5605966efbf26",
+      "files": 4,
+      "hunks": 8,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "No change selected after file and hunk screening"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31579,
+      "title": "tools : reject mismatched shards in GGUF split merge",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31579",
+      "diff_sha256": "5dfa98dc6ed55ffde1b6f72673e9659900f83de5e8e05fa3ec0341c06ea44c2b",
+      "files": 1,
+      "hunks": 2,
+      "review_depth": "targeted change analysis",
+      "decision": "Rejects mismatched shards during the separate GGUF split/merge command."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31563,
+      "title": "cli : fix crash on invalid UTF-8 in prompt or files",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31563",
+      "diff_sha256": "658af39a5af91f20da7d65a0b2b27757a8175c1d5e2299fecd9b1ac3956dbbc1",
+      "files": 1,
+      "hunks": 1,
+      "review_depth": "unified diff and official history",
+      "decision": "Commit already in the accepted official history",
+      "upstream_commit": "6c01da6278ab6c69ed67d9124806b50d2b299ba7"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31560,
+      "title": "Vulkan: KHR_coopmat gives nondeterministic, wrong results on Intel Arc Pro B70 (BMG G31, Mesa 26.2.5) — encoder/decision model, F16 and Q8_0",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31560",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31557,
+      "title": "Vulkan: Arc Pro B60 regression between 65840ed and 29c720e (tg128 20.1 -> 13.0 t/s, pp512 1117 -> 821 t/s)",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31557",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31551,
+      "title": "llama : add dense FFN support for Qwen3Next (Qwen3.5/3.8-27B dense) and fix SIGFPE when n_expert_used == 0",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31551",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31541,
+      "title": "Compile bug: FreeBSD ggml vulkan compilation issue",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31541",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31538,
+      "title": "Misc. bug: iGPU: CPU-resident layers use the Vulkan host buffer, consuming device memory",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31538",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31525,
+      "title": "cuda : pair GQA query heads in vector flash attention for SM70 long-KV decode",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31525",
+      "diff_sha256": "24628eeedce892f54a5ca00006c0979e1c84d7796023483627b90b866407862a",
+      "files": 2,
+      "hunks": 15,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "No change selected after file and hunk screening"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31522,
+      "title": "imatrix : fix --nextn crash",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31522",
+      "diff_sha256": "188a8ac3f5d4bbd284ef30059e0a384c748cedf0b361336558fd5da5ccda0d7d",
+      "files": 1,
+      "hunks": 2,
+      "review_depth": "unified diff and official history",
+      "decision": "Commit already in the accepted official history",
+      "upstream_commit": "3f8af15a76ac8675812e856da45454bafc90f12c"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31519,
+      "title": "batched-bench: validate shapes and warm unified KV cache",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31519",
+      "diff_sha256": "6f2ca9a81acb84c23f546588aec93458299bdf41efd3544e0f5d4a27f0a66040",
+      "files": 4,
+      "hunks": 15,
+      "review_depth": "targeted change analysis",
+      "decision": "Improves the batched-bench tool and its test inputs. It does not change the text generation path."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31514,
+      "title": "Feature Request: separate cache types for the SWA and full-attention KV caches",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31514",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31511,
+      "title": "granite : pass weight scale tensors to build_ffn for NVFP4 support",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31511",
+      "diff_sha256": "aafb6c1c02588341dcbf519d0501f8688f683908ea258c01f5b5142f0ba0025d",
+      "files": 1,
+      "hunks": 2,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "No change selected after file and hunk screening"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31501,
+      "title": "gguf-split: fix tensor data offset mismatch with non-default alignment",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31501",
+      "diff_sha256": "ab163073100867f0c10af355ce8054c56360a24cf21a66862fc7226fd85933fb",
+      "files": 1,
+      "hunks": 2,
+      "review_depth": "targeted change analysis",
+      "decision": "Alignment fix affects the GGUF split tool rather than Native inference."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31495,
+      "title": "Misc. bug: --spec-type draft-mtp cuts HIP prefill throughput by ~80% (Vulkan unaffected)",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31495",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31484,
+      "title": "opencl : cache flash-attention programs on disk",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31484",
+      "diff_sha256": "9c63042cfdb8c9d3e1b26bf5d52a04435abf2529ee5e60f6425a4a8cd75db441",
+      "files": 1,
+      "hunks": 15,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Changes restricted to other GPU backends"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31480,
+      "title": "Eval bug: DeepSeek-V4.1-Flash (deepseek41) outputs gibberish on Vulkan with flash attention enabled (correct with -fa off)",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31480",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31477,
+      "title": "Eval bug: draft-mtp token generation ~35% slower with -np 1 than with -np 2/4 (Vulkan, single request)",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31477",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31466,
+      "title": "[SYCL] run Q4_0 prompt matmul in oneDNN without converting weights to f16",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31466",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31461,
+      "title": "Feature Request: one-token FLASH_ATTN_EXT path for GQA",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31461",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31456,
+      "title": "gptneox: FFN uses tanh GELU (LLM_FFN_GELU) but GPT-NeoX/Pythia are trained with exact erf GELU",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31456",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31452,
+      "title": "[RFC] Deterministic Layer & MoE Streaming: Run 70B/141B on 16GB RAM with Standard GGUF (Zero-OOM mmap Alternative)",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31452",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31448,
+      "title": "Eval bug: granite: build_ffn() passes NULL for NVFP4 weight scales → garbage output",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31448",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31445,
+      "title": "Compile bug: Vulkan backend fails to build since #27512 (`signbit`/`isnan`/`isinf` undeclared in `ggml_fp32_to_f8_e4m3`), GCC 16.2 and clang 22 with libstdc++ 16",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31445",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31415,
+      "title": "llama : fix MTP graph reallocations when switching inputs",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31415",
+      "diff_sha256": "8c33c36f4ef3e84d5b3b96b34dc6e5840ef25c805097c051f98302f89e25972b",
+      "files": 1,
+      "hunks": 1,
+      "review_depth": "targeted change analysis",
+      "decision": "MTP input switching changes graph and allocation reuse. Needs a model-specific draft acceptance trace."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31403,
+      "title": "server : don't crash when the prompt is consumed entirely by media chunks",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31403",
+      "diff_sha256": "fc2045df3a81c0d0c1dcfc20b82c5dd4a030847aed7f338960f3cf72c952f995",
+      "files": 1,
+      "hunks": 2,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Tooling, tests or examples outside the measured Native runtime"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31402,
+      "title": "Misc. bug: Vulkan DeviceLostError on AMD 8845HS (Radeon 780M) starting from b10369",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31402",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31393,
+      "title": "Research: ggml-cuda shared-memory failure with Vulkan acceleration structures",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31393",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31392,
+      "title": "draft-mtp: unconditional sched_need_reserve in set_sampler() rebuilds the scheduler every request — host RSS grows per request, never released",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31392",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31387,
+      "title": "quant : allow manual tensor types with F32, F16 and BF16 targets",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31387",
+      "diff_sha256": "262bf47719646a9840fa4550fadcc0f308c795e317c7da16119b3be39b7fa229",
+      "files": 2,
+      "hunks": 3,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "No change selected after file and hunk screening"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31386,
+      "title": "quant : allow quantization for LFM3-Audio codec decoder",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31386",
+      "diff_sha256": "a8ea268aa67833f074d49a070c9835800d1c5dffe734db602f084d727040a6f5",
+      "files": 2,
+      "hunks": 2,
+      "review_depth": "unified diff and official history",
+      "decision": "Commit already in the accepted official history",
+      "upstream_commit": "889f2ec96deacbc2d8a9a67dbe181eaa43a2fb3b"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31385,
+      "title": "Eval bug: DeepSeek-V4.1-Flash-1017 GGUF issues",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31385",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31369,
+      "title": "Eval bug: SYCL server-intel image crashes (SIGSEGV) in oneAPI 2026.1 persistent device code cache",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31369",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31356,
+      "title": "gemma4: graph optimizations (massive gains on pp for E2B and E4B)",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31356",
+      "diff_sha256": "8411f08294a166fa83202902f2fdcdab381053d099095ec9275ddb0366c02a15",
+      "files": 2,
+      "hunks": 10,
+      "review_depth": "targeted change analysis",
+      "decision": "Gemma4 graph and draft-hidden optimizations require the corresponding model and acceptance trace. They do not target the measured Qwen3."
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31346,
+      "title": "Misc. bug: test-llama-context crashing on deepseek41-moe.gguf",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31346",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31344,
+      "title": "tests : fix comp_padding CUDA graph reservation",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31344",
+      "diff_sha256": "f1aa3fac7eb4219ff4a20f77cdfdc9bb04709f8a7b556af1d9ab57d47d572329",
+      "files": 1,
+      "hunks": 1,
+      "review_depth": "unified diff and official history",
+      "decision": "Commit already in the accepted official history",
+      "upstream_commit": "6d5ac3c8d5aae1831edf17c2d5cda11abe025bb3"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31343,
+      "title": "gguf-py : fix crash when extra_special_tokens is not a dict",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31343",
+      "diff_sha256": "4b5a98eeb1f9cacdfe546e739be5ca8581de41df7ffb12625809bf6ccf025425",
+      "files": 2,
+      "hunks": 2,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Tooling, tests or examples outside the measured Native runtime"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31327,
+      "title": "HIP/CUDA: enable GDN mma kernel on CDNA",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31327",
+      "diff_sha256": "2011fabc89ec40dab58e204fae33268b8fdcc3cc4fc0b9fbaa88edc9b1952146",
+      "files": 1,
+      "hunks": 19,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Changes restricted to other GPU backends"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31310,
+      "title": "gguf-py: fix np_roundf dropping the sign",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31310",
+      "diff_sha256": "30e8f169d1d178d2efc616cf839847260783b0daa8048e0d6616576c672a680d",
+      "files": 5,
+      "hunks": 5,
+      "review_depth": "unified diff and official history",
+      "decision": "Commit already in the accepted official history",
+      "upstream_commit": "28cb47c7c815dfddae5d01edc79828785b4f0811"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31302,
+      "title": "Eval bug: draft-mtp context reallocates its graph on every draft cycle after an image (mtmd) request",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31302",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31298,
+      "title": "Eval bug: glm-ocr GGUF (Ollama conversion) has no chat_template — default framing causes template-token repetition loops; pass-through template fixes it",
+      "url": "https://github.com/ggml-org/llama.cpp/issues/31298",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "ggml-org/llama.cpp",
+      "number": 31296,
+      "title": "Title: CUDA: fuse NVFP4 gate/up matmuls and GLU in MMQ",
+      "url": "https://github.com/ggml-org/llama.cpp/pull/31296",
+      "diff_sha256": "fcfd4db313e63ed4b432c39741f0f9c62f6361414edb0afd24ca590b5d766dc0",
+      "files": 6,
+      "hunks": 45,
+      "review_depth": "unified diff and official history",
+      "decision": "Commit already in the accepted official history",
+      "upstream_commit": "5ce06fc71f5e938301f7dc51697a59ae308bd6b7"
+    },
+    {
+      "repository": "ggml-org/ggml",
+      "number": 1685,
+      "title": "docs : sync ggml_type enum in gguf.md",
+      "url": "https://github.com/ggml-org/ggml/pull/1685",
+      "diff_sha256": "a0d3981e244044e9bb30e60da111fd7d6f64eb4b315782f6955149ff8f3c82ce",
+      "files": 1,
+      "hunks": 2,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Documentation or CI only"
+    },
+    {
+      "repository": "ggml-org/ggml",
+      "number": 1684,
+      "title": "docs/gguf.md: ggml_type list stops at MXFP4 (39); GGUF files in the wild use newer codes",
+      "url": "https://github.com/ggml-org/ggml/issues/1684",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "leejet/stable-diffusion.cpp",
+      "number": 2304,
+      "title": "CUDA (Windows): Z-Image still fails \"workspace capacity check\" mid-sampling above ~768x432 on master-1053 (follow-up to #1989)",
+      "url": "https://github.com/leejet/stable-diffusion.cpp/issues/2304",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "leejet/stable-diffusion.cpp",
+      "number": 2295,
+      "title": "[Bug] Vulkan DEVICE_LOST on GTX 1080 with short prompts",
+      "url": "https://github.com/leejet/stable-diffusion.cpp/issues/2295",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "leejet/stable-diffusion.cpp",
+      "number": 2293,
+      "title": "fix: use patch token count for the Flux scheduler",
+      "url": "https://github.com/leejet/stable-diffusion.cpp/pull/2293",
+      "diff_sha256": "2d1b6f65bee234d55530b78f12bb175ace0fdf13627598fb6708d13a0ead33a7",
+      "files": 3,
+      "hunks": 3,
+      "review_depth": "targeted change analysis",
+      "decision": "Changing Flux patch-token counting changes scheduler inputs. Requires model-specific quality validation and does not address the active ABDM workload."
+    },
+    {
+      "repository": "leejet/stable-diffusion.cpp",
+      "number": 2271,
+      "title": "[Bug] metal: quantised matvec assumes 32-wide simdgroups — silent data loss at width 64 (RDNA)",
+      "url": "https://github.com/leejet/stable-diffusion.cpp/issues/2271",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "leejet/stable-diffusion.cpp",
+      "number": 2267,
+      "title": "[Bug] Flux scheduler counts latent pixels instead of 2x2 patches (image_seq_len=16384 at 1024px, mu=3.23): 4 px grid artifact with Chroma1-HD",
+      "url": "https://github.com/leejet/stable-diffusion.cpp/issues/2267",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "leejet/stable-diffusion.cpp",
+      "number": 2261,
+      "title": "[Bug] \"type i32 unsupported for integer quantization: no dequantization available\"",
+      "url": "https://github.com/leejet/stable-diffusion.cpp/issues/2261",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "engeldlgado/toshllm",
+      "number": 157,
+      "title": "feat(models): add divider lines between GGUF file rows in repo cards",
+      "url": "https://github.com/engeldlgado/toshllm/pull/157",
+      "diff_sha256": "dfe1362c3afc669f578d2d8508c66f223ffd2777ac9b900c994e260574b6c08b",
+      "files": 1,
+      "hunks": 4,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "No change selected after file and hunk screening"
+    },
+    {
+      "repository": "engeldlgado/toshllm",
+      "number": 150,
+      "title": "Local Image-to-3D Generation Workspace (similar to TRELLIS / Image to 3D)",
+      "url": "https://github.com/engeldlgado/toshllm/issues/150",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "Memorithm/SML-GENIUS",
+      "number": 946,
+      "title": "research(BPB3-K): true complete SmolLM2 Q4-146 inference with live Rust AVX2 and stock Q3_K",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/946",
+      "diff_sha256": "d1aee2f38fcf17267de22e4cb1d3abb646f56b726744dac697470fb9ce863e90",
+      "files": 5,
+      "hunks": 7,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Research diff uses its own representation or runtime contract"
+    },
+    {
+      "repository": "Memorithm/SML-GENIUS",
+      "number": 942,
+      "title": "research(BPB3-K): compare exact 130B scale-preencoded AVX2 tile against 110B reused-Q8 baseline",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/942",
+      "diff_sha256": "88ec3ddf40c2e669e2c235c305c6eaebfd163b69945d60bf8a96d9fad4a1b011",
+      "files": 4,
+      "hunks": 4,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Research diff uses its own representation or runtime contract"
+    },
+    {
+      "repository": "Memorithm/SML-GENIUS",
+      "number": 937,
+      "title": "research(BPB3-K): hand-written AVX2 no-stack kernel and three-way stock/Rust/asm bench",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/937",
+      "diff_sha256": "ffd4a3a99c8b002d97654c6abd1f4aa1b0c8acf2b16a927277321f826448692f",
+      "files": 5,
+      "hunks": 5,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Research diff uses its own representation or runtime contract"
+    },
+    {
+      "repository": "Memorithm/SML-GENIUS",
+      "number": 932,
+      "title": "feat(sml-runtime): Cycloid-8 measure verified zero-copy borrow vs resident copy+CRC",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/932",
+      "diff_sha256": "8e65409aac5d6b9ab259e51c5d904732631f7fcc890a53540e4135c505e8ba70",
+      "files": 2,
+      "hunks": 10,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Research diff uses its own representation or runtime contract"
+    },
+    {
+      "repository": "Memorithm/SML-GENIUS",
+      "number": 930,
+      "title": "feat(sml-runtime): Cycloid-7 zero-copy immutable borrow of verified resident pages",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/930",
+      "diff_sha256": "ab882d3fb13e4a5aa887e242a2ce4e75938d03b15579395c2c3a62c7210dff9a",
+      "files": 2,
+      "hunks": 4,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Research diff uses its own representation or runtime contract"
+    },
+    {
+      "repository": "Memorithm/SML-GENIUS",
+      "number": 894,
+      "title": "research(bpb3k): qualify stock-order fused AVX2 v2 against original SmolLM2",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/894",
+      "diff_sha256": "c8be22a000dd94d073e287b7af98412e097928dd4eede05bc2a3915dc16c56f0",
+      "files": 12,
+      "hunks": 30,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Research diff uses its own representation or runtime contract"
+    },
+    {
+      "repository": "Memorithm/SML-GENIUS",
+      "number": 885,
+      "title": "BPB3 real-model Gate B — live SmolLM2 inference versus optimized GGUF (exact-quality falsification)",
+      "url": "https://github.com/Memorithm/SML-GENIUS/issues/885",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "Memorithm/SML-GENIUS",
+      "number": 869,
+      "title": "test(context-2): G9 SWE1/SWC2 restart-and-rollback crash-point harness",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/869",
+      "diff_sha256": "40031da66704b952100992fdb9f6183f49a9f1bc953cbf86351f0f773b39094f",
+      "files": 1,
+      "hunks": 1,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Research diff uses its own representation or runtime contract"
+    },
+    {
+      "repository": "Memorithm/SML-GENIUS",
+      "number": 853,
+      "title": "BPB-3 E1/E2 — mesurer puis réduire les erreurs de reconstruction après qualification GGUF K",
+      "url": "https://github.com/Memorithm/SML-GENIUS/issues/853",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "Memorithm/SML-GENIUS",
+      "number": 852,
+      "title": "research(bpb3): qualify real GGUF Q3_K/Q4_K byte decoders against pinned gguf-py",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/852",
+      "diff_sha256": "bf2b246c71afbd63e2cb3458ff87f97382e2ef1ff4230ea0743210f3f62d14f6",
+      "files": 5,
+      "hunks": 5,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Research diff uses its own representation or runtime contract"
+    },
+    {
+      "repository": "Memorithm/SML-GENIUS",
+      "number": 846,
+      "title": "research(bpb3): independent INT2/INT3/INT4 quantization quality frontier",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/846",
+      "diff_sha256": "30abf25bb26c79df5e4fc0555838c522ded3ea6bed3469db5d3d1ecdf53ca5cc",
+      "files": 2,
+      "hunks": 2,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Research diff uses its own representation or runtime contract"
+    },
+    {
+      "repository": "Memorithm/SML-GENIUS",
+      "number": 837,
+      "title": "research: BPB-3 Boolean Posit blocks and 537M-coefficient resident corpus evidence",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/837",
+      "diff_sha256": "f53381ccdc01b70b78e3cc86cc3b7e8eea1c68cb524bf44b43feb2becaa0136b",
+      "files": 4,
+      "hunks": 4,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Research diff uses its own representation or runtime contract"
+    },
+    {
+      "repository": "Memorithm/SML-GENIUS",
+      "number": 833,
+      "title": "research(pceq3): omit certified-zero and quantized-zero i8 payloads",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/833",
+      "diff_sha256": "ce72359f9b16045ae4bdb052f3ae0deff2d44372b98a0c89d3e5cb4f222c72fd",
+      "files": 5,
+      "hunks": 7,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Research diff uses its own representation or runtime contract"
+    },
+    {
+      "repository": "Memorithm/SML-GENIUS",
+      "number": 831,
+      "title": "research(pceq1): paired end-to-end quantization benchmark for Dell and Thor",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/831",
+      "diff_sha256": "56352fdd7afdc67b12b9e3543c32a5ec6aaa3183da3fb006330c35045a73db28",
+      "files": 2,
+      "hunks": 2,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Research diff uses its own representation or runtime contract"
+    },
+    {
+      "repository": "Memorithm/SML-GENIUS",
+      "number": 830,
+      "title": "research(pceq0): fused producer-carried block quantization with exact oracle",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/830",
+      "diff_sha256": "f141e727c7caaab718f54275a897829ad762981e63ad7f64f4e254ca248e2f1b",
+      "files": 3,
+      "hunks": 3,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Research diff uses its own representation or runtime contract"
+    },
+    {
+      "repository": "Memorithm/SML-GENIUS",
+      "number": 829,
+      "title": "Research PCEQ-0: producer-carried quantization scale to eliminate additional DRAM rereads",
+      "url": "https://github.com/Memorithm/SML-GENIUS/issues/829",
+      "review_depth": "issue description",
+      "decision": "No change selected for the measured profiles"
+    },
+    {
+      "repository": "Memorithm/SML-GENIUS",
+      "number": 807,
+      "title": "feat(sml-store): G1 CONTEXT-3 two-level shortlist (secondary-key order in overflowing buckets, same cap)",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/807",
+      "diff_sha256": "95bf3d70822c67ec78a9db5d70eb14269295ed88e5647a4e00a6d0ee8af81192",
+      "files": 4,
+      "hunks": 9,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Research diff uses its own representation or runtime contract"
+    },
+    {
+      "repository": "Memorithm/SML-GENIUS",
+      "number": 778,
+      "title": "test(sml-core): cover V888 CSR recurrence across 64-bit workspace boundary",
+      "url": "https://github.com/Memorithm/SML-GENIUS/pull/778",
+      "diff_sha256": "68d530a747c9c1f6cf48a670d51236982efcb9d74257ff4f25dd043d95ba62e4",
+      "files": 1,
+      "hunks": 1,
+      "review_depth": "unified diff file and hunk screening",
+      "decision": "Research diff uses its own representation or runtime contract"
+    },
+    {
+      "repository": "0xShug0/audio.cpp",
+      "number": 1254,
+      "title": "🚨 Add shared DiT runtime and migrate denoiser models",
+      "url": "https://github.com/0xShug0/audio.cpp/pull/1254",
+      "diff_sha256": "310a68dc4e2b3fbf5254a2b01d0ec42d4d3f4e5d2d16b5f3af894fe529fbe0f5",
+      "files": 30,
+      "review_depth": "targeted change analysis",
+      "decision": "Shared DiT runtime changes weight, scratch and graph ownership. Needs per-model PCM validation before a port."
+    },
+    {
+      "repository": "0xShug0/audio.cpp",
+      "number": 1251,
+      "title": "Add reusable device denoising and MOSS SoundEffect fusions",
+      "url": "https://github.com/0xShug0/audio.cpp/pull/1251",
+      "diff_sha256": "017edcb015fef81b649af38426829047f2de7ff3aa53aab3fe84d765e1100aa0",
+      "files": 21,
+      "review_depth": "targeted change analysis",
+      "decision": "MOSS sound-effect device denoising is a separate model path from the configured YuE2."
+    },
+    {
+      "repository": "0xShug0/audio.cpp",
+      "number": 1250,
+      "title": "Add session-owned PreparedGraph execution and scheduler support",
+      "url": "https://github.com/0xShug0/audio.cpp/pull/1250",
+      "diff_sha256": "62756c2658f00eba1ce2dc9c3aa27fc729918fdb0c73060dad8404053f440516",
+      "files": 16,
+      "review_depth": "targeted change analysis",
+      "decision": "PreparedGraph requires coordinated backend allocator and graph lifetime changes. Kept the existing Native scheduler."
+    },
+    {
+      "repository": "0xShug0/audio.cpp",
+      "number": 1243,
+      "title": "Run YuE2 on the SYCL backend",
+      "url": "https://github.com/0xShug0/audio.cpp/pull/1243",
+      "diff_sha256": "09723ff2aa55f9b23e8d42f34a2c1d0595063f9d9b142b18549a87fb827162de",
+      "files": 18,
+      "review_depth": "targeted change analysis",
+      "decision": "SYCL-oriented YuE2 lowering, cache and denoiser options alter the execution path. The current RX 580 uses the existing Vulkan lowering."
+    },
+    {
+      "repository": "0xShug0/audio.cpp",
+      "number": 1240,
+      "title": "Remove logging-only tensor readbacks and complete session timing",
+      "url": "https://github.com/0xShug0/audio.cpp/pull/1240",
+      "diff_sha256": "fd662a1cbe89a9403a821bfc1b1188fab64996925128f6c5de3f5d0293810e67",
+      "files": 31,
+      "review_depth": "targeted change analysis",
+      "decision": "Logging readback removal applies to other voice sessions. The current YuE2 hot path is profiled separately."
+    },
+    {
+      "repository": "0xShug0/audio.cpp",
+      "number": 1237,
+      "title": "Improve Kokoro CPU convolution matrix layout",
+      "url": "https://github.com/0xShug0/audio.cpp/pull/1237",
+      "diff_sha256": "edfea8c134dd3ba9bae68c4b7c7354526218401e9250b3ef8a591ecf675fe558",
+      "files": 1,
+      "review_depth": "targeted change analysis",
+      "decision": "Kokoro CPU convolution layout is separate from YuE2."
+    }
+  ]
+}

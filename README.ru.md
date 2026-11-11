@@ -7,20 +7,23 @@
 
 Видео: Wan5B Turbo, полный энкодер + Pro FP32, Euler/beta4, WG512, порог576, ClearReality720p/лица, RIFE48 FPS по умолчанию или60 по запросу. Звук и lip-sync — отдельные этапы, не совместная AV-генерация. Предел Native —121 кадр, проверенный проход —73. Проект15 с по умолчанию, максимум30 с: его собирает клиент; длинный AI-рендер пока не измерен.
 
-**Core 1.125 · 2026-11-11 · `e8743bce`.** Официальная база `f49df57`. [74 отдельных патча](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/tree/concedo_experimental/performance/patches/series).
+**Core 1.125 · 2026-11-11 · Native `fdc3d11d`.** Официальная база `f49df57`. [77 патчей](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/tree/concedo_experimental/performance/patches/series).
 
-## ABDM Normal + 4× · 2026-11-11
+## Замеры токенов, музыки и фото · 11 ноября
 
-`33615ff0` → `e8743bce`. Один профиль ABDM MOSS Q8_0, seed 424242. По три Normal и два отдельных 4× на сборку. Первый Normal вынесен отдельно. Сумма использует медианы отдельных фаз. RGB до и после обработки и апскейла совпал во всех повторах.
+| Нагрузка | Было → стало | Изменение |
+|---|---:|---:|
+| CPU · prompt | 72.313 → 73.305 tok/s | ≈+1.37% |
+| CPU · decode | 17.251 → 17.148 tok/s | ≈-0.60% |
+| RX 580 · prompt | 312.988 → 313.767 tok/s | ≈+0.25% |
+| RX 580 · decode | 34.261 → 34.381 tok/s | +0.35% |
+| YuE2 · 32 s | 43.900 → 43.910 s | +0.02% |
+| ABDM Normal | 150.809 → 151.281 s | +0.31% |
+| ABDM 4× | 2.712 → 2.639 s | ≈-2.70% |
 
-| Этап | Было | Стало | Δ времени |
-|---|---:|---:|---:|
-| Движок | 143.197 s | 143.278 s | +0.081 s (+0.06%) |
-| Готовое Normal | 152.858 s | 151.646 s | -1.212 s (-0.79%) |
-| Отдельный 4× | 2.757 s | 2.670 s | -0.087 s (-3.15%) |
-| Сумма фаз | 155.615 s | 154.316 s | -1.298 s (-0.83%) |
+Тот же GGUF Qwen3-4B IQ4_XS, профиль YuE2 и профиль ABDM Normal. Текст, семантические коды, MP3, PCM и RGB совпали. Символ ≈ обозначает пересечение диапазонов. Для полного запроса YuE2 по одному тёплому замеру.
 
-Замеры фаз с пересекающимися диапазонами не подтверждают ускорение. [Повторы и хеши](results/performance-2026-11-11-two-week.json) · [CPU операции](results/operations-2026-11-11-two-week.json) · [Разбор PR](results/pr-review-2026-11-11-two-week.json)
+[Повторы и хеши](results/performance-2026-11-11-multimodal.json) · [Операции](results/operations-2026-11-11-multimodal.json) · [Диффы PR](results/pr-review-2026-11-11-multimodal.json)
 
 ## Примеры Ray Artshoot · 7 ноября
 
