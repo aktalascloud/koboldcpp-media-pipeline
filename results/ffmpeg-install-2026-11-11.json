@@ -1,0 +1,26 @@
+{
+  "repository": "FFmpeg-Builds/FFmpeg-Builds",
+  "tag": "autobuild-2026-10-31-12-59",
+  "name": "ffmpeg-N-128227-g4811625b5f-win64-gpl.zip",
+  "bytes": 201662768,
+  "sha256": "3a5cdb3b83dd1b62b29d946d3655a14d787e5e81d947ad68202a1a400095d2f8",
+  "url": "https://github.com/FFmpeg-Builds/FFmpeg-Builds/releases/download/autobuild-2026-10-31-12-59/ffmpeg-N-128227-g4811625b5f-win64-gpl.zip",
+  "license": "GPL build from the original distributor",
+  "build_sources": "https://github.com/FFmpeg-Builds/FFmpeg-Builds",
+  "installed_files": [
+    {
+      "path": "runtime/ffmpeg/ffmpeg.exe",
+      "bytes": 169917440,
+      "sha256": "63f7cad2da68519366eee578ee2bcebb09b2bde58b06a410ef4bbf4fc00e2d2c"
+    },
+    {
+      "path": "runtime/ffmpeg/LICENSE.txt",
+      "bytes": 35147,
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+    }
+  ],
+  "archive_crc": true,
+  "version": "ffmpeg version N-128227-g4811625b5f-20261031 Copyright (c) 2000-2026 the FFmpeg developers",
+  "h264_aac_mp3_smoke": true,
+  "scope": "Public installer pin and isolated codec checks. The deployed runtime was untouched."
+}

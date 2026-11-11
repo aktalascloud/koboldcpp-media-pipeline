@@ -5,3 +5,5 @@ Haswell and Polaris update · 2026-11-11
 - AVX2 state-row scheduling and single-pass Scale. CLIP allocation failures and graph metadata allocation. [Operation results](results/operations-2026-11-11.json) · [PR decisions](results/pr-review-2026-11-11.json).
 
 [Native patch catalog](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/tree/concedo_experimental/performance/patches/series) · [Licenses](docs/LICENSES.md).
+
+The installer uses the verified October month-end FFmpeg archive. [Archive and codec checks](results/ffmpeg-install-2026-11-11.json).
