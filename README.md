@@ -9,11 +9,13 @@ Goal: one portable KoboldCpp.exe with one runtime and a common on-demand API for
 - Music: YuE2 MP3. SFX: SA3 CPU WAV/MP3,0.25–60s. Speech/helper/STT use a configurable provider and explicit RU/EN voices.
 - Video: Wan5B Turbo, full encoder + Pro FP32, Euler/beta4, WG512, threshold576, ClearReality720p/faces, RIFE48FPS default/60 optional. Audio-driven lip-sync is a separate optional stage; this is not joint AV inference. Native limit121 frames; conservative tested clip73. Client project15 s default/30 s maximum.
 
-**Core 1.125 · 2026-11-11 · Native 5f103234.** Official base f49df57. [81 patches](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/tree/concedo_experimental/performance/patches/series).
+**Core 1.125 · 2026-11-12 · Native 743938b2.** Official base d7331295. [81 patches](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/tree/concedo_experimental/performance/patches/series).
 
 YuE2 accepts up to 300 seconds or 7,500 semantic tokens through the public music API. [Duration patch](patches/media-music-five-minute-limit/README.md).
 
 ## FlashAttention, decode and render · November 11
+
+This table reports the November 11 Native 5f103234 build.
 
 | Workload | Before → after | Change |
 |---|---:|---:|

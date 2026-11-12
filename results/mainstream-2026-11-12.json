@@ -1,0 +1,62 @@
+{
+  "date": "2026-11-12",
+  "previous_upstream": "f49df57b4a82f6d641c419c7fadc9e4b896f6781",
+  "upstream": "d73312954a1b115124aec4535de2021584004976",
+  "native_sha256": "743938b28361121bdcf943caa220fdfaca61e7c03505af449082eee8cbcf3117",
+  "official_commits": [
+    {
+      "commit": "8f9e295d33dd4413d757861b2b83d7c0471647d7",
+      "title": "update lite and sdui",
+      "url": "https://github.com/LostRuins/koboldcpp/commit/8f9e295d33dd4413d757861b2b83d7c0471647d7"
+    },
+    {
+      "commit": "f19f3f52b6c05a6f0b2ec49e1cd2a185811bb167",
+      "title": "fix a potential XSS issue in noscript webui",
+      "url": "https://github.com/LostRuins/koboldcpp/commit/f19f3f52b6c05a6f0b2ec49e1cd2a185811bb167"
+    },
+    {
+      "commit": "5d81a4eca1eb904d4454496ffe7d42b2b1890fdf",
+      "title": "disable sentencepiece logging in android",
+      "url": "https://github.com/LostRuins/koboldcpp/commit/5d81a4eca1eb904d4454496ffe7d42b2b1890fdf"
+    },
+    {
+      "commit": "d73312954a1b115124aec4535de2021584004976",
+      "title": "fixed https://github.com/LostRuins/koboldcpp/issues/2588#issuecomment-6725890171",
+      "url": "https://github.com/LostRuins/koboldcpp/commit/d73312954a1b115124aec4535de2021584004976"
+    }
+  ],
+  "discussion_sources": 24,
+  "discussion_errors": 0,
+  "changed_entries": 26,
+  "active_forks": 16,
+  "unavailable_forks": [
+    "wbruna/koboldcpp"
+  ],
+  "selected_diffs_and_issues": [
+    {
+      "url": "https://github.com/LostRuins/koboldcpp/issues/2588",
+      "result": "Official commit d73312954 resumes recurrent decoding after the actual last cache position."
+    },
+    {
+      "url": "https://github.com/LostRuins/koboldcpp/issues/2592",
+      "result": "Official commit 5d81a4eca guards the SentencePiece logging path on Android."
+    },
+    {
+      "url": "https://github.com/LostRuins/koboldcpp/issues/2593",
+      "result": "Gemma 4 mmproj OOM issue concerns a separate vision workload. No additional port in this update."
+    },
+    {
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2901",
+      "diff_sha256": "59515b7256747b8f45ea842f9eae6a9a49a8c88811d99db0627fb6f007154b62",
+      "result": "MoE combine follows an explicit CPU tensor override in the ik scheduler. No port to the current Windows model profiles."
+    },
+    {
+      "url": "https://github.com/ikawrakow/ik_llama.cpp/pull/2876",
+      "diff_sha256": "3d209f8f753c7cba90dea1f5fba6782908bd3517af066ca5cd162b4fe44fdc6c",
+      "result": "K-quant arithmetic change targets HIP/CUDA sm_61. The Windows Polaris profile uses Vulkan."
+    }
+  ],
+  "checks": "Build, source and executable SHA, cold startup, visible window and GET API.",
+  "benchmark_native_sha256": "5f103234e8de2dd31bca3146fc256dba4d45889e146381261784e19c7b316d0b",
+  "new_benchmarks": false
+}

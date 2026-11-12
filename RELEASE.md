@@ -1,7 +1,9 @@
 ## English
 
-The public YuE2 API and media controls allow up to 300 seconds or 7,500 semantic tokens. Requests above the limit receive HTTP 422.
+KoboldCpp 1.125 · 2026-11-12 · Native 743938b2. Four official commits through d7331295 update Lite/SD WebUI, fix a potential noscript WebUI XSS and correct recurrent cache resume. Startup and API readiness verified.
 
 ## Русский
 
-Лимит YuE2 в публичном API и настройках медиа — 300 секунд или 7 500 семантических токенов. При превышении API возвращает HTTP 422.
+KoboldCpp 1.125 · 2026-11-12 · Native 743938b2. Включены четыре официальных коммита до d7331295. Обновлены Lite и SD WebUI, закрыта потенциальная XSS в режиме noscript, исправлено продолжение генерации после восстановления рекуррентного кэша. Запуск и доступность API проверены.
+
+[Commits and checks / Коммиты и проверки](results/mainstream-2026-11-12.json) · [Native patches / Патчи](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/tree/concedo_experimental/performance/patches/series).
