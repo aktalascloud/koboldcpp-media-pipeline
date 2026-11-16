@@ -5,6 +5,8 @@ Portable Windows media around [our Haswell/AVX2 RX 580 Polaris/gfx803 fork](http
 
 Open **System → GGUF Converter** in the native settings window. Setup verifies the pinned portable converter from its own release, and the local master embeds it. Version 1.6 adds Vulkan activation-weighted calibration that preserves Q4_0 and Q8_0 layouts. [GGUF Converter v1.6.0](https://github.com/aktalascloud/gguf-converter/releases/tag/v1.6.0)
 
+On 2026-11-16, encoding both LightVAE-Pro outputs from one RGB stream cut the median encoding stage from 0.624 s to 0.366 s on a 49-frame clip. The MP4 was byte-identical and AVI decoded to the same pixels. [Patch](patches/mediapro-one-pass-encode/README.md) · [RX 580 and Haswell trials](benchmarks/2026-11-16-calibration-rx580.json)
+
 Goal: one portable KoboldCpp.exe with one runtime and a common on-demand API for photo, audio, video, effects and their combinations. The experimental core tracks official updates and selected security/model/performance patches for AVX2/Polaris; user-selected models and settings stay configurable.
 
 - Default image recipe: Ray Q8, Afterlight0.25 + RealismEnhancer1, Euler/simple8, eta0, Cache-DiT0.08. Normal736×1104 without automatic SR; High928×1392 with ClearReality4x, supplemental High controls saved in the photo evidence. YuNet/GPEN20%/SFace0.97/Gater before SR, no repeat afterwards. Models/presets are configurable.

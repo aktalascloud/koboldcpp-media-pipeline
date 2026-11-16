@@ -1,9 +1,9 @@
 ## English
 
-KoboldCpp 1.125 · 2026-11-16 · Native e823acf0. Includes official experimental source f5576d37 and the GGML sync through 417a024b. The build includes batched Vulkan tensor transfers, the upstream transpose concat and the updated MTMD backend. Windows cold startup and API verified.
+KoboldCpp media · 2026-11-16 · Native e823acf0. The LightVAE-Pro encoding stage took 0.366 s instead of 0.624 s on 49 frames, with identical MP4 bytes and decoded AVI frames. The GUI now pins Converter v1.6.0 with layout-preserving Vulkan calibration for Q4_0 and Q8_0.
 
 ## Русский
 
-KoboldCpp 1.125 · 2026-11-16 · Native e823acf0. Официальная база f5576d37 включает синхронизацию GGML до 417a024b. В сборке есть пакетные передачи тензоров Vulkan, transpose concat из мейнстрима и обновлённый MTMD. Проверены холодный запуск Windows и API.
+KoboldCpp Media · 2026-11-16 · Native e823acf0. Кодирование LightVAE-Pro на 49 кадрах заняло 0,366 с вместо 0,624 с. MP4 и декодированные кадры AVI совпали. GUI использует Converter v1.6.0 с калибровкой Q4_0 и Q8_0 на Vulkan.
 
-[Commits and checks / Коммиты и проверки](results/mainstream-2026-11-16.json) · [Native patches / Патчи](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/tree/concedo_experimental/performance/patches/series) · [GGML Vulkan transfer measurements / Замеры передач](results/operations-2026-11-16-ggml.json).
+[Measurements / Замеры](https://github.com/aktalascloud/koboldcpp-media-pipeline/blob/v2026.11.16-r1/benchmarks/2026-11-16-calibration-rx580.json) · [Media patch / Патч](https://github.com/aktalascloud/koboldcpp-media-pipeline/tree/v2026.11.16-r1/patches/mediapro-one-pass-encode) · [Converter v1.6.0](https://github.com/aktalascloud/gguf-converter/releases/tag/v1.6.0)
