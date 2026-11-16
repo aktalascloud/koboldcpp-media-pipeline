@@ -3,7 +3,7 @@
 
 Portable Windows media around [our Haswell/AVX2 RX 580 Polaris/gfx803 fork](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa) of [original KoboldCpp](https://github.com/LostRuins/koboldcpp). Run **Start.exe → KoboldCpp.exe**. Models switch exclusively; image stays GPU-resident when idle. Setup.ps1 is initial installation/update, not the launcher. No main weights are mirrored.
 
-Open **System → GGUF Converter** in the native settings window. Setup verifies the pinned portable converter from its own release, and the local master embeds it. Version 1.6 adds Vulkan activation-weighted calibration that preserves Q4_0 and Q8_0 layouts. [GGUF Converter v1.6.0](https://github.com/aktalascloud/gguf-converter/releases/tag/v1.6.0)
+Open **System → GGUF Converter** in the native settings window. Setup verifies the pinned portable converter and the local master embeds it. Version 1.7 adds layout-preserving K-quant calibration and YuE2 activation capture on Vulkan. [GGUF Converter v1.7.0](https://github.com/aktalascloud/gguf-converter/releases/tag/v1.7.0)
 
 On 2026-11-16, encoding both LightVAE-Pro outputs from one RGB stream cut the median encoding stage from 0.624 s to 0.366 s on a 49-frame clip. The MP4 was byte-identical and AVI decoded to the same pixels. [Patch](patches/mediapro-one-pass-encode/README.md) · [RX 580 and Haswell trials](benchmarks/2026-11-16-calibration-rx580.json)
 
