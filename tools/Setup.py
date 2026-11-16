@@ -134,6 +134,8 @@ def main():
         with socket.socket() as probe:
             probe.settimeout(.3)
             if probe.connect_ex(('127.0.0.1',port))==0:raise RuntimeError('Configured port is busy. Close the service before initial Setup; a running installation is never modified.')
+    converter=json.loads((ROOT/'tools/gguf-converter.json').read_text(encoding='utf-8'))
+    download(converter)
     migrate_verified_assets(catalog)
     if args.gpen_path:
         row=next(r for r in catalog['models'] if r['path'].endswith('gpen_bfr_512.onnx'));source=args.gpen_path.resolve()

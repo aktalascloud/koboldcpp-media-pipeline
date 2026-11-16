@@ -80,6 +80,9 @@ class Editor:
         ctk.CTkLabel(parents['Система'],text='Language').grid(row=72,column=0,padx=8,pady=6,sticky='w')
         choice=ctk.CTkOptionMenu(parents['Система'],values=['Русский','English'],variable=language,command=self.change_language);choice.grid(row=72,column=0,padx=(200,0),pady=6,sticky='w')
         choice.bind('<Enter>',lambda event:show_tooltip(event,'RU: Язык GUI и описаний API.\nEN: GUI and API-description language.'))
+        locale.catalog['GGUF Converter']='Конвертер GGUF';locale.reverse['Конвертер GGUF']='GGUF Converter'
+        converter=ctk.CTkButton(parents['Система'],text='GGUF Converter',command=self.open_converter)
+        converter.grid(row=75,column=0,columnspan=2,padx=8,pady=6,sticky='w')
         self.service_vars={}
         for index,(key,label,boolean) in enumerate([('base_url','Helper / TTS / STT API',False),('helper_model','Helper model ID',False),('helper_enabled','Use helper model',True),('tts_enabled','Remote TTS',True),('stt_enabled','Remote STT',True),('female_voice','Female voice profile',False),('male_voice','Male voice profile',False),('english_female_voice','Female voice (EN)',False),('english_male_voice','Male voice (EN)',False),('voice_selection_verified','Voice profiles checked',True)]):
             parent=parents['Музыка'];row=70+index*3
@@ -99,6 +102,24 @@ class Editor:
     def tip(self,widget,key):
         ru,en=TIPS[key];widget.bind('<Enter>',lambda event:self.hover(event,'RU: '+ru+'\nEN: '+en));widget.bind('<Leave>',self.hide)
     def change_language(self,value):self.locale.set(value)
+
+    def open_converter(self):
+        try:
+            path=self.root/'tools/GGUF-Converter.exe'
+            expected=read(self.root/'tools/gguf-converter.json')
+            if path.is_symlink() or not path.is_file() or path.stat().st_size!=expected['bytes']:
+                raise ValueError('Install the GGUF Converter included with this build.' if self.locale.language=='en'
+                                 else 'Установите конвертер GGUF, входящий в этот комплект.')
+            with path.open('rb') as binary:
+                digest=hashlib.file_digest(binary,'sha256').hexdigest()
+            if digest!=expected['sha256']:
+                raise ValueError('GGUF Converter SHA-256 mismatch.' if self.locale.language=='en'
+                                 else 'SHA-256 конвертера GGUF отличается от ожидаемого.')
+            return subprocess.Popen([str(path)],cwd=self.root,creationflags=subprocess.CREATE_NO_WINDOW)
+        except (OSError,ValueError,KeyError) as error:
+            from tkinter.messagebox import showerror
+            showerror(self.locale.text('GGUF Converter'),str(error))
+
     def reset(self,configuration):
         self.configuration=configuration;values,_=load_values(self.root,configuration);p=gd(configuration)['kcpp_proxy'];models=selection(configuration,profile_data(configuration,self.root),p)
         for key,(w,kind) in self.widgets.items():

@@ -23,6 +23,12 @@ def main():
         if p.is_file():files[p.relative_to(ROOT).as_posix()]=p
     for p in (ROOT/'tools').glob('*'):
         if p.suffix in ('.py','.ps1','.json','.cs','.ico'):files[p.relative_to(ROOT).as_posix()]=p
+    converter=ROOT/'tools/GGUF-Converter.exe'; converter_pin=ROOT/'tools/gguf-converter.json'
+    if converter_pin.is_file():
+        target=json.loads(converter_pin.read_text(encoding='utf-8'))
+        if converter.stat().st_size!=target['bytes'] or digest(converter)!=target['sha256']:
+            raise RuntimeError('GGUF Converter fingerprint mismatch')
+        files['tools/GGUF-Converter.exe']=converter
     for relative in ['Helper.kcpps','koboldcpp-nocuda.exe','runtime/native-environment.json','runtime/requirements.lock.txt','runtime/versions.json','profiles/moss-adapters.json','MODELS/manifest.json']:
         p=ROOT/relative
         if p.is_file():files[relative]=p

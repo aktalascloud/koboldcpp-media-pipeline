@@ -1,0 +1,7 @@
+{
+  "version": "1.3.0",
+  "path": "tools/GGUF-Converter.exe",
+  "bytes": 232242688,
+  "sha256": "ab6acfee14152597202678570e3b1653f09b5f0338ed98926a52f6e8a49b0f92",
+  "url": "https://github.com/aktalascloud/gguf-converter/releases/download/v1.3.0/GGUF-Converter-1.3.0.exe"
+}

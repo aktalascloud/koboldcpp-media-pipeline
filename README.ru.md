@@ -3,6 +3,8 @@
 
 Один переносимый Windows-сервер на [оптимизированном форке Haswell/AVX2/RX 580 Polaris/gfx803](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa). Запуск **Start.exe → KoboldCpp.exe**. Setup.ps1 нужен при установке/обновлении. Фото в GPU при простое; музыка/видео загружаются по требованию. Главные веса не зеркалируются.
 
+В родном GUI откройте **«Система → Конвертер GGUF»**. Установщик сверяет SHA‑256 портативного конвертера, локальная сборка включает его в KoboldCpp.exe. [GGUF Converter v1.3.0](https://github.com/aktalascloud/gguf-converter/releases/tag/v1.3.0)
+
 Пример конфигурации фото: Ray Q8, Afterlight0,25 + RealismEnhancer1, Euler/simple8, eta0, Cache-DiT0,08. Normal736×1104 без автоапскейла; High928×1392 с ClearReality4x, дополнительные High-контроли сохранены в фотоотчёте. YuNet/GPEN20%/SFace0,97/Gater выполняются до апскейла, без повтора после него. Модели и параметры выбираются в конфигурации. Музыка — YuE2 MP3; эффекты — SA3 CPU WAV/MP3 до60 с. TTS/хелпер/STT настраиваются, язык и голоса RU/EN задаются явно.
 
 Видео: Wan5B Turbo, полный энкодер + Pro FP32, Euler/beta4, WG512, порог576, ClearReality720p/лица, RIFE48 FPS по умолчанию или60 по запросу. Звук и lip-sync — отдельные этапы, не совместная AV-генерация. Предел Native —121 кадр, проверенный проход —73. Проект15 с по умолчанию, максимум30 с: его собирает клиент; длинный AI-рендер пока не измерен.
