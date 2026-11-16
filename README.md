@@ -3,7 +3,7 @@
 
 Portable Windows media around [our Haswell/AVX2 RX 580 Polaris/gfx803 fork](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa) of [original KoboldCpp](https://github.com/LostRuins/koboldcpp). Run **Start.exe → KoboldCpp.exe**. Models switch exclusively; image stays GPU-resident when idle. Setup.ps1 is initial installation/update, not the launcher. No main weights are mirrored.
 
-Open **System → GGUF Converter** in the native settings window. Setup verifies the pinned portable converter from its own release, and the local master embeds it. [GGUF Converter v1.3.0](https://github.com/aktalascloud/gguf-converter/releases/tag/v1.3.0)
+Open **System → GGUF Converter** in the native settings window. Setup verifies the pinned portable converter from its own release, and the local master embeds it. [GGUF Converter v1.4.0](https://github.com/aktalascloud/gguf-converter/releases/tag/v1.4.0)
 
 Goal: one portable KoboldCpp.exe with one runtime and a common on-demand API for photo, audio, video, effects and their combinations. The experimental core tracks official updates and selected security/model/performance patches for AVX2/Polaris; user-selected models and settings stay configurable.
 

@@ -43,8 +43,11 @@ def _directory(path,identity):
             kinds[kind]=kinds.get(kind,0)+1
     architecture=metadata.get('general.architecture');container_architecture=architecture
     if architecture=='qwen_image' and signature=={'final_linear_video.weight':(3072,128),'layers.0.proj.qkv.weight':(3072,9216),'layers.41.proj.o.weight':(3072,3072)}:architecture='moss_image'
-    quant='q8_0' if 8 in kinds and 2 not in kinds else 'q4_0' if 2 in kinds and 8 not in kinds else None
-    if quant is None or set(kinds)-{0,1,2,8,26}:raise ValueError('Expected reviewed Q8_0/Q4_0 matrices and unquantized small tensors.')
+    if 14 in kinds and 2 not in kinds:
+        quant='q6_k'  # Incompatible matrix widths may retain Q8_0.
+    else:
+        quant='q8_0' if 8 in kinds and 2 not in kinds else 'q4_0' if 2 in kinds and 8 not in kinds else None
+    if quant is None or set(kinds)-{0,1,2,8,14,26}:raise ValueError('Expected reviewed Q8_0/Q6_K/Q4_0 matrices and unquantized small tensors.')
     return dict(architecture=architecture,container_architecture=container_architecture,tensor_signature_confirmation=signature if architecture!=container_architecture else {},tensor_count=count,types=kinds,
                 quantization=quant,quantization_confirmation='GGUF_tensor_directory',names=names)
 def inspect_gguf(path):
