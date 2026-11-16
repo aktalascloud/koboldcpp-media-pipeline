@@ -1,0 +1,190 @@
+{
+  "date": "2026-11-16",
+  "previous_upstream": "d73312954a1b115124aec4535de2021584004976",
+  "upstream": "f5576d37c1c2fc0389dec1c9c367683be0fc9b4f",
+  "native_sha256": "e823acf0221ec199fe64b0801e56e8b2062c9d0572874d0a9df1dfeb9f05f97b",
+  "official_commits": 197,
+  "upstream_ggml_sha256": "417a024b4fb6bc3116d41af7c067166a039bdf12",
+  "ggml_sync_in_upstream": "685981335",
+  "ggml_recent_prs": [
+    {
+      "mergedAt": null,
+      "number": 1694,
+      "state": "OPEN",
+      "title": "ggml-vulkan: fix VRAM fragmentation and large-buffer TTM churn in long-running inference",
+      "updatedAt": "2026-11-14T16:01:40Z",
+      "url": "https://github.com/ggml-org/ggml/pull/1694"
+    },
+    {
+      "mergedAt": null,
+      "number": 1692,
+      "state": "OPEN",
+      "title": "examples : remove explict version from test-cmake",
+      "updatedAt": "2026-11-13T09:12:35Z",
+      "url": "https://github.com/ggml-org/ggml/pull/1692"
+    },
+    {
+      "mergedAt": "2026-11-13T08:13:40Z",
+      "number": 1691,
+      "state": "MERGED",
+      "title": "requirements : fix numpy for python 3.14",
+      "updatedAt": "2026-11-13T08:13:41Z",
+      "url": "https://github.com/ggml-org/ggml/pull/1691"
+    },
+    {
+      "mergedAt": "2026-11-13T08:13:56Z",
+      "number": 1690,
+      "state": "MERGED",
+      "title": "ggml : bump version to 1.0.0",
+      "updatedAt": "2026-11-13T08:14:00Z",
+      "url": "https://github.com/ggml-org/ggml/pull/1690"
+    },
+    {
+      "mergedAt": null,
+      "number": 1689,
+      "state": "OPEN",
+      "title": "Run 32-bit builds on CI",
+      "updatedAt": "2026-11-13T04:17:02Z",
+      "url": "https://github.com/ggml-org/ggml/pull/1689"
+    },
+    {
+      "mergedAt": "2026-11-13T07:20:21Z",
+      "number": 1688,
+      "state": "MERGED",
+      "title": "sync : llama.cpp",
+      "updatedAt": "2026-11-13T07:20:21Z",
+      "url": "https://github.com/ggml-org/ggml/pull/1688"
+    },
+    {
+      "mergedAt": null,
+      "number": 1687,
+      "state": "OPEN",
+      "title": "cmake : define _XOPEN_SOURCE=700 on FreeBSD for POSIX.1-2008 support (#1683)",
+      "updatedAt": "2026-11-12T09:10:18Z",
+      "url": "https://github.com/ggml-org/ggml/pull/1687"
+    },
+    {
+      "mergedAt": "2026-11-08T13:56:22Z",
+      "number": 1685,
+      "state": "MERGED",
+      "title": "docs : sync ggml_type enum in gguf.md",
+      "updatedAt": "2026-11-08T13:56:26Z",
+      "url": "https://github.com/ggml-org/ggml/pull/1685"
+    },
+    {
+      "mergedAt": "2026-11-04T09:27:45Z",
+      "number": 1680,
+      "state": "MERGED",
+      "title": "ggml : bump version to 0.29.0",
+      "updatedAt": "2026-11-04T09:27:51Z",
+      "url": "https://github.com/ggml-org/ggml/pull/1680"
+    },
+    {
+      "mergedAt": "2026-11-04T09:14:25Z",
+      "number": 1679,
+      "state": "MERGED",
+      "title": "sync : llama.cpp",
+      "updatedAt": "2026-11-04T09:16:35Z",
+      "url": "https://github.com/ggml-org/ggml/pull/1679"
+    },
+    {
+      "mergedAt": null,
+      "number": 1678,
+      "state": "OPEN",
+      "title": "examples: fix greedy sampling at --temp 0 for GPT-2/GPT-J",
+      "updatedAt": "2026-11-02T12:30:03Z",
+      "url": "https://github.com/ggml-org/ggml/pull/1678"
+    }
+  ],
+  "ggml_recent_issues": [
+    {
+      "number": 1684,
+      "state": "CLOSED",
+      "title": "docs/gguf.md: ggml_type list stops at MXFP4 (39); GGUF files in the wild use newer codes",
+      "url": "https://github.com/ggml-org/ggml/issues/1684"
+    },
+    {
+      "number": 1683,
+      "state": "OPEN",
+      "title": "error: use of undeclared identifier 'F_DUPFD_CLOEXEC'",
+      "url": "https://github.com/ggml-org/ggml/issues/1683"
+    },
+    {
+      "number": 1682,
+      "state": "OPEN",
+      "title": "Feature request: ggml-metal: compressing and embedding metallibs instead of locating them at runtime",
+      "url": "https://github.com/ggml-org/ggml/issues/1682"
+    },
+    {
+      "number": 1681,
+      "state": "OPEN",
+      "title": "0.29.0: missing `std`",
+      "url": "https://github.com/ggml-org/ggml/issues/1681"
+    }
+  ],
+  "ggml_targeted_diff_review": [
+    {
+      "pr": 1694,
+      "url": "https://github.com/ggml-org/ggml/pull/1694",
+      "diff_sha256": "8f5b2263c45110c63a0afa868d7d90a26e17097a751366819d01ee0759321a6e",
+      "decision": "Open Vulkan allocation-lifetime redesign. Reported TTM issue concerns long-running Linux driver workloads. The author tested Venus on Intel UHD 620. The patch introduces device-resident compute caching and cross-buffer scratch ownership. Hold for Windows RX 580 and media model-switch validation."
+    },
+    {
+      "pr": 1672,
+      "url": "https://github.com/ggml-org/ggml/pull/1672",
+      "diff_sha256": "20ff162258c0e3632bcba08a267302b30e6c1d626bb9ddca82b06346464788c4",
+      "decision": "The local patch already initializes all bytes and uses the normal queue call for unflagged queues."
+    },
+    {
+      "pr": 1616,
+      "url": "https://github.com/ggml-org/ggml/pull/1616",
+      "diff_sha256": "a9c9b51f43079255d27cceb9392e07d41e909c3012068f723a4f6e3ccbb9efd4",
+      "decision": "The local queue patch already calls vkGetDeviceQueue directly for ordinary unflagged queues."
+    },
+    {
+      "pr": 1619,
+      "url": "https://github.com/ggml-org/ggml/pull/1619",
+      "diff_sha256": "d723108207ad39bcf48e35fa18f65fe4d70a0b2ab25e47fc337959475ee30daf",
+      "decision": "Addresses an unclassified AMD device and 32-wide requests. This RX 580 is detected as GCN and already uses its actual wave64 subgroup."
+    },
+    {
+      "pr": 1604,
+      "url": "https://github.com/ggml-org/ggml/pull/1604",
+      "diff_sha256": "a4ece96168f66a7d1f0ec62e29f1075a6712810e056410ffa710c291ea396a2c",
+      "decision": "The F32 tinyBLAS tail changes the reduction path of non-multiple-of-four rows. Its published gains are from ARM VITS. No AVX2 gain is claimed for this build."
+    },
+    {
+      "pr": 1603,
+      "url": "https://github.com/ggml-org/ggml/pull/1603",
+      "diff_sha256": "f1ee4d5e0293444f7df05ee4ba860a6ab6ea7638dc2a2ca312e5ed3807fcfce9",
+      "decision": "Address-strength reduction tuned for AArch64 codegen."
+    },
+    {
+      "pr": 1602,
+      "url": "https://github.com/ggml-org/ggml/pull/1602",
+      "diff_sha256": "0f1dab92d28668f8c69146fc2da3f67bc61262b92378a5d185b3afbfc909f0e5",
+      "decision": "Register-tile change tuned for AArch64 register allocation."
+    },
+    {
+      "pr": 1101,
+      "url": "https://github.com/ggml-org/ggml/pull/1101",
+      "diff_sha256": "a2833a63f1470283e06ca9825269f1fe5d9092c1db6f640b3851b81cb80e440c",
+      "decision": "Older bulk CPU edits span kernels that have moved and changed since the proposed diff. No focused AVX2 port in this update."
+    }
+  ],
+  "retained_patch_count": 78,
+  "absorbed_ports": [
+    "vulkan-transposed-concat",
+    "scheduler-retain-buffers",
+    "llama-graph-meta-pages"
+  ],
+  "adapted_ports": [
+    "wan-latent-export",
+    "cpu-rms-head-rows",
+    "clip-reserve-error",
+    "vulkan-group-norm-grid"
+  ],
+  "verification": "Build, source and executable SHA, independent ordered patch replay, cold startup, profiles and GET API.",
+  "full_model_benchmarks": false,
+  "operator_evidence": "operations-2026-11-16-ggml.json"
+}

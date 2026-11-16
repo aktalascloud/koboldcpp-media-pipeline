@@ -1,0 +1,219 @@
+{
+  "date": "2026-11-16",
+  "upstream": "f5576d37c1c2fc0389dec1c9c367683be0fc9b4f",
+  "native_sha256": "e823acf0221ec199fe64b0801e56e8b2062c9d0572874d0a9df1dfeb9f05f97b",
+  "upstream_change": "https://github.com/ggml-org/llama.cpp/pull/31418",
+  "device": "AMD Radeon RX 580 2048SP",
+  "scope": "Synchronous Vulkan transfer API on real GPU buffers. Single calls versus the upstream batched call on the same build. Nine paired samples, five transfers per sample. Measurement scope is tensor transfer latency.",
+  "fixture_sha256": "3cc94789d51e4b1068c5e6980b4a72e7b7d4974019e73b000339dbdead5ee990",
+  "fixture_source_sha256": "fd93504494397d229055d882f12527f0a3b056e5e15d6ad2ed40151041308846",
+  "exact_round_trips": [
+    {
+      "tensors": 24,
+      "bytes_per_tensor": 4096
+    },
+    {
+      "tensors": 24,
+      "bytes_per_tensor": 65536
+    },
+    {
+      "tensors": 24,
+      "bytes_per_tensor": 1048576
+    }
+  ],
+  "rows": [
+    {
+      "operation": "get",
+      "tensors": 24,
+      "bytes_per_tensor": 4096,
+      "single_median_us": 4397.08,
+      "batch_median_us": 261.04,
+      "change_percent": -94.06333293913234,
+      "samples_us": {
+        "single": [
+          4373.72,
+          4493.46,
+          4386.68,
+          4344.52,
+          4700.06,
+          4529.44,
+          4419.8,
+          4397.08,
+          4359.18
+        ],
+        "batch": [
+          257.9,
+          254.62,
+          278.68,
+          282.58,
+          259.72,
+          262.58,
+          261.04,
+          260.06,
+          267.58
+        ]
+      }
+    },
+    {
+      "operation": "get",
+      "tensors": 24,
+      "bytes_per_tensor": 65536,
+      "single_median_us": 4562.26,
+      "batch_median_us": 485.38,
+      "change_percent": -89.36097460469153,
+      "samples_us": {
+        "single": [
+          4552.64,
+          4579.1,
+          4558.96,
+          4562.26,
+          4567.02,
+          4547.84,
+          4570.04,
+          4570.28,
+          4560.88
+        ],
+        "batch": [
+          487.64,
+          479.26,
+          486.54,
+          477.24,
+          491.76,
+          477.44,
+          485.38,
+          476.68,
+          487.86
+        ]
+      }
+    },
+    {
+      "operation": "get",
+      "tensors": 24,
+      "bytes_per_tensor": 1048576,
+      "single_median_us": 8381.12,
+      "batch_median_us": 4494.36,
+      "change_percent": -46.37518613264099,
+      "samples_us": {
+        "single": [
+          8368.42,
+          8408.46,
+          8363.28,
+          8362.26,
+          8438.54,
+          8373.44,
+          8394.52,
+          8382.68,
+          8381.12
+        ],
+        "batch": [
+          4632.92,
+          4481.8,
+          4535.82,
+          4379.36,
+          4565.9,
+          4521.42,
+          4494.36,
+          4399.84,
+          4489.36
+        ]
+      }
+    },
+    {
+      "operation": "set",
+      "tensors": 24,
+      "bytes_per_tensor": 4096,
+      "single_median_us": 4477.36,
+      "batch_median_us": 264.42,
+      "change_percent": -94.09428770525489,
+      "samples_us": {
+        "single": [
+          4495.52,
+          4474.72,
+          4498.6,
+          4374.1,
+          4497.9,
+          4398.0,
+          4471.7,
+          4477.78,
+          4477.36
+        ],
+        "batch": [
+          270.92,
+          264.42,
+          275.32,
+          258.44,
+          265.44,
+          288.86,
+          260.22,
+          258.6,
+          258.26
+        ]
+      }
+    },
+    {
+      "operation": "set",
+      "tensors": 24,
+      "bytes_per_tensor": 65536,
+      "single_median_us": 4602.28,
+      "batch_median_us": 526.06,
+      "change_percent": -88.56957855671537,
+      "samples_us": {
+        "single": [
+          4620.28,
+          4635.76,
+          4619.84,
+          4585.98,
+          4560.26,
+          4602.28,
+          4570.7,
+          4591.18,
+          4715.88
+        ],
+        "batch": [
+          535.46,
+          521.38,
+          550.74,
+          523.5,
+          526.06,
+          521.08,
+          526.84,
+          519.76,
+          561.1
+        ]
+      }
+    },
+    {
+      "operation": "set",
+      "tensors": 24,
+      "bytes_per_tensor": 1048576,
+      "single_median_us": 8767.1,
+      "batch_median_us": 4760.08,
+      "change_percent": -45.70519327941965,
+      "samples_us": {
+        "single": [
+          8971.3,
+          8934.48,
+          8853.04,
+          8792.28,
+          8627.88,
+          8767.1,
+          8659.54,
+          8727.0,
+          8701.28
+        ],
+        "batch": [
+          4760.08,
+          4781.16,
+          4774.44,
+          4736.34,
+          4726.98,
+          4744.4,
+          4785.88,
+          4774.2,
+          4597.64
+        ]
+      }
+    }
+  ],
+  "fixture_source_lf_sha256": "7fa4ac1af35d33ae2b57e064cc327d817233201e824dd288fab5baced62fd0cb"
+}

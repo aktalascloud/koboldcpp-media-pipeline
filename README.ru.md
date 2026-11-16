@@ -7,7 +7,7 @@
 
 Видео: Wan5B Turbo, полный энкодер + Pro FP32, Euler/beta4, WG512, порог576, ClearReality720p/лица, RIFE48 FPS по умолчанию или60 по запросу. Звук и lip-sync — отдельные этапы, не совместная AV-генерация. Предел Native —121 кадр, проверенный проход —73. Проект15 с по умолчанию, максимум30 с: его собирает клиент; длинный AI-рендер пока не измерен.
 
-**Core 1.125 · 2026-11-12 · Native 743938b2.** Официальная база d7331295. [81 патчей](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/tree/concedo_experimental/performance/patches/series).
+**Core 1.125 · 2026-11-16 · Native e823acf0.** Официальная база f5576d37. [78 патчей](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/tree/concedo_experimental/performance/patches/series).
 
 Публичный API YuE2 принимает длительность до 300 секунд или бюджет до 7 500 семантических токенов. [Патч длительности](patches/media-music-five-minute-limit/README.md).
 
