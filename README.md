@@ -12,3 +12,5 @@ Portable Windows service for images, video, music and sound effects. Run `Start.
 **Core 1.125 · 2026-11-17 · d9b2e6b5** · [Patched source](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/tree/concedo_experimental/performance/patches/series) · [Media patches](patches/)
 
 [Verified examples and dated tests](https://github.com/aktalascloud/koboldcpp-media-pipeline/blob/v2026.11.17-r5/results/measurements.json).
+
+[Gater on RX 580](patches/gater-directml-graph/README.md) · [Video post-processing](patches/media-video-post-fast/README.md) · [RIFE input](patches/rife-fast-png/README.md)

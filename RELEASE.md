@@ -1,9 +1,9 @@
 ## English
 
-Media · 2026-11-17 · Native d9b2e6b5. SA3 can load GGUF files by role from its model manifest. The launcher honors the Native readiness deadline for large models. Checked the unified API and image, video, music and SFX capability routes.
+Media · 2026-11-17 · Native d9b2e6b5. Measured on RX 580 and Haswell under Windows. GaterV3 warm median fell from 6.211 to 5.958 s. Saved-clip video post-processing fell from 1.055 to 0.598 s. RIFE frame extraction fell from 0.548 to 0.205 s. The compared pixels matched.
 
 ## Русский
 
-Media · 2026-11-17 · Native d9b2e6b5. SA3 выбирает GGUF по ролям из манифеста. Оболочка ждёт готовности тяжёлой модели столько, сколько задано в Native. Проверены единый API и маршруты возможностей фото, видео, музыки и эффектов.
+Media · 2026-11-17 · Native d9b2e6b5. Замеры на RX 580 и Haswell под Windows. Медиана тёплого GaterV3 снизилась с 6,211 до 5,958 с. Постобработка сохранённого клипа — с 1,055 до 0,598 с. Извлечение кадров для RIFE — с 0,548 до 0,205 с. Пиксели совпали.
 
-[Core / Движок](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/releases/latest) · [GGUF Converter v1.9.0](https://github.com/aktalascloud/gguf-converter/releases/tag/v1.9.0)
+[Core / Движок](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/releases/latest) · [Patches / Патчи](https://github.com/aktalascloud/koboldcpp-media-pipeline/tree/v2026.11.17-r6/patches)

@@ -435,7 +435,7 @@ class VideoService:
             face_provider=options.get('face_provider','directml'),face_visibility=max(.001,float(face_options.get('visibility',.2))),
             upscaler_path=options.get('upscaler_model',cfg.get('proxy',{}).get('upscaler',{}).get('model')),upscaler_sha256=options.get('upscaler_model_sha256',cfg.get('proxy',{}).get('upscaler',{}).get('model_sha256')),
             face_model=face_options.get('model'),guard_model=face_options.get('feature_guard_model'),detector_model=face_options.get('detector_model'),
-            face_similarity=float(face_options.get('minimum_feature_similarity',.97)),detector_resolution=int(face_options.get('detector_resolution',960)),max_faces=int(face_options.get('max_faces',2)),temporal_faces=.25,timeout=budget.remaining())
+            face_similarity=float(face_options.get('minimum_feature_similarity',.97)),detector_resolution=int(face_options.get('detector_resolution',960)),max_faces=int(face_options.get('max_faces',2)),temporal_faces=.25,timeout=budget.remaining(),diagnostic_frames=False)
         (folder/'video.mp4').rename(folder/'video-native480.mp4')
         shutil.copy2(folder/'last-frame.png',folder/'native-last-frame.png')
         Path(report['output']).rename(folder/'video.mp4');shutil.copy2(folder/'enhanced/output-last.png',folder/'last-frame.png')

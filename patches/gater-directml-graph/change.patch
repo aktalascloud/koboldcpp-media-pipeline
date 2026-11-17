@@ -1,0 +1,13 @@
+diff --git a/tools/PhotoRestoration.py b/tools/PhotoRestoration.py
+index acc8611..f318dc8 100644
+--- a/tools/PhotoRestoration.py
++++ b/tools/PhotoRestoration.py
+@@ -102,7 +102,7 @@ def restore_once(image, options, prior=None):
+         settings.inter_op_num_threads = 1
+         settings.execution_mode = ort.ExecutionMode.ORT_SEQUENTIAL
+         settings.enable_mem_pattern = False
+-        settings.graph_optimization_level = ort.GraphOptimizationLevel.ORT_ENABLE_BASIC
++        settings.graph_optimization_level = ort.GraphOptimizationLevel.ORT_ENABLE_EXTENDED
+         session = ort.InferenceSession(str(model), sess_options=settings,
+             providers=[('DmlExecutionProvider', {'device_id': str(adapter['index'])}), 'CPUExecutionProvider'])
+         # ORT may retry a failed DML initialization with a CPU-only provider.

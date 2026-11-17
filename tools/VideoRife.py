@@ -23,7 +23,7 @@ def interpolate_video(source,destination,root,timeout=180,model_dir=None,target_
         value=timeout-(time.perf_counter()-began)
         if value<=0:raise TimeoutError('RIFE exceeded shared video budget')
         return value
-    subprocess.run([ffmpeg,'-hide_banner','-loglevel','error','-nostdin','-y','-i',str(source),str(inp/'%08d.png')],check=True,timeout=remaining())
+    subprocess.run([ffmpeg,'-hide_banner','-loglevel','error','-nostdin','-y','-i',str(source),'-compression_level','1',str(inp/'%08d.png')],check=True,timeout=remaining())
     count=math.ceil(frames*target_fps/24)
     rife_count=count
     if target_fps==60 and frames%2:

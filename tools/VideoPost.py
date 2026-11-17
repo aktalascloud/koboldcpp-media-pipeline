@@ -14,7 +14,7 @@ PARAGON_DATA_SHA='c8ddb04cc7415390194206f38c9de9108a21d07724908f49c89127d887b791
 def sha(p):
     with p.open('rb') as f:return hashlib.file_digest(f,'sha256').hexdigest()
 
-def process_video(source,destination,root,model='clearreality',faces=False,temporal_faces=.25,timeout=600,profile_gpu=False,target_short_edge=720,face_provider='openvino',face_visibility=.2,freeze_face_initializers=False,face_similarity=.97,detector_resolution=960,max_faces=2,upscaler_path=None,upscaler_sha256=None,face_model=None,guard_model=None,detector_model=None):
+def process_video(source,destination,root,model='clearreality',faces=False,temporal_faces=.25,timeout=600,profile_gpu=False,target_short_edge=720,face_provider='openvino',face_visibility=.2,freeze_face_initializers=False,face_similarity=.97,detector_resolution=960,max_faces=2,upscaler_path=None,upscaler_sha256=None,face_model=None,guard_model=None,detector_model=None,diagnostic_frames=True):
     root=Path(root).resolve();source=Path(source).resolve();destination=Path(destination).resolve()
     if not source.is_relative_to(root) or not source.is_file():raise ValueError('Video source must be inside Root')
     if not any(destination.is_relative_to(root/folder) for folder in ['RESULTS/generated/video','RESULTS/checks']):raise ValueError('Unexpected video postprocess destination')
@@ -27,6 +27,7 @@ def process_video(source,destination,root,model='clearreality',faces=False,tempo
     if not 1<=count<=121 or not 1<=fps<=60 or width*height>2_000_000:raise ValueError('Video exceeds tested postprocessing bounds')
     scale=target_short_edge/min(width,height);size=(2*round(width*scale/2),2*round(height*scale/2))
     upscaler=None;restorer=None;guard=None;encoder=None;stderr=None;rows=[];gpu_report=None;face_gpu_report=None;previous_gray=None;previous_delta=None
+    remap_grid=None
     try:
         if model!='lanczos':
             name,native_scale,digest=MODELS[model];path=Path(upscaler_path) if upscaler_path else root/'MODELS/upscalers'/name
@@ -83,7 +84,9 @@ def process_video(source,destination,root,model='clearreality',faces=False,tempo
                     if float(np.mean(cv2.absdiff(small,previous_gray)))<30:
                         flow=cv2.calcOpticalFlowFarneback(small,previous_gray,None,.5,3,15,3,5,1.2,0)
                         flow=cv2.resize(flow,size);flow[:,:,0]*=size[0]/small.shape[1];flow[:,:,1]*=size[1]/small.shape[0]
-                        yy,xx=np.mgrid[:size[1],:size[0]].astype(np.float32)
+                        if remap_grid is None:
+                            remap_grid=np.indices((size[1],size[0]),dtype=np.float32)
+                        yy,xx=remap_grid
                         warped=cv2.remap(previous_delta,xx+flow[:,:,0],yy+flow[:,:,1],cv2.INTER_LINEAR,borderMode=cv2.BORDER_CONSTANT)
                         mask=np.max(np.abs(delta),axis=2)>0
                         smooth=delta.copy();smooth[mask]=(1-temporal_faces)*delta[mask]+temporal_faces*warped[mask]
@@ -92,16 +95,20 @@ def process_video(source,destination,root,model='clearreality',faces=False,tempo
                         else:temporal_reverted=True
                 previous_delta=np.asarray(enhanced).astype(np.float32)-base;previous_gray=small
                 face_seconds=time.perf_counter()-begin
-            if index==0:
+            if index==0 and diagnostic_frames:
                 original.save(destination/'input-first.png');before.save(destination/'sr-first.png');enhanced.save(destination/'output-first.png')
-            pixels=np.asarray(enhanced.convert('RGB'));encoder.stdin.write(pixels.tobytes())
+            pixels=np.asarray(enhanced if enhanced.mode=='RGB' else enhanced.convert('RGB'))
+            encoder.stdin.write(memoryview(pixels).cast('B'))
             rows.append(dict(frame=index,sr_seconds=sr_seconds,faces_seconds=face_seconds,processed_faces=face_report.get('processed_faces',0),temporal_guard_reverted=temporal_reverted,
                 face_similarities=[f['feature_similarity'] for f in face_report.get('faces',[])],luma_mean=float(cv2.cvtColor(pixels,cv2.COLOR_RGB2GRAY).mean())))
             index+=1
         if index!=count:raise RuntimeError('Source frame count changed during decode')
         encoder.stdin.close();encoder.wait(timeout=max(.1,deadline-time.perf_counter()))
         if encoder.returncode:raise RuntimeError('Video encoder failed')
-        temporary.rename(output);original.save(destination/'input-last.png');before.save(destination/'sr-last.png');enhanced.save(destination/'output-last.png')
+        temporary.rename(output)
+        if diagnostic_frames:
+            original.save(destination/'input-last.png');before.save(destination/'sr-last.png')
+        enhanced.save(destination/'output-last.png')
         check=cv2.VideoCapture(str(output),cv2.CAP_FFMPEG)
         actual=(round(check.get(cv2.CAP_PROP_FRAME_COUNT)),check.get(cv2.CAP_PROP_FPS),round(check.get(cv2.CAP_PROP_FRAME_WIDTH)),round(check.get(cv2.CAP_PROP_FRAME_HEIGHT)));check.release()
         if actual[0]!=count or abs(actual[1]-fps)>.001 or actual[2:]!=size:raise RuntimeError('Video SR changed frame count/FPS/size unexpectedly')

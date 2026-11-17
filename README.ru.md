@@ -12,3 +12,5 @@
 **Core 1.125 · 17 ноября 2026 · d9b2e6b5** · [Патчи движка](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/tree/concedo_experimental/performance/patches/series) · [Патчи медиакомплекта](patches/)
 
 [Проверенные примеры и замеры](https://github.com/aktalascloud/koboldcpp-media-pipeline/blob/v2026.11.17-r5/results/measurements.json).
+
+[Gater на RX 580](patches/gater-directml-graph/README.md) · [Постобработка видео](patches/media-video-post-fast/README.md) · [Кадры для RIFE](patches/rife-fast-png/README.md)
