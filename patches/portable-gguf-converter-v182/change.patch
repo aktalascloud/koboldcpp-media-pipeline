@@ -1,0 +1,15 @@
+diff --git a/tools/gguf-converter.json b/tools/gguf-converter.json
+index d5fc682..6da7d42 100644
+--- a/tools/gguf-converter.json
++++ b/tools/gguf-converter.json
+@@ -1,7 +1,7 @@
+ {
+-  "version": "1.8.1",
++  "version": "1.8.2",
+   "path": "tools/GGUF-Converter.exe",
+   "bytes": 233480192,
+-  "sha256": "ab7960c75a0f5d889f88e15288ac923ec03f6888bab031d4d16722c6bd963500",
+-  "url": "https://github.com/aktalascloud/gguf-converter/releases/download/v1.8.1/GGUF-Converter-1.8.1.exe"
++  "sha256": "f7e162577ce50193398a16a9e88f99a9f1087782a429971277011a9927bb5216",
++  "url": "https://github.com/aktalascloud/gguf-converter/releases/download/v1.8.2/GGUF-Converter-1.8.2.exe"
+ }

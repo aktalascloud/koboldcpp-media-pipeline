@@ -3,7 +3,7 @@
 
 Один переносимый Windows-сервер на [оптимизированном форке Haswell/AVX2/RX 580 Polaris/gfx803](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa). Запуск **Start.exe → KoboldCpp.exe**. Setup.ps1 нужен при установке/обновлении. Фото в GPU при простое; музыка/видео загружаются по требованию. Главные веса не зеркалируются.
 
-В родном GUI откройте **«Система → Конвертер GGUF»**. В версии 1.8.1 метод калибровки выбирается явно. Доступны ACTCAL, GSQ/RCO и MACaQ-R. [GGUF Converter v1.8.1](https://github.com/aktalascloud/gguf-converter/releases/tag/v1.8.1)
+В родном GUI откройте **«Система → Конвертер GGUF»**. В версии 1.8.2 метод калибровки выбирается явно. Доступны ACTCAL, GSQ/RCO и MACaQ-R. [GGUF Converter v1.8.2](https://github.com/aktalascloud/gguf-converter/releases/tag/v1.8.2)
 
 16 ноября 2026 года кодирование AVI и MP4 LightVAE-Pro из одного потока RGB сократило медиану этого этапа с 0,624 до 0,366 с на клипе из 49 кадров. MP4 совпал байт в байт, AVI декодировался в те же пиксели. [Патч](patches/mediapro-one-pass-encode/README.md) · [Замеры RX 580 и Haswell](benchmarks/2026-11-16-calibration-rx580.json)
 
