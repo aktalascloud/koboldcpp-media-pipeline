@@ -3,7 +3,7 @@
 
 Portable Windows media around [our Haswell/AVX2 RX 580 Polaris/gfx803 fork](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa) of [original KoboldCpp](https://github.com/LostRuins/koboldcpp). Run **Start.exe → KoboldCpp.exe**. Models switch exclusively; image stays GPU-resident when idle. Setup.ps1 is initial installation/update, not the launcher. No main weights are mirrored.
 
-Open **System → GGUF Converter** in the native settings window. Version 1.8.2 exposes ACTCAL, GSQ/RCO and MACaQ-R in the calibration selector. Setup verifies the pinned portable EXE. [GGUF Converter v1.8.2](https://github.com/aktalascloud/gguf-converter/releases/tag/v1.8.2)
+Open **System → GGUF Converter** in the native settings window. Version 1.9.0 exposes ACTCAL, GSQ/RCO and MACaQ-R in the calibration selector. Setup verifies the pinned portable EXE. [GGUF Converter v1.9.0](https://github.com/aktalascloud/gguf-converter/releases/tag/v1.9.0)
 
 On 2026-11-16, encoding both LightVAE-Pro outputs from one RGB stream cut the median encoding stage from 0.624 s to 0.366 s on a 49-frame clip. The MP4 was byte-identical and AVI decoded to the same pixels. [Patch](patches/mediapro-one-pass-encode/README.md) · [RX 580 and Haswell trials](benchmarks/2026-11-16-calibration-rx580.json)
 
@@ -13,7 +13,7 @@ Goal: one portable KoboldCpp.exe with one runtime and a common on-demand API for
 - Music: YuE2 MP3. SFX: SA3 CPU WAV/MP3,0.25–60s. Speech/helper/STT use a configurable provider and explicit RU/EN voices.
 - Video: Wan5B Turbo, full encoder + Pro FP32, Euler/beta4, WG512, threshold576, ClearReality720p/faces, RIFE48FPS default/60 optional. Audio-driven lip-sync is a separate optional stage; this is not joint AV inference. Native limit121 frames; conservative tested clip73. Client project15 s default/30 s maximum.
 
-**Core 1.125 · 2026-11-16 · Native e823acf0.** Official base f5576d37. [78 patches](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/tree/concedo_experimental/performance/patches/series).
+**Core 1.125 · 2026-11-17 · Native d9b2e6b5.** Official experimental `ed246f446`. [71 patches](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/tree/concedo_experimental/performance/patches/series).
 
 YuE2 accepts up to 300 seconds or 7,500 semantic tokens through the public music API. [Duration patch](patches/media-music-five-minute-limit/README.md).
 

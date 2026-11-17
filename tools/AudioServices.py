@@ -1,5 +1,15 @@
 """Configured OpenAI-compatible helper/TTS/STT; URLs never come from generation requests."""
 import functools,json,urllib.request,urllib.error,urllib.parse,math,re,threading,socket
+from pathlib import Path
+
+
+SFX_DEFAULT_FILES = {
+    'tok': 't5gemma-b-b-ul2-v1.0-vocab.gguf',
+    't5': 't5gemma-b-b-ul2-encoder-0.3B-v1.0-F16.gguf',
+    'cond': 'stable-audio-3-small-sfx-conditioner-v1.0-F32.gguf',
+    'dit': 'stable-audio-3-small-sfx-dit-0.5B-v1.0-Q8_0.gguf',
+    'same': 'stable-audio-3-small-sfx-same-s-v1.0-Q8_0.gguf',
+}
 
 def _bounded_read(response,limit,timeout):
     expired=threading.Event()
@@ -37,6 +47,32 @@ def normalize(config):
 
 def services(cfg):return normalize(cfg.get('proxy',{}).get('audio_services',{}))
 
+def sfx_assets(cfg, root):
+    root = Path(root).resolve()
+    directory = (root/Path(services(cfg)['sfx_model_dir'])).resolve(strict=True)
+    if not directory.is_relative_to(root) or not directory.is_dir():
+        raise ValueError('Invalid portable SFX model directory')
+    manifest = directory/'manifest.json'
+    names = SFX_DEFAULT_FILES
+    if manifest.is_file():
+        document = json.loads(manifest.read_text(encoding='utf-8-sig'))
+        if not isinstance(document, dict):
+            raise ValueError('Invalid SFX model manifest')
+        names = document.get('runtime_files', names)
+    if not isinstance(names, dict) or names.keys() != SFX_DEFAULT_FILES.keys():
+        raise ValueError('SFX manifest must name all five runtime components')
+    assets = {}
+    for role in SFX_DEFAULT_FILES:
+        name = names[role]
+        if not isinstance(name, str) or Path(name).name != name or Path(name).suffix.lower() != '.gguf':
+            raise ValueError(f'Invalid SFX filename for {role}')
+        path = (directory/name).resolve(strict=True)
+        if path.parent != directory or not path.is_file():
+            raise ValueError(f'Invalid SFX weight for {role}')
+        assets[role] = path
+    return directory, assets
+
+
 def remote(cfg,path,body=None,content_type='application/json',timeout=180):
     opts=services(cfg);base=opts['base_url']
     if not base:raise ValueError('Внешний аудиосервер не подключён')
@@ -52,10 +88,12 @@ def remote(cfg,path,body=None,content_type='application/json',timeout=180):
 
 def capabilities(cfg):
     opts=services(cfg)
-    from pathlib import Path
-    root=Path(__file__).resolve().parent.parent;models=Path(opts['sfx_model_dir']);models=models if models.is_absolute() else root/models
-    names=['stable-audio-3-small-sfx-dit-0.5B-v1.0-Q8_0.gguf','stable-audio-3-small-sfx-same-s-v1.0-Q8_0.gguf','stable-audio-3-small-sfx-conditioner-v1.0-F32.gguf','t5gemma-b-b-ul2-encoder-0.3B-v1.0-F16.gguf','t5gemma-b-b-ul2-v1.0-vocab.gguf']
-    sfx=(root/'runtime/sa3/sa3-generate.exe').is_file() and models.is_dir() and all((models/n).is_file() for n in names)
+    root = Path(__file__).resolve().parent.parent
+    try:
+        sfx_assets(cfg, root)
+        sfx = (root/'runtime/sa3/sa3-generate.exe').is_file()
+    except (OSError, ValueError):
+        sfx = False
     return {'helper':opts['helper_enabled'],'tts':opts['tts_enabled'],'stt':opts['stt_enabled'],'sfx':sfx,'sfx_endpoint':'/v1/audio/sfx','sfx_max_seconds':60,'sfx_backend':'CPU Haswell','voice_selection_verified':opts['voice_selection_verified'],'helper_model':opts['helper_model'],'speaker_profiles':['female','male'],'languages':['ru','en'],'voices':{lang:[{'id':voice,'voice_profile':profile} for profile,voices in profiles.items() for voice in sorted(voices)] for lang,profiles in voice_registry(opts).items()},'url_configured':bool(opts['base_url'])}
 
 def select_voice(opts,speaker):

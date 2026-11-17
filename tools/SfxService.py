@@ -12,14 +12,21 @@ def validate(payload):
     return {'prompt':prompt.strip(),'duration':float(duration),'seed':seed,'response_format':fmt}
 
 def native_clip(root,cfg,prompt,duration,seed,target,remaining):
-    from AudioServices import services,capabilities
+    from AudioServices import services,sfx_assets
     from OwnedMediaProcess import run_owned
     root=Path(root).resolve();target=Path(target).resolve()
     if not target.is_relative_to(root):raise ValueError('SFX output must stay in the portable directory')
-    opts=services(cfg);models=Path(opts['sfx_model_dir']);models=(models if models.is_absolute() else root/models).resolve()
-    if not models.is_relative_to(root) or not capabilities(cfg)['sfx']:raise ValueError('SA3 SFX не установлен полностью внутри комплекта')
+    opts=services(cfg)
+    models, assets=sfx_assets(cfg,root)
+    executable=root/'runtime/sa3/sa3-generate.exe'
+    if not executable.is_file():raise ValueError('SA3 SFX не установлен полностью внутри комплекта')
     target.parent.mkdir(parents=True,exist_ok=True)
-    command=[str(root/'runtime/sa3/sa3-generate.exe'),'--model','small-sfx','--models-dir',str(models),'--encoding','q8_0','--ae-encoding','q8_0','--t5-encoding','f16','--duration',str(max(.25,duration)),'--steps','8','--threads',str(opts['sfx_threads']),'--seed',str(seed),'--prompt',prompt,'--out',str(target)]
+    command = [str(executable), '--model', 'small-sfx', '--models-dir', str(models),
+               '--encoding', 'q8_0', '--ae-encoding', 'q8_0', '--t5-encoding', 'f16']
+    for role, path in assets.items():
+        command.extend((f'--{role}', str(path)))
+    command.extend(('--duration', str(max(.25, duration)), '--steps', '8', '--threads', str(opts['sfx_threads']),
+                    '--seed', str(seed), '--prompt', prompt, '--out', str(target)))
     run_owned(command,root,target.parent/(target.stem+'-worker'),min(900,remaining()),environment={**os.environ,'SA3_DEVICE':'cpu','SA3_GPU':'0'})
     if not target.is_file() or target.stat().st_size<44:raise RuntimeError('SA3 вернул пустой звук')
 

@@ -3,7 +3,7 @@
 
 Один переносимый Windows-сервер на [оптимизированном форке Haswell/AVX2/RX 580 Polaris/gfx803](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa). Запуск **Start.exe → KoboldCpp.exe**. Setup.ps1 нужен при установке/обновлении. Фото в GPU при простое; музыка/видео загружаются по требованию. Главные веса не зеркалируются.
 
-В родном GUI откройте **«Система → Конвертер GGUF»**. В версии 1.8.2 метод калибровки выбирается явно. Доступны ACTCAL, GSQ/RCO и MACaQ-R. [GGUF Converter v1.8.2](https://github.com/aktalascloud/gguf-converter/releases/tag/v1.8.2)
+В родном GUI откройте **«Система → Конвертер GGUF»**. В версии 1.9.0 метод калибровки выбирается явно. Доступны ACTCAL, GSQ/RCO и MACaQ-R. [GGUF Converter v1.9.0](https://github.com/aktalascloud/gguf-converter/releases/tag/v1.9.0)
 
 16 ноября 2026 года кодирование AVI и MP4 LightVAE-Pro из одного потока RGB сократило медиану этого этапа с 0,624 до 0,366 с на клипе из 49 кадров. MP4 совпал байт в байт, AVI декодировался в те же пиксели. [Патч](patches/mediapro-one-pass-encode/README.md) · [Замеры RX 580 и Haswell](benchmarks/2026-11-16-calibration-rx580.json)
 
@@ -11,7 +11,7 @@
 
 Видео: Wan5B Turbo, полный энкодер + Pro FP32, Euler/beta4, WG512, порог576, ClearReality720p/лица, RIFE48 FPS по умолчанию или60 по запросу. Звук и lip-sync — отдельные этапы, не совместная AV-генерация. Предел Native —121 кадр, проверенный проход —73. Проект15 с по умолчанию, максимум30 с: его собирает клиент; длинный AI-рендер пока не измерен.
 
-**Core 1.125 · 2026-11-16 · Native e823acf0.** Официальная база f5576d37. [78 патчей](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/tree/concedo_experimental/performance/patches/series).
+**Core 1.125 · 2026-11-17 · Native d9b2e6b5.** Официальная ветка experimental `ed246f446`. [71 патча](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/tree/concedo_experimental/performance/patches/series).
 
 Публичный API YuE2 принимает длительность до 300 секунд или бюджет до 7 500 семантических токенов. [Патч длительности](patches/media-music-five-minute-limit/README.md).
 
