@@ -1,7 +1,7 @@
 {
-  "version": "1.8.2",
+  "version": "1.9.0",
   "path": "tools/GGUF-Converter.exe",
-  "bytes": 233480192,
-  "sha256": "f7e162577ce50193398a16a9e88f99a9f1087782a429971277011a9927bb5216",
-  "url": "https://github.com/aktalascloud/gguf-converter/releases/download/v1.8.2/GGUF-Converter-1.8.2.exe"
+  "bytes": 237178368,
+  "sha256": "fb92296be1891b1461ecd8a4c965dbb06ee30156ef1d8e26da2a171ffbf36440",
+  "url": "https://github.com/aktalascloud/gguf-converter/releases/download/v1.9.0/GGUF-Converter-1.9.0.exe"
 }
