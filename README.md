@@ -2,7 +2,7 @@
 
 [Русский](README.ru.md) · [Release](https://github.com/aktalascloud/koboldcpp-media-pipeline/releases/latest) · [Install](docs/BUILD.md) · [Unified API](docs/UNIFIED-API.md) · [Licenses](docs/LICENSES.md)
 
-Portable Windows service for images, video, music and sound effects. Run `Start.exe`. Setup installs the [Windows AVX2/Vulkan core](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/releases/tag/v1.125-20261117-d9b2e6b5). The active image model stays resident while idle. Video and music load on demand. Pick weights and presets in the native GUI.
+Portable Windows service for images, video, music and sound effects. After setup, run `KoboldCpp.exe`. Use `Start-Local.cmd` when the project is next to an existing KoboldCpp installation. Setup installs the [Windows AVX2/Vulkan core](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/releases/tag/v1.125-20261117-d9b2e6b5). The image model stays resident while idle. Video and music load on demand.
 
 - Images use MOSS with optional face restoration and 4× upscaling.
 - Wan video supports up to 121 native frames at 24 FPS per pass. RIFE provides 48 or 60 FPS.
@@ -11,10 +11,4 @@ Portable Windows service for images, video, music and sound effects. Run `Start.
 
 **Core 1.125 · 2026-11-17 · d9b2e6b5** · [Patched source](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/tree/concedo_experimental/performance/patches/series) · [Media patches](patches/)
 
-[Verified examples and dated tests](https://github.com/aktalascloud/koboldcpp-media-pipeline/blob/v2026.11.17-r5/results/measurements.json).
-
-[Gater on RX 580](patches/gater-directml-graph/README.md) · [Video post-processing](patches/media-video-post-fast/README.md) · [RIFE input](patches/rife-fast-png/README.md)
-
-[LightVAE-Pro profiling](patches/video-pro-profile/README.md) · [RIFE CPU workers](patches/rife-cpu-workers/README.md) · [November 18 runs](results/video-post-ab-20261118.json)
-
-[RX 580/Haswell measurements](results/lowlevel-media-20261118.json) · [LightVAE-Pro](patches/lightvae-pro-gpu-state/) · [SA3](patches/sa3-media-dispatch/)
+[Measurements and example gallery](docs/evidence/) · [Release notes](RELEASE.md)

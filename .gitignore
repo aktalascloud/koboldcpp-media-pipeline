@@ -26,8 +26,9 @@ outputs/
 backups/
 state/
 MODELS/
-RESULTS/generated/
-results/generated/
+# Local API output and diagnostics; published evidence lives in docs/evidence/.
+/RESULTS/
+/results/
 runtime/python/
 runtime/cache/
 runtime/tmp/

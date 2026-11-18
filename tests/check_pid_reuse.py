@@ -1,7 +1,7 @@
 """Offline stale protected-PID regression checks; no processes/models started."""
 from pathlib import Path
 import sys,tempfile,json
-ROOT=Path(__file__).resolve().parents[2];sys.path.insert(0,str(ROOT/'tools'))
+ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'tools'))
 from BackendSupervisor import BackendSupervisor,WindowsOperations,SupervisorError
 class Ops(WindowsOperations):
     def __init__(self,row,occupied=False):self.row=row;self.occupied=occupied
