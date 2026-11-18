@@ -1,6 +1,6 @@
 # Медиакомплект KoboldCpp
 
-[English](README.md) · [Релиз](https://github.com/aktalascloud/koboldcpp-media-pipeline/releases/latest) · [Установка](docs/BUILD.md) · [API](docs/API.ru.md) · [Лицензии](docs/LICENSES.md)
+[English](README.md) · [Релиз](https://github.com/aktalascloud/koboldcpp-media-pipeline/releases/latest) · [Установка](docs/BUILD.md) · [Единый API](docs/UNIFIED-API.md) · [Лицензии](docs/LICENSES.md)
 
 Переносимый Windows-сервер для фото, видео, музыки и звуковых эффектов. Запускайте `Start.exe`. Установщик подключает [движок AVX2/Vulkan](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/releases/tag/v1.125-20261117-d9b2e6b5). Фото остаётся в памяти при простое. Видео и музыка загружаются по запросу. Модели и параметры выбираются в GUI.
 

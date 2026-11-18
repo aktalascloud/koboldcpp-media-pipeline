@@ -1,9 +1,10 @@
-# Media maintenance rules
-Read README.md, docs/BUILD.md and docs/API.md (API.ru.md for Russian). Work in this portable root, never an old drive/path.
-Start.exe opens KoboldCpp.exe only; internal native engine is koboldcpp-nocuda.exe. Do not remove it. Keep one Python/runtime, original icon, arbitrary.kcpps Save/Load. Native GUI: Image Gen/Audio/Video, Extra language/startup; no separate Media tab.
-Models/settings are the applied Helper snapshot. Do not change image/music/video weights, LoRAs, sampling, cache, face limits or post order unless requested. Model paths are relative: MODELS/detailers and MODELS/upscalers. Generated API files: RESULTS/generated. Public defaults bind loopback; user chooses LAN exposure.
-Exclusive supervisor owns models/processes. Never kill by name, interrupt user generation or create a second GPU context. Atomic JSON uses bounded Windows sharing retries, prior-boot recovery needs profile/port/lock checks, duplicate AutoStart uses one lock. Keep photo resident when idle; music/video demand-load; GPU post gets exclusive VRAM and photo returns.
-Only GET/source/hash/startup checks during routine work. No automatic image/video/music/TTS/SFX/token benchmarks. Last measurements keep original SHA/date; new native builds do not inherit them.
-SFX is CPU only. TTS/helper/STT are user-configured; never hardcode private endpoints in public files. Explicit speaker/language profiles, no gender inference from images. Distinguish voiceover from optional validated audio-driven lip-sync; never promise perfect identity/articulation. Native limit121frames, current tested clip73;15/30s is client orchestration, not a verified long Native render. RIFE48 default/60 optional is real interpolation.
-No weights, secrets, IPs, paths, logs, caches, PID/state in Git/releases. GPEN Non-Commercial only original provider; SA3/Gemma/YuE2 have original terms. Preserve all licenses/source notices. Setup downloads original components and builds local bundles; private-MS-runtime fullEXE is not publicly mirrored.
-Keep only current results and own necessary code. Delete only verified inactive files, no reparse/foreign folders. Preserve active locks/state/logs and user-configured models. Never bypass rejected tool deletion targets. Offline checks: Python syntax, profile SHA, API schemas, relocation fixtures, one visible registered startup.
+# MediaBackend
+
+Единый API и веб-интерфейс для фото, видео, музыки, эффектов и совместимых маршрутов KoboldCpp. Начните с [единого API](docs/UNIFIED-API.md) и [OpenAPI](docs/unified-openapi.json).
+
+- В общей папке запускайте `Start-Local.cmd`. Он использует `../KoboldCpp/KoboldCpp.exe` и открывает `/docs` на 5003. Для отдельной установки следуйте [BUILD.md](docs/BUILD.md).
+- `tools/MediaUI.py` описывает медиамаршруты и строит сайт. Публичный `/openapi.json` объединяет их с опубликованным каталогом встроенного Native. `/v1/media/openapi.json` содержит медиамаршруты. Изменения проверяйте через GET на 5001 и 5003.
+- В общей установке процессы, журнал SQLite и результаты находятся в `../KoboldCpp`. Веса — в `../MODELS`. Экспортируемый код хранится здесь, применённые правки — в `patches/`.
+- Сохраняйте очередь, `Idempotency-Key` и зависимости старых задач. Генерации и тесты производительности запускайте по прямому запросу. Перед перезапуском дождитесь свободного API.
+- Оставляйте произвольные `.kcpps`, настройки режима, LoRA и порядок постобработки. SA3 работает на CPU. TTS и STT используют параметры пользователя. Не подменяйте озвучивание липсинком. Native поддерживает до 121 кадра, RIFE48 и RIFE60 интерполируют кадры. Длительные ролики собирает клиент.
+- Публикуйте код и описания. Используйте закреплённые зависимости и исходные условия лицензий. Не кладите в Git веса, пользовательские данные или журналы.

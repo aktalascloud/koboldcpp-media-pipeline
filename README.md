@@ -1,6 +1,6 @@
 # KoboldCpp media pipeline
 
-[Русский](README.ru.md) · [Release](https://github.com/aktalascloud/koboldcpp-media-pipeline/releases/latest) · [Install](docs/BUILD.md) · [API](docs/API.md) · [Licenses](docs/LICENSES.md)
+[Русский](README.ru.md) · [Release](https://github.com/aktalascloud/koboldcpp-media-pipeline/releases/latest) · [Install](docs/BUILD.md) · [Unified API](docs/UNIFIED-API.md) · [Licenses](docs/LICENSES.md)
 
 Portable Windows service for images, video, music and sound effects. Run `Start.exe`. Setup installs the [Windows AVX2/Vulkan core](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/releases/tag/v1.125-20261117-d9b2e6b5). The active image model stays resident while idle. Video and music load on demand. Pick weights and presets in the native GUI.
 

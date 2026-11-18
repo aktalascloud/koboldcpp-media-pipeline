@@ -45,7 +45,7 @@ from PhotoRestoration import restore_once,rgb_sha,matching_marker as matching_re
 from ImageBudget import ImageBudgetError,apply_image_gpu_budget,prewarm_image_budget
 from NativeVideo import request_json_deadline
 from PhotoCapture import capture_stage
-from MediaUI import page as media_page, schema as media_schema, public_settings as media_settings, dispatch as media_dispatch
+from MediaUI import page as media_page, schema as media_schema, native_schema as parse_native_schema, public_settings as media_settings, dispatch as media_dispatch
 
 VERSION='3.0-photo-video-portable'
 IMAGE_FIELDS=('steps','cfg_scale','sampler_name','scheduler','eta','flow_shift','clip_skip','cache_mode','cache_options')
@@ -580,8 +580,21 @@ def serve(helper,photo_backend_lease=None,backend_supervisor=None):
                     return
                 if path in ('/api','/docs','/media','/videoui'):
                     self.reply(media_page(),content_type='text/html; charset=utf-8');return
-                if path in ('/openapi.json','/v1/media/openapi.json'):
+                if path=='/v1/media/openapi.json':
                     self.reply(media_schema());return
+                if path=='/openapi.json':
+                    native=None
+                    try:
+                        limit=4*1024*1024
+                        with urllib.request.urlopen(cfg['backend']+'/api',timeout=5) as response:
+                            raw=response.read(limit+1)
+                        if len(raw)<=limit:
+                            native=parse_native_schema(raw)
+                    except (OSError,ValueError):
+                        pass
+                    spec=media_schema(native)
+                    spec['x-kobold-native-catalog']='available' if native is not None else 'unavailable'
+                    self.reply(spec);return
                 if path=='/v1/media/settings':
                     self.reply(dict(**media_settings(cfg),revision=cfg['helper_sha256']));return
                 if path=='/v1/audio/capabilities':

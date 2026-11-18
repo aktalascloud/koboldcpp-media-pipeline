@@ -1,5 +1,5 @@
 # Media API / OWUI
-[Full Russian implementation specification](API.ru.md). Configure http://YOUR_KOBOLD_HOST:5001; port5003 shares the same queue. Native5005 is internal. Discover /openapi.json, /v1/media/capabilities, /v1/videos/capabilities and /v1/audio/capabilities. Models and numerical presets belong to GUI/.kcpps, not checkpoint names embedded in a filter.
+[Unified directory and OpenAPI](UNIFIED-API.md) · [Russian implementation specification](API.ru.md). Use the configured KoboldCpp host on port 5001 or 5003. Both ports share one queue. Port 5005 serves internal Native traffic. Discover `/openapi.json`, `/v1/media/capabilities`, `/v1/videos/capabilities` and `/v1/audio/capabilities`. Keep model names and numerical presets in the GUI and `.kcpps` profiles.
 
 | Operation | POST endpoint | Required/core fields |
 |---|---|---|
@@ -16,7 +16,7 @@
 | Speech WAV | /v1/audio/speech | input, voice, language, response_format:wav |
 | STT | /v1/audio/transcriptions | compatible multipart audio |
 
-Image model/adapters/sampling are server-owned: RayQ8, Afterlight.25+RealismEnhancer1, Euler/simple8/eta0/CFG1/shift5, Cache-DiT.08. Normal736x1104 noautoSR; enable_hr:true requests proxyClear4x. High: kcpp_quality:quality,928x1392,default4x. High current adapter mix has no new timing. Faces/Gater run before SR, not again afterwards. GUI uses original Image Gen/Audio plus Video; Extra has language/startup; arbitrary.kcpps Save/Load.
+Image models, adapters and sampler defaults come from the active server profile. Check `/v1/images/capabilities` for the current contract. Normal uses 736×1104. `enable_hr:true` requests ClearReality 4×. High uses `kcpp_quality:quality`, 928×1392 and default 4×. The server applies Face/Gater before upscaling. The native GUI retains `.kcpps` Save/Load.
 
 Image edits are whole-frame img2img, not instruction editing. Unsupported masks/multiple-reference/instruction operations return422 without a fake successful image. /v1/images/synthesize accepts2–4 client vision TEXT analyses, not image conditioning or guaranteed identity.
 
