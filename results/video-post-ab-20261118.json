@@ -1,0 +1,346 @@
+{
+  "date": "2026-11-18",
+  "native_sha256": "d9b2e6b55ab795ed67cdae01d8f8495dd2a857fe3776b98f53fdf0ec5f9482f5",
+  "master_sha256": "73d4210788e099c8af64e3b300f96ec51f414822b986d2616dfbcb239418e060",
+  "latent_sha256": "f06f4b0ca47102f79292feb8175c2d7f65485dd4d6e3692a756bc486403ef8e1",
+  "video_sha256": "d9570b2f5de516c71d64b5bbf0c2cf205e94bab97613fc45fc9eeec119fcdbe8",
+  "pro_manifest_sha256": "9277cf7960d33dd7049a879dbd63e0410de410fbe900cdd0951e34966b910651",
+  "pro_baseline_sha256": "4d768384cf9b44f3c06125aa777ef0158a09e5c56ba03571ce9179d96e168b9b",
+  "pro_candidate_sha256": "98b92485446b759b9b3bf44ec059e280695336b889a85d1868e155262414afde",
+  "rife_baseline_sha256": "154494f88e7e3f86df9da223bef6338bb19b01abf55df5e2aefcb7be1def9637",
+  "rife_candidate_sha256": "a734a4fc9ae323bdecfc8abcc302cf12d3bb68f31f8c3938a8c616bd31234e32",
+  "trials": {
+    "pro": [
+      {
+        "ok": true,
+        "frames": 17,
+        "dimensions": [
+          832,
+          480
+        ],
+        "fps": 24,
+        "decoder": "LightVAE-Pro causal FP32/DirectML",
+        "manifest_sha256": "9277cf7960d33dd7049a879dbd63e0410de410fbe900cdd0951e34966b910651",
+        "tile_threshold": 576,
+        "tile_pixels": 320,
+        "overlap_pixels": 64,
+        "load_seconds": [
+          3.841990099987015,
+          1.936464300029911
+        ],
+        "decode_seconds": 26.971149599878117,
+        "encode_seconds": 0.9240169000113383,
+        "dml_nodes": 27318,
+        "cpu_core_nodes": [],
+        "capture_sha256": "f06f4b0ca47102f79292feb8175c2d7f65485dd4d6e3692a756bc486403ef8e1",
+        "arm": "old",
+        "wall_seconds": 36.35472689999733,
+        "rgb_sha256": "bd4b9c7dc0f167bfd0cb1112e2cdcae81af5382309c9ca556d194204ce07d4ea",
+        "mp4_sha256": "1596c331bc1623a2a7898247b7b086d2c5698ec1820fbbd436229fcf88431f25",
+        "avi_sha256": "816040f55d1457d350f50a8d88e9c9aaab114418bd1136db2d9e8f63bd6bd50b",
+        "last_sha256": "4161822d22e9fd61679a55bc40974d5b457158a641321bbac67dacb0527f5460",
+        "gpu_peak": {
+          "dedicated_mib": 3403.58203125,
+          "shared_mib": 273.85546875
+        }
+      },
+      {
+        "ok": true,
+        "frames": 17,
+        "dimensions": [
+          832,
+          480
+        ],
+        "fps": 24,
+        "decoder": "LightVAE-Pro causal FP32/DirectML",
+        "manifest_sha256": "9277cf7960d33dd7049a879dbd63e0410de410fbe900cdd0951e34966b910651",
+        "tile_threshold": 576,
+        "tile_pixels": 320,
+        "overlap_pixels": 64,
+        "load_seconds": [
+          1.7690320999827236,
+          1.7252303999848664
+        ],
+        "decode_seconds": 26.236889799823985,
+        "encode_seconds": 0.24481529998593032,
+        "dml_nodes": 1820,
+        "profiled_runs": 2,
+        "cpu_core_nodes": [],
+        "capture_sha256": "f06f4b0ca47102f79292feb8175c2d7f65485dd4d6e3692a756bc486403ef8e1",
+        "arm": "new",
+        "wall_seconds": 31.54989789996762,
+        "rgb_sha256": "bd4b9c7dc0f167bfd0cb1112e2cdcae81af5382309c9ca556d194204ce07d4ea",
+        "mp4_sha256": "1596c331bc1623a2a7898247b7b086d2c5698ec1820fbbd436229fcf88431f25",
+        "avi_sha256": "816040f55d1457d350f50a8d88e9c9aaab114418bd1136db2d9e8f63bd6bd50b",
+        "last_sha256": "4161822d22e9fd61679a55bc40974d5b457158a641321bbac67dacb0527f5460",
+        "gpu_peak": {
+          "dedicated_mib": 3403.58203125,
+          "shared_mib": 269.8984375
+        }
+      },
+      {
+        "ok": true,
+        "frames": 17,
+        "dimensions": [
+          832,
+          480
+        ],
+        "fps": 24,
+        "decoder": "LightVAE-Pro causal FP32/DirectML",
+        "manifest_sha256": "9277cf7960d33dd7049a879dbd63e0410de410fbe900cdd0951e34966b910651",
+        "tile_threshold": 576,
+        "tile_pixels": 320,
+        "overlap_pixels": 64,
+        "load_seconds": [
+          1.7827795000048354,
+          1.7144475999521092
+        ],
+        "decode_seconds": 26.249509900342673,
+        "encode_seconds": 0.20000070007517934,
+        "dml_nodes": 1820,
+        "profiled_runs": 2,
+        "cpu_core_nodes": [],
+        "capture_sha256": "f06f4b0ca47102f79292feb8175c2d7f65485dd4d6e3692a756bc486403ef8e1",
+        "arm": "new",
+        "wall_seconds": 31.521524999989197,
+        "rgb_sha256": "bd4b9c7dc0f167bfd0cb1112e2cdcae81af5382309c9ca556d194204ce07d4ea",
+        "mp4_sha256": "1596c331bc1623a2a7898247b7b086d2c5698ec1820fbbd436229fcf88431f25",
+        "avi_sha256": "816040f55d1457d350f50a8d88e9c9aaab114418bd1136db2d9e8f63bd6bd50b",
+        "last_sha256": "4161822d22e9fd61679a55bc40974d5b457158a641321bbac67dacb0527f5460",
+        "gpu_peak": {
+          "dedicated_mib": 3403.58203125,
+          "shared_mib": 269.8984375
+        }
+      },
+      {
+        "ok": true,
+        "frames": 17,
+        "dimensions": [
+          832,
+          480
+        ],
+        "fps": 24,
+        "decoder": "LightVAE-Pro causal FP32/DirectML",
+        "manifest_sha256": "9277cf7960d33dd7049a879dbd63e0410de410fbe900cdd0951e34966b910651",
+        "tile_threshold": 576,
+        "tile_pixels": 320,
+        "overlap_pixels": 64,
+        "load_seconds": [
+          1.7623163000680506,
+          1.7116464000428095
+        ],
+        "decode_seconds": 26.79956700024195,
+        "encode_seconds": 0.20870340010151267,
+        "dml_nodes": 27318,
+        "cpu_core_nodes": [],
+        "capture_sha256": "f06f4b0ca47102f79292feb8175c2d7f65485dd4d6e3692a756bc486403ef8e1",
+        "arm": "old",
+        "wall_seconds": 33.118535300018266,
+        "rgb_sha256": "bd4b9c7dc0f167bfd0cb1112e2cdcae81af5382309c9ca556d194204ce07d4ea",
+        "mp4_sha256": "1596c331bc1623a2a7898247b7b086d2c5698ec1820fbbd436229fcf88431f25",
+        "avi_sha256": "816040f55d1457d350f50a8d88e9c9aaab114418bd1136db2d9e8f63bd6bd50b",
+        "last_sha256": "4161822d22e9fd61679a55bc40974d5b457158a641321bbac67dacb0527f5460",
+        "gpu_peak": {
+          "dedicated_mib": 3403.5859375,
+          "shared_mib": 269.8984375
+        }
+      },
+      {
+        "ok": true,
+        "frames": 17,
+        "dimensions": [
+          832,
+          480
+        ],
+        "fps": 24,
+        "decoder": "LightVAE-Pro causal FP32/DirectML",
+        "manifest_sha256": "9277cf7960d33dd7049a879dbd63e0410de410fbe900cdd0951e34966b910651",
+        "tile_threshold": 576,
+        "tile_pixels": 320,
+        "overlap_pixels": 64,
+        "load_seconds": [
+          1.821109400014393,
+          1.7095692999428138
+        ],
+        "decode_seconds": 26.77732570003718,
+        "encode_seconds": 0.20754079998005182,
+        "dml_nodes": 27318,
+        "cpu_core_nodes": [],
+        "capture_sha256": "f06f4b0ca47102f79292feb8175c2d7f65485dd4d6e3692a756bc486403ef8e1",
+        "arm": "old",
+        "wall_seconds": 33.11399209999945,
+        "rgb_sha256": "bd4b9c7dc0f167bfd0cb1112e2cdcae81af5382309c9ca556d194204ce07d4ea",
+        "mp4_sha256": "1596c331bc1623a2a7898247b7b086d2c5698ec1820fbbd436229fcf88431f25",
+        "avi_sha256": "816040f55d1457d350f50a8d88e9c9aaab114418bd1136db2d9e8f63bd6bd50b",
+        "last_sha256": "4161822d22e9fd61679a55bc40974d5b457158a641321bbac67dacb0527f5460",
+        "gpu_peak": {
+          "dedicated_mib": 3403.58203125,
+          "shared_mib": 269.8984375
+        }
+      },
+      {
+        "ok": true,
+        "frames": 17,
+        "dimensions": [
+          832,
+          480
+        ],
+        "fps": 24,
+        "decoder": "LightVAE-Pro causal FP32/DirectML",
+        "manifest_sha256": "9277cf7960d33dd7049a879dbd63e0410de410fbe900cdd0951e34966b910651",
+        "tile_threshold": 576,
+        "tile_pixels": 320,
+        "overlap_pixels": 64,
+        "load_seconds": [
+          1.8116486999206245,
+          1.6780860999133438
+        ],
+        "decode_seconds": 26.227825600188226,
+        "encode_seconds": 0.21509720000904053,
+        "dml_nodes": 1820,
+        "profiled_runs": 2,
+        "cpu_core_nodes": [],
+        "capture_sha256": "f06f4b0ca47102f79292feb8175c2d7f65485dd4d6e3692a756bc486403ef8e1",
+        "arm": "new",
+        "wall_seconds": 31.347713899915107,
+        "rgb_sha256": "bd4b9c7dc0f167bfd0cb1112e2cdcae81af5382309c9ca556d194204ce07d4ea",
+        "mp4_sha256": "1596c331bc1623a2a7898247b7b086d2c5698ec1820fbbd436229fcf88431f25",
+        "avi_sha256": "816040f55d1457d350f50a8d88e9c9aaab114418bd1136db2d9e8f63bd6bd50b",
+        "last_sha256": "4161822d22e9fd61679a55bc40974d5b457158a641321bbac67dacb0527f5460",
+        "gpu_peak": {
+          "dedicated_mib": 3403.58203125,
+          "shared_mib": 269.8984375
+        }
+      }
+    ],
+    "rife48": [
+      {
+        "arm": "old",
+        "seconds": 4.215597700094804,
+        "frames": 34,
+        "fps": 48,
+        "sha256": "d5482724a92cb5e45b2065070825f751dfff366878f3d943afff6c6c73cbd36c"
+      },
+      {
+        "arm": "new",
+        "seconds": 2.70083510002587,
+        "frames": 34,
+        "fps": 48,
+        "sha256": "d5482724a92cb5e45b2065070825f751dfff366878f3d943afff6c6c73cbd36c"
+      },
+      {
+        "arm": "new",
+        "seconds": 2.7079862999962643,
+        "frames": 34,
+        "fps": 48,
+        "sha256": "d5482724a92cb5e45b2065070825f751dfff366878f3d943afff6c6c73cbd36c"
+      },
+      {
+        "arm": "old",
+        "seconds": 3.925952999969013,
+        "frames": 34,
+        "fps": 48,
+        "sha256": "d5482724a92cb5e45b2065070825f751dfff366878f3d943afff6c6c73cbd36c"
+      }
+    ],
+    "rife60": [
+      {
+        "arm": "old",
+        "seconds": 4.768492499948479,
+        "frames": 43,
+        "fps": 60,
+        "sha256": "cea0319d557fbcc6928beab8526d865fbbd295ff1360624be048b1e20be62a23"
+      },
+      {
+        "arm": "new",
+        "seconds": 3.7382831999566406,
+        "frames": 43,
+        "fps": 60,
+        "sha256": "cea0319d557fbcc6928beab8526d865fbbd295ff1360624be048b1e20be62a23"
+      },
+      {
+        "arm": "new",
+        "seconds": 3.7478162999032065,
+        "frames": 43,
+        "fps": 60,
+        "sha256": "cea0319d557fbcc6928beab8526d865fbbd295ff1360624be048b1e20be62a23"
+      },
+      {
+        "arm": "old",
+        "seconds": 4.992241500061937,
+        "frames": 43,
+        "fps": 60,
+        "sha256": "cea0319d557fbcc6928beab8526d865fbbd295ff1360624be048b1e20be62a23"
+      }
+    ]
+  },
+  "summary": {
+    "pro": {
+      "before": 33.118535300018266,
+      "after": 31.521524999989197,
+      "identical": true
+    },
+    "rife48": {
+      "before": 4.070775350031909,
+      "after": 2.704410700011067,
+      "identical": true
+    },
+    "rife60": {
+      "before": 4.880367000005208,
+      "after": 3.7430497499299236,
+      "identical": true
+    }
+  },
+  "fixed_dimensions": {
+    "status": "rejected",
+    "reason": "DirectML graph initialization failed with 0x80070057 on RX 580, CPU fallback rejected by the worker",
+    "control": [
+      {
+        "ok": true,
+        "frames": 17,
+        "dimensions": [
+          832,
+          480
+        ],
+        "fps": 24,
+        "decoder": "LightVAE-Pro causal FP32/DirectML",
+        "manifest_sha256": "9277cf7960d33dd7049a879dbd63e0410de410fbe900cdd0951e34966b910651",
+        "tile_threshold": 576,
+        "tile_pixels": 320,
+        "overlap_pixels": 64,
+        "load_seconds": [
+          3.9804950000252575,
+          1.923748999950476
+        ],
+        "decode_seconds": 26.38707990013063,
+        "encode_seconds": 0.8144186000572518,
+        "dml_nodes": 1820,
+        "profiled_runs": 2,
+        "cpu_core_nodes": [],
+        "capture_sha256": "f06f4b0ca47102f79292feb8175c2d7f65485dd4d6e3692a756bc486403ef8e1",
+        "arm": "old",
+        "wall_seconds": 34.580767299979925,
+        "rgb_sha256": "bd4b9c7dc0f167bfd0cb1112e2cdcae81af5382309c9ca556d194204ce07d4ea",
+        "mp4_sha256": "1596c331bc1623a2a7898247b7b086d2c5698ec1820fbbd436229fcf88431f25",
+        "avi_sha256": "816040f55d1457d350f50a8d88e9c9aaab114418bd1136db2d9e8f63bd6bd50b",
+        "last_sha256": "4161822d22e9fd61679a55bc40974d5b457158a641321bbac67dacb0527f5460",
+        "gpu_peak": {
+          "dedicated_mib": 3403.58203125,
+          "shared_mib": 269.8984375
+        }
+      }
+    ]
+  },
+  "upstream": {
+    "koboldcpp": "ed246f4467157b3e5663feae28e7bf4d6990db39",
+    "ggml": "d9fe7bff3d2bf4d077e25c654486d02c321734aa",
+    "new_commits": false,
+    "koboldcpp_2648_pr_head": "b0d316e1102cd6329f451c25f35d76fde41f8c34",
+    "ggml_1694_pr_head": "760f2f43b6588c8fd86f7b18fcd0b6cd2f1d2ecf"
+  },
+  "hardware": "Windows, Xeon E5-2696 v3 (10 visible cores), RX 580 2048SP 8 GB",
+  "public_candidate_source_sha256": {
+    "VideoPro.py": "f86475c4d0ad3b9dccc560ba79a5a358559024d0fc1446e5439721a50c052969",
+    "VideoRife.py": "1e082ed5637d93a8afcb3e8181edb9b042208e9f7a06192004796c4106706189"
+  }
+}

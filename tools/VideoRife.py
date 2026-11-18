@@ -31,7 +31,7 @@ def interpolate_video(source,destination,root,timeout=180,model_dir=None,target_
         # 24->60 time grid (4n+1 inputs), then encode only the requested duration.
         shutil.copy2(sorted(inp.glob('*.png'))[-1],inp/f'{frames+1:08d}.png')
         rife_count=(frames+1)*5//2
-    command=[str(root/'runtime/rife/rife-ncnn-vulkan.exe'),'-i',str(inp),'-o',str(out),'-n',str(rife_count),'-m',str((Path(model_dir) if Path(model_dir).is_absolute() else root/Path(model_dir)) if model_dir else root/'MODELS/detailers/interpolation/rife-v4.6'),'-g','0','-j','1:1:1','-f','%08d.png']
+    command=[str(root/'runtime/rife/rife-ncnn-vulkan.exe'),'-i',str(inp),'-o',str(out),'-n',str(rife_count),'-m',str((Path(model_dir) if Path(model_dir).is_absolute() else root/Path(model_dir)) if model_dir else root/'MODELS/detailers/interpolation/rife-v4.6'),'-g','0','-j','2:1:2','-f','%08d.png']
     process=run_owned(command,root,dest,remaining());files=sorted(out.glob('*.png'))
     if len(files)!=rife_count:raise RuntimeError('RIFE frame count mismatch')
     target=dest/'video.mp4'

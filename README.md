@@ -14,3 +14,5 @@ Portable Windows service for images, video, music and sound effects. Run `Start.
 [Verified examples and dated tests](https://github.com/aktalascloud/koboldcpp-media-pipeline/blob/v2026.11.17-r5/results/measurements.json).
 
 [Gater on RX 580](patches/gater-directml-graph/README.md) · [Video post-processing](patches/media-video-post-fast/README.md) · [RIFE input](patches/rife-fast-png/README.md)
+
+[LightVAE-Pro profiling](patches/video-pro-profile/README.md) · [RIFE CPU workers](patches/rife-cpu-workers/README.md) · [November 18 runs](results/video-post-ab-20261118.json)

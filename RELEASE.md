@@ -1,9 +1,9 @@
 ## English
 
-Media · 2026-11-17 · Native d9b2e6b5. Measured on RX 580 and Haswell under Windows. GaterV3 warm median fell from 6.211 to 5.958 s. Saved-clip video post-processing fell from 1.055 to 0.598 s. RIFE frame extraction fell from 0.548 to 0.205 s. The compared pixels matched.
+Media · 2026-11-18 · Native d9b2e6b5. With the same saved 17-frame clip on Haswell and RX 580, the LightVAE-Pro worker median went from 33.119 to 31.522 s. RIFE went from 4.071 to 2.704 s at 48 FPS and from 4.880 to 3.743 s at 60 FPS. The compared outputs matched byte for byte.
 
 ## Русский
 
-Media · 2026-11-17 · Native d9b2e6b5. Замеры на RX 580 и Haswell под Windows. Медиана тёплого GaterV3 снизилась с 6,211 до 5,958 с. Постобработка сохранённого клипа — с 1,055 до 0,598 с. Извлечение кадров для RIFE — с 0,548 до 0,205 с. Пиксели совпали.
+Media · 2026-11-18 · Native d9b2e6b5. На сохранённом клипе из 17 кадров медиана LightVAE-Pro снизилась с 33,119 до 31,522 с. RIFE ускорился с 4,071 до 2,704 с при 48 FPS и с 4,880 до 3,743 с при 60 FPS. Замеры сделаны на Haswell и RX 580 под Windows. Выходные файлы совпали побайтно.
 
-[Core / Движок](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/releases/latest) · [Patches / Патчи](https://github.com/aktalascloud/koboldcpp-media-pipeline/tree/v2026.11.17-r6/patches)
+[Core / Движок](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/releases/latest) · [Patches / Патчи](https://github.com/aktalascloud/koboldcpp-media-pipeline/tree/v2026.11.18/patches)
