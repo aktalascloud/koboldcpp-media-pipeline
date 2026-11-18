@@ -2,12 +2,12 @@
 
 [Русский](README.ru.md) · [Release](https://github.com/aktalascloud/koboldcpp-media-pipeline/releases/latest) · [Install](docs/BUILD.md) · [API](docs/API.md) · [Licenses](docs/LICENSES.md)
 
-Portable Windows service for images, video, music and sound effects. Run `Start.exe`. Setup installs the [Windows AVX2/Vulkan core](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/releases/latest). The active image model stays resident while idle. Video and music load on demand. Pick weights and presets in the native GUI.
+Portable Windows service for images, video, music and sound effects. Run `Start.exe`. Setup installs the [Windows AVX2/Vulkan core](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/releases/tag/v1.125-20261117-d9b2e6b5). The active image model stays resident while idle. Video and music load on demand. Pick weights and presets in the native GUI.
 
 - Images use MOSS with optional face restoration and 4× upscaling.
 - Wan video supports up to 121 native frames at 24 FPS per pass. RIFE provides 48 or 60 FPS.
 - YuE2 accepts up to 300 seconds. SA3 produces sound effects on CPU.
-- Open **System → GGUF Converter** for quantization and calibration. [Converter](https://github.com/aktalascloud/gguf-converter)
+- Open **System → GGUF Converter** for quantization and calibration. [Converter](https://github.com/aktalascloud/gguf-converter) · [Installer patch](patches/portable-gguf-converter/)
 
 **Core 1.125 · 2026-11-17 · d9b2e6b5** · [Patched source](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/tree/concedo_experimental/performance/patches/series) · [Media patches](patches/)
 
