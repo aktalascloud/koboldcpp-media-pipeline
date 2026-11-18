@@ -62,6 +62,7 @@ def run_owned(command,root,destination,timeout,memory_guard=False,environment=No
         return {'worker_pid':child.pid,'worker_wall_seconds':time.perf_counter()-began,'gpu_peak':peaks}
     finally:
         k.CloseHandle(job)
-        if child:
-            try:child.wait(timeout=10)
-            except subprocess.TimeoutExpired:pass
+        for process in (child,monitor):
+            if process:
+                try:process.wait(timeout=10)
+                except subprocess.TimeoutExpired:pass

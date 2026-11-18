@@ -1,0 +1,169 @@
+diff --git a/tools/sa3-generate.cpp b/tools/sa3-generate.cpp
+--- a/tools/sa3-generate.cpp
++++ b/tools/sa3-generate.cpp
+@@ -19,6 +19,7 @@
+ #include <cstdlib>
+ #include <cstring>
+ #include <filesystem>
++#include <fstream>
+ #include <limits>
+ #include <string>
+ #include <vector>
+@@ -36,6 +37,11 @@
+         at = comma + 1;
+     }
+     return true;
++}
++
++static int duration_frames(int target_n_samp) {
++    const int frames = 1 + (target_n_samp - 1) / 4096;
++    return frames + (frames & 1); // SAME-S needs even latent frame counts.
+ }
+ 
+ int main(int argc, char** argv) {
+@@ -54,6 +60,9 @@
+     const char* adapters_dir = (env_ad && *env_ad) ? env_ad : nullptr; // --adapters-dir / SA3_ADAPTERS_DIR (else = models_dir)
+     std::string prompt = "Upbeat funk groove with slap bass, bright horns, tight drums";
+     const char* wav_p = "song.wav";
++    const char* sfx_batch_dir = nullptr;
++    struct SfxPart { int samples; uint64_t seed; };
++    std::vector<SfxPart> sfx_parts;
+     std::vector<std::pair<float,float>> lora_envelope;   // --lora-envelope: strength automation
+     std::string lora_envelope_mode = "velocity";         // --lora-envelope-mode velocity|layer
+     std::vector<sa3::GenParams::LoraLane> lanes;          // --lane ... (see usage)
+@@ -69,6 +78,7 @@
+     std::string rng = "torch-cuda"; unsigned rng_cuda_blocks = sa3::kDefaultRngCudaBlocks;
+     int cpu_threads = 0;
+     bool frames_set = false, duration_set = false, threads_set = false;
++    bool single_seed_set = false, single_output_set = false;
+     double duration_sec = 0.0;
+     std::string dist_shift = "LogSNR";                  // schedule warp: LogSNR|Flux|Full|None
+     bool legacy_schedule = false;
+@@ -96,10 +106,37 @@
+         else if (!strcmp(argv[i], "--duration") && i+1 < argc) { duration_sec = atof(argv[++i]); duration_set = true; }
+         else if (!strcmp(argv[i], "--steps")  && i+1 < argc) steps = atoi(argv[++i]);
+         else if (!strcmp(argv[i], "--threads") && i+1 < argc) { cpu_threads = atoi(argv[++i]); threads_set = true; }
+-        else if (!strcmp(argv[i], "--seed")   && i+1 < argc) seed = strtoll(argv[++i], nullptr, 10);
++        else if (!strcmp(argv[i], "--seed")   && i+1 < argc) { seed = strtoll(argv[++i], nullptr, 10); single_seed_set = true; }
+         else if (!strcmp(argv[i], "--rng")    && i+1 < argc) rng = argv[++i];
+         else if (!strcmp(argv[i], "--rng-cuda-blocks") && i+1 < argc) rng_cuda_blocks = (unsigned)atoi(argv[++i]);
+-        else if (!strcmp(argv[i], "--out")    && i+1 < argc) wav_p = argv[++i];
++        else if (!strcmp(argv[i], "--out")    && i+1 < argc) { wav_p = argv[++i]; single_output_set = true; }
++        else if (!strcmp(argv[i], "--sfx-batch")) {
++            if (i+1 >= argc || sfx_batch_dir) {
++                fprintf(stderr, "--sfx-batch expects one existing output directory\n");
++                return 1;
++            }
++            sfx_batch_dir = argv[++i];
++        }
++        else if (!strcmp(argv[i], "--sfx-part")) {
++            if (i+2 >= argc || sfx_parts.size() >= 12) {
++                fprintf(stderr, "--sfx-part expects duration and seed, at most 12 parts\n");
++                return 1;
++            }
++            const char* seconds_arg = argv[++i];
++            const char* seed_arg = argv[++i];
++            char* seconds_end = nullptr;
++            char* seed_end = nullptr;
++            const double seconds = strtod(seconds_arg, &seconds_end);
++            const long long part_seed = strtoll(seed_arg, &seed_end, 10);
++            if (seconds_end == seconds_arg || *seconds_end || !std::isfinite(seconds) ||
++                seconds < 0.25 || seconds > 5.02 ||
++                seed_end == seed_arg || *seed_end || part_seed < 0 || part_seed > 2147483647LL) {
++                fprintf(stderr, "invalid SFX part duration (0.25..5.02 s) or seed (0..2147483647)\n");
++                return 1;
++            }
++            sfx_parts.push_back({static_cast<int>(std::round(seconds * 44100.0)),
++                                 static_cast<uint64_t>(part_seed)});
++        }
+         else if (!strcmp(argv[i], "--init")   && i+1 < argc) init_p = argv[++i];
+         else if (!strcmp(argv[i], "--init-noise-level") && i+1 < argc) init_noise_level = (float)atof(argv[++i]);
+         else if (!strcmp(argv[i], "--legacy-schedule")) legacy_schedule = true;
+@@ -264,6 +301,16 @@
+                         "                     continuation splice (with --init + --inpaint-start): [--no-splice] [--mask-overlap SEC] [--splice-xfade SEC] [--no-splice-gain-match]\n");
+         return 1;
+     }
++    if (sfx_batch_dir || !sfx_parts.empty()) {
++        const char* device = getenv("SA3_DEVICE");
++        if (!sfx_batch_dir || !*sfx_batch_dir || sfx_parts.size() < 2 ||
++            !model_variant || strcmp(model_variant, "small-sfx") || !device || strcmp(device, "cpu") ||
++            duration_set || frames_set || single_seed_set || single_output_set ||
++            init_p || inpaint || !lora_specs.empty() || !lanes.empty()) {
++            fprintf(stderr, "SFX batching requires --model small-sfx, SA3_DEVICE=cpu, --sfx-batch DIR and 2..12 --sfx-part SEC SEED pairs, with no single-output, init or adapter options\n");
++            return 1;
++        }
++    }
+     if (duration_set && frames_set) {
+         fprintf(stderr, "use either --duration SEC or --frames N, not both\n");
+         return 1;
+@@ -284,8 +331,7 @@
+             return 1;
+         }
+         target_n_samp = (int)samples_d;
+-        frames = std::max(1, (target_n_samp + 4095) / 4096);
+-        if (frames & 1) frames++;  // SAME-S needs even latent frame counts; harmless for SAME-L.
++        frames = duration_frames(target_n_samp);
+     }
+     if (frames <= 0) {
+         fprintf(stderr, "--frames must be positive\n");
+@@ -324,7 +370,7 @@
+     params.frames            = frames;
+     params.target_n_samp     = target_n_samp;
+     params.steps             = steps;
+-    const uint64_t seed_resolved = sa3::pick_seed(seed);   // -1 => random
++    const uint64_t seed_resolved = sfx_batch_dir ? sfx_parts.front().seed : sa3::pick_seed(seed);   // -1 => random for single runs
+     params.seed              = seed_resolved;
+     params.rng               = rng;
+     params.rng_cuda_blocks   = rng_cuda_blocks;
+@@ -361,8 +407,51 @@
+     }
+ 
+     try {
++        std::vector<std::filesystem::path> outputs;
++        if (sfx_batch_dir) {
++            const auto output_dir = std::filesystem::canonical(sfx_batch_dir);
++            if (!std::filesystem::is_directory(output_dir))
++                throw std::runtime_error("SFX batch output directory must already exist");
++            for (size_t i = 0; i < sfx_parts.size(); ++i) {
++                auto output = output_dir / ("part-" + std::to_string(i) + ".wav");
++                auto temporary = output; temporary += ".tmp";
++                if (std::filesystem::exists(std::filesystem::symlink_status(output)) ||
++                    std::filesystem::exists(std::filesystem::symlink_status(temporary)))
++                    throw std::runtime_error("SFX batch output already exists");
++                outputs.push_back(std::move(output));
++            }
++        }
++
+         sa3::Pipeline pipe;
+         pipe.load(paths, cpu_threads);
++        if (sfx_batch_dir) {
++            params.keep_models = true;
++            for (size_t i = 0; i < sfx_parts.size(); ++i) {
++                const double part_start = sa3::wall_time_s();
++                params.target_n_samp = sfx_parts[i].samples;
++                params.frames = duration_frames(params.target_n_samp);
++                params.seed = sfx_parts[i].seed;
++                auto part = pipe.generate(params);
++                const double write_start = sa3::wall_time_s();
++                const auto bytes = sa3::wav_planar_bytes(part.samples.data(), part.n_samp, part.n_ch, part.sample_rate);
++                auto temporary = outputs[i]; temporary += ".tmp";
++                std::ofstream out(temporary, std::ios::binary);
++                out.write(bytes.data(), static_cast<std::streamsize>(bytes.size()));
++                out.close();
++                if (!out)
++                    throw std::runtime_error("failed to write SFX batch WAV");
++                if (std::filesystem::exists(std::filesystem::symlink_status(outputs[i])))
++                    throw std::runtime_error("SFX batch output appeared during generation");
++                std::filesystem::rename(temporary, outputs[i]);
++                sa3::profile_log(prof, "write_wav", sa3::wall_time_s() - write_start);
++                sa3::profile_log(prof, "part_total", sa3::wall_time_s() - part_start);
++                printf("wrote part-%zu.wav  (audio %.2fs, seed %llu)\n",
++                       i, (float)part.n_samp / part.sample_rate, (unsigned long long)params.seed);
++            }
++            sa3::profile_log(prof, "total", sa3::wall_time_s() - t_total0);
++            return 0;
++        }
++
+         sa3::GenResult r = pipe.generate(params);
+         double tp = sa3::wall_time_s();
+         sa3::write_wav_planar(wav_p, r.samples.data(), r.n_samp, r.n_ch, r.sample_rate);

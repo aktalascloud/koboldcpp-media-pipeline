@@ -1,9 +1,9 @@
 ## English
 
-Media · 2026-11-18 · Native d9b2e6b5. With the same saved 17-frame clip on Haswell and RX 580, the LightVAE-Pro worker median went from 33.119 to 31.522 s. RIFE went from 4.071 to 2.704 s at 48 FPS and from 4.880 to 3.743 s at 60 FPS. The compared outputs matched byte for byte.
+On RX 580 and Haswell on 2026-11-18, the LightVAE-Pro worker went from 33.04 to 30.53 s for 17 saved Wan frames and from 81.53 to 76.47 s in one 49-frame pair. The new SA3 CPU worker processed three chunks of a 15-second effect in 21.57 s, down from 26.53 s. Outputs matched byte for byte. The code archive uses the existing pinned installer runtime, which keeps the compatible SA3 path.
 
 ## Русский
 
-Media · 2026-11-18 · Native d9b2e6b5. На сохранённом клипе из 17 кадров медиана LightVAE-Pro снизилась с 33,119 до 31,522 с. RIFE ускорился с 4,071 до 2,704 с при 48 FPS и с 4,880 до 3,743 с при 60 FPS. Замеры сделаны на Haswell и RX 580 под Windows. Выходные файлы совпали побайтно.
+На RX 580 и Haswell 18.11.2026 LightVAE-Pro сократил время с 33,04 до 30,53 с на 17 сохранённых кадрах Wan и с 81,53 до 76,47 с на одной паре прогонов с 49 кадрами. Новый CPU-воркер SA3 обработал три чанка 15-секундного эффекта за 21,57 с вместо 26,53 с. Результаты совпали побайтно. Архив кода использует закреплённый рантайм установщика и сохраняет совместимый путь SA3.
 
-[Core / Движок](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/releases/latest) · [Patches / Патчи](https://github.com/aktalascloud/koboldcpp-media-pipeline/tree/v2026.11.18/patches)
+[Runs and hashes / Замеры и хеши](results/lowlevel-media-20261118.json) · [Patches / Патчи](https://github.com/aktalascloud/koboldcpp-media-pipeline/tree/v2026.11.18-r1/patches)

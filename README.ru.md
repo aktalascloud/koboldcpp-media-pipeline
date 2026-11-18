@@ -16,3 +16,5 @@
 [Gater на RX 580](patches/gater-directml-graph/README.md) · [Постобработка видео](patches/media-video-post-fast/README.md) · [Кадры для RIFE](patches/rife-fast-png/README.md)
 
 [Профилирование LightVAE-Pro](patches/video-pro-profile/README.md) · [Потоки RIFE](patches/rife-cpu-workers/README.md) · [Замеры от 18 ноября](results/video-post-ab-20261118.json)
+
+[Замеры RX 580/Haswell](results/lowlevel-media-20261118.json) · [LightVAE-Pro](patches/lightvae-pro-gpu-state/) · [SA3](patches/sa3-media-dispatch/)
