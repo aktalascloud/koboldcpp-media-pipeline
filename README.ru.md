@@ -1,14 +1,19 @@
-# Медиакомплект KoboldCpp
+# KoboldCpp Media Pipeline
 
-[English](README.md) · [Релиз](https://github.com/aktalascloud/koboldcpp-media-pipeline/releases/latest) · [Установка](docs/BUILD.md) · [Единый API](docs/UNIFIED-API.md) · [Лицензии](docs/LICENSES.md)
+[English](README.md) · [Скачать](https://github.com/aktalascloud/koboldcpp-media-pipeline/releases/tag/v2026.11.18-r1) · [Документация](docs/UNIFIED-API.md) · [Данные](https://github.com/aktalascloud/koboldcpp-media-pipeline/blob/24a912c4c35ee6ad38deea62a46a58730fa3ee84/docs/evidence/lowlevel-media-20261118.json)
 
-Переносимый Windows-сервер для фото, видео, музыки и звуковых эффектов. После установки запускайте `KoboldCpp.exe`. Если проект лежит рядом с готовой установкой KoboldCpp, используйте `Start-Local.cmd`. Установщик подключает [движок AVX2/Vulkan](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/releases/tag/v1.125-20261117-d9b2e6b5). Фото остаётся в памяти при простое. Видео и музыка загружаются по запросу.
+Локальный Windows API для изображений, видео, музыки и звуковых эффектов. Модель изображений остаётся в памяти при простое. Wan и YuE2 загружаются по запросу. Звуковые эффекты SA3 работают на CPU.
 
-- MOSS для изображений с опциональным улучшением лиц и апскейлом 4×.
-- Wan даёт до 121 кадра за проход при 24 FPS. RIFE интерполирует до 48 или 60 FPS.
-- YuE2 принимает запросы до 300 секунд. SA3 генерирует эффекты на CPU.
-- **Система → Конвертер GGUF** открывает квантование и калибровку. [Конвертер](https://github.com/aktalascloud/gguf-converter) · [Патч установщика](patches/portable-gguf-converter/)
+**Запуск.** Следуйте [инструкции установки](docs/BUILD.md) и запустите `KoboldCpp.exe`. Если KoboldCpp уже лежит в соседней папке, используйте `Start-Local.cmd`. Пакеты указаны в [манифесте](release-assets.json) и [каталоге Hugging Face](https://huggingface.co/TalasCloud).
 
-**Core 1.125 · 17 ноября 2026 · d9b2e6b5** · [Патчи движка](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/tree/concedo_experimental/performance/patches/series) · [Патчи медиакомплекта](patches/)
+**Проверка.** В A/B от 18 ноября 2026 года на RX 580 / Haswell воркер LightVAE-Pro сохранил 17 кадров Wan за 30,53 с вместо 33,04 с. CPU-воркер SA3 обработал три чанка 15-секундного эффекта за 21,57 с вместо 26,53 с. Результаты совпали побайтно. В архиве кода используется совместимый рантайм установщика.
 
-[Замеры и галерея примеров](docs/evidence/) · [Заметки к релизу](RELEASE.md)
+## Возможности
+
+- MOSS для изображений, восстановление лиц и апскейл 4× по выбору.
+- Wan генерирует до 121 исходного кадра за проход при 24 FPS. RIFE интерполирует до 48 или 60 FPS.
+- YuE2 принимает длительность до 300 секунд. Квантование и калибровка доступны в **System → GGUF Converter**.
+
+[All measurements and examples / Все замеры и примеры](docs/evidence/) · [Patches / Патчи](patches/) · [GGUF Converter](https://github.com/aktalascloud/gguf-converter) · [Core AVX2/Vulkan](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa)
+
+[Все проекты](https://github.com/aktalascloud)
