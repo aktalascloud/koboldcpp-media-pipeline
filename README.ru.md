@@ -1,6 +1,6 @@
 # KoboldCpp Media Pipeline
 
-[English](README.md) · [Скачать](https://github.com/aktalascloud/koboldcpp-media-pipeline/releases/tag/v2026.11.18-r1) · [Документация](docs/UNIFIED-API.md) · [Данные](https://github.com/aktalascloud/koboldcpp-media-pipeline/blob/24a912c4c35ee6ad38deea62a46a58730fa3ee84/docs/evidence/lowlevel-media-20261118.json)
+[English](README.md) · [Скачать](https://github.com/aktalascloud/koboldcpp-media-pipeline/releases/latest) · [Документация](docs/UNIFIED-API.md) · [Данные](https://github.com/aktalascloud/koboldcpp-media-pipeline/blob/24a912c4c35ee6ad38deea62a46a58730fa3ee84/docs/evidence/lowlevel-media-20261118.json)
 
 Локальный Windows API для изображений, видео, музыки и звуковых эффектов. Модель изображений остаётся в памяти при простое. Wan и YuE2 загружаются по запросу. Звуковые эффекты SA3 работают на CPU.
 
