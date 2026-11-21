@@ -1,9 +1,9 @@
 ## English
 
-The media installer now pins the published KoboldCpp build with SenseNova Loop, DFlash and vision. Setup verifies the Native archive digest and bundles it locally with the media components.
+Setup pins the measured SenseNova Loop build with the prefill and Vulkan top-one improvements. The published Windows profiles use the winner from CPU and Vulkan DFlash comparisons.
 
 ## Русский
 
-Медиаустановщик скачивает релиз KoboldCpp с SenseNova Loop, DFlash и vision. Setup проверяет SHA-256 архива и собирает локальный `KoboldCpp.exe`.
+Setup закрепляет новый KoboldCpp с ускоренным префиллом и Vulkan редукцией одного кандидата. В Windows-релизе есть измеренные профили 16K и 32K.
 
-[Native release / Релиз движка](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/releases/tag/v1.125-20261121-b15e7d0b)
+[Native release / Релиз движка](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/releases/tag/v1.125-20261121-3ccc5579)
