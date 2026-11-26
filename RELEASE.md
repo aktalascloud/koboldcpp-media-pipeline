@@ -1,9 +1,9 @@
 ## English
 
-Setup pins the measured SenseNova Loop build with the prefill and Vulkan top-one improvements. The published Windows profiles use the winner from CPU and Vulkan DFlash comparisons.
+Setup pins the validated KoboldCpp 1.126 Windows release for Haswell AVX2 and Polaris Vulkan. This code-only update reuses the existing hash-pinned runtime and media assets.
 
 ## Русский
 
-Setup закрепляет новый KoboldCpp с ускоренным префиллом и Vulkan редукцией одного кандидата. В Windows-релизе есть измеренные профили 16K и 32K.
+Установщик закреплён за проверенным релизом KoboldCpp 1.126 для Haswell AVX2 и Polaris Vulkan. Обновление использует прежние пакеты рантайма и медиа с проверкой SHA-256.
 
-[Native release / Релиз движка](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/releases/tag/v1.125-20261121-3ccc5579)
+[Native release / Релиз движка](https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/releases/tag/v1.126-20261126-4073df7f)
