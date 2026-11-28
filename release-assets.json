@@ -26,8 +26,8 @@
     },
     {
       "name": "koboldcpp-windows-haswell-vulkan.zip",
-      "sha256": "d24f5b0fd8692e59fb80caa8faa7241174b1574f8b2ac6dfffb09bcd71c429a5",
-      "url": "https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/releases/download/v1.126-20261126-4073df7f/koboldcpp-windows-haswell-vulkan.zip",
+      "sha256": "5df533c649bb051ef3b1ab5e8de22531b293394944c0a8b2e5a84e04894077b6",
+      "url": "https://github.com/aktalascloud/koboldcpp-avx2-vulkan-numa/releases/download/v1.126-20261128-dce636bd/koboldcpp-windows-haswell-vulkan.zip",
       "extract_prefixes": [
         "koboldcpp-nocuda.exe",
         "LICENSE.md",
